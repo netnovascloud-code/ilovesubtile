@@ -12,6 +12,10 @@ import { TranslateClient } from "@/components/tools/clients/TranslateClient";
 import { BatchTranslateClient } from "@/components/tools/clients/BatchTranslateClient";
 import { YouTubeChaptersClient } from "@/components/tools/clients/YouTubeChaptersClient";
 import { AutoSyncClient } from "@/components/tools/clients/AutoSyncClient";
+import { SubtitleGeneratorClient } from "@/components/tools/clients/SubtitleGeneratorClient";
+import { AddSubtitlesToVideoClient } from "@/components/tools/clients/AddSubtitlesToVideoClient";
+import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesClient";
+import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
@@ -134,6 +138,18 @@ export default function LocalisedToolPage({
       break;
     case "auto-sync":
       body = <AutoSyncClient />;
+      break;
+    case "subtitle-generator":
+      body = <SubtitleGeneratorClient crossLinks={crossLinks} />;
+      break;
+    case "add-subtitles-to-video":
+      body = <AddSubtitlesToVideoClient crossLinks={crossLinks} />;
+      break;
+    case "style-subtitles":
+      body = <StyleSubtitlesClient />;
+      break;
+    case "tiktok-subtitles":
+      body = <TikTokSubtitlesClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

@@ -11,6 +11,7 @@ type Props = Omit<ButtonProps, "onClick" | "children"> & {
   plan: PlanKey;
   interval?: "monthly" | "annual";
   label: string;
+  /** Optional fixed-height wrapper so different plans stay vertically aligned in the pricing grid. */
 };
 
 export function UpgradeButton({ plan, interval = "monthly", label, ...buttonProps }: Props) {

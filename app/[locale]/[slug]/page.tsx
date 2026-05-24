@@ -8,6 +8,10 @@ import { SyncClient } from "@/components/tools/clients/SyncClient";
 import { SrtToTextClient } from "@/components/tools/clients/SrtToTextClient";
 import { CleanClient } from "@/components/tools/clients/CleanClient";
 import { EditorClient } from "@/components/tools/clients/EditorClient";
+import { TranslateClient } from "@/components/tools/clients/TranslateClient";
+import { BatchTranslateClient } from "@/components/tools/clients/BatchTranslateClient";
+import { YouTubeChaptersClient } from "@/components/tools/clients/YouTubeChaptersClient";
+import { AutoSyncClient } from "@/components/tools/clients/AutoSyncClient";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
@@ -118,6 +122,18 @@ export default function LocalisedToolPage({
       break;
     case "subtitle-editor":
       body = <EditorClient />;
+      break;
+    case "translate-subtitles":
+      body = <TranslateClient crossLinks={crossLinks} />;
+      break;
+    case "batch-translate":
+      body = <BatchTranslateClient />;
+      break;
+    case "youtube-chapters":
+      body = <YouTubeChaptersClient />;
+      break;
+    case "auto-sync":
+      body = <AutoSyncClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

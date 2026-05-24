@@ -1,17 +1,9 @@
 import { NextResponse } from "next/server";
 import { TOOLS_BY_SLUG } from "@/lib/tools-config";
+import { checkAndReserveQuota } from "@/lib/quotas";
 
 export const runtime = "nodejs";
 
-/**
- * Generic forwarder: client posts a multipart upload here, we forward it
- * to the matching Supabase Edge Function. All third-party keys (Mistral,
- * Stripe) live in those functions' secrets — never in this Next.js app.
- *
- * Auth: we just pass the browser's Authorization header through. The Edge
- * Function decides what to do with it (Mistral functions allow anon
- * traffic at runtime; Stripe functions require a real session).
- */
 const FN_MAP: Record<string, string> = {
   "subtitle-generator": "process-subtitles",
   "tiktok-subtitles": "process-subtitles",
@@ -48,6 +40,21 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
     );
   }
 
+  // Daily quota gate — applies to signed-in users only (anonymous traffic
+  // is limited at the Edge Function level when it lands).
+  const quota = await checkAndReserveQuota();
+  if (!quota.ok) {
+    return NextResponse.json(
+      {
+        error: "daily_limit_reached",
+        plan: quota.plan,
+        resetAt: quota.resetAt,
+        message: "You've hit today's free limit. Upgrade to Pro for unlimited runs.",
+      },
+      { status: 429 },
+    );
+  }
+
   const target = `${supabaseUrl}/functions/v1/${fn}?tool=${encodeURIComponent(tool.slug)}`;
   try {
     const upstream = await fetch(target, {
@@ -63,7 +70,11 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
     const body = await upstream.text();
     return new NextResponse(body, {
       status: upstream.status,
-      headers: { "Content-Type": upstream.headers.get("content-type") ?? "application/json" },
+      headers: {
+        "Content-Type": upstream.headers.get("content-type") ?? "application/json",
+        "X-Plan": quota.plan,
+        "X-Remaining": String(quota.remaining === Infinity ? "unlimited" : quota.remaining),
+      },
     });
   } catch (err) {
     return NextResponse.json(

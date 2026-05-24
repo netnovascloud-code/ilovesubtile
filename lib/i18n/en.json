@@ -1,0 +1,29 @@
+{
+  "nav": { "tools": "Tools", "pricing": "Pricing", "api": "API", "login": "Log in", "start": "Get started" },
+  "hero": {
+    "title": "Convert, generate & translate subtitles online",
+    "subtitle": "Sixteen focused tools for SRT, VTT and video captions. Free. No sign-up required.",
+    "primary": "Start with the generator",
+    "secondary": "See all tools"
+  },
+  "homeSection": {
+    "tools": "All subtitle tools",
+    "toolsLead": "Pick the tool you need. Drop your file. Get your result."
+  },
+  "footer": {
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "languages": "Languages",
+    "tagline": "Free subtitle tools online — generate, translate, sync, convert."
+  },
+  "common": {
+    "freeTier": "Free tier: limited daily runs and file size. Pro removes both.",
+    "selectFile": "Select a file or drop it here",
+    "or": "or",
+    "processing": "Processing…",
+    "download": "Download",
+    "tryAnother": "Try another file",
+    "upgrade": "Upgrade to Pro"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "nav": { "tools": "Outils", "pricing": "Tarifs", "api": "API", "login": "Connexion", "start": "Commencer" },
+  "hero": {
+    "title": "Convertissez, générez et traduisez vos sous-titres en ligne",
+    "subtitle": "Seize outils dédiés aux SRT, VTT et sous-titres vidéo. Gratuit. Sans inscription.",
+    "primary": "Commencer avec le générateur",
+    "secondary": "Voir tous les outils"
+  },
+  "homeSection": {
+    "tools": "Tous les outils de sous-titrage",
+    "toolsLead": "Choisissez votre outil. Déposez votre fichier. Récupérez le résultat."
+  },
+  "footer": {
+    "product": "Produit",
+    "company": "Entreprise",
+    "legal": "Mentions légales",
+    "languages": "Langues",
+    "tagline": "Outils de sous-titrage gratuits — générer, traduire, synchroniser, convertir."
+  },
+  "common": {
+    "freeTier": "Offre gratuite : usages quotidiens et taille de fichier limités. Pro supprime les deux.",
+    "selectFile": "Sélectionnez un fichier ou déposez-le ici",
+    "or": "ou",
+    "processing": "Traitement en cours…",
+    "download": "Télécharger",
+    "tryAnother": "Essayer un autre fichier",
+    "upgrade": "Passer à Pro"
+  }
+}

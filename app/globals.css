@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-surface text-ink-900;
+  }
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+}
+
+@layer components {
+  /* Lightweight ad-bait class — AdBlock filters hide elements with this name.
+     Used by useAdblockDetect via a dynamically created element. */
+  .ads,
+  .ad-banner,
+  .advertisement,
+  .adsbox {
+    /* keep them functional in the DOM but completely invisible */
+    position: absolute;
+    left: -9999px;
+    height: 1px;
+    width: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}

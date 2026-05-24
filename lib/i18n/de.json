@@ -1,0 +1,29 @@
+{
+  "nav": { "tools": "Werkzeuge", "pricing": "Preise", "api": "API", "login": "Anmelden", "start": "Loslegen" },
+  "hero": {
+    "title": "Untertitel online umwandeln, erstellen und übersetzen",
+    "subtitle": "Sechzehn fokussierte Tools für SRT, VTT und Video-Untertitel. Kostenlos. Ohne Anmeldung.",
+    "primary": "Mit dem Generator starten",
+    "secondary": "Alle Tools ansehen"
+  },
+  "homeSection": {
+    "tools": "Alle Untertitel-Tools",
+    "toolsLead": "Tool wählen. Datei hochladen. Ergebnis herunterladen."
+  },
+  "footer": {
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "languages": "Sprachen",
+    "tagline": "Kostenlose Untertitel-Tools — erzeugen, übersetzen, synchronisieren, umwandeln."
+  },
+  "common": {
+    "freeTier": "Kostenlos: begrenzte Tagesnutzung und Dateigröße. Pro hebt beides auf.",
+    "selectFile": "Datei auswählen oder hierher ziehen",
+    "or": "oder",
+    "processing": "Wird verarbeitet…",
+    "download": "Herunterladen",
+    "tryAnother": "Andere Datei versuchen",
+    "upgrade": "Auf Pro upgraden"
+  }
+}

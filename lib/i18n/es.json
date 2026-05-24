@@ -1,0 +1,29 @@
+{
+  "nav": { "tools": "Herramientas", "pricing": "Precios", "api": "API", "login": "Iniciar sesión", "start": "Empezar" },
+  "hero": {
+    "title": "Convierte, genera y traduce subtítulos en línea",
+    "subtitle": "Dieciséis herramientas centradas en SRT, VTT y subtítulos de vídeo. Gratis. Sin registro.",
+    "primary": "Empezar con el generador",
+    "secondary": "Ver todas las herramientas"
+  },
+  "homeSection": {
+    "tools": "Todas las herramientas de subtítulos",
+    "toolsLead": "Elige la herramienta. Suelta tu archivo. Descarga el resultado."
+  },
+  "footer": {
+    "product": "Producto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "languages": "Idiomas",
+    "tagline": "Herramientas gratuitas de subtítulos — generar, traducir, sincronizar, convertir."
+  },
+  "common": {
+    "freeTier": "Plan gratuito: usos diarios y tamaño de archivo limitados. Pro elimina ambos límites.",
+    "selectFile": "Selecciona un archivo o suéltalo aquí",
+    "or": "o",
+    "processing": "Procesando…",
+    "download": "Descargar",
+    "tryAnother": "Probar otro archivo",
+    "upgrade": "Pasar a Pro"
+  }
+}

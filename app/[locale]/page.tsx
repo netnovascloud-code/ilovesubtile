@@ -1,17 +1,51 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowRight, Sparkles, Zap, Globe2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { TOOLS } from "@/lib/tools-config";
 import { getStrings } from "@/lib/i18n/strings";
+import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
+import { SITE_URL } from "@/lib/utils";
+import { HREFLANG_PREFIX, LOCALES } from "@/lib/seo";
 
 const ICON_BY_REASON = [Zap, Sparkles, Globe2, ShieldCheck];
 
-export default function Home() {
-  const ui = getStrings("en");
+export function generateStaticParams() {
+  return NON_DEFAULT_LOCALES.map((locale) => ({ locale }));
+}
+
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  if (!isLocale(params.locale) || params.locale === "en") return {};
+  const locale = params.locale;
+  const ui = getStrings(locale);
+  const canonicalPath = `${HREFLANG_PREFIX[locale]}/`;
+  const alts: Record<string, string> = {};
+  for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/`;
+  alts["x-default"] = `${SITE_URL}/`;
+  return {
+    title: { absolute: `CaptionFlow — ${ui.hero.title}` },
+    description: ui.hero.subtitle,
+    alternates: { canonical: canonicalPath, languages: alts },
+    openGraph: {
+      title: `CaptionFlow — ${ui.hero.title}`,
+      description: ui.hero.subtitle,
+      url: `${SITE_URL}${canonicalPath}`,
+      siteName: "CaptionFlow",
+      locale,
+    },
+  };
+}
+
+export default function LocaleHome({ params }: { params: { locale: string } }) {
+  if (!isLocale(params.locale) || params.locale === "en") notFound();
+  const locale = params.locale;
+  const ui = getStrings(locale);
+  const rtl = isRtl(locale);
 
   return (
-    <>
+    <div dir={rtl ? "rtl" : undefined}>
       <section className="border-b border-ink-100 bg-white">
         <div className="container py-20 md:py-28">
           <div className="mx-auto max-w-3xl text-center">
@@ -24,13 +58,13 @@ export default function Home() {
             </h1>
             <p className="mt-6 text-lg text-ink-500">{ui.hero.subtitle}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/subtitle-generator">
+              <Link href={localePath(locale, "subtitle-generator")}>
                 <Button size="lg">
                   {ui.hero.ctaPrimary}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="#tools">
+              <Link href={`${localePath(locale)}#tools`}>
                 <Button size="lg" variant="outline">
                   {ui.hero.ctaSecondary}
                 </Button>
@@ -43,13 +77,15 @@ export default function Home() {
       <section id="tools" className="scroll-mt-20 bg-surface">
         <div className="container py-20">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-tight text-ink-900">{ui.home.toolsTitle}</h2>
+            <h2 className="text-3xl font-semibold tracking-tight text-ink-900">
+              {ui.home.toolsTitle}
+            </h2>
             <p className="mt-3 text-ink-500">{ui.home.toolsLead}</p>
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {TOOLS.map((tool) => (
-              <ToolCard key={tool.slug} tool={tool} />
+              <ToolCard key={tool.slug} tool={tool} locale={locale} />
             ))}
           </div>
         </div>
@@ -85,7 +121,7 @@ export default function Home() {
                 </h2>
                 <p className="mt-3 text-ink-500">{ui.home.upgradeBody}</p>
                 <div className="mt-6 flex gap-3">
-                  <Link href="/pricing">
+                  <Link href={localePath(locale, "pricing")}>
                     <Button>{ui.home.upgradeCtaPrimary}</Button>
                   </Link>
                   <Link href="/register">
@@ -102,6 +138,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TOOLS } from "@/lib/tools-config";
-import { LANGUAGE_NAMES, LOCALES } from "@/lib/i18n/config";
+import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES } from "@/lib/i18n/locales";
 
 export function Footer() {
   const featured = TOOLS.filter((t) => t.phase === 1);
@@ -76,13 +76,11 @@ export function Footer() {
         <div className="container flex flex-col gap-3 py-6 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
           <div>© {new Date().getFullYear()} CaptionFlow. All rights reserved.</div>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
-            {LOCALES.map((loc) => (
-              <Link
-                key={loc}
-                href={loc === "en" ? "/" : `/${loc}`}
-                className="hover:text-ink-700"
-                hrefLang={loc}
-              >
+            <Link href="/" hrefLang="en" className="hover:text-ink-700">
+              {LANGUAGE_NAMES.en}
+            </Link>
+            {NON_DEFAULT_LOCALES.map((loc) => (
+              <Link key={loc} href={`/${loc}`} hrefLang={loc} className="hover:text-ink-700">
                 {LANGUAGE_NAMES[loc]}
               </Link>
             ))}

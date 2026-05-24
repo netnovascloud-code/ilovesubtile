@@ -7,30 +7,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
-  const buildAlternates = (path: string) => ({
+  const altsFor = (path: string) => ({
     languages: Object.fromEntries(
       LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l]}${path}`]),
     ),
   });
 
-  entries.push({
-    url: `${SITE_URL}/`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 1,
-    alternates: buildAlternates("/"),
-  });
-
-  for (const t of TOOLS) {
+  // Homepage — one entry per locale, each pointing to itself with full hreflang.
+  for (const loc of LOCALES) {
     entries.push({
-      url: `${SITE_URL}/${t.slug}`,
+      url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: t.phase === 1 ? 0.9 : 0.7,
-      alternates: buildAlternates(`/${t.slug}`),
+      priority: loc === "en" ? 1 : 0.9,
+      alternates: altsFor("/"),
     });
   }
 
+  // Tool pages — one entry per locale × tool.
+  for (const tool of TOOLS) {
+    for (const loc of LOCALES) {
+      entries.push({
+        url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/${tool.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: tool.phase === 1 ? (loc === "en" ? 0.95 : 0.85) : 0.7,
+        alternates: altsFor(`/${tool.slug}`),
+      });
+    }
+  }
+
+  // Pricing — one entry per locale.
+  for (const loc of LOCALES) {
+    entries.push({
+      url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/pricing`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: altsFor("/pricing"),
+    });
+  }
+
+  // Competitor pages — English only.
   for (const a of ALTERNATIVES) {
     entries.push({
       url: `${SITE_URL}/${a.slug}`,
@@ -40,7 +58,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  for (const p of ["/pricing", "/api", "/privacy", "/terms"]) {
+  // Other top-level pages — English only.
+  for (const p of ["/api", "/privacy", "/terms"]) {
     entries.push({
       url: `${SITE_URL}${p}`,
       lastModified: now,

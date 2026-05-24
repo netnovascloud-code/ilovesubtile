@@ -5,6 +5,8 @@ import { UploadZone } from "@/components/tools/UploadZone";
 import { ResultScreen } from "@/components/tools/ResultScreen";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome } from "@/lib/i18n/chrome";
 import {
   parseSubtitles,
   shiftCues,
@@ -23,6 +25,9 @@ export function SyncClient() {
   const [offsetMs, setOffsetMs] = useState("0");
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ content: string; name: string } | null>(null);
+  const locale = useLocale();
+  const chrome = getChrome(locale);
+  const t = chrome.sync;
 
   async function handleFile(file: File) {
     setError(null);
@@ -30,19 +35,19 @@ export function SyncClient() {
       const raw = await file.text();
       const fmt = detectFormat(file.name, raw);
       if (fmt === "unknown") {
-        setError("Couldn't detect SRT or VTT format.");
+        setError(chrome.errors.badFormat);
         return;
       }
       const parsed = parseSubtitles(raw);
       if (!parsed.length) {
-        setError("No cues found.");
+        setError(chrome.errors.noCues);
         return;
       }
       setFormat(fmt);
       setCues(parsed);
       setFilename(file.name);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't parse that file.");
+      setError(err instanceof Error ? err.message : chrome.errors.cantParse);
     }
   }
 
@@ -50,7 +55,7 @@ export function SyncClient() {
     if (!cues || !filename) return;
     const total = (parseFloat(offsetSec) || 0) * 1000 + (parseFloat(offsetMs) || 0);
     if (Number.isNaN(total)) {
-      setError("Enter a number for the offset.");
+      setError(chrome.errors.cantParse);
       return;
     }
     const shifted = shiftCues(cues, total);
@@ -84,13 +89,11 @@ export function SyncClient() {
   if (cues) {
     return (
       <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
-        <h3 className="font-semibold text-ink-900">How much should we shift?</h3>
-        <p className="mt-1 text-sm text-ink-500">
-          Positive numbers delay subtitles (push them later). Negative advances them.
-        </p>
+        <h3 className="font-semibold text-ink-900">{t.prompt}</h3>
+        <p className="mt-1 text-sm text-ink-500">{t.help}</p>
         <div className="mt-6 grid max-w-md grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-medium text-ink-700">Seconds</label>
+            <label className="text-sm font-medium text-ink-700">{t.seconds}</label>
             <Input
               type="number"
               step="0.001"
@@ -100,7 +103,7 @@ export function SyncClient() {
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-ink-700">Milliseconds</label>
+            <label className="text-sm font-medium text-ink-700">{t.millis}</label>
             <Input
               type="number"
               step="1"
@@ -114,9 +117,9 @@ export function SyncClient() {
           <p className="mt-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
         )}
         <div className="mt-6 flex gap-2">
-          <Button onClick={apply}>Apply offset</Button>
+          <Button onClick={apply}>{t.apply}</Button>
           <Button variant="outline" onClick={reset}>
-            Cancel
+            {t.cancel}
           </Button>
         </div>
       </div>
@@ -125,7 +128,7 @@ export function SyncClient() {
 
   return (
     <div className="space-y-4">
-      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} cta="Choose file" />
+      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} />
       {error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}

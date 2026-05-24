@@ -1,71 +1,78 @@
+"use client";
+
 import Link from "next/link";
 import { TOOLS } from "@/lib/tools-config";
-import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES } from "@/lib/i18n/locales";
+import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES, localePath } from "@/lib/i18n/locales";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome } from "@/lib/i18n/chrome";
+import { getToolI18n } from "@/lib/i18n/tool-translations";
 
 export function Footer() {
-  const featured = TOOLS.filter((t) => t.phase === 1);
+  const locale = useLocale();
+  const t = getChrome(locale).footer;
+  const featured = TOOLS.filter((tool) => tool.phase === 1);
 
   return (
     <footer className="mt-24 border-t border-ink-100 bg-white">
       <div className="container grid grid-cols-2 gap-10 py-12 md:grid-cols-5">
         <div className="col-span-2 md:col-span-2">
           <div className="font-semibold text-ink-900">CaptionFlow</div>
-          <p className="mt-3 max-w-sm text-sm text-ink-500">
-            Free subtitle tools online — generate, translate, sync, convert. One simple tool per
-            job, all in your browser.
-          </p>
+          <p className="mt-3 max-w-sm text-sm text-ink-500">{t.tagline}</p>
         </div>
 
         <div>
-          <div className="text-sm font-semibold text-ink-900">Top tools</div>
+          <div className="text-sm font-semibold text-ink-900">{t.topTools}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
-            {featured.map((t) => (
-              <li key={t.slug}>
-                <Link href={`/${t.slug}`} className="hover:text-ink-900">
-                  {t.name}
-                </Link>
-              </li>
-            ))}
+            {featured.map((tool) => {
+              const i18n = locale === "en" ? null : getToolI18n(tool.slug, locale);
+              return (
+                <li key={tool.slug}>
+                  <Link href={localePath(locale, tool.slug)} className="hover:text-ink-900">
+                    {i18n?.name ?? tool.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
         <div>
-          <div className="text-sm font-semibold text-ink-900">Product</div>
+          <div className="text-sm font-semibold text-ink-900">{t.product}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
-              <Link href="/pricing" className="hover:text-ink-900">
-                Pricing
+              <Link href={localePath(locale, "pricing")} className="hover:text-ink-900">
+                {t.pricing}
               </Link>
             </li>
             <li>
-              <Link href="/api" className="hover:text-ink-900">
-                API
+              <Link href={localePath(locale, "api")} className="hover:text-ink-900">
+                {t.api}
               </Link>
             </li>
             <li>
               <Link href="/dashboard" className="hover:text-ink-900">
-                Dashboard
+                {t.dashboard}
               </Link>
             </li>
             <li>
               <Link href="/veed-alternative" className="hover:text-ink-900">
-                vs VEED.io
+                {t.vsVeed}
               </Link>
             </li>
           </ul>
         </div>
 
         <div>
-          <div className="text-sm font-semibold text-ink-900">Legal</div>
+          <div className="text-sm font-semibold text-ink-900">{t.legal}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
               <Link href="/privacy" className="hover:text-ink-900">
-                Privacy
+                {t.privacy}
               </Link>
             </li>
             <li>
               <Link href="/terms" className="hover:text-ink-900">
-                Terms
+                {t.terms}
               </Link>
             </li>
           </ul>
@@ -74,7 +81,7 @@ export function Footer() {
 
       <div className="border-t border-ink-100">
         <div className="container flex flex-col gap-3 py-6 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} CaptionFlow. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} CaptionFlow. {t.rights}</div>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             <Link href="/" hrefLang="en" className="hover:text-ink-700">
               {LANGUAGE_NAMES.en}

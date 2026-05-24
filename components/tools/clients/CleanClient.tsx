@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { UploadZone } from "@/components/tools/UploadZone";
 import { ResultScreen } from "@/components/tools/ResultScreen";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import {
   parseSubtitles,
   cleanCues,
@@ -23,14 +25,6 @@ const DEFAULT_OPTS: CleanOptions = {
   trim: true,
 };
 
-const TOGGLES: { key: keyof CleanOptions; label: string }[] = [
-  { key: "stripSdh", label: "Strip SDH tags like [music] (sigh)" },
-  { key: "removeDuplicates", label: "Remove consecutive duplicate lines" },
-  { key: "normaliseShouting", label: "Convert ALL-CAPS to sentence case" },
-  { key: "collapseWhitespace", label: "Collapse multiple spaces" },
-  { key: "trim", label: "Trim whitespace around each line" },
-];
-
 export function CleanClient() {
   const [filename, setFilename] = useState<string | null>(null);
   const [format, setFormat] = useState<"srt" | "vtt">("srt");
@@ -38,6 +32,17 @@ export function CleanClient() {
   const [opts, setOpts] = useState<CleanOptions>(DEFAULT_OPTS);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ content: string; name: string } | null>(null);
+  const locale = useLocale();
+  const chrome = getChrome(locale);
+  const t = chrome.clean;
+
+  const TOGGLES: { key: keyof CleanOptions; label: string }[] = [
+    { key: "stripSdh", label: t.stripSdh },
+    { key: "removeDuplicates", label: t.removeDup },
+    { key: "normaliseShouting", label: t.shouting },
+    { key: "collapseWhitespace", label: t.collapseWs },
+    { key: "trim", label: t.trim },
+  ];
 
   const cleaned = useMemo(() => (cues ? cleanCues(cues, opts) : null), [cues, opts]);
 
@@ -47,14 +52,14 @@ export function CleanClient() {
       const raw = await file.text();
       const fmt = detectFormat(file.name, raw);
       if (fmt === "unknown") {
-        setError("Couldn't detect SRT or VTT format.");
+        setError(chrome.errors.badFormat);
         return;
       }
       setFormat(fmt);
       setCues(parseSubtitles(raw));
       setFilename(file.name);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't parse that file.");
+      setError(err instanceof Error ? err.message : chrome.errors.cantParse);
     }
   }
 
@@ -89,27 +94,27 @@ export function CleanClient() {
   if (cues && cleaned) {
     return (
       <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
-        <h3 className="font-semibold text-ink-900">What should we clean?</h3>
+        <h3 className="font-semibold text-ink-900">{t.title}</h3>
         <p className="mt-1 text-sm text-ink-500">
-          {cues.length} cues in · {cleaned.length} after cleanup.
+          {tt(t.summary, { a: cues.length, b: cleaned.length })}
         </p>
         <div className="mt-6 space-y-3">
-          {TOGGLES.map((t) => (
-            <label key={t.key} className="flex items-center gap-3 text-sm text-ink-700">
+          {TOGGLES.map((toggle) => (
+            <label key={toggle.key} className="flex items-center gap-3 text-sm text-ink-700">
               <input
                 type="checkbox"
-                checked={Boolean(opts[t.key])}
-                onChange={(e) => setOpts((o) => ({ ...o, [t.key]: e.target.checked }))}
+                checked={Boolean(opts[toggle.key])}
+                onChange={(e) => setOpts((o) => ({ ...o, [toggle.key]: e.target.checked }))}
                 className="h-4 w-4 rounded border-ink-200 text-brand-500 focus:ring-brand-500"
               />
-              {t.label}
+              {toggle.label}
             </label>
           ))}
         </div>
         <div className="mt-6 flex gap-2">
-          <Button onClick={finalize}>Download cleaned file</Button>
+          <Button onClick={finalize}>{t.download}</Button>
           <Button variant="outline" onClick={reset}>
-            Cancel
+            {t.cancel}
           </Button>
         </div>
       </div>
@@ -118,7 +123,7 @@ export function CleanClient() {
 
   return (
     <div className="space-y-4">
-      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} cta="Choose file" />
+      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} />
       {error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}

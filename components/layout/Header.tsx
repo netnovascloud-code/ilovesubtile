@@ -5,16 +5,15 @@ import { useEffect, useState } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const NAV = [
-  { href: "/#tools", label: "Tools" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/api", label: "API" },
-];
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome } from "@/lib/i18n/chrome";
+import { localePath } from "@/lib/i18n/locales";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const locale = useLocale();
+  const t = getChrome(locale).nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -22,6 +21,12 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const NAV = [
+    { href: `${localePath(locale)}#tools`, label: t.tools },
+    { href: localePath(locale, "pricing"), label: t.pricing },
+    { href: localePath(locale, "api"), label: t.api },
+  ];
 
   return (
     <header
@@ -31,7 +36,7 @@ export function Header() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-semibold text-ink-900">
+        <Link href={localePath(locale)} className="flex items-center gap-2 font-semibold text-ink-900">
           <span className="grid h-8 w-8 place-items-center rounded bg-brand-500 text-white">
             <Sparkles className="h-4 w-4" />
           </span>
@@ -51,13 +56,13 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link href="/login">
+          <Link href={locale === "en" ? "/login" : `/login?lang=${locale}`}>
             <Button variant="ghost" size="sm">
-              Log in
+              {t.login}
             </Button>
           </Link>
-          <Link href="/register">
-            <Button size="sm">Get started</Button>
+          <Link href={locale === "en" ? "/register" : `/register?lang=${locale}`}>
+            <Button size="sm">{t.start}</Button>
           </Link>
         </div>
 
@@ -86,12 +91,12 @@ export function Header() {
             <div className="mt-2 flex gap-2 px-3">
               <Link href="/login" className="flex-1">
                 <Button variant="outline" size="sm" className="w-full">
-                  Log in
+                  {t.login}
                 </Button>
               </Link>
               <Link href="/register" className="flex-1">
                 <Button size="sm" className="w-full">
-                  Get started
+                  {t.start}
                 </Button>
               </Link>
             </div>

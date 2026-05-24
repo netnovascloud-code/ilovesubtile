@@ -4,6 +4,8 @@ import { useState } from "react";
 import { UploadZone } from "@/components/tools/UploadZone";
 import { ProcessingScreen } from "@/components/tools/ProcessingScreen";
 import { ResultScreen } from "@/components/tools/ResultScreen";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome, t as tt } from "@/lib/i18n/chrome";
 
 export type ServerJobSpec = {
   slug: string;
@@ -24,15 +26,17 @@ export function ServerJobClient({
 }) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [file, setFile] = useState<File | null>(null);
-  const [status, setStatus] = useState<string>("Uploading…");
+  const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [resultName, setResultName] = useState<string | null>(null);
+  const locale = useLocale();
+  const chrome = getChrome(locale);
 
   async function start(f: File) {
     setFile(f);
     setPhase("uploading");
-    setStatus("Uploading your file…");
+    setStatus(chrome.processing.uploading);
     setError(null);
 
     try {
@@ -42,23 +46,21 @@ export function ServerJobClient({
 
       if (res.status === 503) {
         setPhase("error");
-        setError(
-          "This tool isn't wired up to a backend yet. Configure Supabase + the relevant Edge Function to enable it.",
-        );
+        setError(chrome.errors.notWiredUp);
         return;
       }
       if (!res.ok) {
         setPhase("error");
-        setError(`Server returned ${res.status}. Try again in a moment.`);
+        setError(tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
 
-      setStatus("Processing your file…");
+      setStatus(chrome.processing.processing);
       setPhase("processing");
       const data = (await res.json()) as { url?: string; filename?: string };
       if (!data.url) {
         setPhase("error");
-        setError("The server didn't return a result URL.");
+        setError(chrome.errors.noResultUrl);
         return;
       }
       setResultUrl(data.url);
@@ -66,7 +68,7 @@ export function ServerJobClient({
       setPhase("done");
     } catch (err) {
       setPhase("error");
-      setError(err instanceof Error ? err.message : "Network error.");
+      setError(err instanceof Error ? err.message : chrome.errors.network);
     }
   }
 
@@ -102,12 +104,7 @@ export function ServerJobClient({
 
   return (
     <div className="space-y-4">
-      <UploadZone
-        accept={tool.accept}
-        maxMb={tool.freeMaxMb}
-        onFile={start}
-        cta={`Start ${tool.name.toLowerCase()}`}
-      />
+      <UploadZone accept={tool.accept} maxMb={tool.freeMaxMb} onFile={start} />
       {phase === "error" && error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}

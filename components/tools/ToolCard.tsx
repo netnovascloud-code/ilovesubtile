@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ToolDefinition } from "@/lib/tools-config";
 import { cn } from "@/lib/utils";
-import { type Locale } from "@/lib/seo";
-import { localePath } from "@/lib/i18n/locales";
+import { DEFAULT_LOCALE, type Locale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { getChrome } from "@/lib/i18n/chrome";
 
 const TONE_BG: Record<ToolDefinition["tone"], string> = {
   blue: "bg-brand-50 text-brand-600",
@@ -17,9 +17,16 @@ const TONE_BG: Record<ToolDefinition["tone"], string> = {
   slate: "bg-ink-100 text-ink-700",
 };
 
-export function ToolCard({ tool, locale = "en" }: { tool: ToolDefinition; locale?: Locale }) {
+export function ToolCard({
+  tool,
+  locale = DEFAULT_LOCALE,
+}: {
+  tool: ToolDefinition;
+  locale?: Locale;
+}) {
   const Icon = tool.icon;
   const i18n = locale === "en" ? null : getToolI18n(tool.slug, locale);
+  const chrome = getChrome(locale);
   const name = i18n?.name ?? tool.name;
   const short = i18n?.short ?? tool.short;
   return (
@@ -33,11 +40,11 @@ export function ToolCard({ tool, locale = "en" }: { tool: ToolDefinition; locale
       <h3 className="mt-4 font-semibold text-ink-900">{name}</h3>
       <p className="mt-1 text-sm leading-relaxed text-ink-500">{short}</p>
       <div className="mt-4 flex items-center text-sm font-medium text-brand-600 opacity-0 transition-opacity group-hover:opacity-100">
-        Open <ArrowRight className="ml-1 h-4 w-4" />
+        {chrome.card.open} <ArrowRight className="ml-1 h-4 w-4" />
       </div>
       {tool.proOnly && (
         <span className="absolute right-4 top-4 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
-          Pro
+          {chrome.card.pro}
         </span>
       )}
     </Link>

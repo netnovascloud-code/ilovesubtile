@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { UploadZone } from "@/components/tools/UploadZone";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { parseSubtitles, toSrt, toVtt, detectFormat, downloadBlob, type Cue } from "@/lib/srt-utils";
 
 function msToInput(ms: number) {
@@ -34,6 +36,9 @@ export function EditorClient() {
   const [format, setFormat] = useState<"srt" | "vtt">("srt");
   const [cues, setCues] = useState<Cue[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const locale = useLocale();
+  const chrome = getChrome(locale);
+  const T = chrome.editor;
 
   async function handleFile(file: File) {
     setError(null);
@@ -74,7 +79,7 @@ export function EditorClient() {
   if (!cues) {
     return (
       <div className="space-y-4">
-        <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} cta="Open file" />
+        <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={handleFile} cta={T.openFile} />
         {error && (
           <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
         )}
@@ -88,15 +93,15 @@ export function EditorClient() {
         <div>
           <div className="text-sm font-medium text-ink-900">{filename}</div>
           <div className="text-xs text-ink-400">
-            {cues.length} cues · {msToInput(totalDuration)} total
+            {tt(T.cues, { n: cues.length })} · {msToInput(totalDuration)}
           </div>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={() => { setCues(null); setFilename(null); }}>
-            Open another
+            {T.openAnother}
           </Button>
           <Button size="sm" onClick={exportFile}>
-            Export {format.toUpperCase()}
+            {T.export} {format.toUpperCase()}
           </Button>
         </div>
       </div>
@@ -134,7 +139,7 @@ export function EditorClient() {
               onClick={() => deleteCue(idx)}
               className="self-start rounded p-1 text-xs text-ink-400 hover:bg-red-50 hover:text-red-600"
             >
-              Delete
+              {T.delete}
             </button>
           </div>
         ))}

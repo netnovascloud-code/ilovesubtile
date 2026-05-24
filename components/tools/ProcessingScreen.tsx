@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { formatBytes } from "@/lib/utils";
+import { useLocale } from "@/hooks/useLocale";
+import { getChrome } from "@/lib/i18n/chrome";
 
 export type ProcessingScreenProps = {
   filename: string;
   fileSize: number;
-  /** When provided, drives the progress bar. Otherwise we show an indeterminate animation. */
   progress?: number;
   status?: string;
-  /** When true, hide ads (Pro user). */
   hideAds?: boolean;
 };
 
@@ -19,10 +19,12 @@ export function ProcessingScreen({
   filename,
   fileSize,
   progress,
-  status = "Working on your file…",
+  status,
   hideAds = false,
 }: ProcessingScreenProps) {
   const [fakeProgress, setFakeProgress] = useState(0);
+  const locale = useLocale();
+  const chrome = getChrome(locale);
 
   useEffect(() => {
     if (progress !== undefined) return;
@@ -38,7 +40,7 @@ export function ProcessingScreen({
     <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
       <div className="flex flex-col items-center text-center">
         <Loader2 className="h-8 w-8 animate-spin text-brand-500" />
-        <h3 className="mt-4 text-lg font-semibold text-ink-900">{status}</h3>
+        <h3 className="mt-4 text-lg font-semibold text-ink-900">{status ?? chrome.processing.working}</h3>
         <p className="mt-1 text-sm text-ink-500">
           {filename} · {formatBytes(fileSize)}
         </p>
@@ -52,7 +54,7 @@ export function ProcessingScreen({
           </div>
           <div className="mt-2 flex justify-between text-xs text-ink-400">
             <span>{pct}%</span>
-            <span>This usually takes 30–90 seconds</span>
+            <span>{chrome.processing.takes}</span>
           </div>
         </div>
       </div>
@@ -60,7 +62,7 @@ export function ProcessingScreen({
       {!hideAds && (
         <div className="mt-8">
           <div className="mb-2 text-center text-[10px] uppercase tracking-wide text-ink-300">
-            Advertisement
+            {chrome.processing.ad}
           </div>
           <AdSlot slot="processing" />
         </div>

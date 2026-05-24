@@ -1,10 +1,24 @@
-import type { ToolDefinition } from "@/lib/tools-config";
-import { softwareApplicationSchema, faqPageSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
+import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
+import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Home, ChevronRight } from "lucide-react";
 import { getStrings } from "@/lib/i18n/strings";
 import { isRtl, localePath } from "@/lib/i18n/locales";
+import { getLocalisedFaqs } from "@/lib/i18n/faq-templates";
+import { getLocalisedSteps } from "@/lib/i18n/tool-steps";
+
+function localisedFaqSchema(faqs: ToolFaq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
 
 export function ToolPageShell({
   tool,
@@ -14,7 +28,6 @@ export function ToolPageShell({
 }: {
   tool: ToolDefinition;
   locale?: Locale;
-  /** Override the displayed name + h1 + description per locale. */
   override?: { name?: string; h1?: string; metaDescription?: string };
   children: React.ReactNode;
 }) {
@@ -24,6 +37,13 @@ export function ToolPageShell({
   const h1 = override?.h1 ?? tool.h1;
   const description = override?.metaDescription ?? tool.metaDescription;
   const rtl = isRtl(locale);
+
+  // Localised FAQs (template-generated) + steps (per tool × locale).
+  const formats = tool.accept.length
+    ? tool.accept.map((a) => a.toUpperCase()).join(", ")
+    : "the supported formats";
+  const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats);
+  const steps = (locale === "en" ? null : getLocalisedSteps(tool.slug, locale)) ?? tool.steps;
 
   return (
     <div dir={rtl ? "rtl" : undefined}>
@@ -35,7 +55,7 @@ export function ToolPageShell({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(tool)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localisedFaqSchema(faqs)) }}
       />
       <script
         type="application/ld+json"
@@ -80,7 +100,7 @@ export function ToolPageShell({
         <div className="container py-16">
           <h2 className="text-2xl font-semibold text-ink-900">{ui.tool.howItWorks}</h2>
           <ol className="mt-8 grid gap-6 md:grid-cols-3">
-            {tool.steps.map((s, i) => (
+            {steps.map((s, i) => (
               <li key={s.title} className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">
                 <div className="grid h-8 w-8 place-items-center rounded bg-brand-500 text-sm font-semibold text-white">
                   {i + 1}
@@ -97,7 +117,7 @@ export function ToolPageShell({
         <div className="container py-16">
           <h2 className="text-2xl font-semibold text-ink-900">{ui.tool.faq}</h2>
           <dl className="mt-8 grid gap-4 md:grid-cols-2">
-            {tool.faqs.map((f) => (
+            {faqs.map((f) => (
               <div key={f.q} className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">
                 <dt className="font-semibold text-ink-900">{f.q}</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-ink-500">{f.a}</dd>

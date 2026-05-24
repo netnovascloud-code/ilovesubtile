@@ -60,7 +60,7 @@ export type ToolDefinition = {
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,
-    a: `Yes. iLoveSubtitle is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
+    a: `Yes. CaptionFlow is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
   },
   {
     q: `Do you store my files?`,
@@ -92,7 +92,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Subtitle Generator",
     short: "Generate subtitles from any video or audio with AI.",
     h1: "Generate Subtitles from Video & Audio — Free AI Subtitle Generator",
-    metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | iLoveSubtitle",
+    metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | CaptionFlow",
     metaDescription:
       "Generate accurate subtitles from any video or audio file with Whisper AI. Free, fast, supports 80+ languages. Download as SRT or VTT.",
     primaryKeyword: "generate subtitles online",
@@ -116,7 +116,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Add Subtitles to Video",
     short: "Burn subtitles permanently into your video file.",
     h1: "Add Subtitles to Video Online — Burn SRT into MP4 for Free",
-    metaTitle: "Add Subtitles to Video Online Free — Burn SRT into MP4 | iLoveSubtitle",
+    metaTitle: "Add Subtitles to Video Online Free — Burn SRT into MP4 | CaptionFlow",
     metaDescription:
       "Burn subtitles permanently into any video. Upload your MP4 and SRT, choose a style, and download a captioned MP4. No watermark with Pro.",
     primaryKeyword: "add subtitles to video online free",
@@ -140,7 +140,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "SRT to VTT",
     short: "Convert SubRip (.srt) to WebVTT (.vtt) instantly.",
     h1: "SRT to VTT Converter — Convert SubRip Subtitles to WebVTT",
-    metaTitle: "SRT to VTT Converter Online — Free & Instant | iLoveSubtitle",
+    metaTitle: "SRT to VTT Converter Online — Free & Instant | CaptionFlow",
     metaDescription:
       "Convert SRT subtitle files to WebVTT instantly in your browser. Free, unlimited, no upload to a server. Works offline once loaded.",
     primaryKeyword: "srt to vtt converter",
@@ -164,7 +164,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "VTT to SRT",
     short: "Convert WebVTT (.vtt) back to SubRip (.srt).",
     h1: "VTT to SRT Converter — Convert WebVTT to SubRip Online",
-    metaTitle: "VTT to SRT Converter Online — Free & Instant | iLoveSubtitle",
+    metaTitle: "VTT to SRT Converter Online — Free & Instant | CaptionFlow",
     metaDescription:
       "Convert WebVTT subtitle files to SRT instantly in your browser. Free, unlimited, runs entirely on your device.",
     primaryKeyword: "vtt to srt converter",
@@ -188,7 +188,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Translate Subtitles",
     short: "Translate SRT or VTT into 30+ languages.",
     h1: "Translate Subtitles Online — SRT & VTT Translator (30+ Languages)",
-    metaTitle: "Translate Subtitles Online Free — SRT Translator | iLoveSubtitle",
+    metaTitle: "Translate Subtitles Online Free — SRT Translator | CaptionFlow",
     metaDescription:
       "Translate SRT or VTT subtitles into 30+ languages with DeepL-quality output. Timestamps stay perfectly intact.",
     primaryKeyword: "translate srt file online",
@@ -212,7 +212,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Sync Subtitles",
     short: "Shift every cue forward or backward in milliseconds.",
     h1: "Sync Subtitles Online — Fix Subtitle Timing for SRT & VTT",
-    metaTitle: "Sync Subtitles Online — Fix Subtitle Timing Free | iLoveSubtitle",
+    metaTitle: "Sync Subtitles Online — Fix Subtitle Timing Free | CaptionFlow",
     metaDescription:
       "Offset every subtitle line by an exact number of seconds or milliseconds. Fix out-of-sync SRT and VTT files in seconds.",
     primaryKeyword: "sync subtitles online",
@@ -238,7 +238,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Extract Subtitles",
     short: "Pull embedded subtitle tracks out of MKV or MP4.",
     h1: "Extract Subtitles from Video — MKV & MP4 Subtitle Extractor",
-    metaTitle: "Extract Subtitles from Video Online — MKV & MP4 | iLoveSubtitle",
+    metaTitle: "Extract Subtitles from Video Online — MKV & MP4 | CaptionFlow",
     metaDescription:
       "Pull every embedded subtitle track from MKV, MP4 and MOV files. Download each track as a separate SRT.",
     primaryKeyword: "extract subtitles from video online",
@@ -262,7 +262,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Subtitle Editor",
     short: "Edit text and timestamps with a live video preview.",
     h1: "Online Subtitle Editor — Edit SRT & VTT in Your Browser",
-    metaTitle: "Online Subtitle Editor — Edit SRT & VTT Free | iLoveSubtitle",
+    metaTitle: "Online Subtitle Editor — Edit SRT & VTT Free | CaptionFlow",
     metaDescription:
       "Edit subtitle text and timestamps directly in your browser with a live video preview. Free, no sign-up required.",
     primaryKeyword: "online subtitle editor",
@@ -286,7 +286,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "TikTok-Style Subtitles",
     short: "Bold word-by-word captions for short-form video.",
     h1: "TikTok-Style Subtitles — Auto-Caption Reels, Shorts & TikTok",
-    metaTitle: "TikTok Subtitle Generator — Reels & Shorts Captions | iLoveSubtitle",
+    metaTitle: "TikTok Subtitle Generator — Reels & Shorts Captions | CaptionFlow",
     metaDescription:
       "Generate viral word-by-word captions for TikTok, Reels and YouTube Shorts. Big text, perfect timing, ready to burn in.",
     primaryKeyword: "tiktok subtitle generator",
@@ -310,7 +310,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Clean Subtitles",
     short: "Remove duplicates, fix punctuation, strip SDH tags.",
     h1: "Clean Subtitles Online — Remove Duplicates, SDH & Fix Punctuation",
-    metaTitle: "Clean Subtitle File Online — Fix SRT Free | iLoveSubtitle",
+    metaTitle: "Clean Subtitle File Online — Fix SRT Free | CaptionFlow",
     metaDescription:
       "Strip SDH descriptions, kill duplicate lines, fix capitalisation and punctuation in any SRT or VTT file.",
     primaryKeyword: "clean srt subtitles",
@@ -334,7 +334,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "SRT to Text",
     short: "Strip every timestamp and get the plain transcript.",
     h1: "SRT to Text — Convert SubRip Subtitles to Plain Transcript",
-    metaTitle: "SRT to Text Converter Online — Free Transcript | iLoveSubtitle",
+    metaTitle: "SRT to Text Converter Online — Free Transcript | CaptionFlow",
     metaDescription:
       "Convert any SRT file into a clean plain-text transcript. Timestamps and indices removed, paragraphs preserved.",
     primaryKeyword: "srt to text converter",
@@ -358,7 +358,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "YouTube Chapter Generator",
     short: "Generate YouTube chapters from a transcript.",
     h1: "YouTube Chapter Generator — From SRT or Transcript",
-    metaTitle: "YouTube Chapter Generator from SRT — Free AI | iLoveSubtitle",
+    metaTitle: "YouTube Chapter Generator from SRT — Free AI | CaptionFlow",
     metaDescription:
       "Paste your transcript or upload an SRT and get YouTube chapters with timestamps you can copy-paste straight into your video description.",
     primaryKeyword: "youtube chapter generator from srt",
@@ -384,7 +384,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Batch Translate",
     short: "Translate one SRT into 10+ languages in a single pass.",
     h1: "Batch Subtitle Translation — One SRT, Many Languages",
-    metaTitle: "Batch Subtitle Translation — 10+ Languages at Once | iLoveSubtitle",
+    metaTitle: "Batch Subtitle Translation — 10+ Languages at Once | CaptionFlow",
     metaDescription:
       "Pro tool: translate a single SRT into up to 30 languages in one job. Perfect for global launches and creator localisation.",
     primaryKeyword: "batch translate subtitles",
@@ -409,7 +409,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Style Subtitles (ASS)",
     short: "Convert to ASS and style fonts, colors and positions.",
     h1: "Style Subtitles — Convert SRT to ASS with Custom Styles",
-    metaTitle: "Subtitle Styler — Convert SRT to Styled ASS | iLoveSubtitle",
+    metaTitle: "Subtitle Styler — Convert SRT to Styled ASS | CaptionFlow",
     metaDescription:
       "Turn any SRT into a styled ASS file. Pick font, size, color, outline and position — perfect for cinematic captions.",
     primaryKeyword: "style subtitles ass",
@@ -433,7 +433,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Auto-Sync (AI)",
     short: "Re-align mistimed subtitles automatically from audio.",
     h1: "Auto-Sync Subtitles — AI Audio-to-Subtitle Alignment",
-    metaTitle: "Auto-Sync Subtitles to Video — AI Aligner | iLoveSubtitle",
+    metaTitle: "Auto-Sync Subtitles to Video — AI Aligner | CaptionFlow",
     metaDescription:
       "Drop in a video and a mistimed SRT — we re-align every cue to the actual audio using AI forced alignment.",
     primaryKeyword: "auto sync subtitles ai",
@@ -456,10 +456,10 @@ export const TOOLS: ToolDefinition[] = [
     tone: "slate",
     name: "Public API",
     short: "REST endpoints to automate everything above.",
-    h1: "iLoveSubtitle API — REST Endpoints for Subtitles",
-    metaTitle: "Subtitle REST API — Whisper, Translate, Burn-in | iLoveSubtitle",
+    h1: "CaptionFlow API — REST Endpoints for Subtitles",
+    metaTitle: "Subtitle REST API — Whisper, Translate, Burn-in | CaptionFlow",
     metaDescription:
-      "Programmatic access to the same engine that powers iLoveSubtitle: generate, translate, sync and burn in. Pay-as-you-go.",
+      "Programmatic access to the same engine that powers CaptionFlow: generate, translate, sync and burn in. Pay-as-you-go.",
     primaryKeyword: "subtitle api",
     accept: [],
     freeMaxMb: 0,
@@ -492,10 +492,10 @@ export const ALTERNATIVES = [
   {
     slug: "veed-alternative",
     competitor: "VEED.io",
-    title: "Best Free VEED.io Alternative — iLoveSubtitle",
-    metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | iLoveSubtitle",
+    title: "Best Free VEED.io Alternative — CaptionFlow",
+    metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | CaptionFlow",
     metaDescription:
-      "Looking for a VEED.io alternative? iLoveSubtitle is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
+      "Looking for a VEED.io alternative? CaptionFlow is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
       "AI subtitle generation with Whisper — same engine, sharper results.",
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
@@ -506,8 +506,8 @@ export const ALTERNATIVES = [
   {
     slug: "kapwing-alternative",
     competitor: "Kapwing",
-    title: "Best Free Kapwing Alternative — iLoveSubtitle",
-    metaTitle: "Free Kapwing Alternative — Subtitle Focused | iLoveSubtitle",
+    title: "Best Free Kapwing Alternative — CaptionFlow",
+    metaTitle: "Free Kapwing Alternative — Subtitle Focused | CaptionFlow",
     metaDescription:
       "Kapwing alternative built for subtitles. Lighter, faster, and €4/month cheaper than Kapwing Pro.",
     bulletPoints: [
@@ -519,8 +519,8 @@ export const ALTERNATIVES = [
   {
     slug: "happyscribe-alternative",
     competitor: "HappyScribe",
-    title: "Affordable HappyScribe Alternative — iLoveSubtitle",
-    metaTitle: "HappyScribe Alternative Cheaper — iLoveSubtitle",
+    title: "Affordable HappyScribe Alternative — CaptionFlow",
+    metaTitle: "HappyScribe Alternative Cheaper — CaptionFlow",
     metaDescription:
       "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with the same Whisper accuracy.",
     bulletPoints: [
@@ -532,8 +532,8 @@ export const ALTERNATIVES = [
   {
     slug: "clideo-alternative",
     competitor: "Clideo",
-    title: "Best Clideo Subtitle Alternative — iLoveSubtitle",
-    metaTitle: "Clideo Alternative with AI Subtitles | iLoveSubtitle",
+    title: "Best Clideo Subtitle Alternative — CaptionFlow",
+    metaTitle: "Clideo Alternative with AI Subtitles | CaptionFlow",
     metaDescription:
       "Clideo doesn't do AI subtitles. We do. Free generator with Whisper, plus every tool you'd need around it.",
     bulletPoints: [

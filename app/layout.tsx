@@ -16,15 +16,15 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "iLoveSubtitle — Free Online Subtitle Tools",
-    template: "%s | iLoveSubtitle",
+    default: "CaptionFlow — Free Online Subtitle Tools",
+    template: "%s | CaptionFlow",
   },
   description:
     "Free online subtitle tools: generate, translate, sync, convert, edit. Powered by Whisper AI. Sixteen focused tools for SRT, VTT and captioned video.",
-  applicationName: "iLoveSubtitle",
+  applicationName: "CaptionFlow",
   openGraph: {
     type: "website",
-    siteName: "iLoveSubtitle",
+    siteName: "CaptionFlow",
     images: ["/og/default.png"],
   },
   twitter: {

@@ -22,7 +22,7 @@ export function AdblockNotice() {
           <Heart className="h-4 w-4" />
         </div>
         <div className="flex-1 text-sm">
-          <p className="font-medium text-ink-900">iLoveSubtitle is free thanks to ads</p>
+          <p className="font-medium text-ink-900">CaptionFlow is free thanks to ads</p>
           <p className="mt-1 text-ink-500">
             You can disable ads by{" "}
             <Link href="/pricing" className="text-brand-600 underline">

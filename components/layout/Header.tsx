@@ -35,7 +35,7 @@ export function Header() {
           <span className="grid h-8 w-8 place-items-center rounded bg-brand-500 text-white">
             <Sparkles className="h-4 w-4" />
           </span>
-          <span>iLoveSubtitle</span>
+          <span>CaptionFlow</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

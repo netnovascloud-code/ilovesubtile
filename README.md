@@ -1,4 +1,4 @@
-# iLoveSubtitle
+# CaptionFlow
 
 Free online subtitle tools, built like iLovePDF — one focused page per tool, drop your file, get your result.
 
@@ -49,11 +49,17 @@ Until configured, these UIs will surface a clear "Backend not configured" error.
 
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
-`.env.local` only needs the Supabase + Stripe **public** keys to boot. All third-party API keys (OpenAI, DeepL, Mistral, Resend, VPS) live exclusively inside Supabase Edge Function secrets — never in Vercel envs.
+A single `.env` at the repo root holds the **public** keys only (Supabase URL,
+Supabase anon/publishable key, Stripe publishable key, `NEXT_PUBLIC_SITE_URL`).
+That file is git-ignored — never commit it.
+
+**Sensitive keys never live in `.env` and never in Vercel envs.** OpenAI,
+Mistral, DeepL, Stripe secret key, Resend and the FFmpeg VPS credentials live
+exclusively in Supabase Edge Function secrets (set via the Supabase dashboard
+or `supabase secrets set`).
 
 ---
 
@@ -172,7 +178,9 @@ supabase functions deploy send-email
 
 ### Stripe
 
-In the Stripe dashboard create four products with these IDs in `.env.local`:
+In the Stripe dashboard create four products. The price IDs go into Supabase
+Edge Function secrets (used server-side by `stripe-webhook` and the checkout
+route), not into `.env`:
 - `STRIPE_PRICE_PRO_MONTHLY`
 - `STRIPE_PRICE_PRO_ANNUAL`
 - `STRIPE_PRICE_BIZ_MONTHLY`

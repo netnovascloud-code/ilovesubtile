@@ -38,7 +38,7 @@ export function CompetitorPage({ alt }: { alt: Alt }) {
       <section className="bg-surface">
         <div className="container py-16">
           <h2 className="text-2xl font-semibold text-ink-900">
-            Why creators switch from {alt.competitor} to iLoveSubtitle
+            Why creators switch from {alt.competitor} to CaptionFlow
           </h2>
           <ul className="mt-8 grid gap-4 md:grid-cols-2">
             {alt.bulletPoints.map((b) => (

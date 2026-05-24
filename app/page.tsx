@@ -83,7 +83,7 @@ export default function Home() {
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-20">
           <h2 className="text-3xl font-semibold tracking-tight text-ink-900">
-            Why iLoveSubtitle?
+            Why CaptionFlow?
           </h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {REASONS.map((r) => (

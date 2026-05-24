@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-ink-100 bg-white">
       <div className="container grid grid-cols-2 gap-10 py-12 md:grid-cols-5">
         <div className="col-span-2 md:col-span-2">
-          <div className="font-semibold text-ink-900">iLoveSubtitle</div>
+          <div className="font-semibold text-ink-900">CaptionFlow</div>
           <p className="mt-3 max-w-sm text-sm text-ink-500">
             Free subtitle tools online — generate, translate, sync, convert. One simple tool per
             job, all in your browser.
@@ -74,7 +74,7 @@ export function Footer() {
 
       <div className="border-t border-ink-100">
         <div className="container flex flex-col gap-3 py-6 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} iLoveSubtitle. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} CaptionFlow. All rights reserved.</div>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {LOCALES.map((loc) => (
               <Link

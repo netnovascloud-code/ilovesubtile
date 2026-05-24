@@ -5,7 +5,7 @@ import { GoogleButton } from "@/components/auth/GoogleButton";
 
 export const metadata: Metadata = {
   title: "Create an account",
-  description: "Sign up for iLoveSubtitle — free tier with a few daily runs.",
+  description: "Sign up for CaptionFlow — free tier with a few daily runs.",
   robots: { index: false, follow: false },
 };
 

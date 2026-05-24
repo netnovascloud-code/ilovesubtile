@@ -6,7 +6,7 @@ import { ToolCard } from "@/components/tools/ToolCard";
 import { TOOLS } from "@/lib/tools-config";
 
 export const metadata: Metadata = {
-  title: "iLoveSubtitle — Kostenlose Untertitel-Tools online",
+  title: "CaptionFlow — Kostenlose Untertitel-Tools online",
   description:
     "Kostenlose Untertitel-Tools: erzeugen, übersetzen, synchronisieren, umwandeln. Powered by Whisper. Sechzehn Tools für SRT, VTT und untertiteltes Video.",
   alternates: { canonical: "/de" },

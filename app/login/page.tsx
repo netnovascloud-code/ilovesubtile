@@ -5,7 +5,7 @@ import { GoogleButton } from "@/components/auth/GoogleButton";
 
 export const metadata: Metadata = {
   title: "Log in",
-  description: "Log in to iLoveSubtitle to manage your jobs and subscription.",
+  description: "Log in to CaptionFlow to manage your jobs and subscription.",
   robots: { index: false, follow: false },
 };
 
@@ -14,7 +14,7 @@ export default function LoginPage() {
     <div className="container max-w-md py-16">
       <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
         <h1 className="text-2xl font-semibold text-ink-900">Welcome back</h1>
-        <p className="mt-1 text-sm text-ink-500">Log in to your iLoveSubtitle account.</p>
+        <p className="mt-1 text-sm text-ink-500">Log in to your CaptionFlow account.</p>
 
         <div className="mt-6">
           <GoogleButton />

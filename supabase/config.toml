@@ -1,4 +1,4 @@
-project_id = "ilovesubtitle"
+project_id = "captionflow"
 
 [api]
 enabled = true

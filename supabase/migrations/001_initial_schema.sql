@@ -1,5 +1,5 @@
 -- =====================================================================
--- iLoveSubtitle — initial schema
+-- CaptionFlow — initial schema
 -- =====================================================================
 
 create extension if not exists "uuid-ossp";
@@ -47,6 +47,13 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- The trigger runs as the function owner regardless of GRANTs, so we revoke
+-- EXECUTE from public/anon/authenticated to keep the function from being
+-- callable via /rest/v1/rpc/handle_new_user.
+revoke execute on function public.handle_new_user() from public;
+revoke execute on function public.handle_new_user() from anon;
+revoke execute on function public.handle_new_user() from authenticated;
 
 -- ---------------------------------------------------------------------
 -- jobs : one row per tool invocation

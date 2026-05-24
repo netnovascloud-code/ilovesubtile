@@ -42,7 +42,7 @@ export function buildToolMetadata(tool: ToolDefinition): Metadata {
       url,
       title: tool.metaTitle,
       description: tool.metaDescription,
-      siteName: "iLoveSubtitle",
+      siteName: "CaptionFlow",
       images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630, alt: tool.name }],
     },
     twitter: {
@@ -59,7 +59,7 @@ export function softwareApplicationSchema(tool: ToolDefinition) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: `${tool.name} — iLoveSubtitle`,
+    name: `${tool.name} — CaptionFlow`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
     description: tool.metaDescription,

@@ -6,7 +6,7 @@ import { ToolCard } from "@/components/tools/ToolCard";
 import { TOOLS } from "@/lib/tools-config";
 
 export const metadata: Metadata = {
-  title: "iLoveSubtitle — Herramientas gratuitas de subtítulos en línea",
+  title: "CaptionFlow — Herramientas gratuitas de subtítulos en línea",
   description:
     "Herramientas gratuitas de subtítulos: generar, traducir, sincronizar, convertir. Impulsado por Whisper. Dieciséis herramientas para SRT, VTT y vídeo con subtítulos.",
   alternates: { canonical: "/es" },

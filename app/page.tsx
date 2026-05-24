@@ -12,13 +12,13 @@ const REASONS = [
   },
   {
     icon: Sparkles,
-    title: "Powered by Whisper",
-    body: "Industry-leading transcription accuracy in 80+ languages.",
+    title: "Powered by Mistral",
+    body: "Voxtral handles transcription, mistral-large does translation — accurate in 30+ languages.",
   },
   {
     icon: Globe2,
     title: "30+ languages",
-    body: "Translate subtitles with DeepL-quality output — no LLM hallucinations.",
+    body: "Translate subtitles cue-by-cue with strict JSON output — timestamps stay intact.",
   },
   {
     icon: ShieldCheck,

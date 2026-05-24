@@ -8,7 +8,7 @@ import { TOOLS } from "@/lib/tools-config";
 export const metadata: Metadata = {
   title: "CaptionFlow — Outils gratuits de sous-titrage en ligne",
   description:
-    "Outils de sous-titrage gratuits : générer, traduire, synchroniser, convertir. Propulsé par Whisper. Seize outils pour SRT, VTT et vidéos sous-titrées.",
+    "Outils de sous-titrage gratuits : générer, traduire, synchroniser, convertir. Propulsé par Mistral AI. Seize outils pour SRT, VTT et vidéos sous-titrées.",
   alternates: { canonical: "/fr" },
 };
 

@@ -1,22 +1,16 @@
-import Stripe from "stripe";
-
-let _stripe: Stripe | null = null;
-
-export function getStripe(): Stripe {
-  if (_stripe) return _stripe;
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) throw new Error("STRIPE_SECRET_KEY missing");
-  _stripe = new Stripe(key, { apiVersion: "2025-02-24.acacia" });
-  return _stripe;
-}
+/**
+ * Plan definitions — pure data, no Stripe SDK.
+ *
+ * All Stripe API calls live in Supabase Edge Functions (`stripe-checkout`,
+ * `stripe-portal`, `stripe-webhook`). The Stripe price IDs live in those
+ * functions' secrets, not in the frontend.
+ */
 
 export const PLANS = {
   pro: {
     name: "Pro",
     priceMonthly: 12,
     priceAnnual: 99,
-    stripeMonthlyPriceId: process.env.STRIPE_PRICE_PRO_MONTHLY ?? "",
-    stripeAnnualPriceId: process.env.STRIPE_PRICE_PRO_ANNUAL ?? "",
     features: [
       "Unlimited tool runs",
       "Files up to 500 MB",
@@ -30,8 +24,6 @@ export const PLANS = {
     name: "Business",
     priceMonthly: 49,
     priceAnnual: 399,
-    stripeMonthlyPriceId: process.env.STRIPE_PRICE_BIZ_MONTHLY ?? "",
-    stripeAnnualPriceId: process.env.STRIPE_PRICE_BIZ_ANNUAL ?? "",
     features: [
       "Everything in Pro",
       "REST API access",
@@ -54,3 +46,5 @@ export const FREE_PLAN = {
     "Last 10 jobs in history",
   ],
 };
+
+export type PlanKey = keyof typeof PLANS;

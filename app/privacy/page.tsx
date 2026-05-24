@@ -31,9 +31,9 @@ export default function Page() {
 
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Third parties</h2>
         <p>
-          Authentication and storage are provided by Supabase. Payments by Stripe. Transcription
-          uses OpenAI Whisper. Translation uses DeepL. Emails are sent by Resend. Each of these
-          services has their own privacy policy.
+          Authentication and storage are provided by Supabase. Payments by Stripe. All AI
+          processing (transcription, translation, summarisation, cleanup) runs on Mistral AI.
+          Emails are sent by Resend. Each of these services has their own privacy policy.
         </p>
 
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Your rights</h2>

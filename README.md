@@ -29,17 +29,24 @@ After `npm install && npm run dev`, no backend, no env vars:
 
 These tools require a backend; the UI exists and posts to `/api/process/<slug>`, which forwards to a Supabase Edge Function:
 
-| Tool                       | Backend                                |
-|---------------------------|----------------------------------------|
-| `/subtitle-generator`     | `process-subtitles` → OpenAI Whisper   |
-| `/tiktok-subtitles`       | `process-subtitles` + FFmpeg            |
-| `/translate-subtitles`    | `translate-subtitles` → DeepL          |
-| `/batch-translate`        | `translate-subtitles` (loop)            |
-| `/add-subtitles-to-video` | `process-ffmpeg` → Hetzner VPS         |
-| `/extract-subtitles`      | `process-ffmpeg` → Hetzner VPS         |
-| `/style-subtitles`        | `process-ffmpeg` → Hetzner VPS         |
-| `/youtube-chapters`       | `ai-process` → Mistral                  |
-| `/auto-sync`              | `ai-process` + FFmpeg                  |
+| Tool                       | Backend                                                       |
+|---------------------------|---------------------------------------------------------------|
+| `/subtitle-generator`     | `process-subtitles` → Mistral Voxtral (`voxtral-mini-latest`) |
+| `/tiktok-subtitles`       | `process-subtitles` → Voxtral + FFmpeg worker                 |
+| `/translate-subtitles`    | `translate-subtitles` → Mistral (`mistral-large-latest`)      |
+| `/batch-translate`        | `translate-subtitles` (one call per language)                 |
+| `/youtube-chapters`       | `ai-process` → Mistral (`mistral-large-latest`)               |
+| `/auto-sync`              | `ai-process` + FFmpeg worker                                  |
+| `/add-subtitles-to-video` | `process-ffmpeg` → your FFmpeg worker (you provide the host)  |
+| `/extract-subtitles`      | `process-ffmpeg` → your FFmpeg worker                          |
+| `/style-subtitles`        | `process-ffmpeg` → your FFmpeg worker                          |
+| Billing (checkout)        | `stripe-checkout` Edge Function                                |
+| Billing (portal)          | `stripe-portal` Edge Function                                  |
+| Stripe events             | `stripe-webhook` Edge Function                                 |
+| Emails                    | `send-email` Edge Function → Resend                            |
+
+All AI processing goes through a **single provider** (Mistral) with a
+**single key** (`MISTRAL_API_KEY`). No OpenAI, no DeepL, no Whisper.
 
 Until configured, these UIs will surface a clear "Backend not configured" error.
 
@@ -52,14 +59,29 @@ npm install
 npm run dev
 ```
 
-A single `.env` at the repo root holds the **public** keys only (Supabase URL,
-Supabase anon/publishable key, Stripe publishable key, `NEXT_PUBLIC_SITE_URL`).
-That file is git-ignored — never commit it.
+A single `.env` at the repo root holds **two Supabase values only**:
 
-**Sensitive keys never live in `.env` and never in Vercel envs.** OpenAI,
-Mistral, DeepL, Stripe secret key, Resend and the FFmpeg VPS credentials live
+```
+NEXT_PUBLIC_SUPABASE_URL=https://<project>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
+```
+
+That's it. The file is git-ignored — never commit it. The production site
+URL (`https://captionflow.com`) is hardcoded in `lib/utils.ts`.
+
+**Sensitive keys never live in `.env` and never in Vercel envs.** They live
 exclusively in Supabase Edge Function secrets (set via the Supabase dashboard
-or `supabase secrets set`).
+or `supabase secrets set`). The full list:
+
+- `MISTRAL_API_KEY` — used by `process-subtitles`, `translate-subtitles`, `ai-process`
+- `STRIPE_SECRET_KEY` — used by `stripe-checkout`, `stripe-portal`, `stripe-webhook`
+- `STRIPE_WEBHOOK_SECRET` — used by `stripe-webhook`
+- `STRIPE_PRICE_PRO_MONTHLY`, `STRIPE_PRICE_PRO_ANNUAL`, `STRIPE_PRICE_BIZ_MONTHLY`, `STRIPE_PRICE_BIZ_ANNUAL` — Stripe price IDs read by `stripe-checkout`
+- `RESEND_API_KEY` — used by `send-email`
+- `VPS_API_URL`, `VPS_API_KEY` — used by `process-ffmpeg` (only when you wire your FFmpeg worker)
+
+`SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are injected automatically by
+Supabase into every Edge Function — you don't set those yourself.
 
 ---
 
@@ -132,11 +154,13 @@ supabase/
   migrations/001_initial_schema.sql   profiles, jobs, subscriptions, RLS, storage
   functions/
     _shared/          cors + auth helpers
-    process-subtitles/      Whisper (subtitle-generator, tiktok-subtitles)
-    translate-subtitles/    DeepL  (translate, batch-translate)
-    ai-process/             Mistral (youtube-chapters, clean, summary)
-    process-ffmpeg/         Forwarder to Hetzner VPS (burn-in, extract, style)
-    stripe-webhook/         Mirrors plan into profiles
+    process-subtitles/      Voxtral  (subtitle-generator, tiktok-subtitles)
+    translate-subtitles/    Mistral  (translate, batch-translate)
+    ai-process/             Mistral  (youtube-chapters, ai cleanup, summary)
+    process-ffmpeg/         Forwarder to your FFmpeg worker (burn-in, extract, style)
+    stripe-checkout/        Creates Stripe Checkout sessions
+    stripe-portal/          Opens the Stripe Customer Portal
+    stripe-webhook/         Mirrors subscription state into profiles
     send-email/             Resend transactional emails
 ```
 
@@ -159,19 +183,24 @@ supabase init                     # if not already a Supabase folder
 supabase db push                  # applies migrations/001_initial_schema.sql
 
 # Edge function secrets (server-only API keys live HERE, never in Vercel)
-supabase secrets set OPENAI_API_KEY=sk-...
 supabase secrets set MISTRAL_API_KEY=...
-supabase secrets set DEEPL_API_KEY=...
 supabase secrets set RESEND_API_KEY=re_...
-supabase secrets set VPS_API_URL=https://your-ffmpeg-vps/api
-supabase secrets set VPS_API_KEY=...
 supabase secrets set STRIPE_SECRET_KEY=sk_live_...
 supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
+supabase secrets set STRIPE_PRICE_PRO_MONTHLY=price_...
+supabase secrets set STRIPE_PRICE_PRO_ANNUAL=price_...
+supabase secrets set STRIPE_PRICE_BIZ_MONTHLY=price_...
+supabase secrets set STRIPE_PRICE_BIZ_ANNUAL=price_...
+# Only when you have your own FFmpeg worker:
+supabase secrets set VPS_API_URL=https://your-ffmpeg-host/api
+supabase secrets set VPS_API_KEY=...
 
 supabase functions deploy process-subtitles
 supabase functions deploy translate-subtitles
 supabase functions deploy ai-process
 supabase functions deploy process-ffmpeg
+supabase functions deploy stripe-checkout
+supabase functions deploy stripe-portal
 supabase functions deploy stripe-webhook --no-verify-jwt
 supabase functions deploy send-email
 ```
@@ -214,7 +243,8 @@ Enable Google in Supabase → Authentication → Providers and add `http://local
 - ✅ Auth pages, dashboard, pricing, API docs
 - ✅ Supabase migrations + 6 Edge Function stubs
 - ✅ Sitemap, robots, 404
-- ⏳ Backend wiring (Whisper / DeepL / Mistral / FFmpeg / Stripe / Resend) — code present, secrets needed
+- ⏳ Backend secrets (Mistral / Stripe / Resend) — Edge Functions deployed and live, just need keys set
+- ⏳ FFmpeg worker — `process-ffmpeg` deployed and returns a clean error until you set `VPS_API_URL` + `VPS_API_KEY`
 - ⏳ Full i18n for tool pages (only homepage is localised today)
 - ⏳ Ad network integration (Ezoic / Media.net)
 - ⏳ FFmpeg worker on Hetzner

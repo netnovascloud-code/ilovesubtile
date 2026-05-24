@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | CaptionFlow",
   },
   description:
-    "Free online subtitle tools: generate, translate, sync, convert, edit. Powered by Whisper AI. Sixteen focused tools for SRT, VTT and captioned video.",
+    "Free online subtitle tools: generate, translate, sync, convert, edit. Powered by Mistral AI. Sixteen focused tools for SRT, VTT and captioned video.",
   applicationName: "CaptionFlow",
   openGraph: {
     type: "website",

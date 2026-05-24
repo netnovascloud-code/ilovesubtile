@@ -1,11 +1,17 @@
-// Forwarder to a Hetzner-hosted FFmpeg worker.
-// The Edge Function never runs ffmpeg itself — it forwards multipart uploads
-// to a tiny Express service on a VPS that has ffmpeg installed.
+// CaptionFlow — forwarder to a self-hosted FFmpeg worker.
+//
+// This function intentionally has NO third-party API integration. It just
+// forwards a multipart upload to a VPS (or any HTTP service) that you
+// run yourself. Until VPS_API_URL and VPS_API_KEY are set as Supabase
+// secrets, the function returns 500 `missing_vps_config` — every
+// FFmpeg-backed tool page will surface that to the user as
+// "Backend not configured for this tool yet."
+//
+// When you're ready to wire it up:
+//   supabase secrets set VPS_API_URL=https://your-ffmpeg-host/api
+//   supabase secrets set VPS_API_KEY=...
 //
 // Deploy: supabase functions deploy process-ffmpeg
-// Secrets:
-//   supabase secrets set VPS_API_URL=https://ffmpeg.example.com/api
-//   supabase secrets set VPS_API_KEY=...
 
 import { corsHeaders, handleOptions, json } from "../_shared/cors.ts";
 import { getCaller, getServiceClient } from "../_shared/auth.ts";

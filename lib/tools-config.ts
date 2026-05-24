@@ -94,14 +94,14 @@ export const TOOLS: ToolDefinition[] = [
     h1: "Generate Subtitles from Video & Audio — Free AI Subtitle Generator",
     metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | CaptionFlow",
     metaDescription:
-      "Generate accurate subtitles from any video or audio file with Whisper AI. Free, fast, supports 80+ languages. Download as SRT or VTT.",
+      "Generate accurate subtitles from any video or audio file with Mistral's Voxtral model. Free, fast, supports 30+ languages. Download as SRT or VTT.",
     primaryKeyword: "generate subtitles online",
     accept: ["mp4", "mov", "webm", "mkv", "avi", "mp3", "wav", "m4a", "flac", "ogg"],
     freeMaxMb: 25,
     outputType: "SRT",
     steps: [
       { title: "Upload your media", body: "Drop a video or audio file. We support MP4, MOV, MP3, WAV and more." },
-      { title: "AI generates captions", body: "Whisper transcribes your audio with timestamps in 80+ languages." },
+      { title: "AI generates captions", body: "Mistral's Voxtral transcribes your audio with timestamps in 30+ languages." },
       { title: "Download the SRT", body: "Get a clean .srt file ready for YouTube, Premiere, or any player." },
     ],
     faqs: baseFaqs("the subtitle generator", "MP4, MOV, WebM, MKV, AVI, MP3, WAV, M4A, FLAC, OGG"),
@@ -190,7 +190,7 @@ export const TOOLS: ToolDefinition[] = [
     h1: "Translate Subtitles Online — SRT & VTT Translator (30+ Languages)",
     metaTitle: "Translate Subtitles Online Free — SRT Translator | CaptionFlow",
     metaDescription:
-      "Translate SRT or VTT subtitles into 30+ languages with DeepL-quality output. Timestamps stay perfectly intact.",
+      "Translate SRT or VTT subtitles into 30+ languages with Mistral AI. Timestamps stay perfectly intact, cue boundaries preserved.",
     primaryKeyword: "translate srt file online",
     accept: ["srt", "vtt"],
     freeMaxMb: 25,
@@ -457,7 +457,7 @@ export const TOOLS: ToolDefinition[] = [
     name: "Public API",
     short: "REST endpoints to automate everything above.",
     h1: "CaptionFlow API — REST Endpoints for Subtitles",
-    metaTitle: "Subtitle REST API — Whisper, Translate, Burn-in | CaptionFlow",
+    metaTitle: "Subtitle REST API — Transcribe, Translate, Burn-in | CaptionFlow",
     metaDescription:
       "Programmatic access to the same engine that powers CaptionFlow: generate, translate, sync and burn in. Pay-as-you-go.",
     primaryKeyword: "subtitle api",
@@ -497,7 +497,7 @@ export const ALTERNATIVES = [
     metaDescription:
       "Looking for a VEED.io alternative? CaptionFlow is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
-      "AI subtitle generation with Whisper — same engine, sharper results.",
+      "AI subtitle generation with Mistral Voxtral — modern, European, accurate.",
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
@@ -522,9 +522,9 @@ export const ALTERNATIVES = [
     title: "Affordable HappyScribe Alternative — CaptionFlow",
     metaTitle: "HappyScribe Alternative Cheaper — CaptionFlow",
     metaDescription:
-      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with the same Whisper accuracy.",
+      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with Mistral-grade accuracy.",
     bulletPoints: [
-      "Same AI engine (OpenAI Whisper), half the price.",
+      "Modern AI engine (Mistral Voxtral), half the price.",
       "Self-serve, no sales call required.",
       "Works for indie creators, agencies and teams alike.",
     ],
@@ -535,7 +535,7 @@ export const ALTERNATIVES = [
     title: "Best Clideo Subtitle Alternative — CaptionFlow",
     metaTitle: "Clideo Alternative with AI Subtitles | CaptionFlow",
     metaDescription:
-      "Clideo doesn't do AI subtitles. We do. Free generator with Whisper, plus every tool you'd need around it.",
+      "Clideo doesn't do AI subtitles. We do. Free generator with Mistral Voxtral, plus every tool you'd need around it.",
     bulletPoints: [
       "Real AI generation — Clideo only handles add-subtitles-to-video.",
       "16 tools vs Clideo's single one for captions.",

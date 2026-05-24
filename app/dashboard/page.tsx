@@ -4,6 +4,7 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -88,11 +89,9 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <p className="text-sm capitalize text-ink-700">{plan}</p>
-            <form action="/api/billing/portal" method="POST" className="mt-3">
-              <Button variant="outline" size="sm" type="submit">
-                Manage billing
-              </Button>
-            </form>
+            <div className="mt-3">
+              <BillingPortalButton disabled={plan === "free"} />
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -44,13 +44,21 @@ export async function callTool(slug: string, body: FormData | object): Promise<R
   }
 
   const isJson = !(body instanceof FormData);
-  return fetch(`${SUPABASE_URL}/functions/v1/${fn}?tool=${encodeURIComponent(slug)}`, {
-    method: "POST",
-    headers: {
-      apikey: anon,
-      Authorization: `Bearer ${bearer}`,
-      ...(isJson ? { "Content-Type": "application/json" } : {}),
-    },
-    body: isJson ? JSON.stringify(body) : (body as FormData),
-  });
+  // Abort after 90s so a stuck job never spins the UI forever.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 90_000);
+  try {
+    return await fetch(`${SUPABASE_URL}/functions/v1/${fn}?tool=${encodeURIComponent(slug)}`, {
+      method: "POST",
+      headers: {
+        apikey: anon,
+        Authorization: `Bearer ${bearer}`,
+        ...(isJson ? { "Content-Type": "application/json" } : {}),
+      },
+      body: isJson ? JSON.stringify(body) : (body as FormData),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
 }

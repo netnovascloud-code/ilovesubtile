@@ -8,12 +8,14 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
 import { localePath } from "@/lib/i18n/locales";
+import { UserMenu } from "@/components/layout/UserMenu";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const locale = useLocale();
-  const t = getChrome(locale).nav;
+  const chrome = getChrome(locale);
+  const t = chrome.nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -55,15 +57,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link href={locale === "en" ? "/login" : `/login?lang=${locale}`}>
-            <Button variant="ghost" size="sm">
-              {t.login}
-            </Button>
-          </Link>
-          <Link href={locale === "en" ? "/register" : `/register?lang=${locale}`}>
-            <Button size="sm">{t.start}</Button>
-          </Link>
+        <div className="hidden md:flex">
+          <UserMenu
+            labels={{
+              login: t.login,
+              start: t.start,
+              dashboard: chrome.footer.dashboard,
+              billing: chrome.account.billing,
+              logout: chrome.account.logout,
+            }}
+          />
         </div>
 
         <button

@@ -1,21 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ToolDefinition } from "@/lib/tools-config";
-import { cn } from "@/lib/utils";
 import { DEFAULT_LOCALE, type Locale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
 import { getChrome } from "@/lib/i18n/chrome";
-
-const TONE_BG: Record<ToolDefinition["tone"], string> = {
-  blue: "bg-brand-50 text-brand-600",
-  indigo: "bg-indigo-50 text-indigo-600",
-  green: "bg-green-50 text-green-600",
-  amber: "bg-amber-50 text-amber-700",
-  rose: "bg-rose-50 text-rose-600",
-  violet: "bg-violet-50 text-violet-600",
-  teal: "bg-teal-50 text-teal-600",
-  slate: "bg-ink-100 text-ink-700",
-};
 
 export function ToolCard({
   tool,
@@ -34,13 +22,8 @@ export function ToolCard({
       href={localePath(locale, tool.slug)}
       className="group relative flex flex-col rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-cardHover"
     >
-      <div
-        className={cn(
-          "grid h-10 w-10 place-items-center rounded transition-colors duration-200 group-hover:bg-brand-500 group-hover:text-white",
-          TONE_BG[tool.tone],
-        )}
-      >
-        <Icon className="h-5 w-5" />
+      <div className="grid h-10 w-10 place-items-center rounded-lg border border-ink-100 bg-ink-50 text-ink-500 transition-colors duration-200 group-hover:border-brand-500 group-hover:bg-brand-500 group-hover:text-white">
+        <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
       </div>
       <h3 className="mt-4 font-semibold text-ink-900">{name}</h3>
       <p className="mt-1 text-sm leading-relaxed text-ink-500">{short}</p>
@@ -48,7 +31,7 @@ export function ToolCard({
         {chrome.card.open} <ArrowRight className="ml-1 h-4 w-4" />
       </div>
       {tool.proOnly && (
-        <span className="absolute right-4 top-4 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+        <span className="absolute right-4 top-4 rounded bg-ink-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-600">
           {chrome.card.pro}
         </span>
       )}

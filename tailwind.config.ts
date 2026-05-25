@@ -7,12 +7,12 @@ const config: Config = {
   safelist: [
     "bg-brand-50", "text-brand-600",
     "bg-indigo-50", "text-indigo-600",
-    "bg-green-50", "text-green-600",
-    "bg-amber-50", "text-amber-700",
-    "bg-rose-50", "text-rose-600",
+    "bg-emerald-50", "text-emerald-600",
+    "bg-amber-50", "text-amber-600", "text-amber-700",
+    "bg-rose-50", "text-rose-500",
     "bg-violet-50", "text-violet-600",
     "bg-teal-50", "text-teal-600",
-    "bg-ink-100", "text-ink-700",
+    "bg-slate-100", "text-slate-600",
   ],
   theme: {
     container: {

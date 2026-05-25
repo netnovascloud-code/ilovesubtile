@@ -31,11 +31,11 @@ These tools require a backend; the UI exists and posts to `/api/process/<slug>`,
 
 | Tool                       | Backend                                                       |
 |---------------------------|---------------------------------------------------------------|
-| `/subtitle-generator`     | `process-subtitles` → Mistral Voxtral (`voxtral-mini-latest`) |
-| `/tiktok-subtitles`       | `process-subtitles` → Voxtral + FFmpeg worker                 |
-| `/translate-subtitles`    | `translate-subtitles` → Mistral (`mistral-large-latest`)      |
+| `/subtitle-generator`     | `process-subtitles` → AI (`voxtral-mini-latest`) |
+| `/tiktok-subtitles`       | `process-subtitles` → AI + FFmpeg worker                 |
+| `/translate-subtitles`    | `translate-subtitles` → AI (`AI`)      |
 | `/batch-translate`        | `translate-subtitles` (one call per language)                 |
-| `/youtube-chapters`       | `ai-process` → Mistral (`mistral-large-latest`)               |
+| `/youtube-chapters`       | `ai-process` → AI (`AI`)               |
 | `/auto-sync`              | `ai-process` + FFmpeg worker                                  |
 | `/add-subtitles-to-video` | `process-ffmpeg` → your FFmpeg worker (you provide the host)  |
 | `/extract-subtitles`      | `process-ffmpeg` → your FFmpeg worker                          |
@@ -45,7 +45,7 @@ These tools require a backend; the UI exists and posts to `/api/process/<slug>`,
 | Stripe events             | `stripe-webhook` Edge Function                                 |
 | Emails                    | `send-email` Edge Function → Resend                            |
 
-All AI processing goes through a **single provider** (Mistral) with a
+All AI processing goes through a **single provider** (AI) with a
 **single key** (`MISTRAL_API_KEY`). No OpenAI, no DeepL, no Whisper.
 
 Until configured, these UIs will surface a clear "Backend not configured" error.
@@ -154,9 +154,9 @@ supabase/
   migrations/001_initial_schema.sql   profiles, jobs, subscriptions, RLS, storage
   functions/
     _shared/          cors + auth helpers
-    process-subtitles/      Voxtral  (subtitle-generator, tiktok-subtitles)
-    translate-subtitles/    Mistral  (translate, batch-translate)
-    ai-process/             Mistral  (youtube-chapters, ai cleanup, summary)
+    process-subtitles/      AI  (subtitle-generator, tiktok-subtitles)
+    translate-subtitles/    AI  (translate, batch-translate)
+    ai-process/             AI  (youtube-chapters, ai cleanup, summary)
     process-ffmpeg/         Forwarder to your FFmpeg worker (burn-in, extract, style)
     stripe-checkout/        Creates Stripe Checkout sessions
     stripe-portal/          Opens the Stripe Customer Portal
@@ -243,7 +243,7 @@ Enable Google in Supabase → Authentication → Providers and add `http://local
 - ✅ Auth pages, dashboard, pricing, API docs
 - ✅ Supabase migrations + 6 Edge Function stubs
 - ✅ Sitemap, robots, 404
-- ⏳ Backend secrets (Mistral / Stripe / Resend) — Edge Functions deployed and live, just need keys set
+- ⏳ Backend secrets (AI / Stripe / Resend) — Edge Functions deployed and live, just need keys set
 - ⏳ FFmpeg worker — `process-ffmpeg` deployed and returns a clean error until you set `VPS_API_URL` + `VPS_API_KEY`
 - ⏳ Full i18n for tool pages (only homepage is localised today)
 - ⏳ Ad network integration (Ezoic / Media.net)

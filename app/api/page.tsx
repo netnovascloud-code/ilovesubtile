@@ -13,7 +13,7 @@ const ENDPOINTS = [
     method: "POST",
     path: "/api/v1/transcribe",
     cost: "10 credits",
-    desc: "Audio/video → SRT (Voxtral). Multipart `file`, or JSON { file_url }.",
+    desc: "Audio/video → SRT (AI). Multipart `file`, or JSON { file_url }.",
     curl: `curl -X POST ${SITE_URL}/api/v1/transcribe \\
   -H "Authorization: Bearer cf_live_..." \\
   -F "file=@episode.mp3"`,
@@ -22,7 +22,7 @@ const ENDPOINTS = [
     method: "POST",
     path: "/api/v1/translate",
     cost: "5 credits",
-    desc: "Translate an SRT (mistral-large). Multipart `file` + `target_lang`, or JSON { srt_url, target_lang }.",
+    desc: "Translate an SRT (AI). Multipart `file` + `target_lang`, or JSON { srt_url, target_lang }.",
     curl: `curl -X POST ${SITE_URL}/api/v1/translate \\
   -H "Authorization: Bearer cf_live_..." \\
   -F "file=@subs.srt" -F "target_lang=ES"`,
@@ -84,7 +84,7 @@ export default function ApiDocsPage() {
             <ul className="mt-2 space-y-1 text-sm">
               <li><code className="rounded bg-ink-100 px-1">401 invalid_api_key</code> — missing or revoked key.</li>
               <li><code className="rounded bg-ink-100 px-1">402 insufficient_credits</code> — top up in the dashboard.</li>
-              <li><code className="rounded bg-ink-100 px-1">502 mistral_failed</code> — upstream model error; not charged.</li>
+              <li><code className="rounded bg-ink-100 px-1">502 processing_failed</code> — upstream model error; not charged.</li>
             </ul>
           </section>
         </article>

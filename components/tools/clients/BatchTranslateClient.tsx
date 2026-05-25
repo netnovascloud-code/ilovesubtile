@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 import { LANGUAGES, type LanguageCode } from "@/lib/languages";
 
 type JobStatus = "queued" | "running" | "done" | "error";
@@ -37,7 +38,7 @@ export function BatchTranslateClient() {
       const fd = new FormData();
       fd.append("file", f);
       fd.append("target_lang", target);
-      const res = await fetch("/api/process/translate-subtitles", { method: "POST", body: fd });
+      const res = await callTool("translate-subtitles", fd);
       if (!res.ok) {
         return { code: target, status: "error", error: tt(chrome.errors.serverReturned, { status: res.status }) };
       }

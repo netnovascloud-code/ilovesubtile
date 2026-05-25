@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 import { LANGUAGES, type LanguageCode } from "@/lib/languages";
 import { parseSubtitles, toVtt } from "@/lib/srt-utils";
 
@@ -42,15 +43,12 @@ export function SubtitleGeneratorClient({ crossLinks = [] }: { crossLinks?: { hr
       const fd = new FormData();
       fd.append("file", file);
       if (sourceLang) fd.append("language", sourceLang.toLowerCase());
-      const res = await fetch("/api/process/subtitle-generator", { method: "POST", body: fd });
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
+      const res = await callTool("subtitle-generator", fd);
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
       const data = (await res.json()) as { url?: string; filename?: string };

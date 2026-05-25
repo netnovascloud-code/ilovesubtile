@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 
 type Phase = "idle" | "uploading" | "done" | "error";
 
@@ -35,15 +36,12 @@ export function AutoSyncClient() {
       const fd = new FormData();
       fd.append("video", video);
       fd.append("subtitles", subs);
-      const res = await fetch("/api/process/auto-sync", { method: "POST", body: fd });
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
+      const res = await callTool("auto-sync", fd);
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
       const data = (await res.json()) as { url?: string; filename?: string };

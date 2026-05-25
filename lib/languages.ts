@@ -1,6 +1,6 @@
 /**
  * Languages supported by the translation pipeline. Codes are uppercase
- * ISO-639-1 — Mistral's chat completion accepts them in the prompt and
+ * ISO-639-1 — the AI translation prompt accepts them and
  * the edge function maps each one to a human-readable name.
  */
 export type LanguageCode =

@@ -1,0 +1,56 @@
+import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { SUPABASE_URL } from "@/lib/utils";
+
+/** tool slug → Supabase Edge Function that handles it. */
+const FN_MAP: Record<string, string> = {
+  "subtitle-generator": "process-subtitles",
+  "tiktok-subtitles": "process-subtitles",
+  "translate-subtitles": "translate-subtitles",
+  "batch-translate": "translate-subtitles",
+  "youtube-chapters": "ai-process",
+  "auto-sync": "ai-process",
+  "add-subtitles-to-video": "process-ffmpeg",
+  "extract-subtitles": "process-ffmpeg",
+  "style-subtitles": "process-ffmpeg",
+};
+
+export function toolFunction(slug: string): string | null {
+  return FN_MAP[slug] ?? null;
+}
+
+/**
+ * Call a tool's Edge Function DIRECTLY from the browser.
+ *
+ * We deliberately do NOT proxy through a Next.js route: Vercel caps
+ * serverless request bodies at ~4.5 MB, which 413s any real audio/video
+ * upload. Supabase Edge Functions accept much larger bodies, so the file
+ * goes straight there. Auth = the user's session JWT when signed in,
+ * otherwise the public anon key (free tier). The anon key is also sent as
+ * `apikey` for Supabase's function router.
+ */
+export async function callTool(slug: string, body: FormData | object): Promise<Response> {
+  const fn = FN_MAP[slug];
+  if (!fn) throw new Error(`No backend function mapped for "${slug}"`);
+  if (!SUPABASE_URL) throw new Error("Supabase URL not configured");
+
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+  let bearer = anon;
+  try {
+    const supabase = getSupabaseBrowser();
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.access_token) bearer = data.session.access_token;
+  } catch {
+    // not signed in / env missing — fall back to anon
+  }
+
+  const isJson = !(body instanceof FormData);
+  return fetch(`${SUPABASE_URL}/functions/v1/${fn}?tool=${encodeURIComponent(slug)}`, {
+    method: "POST",
+    headers: {
+      apikey: anon,
+      Authorization: `Bearer ${bearer}`,
+      ...(isJson ? { "Content-Type": "application/json" } : {}),
+    },
+    body: isJson ? JSON.stringify(body) : (body as FormData),
+  });
+}

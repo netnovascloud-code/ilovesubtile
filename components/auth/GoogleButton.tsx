@@ -6,22 +6,46 @@ import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 export function GoogleButton({ redirect = "/dashboard" }: { redirect?: string }) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function signIn() {
+    setError(null);
+    setLoading(true);
     try {
-      setLoading(true);
       const supabase = getSupabaseBrowser();
-      await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: { redirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect)}` },
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect)}`,
+        },
       });
+      if (error) {
+        // Most common cause: the Google provider isn't enabled in
+        // Supabase → Authentication → Providers, or the redirect URL
+        // isn't allowlisted for this domain.
+        setError(
+          error.message?.toLowerCase().includes("provider")
+            ? "Google sign-in isn't enabled yet. Enable it in Supabase → Authentication → Providers."
+            : error.message,
+        );
+        setLoading(false);
+        return;
+      }
+      // signInWithOAuth returns a URL we must navigate to.
+      if (data?.url) {
+        window.location.assign(data.url);
+        return;
+      }
+      setError("Could not start Google sign-in.");
+      setLoading(false);
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Could not reach the auth server.");
       setLoading(false);
     }
   }
 
   return (
+    <>
     <Button type="button" variant="outline" className="w-full" onClick={signIn} disabled={loading}>
       <svg className="h-4 w-4" viewBox="0 0 48 48" aria-hidden="true">
         <path
@@ -43,5 +67,7 @@ export function GoogleButton({ redirect = "/dashboard" }: { redirect?: string })
       </svg>
       Continue with Google
     </Button>
+    {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { ProcessingScreen } from "@/components/tools/ProcessingScreen";
 import { ResultScreen } from "@/components/tools/ResultScreen";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
+import { callTool } from "@/lib/tool-api";
 
 export type ServerJobSpec = {
   slug: string;
@@ -42,16 +43,13 @@ export function ServerJobClient({
     try {
       const fd = new FormData();
       fd.append("file", f);
-      const res = await fetch(`/api/process/${tool.slug}`, { method: "POST", body: fd });
+      const res = await callTool(tool.slug, fd);
 
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
 

@@ -52,7 +52,7 @@ const en: UiStrings = {
     whyTitle: "Why CaptionFlow?",
     reasons: [
       { title: "Built for one thing", body: "Each tool does exactly one job. No bloated video editor, no learning curve." },
-      { title: "Powered by Mistral", body: "Voxtral handles transcription, mistral-large does translation — accurate in 30+ languages." },
+      { title: "Powered by AI", body: "State-of-the-art AI for transcription and translation — accurate in 30+ languages." },
       { title: "30+ languages", body: "Translate subtitles cue-by-cue with strict JSON output — timestamps stay intact." },
       { title: "Files auto-deleted", body: "We process and forget. Your media is gone within an hour." },
     ],
@@ -96,7 +96,7 @@ const fr: UiStrings = {
     whyTitle: "Pourquoi CaptionFlow ?",
     reasons: [
       { title: "Une seule mission par outil", body: "Chaque outil fait exactement une chose. Pas d'éditeur vidéo lourd, pas de courbe d'apprentissage." },
-      { title: "Propulsé par Mistral", body: "Voxtral pour la transcription, mistral-large pour la traduction — précis dans 30+ langues." },
+      { title: "Propulsé par l'IA", body: "Une IA de pointe pour la transcription et la traduction — précise dans 30+ langues." },
       { title: "30+ langues", body: "Traduction cue par cue avec sortie JSON stricte — les timestamps restent intacts." },
       { title: "Fichiers auto-supprimés", body: "On traite et on oublie. Vos médias disparaissent en moins d'une heure." },
     ],
@@ -140,7 +140,7 @@ const es: UiStrings = {
     whyTitle: "¿Por qué CaptionFlow?",
     reasons: [
       { title: "Una sola misión por herramienta", body: "Cada herramienta hace exactamente una cosa. Sin editor de vídeo pesado, sin curva de aprendizaje." },
-      { title: "Impulsado por Mistral", body: "Voxtral transcribe, mistral-large traduce — preciso en más de 30 idiomas." },
+      { title: "Impulsado por AI", body: "AI transcribe, AI traduce — preciso en más de 30 idiomas." },
       { title: "30+ idiomas", body: "Traducción cue por cue con salida JSON estricta — los timestamps quedan intactos." },
       { title: "Archivos auto-eliminados", body: "Procesamos y olvidamos. Tu material desaparece en menos de una hora." },
     ],
@@ -184,7 +184,7 @@ const pt: UiStrings = {
     whyTitle: "Por que CaptionFlow?",
     reasons: [
       { title: "Uma só missão por ferramenta", body: "Cada ferramenta faz exatamente uma coisa. Sem editor de vídeo pesado, sem curva de aprendizado." },
-      { title: "Powered by Mistral", body: "Voxtral transcreve, mistral-large traduz — preciso em mais de 30 idiomas." },
+      { title: "Powered by AI", body: "AI transcreve, AI traduz — preciso em mais de 30 idiomas." },
       { title: "30+ idiomas", body: "Tradução cue por cue com saída JSON estrita — timestamps intactos." },
       { title: "Arquivos auto-deletados", body: "Processamos e esquecemos. Sua mídia some em menos de uma hora." },
     ],
@@ -228,7 +228,7 @@ const de: UiStrings = {
     whyTitle: "Warum CaptionFlow?",
     reasons: [
       { title: "Eine Aufgabe pro Tool", body: "Jedes Tool macht genau eine Sache. Kein überladener Video-Editor, keine Lernkurve." },
-      { title: "Powered by Mistral", body: "Voxtral transkribiert, mistral-large übersetzt — präzise in 30+ Sprachen." },
+      { title: "Powered by AI", body: "AI transkribiert, AI übersetzt — präzise in 30+ Sprachen." },
       { title: "30+ Sprachen", body: "Cue-für-Cue-Übersetzung mit striktem JSON — Zeitstempel bleiben erhalten." },
       { title: "Dateien werden gelöscht", body: "Wir verarbeiten und vergessen. Deine Medien sind binnen einer Stunde weg." },
     ],
@@ -272,7 +272,7 @@ const it: UiStrings = {
     whyTitle: "Perché CaptionFlow?",
     reasons: [
       { title: "Una missione per strumento", body: "Ogni strumento fa esattamente una cosa. Niente editor video pesante, nessuna curva di apprendimento." },
-      { title: "Powered by Mistral", body: "Voxtral per la trascrizione, mistral-large per la traduzione — preciso in 30+ lingue." },
+      { title: "Powered by AI", body: "AI per la trascrizione, AI per la traduzione — preciso in 30+ lingue." },
       { title: "30+ lingue", body: "Traduzione cue per cue con output JSON rigoroso — i timestamp restano intatti." },
       { title: "File auto-eliminati", body: "Elaboriamo e dimentichiamo. I tuoi file spariscono entro un'ora." },
     ],
@@ -316,7 +316,7 @@ const nl: UiStrings = {
     whyTitle: "Waarom CaptionFlow?",
     reasons: [
       { title: "Eén taak per tool", body: "Elke tool doet precies één ding. Geen overladen video-editor, geen leercurve." },
-      { title: "Powered by Mistral", body: "Voxtral transcribeert, mistral-large vertaalt — nauwkeurig in 30+ talen." },
+      { title: "Powered by AI", body: "AI transcribeert, AI vertaalt — nauwkeurig in 30+ talen." },
       { title: "30+ talen", body: "Cue-per-cue vertaling met strikte JSON-output — timestamps blijven intact." },
       { title: "Bestanden automatisch verwijderd", body: "We verwerken en vergeten. Je media is binnen een uur weg." },
     ],
@@ -360,7 +360,7 @@ const ja: UiStrings = {
     whyTitle: "CaptionFlowを選ぶ理由",
     reasons: [
       { title: "1ツール1機能", body: "各ツールはひとつの仕事だけをこなします。重い動画エディタも学習コストも不要。" },
-      { title: "Mistral搭載", body: "Voxtralが文字起こし、mistral-largeが翻訳を担当 — 30以上の言語で高精度。" },
+      { title: "AI搭載", body: "AIが文字起こし、AIが翻訳を担当 — 30以上の言語で高精度。" },
       { title: "30以上の言語", body: "厳格なJSON出力でキューごとに翻訳 — タイムスタンプはそのまま。" },
       { title: "ファイルは自動削除", body: "処理したら忘れます。1時間以内にメディアは消えます。" },
     ],
@@ -404,7 +404,7 @@ const zh: UiStrings = {
     whyTitle: "为什么选择 CaptionFlow？",
     reasons: [
       { title: "每个工具只做一件事", body: "每个工具只完成一项任务。没有臃肿的视频编辑器，没有学习曲线。" },
-      { title: "由 Mistral 驱动", body: "Voxtral 负责转录,mistral-large 负责翻译 — 在 30 多种语言中保持准确。" },
+      { title: "由 AI 驱动", body: "AI 负责转录,AI 负责翻译 — 在 30 多种语言中保持准确。" },
       { title: "30+ 语言", body: "逐句翻译并输出严格 JSON — 时间戳保持不变。" },
       { title: "文件自动删除", body: "处理完即遗忘。您的媒体将在一小时内消失。" },
     ],
@@ -448,7 +448,7 @@ const ko: UiStrings = {
     whyTitle: "왜 CaptionFlow인가요?",
     reasons: [
       { title: "도구당 한 가지 작업", body: "각 도구는 정확히 한 가지 일만 합니다. 무거운 영상 편집기도, 학습 곡선도 없습니다." },
-      { title: "Mistral 기반", body: "Voxtral가 전사, mistral-large가 번역 — 30개 이상의 언어에서 정확합니다." },
+      { title: "AI 기반", body: "AI가 전사, AI가 번역 — 30개 이상의 언어에서 정확합니다." },
       { title: "30개 이상 언어", body: "엄격한 JSON 출력으로 큐 단위 번역 — 타임스탬프는 그대로 유지됩니다." },
       { title: "파일 자동 삭제", body: "처리 후 잊어버립니다. 미디어는 1시간 안에 사라집니다." },
     ],
@@ -492,7 +492,7 @@ const ar: UiStrings = {
     whyTitle: "لماذا CaptionFlow؟",
     reasons: [
       { title: "مهمة واحدة لكل أداة", body: "كل أداة تقوم بمهمة واحدة بالضبط. لا محرر فيديو ثقيل، لا منحنى تعلم." },
-      { title: "مدعوم بـ Mistral", body: "Voxtral للتفريغ، mistral-large للترجمة — دقيق في أكثر من 30 لغة." },
+      { title: "مدعوم بـ AI", body: "AI للتفريغ، AI للترجمة — دقيق في أكثر من 30 لغة." },
       { title: "أكثر من 30 لغة", body: "ترجمة سطرًا بسطر مع إخراج JSON صارم — تظل الطوابع الزمنية كما هي." },
       { title: "حذف تلقائي للملفات", body: "نعالج ثم ننسى. تختفي وسائطك خلال ساعة." },
     ],
@@ -536,7 +536,7 @@ const ru: UiStrings = {
     whyTitle: "Почему CaptionFlow?",
     reasons: [
       { title: "Один инструмент — одна задача", body: "Каждый инструмент делает ровно одно дело. Никаких громоздких редакторов, никакого обучения." },
-      { title: "На базе Mistral", body: "Voxtral транскрибирует, mistral-large переводит — точно в 30+ языках." },
+      { title: "На базе AI", body: "AI транскрибирует, AI переводит — точно в 30+ языках." },
       { title: "30+ языков", body: "Перевод по сабтайтлам со строгим JSON — таймкоды остаются нетронутыми." },
       { title: "Файлы удаляются автоматически", body: "Обработали и забыли. Медиа исчезает в течение часа." },
     ],
@@ -580,7 +580,7 @@ const hi: UiStrings = {
     whyTitle: "CaptionFlow क्यों?",
     reasons: [
       { title: "एक टूल, एक काम", body: "हर टूल ठीक एक काम करता है। न भारी वीडियो एडिटर, न सीखने की ज़रूरत।" },
-      { title: "Mistral द्वारा संचालित", body: "Voxtral ट्रांसक्रिप्शन करता है, mistral-large अनुवाद करता है — 30+ भाषाओं में सटीक।" },
+      { title: "AI द्वारा संचालित", body: "AI ट्रांसक्रिप्शन करता है, AI अनुवाद करता है — 30+ भाषाओं में सटीक।" },
       { title: "30+ भाषाएँ", body: "क्यू-दर-क्यू अनुवाद, सख्त JSON आउटपुट के साथ — टाइमस्टैम्प यथावत रहते हैं।" },
       { title: "फ़ाइलें स्वतः हटा दी जाती हैं", body: "हम प्रोसेस करते हैं और भूल जाते हैं। आपका मीडिया एक घंटे में हट जाता है।" },
     ],

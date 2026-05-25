@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 import { parseSubtitles, toPlainText, detectFormat } from "@/lib/srt-utils";
 
 type Phase = "idle" | "ready" | "running" | "done" | "error";
@@ -58,19 +59,12 @@ export function YouTubeChaptersClient() {
     setPhase("running");
     setError(null);
     try {
-      const res = await fetch("/api/process/youtube-chapters", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ task: "chapters", text }),
-      });
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
+      const res = await callTool("youtube-chapters", { task: "chapters", text });
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
       const data = (await res.json()) as { output?: string };

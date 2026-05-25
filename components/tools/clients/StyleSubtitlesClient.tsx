@@ -8,6 +8,7 @@ import { SubtitleStylePicker, DEFAULT_STYLE, type SubtitleStyle } from "@/compon
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 
 type Phase = "idle" | "uploading" | "done" | "error";
 
@@ -31,15 +32,12 @@ export function StyleSubtitlesClient() {
       const fd = new FormData();
       fd.append("file", f);
       fd.append("style", JSON.stringify(style));
-      const res = await fetch("/api/process/style-subtitles", { method: "POST", body: fd });
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
+      const res = await callTool("style-subtitles", fd);
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
       const data = (await res.json()) as { url?: string; filename?: string };

@@ -7,6 +7,7 @@ import { ResultScreen } from "@/components/tools/ResultScreen";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { callTool } from "@/lib/tool-api";
 import { LANGUAGES, DEFAULT_TARGETS, type LanguageCode } from "@/lib/languages";
 
 type Phase = "idle" | "uploading" | "done" | "error";
@@ -35,15 +36,12 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
       fd.append("target_lang", targetLang);
       if (sourceLang) fd.append("source_lang", sourceLang);
 
-      const res = await fetch("/api/process/translate-subtitles", { method: "POST", body: fd });
-      if (res.status === 503) {
-        setPhase("error");
-        setError(chrome.errors.notWiredUp);
-        return;
-      }
+      const res = await callTool("translate-subtitles", fd);
       if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const code = typeof errBody?.error === "string" ? errBody.error : "";
         setPhase("error");
-        setError(tt(chrome.errors.serverReturned, { status: res.status }));
+        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
         return;
       }
       const data = (await res.json()) as { url?: string; filename?: string };

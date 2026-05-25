@@ -6,7 +6,7 @@ type StepsBySlug = Record<string, LocalisedStep[]>;
 const fr: StepsBySlug = {
   "subtitle-generator": [
     { title: "Téléversez votre média", body: "Déposez une vidéo ou un fichier audio. MP4, MOV, MP3, WAV et plus." },
-    { title: "L'IA génère les sous-titres", body: "Voxtral de Mistral transcrit l'audio avec timestamps dans plus de 30 langues." },
+    { title: "L'IA génère les sous-titres", body: "AI transcrit l'audio avec timestamps dans plus de 30 langues." },
     { title: "Téléchargez le SRT", body: "Un fichier .srt propre prêt pour YouTube, Premiere ou tout lecteur." },
   ],
   "add-subtitles-to-video": [
@@ -89,7 +89,7 @@ const fr: StepsBySlug = {
 const es: StepsBySlug = {
   "subtitle-generator": [
     { title: "Sube tu medio", body: "Suelta un vídeo o un audio. MP4, MOV, MP3, WAV y más." },
-    { title: "La IA genera los subtítulos", body: "Voxtral de Mistral transcribe el audio con timestamps en más de 30 idiomas." },
+    { title: "La IA genera los subtítulos", body: "AI transcribe el audio con timestamps en más de 30 idiomas." },
     { title: "Descarga el SRT", body: "Un .srt limpio listo para YouTube, Premiere o cualquier reproductor." },
   ],
   "add-subtitles-to-video": [
@@ -172,7 +172,7 @@ const es: StepsBySlug = {
 const pt: StepsBySlug = {
   "subtitle-generator": [
     { title: "Envie sua mídia", body: "Solte um vídeo ou áudio. MP4, MOV, MP3, WAV e mais." },
-    { title: "A IA gera as legendas", body: "Voxtral da Mistral transcreve o áudio com timestamps em mais de 30 idiomas." },
+    { title: "A IA gera as legendas", body: "AI transcreve o áudio com timestamps em mais de 30 idiomas." },
     { title: "Baixe o SRT", body: "Um .srt limpo, pronto para YouTube, Premiere ou qualquer player." },
   ],
   "add-subtitles-to-video": [
@@ -255,7 +255,7 @@ const pt: StepsBySlug = {
 const de: StepsBySlug = {
   "subtitle-generator": [
     { title: "Medium hochladen", body: "Lade ein Video oder Audio hoch. MP4, MOV, MP3, WAV und mehr." },
-    { title: "KI erstellt die Untertitel", body: "Mistrals Voxtral transkribiert dein Audio mit Zeitstempeln in 30+ Sprachen." },
+    { title: "KI erstellt die Untertitel", body: "AI transkribiert dein Audio mit Zeitstempeln in 30+ Sprachen." },
     { title: "SRT herunterladen", body: "Saubere .srt-Datei, bereit für YouTube, Premiere oder jeden Player." },
   ],
   "add-subtitles-to-video": [
@@ -338,7 +338,7 @@ const de: StepsBySlug = {
 const it: StepsBySlug = {
   "subtitle-generator": [
     { title: "Carica il tuo media", body: "Rilascia un video o un audio. MP4, MOV, MP3, WAV e altri." },
-    { title: "L'IA genera i sottotitoli", body: "Voxtral di Mistral trascrive l'audio con timestamp in oltre 30 lingue." },
+    { title: "L'IA genera i sottotitoli", body: "AI trascrive l'audio con timestamp in oltre 30 lingue." },
     { title: "Scarica l'SRT", body: "Un .srt pulito, pronto per YouTube, Premiere o qualsiasi player." },
   ],
   "add-subtitles-to-video": [
@@ -421,7 +421,7 @@ const it: StepsBySlug = {
 const nl: StepsBySlug = {
   "subtitle-generator": [
     { title: "Upload je media", body: "Sleep een video of audio. MP4, MOV, MP3, WAV en meer." },
-    { title: "AI genereert ondertitels", body: "Mistrals Voxtral transcribeert je audio met timestamps in 30+ talen." },
+    { title: "AI genereert ondertitels", body: "AI transcribeert je audio met timestamps in 30+ talen." },
     { title: "Download het SRT", body: "Schoon .srt bestand, klaar voor YouTube, Premiere of elke player." },
   ],
   "add-subtitles-to-video": [
@@ -504,7 +504,7 @@ const nl: StepsBySlug = {
 const ja: StepsBySlug = {
   "subtitle-generator": [
     { title: "メディアをアップロード", body: "動画または音声をドロップ。MP4、MOV、MP3、WAV など。" },
-    { title: "AI が字幕を生成", body: "Mistral の Voxtral が 30 以上の言語でタイムスタンプ付き文字起こし。" },
+    { title: "AI が字幕を生成", body: "AI が 30 以上の言語でタイムスタンプ付き文字起こし。" },
     { title: "SRT をダウンロード", body: "YouTube、Premiere、各種プレイヤーで使える綺麗な .srt。" },
   ],
   "add-subtitles-to-video": [
@@ -587,7 +587,7 @@ const ja: StepsBySlug = {
 const zh: StepsBySlug = {
   "subtitle-generator": [
     { title: "上传媒体", body: "拖入视频或音频。MP4、MOV、MP3、WAV 等。" },
-    { title: "AI 生成字幕", body: "Mistral 的 Voxtral 在 30 多种语言中转录并标记时间戳。" },
+    { title: "AI 生成字幕", body: "AI 在 30 多种语言中转录并标记时间戳。" },
     { title: "下载 SRT", body: "干净的 .srt,适配 YouTube、Premiere 或任意播放器。" },
   ],
   "add-subtitles-to-video": [
@@ -670,7 +670,7 @@ const zh: StepsBySlug = {
 const ko: StepsBySlug = {
   "subtitle-generator": [
     { title: "미디어 업로드", body: "영상 또는 오디오를 드롭하세요. MP4, MOV, MP3, WAV 등." },
-    { title: "AI 가 자막 생성", body: "Mistral 의 Voxtral 가 30개 이상 언어로 타임스탬프와 함께 전사합니다." },
+    { title: "AI 가 자막 생성", body: "AI 가 30개 이상 언어로 타임스탬프와 함께 전사합니다." },
     { title: "SRT 다운로드", body: "YouTube, Premiere 등 어떤 플레이어에도 맞는 깔끔한 .srt." },
   ],
   "add-subtitles-to-video": [
@@ -753,7 +753,7 @@ const ko: StepsBySlug = {
 const ar: StepsBySlug = {
   "subtitle-generator": [
     { title: "ارفع ملفك", body: "أفلت فيديو أو صوت. MP4 وMOV وMP3 وWAV وغيرها." },
-    { title: "الذكاء الاصطناعي يولّد الترجمة", body: "Voxtral من Mistral يفرّغ الصوت بطوابع زمنية في أكثر من 30 لغة." },
+    { title: "الذكاء الاصطناعي يولّد الترجمة", body: "AI يفرّغ الصوت بطوابع زمنية في أكثر من 30 لغة." },
     { title: "نزّل SRT", body: "ملف .srt نظيف جاهز لـ YouTube وPremiere وأي مشغل." },
   ],
   "add-subtitles-to-video": [
@@ -836,7 +836,7 @@ const ar: StepsBySlug = {
 const ru: StepsBySlug = {
   "subtitle-generator": [
     { title: "Загрузите медиа", body: "Перетащите видео или аудио. MP4, MOV, MP3, WAV и другие." },
-    { title: "ИИ генерирует субтитры", body: "Voxtral от Mistral транскрибирует аудио с таймкодами на 30+ языках." },
+    { title: "ИИ генерирует субтитры", body: "AI транскрибирует аудио с таймкодами на 30+ языках." },
     { title: "Скачайте SRT", body: "Чистый .srt, готовый для YouTube, Premiere или любого плеера." },
   ],
   "add-subtitles-to-video": [
@@ -919,7 +919,7 @@ const ru: StepsBySlug = {
 const hi: StepsBySlug = {
   "subtitle-generator": [
     { title: "अपना मीडिया अपलोड करें", body: "वीडियो या ऑडियो छोड़ें। MP4, MOV, MP3, WAV और बहुत कुछ।" },
-    { title: "AI सबटाइटल बनाता है", body: "Mistral का Voxtral 30+ भाषाओं में टाइमस्टैम्प के साथ ट्रांसक्राइब करता है।" },
+    { title: "AI सबटाइटल बनाता है", body: "AI का AI 30+ भाषाओं में टाइमस्टैम्प के साथ ट्रांसक्राइब करता है।" },
     { title: "SRT डाउनलोड करें", body: "YouTube, Premiere या किसी भी प्लेयर के लिए स्वच्छ .srt फ़ाइल।" },
   ],
   "add-subtitles-to-video": [

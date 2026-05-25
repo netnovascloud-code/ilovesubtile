@@ -94,14 +94,14 @@ export const TOOLS: ToolDefinition[] = [
     h1: "Generate Subtitles from Video & Audio — Free AI Subtitle Generator",
     metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | CaptionFlow",
     metaDescription:
-      "Generate accurate subtitles from any video or audio file with Mistral's Voxtral model. Free, fast, supports 30+ languages. Download as SRT or VTT.",
+      "Generate accurate subtitles from any video or audio file with AI. Free, fast, supports 30+ languages. Download as SRT or VTT.",
     primaryKeyword: "generate subtitles online",
     accept: ["mp4", "mov", "webm", "mkv", "avi", "mp3", "wav", "m4a", "flac", "ogg"],
     freeMaxMb: 25,
     outputType: "SRT",
     steps: [
       { title: "Upload your media", body: "Drop a video or audio file. We support MP4, MOV, MP3, WAV and more." },
-      { title: "AI generates captions", body: "Mistral's Voxtral transcribes your audio with timestamps in 30+ languages." },
+      { title: "AI generates captions", body: "AI transcribes your audio with timestamps in 30+ languages." },
       { title: "Download the SRT", body: "Get a clean .srt file ready for YouTube, Premiere, or any player." },
     ],
     faqs: baseFaqs("the subtitle generator", "MP4, MOV, WebM, MKV, AVI, MP3, WAV, M4A, FLAC, OGG"),
@@ -190,7 +190,7 @@ export const TOOLS: ToolDefinition[] = [
     h1: "Translate Subtitles Online — SRT & VTT Translator (30+ Languages)",
     metaTitle: "Translate Subtitles Online Free — SRT Translator | CaptionFlow",
     metaDescription:
-      "Translate SRT or VTT subtitles into 30+ languages with Mistral AI. Timestamps stay perfectly intact, cue boundaries preserved.",
+      "Translate SRT or VTT subtitles into 30+ languages with AI. Timestamps stay perfectly intact, cue boundaries preserved.",
     primaryKeyword: "translate srt file online",
     accept: ["srt", "vtt"],
     freeMaxMb: 25,
@@ -529,7 +529,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
     metaDescription:
       "Looking for a VEED.io alternative? CaptionFlow is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
-      "AI subtitle generation with Mistral Voxtral — modern, European, accurate.",
+      "AI subtitle generation with AI — modern, European, accurate.",
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
@@ -538,7 +538,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Pro price", us: "€12/month", them: "€18/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Limited, watermarked" },
       { feature: "File size limit", us: "Up to 500 MB (Pro)", them: "Tiered by plan" },
-      { feature: "AI subtitles", us: "Mistral Voxtral, 30+ langs", them: "Yes" },
+      { feature: "AI subtitles", us: "AI, 30+ langs", them: "Yes" },
       { feature: "Translation", us: "30+ languages", them: "Add-on" },
       { feature: "Watermark on text", us: "Never", them: "Free plan only" },
       { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
@@ -566,7 +566,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Pro price", us: "€12/month", them: "$16/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermark + limits" },
       { feature: "Focus", us: "Subtitles only", them: "General editor" },
-      { feature: "AI subtitles", us: "Mistral Voxtral", them: "Yes" },
+      { feature: "AI subtitles", us: "AI", them: "Yes" },
       { feature: "Translation", us: "30+ languages", them: "Yes" },
       { feature: "Watermark on text", us: "Never", them: "Free plan only" },
       { feature: "Speed", us: "Instant client-side conversions", them: "Cloud render queue" },
@@ -584,9 +584,9 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Affordable HappyScribe Alternative — CaptionFlow",
     metaTitle: "HappyScribe Alternative Cheaper — CaptionFlow",
     metaDescription:
-      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with Mistral-grade accuracy.",
+      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with top-tier accuracy.",
     bulletPoints: [
-      "Modern AI engine (Mistral Voxtral), half the price.",
+      "Modern AI engine (AI), half the price.",
       "Self-serve, no sales call required.",
       "Works for indie creators, agencies and teams alike.",
     ],
@@ -594,13 +594,13 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Pro price", us: "€12/month", them: "~€25/month" },
       { feature: "Audience", us: "Creators + teams", them: "Enterprise-first" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Trial only" },
-      { feature: "AI subtitles", us: "Mistral Voxtral", them: "Yes" },
+      { feature: "AI subtitles", us: "AI", them: "Yes" },
       { feature: "Translation", us: "30+ languages", them: "Yes" },
       { feature: "Onboarding", us: "Self-serve, instant", them: "Often sales-led" },
       { feature: "Watermark on text", us: "Never", them: "N/A" },
     ],
     faqs: [
-      { q: "Is CaptionFlow accurate enough vs HappyScribe?", a: "We use Mistral's Voxtral model for transcription — modern accuracy across 30+ languages, at half the price." },
+      { q: "Is CaptionFlow accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, at half the price." },
       { q: "Do I need to talk to sales?", a: "No. CaptionFlow is fully self-serve — sign up and start in seconds." },
       { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
       { q: "What does it cost?", a: "Free tier, Pro at €12/month, Business at €49/month. No hidden per-minute fees on the subscription plans." },
@@ -612,14 +612,14 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Best Clideo Subtitle Alternative — CaptionFlow",
     metaTitle: "Clideo Alternative with AI Subtitles | CaptionFlow",
     metaDescription:
-      "Clideo doesn't do AI subtitles. We do. Free generator with Mistral Voxtral, plus every tool you'd need around it.",
+      "Clideo doesn't do AI subtitles. We do. Free generator with AI, plus every tool you'd need around it.",
     bulletPoints: [
       "Real AI generation — Clideo only handles add-subtitles-to-video.",
       "16 tools vs Clideo's single one for captions.",
       "Cheaper Pro plan, and a free tier without watermarked text outputs.",
     ],
     comparison: [
-      { feature: "AI subtitle generation", us: "Yes (Voxtral)", them: "No" },
+      { feature: "AI subtitle generation", us: "Yes (AI)", them: "No" },
       { feature: "Number of subtitle tools", us: "16", them: "~1" },
       { feature: "Translation", us: "30+ languages", them: "No" },
       { feature: "Pro price", us: "€12/month", them: "~$9/month (all tools)" },
@@ -628,7 +628,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },
     ],
     faqs: [
-      { q: "Does Clideo generate subtitles with AI?", a: "No — Clideo can add an existing subtitle file to video, but it doesn't transcribe. CaptionFlow generates subtitles from audio with Voxtral." },
+      { q: "Does Clideo generate subtitles with AI?", a: "No — Clideo can add an existing subtitle file to video, but it doesn't transcribe. CaptionFlow generates subtitles from audio with AI." },
       { q: "How many subtitle tools does CaptionFlow have?", a: "Sixteen — generate, translate, sync, convert, clean, style, burn-in and more." },
       { q: "Is there translation?", a: "Yes, into 30+ languages, cue-by-cue, keeping your timing intact." },
       { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on SRT/VTT/TXT outputs." },

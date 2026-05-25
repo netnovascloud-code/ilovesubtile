@@ -22,6 +22,7 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
   const [freshKey, setFreshKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [name, setName] = useState("");
 
   const isBusiness = plan === "business";
 
@@ -59,13 +60,14 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
     setError(null);
     setFreshKey(null);
     try {
-      const res = await authedFetch({ action: "create", name: "API key" });
+      const res = await authedFetch({ action: "create", name: name.trim() || "API key" });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error === "business_plan_required" ? "API access requires the Business plan." : data.error);
         return;
       }
       setFreshKey(data.key);
+      setName("");
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed");
@@ -131,11 +133,14 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
           <ul className="divide-y divide-ink-100 text-sm">
             {keys.filter((k) => !k.revoked).map((k) => (
               <li key={k.id} className="flex items-center justify-between py-2">
-                <div>
-                  <code className="font-mono text-ink-900">{k.key_prefix}…</code>
-                  <span className="ml-2 text-xs text-ink-400">
-                    {k.last_used_at ? `used ${new Date(k.last_used_at).toLocaleDateString()}` : "never used"}
-                  </span>
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-ink-900">{k.name || "API key"}</p>
+                  <p className="mt-0.5 text-xs text-ink-400">
+                    <code className="font-mono">{k.key_prefix}…</code>
+                    <span className="ml-2">
+                      {k.last_used_at ? `used ${new Date(k.last_used_at).toLocaleDateString()}` : "never used"}
+                    </span>
+                  </p>
                 </div>
                 <button
                   onClick={() => revoke(k.id)}
@@ -149,10 +154,24 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
         )}
       </div>
 
-      <Button size="sm" className="mt-4" onClick={create} disabled={!isBusiness || creating}>
-        <Plus className="h-3.5 w-3.5" />
-        {creating ? "Generating…" : "Generate API key"}
-      </Button>
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          maxLength={60}
+          disabled={!isBusiness || creating}
+          placeholder="Key name (e.g. Production)"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && isBusiness && !creating) create();
+          }}
+          className="flex-1 rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100 disabled:cursor-not-allowed disabled:bg-ink-50"
+        />
+        <Button size="sm" onClick={create} disabled={!isBusiness || creating}>
+          <Plus className="h-3.5 w-3.5" />
+          {creating ? "Generating…" : "Generate API key"}
+        </Button>
+      </div>
     </div>
   );
 }

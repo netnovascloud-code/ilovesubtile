@@ -3,27 +3,29 @@ import Link from "next/link";
 import { TOOLS_BY_SLUG } from "@/lib/tools-config";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { buildToolMetadata } from "@/lib/seo";
-import { SITE_URL } from "@/lib/utils";
+import { SUPABASE_URL } from "@/lib/utils";
 
 const tool = TOOLS_BY_SLUG.api;
 export const metadata: Metadata = buildToolMetadata(tool);
 
+const BASE = `${SUPABASE_URL}/functions/v1/api-gateway`;
+
 const ENDPOINTS = [
   {
     method: "POST",
-    path: "/api/v1/transcribe",
+    path: `${BASE}?action=transcribe`,
     cost: "10 credits",
-    desc: "Audio/video → SRT (AI). Multipart `file`, or JSON { file_url }.",
-    curl: `curl -X POST ${SITE_URL}/api/v1/transcribe \\
+    desc: "Audio/video → SRT. Multipart `file`, or JSON { file_url }.",
+    curl: `curl -X POST "${BASE}?action=transcribe" \\
   -H "Authorization: Bearer cf_live_..." \\
   -F "file=@episode.mp3"`,
   },
   {
     method: "POST",
-    path: "/api/v1/translate",
+    path: `${BASE}?action=translate`,
     cost: "5 credits",
-    desc: "Translate an SRT (AI). Multipart `file` + `target_lang`, or JSON { srt_url, target_lang }.",
-    curl: `curl -X POST ${SITE_URL}/api/v1/translate \\
+    desc: "Translate an SRT. Multipart `file` + `target_lang`, or JSON { srt_url, target_lang }.",
+    curl: `curl -X POST "${BASE}?action=translate" \\
   -H "Authorization: Bearer cf_live_..." \\
   -F "file=@subs.srt" -F "target_lang=ES"`,
   },

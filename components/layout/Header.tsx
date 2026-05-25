@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
@@ -38,11 +38,8 @@ export function Header() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href={localePath(locale)} className="flex items-center gap-2 font-semibold text-ink-900">
-          <span className="grid h-8 w-8 place-items-center rounded bg-brand-500 text-white">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <span>CaptionFlow</span>
+        <Link href={localePath(locale)} className="flex items-center font-semibold text-lg tracking-tight text-ink-900">
+          CaptionFlow
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

@@ -8,9 +8,12 @@ export async function middleware(request: NextRequest) {
   // Auth-gate /dashboard. Anonymous traffic gets redirected to /login.
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/dashboard")) {
-    const hasSession =
-      request.cookies.has("sb-access-token") ||
-      [...request.cookies.getAll()].some((c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token"));
+    // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
+    // it into `.0`/`.1` chunks when large — so match by *contains*, not
+    // endsWith, otherwise chunked sessions look logged-out (redirect loop).
+    const hasSession = [...request.cookies.getAll()].some(
+      (c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"),
+    );
     if (!hasSession) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";

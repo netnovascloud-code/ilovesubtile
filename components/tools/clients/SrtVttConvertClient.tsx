@@ -65,7 +65,12 @@ export function SrtVttConvertClient({ mode }: { mode: Mode }) {
 
   return (
     <div className="space-y-4">
-      <UploadZone accept={mode === "srt-to-vtt" ? ["srt"] : ["vtt"]} maxMb={25} onFile={handleFile} />
+      <UploadZone
+        accept={mode === "srt-to-vtt" ? ["srt"] : ["vtt"]}
+        maxMb={500}
+        onFile={handleFile}
+        note={chrome.upload.instant}
+      />
       {error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}

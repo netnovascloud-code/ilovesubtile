@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
+import { HtmlLang } from "@/components/layout/HtmlLang";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -47,7 +49,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={jakarta.variable}>
+      <head>
+        {/* Ezoic — display ads. No-op until the domain is verified in Ezoic. */}
+        <Script id="ezoic-sa" src="//www.ezojs.com/ezoic/sa.min.js" strategy="afterInteractive" async />
+      </head>
       <body className="min-h-screen flex flex-col">
+        {/* Syncs <html lang>/<dir> to the URL locale without opting out of SSG. */}
+        <HtmlLang />
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />

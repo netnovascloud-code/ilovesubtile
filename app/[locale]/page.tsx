@@ -47,17 +47,17 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
   return (
     <div dir={rtl ? "rtl" : undefined}>
       <section className="border-b border-ink-100 bg-white">
-        <div className="container py-20 md:py-28">
+        <div className="container py-10 md:py-14">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
               <Sparkles className="h-3.5 w-3.5" />
               {ui.hero.badge}
             </span>
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-ink-900 md:text-6xl">
+            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-ink-900 md:text-5xl">
               {ui.hero.title}
             </h1>
-            <p className="mt-6 text-lg text-ink-500">{ui.hero.subtitle}</p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <p className="mt-4 text-lg text-ink-500">{ui.hero.subtitle}</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link href={localePath(locale, "subtitle-generator")}>
                 <Button size="lg">
                   {ui.hero.ctaPrimary}
@@ -74,8 +74,8 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
         </div>
       </section>
 
-      <section id="tools" className="scroll-mt-20 bg-surface">
-        <div className="container py-20">
+      <section id="tools" className="scroll-mt-20 border-t border-ink-100 bg-white">
+        <div className="container py-10">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-semibold tracking-tight text-ink-900">
               {ui.home.toolsTitle}

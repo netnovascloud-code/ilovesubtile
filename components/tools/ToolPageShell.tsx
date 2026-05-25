@@ -1,12 +1,16 @@
 import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
+import { RELATED_TOOLS, TOOLS_BY_SLUG } from "@/lib/tools-config";
 import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Home, ChevronRight } from "lucide-react";
+import { Home, ChevronRight, ArrowRight } from "lucide-react";
 import { getStrings } from "@/lib/i18n/strings";
 import { isRtl, localePath } from "@/lib/i18n/locales";
 import { getLocalisedFaqs } from "@/lib/i18n/faq-templates";
 import { getLocalisedSteps } from "@/lib/i18n/tool-steps";
+import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { getChrome } from "@/lib/i18n/chrome";
+import { QuotaLine } from "@/components/tools/QuotaLine";
 
 function localisedFaqSchema(faqs: ToolFaq[]) {
   return {
@@ -33,6 +37,7 @@ export function ToolPageShell({
 }) {
   const Icon = tool.icon;
   const ui = getStrings(locale);
+  const chrome = getChrome(locale);
   const name = override?.name ?? tool.name;
   const h1 = override?.h1 ?? tool.h1;
   const description = override?.metaDescription ?? tool.metaDescription;
@@ -44,6 +49,11 @@ export function ToolPageShell({
     : "the supported formats";
   const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats);
   const steps = (locale === "en" ? null : getLocalisedSteps(tool.slug, locale)) ?? tool.steps;
+
+  // Related tools for the "What to do next" cross-sell.
+  const related = (RELATED_TOOLS[tool.slug] ?? [])
+    .map((slug) => TOOLS_BY_SLUG[slug])
+    .filter(Boolean);
 
   return (
     <div dir={rtl ? "rtl" : undefined}>
@@ -89,12 +99,45 @@ export function ToolPageShell({
                 )}
               </div>
               <p className="mt-3 max-w-2xl text-base text-ink-500">{description}</p>
+              <QuotaLine />
             </div>
           </div>
         </div>
       </section>
 
       <main className="container py-10">{children}</main>
+
+      {related.length > 0 && (
+        <section className="border-t border-ink-100 bg-white">
+          <div className="container py-12">
+            <h2 className="text-xl font-semibold text-ink-900">{chrome.result.whatNext}</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {related.map((rt) => {
+                const Icon = rt.icon;
+                const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                return (
+                  <Link
+                    key={rt.slug}
+                    href={localePath(locale, rt.slug)}
+                    className="group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-ink-200"
+                  >
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded bg-brand-50 text-brand-600">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1 font-medium text-ink-900">
+                        {i18n?.name ?? rt.name}
+                        <ArrowRight className="h-3.5 w-3.5 text-brand-500 opacity-0 transition-opacity group-hover:opacity-100" />
+                      </div>
+                      <div className="mt-0.5 truncate text-sm text-ink-500">{i18n?.short ?? rt.short}</div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-16">

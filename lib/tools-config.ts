@@ -488,7 +488,39 @@ export function toClientSpec(t: ToolDefinition) {
   } as const;
 }
 
-export const ALTERNATIVES = [
+/** "What to do next" cross-sell — 3 logically related tools per tool. */
+export const RELATED_TOOLS: Record<string, string[]> = {
+  "subtitle-generator": ["translate-subtitles", "add-subtitles-to-video", "subtitle-editor"],
+  "add-subtitles-to-video": ["subtitle-generator", "tiktok-subtitles", "style-subtitles"],
+  "srt-to-vtt": ["vtt-to-srt", "sync-subtitles", "translate-subtitles"],
+  "vtt-to-srt": ["srt-to-vtt", "sync-subtitles", "translate-subtitles"],
+  "translate-subtitles": ["subtitle-generator", "batch-translate", "srt-to-vtt"],
+  "sync-subtitles": ["subtitle-generator", "srt-to-vtt", "subtitle-editor"],
+  "extract-subtitles": ["translate-subtitles", "clean-subtitles", "subtitle-editor"],
+  "subtitle-editor": ["sync-subtitles", "clean-subtitles", "translate-subtitles"],
+  "tiktok-subtitles": ["add-subtitles-to-video", "subtitle-generator", "style-subtitles"],
+  "clean-subtitles": ["subtitle-editor", "translate-subtitles", "srt-to-text"],
+  "srt-to-text": ["youtube-chapters", "translate-subtitles", "clean-subtitles"],
+  "youtube-chapters": ["srt-to-text", "subtitle-generator", "translate-subtitles"],
+  "batch-translate": ["translate-subtitles", "subtitle-generator", "add-subtitles-to-video"],
+  "style-subtitles": ["add-subtitles-to-video", "tiktok-subtitles", "subtitle-editor"],
+  "auto-sync": ["sync-subtitles", "subtitle-editor", "subtitle-generator"],
+  "api": ["subtitle-generator", "translate-subtitles", "add-subtitles-to-video"],
+};
+
+export type ComparisonRow = { feature: string; us: string; them: string };
+export type AlternativeDef = {
+  slug: string;
+  competitor: string;
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  bulletPoints: string[];
+  comparison: ComparisonRow[];
+  faqs: ToolFaq[];
+};
+
+export const ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "veed-alternative",
     competitor: "VEED.io",
@@ -501,6 +533,21 @@ export const ALTERNATIVES = [
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
+    ],
+    comparison: [
+      { feature: "Pro price", us: "€12/month", them: "€18/month" },
+      { feature: "Free plan", us: "Yes — daily quota", them: "Limited, watermarked" },
+      { feature: "File size limit", us: "Up to 500 MB (Pro)", them: "Tiered by plan" },
+      { feature: "AI subtitles", us: "Mistral Voxtral, 30+ langs", them: "Yes" },
+      { feature: "Translation", us: "30+ languages", them: "Add-on" },
+      { feature: "Watermark on text", us: "Never", them: "Free plan only" },
+      { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
+    ],
+    faqs: [
+      { q: "Is CaptionFlow really cheaper than VEED?", a: "Yes — Pro is €12/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
+      { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any CaptionFlow tool — translate, sync, clean or burn them in." },
+      { q: "Does CaptionFlow add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
+      { q: "Is CaptionFlow a full video editor like VEED?", a: "No, and that's the point. CaptionFlow does subtitles only — each tool does one job fast, with no editor learning curve." },
     ],
   },
   {
@@ -515,6 +562,21 @@ export const ALTERNATIVES = [
       "No bloated video editor. Just subtitle tools that ship.",
       "Free tier you can actually use — no 4-minute video cap.",
     ],
+    comparison: [
+      { feature: "Pro price", us: "€12/month", them: "$16/month" },
+      { feature: "Free plan", us: "Yes — daily quota", them: "Watermark + limits" },
+      { feature: "Focus", us: "Subtitles only", them: "General editor" },
+      { feature: "AI subtitles", us: "Mistral Voxtral", them: "Yes" },
+      { feature: "Translation", us: "30+ languages", them: "Yes" },
+      { feature: "Watermark on text", us: "Never", them: "Free plan only" },
+      { feature: "Speed", us: "Instant client-side conversions", them: "Cloud render queue" },
+    ],
+    faqs: [
+      { q: "Why pick CaptionFlow over Kapwing?", a: "If you only need subtitles, Kapwing's full editor is overkill. CaptionFlow is lighter, faster and €4/month cheaper on Pro." },
+      { q: "Can I move my Kapwing captions over?", a: "Yes — export as SRT/VTT and use any CaptionFlow tool on them." },
+      { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on text files." },
+      { q: "Do conversions upload my files?", a: "SRT↔VTT, sync, clean and SRT-to-text run entirely in your browser — nothing is uploaded." },
+    ],
   },
   {
     slug: "happyscribe-alternative",
@@ -527,6 +589,21 @@ export const ALTERNATIVES = [
       "Modern AI engine (Mistral Voxtral), half the price.",
       "Self-serve, no sales call required.",
       "Works for indie creators, agencies and teams alike.",
+    ],
+    comparison: [
+      { feature: "Pro price", us: "€12/month", them: "~€25/month" },
+      { feature: "Audience", us: "Creators + teams", them: "Enterprise-first" },
+      { feature: "Free plan", us: "Yes — daily quota", them: "Trial only" },
+      { feature: "AI subtitles", us: "Mistral Voxtral", them: "Yes" },
+      { feature: "Translation", us: "30+ languages", them: "Yes" },
+      { feature: "Onboarding", us: "Self-serve, instant", them: "Often sales-led" },
+      { feature: "Watermark on text", us: "Never", them: "N/A" },
+    ],
+    faqs: [
+      { q: "Is CaptionFlow accurate enough vs HappyScribe?", a: "We use Mistral's Voxtral model for transcription — modern accuracy across 30+ languages, at half the price." },
+      { q: "Do I need to talk to sales?", a: "No. CaptionFlow is fully self-serve — sign up and start in seconds." },
+      { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
+      { q: "What does it cost?", a: "Free tier, Pro at €12/month, Business at €49/month. No hidden per-minute fees on the subscription plans." },
     ],
   },
   {
@@ -541,5 +618,20 @@ export const ALTERNATIVES = [
       "16 tools vs Clideo's single one for captions.",
       "Cheaper Pro plan, and a free tier without watermarked text outputs.",
     ],
+    comparison: [
+      { feature: "AI subtitle generation", us: "Yes (Voxtral)", them: "No" },
+      { feature: "Number of subtitle tools", us: "16", them: "~1" },
+      { feature: "Translation", us: "30+ languages", them: "No" },
+      { feature: "Pro price", us: "€12/month", them: "~$9/month (all tools)" },
+      { feature: "Free plan", us: "Yes — daily quota", them: "Watermarked" },
+      { feature: "Watermark on text", us: "Never", them: "Free plan" },
+      { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },
+    ],
+    faqs: [
+      { q: "Does Clideo generate subtitles with AI?", a: "No — Clideo can add an existing subtitle file to video, but it doesn't transcribe. CaptionFlow generates subtitles from audio with Voxtral." },
+      { q: "How many subtitle tools does CaptionFlow have?", a: "Sixteen — generate, translate, sync, convert, clean, style, burn-in and more." },
+      { q: "Is there translation?", a: "Yes, into 30+ languages, cue-by-cue, keeping your timing intact." },
+      { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on SRT/VTT/TXT outputs." },
+    ],
   },
-] as const;
+];

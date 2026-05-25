@@ -1,10 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { CheckCircle2, Download } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { AdSlot } from "@/components/ads/AdSlot";
+import { AdSidebar } from "@/components/ads/AdSidebar";
+import { AdPreDownload } from "@/components/ads/AdPreDownload";
 import { useLocale } from "@/hooks/useLocale";
+import { useShowAds } from "@/hooks/useShowAds";
 import { getChrome } from "@/lib/i18n/chrome";
 
 export type ResultScreenProps = {
@@ -27,6 +30,21 @@ export function ResultScreen({
   const locale = useLocale();
   const chrome = getChrome(locale);
   const t = chrome.result;
+  const showAds = useShowAds() && !hideAds;
+  const [interstitial, setInterstitial] = useState(false);
+
+  // Signal the AdBlock notice that a generation just succeeded.
+  useEffect(() => {
+    window.dispatchEvent(new Event("cf:generated"));
+  }, []);
+
+  function handleDownload() {
+    if (showAds) {
+      setInterstitial(true);
+    } else {
+      onDownload();
+    }
+  }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
@@ -37,7 +55,7 @@ export function ResultScreen({
           </div>
           <h3 className="mt-4 text-xl font-semibold text-ink-900">{t.ready}</h3>
           <p className="mt-1 text-sm text-ink-500">{filename}</p>
-          <Button size="lg" className="mt-6" onClick={onDownload}>
+          <Button size="lg" className="mt-6" onClick={handleDownload}>
             <Download className="h-4 w-4" />
             {t.download}
           </Button>
@@ -77,11 +95,16 @@ export function ResultScreen({
         )}
       </div>
 
-      {!hideAds && (
-        <aside className="hidden lg:block">
-          <div className="mb-2 text-[10px] uppercase tracking-wide text-ink-300">{chrome.processing.ad}</div>
-          <AdSlot slot="sidebar" />
-        </aside>
+      {!hideAds && <AdSidebar />}
+
+      {interstitial && (
+        <AdPreDownload
+          onComplete={() => {
+            setInterstitial(false);
+            onDownload();
+          }}
+          onCancel={() => setInterstitial(false)}
+        />
       )}
     </div>
   );

@@ -15,10 +15,12 @@ export function formatBytes(bytes: number, decimals = 1) {
 
 /**
  * Production site URL. Used for canonical URLs, OG images, sitemap and
- * hreflang. Hardcoded on purpose so the only env vars we ship are Supabase.
- * Change this single constant if the domain changes.
+ * hreflang. Reads NEXT_PUBLIC_SITE_URL when set, otherwise falls back to
+ * the live deployment domain.
  */
-export const SITE_URL = "https://captionflow.com";
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ilovesubtile.vercel.app"
+).replace(/\/$/, "");
 
 /** Supabase project URL — exposed publicly via NEXT_PUBLIC_*. */
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";

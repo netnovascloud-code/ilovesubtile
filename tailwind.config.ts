@@ -2,6 +2,18 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
+  // Tool-card tone classes are looked up dynamically from a Record, so ensure
+  // the JIT always emits them even when it can't statically trace the key.
+  safelist: [
+    "bg-brand-50", "text-brand-600",
+    "bg-indigo-50", "text-indigo-600",
+    "bg-green-50", "text-green-600",
+    "bg-amber-50", "text-amber-700",
+    "bg-rose-50", "text-rose-600",
+    "bg-violet-50", "text-violet-600",
+    "bg-teal-50", "text-teal-600",
+    "bg-ink-100", "text-ink-700",
+  ],
   theme: {
     container: {
       center: true,

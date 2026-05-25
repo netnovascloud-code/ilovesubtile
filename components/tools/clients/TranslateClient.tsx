@@ -4,13 +4,12 @@ import { useState } from "react";
 import { UploadZone } from "@/components/tools/UploadZone";
 import { ProcessingScreen } from "@/components/tools/ProcessingScreen";
 import { ResultScreen } from "@/components/tools/ResultScreen";
-import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
 import { LANGUAGES, DEFAULT_TARGETS, type LanguageCode } from "@/lib/languages";
 
-type Phase = "idle" | "configure" | "uploading" | "done" | "error";
+type Phase = "idle" | "uploading" | "done" | "error";
 
 export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: string; label: string }[] }) {
   const [phase, setPhase] = useState<Phase>("idle");
@@ -26,19 +25,13 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
   const chrome = getChrome(locale);
   const ui = getToolUi(locale).translate;
 
-  function onFile(f: File) {
+  async function start(f: File) {
     setFile(f);
-    setError(null);
-    setPhase("configure");
-  }
-
-  async function start() {
-    if (!file) return;
     setPhase("uploading");
     setError(null);
     try {
       const fd = new FormData();
-      fd.append("file", file);
+      fd.append("file", f);
       fd.append("target_lang", targetLang);
       if (sourceLang) fd.append("source_lang", sourceLang);
 
@@ -60,7 +53,7 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
         return;
       }
       setResultUrl(data.url);
-      setResultName(data.filename ?? `${file.name.replace(/\.[^.]+$/, "")}.${targetLang.toLowerCase()}.srt`);
+      setResultName(data.filename ?? `${f.name.replace(/\.[^.]+$/, "")}.${targetLang.toLowerCase()}.srt`);
       setPhase("done");
     } catch (err) {
       setPhase("error");
@@ -71,7 +64,6 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
   function reset() {
     setPhase("idle");
     setFile(null);
-    setSourceLang("");
     setResultUrl(null);
     setResultName(null);
     setError(null);
@@ -99,13 +91,11 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
     return <ProcessingScreen filename={file.name} fileSize={file.size} status={chrome.processing.processing} />;
   }
 
-  if (phase === "configure" && file) {
-    return (
-      <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
-        <div className="text-sm text-ink-500">{file.name}</div>
-        <p className="mt-2 text-sm text-ink-700">{ui.helper}</p>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+  return (
+    <div className="space-y-6">
+      <div className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">
+        <p className="text-sm text-ink-700">{ui.helper}</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
             <label className="text-sm font-medium text-ink-700" htmlFor="source-lang">
               {ui.sourceLang}
@@ -142,24 +132,9 @@ export function TranslateClient({ crossLinks = [] }: { crossLinks?: { href: stri
             </select>
           </div>
         </div>
-
-        {error && (
-          <p className="mt-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
-        )}
-
-        <div className="mt-6 flex gap-2">
-          <Button onClick={start}>{ui.translateNow}</Button>
-          <Button variant="outline" onClick={reset}>
-            {chrome.sync.cancel}
-          </Button>
-        </div>
       </div>
-    );
-  }
 
-  return (
-    <div className="space-y-4">
-      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={onFile} />
+      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={start} cta={ui.translateNow} />
       {phase === "error" && error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}

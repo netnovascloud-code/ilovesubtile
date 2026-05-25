@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
-import { AdSlot } from "@/components/ads/AdSlot";
+import { AdProcessing } from "@/components/ads/AdProcessing";
 import { formatBytes } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
@@ -59,14 +59,7 @@ export function ProcessingScreen({
         </div>
       </div>
 
-      {!hideAds && (
-        <div className="mt-8">
-          <div className="mb-2 text-center text-[10px] uppercase tracking-wide text-ink-300">
-            {chrome.processing.ad}
-          </div>
-          <AdSlot slot="processing" />
-        </div>
-      )}
+      {!hideAds && <AdProcessing />}
     </div>
   );
 }

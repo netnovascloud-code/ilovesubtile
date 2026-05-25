@@ -14,9 +14,11 @@ export type UploadZoneProps = {
   onFile: (file: File) => void;
   cta?: string;
   multiple?: boolean;
+  /** When set, replaces the "formats + max size" hint (e.g. for in-browser tools). */
+  note?: string;
 };
 
-export function UploadZone({ accept, maxMb, onFile, cta, multiple = false }: UploadZoneProps) {
+export function UploadZone({ accept, maxMb, onFile, cta, multiple = false, note }: UploadZoneProps) {
   const [error, setError] = useState<string | null>(null);
   const locale = useLocale();
   const chrome = getChrome(locale);
@@ -58,21 +60,21 @@ export function UploadZone({ accept, maxMb, onFile, cta, multiple = false }: Upl
       <div
         {...getRootProps()}
         className={cn(
-          "flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-ink-200 bg-white px-6 py-16 text-center transition-colors",
-          isDragActive && "border-brand-500 bg-brand-50/50",
+          "flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-ink-200 bg-brand-50/30 px-6 py-10 text-center transition-colors hover:border-brand-300",
+          isDragActive && "border-brand-500 bg-brand-50/60",
         )}
       >
         <input {...getInputProps()} />
-        <div className="grid h-14 w-14 place-items-center rounded-full bg-brand-50 text-brand-600">
-          {isDragActive ? <FileUp className="h-6 w-6" /> : <Upload className="h-6 w-6" />}
+        <div className="grid h-12 w-12 place-items-center rounded-full bg-brand-50 text-brand-600">
+          {isDragActive ? <FileUp className="h-5 w-5" /> : <Upload className="h-5 w-5" />}
         </div>
-        <h3 className="mt-6 text-lg font-semibold text-ink-900">
+        <h3 className="mt-4 text-lg font-semibold text-ink-900">
           {isDragActive ? t.dropHere : t.dropOrClick}
         </h3>
         <p className="mt-2 max-w-md text-sm text-ink-500">
-          {t.formats}: {accept.map((a) => a.toUpperCase()).join(", ")}. {tt(t.maxFree, { mb: maxMb })}
+          {note ?? `${t.formats}: ${accept.map((a) => a.toUpperCase()).join(", ")}. ${tt(t.maxFree, { mb: maxMb })}`}
         </p>
-        <Button type="button" className="mt-6" size="lg">
+        <Button type="button" className="mt-5 h-12 px-8 text-base" size="lg">
           {cta ?? t.selectFile}
         </Button>
       </div>

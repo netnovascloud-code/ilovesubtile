@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, X } from "lucide-react";
 import Link from "next/link";
 import { useAdblockDetect } from "@/hooks/useAdblockDetect";
@@ -8,13 +8,27 @@ import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
 import { localePath } from "@/lib/i18n/locales";
 
+const SESSION_KEY = "adblock_notice_shown";
+
 export function AdblockNotice() {
   const detected = useAdblockDetect();
-  const [dismissed, setDismissed] = useState(false);
+  const [visible, setVisible] = useState(false);
   const locale = useLocale();
   const t = getChrome(locale).adblock;
 
-  if (!detected || dismissed) return null;
+  // Show only after the first successful generation, once per session.
+  useEffect(() => {
+    function onGenerated() {
+      if (sessionStorage.getItem(SESSION_KEY)) return;
+      if (!detected) return;
+      sessionStorage.setItem(SESSION_KEY, "true");
+      setVisible(true);
+    }
+    window.addEventListener("cf:generated", onGenerated);
+    return () => window.removeEventListener("cf:generated", onGenerated);
+  }, [detected]);
+
+  if (!visible) return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-30 max-w-sm rounded-lg border border-ink-100 bg-white p-4 shadow-card">
@@ -34,7 +48,7 @@ export function AdblockNotice() {
         </div>
         <button
           aria-label={t.dismiss}
-          onClick={() => setDismissed(true)}
+          onClick={() => setVisible(false)}
           className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"
         >
           <X className="h-4 w-4" />

@@ -59,6 +59,11 @@ export function Footer() {
                 {t.vsVeed}
               </Link>
             </li>
+            <li>
+              <Link href="/kapwing-alternative" className="hover:text-ink-900">
+                vs Kapwing
+              </Link>
+            </li>
           </ul>
         </div>
 

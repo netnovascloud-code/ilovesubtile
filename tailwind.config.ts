@@ -55,9 +55,26 @@ const config: Config = {
       },
       boxShadow: {
         card: "0 1px 2px 0 rgb(0 0 0 / 0.04), 0 1px 3px 0 rgb(0 0 0 / 0.06)",
+        cardHover: "0 8px 24px -6px rgb(0 0 0 / 0.12), 0 2px 6px -2px rgb(0 0 0 / 0.08)",
       },
       transitionDuration: {
         DEFAULT: "150ms",
+      },
+      keyframes: {
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "pulse-ring": {
+          "0%, 100%": { borderColor: "rgb(45 107 228 / 0.9)" },
+          "50%": { borderColor: "rgb(45 107 228 / 0.35)" },
+        },
+      },
+      animation: {
+        "fade-up": "fade-up 0.5s ease-out both",
+        "fade-up-delay": "fade-up 0.5s ease-out 0.08s both",
+        "fade-up-delay2": "fade-up 0.5s ease-out 0.16s both",
+        "pulse-ring": "pulse-ring 1.2s ease-in-out infinite",
       },
     },
   },

@@ -32,9 +32,14 @@ export function ToolCard({
   return (
     <Link
       href={localePath(locale, tool.slug)}
-      className="group relative flex flex-col rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-ink-200"
+      className="group relative flex flex-col rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-cardHover"
     >
-      <div className={cn("grid h-10 w-10 place-items-center rounded", TONE_BG[tool.tone])}>
+      <div
+        className={cn(
+          "grid h-10 w-10 place-items-center rounded transition-colors duration-200 group-hover:bg-brand-500 group-hover:text-white",
+          TONE_BG[tool.tone],
+        )}
+      >
         <Icon className="h-5 w-5" />
       </div>
       <h3 className="mt-4 font-semibold text-ink-900">{name}</h3>

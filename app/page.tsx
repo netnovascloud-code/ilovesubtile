@@ -15,15 +15,15 @@ export default function Home() {
       <section className="border-b border-ink-100 bg-white">
         <div className="container py-10 md:py-14">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
+            <span className="inline-flex animate-fade-up items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
               <Sparkles className="h-3.5 w-3.5" />
               {ui.hero.badge}
             </span>
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-ink-900 md:text-5xl">
+            <h1 className="mt-6 animate-fade-up text-4xl font-semibold tracking-tight text-ink-900 md:text-5xl">
               {ui.hero.title}
             </h1>
-            <p className="mt-4 text-lg text-ink-500">{ui.hero.subtitle}</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <p className="mt-4 animate-fade-up-delay text-lg text-ink-500">{ui.hero.subtitle}</p>
+            <div className="mt-6 flex animate-fade-up-delay2 flex-wrap justify-center gap-3">
               <Link href="/subtitle-generator">
                 <Button size="lg">
                   {ui.hero.ctaPrimary}

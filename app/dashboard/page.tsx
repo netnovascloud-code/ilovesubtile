@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
+import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
 import { DAILY_LIMITS, type PlanKey } from "@/lib/quotas";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   let email: string | null = null;
   let plan: PlanKey = "free";
+  let credits = 0;
   let dailyUsage = 0;
   let usageResetAt: string | null = null;
   let jobs: { id: string; tool: string; status: string; created_at: string; output_file_url: string | null }[] = [];
@@ -26,12 +28,13 @@ export default async function DashboardPage() {
     if (userData.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at")
+        .select("plan, daily_usage, usage_reset_at, credits")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
       dailyUsage = profile?.daily_usage ?? 0;
       usageResetAt = profile?.usage_reset_at ?? null;
+      credits = profile?.credits ?? 0;
 
       const { data: jobsData } = await supabase
         .from("jobs")
@@ -156,6 +159,10 @@ export default async function DashboardPage() {
           )}
         </CardContent>
       </Card>
+
+      <div className="mt-8">
+        <ApiKeysCard plan={plan} credits={credits} />
+      </div>
     </div>
   );
 }

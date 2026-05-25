@@ -61,7 +61,7 @@ export function UploadZone({ accept, maxMb, onFile, cta, multiple = false, note 
         {...getRootProps()}
         className={cn(
           "flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-ink-200 bg-brand-50/30 px-6 py-10 text-center transition-colors hover:border-brand-300",
-          isDragActive && "border-brand-500 bg-brand-50/60",
+          isDragActive && "animate-pulse-ring border-brand-500 bg-brand-50/60",
         )}
       >
         <input {...getInputProps()} />

@@ -17,6 +17,7 @@ import { AddSubtitlesToVideoClient } from "@/components/tools/clients/AddSubtitl
 import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesClient";
 import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
 import { TextToolClient } from "@/components/tools/clients/TextToolClient";
+import { RegexClient } from "@/components/tools/clients/RegexClient";
 import { TEXT_TOOLS } from "@/lib/text-tools";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
@@ -160,6 +161,9 @@ export default function LocalisedToolPage({
       break;
     case "tiktok-subtitles":
       body = <TikTokSubtitlesClient />;
+      break;
+    case "regex-tester":
+      body = <RegexClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

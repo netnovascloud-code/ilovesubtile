@@ -91,8 +91,8 @@ export function HomeExplorer({
         )}
       >
         <div className="flex items-start justify-between">
-          <div className={cn("grid h-11 w-11 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105", th.iconBg, th.iconText)}>
-            <ToolGlyph iconName={t.iconName} badge={t.badge} iconClassName="h-[22px] w-[22px]" size="sm" />
+          <div className="transition-transform duration-200 group-hover:scale-110">
+            <ToolGlyph category={t.category} iconName={t.iconName} badge={t.badge} px={42} />
           </div>
           {t.free ? (
             <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-600">{strings.free}</span>

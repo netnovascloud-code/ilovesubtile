@@ -38,7 +38,6 @@ export function ToolPageShell({
   override?: { name?: string; h1?: string; metaDescription?: string };
   children: React.ReactNode;
 }) {
-  const th = categoryTheme(tool.category);
   const ui = getStrings(locale);
   const chrome = getChrome(locale);
   const name = override?.name ?? tool.name;
@@ -93,8 +92,8 @@ export function ToolPageShell({
           </nav>
 
           <div className="flex flex-wrap items-start gap-4">
-            <div className={cn("grid h-12 w-12 place-items-center rounded-xl", th.iconBg, th.iconText)}>
-              <ToolGlyph iconName={(tool.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(tool.slug)} iconClassName="h-6 w-6" size="lg" />
+            <div className="shrink-0">
+              <ToolGlyph category={tool.category} iconName={(tool.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(tool.slug)} px={52} />
             </div>
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2">
@@ -128,8 +127,8 @@ export function ToolPageShell({
                     href={localePath(locale, rt.slug)}
                     className={cn("group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5", rth.hoverBorder)}
                   >
-                    <div className={cn("grid h-9 w-9 shrink-0 place-items-center rounded-lg", rth.iconBg, rth.iconText)}>
-                      <ToolGlyph iconName={(rt.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(rt.slug)} iconClassName="h-4 w-4" size="sm" />
+                    <div className="shrink-0">
+                      <ToolGlyph category={rt.category} iconName={(rt.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(rt.slug)} px={34} />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1 font-medium text-ink-900">

@@ -52,3 +52,19 @@ export const CATEGORY_THEME: Record<ToolCategory, CategoryTheme> = {
 export function categoryTheme(cat: ToolCategory): CategoryTheme {
   return CATEGORY_THEME[cat] ?? CATEGORY_THEME.developer;
 }
+
+// Saturated accent hex per category — used by the colourful SVG tool icons.
+export const CATEGORY_ACCENT: Record<ToolCategory, string> = {
+  documents: "#2563EB",
+  audio: "#F97316",
+  video: "#7C3AED",
+  images: "#10B981",
+  subtitles: "#0EA5E9",
+  developer: "#06B6D4",
+  "text-ai": "#6366F1",
+};
+
+export function categoryAccent(cat: ToolCategory): string {
+  return CATEGORY_ACCENT[cat] ?? CATEGORY_ACCENT.developer;
+}
+

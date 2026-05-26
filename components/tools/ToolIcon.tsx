@@ -95,7 +95,19 @@ const ICONS: Record<string, LucideIcon> = {
   Tags,
 };
 
-export function ToolIcon({ name, className }: { name: string; className?: string }) {
+export function ToolIcon({
+  name,
+  className,
+  size,
+  color,
+  strokeWidth = 1.75,
+}: {
+  name: string;
+  className?: string;
+  size?: number;
+  color?: string;
+  strokeWidth?: number;
+}) {
   const Icon = ICONS[name] ?? Wrench;
-  return <Icon className={className} strokeWidth={1.75} />;
+  return <Icon className={className} size={size} color={color} strokeWidth={strokeWidth} />;
 }

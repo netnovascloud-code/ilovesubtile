@@ -12,6 +12,18 @@ const FN_MAP: Record<string, string> = {
   "add-subtitles-to-video": "process-ffmpeg",
   "extract-subtitles": "process-ffmpeg",
   "style-subtitles": "process-ffmpeg",
+  // Text & AI tools — all handled by the ai-process function via `task`.
+  "translate-text": "ai-process",
+  "rephrase-text": "ai-process",
+  "summarize-text": "ai-process",
+  "fix-grammar": "ai-process",
+  "simplify-text": "ai-process",
+  "professional-email": "ai-process",
+  "product-description": "ai-process",
+  "hashtag-generator": "ai-process",
+  "sentiment-analysis": "ai-process",
+  "keyword-extractor": "ai-process",
+  "detect-language": "ai-process",
 };
 
 export function toolFunction(slug: string): string | null {

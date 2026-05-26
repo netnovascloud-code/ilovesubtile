@@ -40,6 +40,11 @@ import {
   Scaling,
   Shrink,
   Contrast,
+  SpellCheck,
+  Mail,
+  ShoppingBag,
+  Smile,
+  Tags,
   type LucideIcon,
 } from "lucide-react";
 
@@ -83,6 +88,11 @@ const ICONS: Record<string, LucideIcon> = {
   Scaling,
   Shrink,
   Contrast,
+  SpellCheck,
+  Mail,
+  ShoppingBag,
+  Smile,
+  Tags,
 };
 
 export function ToolIcon({ name, className }: { name: string; className?: string }) {

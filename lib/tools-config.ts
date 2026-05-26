@@ -1047,10 +1047,28 @@ export type ToolCardSpec = {
   category: ToolCategory;
   tone: ToolDefinition["tone"];
   iconName: string;
+  badge?: string;
   keywords: string;
   free: boolean;
   ai: boolean;
 };
+
+/**
+ * iLovePDF-style format badge for conversion tools — the output format shown as
+ * bold text in the icon tile, so each converter is instantly distinguishable.
+ * Action tools (compress, rotate, AI…) return undefined and keep their glyph.
+ */
+const FORMAT_BADGE: Record<string, string> = {
+  "jpg-to-png": "PNG", "png-to-jpg": "JPG", "jpg-to-webp": "WEBP", "png-to-webp": "WEBP", "svg-to-png": "PNG",
+  "json-to-csv": "CSV", "csv-to-json": "JSON", "json-to-xml": "XML", "xml-to-json": "JSON",
+  "json-to-yaml": "YAML", "yaml-to-json": "JSON", "markdown-to-html": "HTML", "html-to-markdown": "MD",
+  "format-json": "{ }", "minify-css": "CSS", "format-sql": "SQL", "base64": "64", "url-encode": "%",
+  "srt-to-vtt": "VTT", "vtt-to-srt": "SRT", "srt-to-text": "TXT",
+};
+
+export function formatBadge(slug: string): string | undefined {
+  return FORMAT_BADGE[slug];
+}
 
 /** Card-sized, serialisable projection for the interactive homepage grid. */
 export function toCardSpec(t: ToolDefinition): ToolCardSpec {
@@ -1061,6 +1079,7 @@ export function toCardSpec(t: ToolDefinition): ToolCardSpec {
     category: t.category,
     tone: t.tone,
     iconName: (t.icon as { displayName?: string }).displayName ?? "Wrench",
+    badge: FORMAT_BADGE[t.slug],
     keywords: t.primaryKeyword,
     // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
     free: t.kind === "client",

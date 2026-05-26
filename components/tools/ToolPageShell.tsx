@@ -1,5 +1,8 @@
 import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
-import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS } from "@/lib/tools-config";
+import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS, formatBadge } from "@/lib/tools-config";
+import { categoryTheme } from "@/lib/category-theme";
+import { ToolGlyph } from "@/components/tools/ToolGlyph";
+import { cn } from "@/lib/utils";
 import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -35,7 +38,7 @@ export function ToolPageShell({
   override?: { name?: string; h1?: string; metaDescription?: string };
   children: React.ReactNode;
 }) {
-  const Icon = tool.icon;
+  const th = categoryTheme(tool.category);
   const ui = getStrings(locale);
   const chrome = getChrome(locale);
   const name = override?.name ?? tool.name;
@@ -90,8 +93,8 @@ export function ToolPageShell({
           </nav>
 
           <div className="flex flex-wrap items-start gap-4">
-            <div className="grid h-12 w-12 place-items-center rounded bg-brand-50 text-brand-600">
-              <Icon className="h-6 w-6" />
+            <div className={cn("grid h-12 w-12 place-items-center rounded-xl", th.iconBg, th.iconText)}>
+              <ToolGlyph iconName={(tool.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(tool.slug)} iconClassName="h-6 w-6" size="lg" />
             </div>
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2">
@@ -117,16 +120,16 @@ export function ToolPageShell({
             <h2 className="text-xl font-semibold text-ink-900">{chrome.result.whatNext}</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {related.map((rt) => {
-                const Icon = rt.icon;
+                const rth = categoryTheme(rt.category);
                 const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
                 return (
                   <Link
                     key={rt.slug}
                     href={localePath(locale, rt.slug)}
-                    className="group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-ink-200"
+                    className={cn("group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5", rth.hoverBorder)}
                   >
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded bg-brand-50 text-brand-600">
-                      <Icon className="h-4 w-4" />
+                    <div className={cn("grid h-9 w-9 shrink-0 place-items-center rounded-lg", rth.iconBg, rth.iconText)}>
+                      <ToolGlyph iconName={(rt.icon as { displayName?: string }).displayName ?? "Wrench"} badge={formatBadge(rt.slug)} iconClassName="h-4 w-4" size="sm" />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1 font-medium text-ink-900">

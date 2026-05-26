@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ToolIcon } from "@/components/tools/ToolIcon";
+import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { categoryTheme } from "@/lib/category-theme";
 import type { ToolCardSpec, ToolCategory } from "@/lib/tools-config";
 
@@ -91,7 +92,7 @@ export function HomeExplorer({
       >
         <div className="flex items-start justify-between">
           <div className={cn("grid h-11 w-11 place-items-center rounded-xl transition-transform duration-200 group-hover:scale-105", th.iconBg, th.iconText)}>
-            <ToolIcon name={t.iconName} className="h-[22px] w-[22px]" />
+            <ToolGlyph iconName={t.iconName} badge={t.badge} iconClassName="h-[22px] w-[22px]" size="sm" />
           </div>
           {t.free ? (
             <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-600">{strings.free}</span>

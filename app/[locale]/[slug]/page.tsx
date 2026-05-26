@@ -18,7 +18,9 @@ import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesC
 import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
 import { TextToolClient } from "@/components/tools/clients/TextToolClient";
 import { RegexClient } from "@/components/tools/clients/RegexClient";
+import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { TEXT_TOOLS } from "@/lib/text-tools";
+import { IMAGE_TOOLS } from "@/lib/image-tools";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
@@ -111,8 +113,8 @@ export default function LocalisedToolPage({
   const spec = toClientSpec(tool);
 
   let body: React.ReactNode;
-  if (TEXT_TOOLS[tool.slug]) {
-    body = <TextToolClient slug={tool.slug} />;
+  if (TEXT_TOOLS[tool.slug] || IMAGE_TOOLS[tool.slug]) {
+    body = TEXT_TOOLS[tool.slug] ? <TextToolClient slug={tool.slug} /> : <ImageToolClient slug={tool.slug} />;
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         {body}

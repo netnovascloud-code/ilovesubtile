@@ -34,6 +34,12 @@ import {
   Minimize2,
   WandSparkles,
   Wrench,
+  FileImage,
+  Crop,
+  RotateCw,
+  Scaling,
+  Shrink,
+  Contrast,
   type LucideIcon,
 } from "lucide-react";
 
@@ -71,6 +77,12 @@ const ICONS: Record<string, LucideIcon> = {
   Minimize2,
   WandSparkles,
   Wrench,
+  FileImage,
+  Crop,
+  RotateCw,
+  Scaling,
+  Shrink,
+  Contrast,
 };
 
 export function ToolIcon({ name, className }: { name: string; className?: string }) {

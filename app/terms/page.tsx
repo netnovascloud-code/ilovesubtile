@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The rules for using CaptionFlow.",
+  description: "The rules for using Wyrlo.",
   alternates: { canonical: "/terms" },
 };
 
@@ -15,7 +15,7 @@ export default function Page() {
       <section className="prose prose-sm mt-8 max-w-none text-ink-700">
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Using the service</h2>
         <p>
-          CaptionFlow is provided as-is. Free users have daily quotas; Pro and Business users get
+          Wyrlo is provided as-is. Free users have daily quotas; Pro and Business users get
           higher limits per their subscription tier.
         </p>
 
@@ -27,7 +27,7 @@ export default function Page() {
 
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Prohibited use</h2>
         <p>
-          Don&apos;t use CaptionFlow to process content you don&apos;t have rights to, to generate
+          Don&apos;t use Wyrlo to process content you don&apos;t have rights to, to generate
           illegal content, or to attempt to overwhelm our service.
         </p>
 

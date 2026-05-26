@@ -7,7 +7,7 @@ import { isLocale, type Locale, DEFAULT_LOCALE, isRtl } from "@/lib/i18n/locales
 
 export const metadata: Metadata = {
   title: "Log in",
-  description: "Log in to CaptionFlow to manage your jobs and subscription.",
+  description: "Log in to Wyrlo to manage your jobs and subscription.",
   robots: { index: false, follow: false },
 };
 

@@ -1,4 +1,4 @@
-// CaptionFlow — open the Stripe Customer Portal for the authenticated user.
+// Wyrlo — open the Stripe Customer Portal for the authenticated user.
 //
 // POST /functions/v1/stripe-portal
 // Returns: { url: "https://billing.stripe.com/..." }
@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
   const { data: profile } = await supabase.from("profiles").select("stripe_customer_id").eq("id", caller.id).maybeSingle();
   if (!profile?.stripe_customer_id) return json({ error: "no_stripe_customer" }, { status: 400 });
 
-  const origin = req.headers.get("origin") ?? "https://captionflow.com";
+  const origin = req.headers.get("origin") ?? "https://wyrlo.io";
   const url = new URL(req.url);
   const returnPath = url.searchParams.get("return_path") ?? "/dashboard";
 

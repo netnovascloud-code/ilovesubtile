@@ -1,4 +1,4 @@
-// CaptionFlow — forwarder to a self-hosted FFmpeg worker.
+// Wyrlo — forwarder to a self-hosted FFmpeg worker.
 //
 // This function intentionally has NO third-party API integration. It just
 // forwards a multipart upload to a VPS (or any HTTP service) that you

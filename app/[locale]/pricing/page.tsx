@@ -20,7 +20,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/pricing`;
   alts["x-default"] = `${SITE_URL}/pricing`;
   return {
-    title: { absolute: `${ui.pricing.title} — CaptionFlow` },
+    title: { absolute: `${ui.pricing.title} — Wyrlo` },
     description: ui.pricing.lead,
     alternates: { canonical: canonicalPath, languages: alts },
   };

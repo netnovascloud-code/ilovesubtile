@@ -8,10 +8,10 @@ import { json } from "../_shared/cors.ts";
 
 const TEMPLATES = {
   welcome: (data: { name?: string }) => ({
-    subject: "Welcome to CaptionFlow 👋",
-    html: `<p>Hi ${data.name ?? "there"}, welcome to CaptionFlow.</p>
+    subject: "Welcome to Wyrlo 👋",
+    html: `<p>Hi ${data.name ?? "there"}, welcome to Wyrlo.</p>
 <p>You're on the Free plan: 5 runs per day, files up to 50&nbsp;MB. Try the
-<a href="https://captionflow.com/subtitle-generator">subtitle generator</a> to get started.</p>`,
+<a href="https://wyrlo.io/subtitle-generator">subtitle generator</a> to get started.</p>`,
   }),
   "job-done": (data: { url?: string; tool?: string }) => ({
     subject: "Your file is ready",
@@ -24,7 +24,7 @@ const TEMPLATES = {
   }),
   "renewal-reminder": (data: { dueDate?: string }) => ({
     subject: "Your subscription renews soon",
-    html: `<p>Your CaptionFlow subscription renews on ${data.dueDate}. Manage it from your dashboard.</p>`,
+    html: `<p>Your Wyrlo subscription renews on ${data.dueDate}. Manage it from your dashboard.</p>`,
   }),
 } as const;
 
@@ -50,7 +50,7 @@ Deno.serve(async (req) => {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "CaptionFlow <hello@captionflow.com>",
+      from: "Wyrlo <hello@wyrlo.io>",
       to: body.to,
       subject: tpl.subject,
       html: tpl.html,

@@ -1,4 +1,4 @@
-// CaptionFlow — manage REST API keys (Business plan).
+// Wyrlo — manage REST API keys (Business plan).
 // POST /functions/v1/api-keys  body { action: 'list' | 'create' | 'revoke', name?, id? }
 // Auth: the user's Supabase JWT. Only Business plan may create keys.
 //

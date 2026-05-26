@@ -19,7 +19,7 @@ export function formatBytes(bytes: number, decimals = 1) {
  * the live deployment domain.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ilovesubtile.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://wyrlo.io"
 ).replace(/\/$/, "");
 
 /** Supabase project URL — exposed publicly via NEXT_PUBLIC_*. */

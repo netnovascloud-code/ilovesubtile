@@ -39,7 +39,7 @@ export function Header() {
     >
       <div className="container flex h-16 items-center justify-between">
         <Link href={localePath(locale)} className="flex items-center font-semibold text-lg tracking-tight text-ink-900">
-          CaptionFlow
+          Wyrlo
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

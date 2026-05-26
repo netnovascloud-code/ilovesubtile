@@ -16,6 +16,8 @@ import { SubtitleGeneratorClient } from "@/components/tools/clients/SubtitleGene
 import { AddSubtitlesToVideoClient } from "@/components/tools/clients/AddSubtitlesToVideoClient";
 import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesClient";
 import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
+import { TextToolClient } from "@/components/tools/clients/TextToolClient";
+import { TEXT_TOOLS } from "@/lib/text-tools";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
 import { getToolI18n } from "@/lib/i18n/tool-translations";
@@ -108,6 +110,14 @@ export default function LocalisedToolPage({
   const spec = toClientSpec(tool);
 
   let body: React.ReactNode;
+  if (TEXT_TOOLS[tool.slug]) {
+    body = <TextToolClient slug={tool.slug} />;
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        {body}
+      </ToolPageShell>
+    );
+  }
   switch (tool.slug) {
     case "srt-to-vtt":
       body = <SrtVttConvertClient mode="srt-to-vtt" />;

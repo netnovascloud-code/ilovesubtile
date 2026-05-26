@@ -16,9 +16,24 @@ import {
   Type,
   RefreshCw,
   Terminal,
+  Braces,
+  FileJson,
+  FileCode,
+  FileSpreadsheet,
+  Binary,
+  Link2,
+  KeyRound,
+  Hash,
 } from "lucide-react";
 
-export type ToolCategory = "generate" | "convert" | "edit" | "translate" | "ai" | "developer";
+export type ToolCategory =
+  | "documents"
+  | "audio"
+  | "video"
+  | "images"
+  | "subtitles"
+  | "developer"
+  | "text-ai";
 
 export type ToolFaq = { q: string; a: string };
 
@@ -57,10 +72,34 @@ export type ToolDefinition = {
   proOnly?: boolean;
 };
 
+export type CategoryDef = {
+  id: ToolCategory;
+  /** English label (localised separately for the UI) */
+  label: string;
+  /** lucide-react icon name (resolved client-side via the icon map) */
+  iconName: string;
+  tone: ToolDefinition["tone"];
+  blurb: string;
+};
+
+export const CATEGORIES: CategoryDef[] = [
+  { id: "documents", label: "Documents", iconName: "FileText", tone: "blue", blurb: "PDF, Word, Excel, PowerPoint, EPUB & more." },
+  { id: "audio", label: "Audio", iconName: "Music", tone: "violet", blurb: "Convert, compress, cut and transcribe audio." },
+  { id: "video", label: "Video", iconName: "Video", tone: "rose", blurb: "Convert, compress, trim and edit video." },
+  { id: "images", label: "Images", iconName: "Image", tone: "amber", blurb: "Convert, resize, compress and edit images." },
+  { id: "subtitles", label: "Subtitles", iconName: "Captions", tone: "indigo", blurb: "Generate, translate, sync and convert subtitles." },
+  { id: "developer", label: "Code & Dev", iconName: "Code", tone: "teal", blurb: "Format, convert and encode for developers." },
+  { id: "text-ai", label: "Text & AI", iconName: "Sparkles", tone: "green", blurb: "Translate, rephrase, summarise and fix text." },
+];
+
+export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntries(
+  CATEGORIES.map((c) => [c.id, c]),
+) as Record<ToolCategory, CategoryDef>;
+
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,
-    a: `Yes. CaptionFlow is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
+    a: `Yes. Wyrlo is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
   },
   {
     q: `Do you store my files?`,
@@ -86,13 +125,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "subtitle-generator",
     phase: 1,
     kind: "ai",
-    category: "generate",
+    category: "subtitles",
     icon: Captions,
     tone: "blue",
     name: "Subtitle Generator",
     short: "Generate subtitles from any video or audio with AI.",
     h1: "Generate Subtitles from Video & Audio — Free AI Subtitle Generator",
-    metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | CaptionFlow",
+    metaTitle: "Free AI Subtitle Generator — Auto Captions from Video | Wyrlo",
     metaDescription:
       "Generate accurate subtitles from any video or audio file with AI. Free, fast, supports 30+ languages. Download as SRT or VTT.",
     primaryKeyword: "generate subtitles online",
@@ -110,13 +149,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "add-subtitles-to-video",
     phase: 1,
     kind: "ffmpeg",
-    category: "edit",
+    category: "subtitles",
     icon: Clapperboard,
     tone: "indigo",
     name: "Add Subtitles to Video",
     short: "Burn subtitles permanently into your video file.",
     h1: "Add Subtitles to Video Online — Burn SRT into MP4 for Free",
-    metaTitle: "Add Subtitles to Video Online Free — Burn SRT into MP4 | CaptionFlow",
+    metaTitle: "Add Subtitles to Video Online Free — Burn SRT into MP4 | Wyrlo",
     metaDescription:
       "Burn subtitles permanently into any video. Upload your MP4 and SRT, choose a style, and download a captioned MP4. No watermark with Pro.",
     primaryKeyword: "add subtitles to video online free",
@@ -134,13 +173,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "srt-to-vtt",
     phase: 1,
     kind: "client",
-    category: "convert",
+    category: "subtitles",
     icon: ArrowRightLeft,
     tone: "teal",
     name: "SRT to VTT",
     short: "Convert SubRip (.srt) to WebVTT (.vtt) instantly.",
     h1: "SRT to VTT Converter — Convert SubRip Subtitles to WebVTT",
-    metaTitle: "SRT to VTT Converter Online — Free & Instant | CaptionFlow",
+    metaTitle: "SRT to VTT Converter Online — Free & Instant | Wyrlo",
     metaDescription:
       "Convert SRT subtitle files to WebVTT instantly in your browser. Free, unlimited, no upload to a server. Works offline once loaded.",
     primaryKeyword: "srt to vtt converter",
@@ -158,13 +197,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "vtt-to-srt",
     phase: 1,
     kind: "client",
-    category: "convert",
+    category: "subtitles",
     icon: ArrowLeftRight,
     tone: "teal",
     name: "VTT to SRT",
     short: "Convert WebVTT (.vtt) back to SubRip (.srt).",
     h1: "VTT to SRT Converter — Convert WebVTT to SubRip Online",
-    metaTitle: "VTT to SRT Converter Online — Free & Instant | CaptionFlow",
+    metaTitle: "VTT to SRT Converter Online — Free & Instant | Wyrlo",
     metaDescription:
       "Convert WebVTT subtitle files to SRT instantly in your browser. Free, unlimited, runs entirely on your device.",
     primaryKeyword: "vtt to srt converter",
@@ -182,13 +221,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "translate-subtitles",
     phase: 1,
     kind: "edge",
-    category: "translate",
+    category: "subtitles",
     icon: Languages,
     tone: "violet",
     name: "Translate Subtitles",
     short: "Translate SRT or VTT into 30+ languages.",
     h1: "Translate Subtitles Online — SRT & VTT Translator (30+ Languages)",
-    metaTitle: "Translate Subtitles Online Free — SRT Translator | CaptionFlow",
+    metaTitle: "Translate Subtitles Online Free — SRT Translator | Wyrlo",
     metaDescription:
       "Translate SRT or VTT subtitles into 30+ languages with AI. Timestamps stay perfectly intact, cue boundaries preserved.",
     primaryKeyword: "translate srt file online",
@@ -206,13 +245,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "sync-subtitles",
     phase: 1,
     kind: "client",
-    category: "edit",
+    category: "subtitles",
     icon: Clock,
     tone: "amber",
     name: "Sync Subtitles",
     short: "Shift every cue forward or backward in milliseconds.",
     h1: "Sync Subtitles Online — Fix Subtitle Timing for SRT & VTT",
-    metaTitle: "Sync Subtitles Online — Fix Subtitle Timing Free | CaptionFlow",
+    metaTitle: "Sync Subtitles Online — Fix Subtitle Timing Free | Wyrlo",
     metaDescription:
       "Offset every subtitle line by an exact number of seconds or milliseconds. Fix out-of-sync SRT and VTT files in seconds.",
     primaryKeyword: "sync subtitles online",
@@ -232,13 +271,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "extract-subtitles",
     phase: 2,
     kind: "ffmpeg",
-    category: "convert",
+    category: "subtitles",
     icon: FileDown,
     tone: "rose",
     name: "Extract Subtitles",
     short: "Pull embedded subtitle tracks out of MKV or MP4.",
     h1: "Extract Subtitles from Video — MKV & MP4 Subtitle Extractor",
-    metaTitle: "Extract Subtitles from Video Online — MKV & MP4 | CaptionFlow",
+    metaTitle: "Extract Subtitles from Video Online — MKV & MP4 | Wyrlo",
     metaDescription:
       "Pull every embedded subtitle track from MKV, MP4 and MOV files. Download each track as a separate SRT.",
     primaryKeyword: "extract subtitles from video online",
@@ -256,13 +295,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "subtitle-editor",
     phase: 2,
     kind: "client",
-    category: "edit",
+    category: "subtitles",
     icon: SquarePen,
     tone: "blue",
     name: "Subtitle Editor",
     short: "Edit text and timestamps with a live video preview.",
     h1: "Online Subtitle Editor — Edit SRT & VTT in Your Browser",
-    metaTitle: "Online Subtitle Editor — Edit SRT & VTT Free | CaptionFlow",
+    metaTitle: "Online Subtitle Editor — Edit SRT & VTT Free | Wyrlo",
     metaDescription:
       "Edit subtitle text and timestamps directly in your browser with a live video preview. Free, no sign-up required.",
     primaryKeyword: "online subtitle editor",
@@ -280,13 +319,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "tiktok-subtitles",
     phase: 2,
     kind: "ai",
-    category: "generate",
+    category: "subtitles",
     icon: Smartphone,
     tone: "rose",
     name: "TikTok-Style Subtitles",
     short: "Bold word-by-word captions for short-form video.",
     h1: "TikTok-Style Subtitles — Auto-Caption Reels, Shorts & TikTok",
-    metaTitle: "TikTok Subtitle Generator — Reels & Shorts Captions | CaptionFlow",
+    metaTitle: "TikTok Subtitle Generator — Reels & Shorts Captions | Wyrlo",
     metaDescription:
       "Generate viral word-by-word captions for TikTok, Reels and YouTube Shorts. Big text, perfect timing, ready to burn in.",
     primaryKeyword: "tiktok subtitle generator",
@@ -304,13 +343,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "clean-subtitles",
     phase: 2,
     kind: "client",
-    category: "edit",
+    category: "subtitles",
     icon: Eraser,
     tone: "slate",
     name: "Clean Subtitles",
     short: "Remove duplicates, fix punctuation, strip SDH tags.",
     h1: "Clean Subtitles Online — Remove Duplicates, SDH & Fix Punctuation",
-    metaTitle: "Clean Subtitle File Online — Fix SRT Free | CaptionFlow",
+    metaTitle: "Clean Subtitle File Online — Fix SRT Free | Wyrlo",
     metaDescription:
       "Strip SDH descriptions, kill duplicate lines, fix capitalisation and punctuation in any SRT or VTT file.",
     primaryKeyword: "clean srt subtitles",
@@ -328,13 +367,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "srt-to-text",
     phase: 2,
     kind: "client",
-    category: "convert",
+    category: "subtitles",
     icon: FileText,
     tone: "slate",
     name: "SRT to Text",
     short: "Strip every timestamp and get the plain transcript.",
     h1: "SRT to Text — Convert SubRip Subtitles to Plain Transcript",
-    metaTitle: "SRT to Text Converter Online — Free Transcript | CaptionFlow",
+    metaTitle: "SRT to Text Converter Online — Free Transcript | Wyrlo",
     metaDescription:
       "Convert any SRT file into a clean plain-text transcript. Timestamps and indices removed, paragraphs preserved.",
     primaryKeyword: "srt to text converter",
@@ -352,13 +391,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "youtube-chapters",
     phase: 2,
     kind: "ai",
-    category: "ai",
+    category: "subtitles",
     icon: ListOrdered,
     tone: "amber",
     name: "YouTube Chapter Generator",
     short: "Generate YouTube chapters from a transcript.",
     h1: "YouTube Chapter Generator — From SRT or Transcript",
-    metaTitle: "YouTube Chapter Generator from SRT — Free AI | CaptionFlow",
+    metaTitle: "YouTube Chapter Generator from SRT — Free AI | Wyrlo",
     metaDescription:
       "Paste your transcript or upload an SRT and get YouTube chapters with timestamps you can copy-paste straight into your video description.",
     primaryKeyword: "youtube chapter generator from srt",
@@ -378,13 +417,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "batch-translate",
     phase: 3,
     kind: "edge",
-    category: "translate",
+    category: "subtitles",
     icon: Globe,
     tone: "violet",
     name: "Batch Translate",
     short: "Translate one SRT into 10+ languages in a single pass.",
     h1: "Batch Subtitle Translation — One SRT, Many Languages",
-    metaTitle: "Batch Subtitle Translation — 10+ Languages at Once | CaptionFlow",
+    metaTitle: "Batch Subtitle Translation — 10+ Languages at Once | Wyrlo",
     metaDescription:
       "Pro tool: translate a single SRT into up to 30 languages in one job. Perfect for global launches and creator localisation.",
     primaryKeyword: "batch translate subtitles",
@@ -403,13 +442,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "style-subtitles",
     phase: 3,
     kind: "ffmpeg",
-    category: "edit",
+    category: "subtitles",
     icon: Type,
     tone: "rose",
     name: "Style Subtitles (ASS)",
     short: "Convert to ASS and style fonts, colors and positions.",
     h1: "Style Subtitles — Convert SRT to ASS with Custom Styles",
-    metaTitle: "Subtitle Styler — Convert SRT to Styled ASS | CaptionFlow",
+    metaTitle: "Subtitle Styler — Convert SRT to Styled ASS | Wyrlo",
     metaDescription:
       "Turn any SRT into a styled ASS file. Pick font, size, color, outline and position — perfect for cinematic captions.",
     primaryKeyword: "style subtitles ass",
@@ -427,13 +466,13 @@ export const TOOLS: ToolDefinition[] = [
     slug: "auto-sync",
     phase: 3,
     kind: "ai",
-    category: "ai",
+    category: "subtitles",
     icon: RefreshCw,
     tone: "teal",
     name: "Auto-Sync (AI)",
     short: "Re-align mistimed subtitles automatically from audio.",
     h1: "Auto-Sync Subtitles — AI Audio-to-Subtitle Alignment",
-    metaTitle: "Auto-Sync Subtitles to Video — AI Aligner | CaptionFlow",
+    metaTitle: "Auto-Sync Subtitles to Video — AI Aligner | Wyrlo",
     metaDescription:
       "Drop in a video and a mistimed SRT — we re-align every cue to the actual audio using AI forced alignment.",
     primaryKeyword: "auto sync subtitles ai",
@@ -451,15 +490,15 @@ export const TOOLS: ToolDefinition[] = [
     slug: "api",
     phase: 3,
     kind: "edge",
-    category: "developer",
+    category: "subtitles",
     icon: Terminal,
     tone: "slate",
     name: "Public API",
     short: "REST endpoints to automate everything above.",
-    h1: "CaptionFlow API — REST Endpoints for Subtitles",
-    metaTitle: "Subtitle REST API — Transcribe, Translate, Burn-in | CaptionFlow",
+    h1: "Wyrlo API — REST Endpoints for Subtitles",
+    metaTitle: "Subtitle REST API — Transcribe, Translate, Burn-in | Wyrlo",
     metaDescription:
-      "Programmatic access to the same engine that powers CaptionFlow: generate, translate, sync and burn in. Pay-as-you-go.",
+      "Programmatic access to the same engine that powers Wyrlo: generate, translate, sync and burn in. Pay-as-you-go.",
     primaryKeyword: "subtitle api",
     accept: [],
     freeMaxMb: 0,
@@ -472,6 +511,202 @@ export const TOOLS: ToolDefinition[] = [
     faqs: baseFaqs("the API", "the same formats as the web tools"),
   },
 ];
+
+// ── Wyrlo — Developer & Text (pure client-side, free & unlimited) ──────────
+const codeFaqs = (name: string): ToolFaq[] => [
+  { q: `Is ${name} free?`, a: `Yes — completely free and unlimited, with no account required. It runs entirely in your browser, so there are no usage limits.` },
+  { q: `Are my files or data uploaded?`, a: `No. ${name} runs 100% locally in your browser. Your data never leaves your device and is never sent to a server.` },
+  { q: `Does it work offline?`, a: `Once the page has loaded, the conversion runs on-device, so it keeps working even with a flaky connection.` },
+  { q: `Is there a file size limit?`, a: `There's no hard limit — you're only bound by your device's memory. Very large inputs may be slower to process.` },
+  { q: `Do I need to install anything?`, a: `No. ${name} is a web tool — just open the page and start. Nothing to download or install.` },
+];
+
+TOOLS.push(
+  {
+    slug: "format-json",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: Braces,
+    tone: "teal",
+    name: "JSON Formatter",
+    short: "Beautify, validate or minify JSON instantly.",
+    h1: "JSON Formatter & Validator — Beautify or Minify JSON Online",
+    metaTitle: "JSON Formatter Online — Beautify & Validate JSON Free | Wyrlo",
+    metaDescription: "Format, validate and minify JSON instantly in your browser. Free, unlimited, private — your data never leaves your device.",
+    primaryKeyword: "json formatter",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "JSON",
+    steps: [
+      { title: "Paste your JSON", body: "Drop in any JSON — valid or not." },
+      { title: "Beautify or minify", body: "We pretty-print with 2-space indents, or strip all whitespace." },
+      { title: "Copy or download", body: "Grab the clean result as a .json file or to your clipboard." },
+    ],
+    faqs: codeFaqs("the JSON formatter"),
+  },
+  {
+    slug: "json-to-csv",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: FileSpreadsheet,
+    tone: "teal",
+    name: "JSON to CSV",
+    short: "Convert a JSON array of objects into CSV.",
+    h1: "JSON to CSV Converter — Turn JSON Arrays into Spreadsheets",
+    metaTitle: "JSON to CSV Converter Online — Free & Instant | Wyrlo",
+    metaDescription: "Convert a JSON array of objects to CSV instantly in your browser. Columns are detected automatically. Free, unlimited, private.",
+    primaryKeyword: "json to csv",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "CSV",
+    steps: [
+      { title: "Paste a JSON array", body: "An array of objects, like API output." },
+      { title: "Auto-detect columns", body: "We collect every key across rows into CSV headers." },
+      { title: "Download the CSV", body: "Open it straight in Excel, Sheets or Numbers." },
+    ],
+    faqs: codeFaqs("the JSON to CSV converter"),
+  },
+  {
+    slug: "csv-to-json",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: FileJson,
+    tone: "teal",
+    name: "CSV to JSON",
+    short: "Convert CSV rows into a JSON array of objects.",
+    h1: "CSV to JSON Converter — Turn Spreadsheets into JSON",
+    metaTitle: "CSV to JSON Converter Online — Free & Instant | Wyrlo",
+    metaDescription: "Convert CSV to a JSON array of objects instantly in your browser. Handles quoted fields and commas. Free, unlimited, private.",
+    primaryKeyword: "csv to json",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "JSON",
+    steps: [
+      { title: "Paste your CSV", body: "The first row is treated as the header." },
+      { title: "We parse it safely", body: "Quoted fields, escaped quotes and commas are handled." },
+      { title: "Copy the JSON", body: "A clean array of objects, ready for your code." },
+    ],
+    faqs: codeFaqs("the CSV to JSON converter"),
+  },
+  {
+    slug: "json-to-xml",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: FileCode,
+    tone: "teal",
+    name: "JSON to XML",
+    short: "Convert JSON into well-formed XML.",
+    h1: "JSON to XML Converter — Convert JSON to XML Online",
+    metaTitle: "JSON to XML Converter Online — Free & Instant | Wyrlo",
+    metaDescription: "Convert JSON to well-formed XML instantly in your browser. Free, unlimited, private — nothing is uploaded.",
+    primaryKeyword: "json to xml",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "XML",
+    steps: [
+      { title: "Paste your JSON", body: "Objects and arrays both supported." },
+      { title: "Convert to XML", body: "Keys become tags; arrays become repeated <item> elements." },
+      { title: "Download the XML", body: "Well-formed and ready to use." },
+    ],
+    faqs: codeFaqs("the JSON to XML converter"),
+  },
+  {
+    slug: "base64",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: Binary,
+    tone: "teal",
+    name: "Base64 Encode / Decode",
+    short: "Encode text to Base64 or decode it back.",
+    h1: "Base64 Encoder & Decoder — Encode or Decode Online",
+    metaTitle: "Base64 Encode / Decode Online — Free & Instant | Wyrlo",
+    metaDescription: "Encode text to Base64 or decode Base64 back to text instantly. UTF-8 safe, runs in your browser. Free, unlimited, private.",
+    primaryKeyword: "base64 encode decode",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "Text",
+    steps: [
+      { title: "Pick a mode", body: "Encode plain text, or decode a Base64 string." },
+      { title: "Type or paste", body: "UTF-8 is handled correctly, including emoji." },
+      { title: "Copy the result", body: "Instant, on-device, no upload." },
+    ],
+    faqs: codeFaqs("the Base64 tool"),
+  },
+  {
+    slug: "url-encode",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: Link2,
+    tone: "teal",
+    name: "URL Encode / Decode",
+    short: "Percent-encode or decode URLs and query strings.",
+    h1: "URL Encoder & Decoder — Percent-Encode URLs Online",
+    metaTitle: "URL Encode / Decode Online — Free & Instant | Wyrlo",
+    metaDescription: "Percent-encode or decode URLs and query parameters instantly in your browser. Free, unlimited, private.",
+    primaryKeyword: "url encode decode",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "Text",
+    steps: [
+      { title: "Choose encode or decode", body: "Toggle between the two modes." },
+      { title: "Paste your URL or text", body: "Spaces, accents and symbols handled correctly." },
+      { title: "Copy the result", body: "Ready to drop into a link or API call." },
+    ],
+    faqs: codeFaqs("the URL encoder"),
+  },
+  {
+    slug: "jwt-decoder",
+    phase: 3,
+    kind: "client",
+    category: "developer",
+    icon: KeyRound,
+    tone: "teal",
+    name: "JWT Decoder",
+    short: "Decode a JWT's header and payload instantly.",
+    h1: "JWT Decoder — Decode JSON Web Tokens Online",
+    metaTitle: "JWT Decoder Online — Decode JWT Header & Payload Free | Wyrlo",
+    metaDescription: "Decode the header and payload of any JSON Web Token instantly in your browser. Private — your token is never sent anywhere.",
+    primaryKeyword: "jwt decoder",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "JSON",
+    steps: [
+      { title: "Paste your JWT", body: "The full token: header.payload.signature." },
+      { title: "Decode locally", body: "We Base64URL-decode the header and payload on-device." },
+      { title: "Inspect the claims", body: "Read the JSON — nothing is sent to a server." },
+    ],
+    faqs: codeFaqs("the JWT decoder"),
+  },
+  {
+    slug: "word-counter",
+    phase: 3,
+    kind: "client",
+    category: "text-ai",
+    icon: Hash,
+    tone: "green",
+    name: "Word & Character Counter",
+    short: "Count words, characters, sentences and reading time.",
+    h1: "Word Counter — Count Words, Characters & Reading Time",
+    metaTitle: "Word & Character Counter Online — Free | Wyrlo",
+    metaDescription: "Count words, characters, sentences, paragraphs and estimated reading time as you type. Free, unlimited, private.",
+    primaryKeyword: "word counter",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "Text",
+    steps: [
+      { title: "Paste your text", body: "Anything from a tweet to a thesis." },
+      { title: "See live stats", body: "Words, characters, sentences, paragraphs and reading time." },
+      { title: "Use anywhere", body: "Perfect for essays, SEO meta, and social posts." },
+    ],
+    faqs: codeFaqs("the word counter"),
+  },
+);
 
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(
   TOOLS.map((t) => [t.slug, t]),
@@ -486,6 +721,30 @@ export function toClientSpec(t: ToolDefinition) {
     freeMaxMb: t.freeMaxMb,
     outputType: t.outputType,
   } as const;
+}
+
+export type ToolCardSpec = {
+  slug: string;
+  name: string;
+  short: string;
+  category: ToolCategory;
+  tone: ToolDefinition["tone"];
+  iconName: string;
+  free: boolean;
+};
+
+/** Card-sized, serialisable projection for the interactive homepage grid. */
+export function toCardSpec(t: ToolDefinition): ToolCardSpec {
+  return {
+    slug: t.slug,
+    name: t.name,
+    short: t.short,
+    category: t.category,
+    tone: t.tone,
+    iconName: (t.icon as { displayName?: string }).displayName ?? "Wrench",
+    // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
+    free: t.kind === "client",
+  };
 }
 
 /** "What to do next" cross-sell — 3 logically related tools per tool. */
@@ -524,10 +783,10 @@ export const ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "veed-alternative",
     competitor: "VEED.io",
-    title: "Best Free VEED.io Alternative — CaptionFlow",
-    metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | CaptionFlow",
+    title: "Best Free VEED.io Alternative — Wyrlo",
+    metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | Wyrlo",
     metaDescription:
-      "Looking for a VEED.io alternative? CaptionFlow is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
+      "Looking for a VEED.io alternative? Wyrlo is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
       "AI subtitle generation with AI — modern, European, accurate.",
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
@@ -544,17 +803,17 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
     ],
     faqs: [
-      { q: "Is CaptionFlow really cheaper than VEED?", a: "Yes — Pro is €12/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
-      { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any CaptionFlow tool — translate, sync, clean or burn them in." },
-      { q: "Does CaptionFlow add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
-      { q: "Is CaptionFlow a full video editor like VEED?", a: "No, and that's the point. CaptionFlow does subtitles only — each tool does one job fast, with no editor learning curve." },
+      { q: "Is Wyrlo really cheaper than VEED?", a: "Yes — Pro is €12/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
+      { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any Wyrlo tool — translate, sync, clean or burn them in." },
+      { q: "Does Wyrlo add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
+      { q: "Is Wyrlo a full video editor like VEED?", a: "No, and that's the point. Wyrlo does subtitles only — each tool does one job fast, with no editor learning curve." },
     ],
   },
   {
     slug: "kapwing-alternative",
     competitor: "Kapwing",
-    title: "Best Free Kapwing Alternative — CaptionFlow",
-    metaTitle: "Free Kapwing Alternative — Subtitle Focused | CaptionFlow",
+    title: "Best Free Kapwing Alternative — Wyrlo",
+    metaTitle: "Free Kapwing Alternative — Subtitle Focused | Wyrlo",
     metaDescription:
       "Kapwing alternative built for subtitles. Lighter, faster, and €4/month cheaper than Kapwing Pro.",
     bulletPoints: [
@@ -572,8 +831,8 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed", us: "Instant client-side conversions", them: "Cloud render queue" },
     ],
     faqs: [
-      { q: "Why pick CaptionFlow over Kapwing?", a: "If you only need subtitles, Kapwing's full editor is overkill. CaptionFlow is lighter, faster and €4/month cheaper on Pro." },
-      { q: "Can I move my Kapwing captions over?", a: "Yes — export as SRT/VTT and use any CaptionFlow tool on them." },
+      { q: "Why pick Wyrlo over Kapwing?", a: "If you only need subtitles, Kapwing's full editor is overkill. Wyrlo is lighter, faster and €4/month cheaper on Pro." },
+      { q: "Can I move my Kapwing captions over?", a: "Yes — export as SRT/VTT and use any Wyrlo tool on them." },
       { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on text files." },
       { q: "Do conversions upload my files?", a: "SRT↔VTT, sync, clean and SRT-to-text run entirely in your browser — nothing is uploaded." },
     ],
@@ -581,8 +840,8 @@ export const ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "happyscribe-alternative",
     competitor: "HappyScribe",
-    title: "Affordable HappyScribe Alternative — CaptionFlow",
-    metaTitle: "HappyScribe Alternative Cheaper — CaptionFlow",
+    title: "Affordable HappyScribe Alternative — Wyrlo",
+    metaTitle: "HappyScribe Alternative Cheaper — Wyrlo",
     metaDescription:
       "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with top-tier accuracy.",
     bulletPoints: [
@@ -600,8 +859,8 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Watermark on text", us: "Never", them: "N/A" },
     ],
     faqs: [
-      { q: "Is CaptionFlow accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, at half the price." },
-      { q: "Do I need to talk to sales?", a: "No. CaptionFlow is fully self-serve — sign up and start in seconds." },
+      { q: "Is Wyrlo accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, at half the price." },
+      { q: "Do I need to talk to sales?", a: "No. Wyrlo is fully self-serve — sign up and start in seconds." },
       { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
       { q: "What does it cost?", a: "Free tier, Pro at €12/month, Business at €49/month. No hidden per-minute fees on the subscription plans." },
     ],
@@ -609,8 +868,8 @@ export const ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "clideo-alternative",
     competitor: "Clideo",
-    title: "Best Clideo Subtitle Alternative — CaptionFlow",
-    metaTitle: "Clideo Alternative with AI Subtitles | CaptionFlow",
+    title: "Best Clideo Subtitle Alternative — Wyrlo",
+    metaTitle: "Clideo Alternative with AI Subtitles | Wyrlo",
     metaDescription:
       "Clideo doesn't do AI subtitles. We do. Free generator with AI, plus every tool you'd need around it.",
     bulletPoints: [
@@ -628,8 +887,8 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },
     ],
     faqs: [
-      { q: "Does Clideo generate subtitles with AI?", a: "No — Clideo can add an existing subtitle file to video, but it doesn't transcribe. CaptionFlow generates subtitles from audio with AI." },
-      { q: "How many subtitle tools does CaptionFlow have?", a: "Sixteen — generate, translate, sync, convert, clean, style, burn-in and more." },
+      { q: "Does Clideo generate subtitles with AI?", a: "No — Clideo can add an existing subtitle file to video, but it doesn't transcribe. Wyrlo generates subtitles from audio with AI." },
+      { q: "How many subtitle tools does Wyrlo have?", a: "Sixteen — generate, translate, sync, convert, clean, style, burn-in and more." },
       { q: "Is there translation?", a: "Yes, into 30+ languages, cue-by-cue, keeping your timing intact." },
       { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on SRT/VTT/TXT outputs." },
     ],

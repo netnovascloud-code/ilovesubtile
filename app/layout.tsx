@@ -18,15 +18,15 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CaptionFlow — Free Online Subtitle Tools",
-    template: "%s | CaptionFlow",
+    default: "Wyrlo — Free Online File Converter & Tools",
+    template: "%s | Wyrlo",
   },
   description:
-    "Free online subtitle tools: generate, translate, sync, convert, edit. Powered by AI. Sixteen focused tools for SRT, VTT and captioned video.",
-  applicationName: "CaptionFlow",
+    "Convert anything online for free: documents, audio, video, images, subtitles, code and text. 150+ fast, focused tools. Drop your file, get your result.",
+  applicationName: "Wyrlo",
   openGraph: {
     type: "website",
-    siteName: "CaptionFlow",
+    siteName: "Wyrlo",
     images: ["/og/default.png"],
   },
   twitter: {

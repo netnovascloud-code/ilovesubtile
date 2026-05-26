@@ -54,7 +54,7 @@ export function buildToolMetadata(
       url: canonical,
       title,
       description,
-      siteName: "CaptionFlow",
+      siteName: "Wyrlo",
       locale: locale === "en" ? "en_US" : locale.replace("-", "_"),
       images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630, alt: name }],
     },
@@ -77,7 +77,7 @@ export function softwareApplicationSchema(
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: `${name} — CaptionFlow`,
+    name: `${name} — Wyrlo`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
     description: override?.metaDescription ?? tool.metaDescription,

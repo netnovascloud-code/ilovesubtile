@@ -1,4 +1,4 @@
-// CaptionFlow public REST gateway. Authenticated by a CaptionFlow API key
+// Wyrlo public REST gateway. Authenticated by a Wyrlo API key
 // (cf_live_...), NOT a Supabase JWT — hence verify_jwt is disabled and we
 // validate the key ourselves. Deducts credits per call and logs a job.
 //
@@ -56,7 +56,7 @@ Deno.serve(async (req) => {
   if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
   const svc = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
-  // ---- authenticate the CaptionFlow API key ----
+  // ---- authenticate the Wyrlo API key ----
   const authz = req.headers.get("Authorization") ?? "";
   const raw = authz.replace(/^Bearer\s+/i, "").trim();
   if (!raw.startsWith("cf_")) return json({ error: "missing_api_key" }, { status: 401 });

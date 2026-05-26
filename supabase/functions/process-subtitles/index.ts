@@ -1,4 +1,4 @@
-// CaptionFlow — audio/video → SRT via Mistral.
+// Wyrlo — audio/video → SRT via Mistral.
 //
 // Deploy: supabase functions deploy process-subtitles
 // Secret:  supabase secrets set MISTRAL_API_KEY=...

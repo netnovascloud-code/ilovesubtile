@@ -1,4 +1,4 @@
-// CaptionFlow — create a Stripe Checkout session for the authenticated user.
+// Wyrlo — create a Stripe Checkout session for the authenticated user.
 //
 // POST /functions/v1/stripe-checkout?plan=pro|business&interval=monthly|annual
 // Returns: { url: "https://checkout.stripe.com/..." }
@@ -52,7 +52,7 @@ Deno.serve(async (req) => {
   const priceId = Deno.env.get(priceEnvKey);
   if (!priceId) return json({ error: "no_price_configured", env: priceEnvKey }, { status: 400 });
 
-  const origin = req.headers.get("origin") ?? "https://captionflow.com";
+  const origin = req.headers.get("origin") ?? "https://wyrlo.io";
   const successPath = url.searchParams.get("success_path") ?? "/dashboard?upgraded=1";
   const cancelPath = url.searchParams.get("cancel_path") ?? "/pricing";
 

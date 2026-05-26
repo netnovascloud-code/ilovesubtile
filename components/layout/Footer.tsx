@@ -16,7 +16,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-ink-100 bg-white">
       <div className="container grid grid-cols-2 gap-10 py-12 md:grid-cols-5">
         <div className="col-span-2 md:col-span-2">
-          <div className="font-semibold text-ink-900">CaptionFlow</div>
+          <div className="font-semibold text-ink-900">Wyrlo</div>
           <p className="mt-3 max-w-sm text-sm text-ink-500">{t.tagline}</p>
         </div>
 
@@ -86,7 +86,7 @@ export function Footer() {
 
       <div className="border-t border-ink-100">
         <div className="container flex flex-col gap-3 py-6 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} CaptionFlow. {t.rights}</div>
+          <div>© {new Date().getFullYear()} Wyrlo. {t.rights}</div>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             <Link href="/" hrefLang="en" className="hover:text-ink-700">
               {LANGUAGE_NAMES.en}

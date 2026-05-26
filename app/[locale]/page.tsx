@@ -53,10 +53,19 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
         prefix={localePath(locale)}
         strings={{
           title: "What do you want to convert?",
-          placeholder: "Search 150+ tools — e.g. mp3 to wav, pdf to word, json to csv…",
+          subtitle: "Free, fast online tools for files, images, code and text. Drop it in, get your result.",
+          placeholder: "Search tools — e.g. jpg to png, json to csv, translate…",
           all: "All",
-          suggestions: ["MP3 → WAV", "PDF → Word", "Translate text", "JPG → PNG", "JSON → CSV"],
+          suggestions: [
+            { label: "JPG → PNG", query: "jpg to png", category: "images" },
+            { label: "Compress image", query: "compress", category: "images" },
+            { label: "JSON → CSV", query: "json to csv", category: "developer" },
+            { label: "Translate text", query: "translate", category: "text-ai" },
+            { label: "Subtitles", query: "subtitle", category: "subtitles" },
+          ],
           free: "Free",
+          ai: "AI",
+          seeAll: "See all {n} tools",
           empty: "No tool matches your search yet.",
         }}
       />

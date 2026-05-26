@@ -1047,7 +1047,9 @@ export type ToolCardSpec = {
   category: ToolCategory;
   tone: ToolDefinition["tone"];
   iconName: string;
+  keywords: string;
   free: boolean;
+  ai: boolean;
 };
 
 /** Card-sized, serialisable projection for the interactive homepage grid. */
@@ -1059,8 +1061,10 @@ export function toCardSpec(t: ToolDefinition): ToolCardSpec {
     category: t.category,
     tone: t.tone,
     iconName: (t.icon as { displayName?: string }).displayName ?? "Wrench",
+    keywords: t.primaryKeyword,
     // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
     free: t.kind === "client",
+    ai: t.kind === "ai" || t.kind === "edge",
   };
 }
 

@@ -5,6 +5,9 @@ import { Upload, Download, RotateCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
 import { IMAGE_TOOLS, resolveOutput, supportsQualityMime } from "@/lib/image-tools";
+import { categoryTheme } from "@/lib/category-theme";
+
+const TH = categoryTheme("images");
 
 type Loaded = { file: File; img: HTMLImageElement; url: string; w: number; h: number };
 
@@ -115,9 +118,11 @@ export function ImageToolClient({ slug }: { slug: string }) {
   return (
     <div className="space-y-5">
       {!src ? (
-        <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-ink-200 bg-white px-6 py-16 text-center transition-colors hover:border-brand-300 hover:bg-brand-50/30">
-          <Upload className="h-8 w-8 text-ink-400" />
-          <span className="mt-3 font-medium text-ink-900">Click to upload an image</span>
+        <label className={cn("flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-16 text-center transition-colors hover:brightness-[0.98]", TH.dropBorder, TH.dropBg)}>
+          <span className={cn("grid h-12 w-12 place-items-center rounded-xl", TH.iconBg, TH.iconText)}>
+            <Upload className="h-6 w-6" />
+          </span>
+          <span className="mt-3 font-semibold text-ink-900">Click to upload an image</span>
           <span className="mt-1 text-sm text-ink-400">or drag and drop · processed privately in your browser</span>
           <input
             type="file"

@@ -38,8 +38,9 @@ export function Header() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href={localePath(locale)} className="flex items-center font-semibold text-lg tracking-tight text-ink-900">
-          Wyrlo
+        <Link href={localePath(locale)} className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-[17px] font-extrabold leading-none text-white shadow-sm">W</span>
+          <span>Wyrlo</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

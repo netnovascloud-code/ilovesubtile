@@ -1,5 +1,5 @@
 import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
-import { RELATED_TOOLS, TOOLS_BY_SLUG } from "@/lib/tools-config";
+import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS } from "@/lib/tools-config";
 import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -50,10 +50,14 @@ export function ToolPageShell({
   const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats);
   const steps = (locale === "en" ? null : getLocalisedSteps(tool.slug, locale)) ?? tool.steps;
 
-  // Related tools for the "What to do next" cross-sell.
-  const related = (RELATED_TOOLS[tool.slug] ?? [])
+  // Related tools for the "What to do next" cross-sell. Explicit mapping first,
+  // otherwise fall back to siblings from the same category.
+  let related = (RELATED_TOOLS[tool.slug] ?? [])
     .map((slug) => TOOLS_BY_SLUG[slug])
     .filter(Boolean);
+  if (related.length === 0) {
+    related = TOOLS.filter((t) => t.category === tool.category && t.slug !== tool.slug).slice(0, 3);
+  }
 
   return (
     <div dir={rtl ? "rtl" : undefined}>

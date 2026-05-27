@@ -46,6 +46,8 @@ import {
   Smile,
   Tags,
   Calculator,
+  Files,
+  Scissors,
   type LucideIcon,
 } from "lucide-react";
 
@@ -95,6 +97,8 @@ const ICONS: Record<string, LucideIcon> = {
   Smile,
   Tags,
   Calculator,
+  Files,
+  Scissors,
 };
 
 export function ToolIcon({

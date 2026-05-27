@@ -7,10 +7,12 @@ import { cn } from "@/lib/utils";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { categoryTheme, categoryGradient } from "@/lib/category-theme";
-import type { ToolCardSpec, ToolCategory } from "@/lib/tools-config";
+import type { ToolCardSpec, ToolCategory, ComingSoonTool } from "@/lib/tools-config";
 
 type CategoryChip = { id: ToolCategory; label: string; iconName: string };
 export type HomeSuggestion = { label: string; query: string; category: ToolCategory };
+
+type Card = ToolCardSpec & { comingSoon?: boolean };
 
 export type HomeStrings = {
   title: string;
@@ -20,11 +22,12 @@ export type HomeStrings = {
   suggestions: HomeSuggestion[];
   free: string;
   ai: string;
+  soon: string;
   seeAll: string; // "{n}" placeholder
   empty: string;
 };
 
-const PREVIEW_PER_CATEGORY = 4;
+const PREVIEW_PER_CATEGORY = 6;
 
 // Light synonym expansion so common phrasings still match.
 const SYNONYMS: Record<string, string[]> = {
@@ -34,12 +37,14 @@ const SYNONYMS: Record<string, string[]> = {
 
 export function HomeExplorer({
   tools,
+  comingSoon = [],
   categories,
   categoryLabels,
   strings,
   prefix = "",
 }: {
   tools: ToolCardSpec[];
+  comingSoon?: ComingSoonTool[];
   categories: CategoryChip[];
   categoryLabels: Record<string, string>;
   strings: HomeStrings;
@@ -50,24 +55,33 @@ export function HomeExplorer({
 
   const q = query.trim().toLowerCase();
 
-  // Only surface categories that actually have tools (no dead-end filters).
+  // Real tools first, then the planned (coming-soon) catalog as disabled cards.
+  const allCards = useMemo<Card[]>(() => {
+    const cs: Card[] = comingSoon.map((c) => ({
+      slug: c.slug, name: c.name, short: "", category: c.category, tone: "slate",
+      iconName: c.iconName, keywords: c.name, free: false, ai: false, comingSoon: true,
+    }));
+    return [...tools, ...cs];
+  }, [tools, comingSoon]);
+
+  // Surface every category that has at least one card (real or planned).
   const presentCategories = useMemo(() => {
-    const present = new Set(tools.map((t) => t.category));
+    const present = new Set(allCards.map((t) => t.category));
     return categories.filter((c) => present.has(c.id));
-  }, [tools, categories]);
+  }, [allCards, categories]);
 
   const filtered = useMemo(() => {
-    if (!q) return tools.filter((t) => active === "all" || t.category === active);
+    if (!q) return allCards.filter((t) => active === "all" || t.category === active);
     const terms = [q, ...(SYNONYMS[q] ?? [])];
-    return tools.filter((t) => {
+    return allCards.filter((t) => {
       if (active !== "all" && t.category !== active) return false;
       const hay = `${t.name} ${t.short} ${t.keywords} ${t.slug.replace(/-/g, " ")}`.toLowerCase();
       return terms.some((term) => hay.includes(term));
     });
-  }, [tools, active, q]);
+  }, [allCards, active, q]);
 
   const grouped = useMemo(() => {
-    const map = new Map<ToolCategory, ToolCardSpec[]>();
+    const map = new Map<ToolCategory, Card[]>();
     for (const t of filtered) {
       const arr = map.get(t.category) ?? [];
       arr.push(t);
@@ -80,40 +94,54 @@ export function HomeExplorer({
 
   const showGrouped = !q && active === "all";
 
-  function Card({ t }: { t: ToolCardSpec }) {
+  function CardBadge({ t }: { t: Card }) {
+    if (t.comingSoon) return <span className="rounded-full bg-ink-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-ink-400">{strings.soon}</span>;
+    if (t.free) return <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>;
+    if (t.ai) return (
+      <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
+        <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
+      </span>
+    );
+    return null;
+  }
+
+  function Card({ t }: { t: Card }) {
     const th = categoryTheme(t.category);
+    const body = (
+      <>
+        <span className="absolute right-2 top-2"><CardBadge t={t} /></span>
+        <ToolGlyph category={t.category} iconName={t.iconName} px={44} />
+        <h3 className="mt-2 text-[13px] font-semibold leading-tight text-ink-900">{t.name}</h3>
+      </>
+    );
+    if (t.comingSoon) {
+      return (
+        <div
+          title={`${t.name} — ${strings.soon}`}
+          className="relative flex cursor-default flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-3 text-center opacity-60 shadow-card"
+        >
+          {body}
+        </div>
+      );
+    }
     return (
       <Link
         href={`${prefix}/${t.slug}`}
         title={t.short}
         className={cn(
-          "group relative flex flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-4 text-center shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
+          "group relative flex flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-3 text-center shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
           th.hoverBorderB,
         )}
       >
-        {(t.free || t.ai) && (
-          <span className="absolute right-2 top-2">
-            {t.free ? (
-              <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>
-            ) : (
-              <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
-                <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
-              </span>
-            )}
-          </span>
-        )}
-        <div className="transition-transform duration-200 group-hover:scale-105">
-          <ToolGlyph category={t.category} iconName={t.iconName} px={44} />
-        </div>
-        <h3 className="mt-2.5 text-[13px] font-semibold leading-tight text-ink-900">{t.name}</h3>
+        {body}
       </Link>
     );
   }
 
   return (
     <>
-      {/* Search hero — subtle ice-blue gradient fading seamlessly into white */}
-      <section className="bg-gradient-to-b from-sky-50 via-sky-50/30 to-white">
+      {/* Search hero — ice-blue fading into pure white over ~180px (no hard edge) */}
+      <section style={{ backgroundImage: "linear-gradient(to bottom, #F0F7FF 0px, #FFFFFF 180px)" }}>
         <div className="container py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight text-ink-900 md:text-[2.75rem] md:leading-tight">{strings.title}</h1>
@@ -210,7 +238,7 @@ export function HomeExplorer({
                         </button>
                       )}
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+                    <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>
@@ -218,7 +246,7 @@ export function HomeExplorer({
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
               {filtered.map((t) => <Card key={t.slug} t={t} />)}
             </div>
           )}

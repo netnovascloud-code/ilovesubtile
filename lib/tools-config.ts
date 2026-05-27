@@ -113,6 +113,34 @@ export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntr
   CATEGORIES.map((c) => [c.id, c]),
 ) as Record<ToolCategory, CategoryDef>;
 
+export type ComingSoonTool = { slug: string; name: string; category: ToolCategory; iconName: string };
+
+/**
+ * Planned tools shown on the homepage so the full offer is visible. They have
+ * no routes yet (Documents/Audio/Video need libraries or an FFmpeg host); cards
+ * render disabled with a "Soon" badge until each is built.
+ */
+export const COMING_SOON: ComingSoonTool[] = [
+  { slug: "pdf-to-word", name: "PDF to Word", category: "documents", iconName: "FileText" },
+  { slug: "word-to-pdf", name: "Word to PDF", category: "documents", iconName: "FileText" },
+  { slug: "merge-pdf", name: "Merge PDF", category: "documents", iconName: "Files" },
+  { slug: "split-pdf", name: "Split PDF", category: "documents", iconName: "Scissors" },
+  { slug: "compress-pdf", name: "Compress PDF", category: "documents", iconName: "FileDown" },
+  { slug: "pdf-to-jpg", name: "PDF to JPG", category: "documents", iconName: "Image" },
+  { slug: "mp3-to-wav", name: "MP3 to WAV", category: "audio", iconName: "Music" },
+  { slug: "wav-to-mp3", name: "WAV to MP3", category: "audio", iconName: "Music" },
+  { slug: "compress-audio", name: "Compress Audio", category: "audio", iconName: "Music" },
+  { slug: "cut-audio", name: "Cut Audio", category: "audio", iconName: "Scissors" },
+  { slug: "merge-audio", name: "Merge Audio", category: "audio", iconName: "Music" },
+  { slug: "extract-audio", name: "Audio from Video", category: "audio", iconName: "Music" },
+  { slug: "compress-video", name: "Compress Video", category: "video", iconName: "Video" },
+  { slug: "mp4-to-gif", name: "MP4 to GIF", category: "video", iconName: "Video" },
+  { slug: "trim-video", name: "Trim Video", category: "video", iconName: "Scissors" },
+  { slug: "mp4-to-webm", name: "MP4 to WebM", category: "video", iconName: "Video" },
+  { slug: "resize-video", name: "Resize Video", category: "video", iconName: "Scaling" },
+  { slug: "rotate-video", name: "Rotate Video", category: "video", iconName: "RotateCw" },
+];
+
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,

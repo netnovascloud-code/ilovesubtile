@@ -17,6 +17,7 @@ export type HomeStrings = {
   subtitle: string;
   placeholder: string;
   all: string;
+  counter: string;
   suggestions: HomeSuggestion[];
   ai: string;
   seeAll: string; // "{n}" placeholder
@@ -86,7 +87,7 @@ export function HomeExplorer({
         <div className="relative w-fit">
           <ToolGlyph category={t.category} iconName={t.iconName} px={52} />
           {t.ai && (
-            <span className="absolute -right-3.5 -top-1 rounded-md bg-ink-900/80 px-1 py-0.5 text-[8px] font-bold uppercase tracking-[0.08em] text-white">
+            <span className="absolute -right-4 -top-1.5 rounded-md bg-brand-600 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-white shadow-sm">
               {strings.ai}
             </span>
           )}
@@ -116,6 +117,7 @@ export function HomeExplorer({
                 className="w-full rounded-2xl border border-ink-200/70 bg-white py-5 pl-14 pr-5 text-base text-ink-900 shadow-[0_10px_40px_-12px_rgb(15_23_42_/_0.2)] outline-none transition-shadow placeholder:text-ink-300 focus:border-brand-300 focus:shadow-[0_12px_48px_-12px_rgb(45_107_228_/_0.3)] md:text-lg"
               />
             </div>
+            <p className="mt-4 text-sm font-medium text-ink-400">{strings.counter}</p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {strings.suggestions.map((s) => {
                 const th = categoryTheme(s.category);

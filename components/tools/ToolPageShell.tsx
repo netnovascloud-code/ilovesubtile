@@ -111,7 +111,12 @@ export function ToolPageShell({
         </div>
       </section>
 
-      <main className="container py-10">{children}</main>
+      <main className="container py-10">
+        {children}
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-ink-400">
+          🔒 Your files are deleted automatically after download. Never stored, never shared.
+        </p>
+      </main>
 
       {related.length > 0 && (
         <section className="border-t border-ink-100 bg-white">

@@ -56,6 +56,7 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
           subtitle: "Free, fast online tools for files, images, code and text. Drop it in, get your result.",
           placeholder: "Search tools — e.g. jpg to png, json to csv, translate…",
           all: "All",
+          counter: `${tools.length}+ free tools · 13 languages · Files deleted instantly`,
           suggestions: [
             { label: "JPG → PNG", query: "jpg to png", category: "images" },
             { label: "Compress image", query: "compress", category: "images" },

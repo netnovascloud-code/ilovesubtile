@@ -17,9 +17,9 @@ function json(body: unknown, init: ResponseInit = {}) {
 const DAILY_LIMIT: Record<string, number> = { free: 5, pro: Infinity, business: Infinity };
 
 // Tasks that need the stronger model.
-const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro"]);
+const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize"]);
 
-function buildSystem(task: string, opts: { target?: string; style?: string; format?: string }): string | null {
+function buildSystem(task: string, opts: { target?: string; style?: string; format?: string; register?: string; level?: string }): string | null {
   switch (task) {
     case "chapters":
       return `You generate YouTube chapter markers from a transcript with timestamps. Return up to 10 chapters as plain text, one per line, formatted "HH:MM:SS Chapter title". The first chapter must start at 00:00:00.`;
@@ -27,8 +27,18 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `You receive subtitle text. Fix obvious transcription errors, normalise punctuation, and remove [music] / (sigh) style annotations. Preserve every line break.`;
     case "summary":
       return `You receive a transcript. Return a 4-bullet summary in plain markdown.`;
-    case "translate":
-      return `Translate the user's text into ${opts.target || "English"}. Output ONLY the translation — no notes, no quotes, no preamble. Preserve line breaks, numbers and formatting.`;
+    case "translate": {
+      const reg = opts.register === "formal" ? " Use a polite, formal register (e.g. vouvoiement in French, Sie in German)."
+        : opts.register === "informal" ? " Use a casual, informal register (e.g. tutoiement in French, du in German)."
+        : "";
+      return `You are an expert translator. Translate the user's text into ${opts.target || "English"} so it reads naturally and idiomatically — never word-for-word.${reg} Preserve line breaks, numbers and formatting. Output ONLY the translation, with no notes, quotes or preamble.`;
+    }
+    case "humanize": {
+      const intensity = opts.level === "light" ? "Make light, careful edits."
+        : opts.level === "strong" ? "Rewrite assertively for maximum natural variation."
+        : "Apply a balanced rewrite.";
+      return `You rewrite AI-generated text so it reads as natural, human-written prose. ${intensity} Vary sentence length (mix short and long), use less predictable transitions, replace uniform/over-formal vocabulary with varied natural synonyms, add slight personal rephrasings, and break repetitive structures. Keep the original meaning, language and overall length. Output ONLY the rewritten text.`;
+    }
     case "rephrase":
       return `Rewrite the user's text in a ${opts.style || "clear, neutral"} style/tone. Keep the original meaning and language. Output ONLY the rewritten text.`;
     case "summarize":
@@ -58,6 +68,7 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
 
 const TOOL_BY_TASK: Record<string, string> = {
   chapters: "youtube-chapters", translate: "translate-text", rephrase: "rephrase-text",
+  humanize: "ai-humanizer",
   summarize: "summarize-text", grammar: "fix-grammar", simplify: "simplify-text",
   "email-pro": "professional-email", "product-description": "product-description",
   hashtags: "hashtag-generator", sentiment: "sentiment-analysis", keywords: "keyword-extractor",
@@ -76,7 +87,7 @@ Deno.serve(async (req) => {
   const svc = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
   const body = (await req.json().catch(() => ({}))) as {
-    task?: string; text?: string; options?: { target?: string; style?: string; format?: string };
+    task?: string; text?: string; options?: { target?: string; style?: string; format?: string; register?: string; level?: string };
   };
   const task = body.task ?? "";
   const text = (body.text ?? "").trim();
@@ -123,7 +134,7 @@ Deno.serve(async (req) => {
     body: JSON.stringify({
       model,
       messages: [{ role: "system", content: system }, { role: "user", content: text }],
-      temperature: task === "translate" || task === "grammar" ? 0.1 : 0.4,
+      temperature: task === "translate" || task === "grammar" ? 0.1 : task === "humanize" ? 0.85 : 0.4,
     }),
   });
 

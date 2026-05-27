@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ShieldCheck } from "lucide-react";
 import { TOOLS } from "@/lib/tools-config";
 import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES, localePath } from "@/lib/i18n/locales";
 import { useLocale } from "@/hooks/useLocale";
@@ -18,6 +19,9 @@ export function Footer() {
         <div className="col-span-2 md:col-span-2">
           <div className="font-semibold text-ink-900">Wyrlo</div>
           <p className="mt-3 max-w-sm text-sm text-ink-500">{t.tagline}</p>
+          <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
+            <ShieldCheck className="h-3.5 w-3.5" /> GDPR Compliant · Files never stored
+          </span>
         </div>
 
         <div>

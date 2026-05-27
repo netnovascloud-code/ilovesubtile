@@ -85,25 +85,27 @@ export function HomeExplorer({
     return (
       <Link
         href={`${prefix}/${t.slug}`}
+        title={t.short}
         className={cn(
-          "group relative flex flex-col rounded-xl border-b-2 border-transparent bg-white p-4 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
+          "group relative flex flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-4 text-center shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
           th.hoverBorderB,
         )}
       >
-        <div className="flex items-start justify-between gap-2">
-          <div className="transition-transform duration-200 group-hover:scale-105">
-            <ToolGlyph category={t.category} iconName={t.iconName} convert={t.convert} badge={t.badge} px={46} />
-          </div>
-          {t.free ? (
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>
-          ) : t.ai ? (
-            <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-              <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
-            </span>
-          ) : null}
+        {(t.free || t.ai) && (
+          <span className="absolute right-2 top-2">
+            {t.free ? (
+              <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>
+            ) : (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
+                <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
+              </span>
+            )}
+          </span>
+        )}
+        <div className="transition-transform duration-200 group-hover:scale-105">
+          <ToolGlyph category={t.category} iconName={t.iconName} px={44} />
         </div>
-        <h3 className="mt-3 text-sm font-semibold text-ink-900">{t.name}</h3>
-        <p className="mt-0.5 truncate text-xs text-ink-500">{t.short}</p>
+        <h3 className="mt-2.5 text-[13px] font-semibold leading-tight text-ink-900">{t.name}</h3>
       </Link>
     );
   }

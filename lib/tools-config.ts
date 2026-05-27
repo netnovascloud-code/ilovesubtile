@@ -28,7 +28,6 @@ import {
   Minimize2,
   Regex,
   Image as ImageIcon,
-  FileImage,
   Crop,
   RotateCw,
   Scaling,
@@ -877,25 +876,25 @@ const imgTool = (
 });
 
 TOOLS.push(
-  imgTool("jpg-to-png", FileImage, "JPG to PNG", "Convert JPG images to lossless PNG.",
+  imgTool("jpg-to-png", ImageIcon, "JPG to PNG", "Convert JPG images to lossless PNG.",
     "JPG to PNG Converter — Convert JPEG to PNG Online",
     "JPG to PNG Converter Online — Free & Instant | Wyrlo",
     "Convert JPG to PNG instantly in your browser. Lossless output, no upload, no quality loss. Free and unlimited.",
     "jpg to png", ["jpg", "jpeg"], "PNG",
     [{ title: "Upload your JPG", body: "Drop a .jpg or .jpeg file." }, { title: "Convert in-browser", body: "We re-encode to PNG on your device." }, { title: "Download the PNG", body: "Lossless and ready to use." }]),
-  imgTool("png-to-jpg", FileImage, "PNG to JPG", "Convert PNG to compressed JPG.",
+  imgTool("png-to-jpg", ImageIcon, "PNG to JPG", "Convert PNG to compressed JPG.",
     "PNG to JPG Converter — Convert PNG to JPEG Online",
     "PNG to JPG Converter Online — Free & Instant | Wyrlo",
     "Convert PNG to JPG instantly in your browser. Adjustable quality, transparent areas flattened to white. Free and unlimited.",
     "png to jpg", ["png"], "JPG",
     [{ title: "Upload your PNG", body: "Transparent areas become white." }, { title: "Pick a quality", body: "Balance file size and clarity." }, { title: "Download the JPG", body: "Smaller, web-ready images." }]),
-  imgTool("jpg-to-webp", FileImage, "JPG to WebP", "Convert JPG to modern WebP.",
+  imgTool("jpg-to-webp", ImageIcon, "JPG to WebP", "Convert JPG to modern WebP.",
     "JPG to WebP Converter — Convert JPEG to WebP Online",
     "JPG to WebP Converter Online — Free & Instant | Wyrlo",
     "Convert JPG to WebP instantly in your browser. Smaller files at the same quality. Free, unlimited, private.",
     "jpg to webp", ["jpg", "jpeg"], "WebP",
     [{ title: "Upload your JPG", body: "Any JPEG image." }, { title: "Choose quality", body: "WebP gives smaller files than JPEG." }, { title: "Download the WebP", body: "Faster-loading web images." }]),
-  imgTool("png-to-webp", FileImage, "PNG to WebP", "Convert PNG to WebP, keeping transparency.",
+  imgTool("png-to-webp", ImageIcon, "PNG to WebP", "Convert PNG to WebP, keeping transparency.",
     "PNG to WebP Converter — Convert PNG to WebP Online",
     "PNG to WebP Converter Online — Free & Instant | Wyrlo",
     "Convert PNG to WebP instantly in your browser. Transparency is preserved and files shrink dramatically. Free and unlimited.",
@@ -1041,8 +1040,6 @@ export function toClientSpec(t: ToolDefinition) {
   } as const;
 }
 
-export type ConvertPair = { from: string; to: string };
-
 export type ToolCardSpec = {
   slug: string;
   name: string;
@@ -1050,38 +1047,10 @@ export type ToolCardSpec = {
   category: ToolCategory;
   tone: ToolDefinition["tone"];
   iconName: string;
-  convert?: ConvertPair;
-  badge?: string;
   keywords: string;
   free: boolean;
   ai: boolean;
 };
-
-// Display label per raw format token (used in the source→target glyph).
-const FMT: Record<string, string> = {
-  jpg: "JPG", jpeg: "JPG", png: "PNG", webp: "WEBP", svg: "SVG", gif: "GIF",
-  json: "JSON", csv: "CSV", xml: "XML", yaml: "YAML", yml: "YAML",
-  markdown: "MD", html: "HTML", text: "TXT", srt: "SRT", vtt: "VTT", pdf: "PDF",
-};
-
-// Single-symbol formatting tools (no source→target pair).
-const SINGLE_BADGE: Record<string, string> = {
-  "format-json": "{ }", "base64": "64", "url-encode": "%", "minify-css": "CSS", "format-sql": "SQL",
-};
-
-/** Source→target pair for "x-to-y" conversion slugs (unique per converter). */
-export function convertPair(slug: string): ConvertPair | undefined {
-  const m = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
-  if (!m) return undefined;
-  const from = FMT[m[1]];
-  const to = FMT[m[2]];
-  return from && to ? { from, to } : undefined;
-}
-
-/** Single bold text symbol for a few formatting tools. */
-export function glyphBadge(slug: string): string | undefined {
-  return SINGLE_BADGE[slug];
-}
 
 /** Card-sized, serialisable projection for the interactive homepage grid. */
 export function toCardSpec(t: ToolDefinition): ToolCardSpec {
@@ -1092,8 +1061,6 @@ export function toCardSpec(t: ToolDefinition): ToolCardSpec {
     category: t.category,
     tone: t.tone,
     iconName: (t.icon as { displayName?: string }).displayName ?? "Wrench",
-    convert: convertPair(t.slug),
-    badge: glyphBadge(t.slug),
     keywords: t.primaryKeyword,
     // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
     free: t.kind === "client",

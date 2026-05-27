@@ -41,6 +41,7 @@ import {
   ShoppingBag,
   Smile,
   Tags,
+  Calculator,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -705,7 +706,7 @@ TOOLS.push(
     phase: 3,
     kind: "client",
     category: "text-ai",
-    icon: Hash,
+    icon: Calculator,
     tone: "green",
     name: "Word & Character Counter",
     short: "Count words, characters, sentences and reading time.",
@@ -1040,6 +1041,8 @@ export function toClientSpec(t: ToolDefinition) {
   } as const;
 }
 
+export type ConvertPair = { from: string; to: string };
+
 export type ToolCardSpec = {
   slug: string;
   name: string;
@@ -1047,27 +1050,37 @@ export type ToolCardSpec = {
   category: ToolCategory;
   tone: ToolDefinition["tone"];
   iconName: string;
+  convert?: ConvertPair;
   badge?: string;
   keywords: string;
   free: boolean;
   ai: boolean;
 };
 
-/**
- * iLovePDF-style format badge for conversion tools — the output format shown as
- * bold text in the icon tile, so each converter is instantly distinguishable.
- * Action tools (compress, rotate, AI…) return undefined and keep their glyph.
- */
-const FORMAT_BADGE: Record<string, string> = {
-  "jpg-to-png": "PNG", "png-to-jpg": "JPG", "jpg-to-webp": "WEBP", "png-to-webp": "WEBP", "svg-to-png": "PNG",
-  "json-to-csv": "CSV", "csv-to-json": "JSON", "json-to-xml": "XML", "xml-to-json": "JSON",
-  "json-to-yaml": "YAML", "yaml-to-json": "JSON", "markdown-to-html": "HTML", "html-to-markdown": "MD",
-  "format-json": "{ }", "minify-css": "CSS", "format-sql": "SQL", "base64": "64", "url-encode": "%",
-  "srt-to-vtt": "VTT", "vtt-to-srt": "SRT", "srt-to-text": "TXT",
+// Display label per raw format token (used in the source→target glyph).
+const FMT: Record<string, string> = {
+  jpg: "JPG", jpeg: "JPG", png: "PNG", webp: "WEBP", svg: "SVG", gif: "GIF",
+  json: "JSON", csv: "CSV", xml: "XML", yaml: "YAML", yml: "YAML",
+  markdown: "MD", html: "HTML", text: "TXT", srt: "SRT", vtt: "VTT", pdf: "PDF",
 };
 
-export function formatBadge(slug: string): string | undefined {
-  return FORMAT_BADGE[slug];
+// Single-symbol formatting tools (no source→target pair).
+const SINGLE_BADGE: Record<string, string> = {
+  "format-json": "{ }", "base64": "64", "url-encode": "%", "minify-css": "CSS", "format-sql": "SQL",
+};
+
+/** Source→target pair for "x-to-y" conversion slugs (unique per converter). */
+export function convertPair(slug: string): ConvertPair | undefined {
+  const m = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+  if (!m) return undefined;
+  const from = FMT[m[1]];
+  const to = FMT[m[2]];
+  return from && to ? { from, to } : undefined;
+}
+
+/** Single bold text symbol for a few formatting tools. */
+export function glyphBadge(slug: string): string | undefined {
+  return SINGLE_BADGE[slug];
 }
 
 /** Card-sized, serialisable projection for the interactive homepage grid. */
@@ -1079,7 +1092,8 @@ export function toCardSpec(t: ToolDefinition): ToolCardSpec {
     category: t.category,
     tone: t.tone,
     iconName: (t.icon as { displayName?: string }).displayName ?? "Wrench",
-    badge: FORMAT_BADGE[t.slug],
+    convert: convertPair(t.slug),
+    badge: glyphBadge(t.slug),
     keywords: t.primaryKeyword,
     // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
     free: t.kind === "client",

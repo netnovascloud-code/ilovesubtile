@@ -6,7 +6,7 @@ import { Search, ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
-import { categoryTheme } from "@/lib/category-theme";
+import { categoryTheme, categoryGradient } from "@/lib/category-theme";
 import type { ToolCardSpec, ToolCategory } from "@/lib/tools-config";
 
 type CategoryChip = { id: ToolCategory; label: string; iconName: string };
@@ -86,24 +86,24 @@ export function HomeExplorer({
       <Link
         href={`${prefix}/${t.slug}`}
         className={cn(
-          "group relative flex flex-col rounded-xl border border-ink-100 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
-          th.hoverBorder,
+          "group relative flex flex-col rounded-xl border-b-2 border-transparent bg-white p-4 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
+          th.hoverBorderB,
         )}
       >
-        <div className="flex items-start justify-between">
-          <div className="transition-transform duration-200 group-hover:scale-110">
-            <ToolGlyph category={t.category} iconName={t.iconName} badge={t.badge} px={42} />
+        <div className="flex items-start justify-between gap-2">
+          <div className="transition-transform duration-200 group-hover:scale-105">
+            <ToolGlyph category={t.category} iconName={t.iconName} convert={t.convert} badge={t.badge} px={46} />
           </div>
           {t.free ? (
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-600">{strings.free}</span>
+            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>
           ) : t.ai ? (
-            <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-600">
-              <Zap className="h-2.5 w-2.5 fill-orange-500 text-orange-500" /> {strings.ai}
+            <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+              <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
             </span>
           ) : null}
         </div>
-        <h3 className="mt-4 font-semibold text-ink-900">{t.name}</h3>
-        <p className="mt-1 text-sm leading-relaxed text-ink-500">{t.short}</p>
+        <h3 className="mt-3 text-sm font-semibold text-ink-900">{t.name}</h3>
+        <p className="mt-0.5 truncate text-xs text-ink-500">{t.short}</p>
       </Link>
     );
   }
@@ -186,25 +186,29 @@ export function HomeExplorer({
             <div className="space-y-12">
               {grouped.map(({ chip, items }) => {
                 const th = categoryTheme(chip.id);
+                const g = categoryGradient(chip.id);
                 const total = items.length;
                 const preview = items.slice(0, PREVIEW_PER_CATEGORY);
                 return (
                   <div key={chip.id}>
                     <div className="flex items-center gap-2.5">
-                      <div className={cn("grid h-9 w-9 place-items-center rounded-lg", th.chipBg, th.chipText)}>
-                        <ToolIcon name={chip.iconName} className="h-[18px] w-[18px]" />
-                      </div>
+                      <span
+                        className="grid h-8 w-8 place-items-center rounded-full text-white shadow-sm"
+                        style={{ backgroundImage: `linear-gradient(135deg, ${g.from}, ${g.to})` }}
+                      >
+                        <ToolIcon name={chip.iconName} size={16} color="#fff" strokeWidth={2} />
+                      </span>
                       <h2 className="text-xl font-bold tracking-tight text-ink-900">{categoryLabels[chip.id] ?? chip.label}</h2>
                       {total > PREVIEW_PER_CATEGORY && (
                         <button
                           onClick={() => { setActive(chip.id); setQuery(""); }}
-                          className={cn("ml-auto inline-flex items-center gap-1 text-sm font-medium hover:underline", th.accentText)}
+                          className={cn("ml-auto inline-flex items-center gap-1 text-sm font-semibold hover:underline", th.accentText)}
                         >
                           {strings.seeAll.replace("{n}", String(total))} <ArrowRight className="h-3.5 w-3.5" />
                         </button>
                       )}
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
+                    <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>
@@ -212,7 +216,7 @@ export function HomeExplorer({
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
               {filtered.map((t) => <Card key={t.slug} t={t} />)}
             </div>
           )}

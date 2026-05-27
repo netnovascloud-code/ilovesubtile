@@ -2,17 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, ArrowRight, Zap } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
-import { categoryTheme, categoryGradient } from "@/lib/category-theme";
-import type { ToolCardSpec, ToolCategory, ComingSoonTool } from "@/lib/tools-config";
+import { categoryTheme, categoryAccent } from "@/lib/category-theme";
+import type { ToolCardSpec, ToolCategory } from "@/lib/tools-config";
 
 type CategoryChip = { id: ToolCategory; label: string; iconName: string };
 export type HomeSuggestion = { label: string; query: string; category: ToolCategory };
-
-type Card = ToolCardSpec & { comingSoon?: boolean };
 
 export type HomeStrings = {
   title: string;
@@ -20,16 +18,13 @@ export type HomeStrings = {
   placeholder: string;
   all: string;
   suggestions: HomeSuggestion[];
-  free: string;
   ai: string;
-  soon: string;
   seeAll: string; // "{n}" placeholder
   empty: string;
 };
 
-const PREVIEW_PER_CATEGORY = 6;
+const PREVIEW_PER_CATEGORY = 8;
 
-// Light synonym expansion so common phrasings still match.
 const SYNONYMS: Record<string, string[]> = {
   photo: ["image"], photos: ["image"], picture: ["image"], pic: ["image"],
   pics: ["image"], js: ["javascript"], regexp: ["regex"], yml: ["yaml"],
@@ -37,14 +32,12 @@ const SYNONYMS: Record<string, string[]> = {
 
 export function HomeExplorer({
   tools,
-  comingSoon = [],
   categories,
   categoryLabels,
   strings,
   prefix = "",
 }: {
   tools: ToolCardSpec[];
-  comingSoon?: ComingSoonTool[];
   categories: CategoryChip[];
   categoryLabels: Record<string, string>;
   strings: HomeStrings;
@@ -55,33 +48,23 @@ export function HomeExplorer({
 
   const q = query.trim().toLowerCase();
 
-  // Real tools first, then the planned (coming-soon) catalog as disabled cards.
-  const allCards = useMemo<Card[]>(() => {
-    const cs: Card[] = comingSoon.map((c) => ({
-      slug: c.slug, name: c.name, short: "", category: c.category, tone: "slate",
-      iconName: c.iconName, keywords: c.name, free: false, ai: false, comingSoon: true,
-    }));
-    return [...tools, ...cs];
-  }, [tools, comingSoon]);
-
-  // Surface every category that has at least one card (real or planned).
   const presentCategories = useMemo(() => {
-    const present = new Set(allCards.map((t) => t.category));
+    const present = new Set(tools.map((t) => t.category));
     return categories.filter((c) => present.has(c.id));
-  }, [allCards, categories]);
+  }, [tools, categories]);
 
   const filtered = useMemo(() => {
-    if (!q) return allCards.filter((t) => active === "all" || t.category === active);
+    if (!q) return tools.filter((t) => active === "all" || t.category === active);
     const terms = [q, ...(SYNONYMS[q] ?? [])];
-    return allCards.filter((t) => {
+    return tools.filter((t) => {
       if (active !== "all" && t.category !== active) return false;
       const hay = `${t.name} ${t.short} ${t.keywords} ${t.slug.replace(/-/g, " ")}`.toLowerCase();
       return terms.some((term) => hay.includes(term));
     });
-  }, [allCards, active, q]);
+  }, [tools, active, q]);
 
   const grouped = useMemo(() => {
-    const map = new Map<ToolCategory, Card[]>();
+    const map = new Map<ToolCategory, ToolCardSpec[]>();
     for (const t of filtered) {
       const arr = map.get(t.category) ?? [];
       arr.push(t);
@@ -94,54 +77,30 @@ export function HomeExplorer({
 
   const showGrouped = !q && active === "all";
 
-  function CardBadge({ t }: { t: Card }) {
-    if (t.comingSoon) return <span className="rounded-full bg-ink-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-ink-400">{strings.soon}</span>;
-    if (t.free) return <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-emerald-700">{strings.free}</span>;
-    if (t.ai) return (
-      <span className="inline-flex items-center gap-0.5 rounded-full bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">
-        <Zap className="h-2.5 w-2.5 fill-white" /> {strings.ai}
-      </span>
-    );
-    return null;
-  }
-
-  function Card({ t }: { t: Card }) {
-    const th = categoryTheme(t.category);
-    const body = (
-      <>
-        <span className="absolute right-2 top-2"><CardBadge t={t} /></span>
-        <ToolGlyph category={t.category} iconName={t.iconName} px={44} />
-        <h3 className="mt-2 text-[13px] font-semibold leading-tight text-ink-900">{t.name}</h3>
-      </>
-    );
-    if (t.comingSoon) {
-      return (
-        <div
-          title={`${t.name} — ${strings.soon}`}
-          className="relative flex cursor-default flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-3 text-center opacity-60 shadow-card"
-        >
-          {body}
-        </div>
-      );
-    }
+  function Card({ t }: { t: ToolCardSpec }) {
     return (
       <Link
         href={`${prefix}/${t.slug}`}
-        title={t.short}
-        className={cn(
-          "group relative flex flex-col items-center rounded-xl border-b-2 border-transparent bg-white p-3 text-center shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-cardHover",
-          th.hoverBorderB,
-        )}
+        className="group flex min-h-[170px] flex-col rounded-xl border border-ink-100 bg-white p-5 text-left shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-ink-200 hover:shadow-cardHover"
       >
-        {body}
+        <div className="relative w-fit">
+          <ToolGlyph category={t.category} iconName={t.iconName} px={52} />
+          {t.ai && (
+            <span className="absolute -right-3.5 -top-1 rounded-md bg-ink-900/80 px-1 py-0.5 text-[8px] font-bold uppercase tracking-[0.08em] text-white">
+              {strings.ai}
+            </span>
+          )}
+        </div>
+        <h3 className="mt-4 font-semibold text-ink-900">{t.name}</h3>
+        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-500">{t.short}</p>
       </Link>
     );
   }
 
   return (
     <>
-      {/* Search hero — ice-blue fading into pure white over ~180px (no hard edge) */}
-      <section style={{ backgroundImage: "linear-gradient(to bottom, #F0F7FF 0px, #FFFFFF 180px)" }}>
+      {/* Search hero — pure white */}
+      <section className="bg-white">
         <div className="container py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight text-ink-900 md:text-[2.75rem] md:leading-tight">{strings.title}</h1>
@@ -154,10 +113,9 @@ export function HomeExplorer({
                 autoFocus
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={strings.placeholder}
-                className="w-full rounded-2xl border border-ink-200/70 bg-white py-5 pl-14 pr-5 text-base text-ink-900 shadow-[0_10px_40px_-12px_rgb(15_23_42_/_0.25)] outline-none transition-shadow placeholder:text-ink-300 focus:border-brand-300 focus:shadow-[0_12px_48px_-12px_rgb(45_107_228_/_0.35)] md:text-lg"
+                className="w-full rounded-2xl border border-ink-200/70 bg-white py-5 pl-14 pr-5 text-base text-ink-900 shadow-[0_10px_40px_-12px_rgb(15_23_42_/_0.2)] outline-none transition-shadow placeholder:text-ink-300 focus:border-brand-300 focus:shadow-[0_12px_48px_-12px_rgb(45_107_228_/_0.3)] md:text-lg"
               />
             </div>
-            {/* Colour-coded quick suggestions */}
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {strings.suggestions.map((s) => {
                 const th = categoryTheme(s.category);
@@ -207,27 +165,21 @@ export function HomeExplorer({
         </div>
       </section>
 
-      {/* Tool grid */}
-      <section id="tools" className="scroll-mt-20 bg-white">
-        <div className="container pb-16 pt-4">
+      {/* Tool grid — light grey page like iLovePDF, white cards */}
+      <section id="tools" className="scroll-mt-20 bg-surface">
+        <div className="container py-12">
           {filtered.length === 0 ? (
             <p className="py-16 text-center text-ink-500">{strings.empty}</p>
           ) : showGrouped ? (
             <div className="space-y-12">
               {grouped.map(({ chip, items }) => {
                 const th = categoryTheme(chip.id);
-                const g = categoryGradient(chip.id);
                 const total = items.length;
                 const preview = items.slice(0, PREVIEW_PER_CATEGORY);
                 return (
                   <div key={chip.id}>
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        className="grid h-8 w-8 place-items-center rounded-full text-white shadow-sm"
-                        style={{ backgroundImage: `linear-gradient(135deg, ${g.from}, ${g.to})` }}
-                      >
-                        <ToolIcon name={chip.iconName} size={16} color="#fff" strokeWidth={2} />
-                      </span>
+                    <div className="flex items-center gap-2">
+                      <ToolIcon name={chip.iconName} size={20} color={categoryAccent(chip.id)} strokeWidth={2} />
                       <h2 className="text-xl font-bold tracking-tight text-ink-900">{categoryLabels[chip.id] ?? chip.label}</h2>
                       {total > PREVIEW_PER_CATEGORY && (
                         <button
@@ -238,7 +190,7 @@ export function HomeExplorer({
                         </button>
                       )}
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
+                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>
@@ -246,7 +198,7 @@ export function HomeExplorer({
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
               {filtered.map((t) => <Card key={t.slug} t={t} />)}
             </div>
           )}

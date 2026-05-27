@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
-import { TOOLS, CATEGORIES, COMING_SOON, toCardSpec } from "@/lib/tools-config";
+import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { getStrings } from "@/lib/i18n/strings";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
 import { SITE_URL } from "@/lib/utils";
@@ -48,7 +48,6 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
     <div dir={rtl ? "rtl" : undefined}>
       <HomeExplorer
         tools={tools}
-        comingSoon={COMING_SOON}
         categories={categories}
         categoryLabels={categoryLabels}
         prefix={localePath(locale)}
@@ -64,9 +63,7 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
             { label: "Translate text", query: "translate", category: "text-ai" },
             { label: "Subtitles", query: "subtitle", category: "subtitles" },
           ],
-          free: "Free",
           ai: "AI",
-          soon: "Soon",
           seeAll: "See all {n} tools",
           empty: "No tool matches your search yet.",
         }}

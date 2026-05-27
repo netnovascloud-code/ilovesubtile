@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
-import { TOOLS, CATEGORIES, COMING_SOON, toCardSpec } from "@/lib/tools-config";
+import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { getStrings } from "@/lib/i18n/strings";
 
 export default function Home() {
@@ -14,7 +14,6 @@ export default function Home() {
     <>
       <HomeExplorer
         tools={tools}
-        comingSoon={COMING_SOON}
         categories={categories}
         categoryLabels={categoryLabels}
         strings={{
@@ -29,9 +28,7 @@ export default function Home() {
             { label: "Translate text", query: "translate", category: "text-ai" },
             { label: "Subtitles", query: "subtitle", category: "subtitles" },
           ],
-          free: "Free",
           ai: "AI",
-          soon: "Soon",
           seeAll: "See all {n} tools",
           empty: "No tool matches your search yet.",
         }}

@@ -32,6 +32,7 @@ import { ZipExtractClient } from "@/components/tools/clients/ZipExtractClient";
 import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient";
 import { PendingClient } from "@/components/tools/clients/PendingClient";
 import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
+import { RemoveBackgroundClient } from "@/components/tools/clients/RemoveBackgroundClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -141,6 +142,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <FfmpegToolClient slug={tool.slug} category={tool.category} />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "remove-background") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <RemoveBackgroundClient />
       </ToolPageShell>
     );
   }

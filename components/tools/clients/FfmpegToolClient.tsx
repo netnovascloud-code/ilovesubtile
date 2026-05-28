@@ -99,15 +99,39 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
       )}
 
       {tool.options && tool.options.length > 0 && file && (
-        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-ink-100 bg-white p-3">
-          {tool.options.map((o) => (
-            <label key={o.id} className="flex items-center gap-2 text-sm text-ink-700">
-              <span className="font-medium">{o.label}</span>
-              <select value={opt[o.id]} onChange={(e) => setOpt((s) => ({ ...s, [o.id]: e.target.value }))} className="rounded-md border border-ink-200 bg-white px-2 py-1 text-sm">
-                {o.values.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
-              </select>
-            </label>
-          ))}
+        <div className="flex flex-wrap items-center gap-4 rounded-lg border border-ink-100 bg-white p-3">
+          {tool.options.map((o) => {
+            const type = "type" in o ? o.type : "select";
+            if (type === "number" || type === "range") {
+              const num = o as Extract<typeof o, { type: "number" | "range" }>;
+              return (
+                <label key={o.id} className="flex items-center gap-2 text-sm text-ink-700">
+                  <span className="font-medium">{o.label}</span>
+                  <input
+                    type={type === "range" ? "range" : "number"}
+                    min={num.min}
+                    max={num.max}
+                    step={num.step ?? 1}
+                    value={opt[o.id] ?? num.default}
+                    onChange={(e) => setOpt((s) => ({ ...s, [o.id]: e.target.value }))}
+                    className={type === "range"
+                      ? "w-40 accent-brand-500"
+                      : "w-24 rounded-md border border-ink-200 bg-white px-2 py-1 text-sm"}
+                  />
+                  {type === "range" && <span className="w-10 text-right font-mono text-xs text-ink-500">{opt[o.id] ?? num.default}{num.unit ? ` ${num.unit}` : ""}</span>}
+                </label>
+              );
+            }
+            const sel = o as Extract<typeof o, { type?: "select"; values: { id: string; label: string }[] }>;
+            return (
+              <label key={o.id} className="flex items-center gap-2 text-sm text-ink-700">
+                <span className="font-medium">{o.label}</span>
+                <select value={opt[o.id] ?? sel.default} onChange={(e) => setOpt((s) => ({ ...s, [o.id]: e.target.value }))} className="rounded-md border border-ink-200 bg-white px-2 py-1 text-sm">
+                  {sel.values.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
+                </select>
+              </label>
+            );
+          })}
         </div>
       )}
 

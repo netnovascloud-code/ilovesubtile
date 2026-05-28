@@ -1240,7 +1240,7 @@ TOOLS.push(
     "Cut Audio Online — Free Tool | Wyrlo",
     "Cut and trim MP3, WAV and other audio files between two timestamps.",
     "cut audio", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
-    [{ title: "Upload your audio", body: "Any common format." }, { title: "Set start and end", body: "Down to the millisecond." }, { title: "Download the clip", body: "Just the slice you wanted." }]),
+    [{ title: "Upload your audio", body: "Any common format." }, { title: "Set start and end", body: "Down to the millisecond." }, { title: "Download the clip", body: "Just the slice you wanted." }], false),
   avTool("merge-audio", Combine, "audio", "Merge Audio", "Concatenate multiple audio files into one.",
     "Merge Audio Online — Combine MP3 / WAV",
     "Merge Audio Online — Free Tool | Wyrlo",
@@ -1258,13 +1258,13 @@ TOOLS.push(
     "Change Volume Online — Free Tool | Wyrlo",
     "Increase or decrease the volume of any MP3 or WAV without distortion.",
     "change audio volume", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
-    [{ title: "Upload your audio", body: "Any format." }, { title: "Set the gain", body: "From −12 dB to +12 dB." }, { title: "Download the result", body: "New balanced level." }]),
+    [{ title: "Upload your audio", body: "Any format." }, { title: "Set the gain", body: "From −12 dB to +12 dB." }, { title: "Download the result", body: "New balanced level." }], false),
   avTool("change-speed", Gauge, "audio", "Change Audio Speed", "Speed up or slow down audio playback.",
     "Change Audio Speed Online — Adjust Tempo",
     "Change Audio Speed Online — Free Tool | Wyrlo",
     "Speed up or slow down any audio file without changing pitch.",
     "change audio speed", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
-    [{ title: "Upload your audio", body: "Any format." }, { title: "Pick a speed", body: "0.5× to 2× normal." }, { title: "Download the result", body: "Same pitch, new tempo." }]),
+    [{ title: "Upload your audio", body: "Any format." }, { title: "Pick a speed", body: "0.5× to 2× normal." }, { title: "Download the result", body: "Same pitch, new tempo." }], false),
 );
 
 TOOLS.push(
@@ -1291,7 +1291,7 @@ TOOLS.push(
     "Trim Video Online — Free Tool | Wyrlo",
     "Cut any video between two timestamps. Lossless when possible.",
     "trim video", ["mp4", "mov", "mkv", "webm"], "Video",
-    [{ title: "Upload your video", body: "Any common container." }, { title: "Set start and end", body: "Down to the second." }, { title: "Download the clip", body: "Just the part you want." }]),
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Set start and end", body: "Down to the second." }, { title: "Download the clip", body: "Just the part you want." }], false),
   avTool("mp4-to-webm", Video, "video", "MP4 to WebM", "Convert MP4 to web-optimised WebM.",
     "MP4 to WebM Online — Web-optimised Video",
     "MP4 to WebM Online — Free | Wyrlo",
@@ -1303,13 +1303,13 @@ TOOLS.push(
     "Resize Video Online — Free | Wyrlo",
     "Resize MP4, MOV and other videos to any resolution.",
     "resize video", ["mp4", "mov", "mkv", "webm"], "Video",
-    [{ title: "Upload your video", body: "Any source resolution." }, { title: "Enter target size", body: "Lock the ratio or go custom." }, { title: "Download the result", body: "Right dimensions." }]),
+    [{ title: "Upload your video", body: "Any source resolution." }, { title: "Enter target size", body: "Lock the ratio or go custom." }, { title: "Download the result", body: "Right dimensions." }], false),
   avTool("rotate-video", RotateCw, "video", "Rotate Video", "Rotate a video by 90, 180 or 270 degrees.",
     "Rotate Video Online — Fix Video Orientation",
     "Rotate Video Online — Free | Wyrlo",
     "Fix sideways or upside-down videos in one click.",
     "rotate video", ["mp4", "mov", "mkv", "webm"], "Video",
-    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a rotation", body: "90°, 180° or 270°." }, { title: "Download the result", body: "Right way up." }]),
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a rotation", body: "90°, 180° or 270°." }, { title: "Download the result", body: "Right way up." }], false),
   avTool("add-watermark", Type, "video", "Add Watermark to Video", "Burn a logo or text watermark into a video.",
     "Add Watermark to Video — Logo & Text Overlay",
     "Add Watermark Online — Free | Wyrlo",
@@ -1344,7 +1344,7 @@ TOOLS.push(
 
 // ── Images — Background remover (client-side via @imgly/background-removal) ─
 TOOLS.push({
-  slug: "remove-background", phase: 3, kind: "ffmpeg", category: "images", icon: Eraser, tone: "green",
+  slug: "remove-background", phase: 3, kind: "client", category: "images", icon: Eraser, tone: "green",
   name: "Remove Background",
   short: "Cut out a clean transparent PNG, in seconds.",
   h1: "Remove Background from Image Online Free — AI Powered, In-browser",
@@ -1357,7 +1357,7 @@ TOOLS.push({
     { title: "AI cuts out the subject", body: "Runs in your browser via WebAssembly, no upload." },
     { title: "Download transparent PNG", body: "Ready for design, slides or e-commerce." },
   ],
-  faqs: codeFaqs("Background Remover"), pending: true,
+  faqs: codeFaqs("Background Remover"),
 });
 
 // ── Utilities — QR generator ──────────────────────────────────────────────

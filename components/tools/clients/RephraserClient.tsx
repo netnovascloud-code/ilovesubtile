@@ -5,6 +5,7 @@ import { Copy, Check, Sparkles, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { callTool } from "@/lib/tool-api";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 const STYLES = [
   "Professional", "Casual", "Academic", "Creative",
@@ -136,6 +137,14 @@ export function RephraserClient() {
 
   return (
     <div className="space-y-4">
+      <TemplatesBar
+        tool="rephraser"
+        settings={{ tab, style }}
+        onApply={(s) => {
+          if (s.tab === "correct" || s.tab === "reformulate") setTab(s.tab);
+          if (typeof s.style === "string") setStyle(s.style);
+        }}
+      />
       {/* Tabs */}
       <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">
         {(["correct", "reformulate"] as const).map((t) => (

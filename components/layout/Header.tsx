@@ -29,6 +29,7 @@ export function Header() {
     { href: "/translator", label: "Translator" },
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
+    { href: "/batch", label: "Batch" },
     { href: localePath(locale, "pricing"), label: t.pricing },
     { href: localePath(locale, "api"), label: t.api },
   ];

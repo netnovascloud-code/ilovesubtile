@@ -37,6 +37,8 @@ import { PdfToTextClient } from "@/components/tools/clients/PdfToTextClient";
 import { PdfToJpgClient } from "@/components/tools/clients/PdfToJpgClient";
 import { WordToPdfClient } from "@/components/tools/clients/WordToPdfClient";
 import { HtmlToPdfClient } from "@/components/tools/clients/HtmlToPdfClient";
+import { ExcelToPdfClient } from "@/components/tools/clients/ExcelToPdfClient";
+import { CompressPdfClient } from "@/components/tools/clients/CompressPdfClient";
 import { WatermarkVideoClient } from "@/components/tools/clients/WatermarkVideoClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
@@ -189,6 +191,20 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <WatermarkVideoClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "excel-to-pdf") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <ExcelToPdfClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "compress-pdf") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <CompressPdfClient />
       </ToolPageShell>
     );
   }

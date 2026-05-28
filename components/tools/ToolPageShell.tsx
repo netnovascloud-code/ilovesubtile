@@ -105,7 +105,7 @@ export function ToolPageShell({
                 )}
               </div>
               <p className="mt-3 max-w-2xl text-base text-ink-500">{description}</p>
-              <QuotaLine />
+              {!tool.pending && (tool.kind === "ai" || tool.kind === "edge") && <QuotaLine />}
             </div>
           </div>
         </div>

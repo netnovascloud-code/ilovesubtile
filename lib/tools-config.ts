@@ -1209,11 +1209,11 @@ const avFaqs = (name: string): ToolFaq[] => [
 const avTool = (
   slug: string, icon: LucideIcon, category: "audio" | "video", name: string, short: string, h1: string,
   metaTitle: string, metaDescription: string, primaryKeyword: string, accept: string[], outputType: string,
-  steps: { title: string; body: string }[],
+  steps: { title: string; body: string }[], pending = true,
 ): ToolDefinition => ({
   slug, phase: 3, kind: "ffmpeg", category, icon, tone: category === "audio" ? "amber" : "violet",
   name, short, h1, metaTitle, metaDescription, primaryKeyword,
-  accept, freeMaxMb: 200, outputType, steps, faqs: avFaqs(name), pending: true,
+  accept, freeMaxMb: 200, outputType, steps, faqs: avFaqs(name), pending: pending || undefined,
 });
 
 TOOLS.push(
@@ -1222,19 +1222,19 @@ TOOLS.push(
     "MP3 to WAV Online — Free Converter | Wyrlo",
     "Convert MP3 files to lossless WAV in seconds, free.",
     "mp3 to wav", ["mp3"], "WAV",
-    [{ title: "Upload your MP3", body: "Any quality." }, { title: "We re-encode to WAV", body: "Lossless PCM output." }, { title: "Download your WAV", body: "Ready for editing." }]),
+    [{ title: "Upload your MP3", body: "Any quality." }, { title: "We re-encode to WAV", body: "Lossless PCM output." }, { title: "Download your WAV", body: "Ready for editing." }], false),
   avTool("wav-to-mp3", Music, "audio", "WAV to MP3", "Compress WAV to MP3 at the bitrate you choose.",
     "WAV to MP3 Online — Compress Audio",
     "WAV to MP3 Online — Free Converter | Wyrlo",
     "Convert WAV files to MP3 with custom bitrate. Free and fast.",
     "wav to mp3", ["wav"], "MP3",
-    [{ title: "Upload your WAV", body: "Any sample rate." }, { title: "Pick a bitrate", body: "128, 192, 256 or 320 kbps." }, { title: "Download your MP3", body: "Smaller, portable." }]),
+    [{ title: "Upload your WAV", body: "Any sample rate." }, { title: "Pick a bitrate", body: "128, 192, 256 or 320 kbps." }, { title: "Download your MP3", body: "Smaller, portable." }], false),
   avTool("compress-audio", Shrink, "audio", "Compress Audio", "Shrink audio files without losing clarity.",
     "Compress Audio Online — Reduce MP3 / WAV Size",
     "Compress Audio Online — Free Tool | Wyrlo",
     "Reduce the size of MP3, WAV or M4A files. Pick a target bitrate.",
     "compress audio", ["mp3", "wav", "m4a", "aac", "flac", "ogg"], "MP3",
-    [{ title: "Upload your audio", body: "Any common format." }, { title: "Pick a quality", body: "Lower bitrate = smaller file." }, { title: "Download the result", body: "Same audio, less weight." }]),
+    [{ title: "Upload your audio", body: "Any common format." }, { title: "Pick a quality", body: "Lower bitrate = smaller file." }, { title: "Download the result", body: "Same audio, less weight." }], false),
   avTool("cut-audio", Scissors, "audio", "Cut Audio", "Trim audio between two timestamps.",
     "Cut Audio Online — Trim MP3 / WAV",
     "Cut Audio Online — Free Tool | Wyrlo",
@@ -1252,7 +1252,7 @@ TOOLS.push(
     "Extract Audio from Video — Free | Wyrlo",
     "Extract the audio track from MP4, MOV, MKV, WebM and more — to MP3 or WAV.",
     "extract audio from video", ["mp4", "mov", "mkv", "webm", "avi"], "MP3",
-    [{ title: "Upload your video", body: "Any common container." }, { title: "We extract the audio", body: "MP3 or WAV." }, { title: "Download the track", body: "Just the sound." }]),
+    [{ title: "Upload your video", body: "Any common container." }, { title: "We extract the audio", body: "MP3 or WAV." }, { title: "Download the track", body: "Just the sound." }], false),
   avTool("change-volume", Volume2, "audio", "Change Audio Volume", "Boost or lower the volume of an audio file.",
     "Change Audio Volume Online — Adjust Loudness",
     "Change Volume Online — Free Tool | Wyrlo",
@@ -1273,19 +1273,19 @@ TOOLS.push(
     "Compress Video Online — Free Tool | Wyrlo",
     "Shrink MP4, MOV and other videos — perfect for email and the web.",
     "compress video", ["mp4", "mov", "mkv", "webm", "avi"], "MP4",
-    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a quality", body: "Balanced default or custom." }, { title: "Download the result", body: "Much smaller file." }]),
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a quality", body: "Balanced default or custom." }, { title: "Download the result", body: "Much smaller file." }], false),
   avTool("mp4-to-gif", Film, "video", "MP4 to GIF", "Turn a short video clip into a GIF.",
     "MP4 to GIF Online — Convert Video to GIF",
     "MP4 to GIF Online — Free | Wyrlo",
     "Convert any MP4 or MOV into an animated GIF — perfect for social and docs.",
     "mp4 to gif", ["mp4", "mov", "webm"], "GIF",
-    [{ title: "Upload your clip", body: "A few seconds is best." }, { title: "Pick a size and FPS", body: "Smaller = lighter GIF." }, { title: "Download the GIF", body: "Animated, ready to share." }]),
+    [{ title: "Upload your clip", body: "A few seconds is best." }, { title: "Pick a size and FPS", body: "Smaller = lighter GIF." }, { title: "Download the GIF", body: "Animated, ready to share." }], false),
   avTool("gif-to-mp4", Film, "video", "GIF to MP4", "Convert animated GIFs into compact MP4 videos.",
     "GIF to MP4 Online — Animated GIF to Video",
     "GIF to MP4 Online — Free | Wyrlo",
     "Turn GIFs into MP4 — much smaller files at the same playback.",
     "gif to mp4", ["gif"], "MP4",
-    [{ title: "Upload your GIF", body: "Any size." }, { title: "We re-encode to MP4", body: "Same loop, smaller file." }, { title: "Download the MP4", body: "Ready for the web." }]),
+    [{ title: "Upload your GIF", body: "Any size." }, { title: "We re-encode to MP4", body: "Same loop, smaller file." }, { title: "Download the MP4", body: "Ready for the web." }], false),
   avTool("trim-video", Scissors, "video", "Trim Video", "Cut a video between two timestamps.",
     "Trim Video Online — Cut MP4 / MOV",
     "Trim Video Online — Free Tool | Wyrlo",
@@ -1297,7 +1297,7 @@ TOOLS.push(
     "MP4 to WebM Online — Free | Wyrlo",
     "Convert MP4 to WebM for faster, lighter web playback.",
     "mp4 to webm", ["mp4", "mov"], "WebM",
-    [{ title: "Upload your MP4", body: "Any size." }, { title: "We re-encode to WebM", body: "Modern, smaller, royalty-free." }, { title: "Download the WebM", body: "Optimised for the web." }]),
+    [{ title: "Upload your MP4", body: "Any size." }, { title: "We re-encode to WebM", body: "Modern, smaller, royalty-free." }, { title: "Download the WebM", body: "Optimised for the web." }], false),
   avTool("resize-video", Scaling, "video", "Resize Video", "Set an exact width and height for any video.",
     "Resize Video Online — Change Video Resolution",
     "Resize Video Online — Free | Wyrlo",
@@ -1341,6 +1341,24 @@ TOOLS.push(
     faqs: codeFaqs("Extract ZIP"),
   },
 );
+
+// ── Images — Background remover (client-side via @imgly/background-removal) ─
+TOOLS.push({
+  slug: "remove-background", phase: 3, kind: "ffmpeg", category: "images", icon: Eraser, tone: "green",
+  name: "Remove Background",
+  short: "Cut out a clean transparent PNG, in seconds.",
+  h1: "Remove Background from Image Online Free — AI Powered, In-browser",
+  metaTitle: "Remove Background from Image Free — In-browser AI | Wyrlo",
+  metaDescription: "Erase the background of any photo to a transparent PNG. Runs entirely in your browser via AI WebAssembly — your image is never uploaded.",
+  primaryKeyword: "remove background from image",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "PNG",
+  steps: [
+    { title: "Upload an image", body: "JPG, PNG or WebP — stays on your device." },
+    { title: "AI cuts out the subject", body: "Runs in your browser via WebAssembly, no upload." },
+    { title: "Download transparent PNG", body: "Ready for design, slides or e-commerce." },
+  ],
+  faqs: codeFaqs("Background Remover"), pending: true,
+});
 
 // ── Utilities — QR generator ──────────────────────────────────────────────
 TOOLS.push(
@@ -1395,7 +1413,9 @@ export function toCardSpec(t: ToolDefinition): ToolCardSpec {
     keywords: t.primaryKeyword,
     // Pure client-side tools are free & unlimited (no AI, no quota, no ads).
     free: t.kind === "client",
-    ai: t.kind === "ai" || t.kind === "edge",
+    // AI badge only when the tool actually consumes the AI pipeline — never
+    // for pure-code tools, never for FFmpeg.wasm, and never while pending.
+    ai: !t.pending && (t.kind === "ai" || t.kind === "edge"),
   };
 }
 

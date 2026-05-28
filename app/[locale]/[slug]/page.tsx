@@ -31,6 +31,8 @@ import { ZipCreateClient } from "@/components/tools/clients/ZipCreateClient";
 import { ZipExtractClient } from "@/components/tools/clients/ZipExtractClient";
 import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient";
 import { PendingClient } from "@/components/tools/clients/PendingClient";
+import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
+import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
 import { TEXT_TOOLS } from "@/lib/text-tools";
@@ -132,6 +134,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <PendingClient category={tool.category} accept={tool.accept.map((e) => "." + e).join(",")} />
+      </ToolPageShell>
+    );
+  }
+  if (FFMPEG_TOOLS[tool.slug]) {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <FfmpegToolClient slug={tool.slug} category={tool.category} />
       </ToolPageShell>
     );
   }

@@ -61,6 +61,8 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `Extract the 8-12 most important keywords and key phrases from the user's text. Output ONLY a comma-separated list, most important first.`;
     case "detect-language":
       return `Identify the language of the user's text. Output exactly one line: "<Language name> (<ISO 639-1 code>)". Nothing else.`;
+    case "analyze-file":
+      return `You receive a JSON describing a file the user just dropped, plus a catalogue of available tools. Pick the 3 most relevant tools for what the user likely wants to do. Return ONLY JSON of the shape: {"suggestions":[{"slug":"<tool-slug>","why":"<one short sentence>"}, ... 3 items]}. Use only slugs that appear in the provided catalogue.`;
     default:
       return null;
   }
@@ -73,6 +75,7 @@ const TOOL_BY_TASK: Record<string, string> = {
   "email-pro": "professional-email", "product-description": "product-description",
   hashtags: "hashtag-generator", sentiment: "sentiment-analysis", keywords: "keyword-extractor",
   "detect-language": "detect-language",
+  "analyze-file": "smart-drop",
 };
 
 Deno.serve(async (req) => {
@@ -128,13 +131,15 @@ Deno.serve(async (req) => {
   }
 
   const model = LARGE.has(task) ? "mistral-large-latest" : "mistral-small-latest";
+  const wantsJson = task === "analyze-file";
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model,
       messages: [{ role: "system", content: system }, { role: "user", content: text }],
-      temperature: task === "translate" || task === "grammar" ? 0.1 : task === "humanize" ? 0.85 : 0.4,
+      ...(wantsJson ? { response_format: { type: "json_object" } } : {}),
+      temperature: task === "translate" || task === "grammar" ? 0.1 : task === "humanize" ? 0.85 : wantsJson ? 0.2 : 0.4,
     }),
   });
 

@@ -24,6 +24,7 @@ const FN_MAP: Record<string, string> = {
   "sentiment-analysis": "ai-process",
   "keyword-extractor": "ai-process",
   "detect-language": "ai-process",
+  "smart-drop": "ai-process",
 };
 
 export function toolFunction(slug: string): string | null {

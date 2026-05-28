@@ -1189,7 +1189,7 @@ TOOLS.push(
     "Word to PDF Online — Free Tool | Wyrlo",
     "Convert .doc and .docx documents to PDF with formatting kept intact.",
     "word to pdf", ["doc", "docx"], "PDF",
-    [{ title: "Upload your document", body: ".doc or .docx." }, { title: "We convert it", body: "Fonts and layout preserved." }, { title: "Download the PDF", body: "Ready to share." }], true),
+    [{ title: "Upload your document", body: ".doc or .docx." }, { title: "We convert it", body: "Fonts and layout preserved." }, { title: "Download the PDF", body: "Ready to share." }], false),
   docTool("excel-to-pdf", FileSpreadsheet, "Excel to PDF", "Convert spreadsheets to PDF.",
     "Excel to PDF Online — Convert .xlsx to PDF",
     "Excel to PDF Online — Free Tool | Wyrlo",
@@ -1201,7 +1201,7 @@ TOOLS.push(
     "HTML to PDF Online — Free Tool | Wyrlo",
     "Convert HTML files or remote URLs to a clean PDF using a real browser engine.",
     "html to pdf", ["html", "htm"], "PDF",
-    [{ title: "Upload HTML or paste URL", body: "Static files or live pages." }, { title: "We render the page", body: "Headless browser, no scaling tricks." }, { title: "Download the PDF", body: "Crisp, paginated." }], true),
+    [{ title: "Upload HTML or paste URL", body: "Static files or live pages." }, { title: "We render the page", body: "Headless browser, no scaling tricks." }, { title: "Download the PDF", body: "Crisp, paginated." }], false),
 );
 
 // ── Audio (server-side via FFmpeg — pending until the engine is wired) ────
@@ -1321,7 +1321,7 @@ TOOLS.push(
     "Add Watermark Online — Free | Wyrlo",
     "Burn a logo or text watermark into any MP4 or MOV.",
     "add watermark to video", ["mp4", "mov"], "MP4",
-    [{ title: "Upload your video", body: "Any common container." }, { title: "Add image or text", body: "Pick position and opacity." }, { title: "Download the result", body: "Watermark burned in." }]),
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Add image or text", body: "Pick position and opacity." }, { title: "Download the result", body: "Watermark burned in." }], false),
 );
 
 // ── Archives (real, client-side via JSZip) ────────────────────────────────

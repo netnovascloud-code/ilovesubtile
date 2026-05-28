@@ -5,6 +5,7 @@ import { Upload, X, Download, Loader2, GripVertical } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 type Entry = { id: string; file: File; previewUrl: string };
 
@@ -73,6 +74,14 @@ export function ImagesToPdfClient() {
 
   return (
     <div className="space-y-4">
+      <TemplatesBar
+        tool="images-to-pdf"
+        settings={{ pageSize, margin }}
+        onApply={(s) => {
+          if (typeof s.pageSize === "string") setPageSize(s.pageSize);
+          if (typeof s.margin === "number") setMargin(s.margin);
+        }}
+      />
       <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-blue-300 bg-blue-50/40 px-6 py-10 text-center transition-colors hover:brightness-95">
         <Upload className="h-7 w-7 text-blue-600" />
         <span className="mt-2 font-medium text-ink-900">Add JPG or PNG images</span>

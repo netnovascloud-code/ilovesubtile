@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Upload, X, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 let ffmpegPromise: Promise<unknown> | null = null;
 type FfmpegLike = { exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<unknown>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<unknown>; on: (e: string, h: (ev: { progress: number }) => void) => void };
@@ -115,6 +116,18 @@ export function WatermarkVideoClient() {
           <button onClick={() => { setFile(null); setOutUrl(null); setPhase("idle"); }} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
+
+      <TemplatesBar
+        tool="add-watermark"
+        settings={{ text, pos, size, color, opacity }}
+        onApply={(s) => {
+          if (typeof s.text === "string") setText(s.text);
+          if (typeof s.pos === "string") setPos(s.pos);
+          if (typeof s.size === "number") setSize(s.size);
+          if (typeof s.color === "string") setColor(s.color);
+          if (typeof s.opacity === "number") setOpacity(s.opacity);
+        }}
+      />
 
       <div className="grid gap-3 rounded-lg border border-ink-100 bg-white p-4 md:grid-cols-2">
         <div>

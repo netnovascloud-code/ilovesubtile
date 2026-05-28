@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { callTool } from "@/lib/tool-api";
 import { AdProcessing } from "@/components/ads/AdProcessing";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 const LEVELS = [
   { id: "light", label: "Light" },
@@ -57,6 +58,11 @@ export function HumanizerClient() {
 
   return (
     <div className="space-y-4">
+      <TemplatesBar
+        tool="ai-humanizer"
+        settings={{ level }}
+        onApply={(s) => { if (typeof s.level === "string") setLevel(s.level); }}
+      />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="text-sm text-ink-500">Strength:</span>

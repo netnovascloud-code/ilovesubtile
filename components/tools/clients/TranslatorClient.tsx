@@ -5,6 +5,7 @@ import { Copy, Check, ArrowLeftRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { callTool } from "@/lib/tool-api";
 import { LANGUAGES } from "@/lib/languages";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 const MAX = 5000;
 
@@ -59,6 +60,14 @@ export function TranslatorClient() {
 
   return (
     <div className="space-y-3">
+      <TemplatesBar
+        tool="translator"
+        settings={{ targetLang, register }}
+        onApply={(s) => {
+          if (typeof s.targetLang === "string") setTargetLang(s.targetLang);
+          if (typeof s.register === "string") setRegister(s.register as "" | "formal" | "informal");
+        }}
+      />
       <div className="flex items-center justify-center gap-2">
         <span className="text-sm text-ink-500">Register:</span>
         <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">

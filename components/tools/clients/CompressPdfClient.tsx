@@ -5,6 +5,7 @@ import { Upload, X, Download, Loader2 } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 type PdfJs = {
   GlobalWorkerOptions: { workerSrc: string };
@@ -88,6 +89,12 @@ export function CompressPdfClient() {
           <button onClick={() => { setFile(null); setResultUrl(null); setError(null); }} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
+
+      <TemplatesBar
+        tool="compress-pdf"
+        settings={{ preset }}
+        onApply={(s) => { if (typeof s.preset === "string") setPreset(s.preset); }}
+      />
 
       {file && (
         <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">

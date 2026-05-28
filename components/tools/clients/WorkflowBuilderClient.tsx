@@ -5,6 +5,7 @@ import { Upload, X, Download, Loader2, Plus, ArrowDown, GripVertical, Check } fr
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 import { defaultStep, runStep, STEP_LABELS, type Step, type StepKind } from "@/lib/workflow-engine";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 const MAX_STEPS = 5;
 const ADDABLE: StepKind[] = ["resize", "format", "rotate", "grayscale", "watermark", "to-pdf"];
@@ -97,6 +98,12 @@ export function WorkflowBuilderClient() {
           <button onClick={() => { setFile(null); setSrcUrl(null); setResultUrl(null); }} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
+
+      <TemplatesBar
+        tool="workflow"
+        settings={{ steps }}
+        onApply={(s) => { if (Array.isArray(s.steps)) setSteps(s.steps as Step[]); }}
+      />
 
       <div>
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">

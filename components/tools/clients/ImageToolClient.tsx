@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
 import { IMAGE_TOOLS, resolveOutput, supportsQualityMime } from "@/lib/image-tools";
 import { categoryTheme } from "@/lib/category-theme";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 const TH = categoryTheme("images");
 
@@ -145,6 +146,20 @@ export function ImageToolClient({ slug }: { slug: string }) {
               <X className="h-3.5 w-3.5" /> Change
             </button>
           </div>
+
+          {/* User templates */}
+          <TemplatesBar
+            tool={slug}
+            settings={{ quality, width, height, lockAspect, angle, crop }}
+            onApply={(s) => {
+              if (typeof s.quality === "number") setQuality(s.quality);
+              if (typeof s.width === "number") setWidth(s.width);
+              if (typeof s.height === "number") setHeight(s.height);
+              if (typeof s.lockAspect === "boolean") setLockAspect(s.lockAspect);
+              if (typeof s.angle === "number") setAngle(s.angle);
+              if (s.crop && typeof s.crop === "object") setCrop(s.crop as { x: number; y: number; w: number; h: number });
+            }}
+          />
 
           {/* Controls */}
           <div className="flex flex-wrap items-end gap-4 rounded-lg border border-ink-100 bg-white p-4">

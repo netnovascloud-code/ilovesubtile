@@ -41,6 +41,10 @@ import {
   Smile,
   Tags,
   Calculator,
+  Palette,
+  Ruler,
+  Fingerprint,
+  ShieldCheck,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -50,7 +54,8 @@ export type ToolCategory =
   | "images"
   | "subtitles"
   | "developer"
-  | "text-ai";
+  | "text-ai"
+  | "utilities";
 
 export type ToolFaq = { q: string; a: string };
 
@@ -107,6 +112,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: "subtitles", label: "Subtitles", iconName: "Captions", tone: "indigo", blurb: "Generate, translate, sync and convert subtitles." },
   { id: "developer", label: "Code & Dev", iconName: "Code", tone: "teal", blurb: "Format, convert and encode for developers." },
   { id: "text-ai", label: "Text & AI", iconName: "Sparkles", tone: "green", blurb: "Translate, rephrase, summarise and fix text." },
+  { id: "utilities", label: "Utilities", iconName: "Wrench", tone: "slate", blurb: "Colours, hashes, units, passwords and more — all in-browser." },
 ];
 
 export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntries(
@@ -1051,6 +1057,50 @@ TOOLS.push(
     "Detect the language of any text instantly with AI. Returns the language name and ISO code. Free daily use.",
     "language detector",
     [{ title: "Paste text", body: "In any language." }, { title: "We detect it", body: "Language name + ISO code." }, { title: "Done", body: "Use it to route or translate." }]),
+);
+
+// ── Wyrlo — Utilities (pure client-side, free & unlimited) ─────────────────
+const utilTool = (
+  slug: string, icon: LucideIcon, name: string, short: string, h1: string,
+  metaTitle: string, metaDescription: string, primaryKeyword: string, outputType: string,
+  steps: { title: string; body: string }[],
+): ToolDefinition => ({
+  slug, phase: 3, kind: "client", category: "utilities", icon, tone: "slate",
+  name, short, h1, metaTitle, metaDescription, primaryKeyword,
+  accept: [], freeMaxMb: 0, outputType, steps, faqs: codeFaqs(name),
+});
+
+TOOLS.push(
+  utilTool("color-converter", Palette, "Color Converter", "HEX, RGB, HSL and CMYK side by side.",
+    "Color Converter — HEX, RGB, HSL & CMYK Online",
+    "Color Converter Online — HEX / RGB / HSL / CMYK | Wyrlo",
+    "Convert colours between HEX, RGB, HSL and CMYK in real time. Free, unlimited, in-browser.",
+    "color converter", "Color",
+    [{ title: "Pick a colour", body: "Use the picker or type a HEX value." }, { title: "See every format", body: "RGB, HSL and CMYK update instantly." }, { title: "Copy what you need", body: "One click to copy any format." }]),
+  utilTool("number-base-converter", Binary, "Number Base Converter", "Binary, octal, decimal and hexadecimal in one view.",
+    "Number Base Converter — Binary, Hex, Decimal, Octal",
+    "Number Base Converter Online — Binary / Hex / Decimal | Wyrlo",
+    "Convert numbers between binary, octal, decimal and hexadecimal instantly. Free, unlimited, in-browser.",
+    "number base converter", "Number",
+    [{ title: "Pick a base", body: "Decimal, hex, octal or binary." }, { title: "Type your number", body: "We validate as you type." }, { title: "Get every base", body: "All four representations at once." }]),
+  utilTool("hash-generator", Fingerprint, "Hash Generator", "SHA-1, SHA-256 and SHA-512 of any text.",
+    "Hash Generator — SHA-1, SHA-256, SHA-512 Online",
+    "Hash Generator Online — SHA-1 / SHA-256 / SHA-512 | Wyrlo",
+    "Generate SHA-1, SHA-256 and SHA-512 hashes of any text directly in your browser. Free, unlimited, private.",
+    "sha256 generator", "Hash",
+    [{ title: "Paste your text", body: "Any length, any language." }, { title: "Hashes update live", body: "SHA-1, SHA-256 and SHA-512 instantly." }, { title: "Copy any hash", body: "Hex-encoded, ready to use." }]),
+  utilTool("unit-converter", Ruler, "Unit Converter", "Length, weight, temperature, area and speed.",
+    "Unit Converter — Length, Weight, Temperature & More",
+    "Unit Converter Online — Length / Weight / Temperature | Wyrlo",
+    "Convert length, weight, temperature, area and speed between dozens of units. Free, unlimited, in-browser.",
+    "unit converter", "Value",
+    [{ title: "Pick a category", body: "Length, weight, temperature, area or speed." }, { title: "Type a value", body: "Conversion updates live." }, { title: "Swap & copy", body: "Switch units instantly and copy the result." }]),
+  utilTool("password-generator", ShieldCheck, "Password Generator", "Secure random passwords with strength meter.",
+    "Password Generator — Secure Random Passwords Online",
+    "Password Generator Online — Secure Random Passwords | Wyrlo",
+    "Generate strong random passwords in your browser. Adjust length and character sets. Free, unlimited, private.",
+    "password generator", "Password",
+    [{ title: "Pick options", body: "Length, lowercase, uppercase, digits and symbols." }, { title: "Watch the strength", body: "Live strength meter from weak to very strong." }, { title: "Copy and use", body: "One-click copy — never sent to a server." }]),
 );
 
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(

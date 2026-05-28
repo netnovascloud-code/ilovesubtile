@@ -87,7 +87,7 @@ export function HomeExplorer({
         <div className="relative w-fit">
           <ToolGlyph category={t.category} iconName={t.iconName} px={52} />
           {t.ai && (
-            <span className="absolute -right-4 -top-1.5 rounded-md bg-brand-600 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-white shadow-sm">
+            <span className="absolute -right-4 -top-1.5 rounded-md px-[5px] py-[2px] text-[10px] font-bold uppercase tracking-[0.08em] text-white shadow-sm" style={{ backgroundColor: "#2563EB" }}>
               {strings.ai}
             </span>
           )}

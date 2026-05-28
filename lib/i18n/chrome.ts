@@ -75,7 +75,7 @@ export type ChromeStrings = {
 
 const en: ChromeStrings = {
   nav: { tools: "Tools", pricing: "Pricing", api: "API", login: "Log in", start: "Get started" },
-  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job, all in your browser.", topTools: "Top tools", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
+  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", topTools: "Top tools", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
   card: { open: "Open", pro: "Pro" },
   account: { billing: "Billing", logout: "Log out" },
   upload: { instant: "Instant conversion — runs in your browser, no upload needed", dropOrClick: "Drop your file or click to upload", dropHere: "Drop the file here", formats: "Accepted formats", maxFree: "Max {mb} MB on the free plan.", selectFile: "Select a file", fileTooLarge: "This file is {size}. Free limit is {mb} MB — upgrade to Pro for up to 500 MB." },

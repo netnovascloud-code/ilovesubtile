@@ -26,6 +26,9 @@ export function Header() {
 
   const NAV = [
     { href: `${localePath(locale)}#tools`, label: t.tools },
+    { href: "/translator", label: "Translator" },
+    { href: "/rephraser", label: "Rephraser" },
+    { href: "/ai-humanizer", label: "AI Humanizer" },
     { href: localePath(locale, "pricing"), label: t.pricing },
     { href: localePath(locale, "api"), label: t.api },
   ];

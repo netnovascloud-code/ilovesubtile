@@ -48,6 +48,10 @@ import {
   Calculator,
   Files,
   Scissors,
+  Palette,
+  Ruler,
+  Fingerprint,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -99,6 +103,10 @@ const ICONS: Record<string, LucideIcon> = {
   Calculator,
   Files,
   Scissors,
+  Palette,
+  Ruler,
+  Fingerprint,
+  ShieldCheck,
 };
 
 export function ToolIcon({

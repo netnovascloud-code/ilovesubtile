@@ -1,8 +1,16 @@
 import Link from "next/link";
+import { Heart, ShieldCheck, Sparkles, GitBranch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { getStrings } from "@/lib/i18n/strings";
+
+const WHY = [
+  { icon: Heart, title: "Free to start", body: "No credit card. Use the core tools forever for free." },
+  { icon: ShieldCheck, title: "Files deleted instantly", body: "GDPR-native. Your data never lingers on our servers." },
+  { icon: Sparkles, title: "AI where it counts", body: "Smart features when they help — never gimmicky." },
+  { icon: GitBranch, title: "Chain your conversions", body: "The only platform that connects steps end-to-end." },
+];
 
 export default function Home() {
   const ui = getStrings("en");
@@ -35,6 +43,23 @@ export default function Home() {
         }}
       />
 
+      <section className="border-t border-ink-100 bg-white">
+        <div className="container py-16">
+          <h2 className="text-center text-2xl font-bold tracking-tight text-ink-900 md:text-3xl">Why Wyrlo</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {WHY.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="rounded-xl border border-ink-100 bg-white p-5 shadow-card">
+                <div className="grid h-10 w-10 place-items-center rounded-lg bg-brand-50 text-brand-600">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-semibold text-ink-900">{title}</h3>
+                <p className="mt-1.5 text-sm text-ink-500">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-ink-100 bg-surface">
         <div className="container py-20">
           <div className="rounded-lg border border-ink-100 bg-white p-10 shadow-card md:p-14">
@@ -57,6 +82,7 @@ export default function Home() {
                 {ui.home.upgradeFeatures.map((f) => (
                   <li key={f}>✓ {f}</li>
                 ))}
+                <li className="text-ink-400">✓ Workflow Builder · Batch up to 50 files · Saved templates <span className="ml-1 rounded bg-ink-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-500">Soon</span></li>
               </ul>
             </div>
           </div>

@@ -49,6 +49,10 @@ export const CATEGORY_THEME: Record<ToolCategory, CategoryTheme> = {
     iconBg: "bg-indigo-50", iconText: "text-indigo-600", hoverBorder: "hover:border-indigo-300", hoverBorderB: "hover:border-b-indigo-500",
     chipBg: "bg-indigo-50", chipText: "text-indigo-600", dropBg: "bg-indigo-50/50", dropBorder: "border-indigo-300", accentText: "text-indigo-600",
   },
+  utilities: {
+    iconBg: "bg-slate-100", iconText: "text-slate-700", hoverBorder: "hover:border-slate-300", hoverBorderB: "hover:border-b-slate-500",
+    chipBg: "bg-slate-100", chipText: "text-slate-700", dropBg: "bg-slate-100/50", dropBorder: "border-slate-300", accentText: "text-slate-700",
+  },
 };
 
 export function categoryTheme(cat: ToolCategory): CategoryTheme {
@@ -64,6 +68,7 @@ export const CATEGORY_ACCENT: Record<ToolCategory, string> = {
   subtitles: "#4F46E5",
   developer: "#0891B2",
   "text-ai": "#6366F1",
+  utilities: "#475569",
 };
 
 export function categoryAccent(cat: ToolCategory): string {
@@ -79,6 +84,7 @@ export const CATEGORY_GRADIENT: Record<ToolCategory, { from: string; to: string 
   subtitles: { from: "#3B82F6", to: "#4F46E5" },
   developer: { from: "#22D3EE", to: "#2563EB" },
   "text-ai": { from: "#6366F1", to: "#8B5CF6" },
+  utilities: { from: "#64748B", to: "#334155" },
 };
 
 export function categoryGradient(cat: ToolCategory): { from: string; to: string } {

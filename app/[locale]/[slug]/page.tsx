@@ -18,6 +18,11 @@ import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesC
 import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
 import { TextToolClient } from "@/components/tools/clients/TextToolClient";
 import { RegexClient } from "@/components/tools/clients/RegexClient";
+import { ColorConverterClient } from "@/components/tools/clients/ColorConverterClient";
+import { NumberBaseClient } from "@/components/tools/clients/NumberBaseClient";
+import { HashClient } from "@/components/tools/clients/HashClient";
+import { UnitConverterClient } from "@/components/tools/clients/UnitConverterClient";
+import { PasswordGenClient } from "@/components/tools/clients/PasswordGenClient";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
 import { TEXT_TOOLS } from "@/lib/text-tools";
@@ -172,6 +177,21 @@ export default function LocalisedToolPage({
       break;
     case "regex-tester":
       body = <RegexClient />;
+      break;
+    case "color-converter":
+      body = <ColorConverterClient />;
+      break;
+    case "number-base-converter":
+      body = <NumberBaseClient />;
+      break;
+    case "hash-generator":
+      body = <HashClient />;
+      break;
+    case "unit-converter":
+      body = <UnitConverterClient />;
+      break;
+    case "password-generator":
+      body = <PasswordGenClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

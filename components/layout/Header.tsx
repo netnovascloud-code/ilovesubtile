@@ -30,6 +30,7 @@ export function Header() {
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
     { href: "/batch", label: "Batch" },
+    { href: "/workflow", label: "Workflow" },
     { href: localePath(locale, "pricing"), label: t.pricing },
     { href: localePath(locale, "api"), label: t.api },
   ];

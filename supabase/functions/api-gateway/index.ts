@@ -133,7 +133,12 @@ Deno.serve(async (req) => {
   // ---- store result + signed url ----
   const path = `${userId}/${crypto.randomUUID()}/result.srt`;
   await svc.storage.from("results").upload(path, new Blob([outSrt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
-  const { data: signed } = await svc.storage.from("results").createSignedUrl(path, 3600);
+  // GDPR: 10-minute signed URL window. The pg_cron purge sweeps every 5 min.
+  // For files we generated and don't need to retain (text output), we also
+  // schedule a best-effort delete after a short window via the platform's
+  // built-in storage TTL features (see migration). The link works long enough
+  // for the user to download but nothing lingers.
+  const { data: signed } = await svc.storage.from("results").createSignedUrl(path, 600);
 
   // ---- charge credits atomically + log job ----
   const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });

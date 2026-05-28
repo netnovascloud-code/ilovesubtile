@@ -23,6 +23,14 @@ import { NumberBaseClient } from "@/components/tools/clients/NumberBaseClient";
 import { HashClient } from "@/components/tools/clients/HashClient";
 import { UnitConverterClient } from "@/components/tools/clients/UnitConverterClient";
 import { PasswordGenClient } from "@/components/tools/clients/PasswordGenClient";
+import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
+import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
+import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
+import { ImagesToPdfClient } from "@/components/tools/clients/ImagesToPdfClient";
+import { ZipCreateClient } from "@/components/tools/clients/ZipCreateClient";
+import { ZipExtractClient } from "@/components/tools/clients/ZipExtractClient";
+import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient";
+import { PendingClient } from "@/components/tools/clients/PendingClient";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
 import { TEXT_TOOLS } from "@/lib/text-tools";
@@ -120,6 +128,13 @@ export default function LocalisedToolPage({
   const spec = toClientSpec(tool);
 
   let body: React.ReactNode;
+  if (tool.pending) {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PendingClient category={tool.category} accept={tool.accept.map((e) => "." + e).join(",")} />
+      </ToolPageShell>
+    );
+  }
   if (TEXT_TOOLS[tool.slug] || IMAGE_TOOLS[tool.slug] || AI_TEXT_TOOLS[tool.slug]) {
     body = TEXT_TOOLS[tool.slug]
       ? <TextToolClient slug={tool.slug} />
@@ -192,6 +207,27 @@ export default function LocalisedToolPage({
       break;
     case "password-generator":
       body = <PasswordGenClient />;
+      break;
+    case "merge-pdf":
+      body = <PdfMergeClient />;
+      break;
+    case "split-pdf":
+      body = <PdfSplitClient />;
+      break;
+    case "rotate-pdf":
+      body = <PdfRotateClient />;
+      break;
+    case "images-to-pdf":
+      body = <ImagesToPdfClient />;
+      break;
+    case "create-zip":
+      body = <ZipCreateClient />;
+      break;
+    case "extract-zip":
+      body = <ZipExtractClient />;
+      break;
+    case "qr-generator":
+      body = <QrGeneratorClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

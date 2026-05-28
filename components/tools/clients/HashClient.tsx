@@ -2,26 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { Copy, Check } from "lucide-react";
+import { md5 } from "js-md5";
 
-const ALGOS = ["SHA-1", "SHA-256", "SHA-512"] as const;
+const ALGOS = ["MD5", "SHA-1", "SHA-256", "SHA-512"] as const;
 type Algo = (typeof ALGOS)[number];
 
-async function digest(text: string, algo: Algo): Promise<string> {
+async function compute(text: string, algo: Algo): Promise<string> {
+  if (algo === "MD5") return md5(text);
   const buf = await crypto.subtle.digest(algo, new TextEncoder().encode(text));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 export function HashClient() {
   const [input, setInput] = useState("");
-  const [hashes, setHashes] = useState<Record<Algo, string>>({ "SHA-1": "", "SHA-256": "", "SHA-512": "" });
+  const [hashes, setHashes] = useState<Record<Algo, string>>({ MD5: "", "SHA-1": "", "SHA-256": "", "SHA-512": "" });
   const [copied, setCopied] = useState<Algo | null>(null);
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      if (!input) { if (alive) setHashes({ "SHA-1": "", "SHA-256": "", "SHA-512": "" }); return; }
-      const next = { "SHA-1": "", "SHA-256": "", "SHA-512": "" } as Record<Algo, string>;
-      for (const a of ALGOS) next[a] = await digest(input, a);
+      if (!input) { if (alive) setHashes({ MD5: "", "SHA-1": "", "SHA-256": "", "SHA-512": "" }); return; }
+      const next = { MD5: "", "SHA-1": "", "SHA-256": "", "SHA-512": "" } as Record<Algo, string>;
+      for (const a of ALGOS) next[a] = await compute(input, a);
       if (alive) setHashes(next);
     })();
     return () => { alive = false; };
@@ -51,7 +53,7 @@ export function HashClient() {
           </button>
         </div>
       ))}
-      <p className="text-xs text-ink-400">100% in your browser — SHA-1, SHA-256 and SHA-512 via the WebCrypto API. MD5 isn't included (insecure and not in WebCrypto).</p>
+      <p className="text-xs text-ink-400">100% in your browser — MD5 via js-md5, SHA family via WebCrypto. MD5 should not be used for security-critical hashing.</p>
     </div>
   );
 }

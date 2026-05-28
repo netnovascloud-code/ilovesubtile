@@ -52,6 +52,13 @@ import {
   Ruler,
   Fingerprint,
   ShieldCheck,
+  Combine,
+  Volume2,
+  Gauge,
+  Film,
+  QrCode,
+  Archive,
+  FileArchive,
   type LucideIcon,
 } from "lucide-react";
 
@@ -107,6 +114,13 @@ const ICONS: Record<string, LucideIcon> = {
   Ruler,
   Fingerprint,
   ShieldCheck,
+  Combine,
+  Volume2,
+  Gauge,
+  Film,
+  QrCode,
+  Archive,
+  FileArchive,
 };
 
 export function ToolIcon({

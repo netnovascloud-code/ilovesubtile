@@ -41,10 +41,20 @@ import {
   Smile,
   Tags,
   Calculator,
+  Scissors,
   Palette,
   Ruler,
   Fingerprint,
   ShieldCheck,
+  Combine,
+  Volume2,
+  Gauge,
+  Film,
+  QrCode,
+  Archive,
+  FileArchive,
+  Music,
+  Video,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -55,7 +65,8 @@ export type ToolCategory =
   | "subtitles"
   | "developer"
   | "text-ai"
-  | "utilities";
+  | "utilities"
+  | "archives";
 
 export type ToolFaq = { q: string; a: string };
 
@@ -92,6 +103,8 @@ export type ToolDefinition = {
   steps: { title: string; body: string }[];
   /** Pro-only? (always usable, but feature/limit upgrades for Pro) */
   proOnly?: boolean;
+  /** Tool's processing engine isn't connected yet — UI ships but action button is disabled. */
+  pending?: boolean;
 };
 
 export type CategoryDef = {
@@ -113,6 +126,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: "developer", label: "Code & Dev", iconName: "Code", tone: "teal", blurb: "Format, convert and encode for developers." },
   { id: "text-ai", label: "Text & AI", iconName: "Sparkles", tone: "green", blurb: "Translate, rephrase, summarise and fix text." },
   { id: "utilities", label: "Utilities", iconName: "Wrench", tone: "slate", blurb: "Colours, hashes, units, passwords and more — all in-browser." },
+  { id: "archives", label: "Archives", iconName: "Archive", tone: "amber", blurb: "Create and extract ZIP archives directly in your browser." },
 ];
 
 export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntries(
@@ -1101,6 +1115,245 @@ TOOLS.push(
     "Generate strong random passwords in your browser. Adjust length and character sets. Free, unlimited, private.",
     "password generator", "Password",
     [{ title: "Pick options", body: "Length, lowercase, uppercase, digits and symbols." }, { title: "Watch the strength", body: "Live strength meter from weak to very strong." }, { title: "Copy and use", body: "One-click copy — never sent to a server." }]),
+);
+
+// ── Wyrlo — Documents (PDF tools, client-side via pdf-lib + pending) ──────
+const docFaqs = (name: string): ToolFaq[] => [
+  { q: `Is ${name} free?`, a: `Yes — free with a daily limit on the free plan. Pro unlocks unlimited use and bigger files.` },
+  { q: `Where is the PDF processed?`, a: `Real PDF tools (merge, split, rotate, images→PDF) run entirely in your browser — your file is never uploaded. Server-side tools delete files immediately after download.` },
+  { q: `Will my formatting be preserved?`, a: `Yes, the original structure and metadata are kept as-is whenever the operation allows.` },
+  { q: `Is there a file size limit?`, a: `Free tier supports up to 50 MB. Pro raises this to 500 MB.` },
+  { q: `Do I need to install anything?`, a: `No, ${name} is a web tool — no install, no plugin, no account required for casual use.` },
+];
+const docTool = (
+  slug: string, icon: LucideIcon, name: string, short: string, h1: string, metaTitle: string, metaDescription: string,
+  primaryKeyword: string, accept: string[], outputType: string,
+  steps: { title: string; body: string }[], pending = false,
+): ToolDefinition => ({
+  slug, phase: 3, kind: pending ? "edge" : "client", category: "documents", icon, tone: "rose",
+  name, short, h1, metaTitle, metaDescription, primaryKeyword,
+  accept, freeMaxMb: 50, outputType, steps, faqs: docFaqs(name), pending: pending || undefined,
+});
+
+TOOLS.push(
+  docTool("merge-pdf", Combine, "Merge PDF", "Combine multiple PDFs into one document.",
+    "Merge PDF Online — Combine Multiple PDFs into One",
+    "Merge PDF Online — Free & In-browser | Wyrlo",
+    "Combine multiple PDF files into a single document, in your browser. Drag to reorder, free & unlimited.",
+    "merge pdf", ["pdf"], "PDF",
+    [{ title: "Add your PDFs", body: "Drop multiple files or pick them one by one." }, { title: "Reorder if needed", body: "Drag to put pages in the right order." }, { title: "Download merged PDF", body: "Single file, instantly." }]),
+  docTool("split-pdf", Scissors, "Split PDF", "Split a PDF by page ranges.",
+    "Split PDF Online — Extract Page Ranges",
+    "Split PDF Online — Free & In-browser | Wyrlo",
+    "Split a PDF into one or more page ranges directly in your browser. Multiple ranges produce a ZIP.",
+    "split pdf", ["pdf"], "PDF",
+    [{ title: "Upload your PDF", body: "We read it locally and show the page count." }, { title: "Enter page ranges", body: "Like 1-3, 5, 7-8 — one or many." }, { title: "Download the result", body: "Single PDF or ZIP of PDFs." }]),
+  docTool("rotate-pdf", RotateCw, "Rotate PDF", "Rotate every page by 90, 180 or 270 degrees.",
+    "Rotate PDF Online — Fix PDF Orientation",
+    "Rotate PDF Online — Free & In-browser | Wyrlo",
+    "Rotate every page of a PDF in your browser. 90°, 180° or 270° in one click.",
+    "rotate pdf", ["pdf"], "PDF",
+    [{ title: "Upload your PDF", body: "Stays on your device." }, { title: "Pick a rotation", body: "90°, 180° or 270°." }, { title: "Download fixed PDF", body: "Right way up." }]),
+  docTool("images-to-pdf", ImageIcon, "Images to PDF", "Build a PDF from JPG or PNG images.",
+    "Images to PDF — Convert JPG & PNG to a Single PDF",
+    "Images to PDF Online — Free & In-browser | Wyrlo",
+    "Combine JPG and PNG images into a single PDF in your browser. Reorder, pick page size, set a margin.",
+    "images to pdf", ["jpg", "jpeg", "png"], "PDF",
+    [{ title: "Add images", body: "JPG or PNG — drag to reorder." }, { title: "Choose page size", body: "A4, Letter or fit to image." }, { title: "Download the PDF", body: "Built locally in seconds." }]),
+  docTool("compress-pdf", Shrink, "Compress PDF", "Reduce PDF file size while keeping quality.",
+    "Compress PDF Online — Smaller Files, Same Quality",
+    "Compress PDF Online — Free Tool | Wyrlo",
+    "Shrink the size of any PDF while keeping it readable. Great for email and uploads.",
+    "compress pdf", ["pdf"], "PDF",
+    [{ title: "Upload your PDF", body: "Any size." }, { title: "We optimise it", body: "Smaller file, same quality." }, { title: "Download the result", body: "Compressed PDF, ready to share." }], true),
+  docTool("pdf-to-jpg", ImageIcon, "PDF to JPG", "Convert every page of a PDF into a JPG image.",
+    "PDF to JPG Online — Convert PDF Pages to Images",
+    "PDF to JPG Online — Free Tool | Wyrlo",
+    "Turn every page of a PDF into JPG images. Download individually or as a ZIP.",
+    "pdf to jpg", ["pdf"], "JPG",
+    [{ title: "Upload your PDF", body: "Any number of pages." }, { title: "We render each page", body: "Crisp JPG at the resolution you pick." }, { title: "Download the images", body: "One file per page." }], true),
+  docTool("pdf-to-word", FileText, "PDF to Word", "Convert a PDF into an editable Word document.",
+    "PDF to Word Online — Editable .docx Output",
+    "PDF to Word Online — Free Tool | Wyrlo",
+    "Convert your PDF into an editable Word document while preserving the original layout.",
+    "pdf to word", ["pdf"], "DOCX",
+    [{ title: "Upload your PDF", body: "Any source file." }, { title: "We convert it", body: "Layout and styles preserved." }, { title: "Download .docx", body: "Open in Word, Pages or Google Docs." }], true),
+  docTool("word-to-pdf", FileText, "Word to PDF", "Convert .docx documents to PDF.",
+    "Word to PDF Online — Convert .docx to PDF",
+    "Word to PDF Online — Free Tool | Wyrlo",
+    "Convert .doc and .docx documents to PDF with formatting kept intact.",
+    "word to pdf", ["doc", "docx"], "PDF",
+    [{ title: "Upload your document", body: ".doc or .docx." }, { title: "We convert it", body: "Fonts and layout preserved." }, { title: "Download the PDF", body: "Ready to share." }], true),
+  docTool("excel-to-pdf", FileSpreadsheet, "Excel to PDF", "Convert spreadsheets to PDF.",
+    "Excel to PDF Online — Convert .xlsx to PDF",
+    "Excel to PDF Online — Free Tool | Wyrlo",
+    "Convert Excel spreadsheets (.xls, .xlsx) to PDF with one click.",
+    "excel to pdf", ["xls", "xlsx"], "PDF",
+    [{ title: "Upload your spreadsheet", body: ".xls or .xlsx." }, { title: "We render every sheet", body: "Each sheet on its own page." }, { title: "Download the PDF", body: "Ready to share." }], true),
+  docTool("html-to-pdf", FileCode, "HTML to PDF", "Render an HTML file or web page to PDF.",
+    "HTML to PDF Online — Render Web Pages to PDF",
+    "HTML to PDF Online — Free Tool | Wyrlo",
+    "Convert HTML files or remote URLs to a clean PDF using a real browser engine.",
+    "html to pdf", ["html", "htm"], "PDF",
+    [{ title: "Upload HTML or paste URL", body: "Static files or live pages." }, { title: "We render the page", body: "Headless browser, no scaling tricks." }, { title: "Download the PDF", body: "Crisp, paginated." }], true),
+);
+
+// ── Audio (server-side via FFmpeg — pending until the engine is wired) ────
+const avFaqs = (name: string): ToolFaq[] => [
+  { q: `Is ${name} free?`, a: `Yes — free daily use on every Wyrlo tool. Pro unlocks unlimited runs and bigger files.` },
+  { q: `Where is my file processed?`, a: `On a secure server we control. As soon as your download link is generated, the file is deleted — never stored beyond the conversion.` },
+  { q: `What about quality?`, a: `We use industry-standard FFmpeg encoders with sensible defaults — the same engine professional editors trust.` },
+  { q: `File size limit?`, a: `Free tier up to 200 MB. Pro raises it to 2 GB.` },
+  { q: `Do I need to install anything?`, a: `No — drop your file, get the result, all from your browser.` },
+];
+const avTool = (
+  slug: string, icon: LucideIcon, category: "audio" | "video", name: string, short: string, h1: string,
+  metaTitle: string, metaDescription: string, primaryKeyword: string, accept: string[], outputType: string,
+  steps: { title: string; body: string }[],
+): ToolDefinition => ({
+  slug, phase: 3, kind: "ffmpeg", category, icon, tone: category === "audio" ? "amber" : "violet",
+  name, short, h1, metaTitle, metaDescription, primaryKeyword,
+  accept, freeMaxMb: 200, outputType, steps, faqs: avFaqs(name), pending: true,
+});
+
+TOOLS.push(
+  avTool("mp3-to-wav", Music, "audio", "MP3 to WAV", "Convert MP3 audio to lossless WAV.",
+    "MP3 to WAV Online — Convert Audio Online",
+    "MP3 to WAV Online — Free Converter | Wyrlo",
+    "Convert MP3 files to lossless WAV in seconds, free.",
+    "mp3 to wav", ["mp3"], "WAV",
+    [{ title: "Upload your MP3", body: "Any quality." }, { title: "We re-encode to WAV", body: "Lossless PCM output." }, { title: "Download your WAV", body: "Ready for editing." }]),
+  avTool("wav-to-mp3", Music, "audio", "WAV to MP3", "Compress WAV to MP3 at the bitrate you choose.",
+    "WAV to MP3 Online — Compress Audio",
+    "WAV to MP3 Online — Free Converter | Wyrlo",
+    "Convert WAV files to MP3 with custom bitrate. Free and fast.",
+    "wav to mp3", ["wav"], "MP3",
+    [{ title: "Upload your WAV", body: "Any sample rate." }, { title: "Pick a bitrate", body: "128, 192, 256 or 320 kbps." }, { title: "Download your MP3", body: "Smaller, portable." }]),
+  avTool("compress-audio", Shrink, "audio", "Compress Audio", "Shrink audio files without losing clarity.",
+    "Compress Audio Online — Reduce MP3 / WAV Size",
+    "Compress Audio Online — Free Tool | Wyrlo",
+    "Reduce the size of MP3, WAV or M4A files. Pick a target bitrate.",
+    "compress audio", ["mp3", "wav", "m4a", "aac", "flac", "ogg"], "MP3",
+    [{ title: "Upload your audio", body: "Any common format." }, { title: "Pick a quality", body: "Lower bitrate = smaller file." }, { title: "Download the result", body: "Same audio, less weight." }]),
+  avTool("cut-audio", Scissors, "audio", "Cut Audio", "Trim audio between two timestamps.",
+    "Cut Audio Online — Trim MP3 / WAV",
+    "Cut Audio Online — Free Tool | Wyrlo",
+    "Cut and trim MP3, WAV and other audio files between two timestamps.",
+    "cut audio", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
+    [{ title: "Upload your audio", body: "Any common format." }, { title: "Set start and end", body: "Down to the millisecond." }, { title: "Download the clip", body: "Just the slice you wanted." }]),
+  avTool("merge-audio", Combine, "audio", "Merge Audio", "Concatenate multiple audio files into one.",
+    "Merge Audio Online — Combine MP3 / WAV",
+    "Merge Audio Online — Free Tool | Wyrlo",
+    "Stick multiple audio files together — perfect for podcasts and mixtapes.",
+    "merge audio", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
+    [{ title: "Upload your files", body: "Reorder them as you like." }, { title: "We join them", body: "Seamless concatenation." }, { title: "Download the merged file", body: "Ready to publish." }]),
+  avTool("audio-from-video", Music, "audio", "Audio from Video", "Extract the audio track from any video.",
+    "Extract Audio from Video — MP4, MOV, MKV to MP3",
+    "Extract Audio from Video — Free | Wyrlo",
+    "Extract the audio track from MP4, MOV, MKV, WebM and more — to MP3 or WAV.",
+    "extract audio from video", ["mp4", "mov", "mkv", "webm", "avi"], "MP3",
+    [{ title: "Upload your video", body: "Any common container." }, { title: "We extract the audio", body: "MP3 or WAV." }, { title: "Download the track", body: "Just the sound." }]),
+  avTool("change-volume", Volume2, "audio", "Change Audio Volume", "Boost or lower the volume of an audio file.",
+    "Change Audio Volume Online — Adjust Loudness",
+    "Change Volume Online — Free Tool | Wyrlo",
+    "Increase or decrease the volume of any MP3 or WAV without distortion.",
+    "change audio volume", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
+    [{ title: "Upload your audio", body: "Any format." }, { title: "Set the gain", body: "From −12 dB to +12 dB." }, { title: "Download the result", body: "New balanced level." }]),
+  avTool("change-speed", Gauge, "audio", "Change Audio Speed", "Speed up or slow down audio playback.",
+    "Change Audio Speed Online — Adjust Tempo",
+    "Change Audio Speed Online — Free Tool | Wyrlo",
+    "Speed up or slow down any audio file without changing pitch.",
+    "change audio speed", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
+    [{ title: "Upload your audio", body: "Any format." }, { title: "Pick a speed", body: "0.5× to 2× normal." }, { title: "Download the result", body: "Same pitch, new tempo." }]),
+);
+
+TOOLS.push(
+  avTool("compress-video", Shrink, "video", "Compress Video", "Reduce video size while keeping it watchable.",
+    "Compress Video Online — Smaller MP4 Files",
+    "Compress Video Online — Free Tool | Wyrlo",
+    "Shrink MP4, MOV and other videos — perfect for email and the web.",
+    "compress video", ["mp4", "mov", "mkv", "webm", "avi"], "MP4",
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a quality", body: "Balanced default or custom." }, { title: "Download the result", body: "Much smaller file." }]),
+  avTool("mp4-to-gif", Film, "video", "MP4 to GIF", "Turn a short video clip into a GIF.",
+    "MP4 to GIF Online — Convert Video to GIF",
+    "MP4 to GIF Online — Free | Wyrlo",
+    "Convert any MP4 or MOV into an animated GIF — perfect for social and docs.",
+    "mp4 to gif", ["mp4", "mov", "webm"], "GIF",
+    [{ title: "Upload your clip", body: "A few seconds is best." }, { title: "Pick a size and FPS", body: "Smaller = lighter GIF." }, { title: "Download the GIF", body: "Animated, ready to share." }]),
+  avTool("gif-to-mp4", Film, "video", "GIF to MP4", "Convert animated GIFs into compact MP4 videos.",
+    "GIF to MP4 Online — Animated GIF to Video",
+    "GIF to MP4 Online — Free | Wyrlo",
+    "Turn GIFs into MP4 — much smaller files at the same playback.",
+    "gif to mp4", ["gif"], "MP4",
+    [{ title: "Upload your GIF", body: "Any size." }, { title: "We re-encode to MP4", body: "Same loop, smaller file." }, { title: "Download the MP4", body: "Ready for the web." }]),
+  avTool("trim-video", Scissors, "video", "Trim Video", "Cut a video between two timestamps.",
+    "Trim Video Online — Cut MP4 / MOV",
+    "Trim Video Online — Free Tool | Wyrlo",
+    "Cut any video between two timestamps. Lossless when possible.",
+    "trim video", ["mp4", "mov", "mkv", "webm"], "Video",
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Set start and end", body: "Down to the second." }, { title: "Download the clip", body: "Just the part you want." }]),
+  avTool("mp4-to-webm", Video, "video", "MP4 to WebM", "Convert MP4 to web-optimised WebM.",
+    "MP4 to WebM Online — Web-optimised Video",
+    "MP4 to WebM Online — Free | Wyrlo",
+    "Convert MP4 to WebM for faster, lighter web playback.",
+    "mp4 to webm", ["mp4", "mov"], "WebM",
+    [{ title: "Upload your MP4", body: "Any size." }, { title: "We re-encode to WebM", body: "Modern, smaller, royalty-free." }, { title: "Download the WebM", body: "Optimised for the web." }]),
+  avTool("resize-video", Scaling, "video", "Resize Video", "Set an exact width and height for any video.",
+    "Resize Video Online — Change Video Resolution",
+    "Resize Video Online — Free | Wyrlo",
+    "Resize MP4, MOV and other videos to any resolution.",
+    "resize video", ["mp4", "mov", "mkv", "webm"], "Video",
+    [{ title: "Upload your video", body: "Any source resolution." }, { title: "Enter target size", body: "Lock the ratio or go custom." }, { title: "Download the result", body: "Right dimensions." }]),
+  avTool("rotate-video", RotateCw, "video", "Rotate Video", "Rotate a video by 90, 180 or 270 degrees.",
+    "Rotate Video Online — Fix Video Orientation",
+    "Rotate Video Online — Free | Wyrlo",
+    "Fix sideways or upside-down videos in one click.",
+    "rotate video", ["mp4", "mov", "mkv", "webm"], "Video",
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a rotation", body: "90°, 180° or 270°." }, { title: "Download the result", body: "Right way up." }]),
+  avTool("add-watermark", Type, "video", "Add Watermark to Video", "Burn a logo or text watermark into a video.",
+    "Add Watermark to Video — Logo & Text Overlay",
+    "Add Watermark Online — Free | Wyrlo",
+    "Burn a logo or text watermark into any MP4 or MOV.",
+    "add watermark to video", ["mp4", "mov"], "MP4",
+    [{ title: "Upload your video", body: "Any common container." }, { title: "Add image or text", body: "Pick position and opacity." }, { title: "Download the result", body: "Watermark burned in." }]),
+);
+
+// ── Archives (real, client-side via JSZip) ────────────────────────────────
+TOOLS.push(
+  {
+    slug: "create-zip", phase: 3, kind: "client", category: "archives", icon: Archive, tone: "amber",
+    name: "Create ZIP", short: "Bundle any files into a single ZIP.",
+    h1: "Create ZIP Archive Online — Bundle Files in Your Browser",
+    metaTitle: "Create ZIP Archive Online — Free & In-browser | Wyrlo",
+    metaDescription: "Bundle any set of files into a single ZIP archive directly in your browser. Free, unlimited, private.",
+    primaryKeyword: "create zip", accept: [], freeMaxMb: 0, outputType: "ZIP",
+    steps: [{ title: "Add files", body: "Drop multiple files from your device." }, { title: "We compress them", body: "DEFLATE compression in-browser." }, { title: "Download the ZIP", body: "Single archive, ready to share." }],
+    faqs: codeFaqs("Create ZIP"),
+  },
+  {
+    slug: "extract-zip", phase: 3, kind: "client", category: "archives", icon: FileArchive, tone: "amber",
+    name: "Extract ZIP", short: "Unpack a ZIP archive and download files.",
+    h1: "Extract ZIP Archive Online — Unpack ZIP Files",
+    metaTitle: "Extract ZIP Online — Free & In-browser | Wyrlo",
+    metaDescription: "Open and extract any ZIP archive directly in your browser. Download files individually.",
+    primaryKeyword: "extract zip", accept: ["zip"], freeMaxMb: 0, outputType: "Files",
+    steps: [{ title: "Upload a ZIP", body: "Your archive stays on your device." }, { title: "We list every file", body: "Browse and pick what you need." }, { title: "Download files", body: "One by one — no server roundtrip." }],
+    faqs: codeFaqs("Extract ZIP"),
+  },
+);
+
+// ── Utilities — QR generator ──────────────────────────────────────────────
+TOOLS.push(
+  {
+    slug: "qr-generator", phase: 3, kind: "client", category: "utilities", icon: QrCode, tone: "slate",
+    name: "QR Code Generator", short: "Create a QR code from any text, URL or Wi-Fi info.",
+    h1: "QR Code Generator Online — Free, Custom Colours",
+    metaTitle: "QR Code Generator Online — Free & Customisable | Wyrlo",
+    metaDescription: "Generate QR codes from text or URLs with custom colours and error-correction. Free, unlimited, in-browser.",
+    primaryKeyword: "qr code generator", accept: [], freeMaxMb: 0, outputType: "PNG",
+    steps: [{ title: "Type the content", body: "URL, text, Wi-Fi, vCard…" }, { title: "Customise the look", body: "Colours, size and error-correction." }, { title: "Download the PNG", body: "Print, share or embed." }],
+    faqs: codeFaqs("QR Code Generator"),
+  },
 );
 
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(

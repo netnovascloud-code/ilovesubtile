@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { RephraserClient } from "@/components/tools/clients/RephraserClient";
+import { SITE_URL } from "@/lib/utils";
+import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
+
+const langs = Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l]}/rephraser`]));
+langs["x-default"] = `${SITE_URL}/rephraser`;
 
 export const metadata: Metadata = {
   title: "AI Rephraser & Grammar Corrector — Rewrite Text in 8 Styles",
   description: "Correct grammar and spelling with click-to-accept changes, or rephrase your text in 8 different styles. Free, private — your text is never stored.",
-  alternates: { canonical: "/rephraser" },
+  alternates: { canonical: "/rephraser", languages: langs },
 };
 
 export default function Page() {

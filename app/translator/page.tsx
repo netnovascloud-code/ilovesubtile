@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { TranslatorClient } from "@/components/tools/clients/TranslatorClient";
+import { SITE_URL } from "@/lib/utils";
+import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
+
+const langs = Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l]}/translator`]));
+langs["x-default"] = `${SITE_URL}/translator`;
 
 export const metadata: Metadata = {
   title: "AI Translator — Translate Text in 30+ Languages",
   description: "Free AI translator with natural, idiomatic results in 30+ languages. Auto language detection, formal/informal register, real-time translation. Your text is never stored.",
-  alternates: { canonical: "/translator" },
+  alternates: { canonical: "/translator", languages: langs },
 };
 
 export default function Page() {

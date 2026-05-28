@@ -114,4 +114,88 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { q: "Can I use it commercially?", a: "Yes, for your own images." },
     ],
   },
+  {
+    slug: "smallpdf",
+    competitor: "Smallpdf",
+    title: "Free Smallpdf Alternative — Wyrlo",
+    metaTitle: "Wyrlo vs Smallpdf — Free Unlimited PDF Tools | Wyrlo",
+    metaDescription:
+      "Smallpdf caps the free plan at 2 tasks/day. Wyrlo's PDF tools run in your browser, with no daily cap and no upload.",
+    bulletPoints: [
+      "Merge, split, rotate and Images→PDF — all client-side via pdf-lib.",
+      "No 2-task daily cap, no watermark, no forced sign-up.",
+      "Files never uploaded — your PDF stays on your device.",
+      "Plus 80+ tools Smallpdf doesn't have (audio, video, AI, code).",
+    ],
+    comparison: [
+      { feature: "Daily free cap", us: "Unlimited on client tools", them: "2 tasks/day" },
+      { feature: "Where conversion runs", us: "Your browser", them: "Their servers" },
+      { feature: "Pro price", us: "€12/month", them: "$9/month" },
+      { feature: "OCR & PDF→Excel", us: "Coming soon", them: "Yes" },
+      { feature: "Other categories", us: "Audio, video, AI, code, subtitles", them: "PDF + some images" },
+      { feature: "Watermark", us: "Never", them: "Free plan: yes" },
+    ],
+    faqs: [
+      { q: "Is Wyrlo really unlimited for PDFs?", a: "For Merge / Split / Rotate / Images→PDF — yes, with no per-day cap, no waterprint, no upload. The processing runs entirely in your browser." },
+      { q: "What does Smallpdf still do better?", a: "OCR, PDF→Excel and a few enterprise features. They're on our roadmap." },
+      { q: "Why is Wyrlo cheaper effectively?", a: "We don't charge for tools that run on the user's device — there's no server cost to recoup." },
+      { q: "What about privacy?", a: "PDF tools process locally — file never leaves the browser." },
+    ],
+  },
+  {
+    slug: "veed",
+    competitor: "VEED.io",
+    title: "Free VEED Alternative — Wyrlo",
+    metaTitle: "Wyrlo vs VEED — Free Video Tools without Watermark | Wyrlo",
+    metaDescription:
+      "VEED's free plan watermarks everything. Wyrlo's video tools run via FFmpeg.wasm in your browser — no watermark, no upload, no upsell.",
+    bulletPoints: [
+      "Compress, trim, resize, rotate, MP4↔GIF, MP4→WebM — via FFmpeg.wasm.",
+      "No watermark on free tier — ever.",
+      "Files never uploaded — runs entirely in your browser.",
+      "Lighter than VEED's full editor — one job, done fast.",
+    ],
+    comparison: [
+      { feature: "Watermark on free", us: "Never", them: "Yes" },
+      { feature: "Where conversion runs", us: "Your browser", them: "Their servers" },
+      { feature: "Daily free limit", us: "Unlimited on client tools", them: "Time/size limited" },
+      { feature: "AI subtitles", us: "Via subtitle-generator", them: "Yes (premium)" },
+      { feature: "Pro price", us: "€12/month", them: "€18+/month" },
+      { feature: "Other categories", us: "PDF, audio, image, code, AI", them: "Video editor focus" },
+    ],
+    faqs: [
+      { q: "Can I use VEED's editor in Wyrlo?", a: "Not the timeline editor — Wyrlo focuses on one-shot conversions and quick edits. Editing complex sequences is still better in VEED or DaVinci." },
+      { q: "Are big video files supported?", a: "Yes — limited only by your device's RAM. The first job loads FFmpeg.wasm (~30MB); subsequent jobs are instant." },
+      { q: "Is there a watermark?", a: "Never on Wyrlo's client-side video output." },
+      { q: "What about subtitles?", a: "Wyrlo has 16 subtitle tools (generate, translate, sync, burn-in, convert)." },
+    ],
+  },
+  {
+    slug: "chatgpt",
+    competitor: "ChatGPT",
+    title: "Free ChatGPT Alternative for Conversions — Wyrlo",
+    metaTitle: "Wyrlo AI Tools — ChatGPT Alternative for File Tasks | Wyrlo",
+    metaDescription:
+      "ChatGPT is generic. Wyrlo's AI is purpose-built for translation, rephrasing, humanising AI text and summarising — instantly, in one click.",
+    bulletPoints: [
+      "Built for files and copy — not chat. One click, one result.",
+      "Specialised UIs: DeepL-style translator, click-to-accept rephraser, humanizer.",
+      "Free daily quota, no sign-up required for casual use.",
+      "Files never stored — text inputs aren't logged or used to train models.",
+    ],
+    comparison: [
+      { feature: "Translation register", us: "Formal / informal toggle", them: "Prompt engineering" },
+      { feature: "Rephrasing styles", us: "8 one-click styles", them: "Manual prompt each time" },
+      { feature: "Humanizer score", us: "Live score 0-100", them: "No native indicator" },
+      { feature: "File conversion", us: "80+ tools alongside the AI", them: "No" },
+      { feature: "Free tier", us: "5 runs/day signed in", them: "Limited GPT-4 access" },
+      { feature: "Data retention", us: "Inputs not stored", them: "Used to improve service" },
+    ],
+    faqs: [
+      { q: "Does Wyrlo replace ChatGPT?", a: "Not for open conversation. For specific copy/file tasks (translate, summarise, rephrase, humanize, fix grammar) — yes, faster and with purpose-built UIs." },
+      { q: "Which AI does Wyrlo use?", a: "An advanced large language model running server-side via Edge Functions. The technical name isn't surfaced because the experience is what matters." },
+      { q: "Is my text stored?", a: "No. The text is sent to the AI provider for the call and is not retained in long-term storage." },
+      { q: "What's the limit?", a: "Anonymous: 3 runs/day. Free signed in: 5/day. Pro: unlimited." },
+    ],
+  },
 ];

@@ -33,6 +33,8 @@ import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient"
 import { PendingClient } from "@/components/tools/clients/PendingClient";
 import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
 import { RemoveBackgroundClient } from "@/components/tools/clients/RemoveBackgroundClient";
+import { PdfToTextClient } from "@/components/tools/clients/PdfToTextClient";
+import { PdfToJpgClient } from "@/components/tools/clients/PdfToJpgClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -149,6 +151,20 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <RemoveBackgroundClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "pdf-to-text") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PdfToTextClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "pdf-to-jpg") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PdfToJpgClient />
       </ToolPageShell>
     );
   }

@@ -8,12 +8,15 @@ import { SUPABASE_URL } from "@/lib/utils";
 
 const BASE = `${SUPABASE_URL}/functions/v1/api-gateway`;
 
-type Endpoint = { id: "me" | "rephrase" | "summarize"; label: string; method: "GET" | "POST"; cost: number; body?: object; payload?: () => string };
+type EndpointId = "me" | "rephrase" | "summarize" | "humanize" | "convert_code";
+type Endpoint = { id: EndpointId; label: string; method: "GET" | "POST"; cost: number; payload?: () => string };
 
 const ENDPOINTS: Endpoint[] = [
   { id: "me", label: "/me", method: "GET", cost: 0 },
   { id: "rephrase", label: "/rephrase", method: "POST", cost: 3, payload: () => "Hey can u send file asap thx" },
   { id: "summarize", label: "/summarize", method: "POST", cost: 3, payload: () => "Wyrlo is a free online conversion platform with 90+ tools spanning images, PDF, audio, video, code and AI text — most run entirely in the browser." },
+  { id: "humanize", label: "/humanize", method: "POST", cost: 5, payload: () => "The aforementioned methodology facilitates the optimization of operational efficiencies across the organization." },
+  { id: "convert_code", label: "/convert_code", method: "POST", cost: 4, payload: () => "def add(a, b):\n    return a + b" },
 ];
 
 export function ApiTesterClient() {
@@ -36,8 +39,10 @@ export function ApiTesterClient() {
         headers: { Authorization: `Bearer ${key.trim()}`, ...(cur.method === "POST" ? { "Content-Type": "application/json" } : {}) },
       };
       if (cur.method === "POST") {
-        const opts = endpoint === "rephrase" ? { text: input, style: "formal professional" }
+        const opts = endpoint === "rephrase" ? { text: input, style: "professional" }
           : endpoint === "summarize" ? { text: input, format: "sentence" }
+          : endpoint === "humanize" ? { text: input, level: "medium" }
+          : endpoint === "convert_code" ? { code: input, from_language: "python", to_language: "javascript" }
           : { text: input };
         init.body = JSON.stringify(opts);
       }

@@ -2,11 +2,17 @@
 // (cf_live_...), NOT a Supabase JWT — hence verify_jwt is disabled and we
 // validate the key ourselves. Deducts credits per call and logs a job.
 //
-//   POST /functions/v1/api-gateway?action=transcribe   (cost 10)
-//   POST /functions/v1/api-gateway?action=translate     (cost 5)  form: target_lang
+//   GET  /functions/v1/api-gateway?action=me                (cost 0)
+//   GET  /functions/v1/api-gateway?action=job&id=<uuid>     (cost 0)
+//   POST /functions/v1/api-gateway?action=transcribe        (10 / started min)
+//   POST /functions/v1/api-gateway?action=translate         (5 / 1000 words, min 5)
+//   POST /functions/v1/api-gateway?action=rephrase          (3 short / 8 long)
+//   POST /functions/v1/api-gateway?action=summarize         (3 short / 6 long)
+//   POST /functions/v1/api-gateway?action=humanize          (5 short / 12 long)
+//   POST /functions/v1/api-gateway?action=convert_code      (4)
 //   Header: Authorization: Bearer cf_live_...
-//   Body: multipart 'file', OR JSON { file_url, target_lang? }
 //
+// Credit costs mirror lib/credits.ts on the frontend — keep in sync.
 // Deploy: supabase functions deploy api-gateway --no-verify-jwt
 // Secret: MISTRAL_API_KEY
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -14,17 +20,46 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const cors = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
+const BUY_CREDITS_URL = "https://wyrlo.io/pricing";
+
 function json(body: unknown, init: ResponseInit = {}) {
   return new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+}
+/** Standard error envelope used across every endpoint. */
+function err(error: string, message: string, status: number, extra: Record<string, unknown> = {}) {
+  return json({ error, message, ...extra }, { status });
+}
+function insufficient(required: number, available: number) {
+  return json({
+    error: "insufficient_credits",
+    message: `This operation costs ${required} credits. Your balance: ${available} credits.`,
+    credits_required: required,
+    credits_available: available,
+    buy_credits_url: BUY_CREDITS_URL,
+  }, { status: 402 });
 }
 async function sha256(s: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-const COST: Record<string, number> = { transcribe: 10, translate: 5 };
+const LONG_TEXT_THRESHOLD = 500;
+function countWords(t: string): number {
+  const s = t.trim();
+  return s ? s.split(/\s+/).length : 0;
+}
+function transcribeCost(seconds: number): number {
+  return Math.max(1, Math.ceil(seconds / 60)) * 10;
+}
+function translateCost(words: number): number {
+  return Math.max(1, Math.ceil(words / 1000)) * 5;
+}
+const TIER = { rephrase: { short: 3, long: 8 }, summarize: { short: 3, long: 6 }, humanize: { short: 5, long: 12 } } as const;
+function tieredCost(op: keyof typeof TIER, words: number): number {
+  return words >= LONG_TEXT_THRESHOLD ? TIER[op].long : TIER[op].short;
+}
 
 type Segment = { start: number; end: number; text: string };
 function srtFromSegments(segs: Segment[]): string {
@@ -48,107 +83,221 @@ function parseSrt(raw: string) {
   return cues;
 }
 
+const MISTRAL_CHAT = "https://api.mistral.ai/v1/chat/completions";
+async function mistralChat(key: string, system: string, user: string, large = true): Promise<string> {
+  const res = await fetch(MISTRAL_CHAT, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: large ? "mistral-large-latest" : "mistral-small-latest",
+      temperature: 0.4,
+      messages: [{ role: "system", content: system }, { role: "user", content: user }],
+    }),
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const data = await res.json() as { choices: { message: { content: string } }[] };
+  return data.choices?.[0]?.message?.content?.trim() ?? "";
+}
+
+/** System prompts for the text/code actions. */
+function textSystem(action: string, opts: { style?: string; format?: string; level?: string; from?: string; to?: string }): string {
+  switch (action) {
+    case "rephrase":
+      return `Rewrite the user's text in a ${opts.style || "clear, neutral"} style/tone. Keep the original meaning and language. Output ONLY the rewritten text.`;
+    case "summarize":
+      if (opts.format === "sentence" || opts.format === "short") return `Summarise the user's text in a single concise sentence. Output only that sentence.`;
+      if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs. Output only the summary.`;
+      return `Summarise the user's text as 3-6 key bullet points in markdown. Output only the bullets.`;
+    case "humanize": {
+      const intensity = opts.level === "light" ? "Make light, careful edits."
+        : opts.level === "strong" ? "Rewrite assertively for maximum natural variation."
+        : "Apply a balanced rewrite.";
+      return `You rewrite AI-generated text so it reads as natural, human-written prose. ${intensity} Vary sentence length, use less predictable transitions, replace over-formal vocabulary with varied natural synonyms, and break repetitive structures. Keep the original meaning, language and overall length. Output ONLY the rewritten text.`;
+    }
+    case "convert_code":
+      return `You convert source code from ${opts.from || "the source language"} to ${opts.to || "the target language"}. Preserve behaviour and comments. Output ONLY the converted code, no fences, no explanation.`;
+    case "explain_code":
+      return `You explain source code clearly and concisely for a developer. Output a short paragraph plus, if useful, a bullet list of key steps.`;
+    default:
+      return "";
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
-  if (req.method !== "POST") return json({ error: "method_not_allowed" }, { status: 405 });
 
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");
-  if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
+  if (!mistralKey) return err("server_error", "Service misconfigured.", 500);
   const svc = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
   // ---- authenticate the Wyrlo API key ----
   const authz = req.headers.get("Authorization") ?? "";
   const raw = authz.replace(/^Bearer\s+/i, "").trim();
-  if (!raw.startsWith("cf_")) return json({ error: "missing_api_key" }, { status: 401 });
+  if (!raw.startsWith("cf_")) return err("missing_api_key", "Send Authorization: Bearer cf_live_…", 401);
   const hash = await sha256(raw);
   const { data: keyRow } = await svc.from("api_keys").select("id, user_id, revoked").eq("key_hash", hash).maybeSingle();
-  if (!keyRow || keyRow.revoked) return json({ error: "invalid_api_key" }, { status: 401 });
+  if (!keyRow || keyRow.revoked) return err("invalid_api_key", "API key not found or revoked.", 401);
   const userId = keyRow.user_id as string;
   await svc.from("api_keys").update({ last_used_at: new Date().toISOString() }).eq("id", keyRow.id);
 
-  const action = new URL(req.url).searchParams.get("action") ?? "";
-  const cost = COST[action];
-  if (!cost) return json({ error: "unknown_action" }, { status: 400 });
+  const url = new URL(req.url);
+  const action = url.searchParams.get("action") ?? "";
 
-  // ---- balance check (fail fast; atomic spend happens after success) ----
-  const { data: prof } = await svc.from("profiles").select("credits").eq("id", userId).maybeSingle();
-  if ((prof?.credits ?? 0) < cost) return json({ error: "insufficient_credits", needed: cost, balance: prof?.credits ?? 0 }, { status: 402 });
+  // ---- read profile (plan + balance) ----
+  const { data: prof } = await svc.from("profiles").select("plan, credits, email").eq("id", userId).maybeSingle();
+  const balance = prof?.credits ?? 0;
 
-  // ---- read input (multipart file OR JSON file_url) ----
-  let file: File | null = null;
-  let srtText: string | null = null;
-  let targetLang = "EN";
-  const ctype = req.headers.get("content-type") ?? "";
-  if (ctype.includes("application/json")) {
-    const b = await req.json();
-    targetLang = String(b.target_lang ?? "EN").toUpperCase();
-    const fileUrl = b.file_url ?? b.srt_url;
-    if (!fileUrl) return json({ error: "missing_file_url" }, { status: 400 });
-    const r = await fetch(fileUrl);
-    if (!r.ok) return json({ error: "fetch_failed" }, { status: 400 });
-    if (action === "translate") srtText = await r.text();
-    else file = new File([await r.blob()], "input");
-  } else {
-    const form = await req.formData();
-    targetLang = String(form.get("target_lang") ?? "EN").toUpperCase();
-    const f = form.get("file");
-    if (!(f instanceof File)) return json({ error: "no_file" }, { status: 400 });
-    if (action === "translate") srtText = await f.text();
-    else file = f;
+  // ===== free, read-only actions =====
+  if (action === "me") {
+    return json({
+      user_id: userId,
+      email: prof?.email ?? null,
+      plan: prof?.plan ?? "free",
+      credits: balance,
+      max_file_mb: (prof?.plan === "business") ? 2048 : (prof?.plan === "pro") ? 500 : 25,
+    });
+  }
+  if (action === "job") {
+    const id = url.searchParams.get("id");
+    if (!id) return err("bad_request", "Pass &id=<job_id>.", 400);
+    const { data: job } = await svc.from("jobs").select("id, tool, status, output_file_url, created_at, completed_at").eq("id", id).eq("user_id", userId).maybeSingle();
+    if (!job) return err("job_not_found", "No job with that id on your account.", 404);
+    return json({ job });
   }
 
-  // ---- do the work ----
-  let outSrt = "";
-  try {
-    if (action === "transcribe") {
-      const fd = new FormData();
-      fd.append("file", file!);
-      fd.append("model", "voxtral-mini-latest");
-      fd.append("response_format", "verbose_json");
-      fd.append("timestamp_granularities[]", "segment");
-      const res = await fetch("https://api.mistral.ai/v1/audio/transcriptions", { method: "POST", headers: { Authorization: `Bearer ${mistralKey}` }, body: fd });
-      if (!res.ok) return json({ error: "mistral_failed", message: await res.text() }, { status: 502 });
-      const v = await res.json() as { text?: string; segments?: Segment[] };
-      const segs = Array.isArray(v.segments) && v.segments.length ? v.segments : [{ start: 0, end: 3, text: v.text ?? "" }];
-      outSrt = srtFromSegments(segs);
+  if (req.method !== "POST") return err("method_not_allowed", "Use POST for this action.", 405);
+
+  // ===== text / code actions (Mistral chat) =====
+  const TEXT_ACTIONS = new Set(["rephrase", "summarize", "humanize", "convert_code", "explain_code"]);
+  if (TEXT_ACTIONS.has(action)) {
+    let body: Record<string, unknown> = {};
+    try { body = await req.json(); } catch { return err("bad_request", "Send a JSON body.", 400); }
+    const text = String(body.text ?? body.code ?? "").trim();
+    if (!text) return err("bad_request", "Missing `text`.", 400);
+    if (text.length > 40000) return err("text_too_long", "Keep payload under 40,000 characters.", 413);
+    const words = countWords(text);
+    const cost = action === "convert_code" ? 4
+      : action === "explain_code" ? 3
+      : tieredCost(action as keyof typeof TIER, words);
+    if (balance < cost) return insufficient(cost, balance);
+
+    const system = textSystem(action, {
+      style: body.style as string, format: body.format as string, level: body.level as string,
+      from: (body.from_language ?? body.from) as string, to: (body.to_language ?? body.to) as string,
+    });
+    let output = "";
+    try { output = await mistralChat(mistralKey, system, text, action !== "explain_code"); }
+    catch (e) { return err("processing_failed", e instanceof Error ? e.message : "Upstream model error — not charged.", 502); }
+
+    const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });
+    if (spendErr) return insufficient(cost, balance);
+    const { data: job } = await svc.from("jobs").insert({ user_id: userId, tool: `api-${action}`, status: "done", metadata: { via: "api" }, completed_at: new Date().toISOString() }).select("id").maybeSingle();
+    return json({ job_id: job?.id ?? null, output, credits_remaining: newBalance, cost });
+  }
+
+  // ===== metered media actions (transcribe / translate) =====
+  if (action === "transcribe" || action === "translate") {
+    let file: File | null = null;
+    let srtText: string | null = null;
+    let targetLang = "EN";
+    let inputText: string | null = null;
+    const ctype = req.headers.get("content-type") ?? "";
+    if (ctype.includes("application/json")) {
+      const b = await req.json().catch(() => ({}));
+      targetLang = String(b.target_lang ?? "EN").toUpperCase();
+      if (action === "translate" && typeof b.text === "string") inputText = b.text;
+      else {
+        const fileUrl = b.file_url ?? b.srt_url;
+        if (!fileUrl) return err("bad_request", "Provide a `file_url` (or `text` for translate).", 400);
+        const r = await fetch(fileUrl);
+        if (!r.ok) return err("bad_request", "Could not fetch file_url.", 400);
+        if (action === "translate") srtText = await r.text();
+        else file = new File([await r.blob()], "input");
+      }
     } else {
-      const cues = parseSrt(srtText!);
-      if (!cues.length) return json({ error: "empty_subtitle" }, { status: 400 });
-      const system = `Translate every input subtitle cue to ${targetLang}. Output the SAME number of cues, in order, preserving line breaks. Return ONLY JSON: {"cues":["..."]}`;
-      const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST", headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "mistral-large-latest", response_format: { type: "json_object" }, temperature: 0.1, messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify({ cues: cues.map((c) => c.lines.join("\n")) }) }] }),
-      });
-      if (!res.ok) return json({ error: "mistral_failed", message: await res.text() }, { status: 502 });
-      const data = await res.json() as { choices: { message: { content: string } }[] };
-      const parsed = JSON.parse(data.choices?.[0]?.message?.content ?? "{}");
-      const out: string[] = Array.isArray(parsed.cues) ? parsed.cues.map(String) : [];
-      if (out.length !== cues.length) return json({ error: "translation_mismatch" }, { status: 502 });
-      outSrt = cues.map((c, i) => `${i + 1}\n${c.start} --> ${c.end}\n${out[i]}`).join("\n\n") + "\n";
+      const form = await req.formData();
+      targetLang = String(form.get("target_lang") ?? "EN").toUpperCase();
+      const f = form.get("file");
+      if (!(f instanceof File)) return err("bad_request", "Attach a multipart `file`.", 400);
+      if (action === "translate") srtText = await f.text();
+      else file = f;
     }
-  } catch (err) {
-    return json({ error: "processing_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
+
+    // Pre-flight balance check against the minimum this op can cost.
+    const minCost = action === "transcribe" ? 10 : 5;
+    if (balance < minCost) return insufficient(minCost, balance);
+
+    let outSrt = "";
+    let outText = "";
+    let cost = minCost;
+    try {
+      if (action === "transcribe") {
+        const fd = new FormData();
+        fd.append("file", file!);
+        fd.append("model", "voxtral-mini-latest");
+        fd.append("response_format", "verbose_json");
+        fd.append("timestamp_granularities[]", "segment");
+        const res = await fetch("https://api.mistral.ai/v1/audio/transcriptions", { method: "POST", headers: { Authorization: `Bearer ${mistralKey}` }, body: fd });
+        if (!res.ok) return err("processing_failed", await res.text(), 502);
+        const v = await res.json() as { text?: string; segments?: Segment[] };
+        const segs = Array.isArray(v.segments) && v.segments.length ? v.segments : [{ start: 0, end: 3, text: v.text ?? "" }];
+        outSrt = srtFromSegments(segs);
+        const duration = segs[segs.length - 1]?.end ?? 0;
+        cost = transcribeCost(duration);
+      } else if (inputText !== null) {
+        // Plain-text translation.
+        cost = translateCost(countWords(inputText));
+        if (balance < cost) return insufficient(cost, balance);
+        const system = `You are an expert translator. Translate the user's text into ${targetLang} naturally and idiomatically. Preserve line breaks and formatting. Output ONLY the translation.`;
+        outText = await mistralChat(mistralKey, system, inputText);
+      } else {
+        // SRT/VTT cue-by-cue translation.
+        const cues = parseSrt(srtText!);
+        if (!cues.length) return err("bad_request", "No subtitle cues found.", 400);
+        cost = translateCost(countWords(cues.map((c) => c.lines.join(" ")).join(" ")));
+        if (balance < cost) return insufficient(cost, balance);
+        const system = `Translate every input subtitle cue to ${targetLang}. Output the SAME number of cues, in order, preserving line breaks. Return ONLY JSON: {"cues":["..."]}`;
+        const res = await fetch(MISTRAL_CHAT, {
+          method: "POST", headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ model: "mistral-large-latest", response_format: { type: "json_object" }, temperature: 0.1, messages: [{ role: "system", content: system }, { role: "user", content: JSON.stringify({ cues: cues.map((c) => c.lines.join("\n")) }) }] }),
+        });
+        if (!res.ok) return err("processing_failed", await res.text(), 502);
+        const data = await res.json() as { choices: { message: { content: string } }[] };
+        const parsed = JSON.parse(data.choices?.[0]?.message?.content ?? "{}");
+        const out: string[] = Array.isArray(parsed.cues) ? parsed.cues.map(String) : [];
+        if (out.length !== cues.length) return err("processing_failed", "Translation cue count mismatch.", 502);
+        outSrt = cues.map((c, i) => `${i + 1}\n${c.start} --> ${c.end}\n${out[i]}`).join("\n\n") + "\n";
+      }
+    } catch (e) {
+      return err("processing_failed", e instanceof Error ? e.message : "Upstream model error — not charged.", 502);
+    }
+
+    // Final balance guard now that the metered cost is known.
+    if (balance < cost) return insufficient(cost, balance);
+
+    let signedUrl: string | null = null;
+    if (outSrt) {
+      const path = `${userId}/${crypto.randomUUID()}/result.srt`;
+      await svc.storage.from("results").upload(path, new Blob([outSrt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
+      const { data: signed } = await svc.storage.from("results").createSignedUrl(path, 600);
+      signedUrl = signed?.signedUrl ?? null;
+    }
+
+    const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });
+    if (spendErr) return insufficient(cost, balance);
+    const { data: job } = await svc.from("jobs").insert({
+      user_id: userId, tool: `api-${action}`, status: "done",
+      output_file_url: signedUrl, language_target: action === "translate" ? targetLang : null,
+      metadata: { via: "api" }, completed_at: new Date().toISOString(),
+    }).select("id").maybeSingle();
+
+    return json({ job_id: job?.id ?? null, url: signedUrl, output: outText || undefined, credits_remaining: newBalance, cost });
   }
 
-  // ---- store result + signed url ----
-  const path = `${userId}/${crypto.randomUUID()}/result.srt`;
-  await svc.storage.from("results").upload(path, new Blob([outSrt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
-  // GDPR: 10-minute signed URL window. The pg_cron purge sweeps every 5 min.
-  // For files we generated and don't need to retain (text output), we also
-  // schedule a best-effort delete after a short window via the platform's
-  // built-in storage TTL features (see migration). The link works long enough
-  // for the user to download but nothing lingers.
-  const { data: signed } = await svc.storage.from("results").createSignedUrl(path, 600);
+  // ===== in-browser-only ops (no server engine yet) =====
+  if (action === "remove_background" || action === "convert_image" || action === "convert_pdf") {
+    return err("not_implemented", `\`${action}\` runs in-browser today and isn't yet available over REST. Use the web tool, or watch ${BUY_CREDITS_URL} for the API rollout. You were not charged.`, 501);
+  }
 
-  // ---- charge credits atomically + log job ----
-  const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });
-  if (spendErr) return json({ error: "insufficient_credits", message: spendErr.message }, { status: 402 });
-
-  const { data: job } = await svc.from("jobs").insert({
-    user_id: userId, tool: `api-${action}`, status: "done",
-    output_file_url: signed?.signedUrl ?? null, language_target: action === "translate" ? targetLang : null,
-    metadata: { via: "api" }, completed_at: new Date().toISOString(),
-  }).select("id").maybeSingle();
-
-  return json({ job_id: job?.id ?? null, url: signed?.signedUrl, credits_remaining: newBalance, cost });
+  return err("bad_request", `Unknown action: ${action || "(none)"}.`, 400);
 });

@@ -19,7 +19,17 @@ function parseInserts(sql: string): { table: string; rows: Record<string, unknow
   let inStr = false;
   let depth = 0;
   for (const ch of m[3]) {
-    if (inStr) { buf += ch; if (ch === "'" && buf[buf.length - 2] !== "\\") inStr = false; continue; }
+    if (inStr) {
+      buf += ch;
+      if (ch === "'") {
+        // A quote closes the string unless escaped by an ODD run of backslashes
+        // (`\'`). `''` doubling is handled by re-entering on the next quote.
+        let bs = 0;
+        for (let k = buf.length - 2; k >= 0 && buf[k] === "\\"; k--) bs++;
+        if (bs % 2 === 0) inStr = false;
+      }
+      continue;
+    }
     if (ch === "'") { inStr = true; buf += ch; continue; }
     if (ch === "(") { if (depth === 0) { buf = ""; cur = []; } else buf += ch; depth++; continue; }
     if (ch === ")") { depth--; if (depth === 0) { cur.push(buf.trim()); tuples.push(cur); } else buf += ch; continue; }
@@ -34,7 +44,12 @@ function parseInserts(sql: string): { table: string; rows: Record<string, unknow
       if (lower === "null") v = null;
       else if (lower === "true") v = true;
       else if (lower === "false") v = false;
-      else if (/^-?\d+(\.\d+)?$/.test(raw)) v = Number(raw);
+      else if (/^-?\d+(\.\d+)?$/.test(raw)) {
+        // Keep leading-zero codes (e.g. 02115) and integers beyond JS's safe range
+        // as strings — coercing them via Number() would silently corrupt the value.
+        const n = Number(raw);
+        v = !/^-?0\d/.test(raw) && (raw.includes(".") || Number.isSafeInteger(n)) ? n : raw;
+      }
       else if (raw.startsWith("'") && raw.endsWith("'")) v = raw.slice(1, -1).replace(/''/g, "'").replace(/\\'/g, "'");
       else v = raw;
       obj[cols[i] ?? `col_${i + 1}`] = v;
@@ -50,6 +65,9 @@ function jsonToInsert(table: string, rows: Record<string, unknown>[]): string {
   const lit = (v: unknown): string => {
     if (v === null || v === undefined) return "NULL";
     if (typeof v === "number" || typeof v === "boolean") return String(v);
+    // Nested objects/arrays have no native SQL form — serialise to a JSON string
+    // literal rather than emitting "[object Object]".
+    if (typeof v === "object") return `'${JSON.stringify(v).replace(/'/g, "''")}'`;
     return `'${String(v).replace(/'/g, "''")}'`;
   };
   const values = rows.map((r) => `(${cols.map((c) => lit(r[c])).join(", ")})`).join(",\n  ");
@@ -60,7 +78,6 @@ export function SqlJsonClient() {
   const [dir, setDir] = useState<Dir>("sql_to_json");
   const [input, setInput] = useState<string>(`INSERT INTO users (id, name, age) VALUES\n  (1, 'Alice', 30),\n  (2, 'Bob', 25);`);
   const [tableName, setTableName] = useState("users");
-  const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
   // Re-default when switching direction.
@@ -69,21 +86,20 @@ export function SqlJsonClient() {
     else setInput(`[\n  { "id": 1, "name": "Alice", "age": 30 },\n  { "id": 2, "name": "Bob", "age": 25 }\n]`);
   }, [dir]);
 
-  const output = useMemo(() => {
+  // Compute output and error together inside the memo — never call setState during
+  // render. The error is derived data, so it lives in the same memoised result.
+  const { output, error } = useMemo<{ output: string; error: string | null }>(() => {
     try {
-      setError(null);
+      if (!input.trim()) return { output: "", error: null };
       if (dir === "sql_to_json") {
-        if (!input.trim()) return "";
         const { rows } = parseInserts(input);
-        return JSON.stringify(rows, null, 2);
+        return { output: JSON.stringify(rows, null, 2), error: null };
       }
-      if (!input.trim()) return "";
       const parsed = JSON.parse(input);
       const rows: Record<string, unknown>[] = Array.isArray(parsed) ? parsed : [parsed];
-      return jsonToInsert(tableName || "my_table", rows);
+      return { output: jsonToInsert(tableName || "my_table", rows), error: null };
     } catch (e) {
-      setError((e as Error).message);
-      return "";
+      return { output: "", error: (e as Error).message };
     }
   }, [dir, input, tableName]);
 

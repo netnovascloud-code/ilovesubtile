@@ -53,7 +53,10 @@ export function VatCalculatorClient() {
   const [amount, setAmount] = useState("100");
 
   const row = RATES.find((r) => r.code === country)!;
-  const rate = Number(customRate) || row.rate;
+  // Use the override only when it's actually entered — `|| row.rate` would treat a
+  // deliberate 0% (zero-rated) override as falsy and silently revert to the standard rate.
+  const customNum = customRate.trim() === "" ? NaN : Number(customRate);
+  const rate = Number.isFinite(customNum) && customNum >= 0 ? customNum : row.rate;
 
   const result = useMemo(() => {
     const a = Number(amount);

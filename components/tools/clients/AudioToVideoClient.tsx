@@ -4,30 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Music, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
-
-type FfmpegLike = {
-  exec: (a: string[]) => Promise<number>;
-  writeFile: (n: string, d: Uint8Array) => Promise<unknown>;
-  readFile: (n: string) => Promise<Uint8Array>;
-  deleteFile: (n: string) => Promise<unknown>;
-};
-let ffmpegPromise: Promise<FfmpegLike> | null = null;
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ff as unknown as FfmpegLike;
-    })();
-  }
-  return ffmpegPromise;
-}
+import { getFfmpeg } from "@/lib/ffmpeg-client";
 
 export function AudioToVideoClient() {
   const [audio, setAudio] = useState<File | null>(null);

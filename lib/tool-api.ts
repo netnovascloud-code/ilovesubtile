@@ -9,9 +9,10 @@ const FN_MAP: Record<string, string> = {
   "batch-translate": "translate-subtitles",
   "youtube-chapters": "ai-process",
   "auto-sync": "ai-process",
+  "ai-humanizer": "ai-process",
+  // NOTE: extract-subtitles and style-subtitles now run entirely in the browser
+  // (FFmpeg.wasm / pure-JS ASS) and no longer call any backend.
   "add-subtitles-to-video": "process-ffmpeg",
-  "extract-subtitles": "process-ffmpeg",
-  "style-subtitles": "process-ffmpeg",
   // Text & AI tools — all handled by the ai-process function via `task`.
   "translate-text": "ai-process",
   "rephrase-text": "ai-process",

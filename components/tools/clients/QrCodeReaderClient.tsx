@@ -39,8 +39,12 @@ export function QrCodeReaderClient() {
   const camRef = useRef<HTMLVideoElement | null>(null);
   const camStream = useRef<MediaStream | null>(null);
   const [scanning, setScanning] = useState(false);
+  // The rAF loop must read a ref, not `scanning`: setScanning(true) hasn't applied
+  // yet when startCam's closure is created, so the captured state would be false
+  // and the loop would exit on its first tick (never decoding anything).
+  const scanningRef = useRef(false);
 
-  useEffect(() => () => { if (camStream.current) camStream.current.getTracks().forEach((t) => t.stop()); }, []);
+  useEffect(() => () => { scanningRef.current = false; if (camStream.current) camStream.current.getTracks().forEach((t) => t.stop()); }, []);
 
   async function pick(f: File | null) {
     if (!f) return;
@@ -63,13 +67,13 @@ export function QrCodeReaderClient() {
 
   async function startCam() {
     try {
-      setError(null); setResult(null); setScanning(true);
+      setError(null); setResult(null); scanningRef.current = true; setScanning(true);
       const jsQR = await loadJsQR();
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
       camStream.current = stream;
       if (camRef.current) { camRef.current.srcObject = stream; await camRef.current.play(); }
       const tick = async () => {
-        if (!scanning || !camRef.current || !camStream.current) return;
+        if (!scanningRef.current || !camRef.current || !camStream.current) return;
         const v = camRef.current;
         if (v.videoWidth && v.videoHeight) {
           const c = document.createElement("canvas");
@@ -85,10 +89,12 @@ export function QrCodeReaderClient() {
       tick();
     } catch (e) {
       setError(`Camera access denied: ${(e as Error).message}`);
+      scanningRef.current = false;
       setScanning(false);
     }
   }
   function stopCam() {
+    scanningRef.current = false;
     setScanning(false);
     if (camStream.current) { camStream.current.getTracks().forEach((t) => t.stop()); camStream.current = null; }
   }

@@ -6,28 +6,8 @@ import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 import { categoryTheme } from "@/lib/category-theme";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
 import type { ToolCategory } from "@/lib/tools-config";
-
-// Singleton FFmpeg instance — loaded once per session (~30MB WASM core).
-let ffmpegPromise: Promise<unknown> | null = null;
-async function getFfmpeg(onProgress?: (p: number) => void): Promise<{ exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<void>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<void>; on: (event: string, h: (e: { progress: number }) => void) => void }> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ffmpeg = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ffmpeg;
-    })();
-  }
-  const ff = (await ffmpegPromise) as Awaited<ReturnType<typeof getFfmpeg>>;
-  if (onProgress) ff.on("progress", (e: { progress: number }) => onProgress(Math.max(1, Math.min(99, Math.round(e.progress * 100)))));
-  return ff;
-}
 
 export function FfmpegToolClient({ slug, category }: { slug: string; category: ToolCategory }) {
   const tool = FFMPEG_TOOLS[slug];

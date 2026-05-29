@@ -16,6 +16,18 @@ function isValid(value: string, base: number): boolean {
   return re.test(value);
 }
 
+/** Parse digit-by-digit straight into a BigInt. Going through parseInt() first
+ *  would round-trip the value through a 53-bit double and silently corrupt any
+ *  number above 2^53 (e.g. a 64-bit hex value). Callers pre-validate the digits. */
+function parseToBigInt(value: string, base: number): bigint {
+  const neg = value.startsWith("-");
+  const digits = (neg ? value.slice(1) : value).toLowerCase();
+  const b = BigInt(base);
+  let n = 0n;
+  for (const ch of digits) n = n * b + BigInt(parseInt(ch, base));
+  return neg ? -n : n;
+}
+
 export function NumberBaseClient() {
   const [value, setValue] = useState("179");
   const [base, setBase] = useState<number>(10);
@@ -25,7 +37,7 @@ export function NumberBaseClient() {
     if (!value.trim()) return { results: null, error: null as string | null };
     if (!isValid(value.trim(), base)) return { results: null, error: `Not a valid base-${base} number.` };
     let n: bigint;
-    try { n = BigInt(parseInt(value, base)); }
+    try { n = parseToBigInt(value.trim(), base); }
     catch { return { results: null, error: "Could not parse number." }; }
     return {
       results: {

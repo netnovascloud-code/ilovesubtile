@@ -45,17 +45,20 @@ function humanize(parts: Record<Field, string>): string {
   return `${min}, ${hr}, ${day}, ${mo}${wd}.`;
 }
 
-/** Sample next-fire times. Pure brute-force scan minute-by-minute over the next
- *  ~14 days — enough for previewing without pulling in a real cron library. */
-function fieldMatches(value: number, expr: string): boolean {
+// Sample next-fire times. Pure brute-force scan minute-by-minute over the next
+// ~14 days — enough for previewing without pulling in a real cron library.
+// `min`/`max` are the field bounds: a bare star-step ("* / step") is anchored at
+// the field minimum per cron semantics, so day-of-month step-2 fires on 1,3,5…
+// not 2,4,6.
+function fieldMatches(value: number, expr: string, min: number, max: number): boolean {
   if (expr === "*") return true;
   for (const part of expr.split(",")) {
     if (part.includes("/")) {
       const [range, stepStr] = part.split("/");
       const step = Number(stepStr) || 1;
-      const [a, b] = range === "*" ? [0, Infinity] : range.split("-").map(Number);
-      const lo = a, hi = (b === undefined ? a : b);
-      if (value >= lo && (value <= hi || hi === Infinity) && (value - lo) % step === 0) return true;
+      const [a, b] = range === "*" ? [min, max] : range.split("-").map(Number);
+      const lo = a, hi = (b === undefined ? max : b);
+      if (value >= lo && value <= hi && (value - lo) % step === 0) return true;
     } else if (part.includes("-")) {
       const [a, b] = part.split("-").map(Number);
       if (value >= a && value <= b) return true;
@@ -63,6 +66,16 @@ function fieldMatches(value: number, expr: string): boolean {
   }
   return false;
 }
+
+/** Day-of-week matcher. Cron accepts both 0 and 7 for Sunday, but JS getDay()
+ *  only returns 0 for Sunday — so test the raw value, then retry with any `7`
+ *  rewritten to `0` when the current day is Sunday. */
+function dowMatches(jsDay: number, expr: string): boolean {
+  if (fieldMatches(jsDay, expr, 0, 7)) return true;
+  if (jsDay === 0 && /7/.test(expr)) return fieldMatches(0, expr.replace(/7/g, "0"), 0, 6);
+  return false;
+}
+
 function nextFires(parts: Record<Field, string>, count = 5): Date[] {
   const out: Date[] = [];
   const now = new Date();
@@ -72,11 +85,11 @@ function nextFires(parts: Record<Field, string>, count = 5): Date[] {
   for (let t = now.getTime(); t <= stop.getTime() && out.length < count; t += 60_000) {
     const d = new Date(t);
     if (
-      fieldMatches(d.getMinutes(), parts.minute) &&
-      fieldMatches(d.getHours(), parts.hour) &&
-      fieldMatches(d.getDate(), parts.dom) &&
-      fieldMatches(d.getMonth() + 1, parts.month) &&
-      fieldMatches(d.getDay(), parts.dow)
+      fieldMatches(d.getMinutes(), parts.minute, 0, 59) &&
+      fieldMatches(d.getHours(), parts.hour, 0, 23) &&
+      fieldMatches(d.getDate(), parts.dom, 1, 31) &&
+      fieldMatches(d.getMonth() + 1, parts.month, 1, 12) &&
+      dowMatches(d.getDay(), parts.dow)
     ) out.push(new Date(d));
   }
   return out;

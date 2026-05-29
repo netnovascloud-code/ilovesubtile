@@ -18,11 +18,13 @@ export function AdjustImageClient() {
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const cleanup = useRef<string | null>(null);
+  const bmpRef = useRef<ImageBitmap | null>(null);
 
   useEffect(() => () => {
     if (cleanup.current) URL.revokeObjectURL(cleanup.current);
-    if (bmp) bmp.close();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Close the *current* bitmap via a ref — an empty-dep cleanup would otherwise
+    // capture the initial (null) bmp and leak the one actually loaded.
+    if (bmpRef.current) bmpRef.current.close();
   }, []);
 
   async function pick(f: File | null) {
@@ -31,7 +33,8 @@ export function AdjustImageClient() {
     setFile(f);
     try {
       const b = await createImageBitmap(f);
-      if (bmp) bmp.close();
+      if (bmpRef.current) bmpRef.current.close();
+      bmpRef.current = b;
       setBmp(b);
     } catch (e) {
       setError(`Could not read this image: ${(e as Error).message}`);
@@ -84,7 +87,7 @@ export function AdjustImageClient() {
       ) : (
         <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-white px-4 py-2.5 text-sm">
           <div className="min-w-0 truncate"><span className="font-medium text-ink-900">{file.name}</span><span className="ml-2 text-ink-400">{formatBytes(file.size)}</span></div>
-          <button onClick={() => { setFile(null); setBmp(null); setOutUrl(null); }} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+          <button onClick={() => { if (bmpRef.current) { bmpRef.current.close(); bmpRef.current = null; } setFile(null); setBmp(null); setOutUrl(null); }} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
 

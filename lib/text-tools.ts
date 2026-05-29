@@ -72,7 +72,10 @@ function csvEscape(v: unknown): string {
 function jsonToXml(value: unknown, tag = "root", indent = ""): string {
   const next = indent + "  ";
   if (Array.isArray(value)) {
-    return value.map((v) => jsonToXml(v, "item", indent)).join("\n");
+    // Wrap the array in its own element so the document keeps a single root —
+    // emitting bare <item> siblings at the top level produces invalid XML.
+    const inner = value.map((v) => jsonToXml(v, "item", next)).join("\n");
+    return `${indent}<${tag}>\n${inner}\n${indent}</${tag}>`;
   }
   if (value !== null && typeof value === "object") {
     const inner = Object.entries(value as Record<string, unknown>)
@@ -459,8 +462,17 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
       if (err) throw new Error("Invalid XML.");
       const toObj = (el: Element): unknown => {
         const children = Array.from(el.children);
-        if (children.length === 0) return el.textContent?.trim() ?? "";
+        const attrs = Array.from(el.attributes);
+        // Pure leaf with no attributes → just its text.
+        if (children.length === 0 && attrs.length === 0) return el.textContent?.trim() ?? "";
         const obj: Record<string, unknown> = {};
+        // Preserve attributes as "@name" keys so they aren't silently dropped.
+        for (const a of attrs) obj[`@${a.name}`] = a.value;
+        if (children.length === 0) {
+          const text = el.textContent?.trim();
+          if (text) obj["#text"] = text;
+          return obj;
+        }
         for (const child of children) {
           const key = child.tagName;
           const val = toObj(child);

@@ -1,88 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UploadZone } from "@/components/tools/UploadZone";
-import { ProcessingScreen } from "@/components/tools/ProcessingScreen";
 import { ResultScreen } from "@/components/tools/ResultScreen";
 import { SubtitleStylePicker, DEFAULT_STYLE, type SubtitleStyle } from "@/components/tools/SubtitleStylePicker";
 import { useLocale } from "@/hooks/useLocale";
-import { getChrome, t as tt } from "@/lib/i18n/chrome";
 import { getToolUi } from "@/lib/i18n/tool-ui";
-import { callTool } from "@/lib/tool-api";
+import { parseSubtitles, toAss, type Cue } from "@/lib/srt-utils";
 
-type Phase = "idle" | "uploading" | "done" | "error";
+type Phase = "idle" | "done" | "error";
 
+// Styling subtitles produces a self-contained .ass file (Advanced SubStation
+// Alpha), which carries the look inline — so this is a pure in-browser text
+// transform. No upload, no media engine: parse the SRT/VTT, re-emit as ASS,
+// and regenerate whenever the style changes.
 export function StyleSubtitlesClient() {
   const [style, setStyle] = useState<SubtitleStyle>(DEFAULT_STYLE);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string>("");
+  const [cues, setCues] = useState<Cue[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
-  const [resultName, setResultName] = useState<string | null>(null);
+  const cleanup = useRef<string | null>(null);
 
   const locale = useLocale();
-  const chrome = getChrome(locale);
   const ui = getToolUi(locale);
 
+  useEffect(() => () => { if (cleanup.current) URL.revokeObjectURL(cleanup.current); }, []);
+
+  function build(nextCues: Cue[], nextStyle: SubtitleStyle) {
+    const ass = toAss(nextCues, nextStyle);
+    if (cleanup.current) URL.revokeObjectURL(cleanup.current);
+    const url = URL.createObjectURL(new Blob([ass], { type: "text/plain;charset=utf-8" }));
+    cleanup.current = url;
+    setResultUrl(url);
+  }
+
   async function start(f: File) {
-    setFile(f);
-    setPhase("uploading");
     setError(null);
     try {
-      const fd = new FormData();
-      fd.append("file", f);
-      fd.append("style", JSON.stringify(style));
-      const res = await callTool("style-subtitles", fd);
-      if (!res.ok) {
-        const errBody = await res.json().catch(() => ({}));
-        const code = typeof errBody?.error === "string" ? errBody.error : "";
+      const raw = await f.text();
+      const parsed = parseSubtitles(raw);
+      if (!parsed.length) {
         setPhase("error");
-        setError(code.startsWith("missing_") ? chrome.errors.notWiredUp : tt(chrome.errors.serverReturned, { status: res.status }));
+        setError("No subtitle cues found — please upload a valid .srt or .vtt file.");
         return;
       }
-      const data = (await res.json()) as { url?: string; filename?: string };
-      if (!data.url) {
-        setPhase("error");
-        setError(chrome.errors.noResultUrl);
-        return;
-      }
-      setResultUrl(data.url);
-      setResultName(data.filename ?? `${f.name.replace(/\.[^.]+$/, "")}.ass`);
+      setFileName(f.name.replace(/\.[^.]+$/, "") + ".ass");
+      setCues(parsed);
+      build(parsed, style);
       setPhase("done");
     } catch (err) {
       setPhase("error");
-      setError(err instanceof Error ? err.message : chrome.errors.network);
+      setError(err instanceof Error ? err.message : "Could not read this file.");
     }
   }
 
+  // Re-render the ASS whenever the style changes after the first build.
+  useEffect(() => {
+    if (cues) build(cues, style);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [style]);
+
   function reset() {
-    setFile(null);
     setStyle(DEFAULT_STYLE);
     setPhase("idle");
+    setCues(null);
+    setFileName("");
     setResultUrl(null);
-    setResultName(null);
     setError(null);
-  }
-
-  if (phase === "done" && resultUrl && resultName) {
-    return (
-      <ResultScreen
-        filename={resultName}
-        onDownload={() => {
-          const a = document.createElement("a");
-          a.href = resultUrl;
-          a.download = resultName;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-        }}
-        onReset={reset}
-      />
-    );
-  }
-
-  if (phase === "uploading" && file) {
-    return <ProcessingScreen filename={file.name} fileSize={file.size} status={chrome.processing.processing} />;
   }
 
   return (
@@ -94,10 +80,27 @@ export function StyleSubtitlesClient() {
         </div>
       </div>
 
-      <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={start} cta={ui.style.download} />
+      {phase === "done" && resultUrl && cues ? (
+        <ResultScreen
+          filename={fileName}
+          onDownload={() => {
+            const a = document.createElement("a");
+            a.href = resultUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }}
+          onReset={reset}
+        />
+      ) : (
+        <UploadZone accept={["srt", "vtt"]} maxMb={25} onFile={start} cta={ui.style.download} />
+      )}
+
       {phase === "error" && error && (
         <p className="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}
+      <p className="text-xs text-ink-400">100% in your browser — your subtitles are never uploaded.</p>
     </div>
   );
 }

@@ -59,7 +59,7 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
   "compress-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm,.avi", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
     options: [CRF_VIDEO],
-    command: (i, o, opt) => ["-i", i, "-c:v", "libx264", "-crf", opt.crf ?? "28", "-preset", "veryfast", "-c:a", "aac", "-b:a", "128k", o],
+    command: (i, o, opt) => ["-i", i, "-c:v", "libx264", "-crf", opt.crf ?? "28", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", o],
   },
   "mp4-to-gif": {
     label: "an MP4", accept: "video/mp4,video/quicktime,.mp4,.mov,.webm", inputExt: "mp4", outputExt: "gif", outputMime: "image/gif",
@@ -113,7 +113,7 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
       { id: "start", label: "Start (seconds)", type: "number", min: 0, max: 36000, step: 0.1, default: "0" },
       { id: "end", label: "End (seconds)", type: "number", min: 0.1, max: 36000, step: 0.1, default: "10" },
     ],
-    command: (i, o, opt) => ["-i", i, "-ss", opt.start || "0", "-to", opt.end || "10", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "128k", o],
+    command: (i, o, opt) => ["-i", i, "-ss", opt.start || "0", "-to", opt.end || "10", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", o],
   },
   "resize-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
@@ -121,7 +121,7 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
       { id: "w", label: "Width", type: "number", min: 32, max: 7680, step: 2, unit: "px", default: "1280" },
       { id: "h", label: "Height", type: "number", min: 32, max: 4320, step: 2, unit: "px", default: "720" },
     ],
-    command: (i, o, opt) => ["-i", i, "-vf", `scale=${opt.w || "1280"}:${opt.h || "720"}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "copy", o],
+    command: (i, o, opt) => ["-i", i, "-vf", `scale=${opt.w || "1280"}:${opt.h || "720"}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "copy", o],
   },
   "m4a-to-mp3": {
     label: "an M4A", accept: "audio/mp4,audio/x-m4a,audio/aac,.m4a,.aac", inputExt: "m4a", outputExt: "mp3", outputMime: "audio/mpeg",
@@ -169,13 +169,15 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
       ], default: "1.5" },
     ],
     // setpts=PTS/speed for video, atempo=speed for audio (atempo clamped to 0.5–100 per stage).
+    // We apply via -vf/-af with an OPTIONAL audio map (0:a:0?) so videos with no audio
+    // track (screen recordings, GIF-sourced clips) don't abort on a missing [0:a] stream.
     command: (i, o, opt) => {
       const s = Number(opt.speed || "1");
       // Chain atempo stages so we can hit 0.25× (0.5×0.5) and 4× (2×2). Safe for our 0.25..4 range.
       let atempo = "atempo=" + s.toFixed(6);
       if (s < 0.5) atempo = "atempo=0.5,atempo=" + (s / 0.5).toFixed(6);
       if (s > 2) atempo = "atempo=2.0,atempo=" + (s / 2).toFixed(6);
-      return ["-i", i, "-filter_complex", `[0:v]setpts=${(1 / s).toFixed(6)}*PTS[v];[0:a]${atempo}[a]`, "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "128k", o];
+      return ["-i", i, "-vf", `setpts=${(1 / s).toFixed(6)}*PTS`, "-af", atempo, "-map", "0:v:0", "-map", "0:a:0?", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", o];
     },
   },
   // image + audio → MP4. Caller must upload BOTH files; we use the FFmpeg
@@ -213,6 +215,6 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
         { id: "transpose=1,transpose=1", label: "180°" },
       ], default: "transpose=1" },
     ],
-    command: (i, o, opt) => ["-i", i, "-vf", opt.rot || "transpose=1", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "copy", o],
+    command: (i, o, opt) => ["-i", i, "-vf", opt.rot || "transpose=1", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "copy", o],
   },
 };

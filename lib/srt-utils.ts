@@ -124,6 +124,74 @@ export function toVtt(cues: Cue[]): string {
   return `WEBVTT\n\n${body}\n`;
 }
 
+/** Style shape needed to emit ASS — structurally matches the SubtitleStyle the
+ *  style picker produces, but declared here so this lib stays React-free. */
+export type AssStyleInput = {
+  fontFamily: string;
+  fontSizePx: number;
+  color: string;
+  outlineColor: string;
+  outlineWidth: number;
+  bold: boolean;
+  italic: boolean;
+  position: "top" | "middle" | "bottom";
+  align: "left" | "center" | "right";
+};
+
+function assTime(ms: number): string {
+  const t = Math.max(0, Math.round(ms));
+  const h = Math.floor(t / 3_600_000);
+  const m = Math.floor((t % 3_600_000) / 60_000);
+  const s = Math.floor((t % 60_000) / 1_000);
+  const cs = Math.floor((t % 1_000) / 10);
+  return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(cs).padStart(2, "0")}`;
+}
+
+/** #RRGGBB → ASS &HAABBGGRR (alpha 00 = fully opaque). */
+function assColor(hex: string): string {
+  const m = /^#?([0-9a-fA-F]{6})$/.exec((hex || "").trim());
+  if (!m) return "&H00FFFFFF";
+  const r = m[1].slice(0, 2), g = m[1].slice(2, 4), b = m[1].slice(4, 6);
+  return `&H00${b}${g}${r}`.toUpperCase();
+}
+
+/** Serialise cues to an Advanced SubStation Alpha (.ass) file with the given
+ *  style. ASS keeps styling inline, so this is a pure text transform — no media
+ *  engine needed. PlayRes is fixed at 1080p, which the font size is relative to. */
+export function toAss(cues: Cue[], style: AssStyleInput): string {
+  // ASS alignment is numpad-style: 1-3 bottom, 4-6 middle, 7-9 top; within each
+  // row 1/2/3 = left/centre/right.
+  const base = style.position === "top" ? 7 : style.position === "middle" ? 4 : 1;
+  const col = style.align === "left" ? 0 : style.align === "right" ? 2 : 1;
+  const alignment = base + col;
+  const bold = style.bold ? -1 : 0;
+  const italic = style.italic ? -1 : 0;
+  const size = Math.max(1, Math.round(style.fontSizePx));
+  const outline = Math.max(0, style.outlineWidth);
+
+  const header = [
+    "[Script Info]",
+    "ScriptType: v4.00+",
+    "WrapStyle: 0",
+    "ScaledBorderAndShadow: yes",
+    "PlayResX: 1920",
+    "PlayResY: 1080",
+    "",
+    "[V4+ Styles]",
+    "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
+    `Style: Default,${style.fontFamily},${size},${assColor(style.color)},&H000000FF,${assColor(style.outlineColor)},&H64000000,${bold},${italic},0,0,100,100,0,0,1,${outline},0,${alignment},60,60,50,1`,
+    "",
+    "[Events]",
+    "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
+  ].join("\n");
+
+  const events = cues
+    .map((c) => `Dialogue: 0,${assTime(c.start)},${assTime(c.end)},Default,,0,0,0,,${c.lines.join("\\N")}`)
+    .join("\n");
+
+  return `${header}\n${events}\n`;
+}
+
 export function toPlainText(cues: Cue[], opts: { mergeParagraphs?: boolean } = {}): string {
   if (opts.mergeParagraphs) {
     return cues.map((c) => c.lines.join(" ")).join(" ").trim() + "\n";

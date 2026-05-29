@@ -53,14 +53,17 @@ export function ExcelToJsonClient() {
     }
   }
 
-  async function reconvert() {
+  // Overrides are passed explicitly because the calling setState (setSheet/setMode/
+  // setPretty) hasn't applied yet when this runs — reading component state here would
+  // use the previous value and render the wrong sheet/format.
+  async function reconvert(over?: { sheet?: string; mode?: Mode; pretty?: boolean }) {
     if (!file) return;
     setBusy(true); setError(null);
     try {
       const xlsx = await import("xlsx");
       const data = new Uint8Array(await file.arrayBuffer());
       const wb = xlsx.read(data, { type: "array" });
-      await convert(wb, sheet, mode, pretty);
+      await convert(wb, over?.sheet ?? sheet, over?.mode ?? mode, over?.pretty ?? pretty);
     } finally {
       setBusy(false);
     }
@@ -98,19 +101,19 @@ export function ExcelToJsonClient() {
         <div className="grid gap-3 rounded-lg border border-ink-100 bg-white p-4 sm:grid-cols-3">
           <label className="flex flex-col text-xs font-medium text-ink-600">
             Sheet
-            <select value={sheet} onChange={(e) => { setSheet(e.target.value); reconvert(); }} className="mt-1 rounded-md border border-ink-200 px-2 py-1.5 text-sm">
+            <select value={sheet} onChange={(e) => { setSheet(e.target.value); reconvert({ sheet: e.target.value }); }} className="mt-1 rounded-md border border-ink-200 px-2 py-1.5 text-sm">
               {sheets.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </label>
           <label className="flex flex-col text-xs font-medium text-ink-600">
             Format
-            <select value={mode} onChange={(e) => { setMode(e.target.value as Mode); reconvert(); }} className="mt-1 rounded-md border border-ink-200 px-2 py-1.5 text-sm">
+            <select value={mode} onChange={(e) => { setMode(e.target.value as Mode); reconvert({ mode: e.target.value as Mode }); }} className="mt-1 rounded-md border border-ink-200 px-2 py-1.5 text-sm">
               <option value="rows">Array of objects (first row = headers)</option>
               <option value="matrix">Array of arrays (raw rows)</option>
             </select>
           </label>
           <label className="flex items-center gap-2 self-end text-sm text-ink-700">
-            <input type="checkbox" checked={pretty} onChange={(e) => { setPretty(e.target.checked); reconvert(); }} className="h-4 w-4" />
+            <input type="checkbox" checked={pretty} onChange={(e) => { setPretty(e.target.checked); reconvert({ pretty: e.target.checked }); }} className="h-4 w-4" />
             Pretty-print
           </label>
         </div>

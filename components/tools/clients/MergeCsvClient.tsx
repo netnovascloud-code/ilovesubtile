@@ -28,10 +28,13 @@ function parseCsv(text: string): string[][] {
     }
   }
   if (cur.length || row.length) { row.push(cur); out.push(row); }
-  return out.filter((r) => r.some((c) => c.length));
+  // Drop only genuine blank lines (a lone empty cell). A structural all-empty row
+  // like `,,` parses to ["","",""] and is a real record — keep it so column
+  // alignment and row counts stay correct.
+  return out.filter((r) => !(r.length === 1 && r[0] === ""));
 }
 function toCsv(rows: string[][]): string {
-  return rows.map((r) => r.map((c) => /[,"\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c).join(",")).join("\n") + "\n";
+  return rows.map((r) => r.map((c) => /[,"\n\r]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c).join(",")).join("\n") + "\n";
 }
 
 export function MergeCsvClient() {

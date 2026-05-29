@@ -15,6 +15,7 @@ import { AutoSyncClient } from "@/components/tools/clients/AutoSyncClient";
 import { SubtitleGeneratorClient } from "@/components/tools/clients/SubtitleGeneratorClient";
 import { AddSubtitlesToVideoClient } from "@/components/tools/clients/AddSubtitlesToVideoClient";
 import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesClient";
+import { ExtractSubtitlesClient } from "@/components/tools/clients/ExtractSubtitlesClient";
 import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
 import { TextToolClient } from "@/components/tools/clients/TextToolClient";
 import { RegexClient } from "@/components/tools/clients/RegexClient";
@@ -365,6 +366,9 @@ export default function LocalisedToolPage({
       break;
     case "style-subtitles":
       body = <StyleSubtitlesClient />;
+      break;
+    case "extract-subtitles":
+      body = <ExtractSubtitlesClient />;
       break;
     case "tiktok-subtitles":
       body = <TikTokSubtitlesClient />;

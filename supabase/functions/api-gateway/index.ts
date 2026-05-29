@@ -235,7 +235,9 @@ Deno.serve(async (req) => {
   // ---- authenticate the Wyrlo API key ----
   const authz = req.headers.get("Authorization") ?? "";
   const raw = authz.replace(/^Bearer\s+/i, "").trim();
-  if (!raw.startsWith("cf_")) return err("missing_api_key", "Send Authorization: Bearer cf_live_…", 401);
+  // Accept the current wyr_ prefix and the legacy cf_ prefix (keys issued
+  // before the Wyrlo rename) — validation is hash-based, so old keys keep working.
+  if (!/^(wyr|cf)_/.test(raw)) return err("missing_api_key", "Send Authorization: Bearer wyr_live_…", 401);
   const hash = await sha256(raw);
   const { data: keyRow } = await svc.from("api_keys").select("id, user_id, revoked").eq("key_hash", hash).maybeSingle();
   if (!keyRow || keyRow.revoked) return err("invalid_api_key", "API key not found or revoked.", 401);

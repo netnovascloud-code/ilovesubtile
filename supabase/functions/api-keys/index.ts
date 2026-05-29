@@ -23,9 +23,15 @@ async function sha256(s: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
+// wyr_live_ + 32 random bytes, base64url-encoded (43 chars, no padding).
+// The raw key is shown to the user exactly once; only its SHA-256 hash and a
+// 12-char display prefix are persisted.
 function randomKey(): string {
-  const bytes = crypto.getRandomValues(new Uint8Array(24));
-  return "cf_live_" + Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join("");
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  let bin = "";
+  for (const b of bytes) bin += String.fromCharCode(b);
+  const b64url = btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return "wyr_live_" + b64url;
 }
 
 Deno.serve(async (req) => {
@@ -65,7 +71,7 @@ Deno.serve(async (req) => {
     if (plan !== "business") return json({ error: "business_plan_required" }, { status: 403 });
     const raw = randomKey();
     const key_hash = await sha256(raw);
-    const key_prefix = raw.slice(0, 16);
+    const key_prefix = raw.slice(0, 12);
     const { error } = await svc.from("api_keys").insert({
       user_id: user.id, name: (body.name as string)?.slice(0, 60) || "Default", key_hash, key_prefix,
     });

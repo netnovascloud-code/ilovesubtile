@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
 import { HtmlLang } from "@/components/layout/HtmlLang";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -56,6 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col">
         {/* Syncs <html lang>/<dir> to the URL locale without opting out of SSG. */}
         <HtmlLang />
+        {/* Resets scroll to the top on every route change. */}
+        <ScrollToTop />
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />

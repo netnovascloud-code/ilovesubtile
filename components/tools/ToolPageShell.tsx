@@ -4,6 +4,7 @@ import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { cn } from "@/lib/utils";
 import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
+import { alsoSearchedAs } from "@/lib/keywords";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Home, ChevronRight, ArrowRight } from "lucide-react";
@@ -119,6 +120,9 @@ export function ToolPageShell({
                 )}
               </div>
               <p className="mt-3 max-w-2xl text-base text-ink-500">{description}</p>
+              {alsoSearchedAs(tool, locale) && (
+                <p className="mt-2 max-w-2xl text-xs text-ink-400">{alsoSearchedAs(tool, locale)}</p>
+              )}
               {!tool.pending && (tool.kind === "ai" || tool.kind === "edge") && <QuotaLine />}
             </div>
           </div>

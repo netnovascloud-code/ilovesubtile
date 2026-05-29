@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
+import { toolKeywords } from "@/lib/keywords";
 import { getStrings } from "@/lib/i18n/strings";
 import { getHomeExplorer } from "@/lib/i18n/home-explorer";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
@@ -41,7 +42,8 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
   const locale = params.locale;
   const ui = getStrings(locale);
   const rtl = isRtl(locale);
-  const tools = TOOLS.map(toCardSpec);
+  // Enrich the search haystack with locale-aware keyword variants.
+  const tools = TOOLS.map((t) => ({ ...toCardSpec(t), keywords: toolKeywords(t, locale).join(" ") }));
   const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label, iconName: c.iconName, tone: c.tone }));
   const categoryLabels = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
   const hx = getHomeExplorer(locale);

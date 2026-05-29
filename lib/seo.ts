@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ToolDefinition } from "@/lib/tools-config";
 import { SITE_URL } from "@/lib/utils";
+import { toolKeywords } from "@/lib/keywords";
 
 export const LOCALES = ["en", "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -47,7 +48,9 @@ export function buildToolMetadata(
     metadataBase: new URL(SITE_URL),
     title: { absolute: title },
     description,
-    keywords: [primaryKeyword, name, "subtitles", "captions", "SRT", "VTT"],
+    // Per-tool variants in the page's language (was hardcoded subtitle terms,
+    // which were wrong for the 100+ non-subtitle tools).
+    keywords: Array.from(new Set([primaryKeyword.toLowerCase(), name.toLowerCase(), ...toolKeywords(tool, locale)])),
     alternates: { canonical: canonicalPath, languages: alts },
     openGraph: {
       type: "website",

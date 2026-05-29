@@ -2,10 +2,22 @@ import { NextResponse } from "next/server";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { edgeFnUrl } from "@/lib/utils";
 
+/** Only allow same-origin redirects expressed as a root-relative path.
+ *  Anything that looks like a scheme, host or "//" prefix is rejected to
+ *  prevent open-redirect phishing via /auth/callback?redirect=https://evil.com. */
+function safeRedirectPath(raw: string | null): string {
+  const fallback = "/dashboard";
+  if (!raw) return fallback;
+  if (!raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/\\")) return fallback;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return fallback;
+  if (raw.length > 512) return fallback;
+  return raw;
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
-  const redirect = url.searchParams.get("redirect") || "/dashboard";
+  const redirect = safeRedirectPath(url.searchParams.get("redirect"));
 
   if (code) {
     const supabase = getSupabaseServer();

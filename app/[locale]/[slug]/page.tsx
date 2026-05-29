@@ -23,6 +23,12 @@ import { NumberBaseClient } from "@/components/tools/clients/NumberBaseClient";
 import { HashClient } from "@/components/tools/clients/HashClient";
 import { UnitConverterClient } from "@/components/tools/clients/UnitConverterClient";
 import { PasswordGenClient } from "@/components/tools/clients/PasswordGenClient";
+import { CaseConverterClient } from "@/components/tools/clients/CaseConverterClient";
+import { LoremIpsumClient } from "@/components/tools/clients/LoremIpsumClient";
+import { UuidGeneratorClient } from "@/components/tools/clients/UuidGeneratorClient";
+import { UnixTimestampClient } from "@/components/tools/clients/UnixTimestampClient";
+import { TextDiffClient } from "@/components/tools/clients/TextDiffClient";
+import { VatCalculatorClient } from "@/components/tools/clients/VatCalculatorClient";
 import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
 import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
 import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
@@ -301,6 +307,24 @@ export default function LocalisedToolPage({
       break;
     case "unit-converter":
       body = <UnitConverterClient />;
+      break;
+    case "case-converter":
+      body = <CaseConverterClient />;
+      break;
+    case "lorem-ipsum":
+      body = <LoremIpsumClient />;
+      break;
+    case "uuid-generator":
+      body = <UuidGeneratorClient />;
+      break;
+    case "unix-timestamp":
+      body = <UnixTimestampClient />;
+      break;
+    case "text-diff":
+      body = <TextDiffClient />;
+      break;
+    case "vat-calculator":
+      body = <VatCalculatorClient />;
       break;
     case "password-generator":
       body = <PasswordGenClient />;

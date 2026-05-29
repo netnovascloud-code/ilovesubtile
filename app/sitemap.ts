@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { TOOLS, ALTERNATIVES } from "@/lib/tools-config";
+import { TOOLS, ALTERNATIVES, CATEGORIES } from "@/lib/tools-config";
 import { EXTRA_ALTERNATIVES } from "@/lib/alternatives-extra";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
@@ -36,6 +36,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: altsFor(`/${tool.slug}`),
       });
     }
+  }
+
+  // Category landing pages — English only (one entry per category).
+  for (const c of CATEGORIES) {
+    entries.push({
+      url: `${SITE_URL}/${c.id}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    });
   }
 
   // Pricing — one entry per locale.

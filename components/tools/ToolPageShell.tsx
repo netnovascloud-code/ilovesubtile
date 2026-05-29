@@ -61,6 +61,20 @@ export function ToolPageShell({
     related = TOOLS.filter((t) => t.category === tool.category && t.slug !== tool.slug).slice(0, 3);
   }
 
+  // "More in [category]" — 4 siblings not already shown above (covers SEO
+  // internal linking + topical authority). "Also popular" — 3 high-traffic
+  // tools from other categories so users discover the breadth.
+  const shown = new Set([tool.slug, ...related.map((r) => r.slug)]);
+  const moreInCategory = TOOLS
+    .filter((t) => t.category === tool.category && !shown.has(t.slug))
+    .slice(0, 4);
+  moreInCategory.forEach((t) => shown.add(t.slug));
+  const POPULAR_SLUGS = ["merge-pdf", "remove-background", "format-json", "compress-video", "subtitle-generator", "qr-generator", "word-counter", "translate-text"];
+  const alsoPopular = POPULAR_SLUGS
+    .map((s) => TOOLS_BY_SLUG[s])
+    .filter((t) => t && t.category !== tool.category && !shown.has(t.slug))
+    .slice(0, 3);
+
   return (
     <div dir={rtl ? "rtl" : undefined}>
       <script
@@ -146,6 +160,51 @@ export function ToolPageShell({
                 );
               })}
             </div>
+          </div>
+        </section>
+      )}
+
+      {(moreInCategory.length > 0 || alsoPopular.length > 0) && (
+        <section className="border-t border-ink-100 bg-surface">
+          <div className="container py-12">
+            {moreInCategory.length > 0 && (
+              <div>
+                <h2 className="text-lg font-semibold text-ink-900">
+                  More in {tool.category === "text-ai" ? "Text & AI" : tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}
+                </h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {moreInCategory.map((rt) => {
+                    const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                    return (
+                      <li key={rt.slug}>
+                        <Link href={localePath(locale, rt.slug)} className="block rounded-lg border border-ink-100 bg-white px-4 py-3 text-sm transition-colors hover:border-brand-300">
+                          <div className="font-medium text-ink-900">{i18n?.name ?? rt.name}</div>
+                          <div className="mt-0.5 line-clamp-1 text-xs text-ink-500">{i18n?.short ?? rt.short}</div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+            {alsoPopular.length > 0 && (
+              <div className={moreInCategory.length > 0 ? "mt-8" : ""}>
+                <h2 className="text-lg font-semibold text-ink-900">Also popular</h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {alsoPopular.map((rt) => {
+                    const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                    return (
+                      <li key={rt.slug}>
+                        <Link href={localePath(locale, rt.slug)} className="block rounded-lg border border-ink-100 bg-white px-4 py-3 text-sm transition-colors hover:border-brand-300">
+                          <div className="font-medium text-ink-900">{i18n?.name ?? rt.name}</div>
+                          <div className="mt-0.5 line-clamp-1 text-xs text-ink-500">{i18n?.short ?? rt.short}</div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
       )}

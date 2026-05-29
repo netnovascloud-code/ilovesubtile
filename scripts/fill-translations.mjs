@@ -1,18 +1,18 @@
-// Fill missing tool translations via Mistral Large.
+// Fill missing translations via Mistral Large — tool SEO fields + category labels.
 //
-//   node scripts/fill-translations.mjs --dry-run        # audit only, no API calls
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs              # fill all gaps
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --locale fr  # one locale
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --limit 20   # cap tools
+//   node scripts/fill-translations.mjs --dry-run               # audit only, no API
+//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs                  # fill everything
+//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --target tools   # tools only
+//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --target categories
+//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --locale fr --limit 20
 //
-// Reads the English source from lib/tools-config.ts and the existing
-// hand-authored + generated translations, finds every (tool, locale) pair
-// with no translation, asks Mistral to translate the 5 SEO/UI fields, and
-// writes the results into lib/i18n/tool-translations.generated.ts. Safe to
-// re-run: it only fills what is still missing, so it resumes after a crash.
+// Reads the English source + existing translations, finds every missing
+// (item, locale), translates the fields, and writes them into the matching
+// generated overlay (tool-translations.generated.ts / category-translations
+// .generated.ts). Safe to re-run: only fills what is still missing.
 //
-// Requires Node 22.18+ (native TypeScript type-stripping — these imports are
-// type-only at runtime, so no build step is needed).
+// Requires Node 22.18+ (native TypeScript type-stripping — the imported app
+// modules are type-only at runtime, so no build step is needed).
 
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -20,16 +20,14 @@ import { dirname, resolve } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const GENERATED_PATH = resolve(ROOT, "lib/i18n/tool-translations.generated.ts");
+const TOOL_PATH = resolve(ROOT, "lib/i18n/tool-translations.generated.ts");
+const CAT_PATH = resolve(ROOT, "lib/i18n/category-translations.generated.ts");
 
-// The 12 non-English UI locales (locales.ts re-exports through the @/ alias,
-// which a plain node script can't resolve — so the list is inlined here).
 const LOCALES = [
   ["fr", "French"], ["es", "Spanish"], ["pt", "Portuguese"], ["de", "German"],
   ["it", "Italian"], ["nl", "Dutch"], ["ja", "Japanese"], ["zh", "Chinese (Simplified)"],
   ["ko", "Korean"], ["ar", "Arabic"], ["ru", "Russian"], ["hi", "Hindi"],
 ];
-const FIELDS = ["name", "short", "h1", "metaTitle", "metaDescription"];
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -37,110 +35,125 @@ const valOf = (f) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1] : 
 const DRY_RUN = has("--dry-run");
 const ONLY_LOCALE = valOf("--locale");
 const LIMIT = valOf("--limit") ? Number(valOf("--limit")) : Infinity;
+const TARGET = valOf("--target") ?? "all";
 const CONCURRENCY = 4;
 
 async function main() {
-  const { TOOLS } = await import(resolve(ROOT, "lib/tools-config.ts"));
+  const { TOOLS, CATEGORIES } = await import(resolve(ROOT, "lib/tools-config.ts"));
   const { TOOL_TRANSLATIONS } = await import(resolve(ROOT, "lib/i18n/tool-translations.ts"));
-  const { GENERATED_TOOL_TRANSLATIONS } = await import(GENERATED_PATH);
-
-  const generated = structuredClone(GENERATED_TOOL_TRANSLATIONS);
+  const { GENERATED_TOOL_TRANSLATIONS } = await import(TOOL_PATH);
+  const { GENERATED_CATEGORY_TRANSLATIONS } = await import(CAT_PATH);
   const locales = ONLY_LOCALE ? LOCALES.filter(([c]) => c === ONLY_LOCALE) : LOCALES;
 
-  // Build the work list: every (tool, locale) with no hand-authored or
-  // previously-generated translation.
+  const key = process.env.MISTRAL_API_KEY;
+  if (!DRY_RUN && !key) { console.error("MISTRAL_API_KEY is not set. Aborting."); process.exit(1); }
+
+  if (TARGET === "all" || TARGET === "tools") {
+    await processTarget({
+      title: "Tools",
+      items: TOOLS,
+      keyOf: (t) => t.slug,
+      fields: ["name", "short", "h1", "metaTitle", "metaDescription"],
+      handHas: (slug, loc) => Boolean(TOOL_TRANSLATIONS[slug]?.[loc]),
+      generated: structuredClone(GENERATED_TOOL_TRANSLATIONS),
+      path: TOOL_PATH,
+      typeName: "ToolI18n",
+      typeImport: 'import type { ToolI18n } from "./tool-translations";',
+      sysNoun: "UI/SEO strings for a tool",
+      key,
+    });
+  }
+  if (TARGET === "all" || TARGET === "categories") {
+    await processTarget({
+      title: "Categories",
+      items: CATEGORIES,
+      keyOf: (c) => c.id,
+      fields: ["label", "blurb"],
+      handHas: () => false, // no hand-authored category translations
+      generated: structuredClone(GENERATED_CATEGORY_TRANSLATIONS),
+      path: CAT_PATH,
+      typeName: "CategoryI18n",
+      typeImport: "export type CategoryI18n = { label: string; blurb: string };",
+      sysNoun: "a tool-category label and one-line blurb",
+      key,
+    });
+  }
+}
+
+async function processTarget(cfg) {
+  const { title, items, keyOf, fields, handHas, generated, path, key } = cfg;
+  const locales = ONLY_LOCALE ? LOCALES.filter(([c]) => c === ONLY_LOCALE) : LOCALES;
+
   const jobs = [];
-  const perLocaleMissing = Object.fromEntries(locales.map(([c]) => [c, 0]));
-  let toolsTouched = 0;
-  for (const tool of TOOLS) {
-    let toolHasGap = false;
+  const perLocale = Object.fromEntries(locales.map(([c]) => [c, 0]));
+  let touched = 0;
+  for (const item of items) {
+    const id = keyOf(item);
+    let gap = false;
     for (const [code, lang] of locales) {
-      const hand = TOOL_TRANSLATIONS[tool.slug]?.[code];
-      const gen = generated[tool.slug]?.[code];
-      if (hand || gen) continue;
-      perLocaleMissing[code]++;
-      toolHasGap = true;
-      jobs.push({ slug: tool.slug, code, lang, en: pickEn(tool) });
+      if (handHas(id, code) || generated[id]?.[code]) continue;
+      perLocale[code]++; gap = true;
+      jobs.push({ id, code, lang, en: Object.fromEntries(fields.map((f) => [f, item[f]])) });
     }
-    if (toolHasGap && ++toolsTouched > LIMIT) break;
+    if (gap && ++touched > LIMIT) break;
   }
 
-  console.log(`\nTranslation audit (${TOOLS.length} tools × ${locales.length} locales):`);
-  for (const [code] of locales) console.log(`  ${code}: ${perLocaleMissing[code]} missing`);
-  console.log(`  ── ${jobs.length} (tool,locale) pairs to fill${LIMIT !== Infinity ? ` (capped to ${toolsTouched - 1} tools)` : ""}\n`);
+  console.log(`\n${title} audit (${items.length} × ${locales.length} locales):`);
+  for (const [code] of locales) console.log(`  ${code}: ${perLocale[code]} missing`);
+  console.log(`  ── ${jobs.length} (item,locale) pairs to fill\n`);
 
-  if (DRY_RUN) { console.log("Dry run — no API calls made."); return; }
-  if (jobs.length === 0) { console.log("Nothing to fill. ✅"); return; }
-
-  const key = process.env.MISTRAL_API_KEY;
-  if (!key) { console.error("MISTRAL_API_KEY is not set. Aborting."); process.exit(1); }
+  if (DRY_RUN || jobs.length === 0) { if (DRY_RUN) console.log("Dry run — no API calls."); return; }
 
   let done = 0, failed = 0;
   const queue = [...jobs];
-  async function worker() {
+  const worker = async () => {
     while (queue.length) {
       const job = queue.shift();
       try {
-        const out = await translate(job, key);
-        (generated[job.slug] ??= {})[job.code] = out;
-        if (++done % 10 === 0) { await flush(generated); process.stdout.write(`  …${done}/${jobs.length}\n`); }
-      } catch (e) {
-        failed++;
-        console.warn(`  ! ${job.slug} [${job.code}]: ${e.message}`);
-      }
+        (generated[job.id] ??= {})[job.code] = await translate(job, fields, cfg.sysNoun, key);
+        if (++done % 10 === 0) { await flush(cfg, generated); process.stdout.write(`  …${done}/${jobs.length}\n`); }
+      } catch (e) { failed++; console.warn(`  ! ${job.id} [${job.code}]: ${e.message}`); }
     }
-  }
+  };
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
-  await flush(generated);
-  console.log(`\nFilled ${done} translations${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
+  await flush(cfg, generated);
+  console.log(`${title}: filled ${done}${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
 }
 
-function pickEn(tool) {
-  return Object.fromEntries(FIELDS.map((f) => [f, tool[f]]));
-}
-
-async function translate(job, key) {
-  const sys = `You are a professional software localizer for "Wyrlo", a free online file-converter and tools website. Translate the given UI/SEO strings into ${job.lang}. Rules: keep the brand name "Wyrlo" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); keep it natural, concise and idiomatic; the metaTitle should stay roughly under 60 characters and metaDescription under 160. Return ONLY a JSON object with exactly these keys: ${FIELDS.join(", ")}.`;
+async function translate(job, fields, sysNoun, key) {
+  const sys = `You are a professional software localizer for "Wyrlo", a free online file-converter and tools website. Translate the given ${sysNoun} into ${job.lang}. Rules: keep the brand name "Wyrlo" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); keep it natural, concise and idiomatic; meta titles should stay roughly under 60 characters and meta descriptions under 160. Return ONLY a JSON object with exactly these keys: ${fields.join(", ")}.`;
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "mistral-large-latest",
-      temperature: 0.2,
+      model: "mistral-large-latest", temperature: 0.2,
       response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: sys },
-        { role: "user", content: JSON.stringify(job.en) },
-      ],
+      messages: [{ role: "system", content: sys }, { role: "user", content: JSON.stringify(job.en) }],
     }),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 120)}`);
-  const data = await res.json();
-  const parsed = JSON.parse(data.choices[0].message.content);
-  for (const f of FIELDS) {
-    if (typeof parsed[f] !== "string" || !parsed[f].trim()) throw new Error(`missing field "${f}" in response`);
-  }
-  return Object.fromEntries(FIELDS.map((f) => [f, parsed[f].trim()]));
+  const parsed = JSON.parse((await res.json()).choices[0].message.content);
+  for (const f of fields) if (typeof parsed[f] !== "string" || !parsed[f].trim()) throw new Error(`missing "${f}"`);
+  return Object.fromEntries(fields.map((f) => [f, parsed[f].trim()]));
 }
 
-async function flush(generated) {
-  // Stable key order for clean diffs.
+async function flush(cfg, generated) {
   const sorted = {};
-  for (const slug of Object.keys(generated).sort()) {
-    sorted[slug] = {};
-    for (const code of Object.keys(generated[slug]).sort()) sorted[slug][code] = generated[slug][code];
+  for (const id of Object.keys(generated).sort()) {
+    sorted[id] = {};
+    for (const code of Object.keys(generated[id]).sort()) sorted[id][code] = generated[id][code];
   }
+  const exportName = cfg.path === CAT_PATH ? "GENERATED_CATEGORY_TRANSLATIONS" : "GENERATED_TOOL_TRANSLATIONS";
   const body = `import type { Locale } from "@/lib/i18n/locales";
-import type { ToolI18n } from "./tool-translations";
+${cfg.typeImport}
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations (Mistral Large) for tools without a hand-authored entry.
- * The resolver prefers hand-authored strings field-by-field over this overlay.
+ * Machine translations (Mistral Large). Resolvers prefer hand-authored strings.
  */
-export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, ToolI18n>>> = ${JSON.stringify(sorted, null, 2)};
+export const ${exportName}: Record<string, Partial<Record<Locale, ${cfg.typeName}>>> = ${JSON.stringify(sorted, null, 2)};
 `;
-  await writeFile(GENERATED_PATH, body, "utf8");
+  await writeFile(cfg.path, body, "utf8");
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

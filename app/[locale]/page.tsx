@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
+import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
 import { getStrings } from "@/lib/i18n/strings";
 import { getHomeExplorer } from "@/lib/i18n/home-explorer";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
@@ -44,8 +45,8 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
   const rtl = isRtl(locale);
   // Enrich the search haystack with locale-aware keyword variants.
   const tools = TOOLS.map((t) => ({ ...toCardSpec(t), keywords: toolKeywords(t, locale).join(" ") }));
-  const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label, iconName: c.iconName, tone: c.tone }));
-  const categoryLabels = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
+  const categories = CATEGORIES.map((c) => ({ id: c.id, label: categoryLabel(c.id, locale), iconName: c.iconName, tone: c.tone }));
+  const categoryLabels = Object.fromEntries(CATEGORIES.map((c) => [c.id, categoryLabel(c.id, locale)]));
   const hx = getHomeExplorer(locale);
   const SUGGEST = [
     { query: "jpg to png", category: "images" },

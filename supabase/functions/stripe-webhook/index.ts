@@ -68,6 +68,24 @@ Deno.serve(async (req) => {
     case "checkout.session.completed": {
       const s = event.data.object as Stripe.Checkout.Session;
       const userId = (s.metadata?.user_id as string | undefined) ?? null;
+
+      // One-time credit-pack purchase → grant non-expiring credits.
+      if (userId && (s.mode === "payment" || s.metadata?.kind === "pack")) {
+        const credits = Number(s.metadata?.credits ?? 0);
+        const pi = s.payment_intent ? String(s.payment_intent) : String(s.id);
+        if (credits > 0) {
+          // Idempotency: skip if we've already recorded this payment.
+          const { data: existing } = await supabase
+            .from("credit_transactions").select("id").eq("stripe_payment_intent", pi).maybeSingle();
+          if (!existing) {
+            await supabase.rpc("grant_credits", {
+              p_user: userId, p_amount: credits, p_reason: `pack:${s.metadata?.pack ?? "credits"}`, p_pi: pi,
+            });
+          }
+        }
+        break;
+      }
+
       if (!userId || !s.subscription || !s.customer) break;
       const plan = await planFromSubscription(String(s.subscription));
       await supabase.from("profiles").update({

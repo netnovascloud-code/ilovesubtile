@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
+import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { DAILY_LIMITS, type PlanKey } from "@/lib/quotas";
 
 export const metadata: Metadata = {
@@ -28,13 +29,16 @@ export default async function DashboardPage() {
     if (userData.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, credits")
+        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
       dailyUsage = profile?.daily_usage ?? 0;
       usageResetAt = profile?.usage_reset_at ?? null;
-      credits = profile?.credits ?? 0;
+      // Effective balance = permanent credits + this month's Business grant.
+      const thisMonth = new Date().toISOString().slice(0, 7);
+      const monthly = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
+      credits = (profile?.credits ?? 0) + monthly;
 
       const { data: jobsData } = await supabase
         .from("jobs")
@@ -162,6 +166,10 @@ export default async function DashboardPage() {
 
       <div className="mt-8">
         <ApiKeysCard plan={plan} credits={credits} />
+      </div>
+
+      <div className="mt-8">
+        <BuyCreditsCard />
       </div>
     </div>
   );

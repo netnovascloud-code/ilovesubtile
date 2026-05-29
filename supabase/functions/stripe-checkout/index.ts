@@ -1,14 +1,16 @@
 // Wyrlo — create a Stripe Checkout session for the authenticated user.
 //
-// POST /functions/v1/stripe-checkout?plan=pro|business&interval=monthly|annual
+// Subscriptions:
+//   POST /functions/v1/stripe-checkout?plan=pro|business&interval=monthly|annual
+// Credit packs (one-time, never expire):
+//   POST /functions/v1/stripe-checkout?pack=starter|growth|scale|studio
 // Returns: { url: "https://checkout.stripe.com/..." }
 //
 // Deploy:  supabase functions deploy stripe-checkout
 // Secrets: supabase secrets set STRIPE_SECRET_KEY=sk_live_...
-//          supabase secrets set STRIPE_PRICE_PRO_MONTHLY=price_...
-//          supabase secrets set STRIPE_PRICE_PRO_ANNUAL=price_...
-//          supabase secrets set STRIPE_PRICE_BIZ_MONTHLY=price_...
-//          supabase secrets set STRIPE_PRICE_BIZ_ANNUAL=price_...
+//          STRIPE_PRICE_PRO_MONTHLY / STRIPE_PRICE_PRO_ANNUAL
+//          STRIPE_PRICE_BIZ_MONTHLY / STRIPE_PRICE_BIZ_ANNUAL
+//          STRIPE_PRICE_PACK_STARTER / _GROWTH / _SCALE / _STUDIO  (one-time prices)
 
 import Stripe from "https://esm.sh/stripe@17.2.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -44,6 +46,41 @@ Deno.serve(async (req) => {
   if (!caller) return json({ error: "unauthorized" }, { status: 401 });
 
   const url = new URL(req.url);
+  const origin = req.headers.get("origin") ?? "https://wyrlo.io";
+
+  const stripe = new Stripe(stripeKey, {
+    apiVersion: "2024-09-30.acacia",
+    httpClient: Stripe.createFetchHttpClient(),
+  });
+
+  // ── Credit pack (one-time payment) ─────────────────────────────────────
+  const pack = url.searchParams.get("pack")?.toLowerCase();
+  if (pack) {
+    const PACK_CREDITS: Record<string, number> = { starter: 100, growth: 500, scale: 2000, studio: 6000 };
+    const credits = PACK_CREDITS[pack];
+    if (!credits) return json({ error: "invalid_pack" }, { status: 400 });
+    const priceId = Deno.env.get(`STRIPE_PRICE_PACK_${pack.toUpperCase()}`);
+    if (!priceId) return json({ error: "no_price_configured", env: `STRIPE_PRICE_PACK_${pack.toUpperCase()}` }, { status: 400 });
+    const successPath = url.searchParams.get("success_path") ?? "/dashboard?credits=1";
+    const cancelPath = url.searchParams.get("cancel_path") ?? "/dashboard";
+    try {
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        line_items: [{ price: priceId, quantity: 1 }],
+        customer_email: caller.email ?? undefined,
+        success_url: `${origin}${successPath}`,
+        cancel_url: `${origin}${cancelPath}`,
+        // payment_intent metadata is what the webhook reads to grant credits.
+        metadata: { user_id: caller.id, kind: "pack", pack, credits: String(credits) },
+        payment_intent_data: { metadata: { user_id: caller.id, kind: "pack", pack, credits: String(credits) } },
+      });
+      return json({ url: session.url });
+    } catch (err) {
+      return json({ error: "stripe_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
+    }
+  }
+
+  // ── Subscription ───────────────────────────────────────────────────────
   const plan = (url.searchParams.get("plan") ?? "pro").toLowerCase();
   const interval = url.searchParams.get("interval") === "annual" ? "annual" : "monthly";
   if (plan !== "pro" && plan !== "business") return json({ error: "invalid_plan" }, { status: 400 });
@@ -52,14 +89,8 @@ Deno.serve(async (req) => {
   const priceId = Deno.env.get(priceEnvKey);
   if (!priceId) return json({ error: "no_price_configured", env: priceEnvKey }, { status: 400 });
 
-  const origin = req.headers.get("origin") ?? "https://wyrlo.io";
   const successPath = url.searchParams.get("success_path") ?? "/dashboard?upgraded=1";
   const cancelPath = url.searchParams.get("cancel_path") ?? "/pricing";
-
-  const stripe = new Stripe(stripeKey, {
-    apiVersion: "2024-09-30.acacia",
-    httpClient: Stripe.createFetchHttpClient(),
-  });
 
   try {
     const session = await stripe.checkout.sessions.create({

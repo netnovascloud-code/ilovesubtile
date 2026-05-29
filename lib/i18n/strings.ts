@@ -41,8 +41,8 @@ export type UiStrings = {
 const en: UiStrings = {
   hero: {
     badge: "Free · No sign-up required",
-    title: "Convert, generate & translate subtitles online",
-    subtitle: "Sixteen focused tools for SRT, VTT and captioned video. Drop your file, get your result — no editor, no sign-up, no nonsense.",
+    title: "Convert files, images, audio, video & text online",
+    subtitle: "80+ free, fast online tools for documents, images, audio, video, code and text — most run right in your browser. No sign-up.",
     ctaPrimary: "Start with the generator",
     ctaSecondary: "See all tools",
   },
@@ -85,8 +85,8 @@ const en: UiStrings = {
 const fr: UiStrings = {
   hero: {
     badge: "Gratuit · sans inscription",
-    title: "Convertir, générer et traduire vos sous-titres en ligne",
-    subtitle: "Seize outils dédiés aux SRT, VTT et sous-titres vidéo. Déposez votre fichier, récupérez le résultat — sans éditeur compliqué, sans inscription.",
+    title: "Convertir fichiers, images, audio, vidéo et texte en ligne",
+    subtitle: "Plus de 80 outils en ligne gratuits et rapides pour documents, images, audio, vidéo, code et texte — la plupart dans votre navigateur. Sans inscription.",
     ctaPrimary: "Démarrer avec le générateur",
     ctaSecondary: "Voir tous les outils",
   },
@@ -129,8 +129,8 @@ const fr: UiStrings = {
 const es: UiStrings = {
   hero: {
     badge: "Gratis · sin registro",
-    title: "Convierte, genera y traduce subtítulos en línea",
-    subtitle: "Dieciséis herramientas centradas en SRT, VTT y vídeo con subtítulos. Suelta tu archivo, descarga el resultado — sin editor, sin registro.",
+    title: "Convierte archivos, imágenes, audio, vídeo y texto online",
+    subtitle: "Más de 80 herramientas online gratis y rápidas para documentos, imágenes, audio, vídeo, código y texto — la mayoría en tu navegador. Sin registro.",
     ctaPrimary: "Empezar con el generador",
     ctaSecondary: "Ver todas las herramientas",
   },
@@ -173,8 +173,8 @@ const es: UiStrings = {
 const pt: UiStrings = {
   hero: {
     badge: "Grátis · sem cadastro",
-    title: "Converta, gere e traduza legendas online",
-    subtitle: "Dezesseis ferramentas focadas em SRT, VTT e vídeo legendado. Solte seu arquivo, baixe o resultado — sem editor, sem cadastro.",
+    title: "Converta arquivos, imagens, áudio, vídeo e texto online",
+    subtitle: "Mais de 80 ferramentas online grátis e rápidas para documentos, imagens, áudio, vídeo, código e texto — a maioria no seu navegador. Sem cadastro.",
     ctaPrimary: "Começar com o gerador",
     ctaSecondary: "Ver todas as ferramentas",
   },
@@ -217,8 +217,8 @@ const pt: UiStrings = {
 const de: UiStrings = {
   hero: {
     badge: "Kostenlos · ohne Anmeldung",
-    title: "Untertitel online umwandeln, erstellen und übersetzen",
-    subtitle: "Sechzehn fokussierte Tools für SRT, VTT und Video-Untertitel. Datei hochladen, Ergebnis herunterladen — kein Editor, keine Anmeldung.",
+    title: "Dateien, Bilder, Audio, Video & Text online umwandeln",
+    subtitle: "80+ kostenlose, schnelle Online-Tools für Dokumente, Bilder, Audio, Video, Code und Text — die meisten direkt im Browser. Ohne Anmeldung.",
     ctaPrimary: "Mit dem Generator starten",
     ctaSecondary: "Alle Tools ansehen",
   },
@@ -261,8 +261,8 @@ const de: UiStrings = {
 const it: UiStrings = {
   hero: {
     badge: "Gratuito · senza registrazione",
-    title: "Converti, genera e traduci sottotitoli online",
-    subtitle: "Sedici strumenti dedicati a SRT, VTT e video sottotitolati. Carica il file, scarica il risultato — niente editor, niente registrazione.",
+    title: "Converti file, immagini, audio, video e testo online",
+    subtitle: "Oltre 80 strumenti online gratuiti e veloci per documenti, immagini, audio, video, codice e testo — la maggior parte nel browser. Senza registrazione.",
     ctaPrimary: "Inizia con il generatore",
     ctaSecondary: "Vedi tutti gli strumenti",
   },
@@ -305,8 +305,8 @@ const it: UiStrings = {
 const nl: UiStrings = {
   hero: {
     badge: "Gratis · geen registratie",
-    title: "Ondertitels online converteren, genereren en vertalen",
-    subtitle: "Zestien gerichte tools voor SRT, VTT en ondertitelde video. Bestand uploaden, resultaat downloaden — geen editor, geen registratie.",
+    title: "Bestanden, afbeeldingen, audio, video & tekst online converteren",
+    subtitle: "80+ gratis, snelle online tools voor documenten, afbeeldingen, audio, video, code en tekst — de meeste direct in je browser. Geen registratie.",
     ctaPrimary: "Start met de generator",
     ctaSecondary: "Alle tools bekijken",
   },
@@ -349,8 +349,8 @@ const nl: UiStrings = {
 const ja: UiStrings = {
   hero: {
     badge: "無料 · 登録不要",
-    title: "字幕をオンラインで変換・生成・翻訳",
-    subtitle: "SRT、VTT、字幕付き動画に特化した16のツール。ファイルをドロップして結果を受け取るだけ — 編集ソフトも登録も不要。",
+    title: "ファイル・画像・音声・動画・テキストをオンライン変換",
+    subtitle: "文書・画像・音声・動画・コード・テキスト向けの無料で高速なオンラインツール 80 種類以上。多くはブラウザ内で動作。登録不要。",
     ctaPrimary: "ジェネレーターを始める",
     ctaSecondary: "すべてのツールを見る",
   },
@@ -393,8 +393,8 @@ const ja: UiStrings = {
 const zh: UiStrings = {
   hero: {
     badge: "免费 · 无需注册",
-    title: "在线转换、生成和翻译字幕",
-    subtitle: "十六款专注于 SRT、VTT 和带字幕视频的工具。上传文件，下载结果 — 无需编辑器，无需注册。",
+    title: "在线转换文件、图片、音频、视频和文本",
+    subtitle: "面向文档、图片、音频、视频、代码和文本的 80+ 免费快捷在线工具，多数在浏览器中运行。无需注册。",
     ctaPrimary: "从生成器开始",
     ctaSecondary: "查看所有工具",
   },
@@ -437,8 +437,8 @@ const zh: UiStrings = {
 const ko: UiStrings = {
   hero: {
     badge: "무료 · 가입 불필요",
-    title: "온라인으로 자막을 변환·생성·번역",
-    subtitle: "SRT, VTT, 자막 영상에 특화된 16개의 도구. 파일을 올리고 결과를 받기만 하면 됩니다 — 편집기도, 가입도 필요 없습니다.",
+    title: "파일·이미지·오디오·동영상·텍스트 온라인 변환",
+    subtitle: "문서·이미지·오디오·동영상·코드·텍스트를 위한 80개 이상의 무료 고속 온라인 도구. 대부분 브라우저에서 실행. 가입 불필요.",
     ctaPrimary: "생성기로 시작",
     ctaSecondary: "모든 도구 보기",
   },
@@ -481,8 +481,8 @@ const ko: UiStrings = {
 const ar: UiStrings = {
   hero: {
     badge: "مجاني · بدون تسجيل",
-    title: "حوّل، أنشئ، وترجم الترجمات عبر الإنترنت",
-    subtitle: "ستة عشر أداة مخصصة لـ SRT وVTT والفيديو المُترجم. ارفع ملفك واحصل على النتيجة — بدون محرر، بدون تسجيل.",
+    title: "حوّل الملفات والصور والصوت والفيديو والنصوص عبر الإنترنت",
+    subtitle: "أكثر من 80 أداة أونلاين مجانية وسريعة للمستندات والصور والصوت والفيديو والشيفرة والنصوص — معظمها يعمل داخل متصفحك. بدون تسجيل.",
     ctaPrimary: "ابدأ بمولّد الترجمة",
     ctaSecondary: "اعرض كل الأدوات",
   },
@@ -525,8 +525,8 @@ const ar: UiStrings = {
 const ru: UiStrings = {
   hero: {
     badge: "Бесплатно · без регистрации",
-    title: "Конвертируйте, создавайте и переводите субтитры онлайн",
-    subtitle: "Шестнадцать инструментов для SRT, VTT и видео с субтитрами. Загрузите файл, получите результат — без редактора, без регистрации.",
+    title: "Конвертируйте файлы, изображения, аудио, видео и текст онлайн",
+    subtitle: "80+ бесплатных быстрых онлайн-инструментов для документов, изображений, аудио, видео, кода и текста — большинство работает прямо в браузере. Без регистрации.",
     ctaPrimary: "Начать с генератора",
     ctaSecondary: "Все инструменты",
   },
@@ -569,8 +569,8 @@ const ru: UiStrings = {
 const hi: UiStrings = {
   hero: {
     badge: "मुफ़्त · पंजीकरण नहीं चाहिए",
-    title: "ऑनलाइन सबटाइटल बदलें, बनाएँ और अनुवाद करें",
-    subtitle: "SRT, VTT और कैप्शन वाले वीडियो के लिए सोलह सटीक टूल। फ़ाइल छोड़ें, परिणाम पाएँ — कोई एडिटर नहीं, कोई पंजीकरण नहीं।",
+    title: "ऑनलाइन फ़ाइलें, छवियाँ, ऑडियो, वीडियो और टेक्स्ट कन्वर्ट करें",
+    subtitle: "दस्तावेज़, छवियों, ऑडियो, वीडियो, कोड और टेक्स्ट के लिए 80+ मुफ़्त, तेज़ ऑनलाइन टूल — अधिकांश आपके ब्राउज़र में चलते हैं। पंजीकरण नहीं।",
     ctaPrimary: "जनरेटर से शुरू करें",
     ctaSecondary: "सभी टूल देखें",
   },

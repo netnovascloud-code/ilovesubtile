@@ -32,6 +32,10 @@ export const IMAGE_TOOLS: Record<string, ImageToolConfig> = {
   "crop-image": { target: "keep", ext: "", accept: "image/*", controls: { crop: true, quality: true }, defaultQuality: 92 },
   "rotate-image": { target: "keep", ext: "", accept: "image/*", controls: { rotate: true, quality: true }, defaultQuality: 92 },
   "grayscale-image": { target: "keep", ext: "", accept: "image/*", controls: { quality: true }, forceGrayscale: true, defaultQuality: 92 },
+  // AVIF is decoded natively by createImageBitmap in modern browsers, then
+  // re-encoded via canvas — no extra library needed.
+  "avif-to-jpg": { target: "image/jpeg", ext: "jpg", accept: "image/avif,.avif", controls: { quality: true }, defaultQuality: 92 },
+  "avif-to-png": { target: "image/png", ext: "png", accept: "image/avif,.avif", controls: {} },
 };
 
 /** Resolve the effective output mime + extension given the source file type. */

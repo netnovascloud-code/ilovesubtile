@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { TOOLS, ALTERNATIVES, CATEGORIES } from "@/lib/tools-config";
 import { EXTRA_ALTERNATIVES } from "@/lib/alternatives-extra";
 import { SECTOR_IDS } from "@/lib/sectors";
+import { VS_IDS } from "@/lib/vs";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -56,6 +57,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
+    });
+  }
+
+  // "Wyrlo vs <competitor>" pages — English only, high-intent.
+  for (const v of VS_IDS) {
+    entries.push({
+      url: `${SITE_URL}/vs/${v}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
     });
   }
 

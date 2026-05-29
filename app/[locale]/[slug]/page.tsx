@@ -38,6 +38,7 @@ import { ComparePdfClient } from "@/components/tools/clients/ComparePdfClient";
 import { ImageToIcoClient } from "@/components/tools/clients/ImageToIcoClient";
 import { WatermarkImageClient } from "@/components/tools/clients/WatermarkImageClient";
 import { ExtractColorsClient } from "@/components/tools/clients/ExtractColorsClient";
+import { PdfToExcelClient } from "@/components/tools/clients/PdfToExcelClient";
 import { InvoiceGeneratorClient } from "@/components/tools/clients/InvoiceGeneratorClient";
 import { QrCodeReaderClient } from "@/components/tools/clients/QrCodeReaderClient";
 import { BarcodeGeneratorClient } from "@/components/tools/clients/BarcodeGeneratorClient";
@@ -269,6 +270,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <ComparePdfClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "pdf-to-excel") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PdfToExcelClient />
       </ToolPageShell>
     );
   }

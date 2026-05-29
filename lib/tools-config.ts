@@ -1754,6 +1754,21 @@ TOOLS.push(
   },
 );
 
+TOOLS.push(
+  utilTool("timezone-converter", Globe, "Time Zone Converter", "Convert any time between world time zones.",
+    "Time Zone Converter — Convert Time Between Cities & Zones",
+    "Time Zone Converter — World Clock & Time Difference | Wyrlo",
+    "Convert a date and time between any two time zones, with automatic daylight-saving handling. Free, instant, in-browser — no sign-up.",
+    "time zone converter", "Time",
+    [{ title: "Pick the zones", body: "Choose a source and target time zone from the full IANA list." }, { title: "Enter a date & time", body: "Type a time in the source zone, or hit “Now”." }, { title: "Read the result", body: "See the converted time and the exact hour difference." }]),
+  utilTool("age-calculator", CalendarClock, "Age Calculator", "Calculate exact age in years, months and days.",
+    "Age Calculator — Calculate Your Exact Age From Date of Birth",
+    "Age Calculator — Exact Age in Years, Months & Days | Wyrlo",
+    "Calculate exact age from a date of birth in years, months and days — plus total weeks, days and your next birthday. Free, instant, in-browser.",
+    "age calculator", "Age",
+    [{ title: "Enter a date of birth", body: "Any date — we validate it as you type." }, { title: "Pick the reference date", body: "Defaults to today; change it to age at any date." }, { title: "Read the breakdown", body: "Exact age plus months, weeks, days and your next birthday." }]),
+);
+
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(
   TOOLS.map((t) => [t.slug, t]),
 );

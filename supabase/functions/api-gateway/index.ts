@@ -140,6 +140,17 @@ Deno.serve(async (req) => {
   const userId = keyRow.user_id as string;
   await svc.from("api_keys").update({ last_used_at: new Date().toISOString() }).eq("id", keyRow.id);
 
+  // ---- per-key rate limit (60 requests / 60s sliding window) ----
+  const { data: rl } = await svc.rpc("api_rate_hit", { p_key_id: keyRow.id, p_limit: 60 });
+  const row = Array.isArray(rl) ? rl[0] : rl;
+  if (row && row.allowed === false) {
+    const retry = Number(row.retry_after ?? 60);
+    return json(
+      { error: "rate_limited", message: `Too many requests. Retry in ${retry}s.`, retry_after: retry },
+      { status: 429, headers: { "Retry-After": String(retry) } },
+    );
+  }
+
   const url = new URL(req.url);
   const action = url.searchParams.get("action") ?? "";
 

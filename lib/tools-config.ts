@@ -1366,6 +1366,24 @@ TOOLS.push({
   faqs: codeFaqs("Background Remover"),
 });
 
+// ── Video — Background remover (FFmpeg.wasm + @imgly, frame-by-frame) ───────
+TOOLS.push({
+  slug: "remove-video-background", phase: 3, kind: "client", category: "video", icon: Eraser, tone: "rose",
+  name: "Remove Video Background",
+  short: "Erase a video background or swap it for a colour.",
+  h1: "Remove Video Background Online Free — In-browser, No Upload",
+  metaTitle: "Remove Video Background Free — In-browser AI | Wyrlo",
+  metaDescription: "Remove or replace the background of a video — transparent WebM or a green/white/black/custom colour. Runs entirely in your browser; your video is never uploaded.",
+  primaryKeyword: "remove video background",
+  accept: ["mp4", "mov", "webm", "mkv"], freeMaxMb: 0, outputType: "WebM / MP4",
+  steps: [
+    { title: "Upload a video", body: "MP4, MOV or WebM — stays on your device." },
+    { title: "Pick a background", body: "Transparent, green screen, white, black, or any custom colour." },
+    { title: "Download the result", body: "Transparent WebM, or an MP4 with your chosen colour." },
+  ],
+  faqs: codeFaqs("Video Background Remover"),
+});
+
 // ── Utilities — QR generator ──────────────────────────────────────────────
 TOOLS.push(
   {

@@ -33,6 +33,7 @@ import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient"
 import { PendingClient } from "@/components/tools/clients/PendingClient";
 import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
 import { RemoveBackgroundClient } from "@/components/tools/clients/RemoveBackgroundClient";
+import { RemoveVideoBackgroundClient } from "@/components/tools/clients/RemoveVideoBackgroundClient";
 import { PdfToTextClient } from "@/components/tools/clients/PdfToTextClient";
 import { PdfToWordClient } from "@/components/tools/clients/PdfToWordClient";
 import { MergeAudioClient } from "@/components/tools/clients/MergeAudioClient";
@@ -158,6 +159,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <RemoveBackgroundClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "remove-video-background") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <RemoveVideoBackgroundClient />
       </ToolPageShell>
     );
   }

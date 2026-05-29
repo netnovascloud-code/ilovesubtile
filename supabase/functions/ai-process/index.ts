@@ -28,7 +28,7 @@ function corsFor(req: Request): Record<string, string> {
 const DAILY_LIMIT: Record<string, number> = { free: 2, pro: Infinity, business: Infinity };
 
 // Tasks that need the stronger model.
-const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize"]);
+const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
 
 function buildSystem(task: string, opts: { target?: string; style?: string; format?: string; register?: string; level?: string }): string | null {
   switch (task) {
@@ -74,6 +74,10 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `Identify the language of the user's text. Output exactly one line: "<Language name> (<ISO 639-1 code>)". Nothing else.`;
     case "analyze-file":
       return `You receive a JSON describing a file the user just dropped, plus a catalogue of available tools. Pick the 3 most relevant tools for what the user likely wants to do. Return ONLY JSON of the shape: {"suggestions":[{"slug":"<tool-slug>","why":"<one short sentence>"}, ... 3 items]}. Use only slugs that appear in the provided catalogue.`;
+    case "cover-letter":
+      return `You receive a JSON with the user's profile (name, current role, key skills, target job description). Write a professional, well-structured cover letter of 3-4 short paragraphs in ${opts.target || "English"}. Open with a hook that links the candidate's strongest skill to the role, explain fit with concrete examples, show genuine interest in the company/mission, close with a confident call to action. Avoid clichés and over-formal phrasing. Output ONLY the letter body — no greeting line, no signature, no commentary.`;
+    case "contract-analyze":
+      return `You receive the plain text of a contract. Return ONLY a JSON object with these keys: parties (array of strings — the contracting entities), effective_date (ISO YYYY-MM-DD or null), term (string describing duration / termination), payment_terms (string), liability (string — caps / waivers / indemnities, or null), confidentiality (string or null), governing_law (string or null), notable_clauses (array of {title, summary} — 3-6 items the reader should not miss), red_flags (array of strings — anything one-sided or unusual, possibly empty). Be concise; use null when a field is genuinely absent.`;
     default:
       return null;
   }
@@ -87,6 +91,8 @@ const TOOL_BY_TASK: Record<string, string> = {
   hashtags: "hashtag-generator", sentiment: "sentiment-analysis", keywords: "keyword-extractor",
   "detect-language": "detect-language",
   "analyze-file": "smart-drop",
+  "cover-letter": "cover-letter",
+  "contract-analyze": "contract-analyzer",
 };
 
 Deno.serve(async (req) => {
@@ -111,7 +117,10 @@ Deno.serve(async (req) => {
   const text = (body.text ?? "").trim();
   const system = buildSystem(task, body.options ?? {});
   if (!system || !text) return json({ error: "bad_request" }, { status: 400 });
-  if (text.length > 40000) return json({ error: "text_too_long" }, { status: 413 });
+  // Contracts can run long — bump the cap to 120 KB only for that task to
+  // keep memory predictable on the smaller default tasks.
+  const maxLen = task === "contract-analyze" ? 120_000 : 40_000;
+  if (text.length > maxLen) return json({ error: "text_too_long" }, { status: 413 });
 
   // Resolve caller (optional) and enforce the per-day free-tier cap.
   let userId: string | null = null;
@@ -146,7 +155,7 @@ Deno.serve(async (req) => {
   }
 
   const model = LARGE.has(task) ? "mistral-large-latest" : "mistral-small-latest";
-  const wantsJson = task === "analyze-file";
+  const wantsJson = task === "analyze-file" || task === "contract-analyze";
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },

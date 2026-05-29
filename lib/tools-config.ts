@@ -1835,6 +1835,74 @@ TOOLS.push(
   },
 );
 
+// ── Productivity & creative (last batch of new modules) ────────────────────
+TOOLS.push(
+  {
+    slug: "change-background", phase: 3, kind: "client", category: "images", icon: WandSparkles, tone: "amber",
+    name: "Change Image Background",
+    short: "Replace the background with a colour, gradient or image.",
+    h1: "Change Image Background Online Free — Replace Background",
+    metaTitle: "Change Image Background Online — Color, Gradient, Image | Konver",
+    metaDescription: "Remove the background and drop in a new one — colour, gradient or your own image. Runs in your browser, your photo is never uploaded.",
+    primaryKeyword: "change image background",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "PNG",
+    steps: [
+      { title: "Upload a subject photo", body: "Person, product or object." },
+      { title: "Pick a new background", body: "Solid colour, gradient preset, or your own image." },
+      { title: "Download the PNG", body: "Composited at the original resolution." },
+    ],
+    faqs: codeFaqs("Change Image Background"),
+  },
+  {
+    slug: "resume-builder", phase: 3, kind: "client", category: "documents", icon: FileText, tone: "blue",
+    name: "Resume Builder",
+    short: "Build a clean PDF resume with two templates.",
+    h1: "Free Resume Builder Online — Create CV PDF Instantly",
+    metaTitle: "Free Resume Builder — Create PDF CV Online | Konver",
+    metaDescription: "Build a clean, ATS-friendly resume with two templates and export to PDF — entirely in your browser, no sign-up, your data never leaves your device.",
+    primaryKeyword: "free resume builder",
+    accept: [], freeMaxMb: 0, outputType: "PDF",
+    steps: [
+      { title: "Fill in your details", body: "Header, summary, experience, education, skills." },
+      { title: "Pick a template", body: "Clean or Modern — same content, different layout." },
+      { title: "Export the PDF", body: "Generated locally with pdf-lib." },
+    ],
+    faqs: codeFaqs("Resume Builder"),
+  },
+  {
+    slug: "cover-letter", phase: 3, kind: "ai", category: "documents", icon: Mail, tone: "blue",
+    name: "Cover Letter Generator",
+    short: "Job description → tailored cover letter, ready to send.",
+    h1: "AI Cover Letter Generator Free — Write Letter in Seconds",
+    metaTitle: "AI Cover Letter Generator — Free, Multilingual | Konver",
+    metaDescription: "Paste your background and the job description — get a polished cover letter in seconds, in 7 languages. Export to PDF.",
+    primaryKeyword: "ai cover letter generator",
+    accept: [], freeMaxMb: 0, outputType: "Letter",
+    steps: [
+      { title: "Enter your background", body: "Name, current role, key skills." },
+      { title: "Paste the job description", body: "We tailor the letter to its language and tone." },
+      { title: "Export to PDF", body: "Edit the result, then download." },
+    ],
+    faqs: codeFaqs("Cover Letter Generator"),
+  },
+  {
+    slug: "contract-analyzer", phase: 3, kind: "ai", category: "documents", icon: FileText, tone: "blue",
+    name: "Contract Analyzer",
+    short: "Surface parties, term, payment, liability and red flags.",
+    h1: "AI Contract Analyzer Online Free — Extract Key Clauses",
+    metaTitle: "AI Contract Analyzer Online — Key Clauses & Red Flags | Konver",
+    metaDescription: "Drop a contract PDF and get a clean breakdown of parties, term, payment, liability, governing law and red flags. AI-assisted, for orientation only.",
+    primaryKeyword: "contract analyzer",
+    accept: ["pdf"], freeMaxMb: 5, outputType: "Analysis",
+    steps: [
+      { title: "Upload the contract PDF", body: "Text-based — scans need OCR first." },
+      { title: "We extract & summarise", body: "Parties, term, payment, liability, notable clauses." },
+      { title: "Read the red flags", body: "AI flags one-sided or unusual provisions." },
+    ],
+    faqs: codeFaqs("Contract Analyzer"),
+  },
+);
+
 // ── Vision (Mistral Pixtral via ai-vision edge fn) ─────────────────────────
 TOOLS.push(
   {

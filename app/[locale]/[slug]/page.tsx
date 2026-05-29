@@ -85,6 +85,10 @@ import { HandwritingToTextClient } from "@/components/tools/clients/HandwritingT
 import { BusinessCardScannerClient } from "@/components/tools/clients/BusinessCardScannerClient";
 import { ReceiptScannerClient } from "@/components/tools/clients/ReceiptScannerClient";
 import { ScreenshotToCodeClient } from "@/components/tools/clients/ScreenshotToCodeClient";
+import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
+import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
+import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
+import { ContractAnalyzerClient } from "@/components/tools/clients/ContractAnalyzerClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -465,6 +469,18 @@ export default function LocalisedToolPage({
       break;
     case "screenshot-to-code":
       body = <ScreenshotToCodeClient />;
+      break;
+    case "change-background":
+      body = <ChangeBackgroundClient />;
+      break;
+    case "resume-builder":
+      body = <ResumeBuilderClient />;
+      break;
+    case "cover-letter":
+      body = <CoverLetterClient />;
+      break;
+    case "contract-analyzer":
+      body = <ContractAnalyzerClient />;
       break;
     case "image-to-base64":
       body = <ImageToBase64Client />;

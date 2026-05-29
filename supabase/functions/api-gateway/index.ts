@@ -144,8 +144,12 @@ Deno.serve(async (req) => {
   const action = url.searchParams.get("action") ?? "";
 
   // ---- read profile (plan + balance) ----
-  const { data: prof } = await svc.from("profiles").select("plan, credits, email").eq("id", userId).maybeSingle();
-  const balance = prof?.credits ?? 0;
+  // Effective balance = permanent credits + this month's Business grant.
+  // spend_credits draws the monthly bucket first; available_credits sums them.
+  const { data: prof } = await svc.from("profiles").select("plan, credits, email, monthly_credits, monthly_credits_month").eq("id", userId).maybeSingle();
+  const thisMonth = new Date().toISOString().slice(0, 7);
+  const monthly = prof?.monthly_credits_month === thisMonth ? (prof?.monthly_credits ?? 0) : 0;
+  const balance = (prof?.credits ?? 0) + monthly;
 
   // ===== free, read-only actions =====
   if (action === "me") {
@@ -154,6 +158,8 @@ Deno.serve(async (req) => {
       email: prof?.email ?? null,
       plan: prof?.plan ?? "free",
       credits: balance,
+      credits_permanent: prof?.credits ?? 0,
+      credits_monthly: monthly,
       max_file_mb: (prof?.plan === "business") ? 2048 : (prof?.plan === "pro") ? 500 : 25,
     });
   }

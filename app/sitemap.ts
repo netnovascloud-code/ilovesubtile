@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { TOOLS, ALTERNATIVES } from "@/lib/tools-config";
+import { EXTRA_ALTERNATIVES } from "@/lib/alternatives-extra";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -52,6 +53,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const a of ALTERNATIVES) {
     entries.push({
       url: `${SITE_URL}/${a.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    });
+  }
+
+  // Extra competitor pages live under /alternatives/<slug> — English only.
+  for (const a of EXTRA_ALTERNATIVES) {
+    entries.push({
+      url: `${SITE_URL}/alternatives/${a.slug}`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,

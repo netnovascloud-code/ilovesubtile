@@ -164,7 +164,7 @@ export const COMING_SOON: ComingSoonTool[] = [
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,
-    a: `Yes. Wyrlo is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
+    a: `Yes. Wyrlo is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€9/month) get unlimited runs, larger files, and no ads.`,
   },
   {
     q: `Do you store my files?`,
@@ -988,7 +988,7 @@ TOOLS.push(
 
 // ── Wyrlo — Text & AI (server-side AI, daily free quota) ───────────────────
 const aiFaqs = (name: string): ToolFaq[] => [
-  { q: `Is ${name} free?`, a: `Yes. Free users get 3 runs/day without an account and 5/day signed in. Pro (€12/month) removes the limit and all ads, with larger inputs.` },
+  { q: `Is ${name} free?`, a: `Yes. Free users get 3 runs/day without an account and 5/day signed in. Pro (€9/month) removes the limit and all ads, with larger inputs.` },
   { q: `Is my text stored or used to train AI?`, a: `No. Your text is processed only to generate your result and is not used to train any model. Inputs are not retained long-term.` },
   { q: `How accurate is the result?`, a: `${name} uses an advanced language model and is strong across many languages. For high-stakes content, give the output a quick review.` },
   { q: `Which languages are supported?`, a: `Dozens — input and output work across all major world languages.` },
@@ -1482,15 +1482,15 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Best Free VEED.io Alternative — Wyrlo",
     metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | Wyrlo",
     metaDescription:
-      "Looking for a VEED.io alternative? Wyrlo is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
+      "Looking for a VEED.io alternative? Wyrlo is faster, cheaper (€9/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
       "AI subtitle generation with AI — modern, European, accurate.",
-      "€12/month Pro vs VEED's €18/month — and a real free tier.",
+      "€9/month Pro vs VEED's €18/month — and a real free tier.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€12/month", them: "€18/month" },
+      { feature: "Pro price", us: "€9/month", them: "€18/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Limited, watermarked" },
       { feature: "File size limit", us: "Up to 500 MB (Pro)", them: "Tiered by plan" },
       { feature: "AI subtitles", us: "AI, 30+ langs", them: "Yes" },
@@ -1499,7 +1499,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
     ],
     faqs: [
-      { q: "Is Wyrlo really cheaper than VEED?", a: "Yes — Pro is €12/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
+      { q: "Is Wyrlo really cheaper than VEED?", a: "Yes — Pro is €9/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
       { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any Wyrlo tool — translate, sync, clean or burn them in." },
       { q: "Does Wyrlo add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
       { q: "Is Wyrlo a full video editor like VEED?", a: "No, and that's the point. Wyrlo does subtitles only — each tool does one job fast, with no editor learning curve." },
@@ -1518,7 +1518,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       "Free tier you can actually use — no 4-minute video cap.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€12/month", them: "$16/month" },
+      { feature: "Pro price", us: "€9/month", them: "$16/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermark + limits" },
       { feature: "Focus", us: "Subtitles only", them: "General editor" },
       { feature: "AI subtitles", us: "AI", them: "Yes" },
@@ -1539,14 +1539,14 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Affordable HappyScribe Alternative — Wyrlo",
     metaTitle: "HappyScribe Alternative Cheaper — Wyrlo",
     metaDescription:
-      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with top-tier accuracy.",
+      "HappyScribe alternative for creators, not just enterprise. €9/month vs €25/month with top-tier accuracy.",
     bulletPoints: [
       "Modern AI engine (AI), half the price.",
       "Self-serve, no sales call required.",
       "Works for indie creators, agencies and teams alike.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€12/month", them: "~€25/month" },
+      { feature: "Pro price", us: "€9/month", them: "~€25/month" },
       { feature: "Audience", us: "Creators + teams", them: "Enterprise-first" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Trial only" },
       { feature: "AI subtitles", us: "AI", them: "Yes" },
@@ -1577,7 +1577,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "AI subtitle generation", us: "Yes (AI)", them: "No" },
       { feature: "Number of subtitle tools", us: "16", them: "~1" },
       { feature: "Translation", us: "30+ languages", them: "No" },
-      { feature: "Pro price", us: "€12/month", them: "~$9/month (all tools)" },
+      { feature: "Pro price", us: "€9/month", them: "~$9/month (all tools)" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermarked" },
       { feature: "Watermark on text", us: "Never", them: "Free plan" },
       { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },

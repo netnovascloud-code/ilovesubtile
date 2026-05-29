@@ -85,7 +85,6 @@ export default function Home() {
                 {ui.home.upgradeFeatures.map((f) => (
                   <li key={f}>✓ {f}</li>
                 ))}
-                <li className="text-ink-400">✓ Workflow Builder · Batch up to 50 files · Saved templates <span className="ml-1 rounded bg-ink-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-500">Soon</span></li>
               </ul>
             </div>
           </div>

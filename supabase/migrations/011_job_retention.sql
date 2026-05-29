@@ -1,12 +1,12 @@
 -- =====================================================================
--- Wyrlo — privacy retention: consolidate temp-data purge into one function
+-- Konver — privacy retention: consolidate temp-data purge into one function
 --
--- Privacy guarantee: Wyrlo stores NO file or document content — only
+-- Privacy guarantee: Konver stores NO file or document content — only
 -- metadata (tool name, status, file name/size in the `metadata` jsonb, and
 -- short-lived signed URLs). Download links expire after 1 hour
 -- (send-email edge function), so the windows below never race a live download.
 --
--- Context: an ad-hoc cron `wyrlo-purge-fast` already deleted `results`
+-- Context: an ad-hoc cron `konver-purge-fast` already deleted `results`
 -- objects (>30 min) and `jobs` rows (>2 h), but it never touched the
 -- `uploads` bucket. This migration centralises the logic in one documented
 -- function, adds the missing `uploads` purge, and replaces the ad-hoc cron so
@@ -42,16 +42,25 @@ revoke execute on function public.cleanup_expired_jobs() from public, anon, auth
 
 -- Replace the ad-hoc inline cron with one that calls the function above.
 do $$
+declare
+  legacy_name text;
 begin
-  if exists (select 1 from pg_extension where extname = 'pg_cron') then
-    -- Drop the legacy ad-hoc job (inline SQL, no uploads purge) if present.
-    if exists (select 1 from cron.job where jobname = 'wyrlo-purge-fast') then
-      perform cron.unschedule('wyrlo-purge-fast');
-    end if;
-    if exists (select 1 from cron.job where jobname = 'wyrlo_job_retention') then
-      perform cron.unschedule('wyrlo_job_retention');
-    end if;
-    perform cron.schedule('wyrlo_job_retention', '*/5 * * * *', $cron$ select public.cleanup_expired_jobs(); $cron$);
+  if not exists (select 1 from pg_extension where extname = 'pg_cron') then
+    return;
   end if;
+  -- Drop every legacy/historic cron name idempotently: the original ad-hoc
+  -- inline cron, the post-CaptionFlow Wyrlo-era name (deployed on prod before
+  -- the Konver rename), and any prior run of this same migration. Without
+  -- this loop, re-running migration 011 on a production DB that already has
+  -- the Wyrlo-named cron would leave BOTH crons scheduled simultaneously.
+  foreach legacy_name in array array[
+    'wyrlo-purge-fast', 'wyrlo_job_retention',
+    'konver-purge-fast', 'konver_job_retention'
+  ] loop
+    if exists (select 1 from cron.job where jobname = legacy_name) then
+      perform cron.unschedule(legacy_name);
+    end if;
+  end loop;
+  perform cron.schedule('konver_job_retention', '*/5 * * * *', $cron$ select public.cleanup_expired_jobs(); $cron$);
 end;
 $$;

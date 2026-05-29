@@ -17,8 +17,8 @@ export function generateMetadata({ params }: { params: { sector: string } }): Me
     openGraph: {
       title: sector.metaTitle,
       description: sector.metaDescription,
-      url: `https://wyrlo.io/for/${sector.id}`,
-      siteName: "Wyrlo",
+      url: `https://konver.app/for/${sector.id}`,
+      siteName: "Konver",
       type: "website",
     },
   };

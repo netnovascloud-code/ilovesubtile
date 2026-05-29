@@ -1,4 +1,4 @@
-// Wyrlo — translate SRT/VTT via Mistral chat (JSON mode).
+// Konver — translate SRT/VTT via Mistral chat (JSON mode).
 //
 // Deploy: supabase functions deploy translate-subtitles
 // Secret:  supabase secrets set MISTRAL_API_KEY=...
@@ -11,12 +11,12 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
-  "https://wyrlo.io", "https://www.wyrlo.io",
+  "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",

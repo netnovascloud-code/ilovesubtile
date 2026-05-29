@@ -110,8 +110,8 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://wyrlo.io/" },
-              { "@type": "ListItem", position: 2, name: def.label, item: `https://wyrlo.io/${category}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
+              { "@type": "ListItem", position: 2, name: def.label, item: `https://konver.app/${category}` },
             ],
           }),
         }}
@@ -135,7 +135,7 @@ export function categoryMetadata(category: ToolCategory) {
     archives: "Archive Tools — Create & Extract ZIP Online Free",
   };
   return {
-    title: { absolute: `${titles[category]} | Wyrlo` },
+    title: { absolute: `${titles[category]} | Konver` },
     description: `${def.blurb} Free, fast, browser-first — no sign-up needed.`,
     alternates: { canonical: `/${category}` },
   };

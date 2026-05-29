@@ -61,7 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // "Wyrlo vs <competitor>" pages — English only, high-intent.
+  // "Konver vs <competitor>" pages — English only, high-intent.
   for (const v of VS_IDS) {
     entries.push({
       url: `${SITE_URL}/vs/${v}`,

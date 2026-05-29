@@ -16,9 +16,9 @@ export type Sector = {
 export const SECTORS: Record<string, Sector> = {
   youtubers: {
     id: "youtubers",
-    hero: "Wyrlo for YouTubers — Subtitles, Audio & Thumbnails",
+    hero: "Konver for YouTubers — Subtitles, Audio & Thumbnails",
     intro: "Generate subtitles in 30+ languages, extract audio for podcast versions, compress videos for previews, and create polished thumbnails — all in your browser, free.",
-    metaTitle: "Wyrlo for YouTubers — Subtitles, Audio & Thumbnails Free | Wyrlo",
+    metaTitle: "Konver for YouTubers — Subtitles, Audio & Thumbnails Free | Konver",
     metaDescription: "Free tools built for YouTubers: AI subtitle generation, translation, video compression, audio extraction, thumbnail crop and resize. No editor, no sign-up.",
     highlights: [
       { title: "Subtitles in 30+ languages", body: "AI transcription + translation cue-by-cue, with timestamps preserved." },
@@ -34,9 +34,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   developers: {
     id: "developers",
-    hero: "Wyrlo for Developers — JSON, Code & API Tools",
+    hero: "Konver for Developers — JSON, Code & API Tools",
     intro: "Format and validate JSON, convert between data formats, decode JWTs, encode Base64, generate UUIDs — and call any of it programmatically via the public REST API.",
-    metaTitle: "Wyrlo for Developers — JSON, Code & API Tools | Wyrlo",
+    metaTitle: "Konver for Developers — JSON, Code & API Tools | Konver",
     metaDescription: "Free dev tools: JSON formatter, JSON↔CSV/XML/YAML, Base64, URL encode, JWT decoder, UUID v4/v7, regex tester, diff. Plus a paid REST API for automation.",
     highlights: [
       { title: "Browser-first, zero upload", body: "JSON, regex, diff, UUID — runs in your browser. Your code never leaves the device." },
@@ -52,9 +52,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   podcasters: {
     id: "podcasters",
-    hero: "Wyrlo for Podcasters — Transcription & Audio Tools",
+    hero: "Konver for Podcasters — Transcription & Audio Tools",
     intro: "Transcribe episodes with AI, translate them, clean up MP3s, cut, merge, and compress — everything you need to turn a raw recording into a ready-to-publish episode.",
-    metaTitle: "Wyrlo for Podcasters — Transcription & Audio Tools | Wyrlo",
+    metaTitle: "Konver for Podcasters — Transcription & Audio Tools | Konver",
     metaDescription: "Free podcaster tools: AI transcription with timestamps, multi-language translation, audio cut/merge/compress, MP3↔WAV conversion, volume and speed control.",
     highlights: [
       { title: "AI transcription with timestamps", body: "Voxtral-grade accuracy across 30+ languages, exported to SRT." },
@@ -70,9 +70,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   designers: {
     id: "designers",
-    hero: "Wyrlo for Designers — Image & Color Tools",
+    hero: "Konver for Designers — Image & Color Tools",
     intro: "Convert between image formats, remove backgrounds, resize, crop, rotate, build a colour palette, and grab the exact HEX/RGB/HSL/CMYK values — all in seconds.",
-    metaTitle: "Wyrlo for Designers — Image & Color Tools Free | Wyrlo",
+    metaTitle: "Konver for Designers — Image & Color Tools Free | Konver",
     metaDescription: "Free designer tools: AI background removal, image format conversion (JPG/PNG/WebP/SVG), resize, crop, rotate, grayscale, colour converter (HEX/RGB/HSL/CMYK).",
     highlights: [
       { title: "AI background removal", body: "Cut out a clean transparent PNG in seconds — entirely in the browser." },
@@ -88,9 +88,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   students: {
     id: "students",
-    hero: "Wyrlo for Students — Free Study & Document Tools",
+    hero: "Konver for Students — Free Study & Document Tools",
     intro: "Merge lecture notes, convert PDFs to Word, summarize long readings, generate study flashcards from a transcript, translate articles — all free, no sign-up.",
-    metaTitle: "Wyrlo for Students — Free Study & Document Tools | Wyrlo",
+    metaTitle: "Konver for Students — Free Study & Document Tools | Konver",
     metaDescription: "Free student tools: merge/split/compress PDF, PDF↔Word, AI summarization, translation, transcription, JSON/CSV — everything you need for assignments and notes.",
     highlights: [
       { title: "Convert PDFs without paying", body: "Merge, split, compress, PDF↔Word — entirely in your browser." },
@@ -106,9 +106,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   lawyers: {
     id: "lawyers",
-    hero: "Wyrlo for Legal Professionals — Document Conversion",
+    hero: "Konver for Legal Professionals — Document Conversion",
     intro: "Merge briefs, split filings, lock PDFs, redact and translate — all without uploading sensitive material to a stranger's server.",
-    metaTitle: "Wyrlo for Legal Professionals — Document Tools | Wyrlo",
+    metaTitle: "Konver for Legal Professionals — Document Tools | Konver",
     metaDescription: "Free document tools for legal work: merge/split/compress PDF, PDF↔Word, redact, translate filings with AI, transcribe depositions. Browser-first privacy.",
     highlights: [
       { title: "Browser-first privacy", body: "PDF operations run entirely in your browser. Files never leave your device." },
@@ -124,9 +124,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   recruiters: {
     id: "recruiters",
-    hero: "Wyrlo for HR & Recruiters — CV & Document Tools",
+    hero: "Konver for HR & Recruiters — CV & Document Tools",
     intro: "Convert CVs between formats, batch-translate candidate documents, summarize cover letters, and standardize file types before sharing with hiring managers.",
-    metaTitle: "Wyrlo for HR & Recruiters — CV & Document Tools | Wyrlo",
+    metaTitle: "Konver for HR & Recruiters — CV & Document Tools | Konver",
     metaDescription: "Free HR & recruiter tools: PDF↔Word for CV conversion, AI translation, summarization, document compression. Batch process candidate files securely.",
     highlights: [
       { title: "Standardize CV formats", body: "PDF↔Word in seconds — every candidate file in the same shape." },
@@ -142,9 +142,9 @@ export const SECTORS: Record<string, Sector> = {
   },
   ecommerce: {
     id: "ecommerce",
-    hero: "Wyrlo for E-commerce — Product Images & Descriptions",
+    hero: "Konver for E-commerce — Product Images & Descriptions",
     intro: "Cut out clean transparent backgrounds, resize for every marketplace, compress for fast pages, generate product descriptions with AI, translate listings.",
-    metaTitle: "Wyrlo for E-commerce — Product Images & Descriptions | Wyrlo",
+    metaTitle: "Konver for E-commerce — Product Images & Descriptions | Konver",
     metaDescription: "Free e-commerce tools: AI background removal, image resize/compress, AI product description generator, listing translation, QR codes for offline campaigns.",
     highlights: [
       { title: "Catalogue-ready images", body: "AI background removal + resize for Amazon, Shopify, eBay specs." },

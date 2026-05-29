@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — make Stripe credit-pack grants exactly-once
+-- Konver — make Stripe credit-pack grants exactly-once
 --
 -- The stripe-webhook performed a check-then-insert ("does a row with this
 -- stripe_payment_intent already exist?  if not, grant credits"). That's

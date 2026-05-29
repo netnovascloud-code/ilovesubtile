@@ -161,7 +161,7 @@ export function defaultStep(kind: StepKind, width = 1280, height = 720): Step {
     case "format": return { id, kind, format: "image/webp", quality: 85 };
     case "rotate": return { id, kind, angle: 90 };
     case "grayscale": return { id, kind };
-    case "watermark": return { id, kind, text: "Wyrlo.io", position: "br", size: 48, color: "#FFFFFF", opacity: 90 };
+    case "watermark": return { id, kind, text: "Konver.io", position: "br", size: 48, color: "#FFFFFF", opacity: 90 };
     case "to-pdf": return { id, kind, pageSize: "A4", margin: 20 };
   }
 }

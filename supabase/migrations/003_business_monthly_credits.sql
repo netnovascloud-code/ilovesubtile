@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — Business plan monthly credit grant (200 credits, expiring)
+-- Konver — Business plan monthly credit grant (200 credits, expiring)
 --
 -- Purchased credits (profiles.credits) never expire. Business subscribers
 -- additionally receive 200 credits on the 1st of each month that expire at
@@ -103,12 +103,20 @@ revoke execute on function public.grant_business_monthly() from public, anon, au
 
 -- Schedule the grant for 00:05 UTC on the 1st of every month (pg_cron).
 do $$
+declare
+  legacy_name text;
 begin
-  if exists (select 1 from pg_extension where extname = 'pg_cron') then
-    if exists (select 1 from cron.job where jobname = 'wyrlo_business_monthly') then
-      perform cron.unschedule('wyrlo_business_monthly');
-    end if;
-    perform cron.schedule('wyrlo_business_monthly', '5 0 1 * *', $cron$ select public.grant_business_monthly(); $cron$);
+  if not exists (select 1 from pg_extension where extname = 'pg_cron') then
+    return;
   end if;
+  -- Drop legacy names idempotently (Wyrlo-era prod cron + a prior run of this
+  -- migration under the new name) before scheduling, so re-running this
+  -- migration never leaves two crons running side by side.
+  foreach legacy_name in array array['wyrlo_business_monthly', 'konver_business_monthly'] loop
+    if exists (select 1 from cron.job where jobname = legacy_name) then
+      perform cron.unschedule(legacy_name);
+    end if;
+  end loop;
+  perform cron.schedule('konver_business_monthly', '5 0 1 * *', $cron$ select public.grant_business_monthly(); $cron$);
 end;
 $$;

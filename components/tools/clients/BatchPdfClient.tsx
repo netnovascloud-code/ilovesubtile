@@ -163,7 +163,7 @@ export function BatchPdfClient() {
           {busy ? `Compressing ${done}/${total}…` : `Compress ${jobs.length || ""} PDFs`}
         </Button>
         {zipUrl && (
-          <a href={zipUrl} download="wyrlo-pdfs.zip">
+          <a href={zipUrl} download="konver-pdfs.zip">
             <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
           </a>
         )}

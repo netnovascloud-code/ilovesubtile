@@ -14,7 +14,7 @@ type Endpoint = { id: EndpointId; label: string; method: "GET" | "POST"; cost: n
 const ENDPOINTS: Endpoint[] = [
   { id: "me", label: "/me", method: "GET", cost: 0 },
   { id: "rephrase", label: "/rephrase", method: "POST", cost: 3, payload: () => "Hey can u send file asap thx" },
-  { id: "summarize", label: "/summarize", method: "POST", cost: 3, payload: () => "Wyrlo is a free online conversion platform with 90+ tools spanning images, PDF, audio, video, code and AI text — most run entirely in the browser." },
+  { id: "summarize", label: "/summarize", method: "POST", cost: 3, payload: () => "Konver is a free online conversion platform with 90+ tools spanning images, PDF, audio, video, code and AI text — most run entirely in the browser." },
   { id: "humanize", label: "/humanize", method: "POST", cost: 5, payload: () => "The aforementioned methodology facilitates the optimization of operational efficiencies across the organization." },
   { id: "convert_code", label: "/convert_code", method: "POST", cost: 4, payload: () => "def add(a, b):\n    return a + b" },
 ];

@@ -1,4 +1,4 @@
-// Wyrlo — Mistral-powered text tasks. Self-contained (no shared imports) so it
+// Konver — Mistral-powered text tasks. Self-contained (no shared imports) so it
 // deploys cleanly. POST JSON: { task, text, options? }.
 //   options: { target?, style?, format? }
 // Auth: optional user JWT. Free signed-in users are capped per day; Pro/Business
@@ -6,15 +6,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 // CORS allowlist — echo the caller's Origin only when it's a trusted host
-// (production *.vercel.app, the future wyrlo.io, local dev). This stops other
+// (production *.vercel.app, the future konver.app, local dev). This stops other
 // websites from using our AI endpoint as a free backend via the browser.
 const STATIC_ORIGINS = new Set<string>([
-  "https://wyrlo.io", "https://www.wyrlo.io",
+  "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",

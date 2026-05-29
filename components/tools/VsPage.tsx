@@ -28,7 +28,7 @@ export function VsPage({ vs }: { vs: Vs }) {
             <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
               <tr>
                 <th className="px-4 py-3">Feature</th>
-                <th className="px-4 py-3 text-brand-700">Wyrlo</th>
+                <th className="px-4 py-3 text-brand-700">Konver</th>
                 <th className="px-4 py-3">{vs.competitor}</th>
               </tr>
             </thead>
@@ -39,7 +39,7 @@ export function VsPage({ vs }: { vs: Vs }) {
                   <td className="px-4 py-3">
                     <span className="inline-flex items-center gap-1.5 text-ink-900">
                       {r.win && <Check className="h-4 w-4 shrink-0 text-emerald-600" />}
-                      {r.wyrlo}
+                      {r.konver}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-ink-500">{r.them}</td>
@@ -50,7 +50,7 @@ export function VsPage({ vs }: { vs: Vs }) {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink-900">What Wyrlo does better</h2>
+          <h2 className="text-xl font-semibold text-ink-900">What Konver does better</h2>
           <ul className="mt-4 space-y-2">
             {vs.better.map((b) => (
               <li key={b} className="flex items-start gap-2 text-ink-700">
@@ -96,8 +96,8 @@ export function VsPage({ vs }: { vs: Vs }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://wyrlo.io/" },
-              { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://wyrlo.io/vs/${vs.id}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
+              { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://konver.app/vs/${vs.id}` },
             ],
           }),
         }}

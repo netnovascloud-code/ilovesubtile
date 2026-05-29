@@ -41,7 +41,7 @@ export function HowToPage({ howto }: { howto: HowTo }) {
               ))}
             </ol>
 
-            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Wyrlo for this</h2>
+            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Konver for this</h2>
             <p className="mt-3 text-ink-600">{howto.why}</p>
 
             <h2 className="mt-10 text-2xl font-semibold text-ink-900">FAQ</h2>
@@ -103,9 +103,9 @@ export function HowToPage({ howto }: { howto: HowTo }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://wyrlo.io/" },
-              { "@type": "ListItem", position: 2, name: "Guides", item: "https://wyrlo.io/how-to" },
-              { "@type": "ListItem", position: 3, name: howto.h1, item: `https://wyrlo.io/how-to/${howto.id}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
+              { "@type": "ListItem", position: 2, name: "Guides", item: "https://konver.app/how-to" },
+              { "@type": "ListItem", position: 3, name: howto.h1, item: `https://konver.app/how-to/${howto.id}` },
             ],
           }),
         }}

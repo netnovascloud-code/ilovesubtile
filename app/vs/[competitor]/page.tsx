@@ -14,7 +14,7 @@ export function generateMetadata({ params }: { params: { competitor: string } })
     title: { absolute: vs.metaTitle },
     description: vs.metaDescription,
     alternates: { canonical: `/vs/${vs.id}` },
-    openGraph: { title: vs.metaTitle, description: vs.metaDescription, url: `https://wyrlo.io/vs/${vs.id}`, siteName: "Wyrlo", type: "website" },
+    openGraph: { title: vs.metaTitle, description: vs.metaDescription, url: `https://konver.app/vs/${vs.id}`, siteName: "Konver", type: "website" },
   };
 }
 

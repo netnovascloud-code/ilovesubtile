@@ -1,14 +1,14 @@
-// Wyrlo vs. major competitors — used by the /alternatives/<slug> pages.
+// Konver vs. major competitors — used by the /alternatives/<slug> pages.
 import type { AlternativeDef } from "@/lib/tools-config";
 
 export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "deepl",
     competitor: "DeepL",
-    title: "Free DeepL Alternative — Wyrlo Translator",
-    metaTitle: "Wyrlo vs DeepL — Free Translator with Formal/Informal | Wyrlo",
+    title: "Free DeepL Alternative — Konver Translator",
+    metaTitle: "Konver vs DeepL — Free Translator with Formal/Informal | Konver",
     metaDescription:
-      "Looking for a free DeepL alternative? Wyrlo Translator covers 30+ languages with formal/informal register, instant translation and zero file retention.",
+      "Looking for a free DeepL alternative? Konver Translator covers 30+ languages with formal/informal register, instant translation and zero file retention.",
     bulletPoints: [
       "30+ languages with auto-detection and a formal/informal toggle.",
       "Two-pane live UI, debounced calls — feels like DeepL.",
@@ -24,7 +24,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "File retention", us: "Files deleted in 30 min, jobs in 2h", them: "Document storage rules apply" },
     ],
     faqs: [
-      { q: "Is Wyrlo's translator as good as DeepL?", a: "It uses an advanced AI model and idiomatic prompts — quality is comparable on common language pairs. DeepL still leads on some European pairs; we keep adding tuning." },
+      { q: "Is Konver's translator as good as DeepL?", a: "It uses an advanced AI model and idiomatic prompts — quality is comparable on common language pairs. DeepL still leads on some European pairs; we keep adding tuning." },
       { q: "Can I translate documents?", a: "You can translate pasted text and SRT/VTT subtitle files today. Word/PDF translation is on the roadmap." },
       { q: "Is there a real free tier?", a: "Yes — 3 runs/day anonymous, 5/day signed in, no card. Pro lifts the limit." },
       { q: "Do you store my text?", a: "No. The input is sent to the AI provider for the moment of the call and is never written to long-term storage." },
@@ -33,10 +33,10 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "ilovepdf",
     competitor: "iLovePDF",
-    title: "Free iLovePDF Alternative — All-in-One Wyrlo",
-    metaTitle: "Wyrlo vs iLovePDF — Free PDF, Image, Audio, Video Tools | Wyrlo",
+    title: "Free iLovePDF Alternative — All-in-One Konver",
+    metaTitle: "Konver vs iLovePDF — Free PDF, Image, Audio, Video Tools | Konver",
     metaDescription:
-      "iLovePDF is great for PDF. Wyrlo does PDF too — plus images, audio, video, subtitles, code and AI text — all in one place, all free.",
+      "iLovePDF is great for PDF. Konver does PDF too — plus images, audio, video, subtitles, code and AI text — all in one place, all free.",
     bulletPoints: [
       "Same PDF basics (merge, split, rotate, images→PDF) — fully in your browser.",
       "Plus 9 categories iLovePDF doesn't have: audio, video, code, subtitles, AI.",
@@ -53,19 +53,19 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "File retention", us: "Up to 30 min", them: "2h" },
     ],
     faqs: [
-      { q: "Does Wyrlo replace iLovePDF for PDFs?", a: "For Merge / Split / Rotate / Images→PDF, yes — done fully in your browser. PDF→Word, PDF→JPG and compress-PDF are coming via in-browser libraries." },
+      { q: "Does Konver replace iLovePDF for PDFs?", a: "For Merge / Split / Rotate / Images→PDF, yes — done fully in your browser. PDF→Word, PDF→JPG and compress-PDF are coming via in-browser libraries." },
       { q: "Is the PDF processing private?", a: "Yes — pdf-lib runs in your browser, your file never leaves your device." },
       { q: "What does iLovePDF still do better?", a: "OCR and PDF→Excel are stronger today. We're catching up." },
-      { q: "What else does Wyrlo do?", a: "Audio/video conversion, image editing, AI text tools, dev utilities, subtitle tools — 80+ tools total." },
+      { q: "What else does Konver do?", a: "Audio/video conversion, image editing, AI text tools, dev utilities, subtitle tools — 80+ tools total." },
     ],
   },
   {
     slug: "convertio",
     competitor: "Convertio",
-    title: "Free Convertio Alternative — Wyrlo",
-    metaTitle: "Wyrlo vs Convertio — Faster, Free, Private | Wyrlo",
+    title: "Free Convertio Alternative — Konver",
+    metaTitle: "Konver vs Convertio — Faster, Free, Private | Konver",
     metaDescription:
-      "Convertio uploads your files; Wyrlo doesn't. Faster, private, no daily upload cap — and free for most conversions.",
+      "Convertio uploads your files; Konver doesn't. Faster, private, no daily upload cap — and free for most conversions.",
     bulletPoints: [
       "Same range of conversions (PDF, images, audio, video, code).",
       "Most run 100% in your browser — your files never leave your device.",
@@ -81,7 +81,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Subtitle tools", us: "16 subtitle tools", them: "Limited" },
     ],
     faqs: [
-      { q: "Is Wyrlo as fast as Convertio?", a: "For images, PDFs and most code tools, faster — there's no upload. For audio/video the first run loads FFmpeg.wasm (~30MB), then everything is instant." },
+      { q: "Is Konver as fast as Convertio?", a: "For images, PDFs and most code tools, faster — there's no upload. For audio/video the first run loads FFmpeg.wasm (~30MB), then everything is instant." },
       { q: "Do you support OCR like Convertio?", a: "Not yet. It's on the roadmap once we ship a Tesseract.wasm-based OCR tool." },
       { q: "Are my files truly never uploaded?", a: "Right — for image, PDF, audio/video and dev tools the file is processed locally. Only AI tools (translator/transcribe) send the text/audio to the AI provider." },
       { q: "What if a tool is missing?", a: "Tell us via the contact link in the footer — we add tools quickly." },
@@ -90,14 +90,14 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "remove-bg",
     competitor: "Remove.bg",
-    title: "Free Remove.bg Alternative — Wyrlo",
-    metaTitle: "Wyrlo vs Remove.bg — Free, In-browser, Unlimited | Wyrlo",
+    title: "Free Remove.bg Alternative — Konver",
+    metaTitle: "Konver vs Remove.bg — Free, In-browser, Unlimited | Konver",
     metaDescription:
-      "Remove backgrounds free without paid credits. Wyrlo runs AI background removal in your browser via WebAssembly — no upload, no quota.",
+      "Remove backgrounds free without paid credits. Konver runs AI background removal in your browser via WebAssembly — no upload, no quota.",
     bulletPoints: [
       "AI background removal that runs entirely in your browser.",
       "No credits, no per-image fee, no upload — even for high-res photos.",
-      "Pair it with the other Wyrlo image tools (compress, resize, convert).",
+      "Pair it with the other Konver image tools (compress, resize, convert).",
       "Free with no sign-up; Pro removes ads everywhere.",
     ],
     comparison: [
@@ -117,10 +117,10 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
   {
     slug: "smallpdf",
     competitor: "Smallpdf",
-    title: "Free Smallpdf Alternative — Wyrlo",
-    metaTitle: "Wyrlo vs Smallpdf — Free Unlimited PDF Tools | Wyrlo",
+    title: "Free Smallpdf Alternative — Konver",
+    metaTitle: "Konver vs Smallpdf — Free Unlimited PDF Tools | Konver",
     metaDescription:
-      "Smallpdf caps the free plan at 2 tasks/day. Wyrlo's PDF tools run in your browser, with no daily cap and no upload.",
+      "Smallpdf caps the free plan at 2 tasks/day. Konver's PDF tools run in your browser, with no daily cap and no upload.",
     bulletPoints: [
       "Merge, split, rotate and Images→PDF — all client-side via pdf-lib.",
       "No 2-task daily cap, no watermark, no forced sign-up.",
@@ -136,19 +136,19 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Watermark", us: "Never", them: "Free plan: yes" },
     ],
     faqs: [
-      { q: "Is Wyrlo really unlimited for PDFs?", a: "For Merge / Split / Rotate / Images→PDF — yes, with no per-day cap, no waterprint, no upload. The processing runs entirely in your browser." },
+      { q: "Is Konver really unlimited for PDFs?", a: "For Merge / Split / Rotate / Images→PDF — yes, with no per-day cap, no waterprint, no upload. The processing runs entirely in your browser." },
       { q: "What does Smallpdf still do better?", a: "OCR, PDF→Excel and a few enterprise features. They're on our roadmap." },
-      { q: "Why is Wyrlo cheaper effectively?", a: "We don't charge for tools that run on the user's device — there's no server cost to recoup." },
+      { q: "Why is Konver cheaper effectively?", a: "We don't charge for tools that run on the user's device — there's no server cost to recoup." },
       { q: "What about privacy?", a: "PDF tools process locally — file never leaves the browser." },
     ],
   },
   {
     slug: "veed",
     competitor: "VEED.io",
-    title: "Free VEED Alternative — Wyrlo",
-    metaTitle: "Wyrlo vs VEED — Free Video Tools without Watermark | Wyrlo",
+    title: "Free VEED Alternative — Konver",
+    metaTitle: "Konver vs VEED — Free Video Tools without Watermark | Konver",
     metaDescription:
-      "VEED's free plan watermarks everything. Wyrlo's video tools run via FFmpeg.wasm in your browser — no watermark, no upload, no upsell.",
+      "VEED's free plan watermarks everything. Konver's video tools run via FFmpeg.wasm in your browser — no watermark, no upload, no upsell.",
     bulletPoints: [
       "Compress, trim, resize, rotate, MP4↔GIF, MP4→WebM — via FFmpeg.wasm.",
       "No watermark on free tier — ever.",
@@ -164,19 +164,19 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Other categories", us: "PDF, audio, image, code, AI", them: "Video editor focus" },
     ],
     faqs: [
-      { q: "Can I use VEED's editor in Wyrlo?", a: "Not the timeline editor — Wyrlo focuses on one-shot conversions and quick edits. Editing complex sequences is still better in VEED or DaVinci." },
+      { q: "Can I use VEED's editor in Konver?", a: "Not the timeline editor — Konver focuses on one-shot conversions and quick edits. Editing complex sequences is still better in VEED or DaVinci." },
       { q: "Are big video files supported?", a: "Yes — limited only by your device's RAM. The first job loads FFmpeg.wasm (~30MB); subsequent jobs are instant." },
-      { q: "Is there a watermark?", a: "Never on Wyrlo's client-side video output." },
-      { q: "What about subtitles?", a: "Wyrlo has 16 subtitle tools (generate, translate, sync, burn-in, convert)." },
+      { q: "Is there a watermark?", a: "Never on Konver's client-side video output." },
+      { q: "What about subtitles?", a: "Konver has 16 subtitle tools (generate, translate, sync, burn-in, convert)." },
     ],
   },
   {
     slug: "chatgpt",
     competitor: "ChatGPT",
-    title: "Free ChatGPT Alternative for Conversions — Wyrlo",
-    metaTitle: "Wyrlo AI Tools — ChatGPT Alternative for File Tasks | Wyrlo",
+    title: "Free ChatGPT Alternative for Conversions — Konver",
+    metaTitle: "Konver AI Tools — ChatGPT Alternative for File Tasks | Konver",
     metaDescription:
-      "ChatGPT is generic. Wyrlo's AI is purpose-built for translation, rephrasing, humanising AI text and summarising — instantly, in one click.",
+      "ChatGPT is generic. Konver's AI is purpose-built for translation, rephrasing, humanising AI text and summarising — instantly, in one click.",
     bulletPoints: [
       "Built for files and copy — not chat. One click, one result.",
       "Specialised UIs: DeepL-style translator, click-to-accept rephraser, humanizer.",
@@ -192,8 +192,8 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Data retention", us: "Inputs not stored", them: "Used to improve service" },
     ],
     faqs: [
-      { q: "Does Wyrlo replace ChatGPT?", a: "Not for open conversation. For specific copy/file tasks (translate, summarise, rephrase, humanize, fix grammar) — yes, faster and with purpose-built UIs." },
-      { q: "Which AI does Wyrlo use?", a: "An advanced large language model running server-side via Edge Functions. The technical name isn't surfaced because the experience is what matters." },
+      { q: "Does Konver replace ChatGPT?", a: "Not for open conversation. For specific copy/file tasks (translate, summarise, rephrase, humanize, fix grammar) — yes, faster and with purpose-built UIs." },
+      { q: "Which AI does Konver use?", a: "An advanced large language model running server-side via Edge Functions. The technical name isn't surfaced because the experience is what matters." },
       { q: "Is my text stored?", a: "No. The text is sent to the AI provider for the call and is not retained in long-term storage." },
       { q: "What's the limit?", a: "Anonymous: 3 runs/day. Free signed in: 5/day. Pro: unlimited." },
     ],

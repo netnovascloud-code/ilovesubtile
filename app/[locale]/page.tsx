@@ -25,14 +25,14 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/`;
   alts["x-default"] = `${SITE_URL}/`;
   return {
-    title: { absolute: `Wyrlo — ${ui.hero.title}` },
+    title: { absolute: `Konver — ${ui.hero.title}` },
     description: ui.hero.subtitle,
     alternates: { canonical: canonicalPath, languages: alts },
     openGraph: {
-      title: `Wyrlo — ${ui.hero.title}`,
+      title: `Konver — ${ui.hero.title}`,
       description: ui.hero.subtitle,
       url: `${SITE_URL}${canonicalPath}`,
-      siteName: "Wyrlo",
+      siteName: "Konver",
       locale,
     },
   };

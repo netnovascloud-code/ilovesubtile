@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — close two RLS escalation paths
+-- Konver — close two RLS escalation paths
 --
 -- 1) profiles UPDATE policy was column-blind. End-users could set their
 --    own plan='business', credits=999999, monthly_credits=999999, etc.

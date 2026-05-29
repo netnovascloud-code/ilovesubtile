@@ -184,7 +184,7 @@ export function BatchImageClient() {
           {busy ? `Processing ${done}/${total}…` : `Process ${jobs.length || ""} images`}
         </Button>
         {zipUrl && (
-          <a href={zipUrl} download="wyrlo-batch.zip">
+          <a href={zipUrl} download="konver-batch.zip">
             <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
           </a>
         )}

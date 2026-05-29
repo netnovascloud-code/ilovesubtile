@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — make grant_credits exactly-once on stripe_payment_intent
+-- Konver — make grant_credits exactly-once on stripe_payment_intent
 --
 -- Companion to migration 009 (partial UNIQUE index). The webhook caller
 -- still issues an idempotency check, but that check is now backed by the

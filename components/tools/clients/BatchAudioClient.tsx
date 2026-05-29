@@ -164,7 +164,7 @@ export function BatchAudioClient() {
           {busy ? `Converting ${done}/${total}…` : `Convert ${jobs.length || ""} to MP3`}
         </Button>
         {zipUrl && (
-          <a href={zipUrl} download="wyrlo-audio.zip">
+          <a href={zipUrl} download="konver-audio.zip">
             <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
           </a>
         )}

@@ -78,7 +78,7 @@ export function WorkflowBuilderClient() {
       const url = URL.createObjectURL(cur);
       cleanup.current.push(url);
       setResultUrl(url); setResultSize(cur.size);
-      setResultName(`${file.name.replace(/\.[^.]+$/, "")}-wyrlo.${ext}`);
+      setResultName(`${file.name.replace(/\.[^.]+$/, "")}-konver.${ext}`);
     } catch (e) { setError(`Step ${running + 1} failed: ${(e as Error).message}`); }
     finally { setRunning(-1); }
   }

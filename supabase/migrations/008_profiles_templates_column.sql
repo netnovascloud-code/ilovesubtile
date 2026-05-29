@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — declare profiles.templates (repo/live drift fix)
+-- Konver — declare profiles.templates (repo/live drift fix)
 --
 -- lib/templates.ts reads/writes profiles.templates (saved tool presets).
 -- The column exists in the live DB but was never declared in a repo

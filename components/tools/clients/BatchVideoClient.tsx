@@ -163,7 +163,7 @@ export function BatchVideoClient() {
           {busy ? `Compressing ${done}/${total}…` : `Compress ${jobs.length || ""} videos`}
         </Button>
         {zipUrl && (
-          <a href={zipUrl} download="wyrlo-videos.zip">
+          <a href={zipUrl} download="konver-videos.zip">
             <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
           </a>
         )}

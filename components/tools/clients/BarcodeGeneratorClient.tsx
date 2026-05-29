@@ -25,8 +25,8 @@ const FORMATS = [
 ];
 
 const SAMPLES: Record<string, string> = {
-  CODE128: "WYRLO-12345",
-  CODE39: "WYRLO 39",
+  CODE128: "KONVER-12345",
+  CODE39: "KONVER 39",
   EAN13: "5901234123457",
   EAN8: "96385074",
   UPC: "123456789012",

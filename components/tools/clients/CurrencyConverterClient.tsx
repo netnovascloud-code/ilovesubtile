@@ -16,7 +16,7 @@ const CURRENCIES = [
   "RON", "BGN", "TRY", "RUB", "INR", "BRL", "MXN", "ZAR", "SGD", "HKD", "KRW", "NZD", "ILS", "AED",
 ];
 
-const CACHE_KEY = "wyrlo_fx_rates_v1";
+const CACHE_KEY = "konver_fx_rates_v1";
 const CACHE_TTL_MS = 60 * 60 * 1000;
 
 type Rates = { base: string; date: string; rates: Record<string, number> };

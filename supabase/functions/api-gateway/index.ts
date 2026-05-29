@@ -1,4 +1,4 @@
-// Wyrlo public REST gateway. Authenticated by a Wyrlo API key
+// Konver public REST gateway. Authenticated by a Konver API key
 // (cf_live_...), NOT a Supabase JWT — hence verify_jwt is disabled and we
 // validate the key ourselves. Deducts credits per call and logs a job.
 //
@@ -17,22 +17,22 @@
 // Secret: MISTRAL_API_KEY
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const BUY_CREDITS_URL = "https://wyrlo.io/pricing";
+const BUY_CREDITS_URL = "https://konver.app/pricing";
 
 // CORS allowlist. We echo the caller's Origin only when it's a known host
-// (production vercel.app domains, the future wyrlo.io, and local dev);
+// (production vercel.app domains, the future konver.app, and local dev);
 // otherwise we fall back to the canonical site. Server-to-server API callers
 // send no Origin and are unaffected. Note: api-gateway is JWT-free and uses
 // API-key auth, so CORS is defence-in-depth, not the primary control.
 const STATIC_ORIGINS = new Set<string>([
-  "https://wyrlo.io", "https://www.wyrlo.io",
+  "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function allowOrigin(req: Request): string {
   const o = req.headers.get("origin") ?? "";
   if (STATIC_ORIGINS.has(o)) return o;
   if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o)) return o;
-  return "https://wyrlo.io";
+  return "https://konver.app";
 }
 function corsFor(req: Request): Record<string, string> {
   return {
@@ -232,12 +232,13 @@ Deno.serve(async (req) => {
   if (!mistralKey) return err("server_error", "Service misconfigured.", 500);
   const svc = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
-  // ---- authenticate the Wyrlo API key ----
+  // ---- authenticate the Konver API key ----
   const authz = req.headers.get("Authorization") ?? "";
   const raw = authz.replace(/^Bearer\s+/i, "").trim();
-  // Accept the current wyr_ prefix and the legacy cf_ prefix (keys issued
-  // before the Wyrlo rename) — validation is hash-based, so old keys keep working.
-  if (!/^(wyr|cf)_/.test(raw)) return err("missing_api_key", "Send Authorization: Bearer wyr_live_…", 401);
+  // Accept the current knv_ prefix and the legacy wyr_ / cf_ prefixes (keys
+  // issued before the Konver rename / pre-Wyrlo CaptionFlow era). Validation
+  // is hash-based, so old keys keep working.
+  if (!/^(knv|wyr|cf)_/.test(raw)) return err("missing_api_key", "Send Authorization: Bearer knv_live_…", 401);
   const hash = await sha256(raw);
   const { data: keyRow } = await svc.from("api_keys").select("id, user_id, revoked").eq("key_hash", hash).maybeSingle();
   if (!keyRow || keyRow.revoked) return err("invalid_api_key", "API key not found or revoked.", 401);

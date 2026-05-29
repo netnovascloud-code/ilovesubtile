@@ -2,11 +2,16 @@ import { NextResponse, type NextRequest } from "next/server";
 import { updateSupabaseSession } from "@/lib/supabase/middleware";
 
 const LOCALES = new Set(["fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi"]);
-const LOCALE_COOKIE = "wyrlo_locale";
+// Named per Next.js convention so it lines up with the standard ecosystem.
+// We also read the legacy "wyrlo_locale" cookie so users who picked a language
+// before the Konver rename don't lose their preference on next visit.
+const LOCALE_COOKIE = "NEXT_LOCALE";
+const LEGACY_LOCALE_COOKIE = "wyrlo_locale";
 
 /** Pick the best supported locale from a cookie or Accept-Language header. */
 function preferredLocale(request: NextRequest): string | null {
-  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+  const cookie = request.cookies.get(LOCALE_COOKIE)?.value
+    ?? request.cookies.get(LEGACY_LOCALE_COOKIE)?.value;
   if (cookie === "en") return null;
   if (cookie && LOCALES.has(cookie)) return cookie;
   const header = request.headers.get("accept-language") ?? "";

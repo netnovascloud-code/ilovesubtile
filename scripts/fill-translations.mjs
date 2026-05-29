@@ -121,7 +121,7 @@ async function processTarget(cfg) {
 }
 
 async function translate(job, fields, sysNoun, key) {
-  const sys = `You are a professional software localizer for "Wyrlo", a free online file-converter and tools website. Translate the given ${sysNoun} into ${job.lang}. Rules: keep the brand name "Wyrlo" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); keep it natural, concise and idiomatic; meta titles should stay roughly under 60 characters and meta descriptions under 160. Return ONLY a JSON object with exactly these keys: ${fields.join(", ")}.`;
+  const sys = `You are a professional software localizer for "Konver", a free online file-converter and tools website. Translate the given ${sysNoun} into ${job.lang}. Rules: keep the brand name "Konver" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); keep it natural, concise and idiomatic; meta titles should stay roughly under 60 characters and meta descriptions under 160. Return ONLY a JSON object with exactly these keys: ${fields.join(", ")}.`;
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },

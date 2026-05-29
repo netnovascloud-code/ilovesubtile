@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — per-user generic rate limiter (used for send-email, etc.)
+-- Konver — per-user generic rate limiter (used for send-email, etc.)
 --
 -- One row per (user, bucket). Race-safe sliding-window counter exposed
 -- via the user_rate_hit() SECURITY DEFINER RPC. RLS is enabled but no

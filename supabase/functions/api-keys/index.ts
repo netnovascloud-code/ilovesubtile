@@ -1,4 +1,4 @@
-// Wyrlo — manage REST API keys (Business plan).
+// Konver — manage REST API keys (Business plan).
 // POST /functions/v1/api-keys  body { action: 'list' | 'create' | 'revoke', name?, id? }
 // Auth: the user's Supabase JWT. Only Business plan may create keys.
 //
@@ -6,12 +6,12 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
-  "https://wyrlo.io", "https://www.wyrlo.io",
+  "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -23,7 +23,7 @@ async function sha256(s: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
-// wyr_live_ + 32 random bytes, base64url-encoded (43 chars, no padding).
+// knv_live_ + 32 random bytes, base64url-encoded (43 chars, no padding).
 // The raw key is shown to the user exactly once; only its SHA-256 hash and a
 // 12-char display prefix are persisted.
 function randomKey(): string {
@@ -31,7 +31,7 @@ function randomKey(): string {
   let bin = "";
   for (const b of bytes) bin += String.fromCharCode(b);
   const b64url = btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  return "wyr_live_" + b64url;
+  return "knv_live_" + b64url;
 }
 
 Deno.serve(async (req) => {

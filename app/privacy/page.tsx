@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Wyrlo handles your data.",
+  description: "How Konver handles your data.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -39,8 +39,8 @@ export default function Page() {
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Your rights</h2>
         <p>
           You can request export or deletion of your account at any time. Write to{" "}
-          <a className="text-brand-600 underline" href="mailto:privacy@wyrlo.io">
-            privacy@wyrlo.io
+          <a className="text-brand-600 underline" href="mailto:privacy@konver.app">
+            privacy@konver.app
           </a>
           .
         </p>

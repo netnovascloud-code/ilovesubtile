@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — close public RPC exposure of SECURITY DEFINER functions
+-- Konver — close public RPC exposure of SECURITY DEFINER functions
 --
 -- The Supabase security advisor flagged several SECURITY DEFINER functions
 -- as EXECUTE-able by the anon / authenticated roles through PostgREST

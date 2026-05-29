@@ -49,7 +49,7 @@ const en: UiStrings = {
   home: {
     toolsTitle: "All subtitle tools",
     toolsLead: "Pick the tool you need. Drop your file. Get your result.",
-    whyTitle: "Why Wyrlo?",
+    whyTitle: "Why Konver?",
     reasons: [
       { title: "Built for one thing", body: "Each tool does exactly one job. No bloated video editor, no learning curve." },
       { title: "Powered by AI", body: "State-of-the-art AI for transcription and translation — accurate in 30+ languages." },
@@ -93,7 +93,7 @@ const fr: UiStrings = {
   home: {
     toolsTitle: "Tous les outils de sous-titrage",
     toolsLead: "Choisissez votre outil. Déposez votre fichier. Récupérez le résultat.",
-    whyTitle: "Pourquoi Wyrlo ?",
+    whyTitle: "Pourquoi Konver ?",
     reasons: [
       { title: "Une seule mission par outil", body: "Chaque outil fait exactement une chose. Pas d'éditeur vidéo lourd, pas de courbe d'apprentissage." },
       { title: "Propulsé par l'IA", body: "Une IA de pointe pour la transcription et la traduction — précise dans 30+ langues." },
@@ -137,7 +137,7 @@ const es: UiStrings = {
   home: {
     toolsTitle: "Todas las herramientas de subtítulos",
     toolsLead: "Elige la herramienta. Suelta tu archivo. Descarga el resultado.",
-    whyTitle: "¿Por qué Wyrlo?",
+    whyTitle: "¿Por qué Konver?",
     reasons: [
       { title: "Una sola misión por herramienta", body: "Cada herramienta hace exactamente una cosa. Sin editor de vídeo pesado, sin curva de aprendizaje." },
       { title: "Impulsado por AI", body: "AI transcribe, AI traduce — preciso en más de 30 idiomas." },
@@ -181,7 +181,7 @@ const pt: UiStrings = {
   home: {
     toolsTitle: "Todas as ferramentas de legendas",
     toolsLead: "Escolha a ferramenta. Solte seu arquivo. Baixe o resultado.",
-    whyTitle: "Por que Wyrlo?",
+    whyTitle: "Por que Konver?",
     reasons: [
       { title: "Uma só missão por ferramenta", body: "Cada ferramenta faz exatamente uma coisa. Sem editor de vídeo pesado, sem curva de aprendizado." },
       { title: "Powered by AI", body: "AI transcreve, AI traduz — preciso em mais de 30 idiomas." },
@@ -225,7 +225,7 @@ const de: UiStrings = {
   home: {
     toolsTitle: "Alle Untertitel-Tools",
     toolsLead: "Tool wählen. Datei hochladen. Ergebnis herunterladen.",
-    whyTitle: "Warum Wyrlo?",
+    whyTitle: "Warum Konver?",
     reasons: [
       { title: "Eine Aufgabe pro Tool", body: "Jedes Tool macht genau eine Sache. Kein überladener Video-Editor, keine Lernkurve." },
       { title: "Powered by AI", body: "AI transkribiert, AI übersetzt — präzise in 30+ Sprachen." },
@@ -269,7 +269,7 @@ const it: UiStrings = {
   home: {
     toolsTitle: "Tutti gli strumenti per sottotitoli",
     toolsLead: "Scegli lo strumento. Carica il file. Scarica il risultato.",
-    whyTitle: "Perché Wyrlo?",
+    whyTitle: "Perché Konver?",
     reasons: [
       { title: "Una missione per strumento", body: "Ogni strumento fa esattamente una cosa. Niente editor video pesante, nessuna curva di apprendimento." },
       { title: "Powered by AI", body: "AI per la trascrizione, AI per la traduzione — preciso in 30+ lingue." },
@@ -313,7 +313,7 @@ const nl: UiStrings = {
   home: {
     toolsTitle: "Alle ondertitel-tools",
     toolsLead: "Kies je tool. Upload je bestand. Download het resultaat.",
-    whyTitle: "Waarom Wyrlo?",
+    whyTitle: "Waarom Konver?",
     reasons: [
       { title: "Eén taak per tool", body: "Elke tool doet precies één ding. Geen overladen video-editor, geen leercurve." },
       { title: "Powered by AI", body: "AI transcribeert, AI vertaalt — nauwkeurig in 30+ talen." },
@@ -357,7 +357,7 @@ const ja: UiStrings = {
   home: {
     toolsTitle: "すべての字幕ツール",
     toolsLead: "ツールを選んで、ファイルをドロップして、結果を受け取る。",
-    whyTitle: "Wyrloを選ぶ理由",
+    whyTitle: "Konverを選ぶ理由",
     reasons: [
       { title: "1ツール1機能", body: "各ツールはひとつの仕事だけをこなします。重い動画エディタも学習コストも不要。" },
       { title: "AI搭載", body: "AIが文字起こし、AIが翻訳を担当 — 30以上の言語で高精度。" },
@@ -401,7 +401,7 @@ const zh: UiStrings = {
   home: {
     toolsTitle: "所有字幕工具",
     toolsLead: "选择工具，上传文件，下载结果。",
-    whyTitle: "为什么选择 Wyrlo？",
+    whyTitle: "为什么选择 Konver？",
     reasons: [
       { title: "每个工具只做一件事", body: "每个工具只完成一项任务。没有臃肿的视频编辑器，没有学习曲线。" },
       { title: "由 AI 驱动", body: "AI 负责转录,AI 负责翻译 — 在 30 多种语言中保持准确。" },
@@ -445,7 +445,7 @@ const ko: UiStrings = {
   home: {
     toolsTitle: "모든 자막 도구",
     toolsLead: "도구를 선택하고, 파일을 올리고, 결과를 받으세요.",
-    whyTitle: "왜 Wyrlo인가요?",
+    whyTitle: "왜 Konver인가요?",
     reasons: [
       { title: "도구당 한 가지 작업", body: "각 도구는 정확히 한 가지 일만 합니다. 무거운 영상 편집기도, 학습 곡선도 없습니다." },
       { title: "AI 기반", body: "AI가 전사, AI가 번역 — 30개 이상의 언어에서 정확합니다." },
@@ -489,7 +489,7 @@ const ar: UiStrings = {
   home: {
     toolsTitle: "كل أدوات الترجمة",
     toolsLead: "اختر الأداة. ارفع الملف. حمّل النتيجة.",
-    whyTitle: "لماذا Wyrlo؟",
+    whyTitle: "لماذا Konver؟",
     reasons: [
       { title: "مهمة واحدة لكل أداة", body: "كل أداة تقوم بمهمة واحدة بالضبط. لا محرر فيديو ثقيل، لا منحنى تعلم." },
       { title: "مدعوم بـ AI", body: "AI للتفريغ، AI للترجمة — دقيق في أكثر من 30 لغة." },
@@ -533,7 +533,7 @@ const ru: UiStrings = {
   home: {
     toolsTitle: "Все инструменты для субтитров",
     toolsLead: "Выберите инструмент. Загрузите файл. Скачайте результат.",
-    whyTitle: "Почему Wyrlo?",
+    whyTitle: "Почему Konver?",
     reasons: [
       { title: "Один инструмент — одна задача", body: "Каждый инструмент делает ровно одно дело. Никаких громоздких редакторов, никакого обучения." },
       { title: "На базе AI", body: "AI транскрибирует, AI переводит — точно в 30+ языках." },
@@ -577,7 +577,7 @@ const hi: UiStrings = {
   home: {
     toolsTitle: "सभी सबटाइटल टूल",
     toolsLead: "टूल चुनें। फ़ाइल अपलोड करें। परिणाम डाउनलोड करें।",
-    whyTitle: "Wyrlo क्यों?",
+    whyTitle: "Konver क्यों?",
     reasons: [
       { title: "एक टूल, एक काम", body: "हर टूल ठीक एक काम करता है। न भारी वीडियो एडिटर, न सीखने की ज़रूरत।" },
       { title: "AI द्वारा संचालित", body: "AI ट्रांसक्रिप्शन करता है, AI अनुवाद करता है — 30+ भाषाओं में सटीक।" },

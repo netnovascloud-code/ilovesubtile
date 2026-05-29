@@ -28,9 +28,9 @@ const ENDPOINTS: Endpoint[] = [
     method: "GET", action: "me", cost: "0 credits",
     desc: "Account info: plan, credit balance, email, max file size.",
     curl: `curl "${BASE}?action=me" \\
-  -H "Authorization: Bearer wyr_live_..."`,
+  -H "Authorization: Bearer knv_live_..."`,
     js: `const r = await fetch("${BASE}?action=me", {
-  headers: { Authorization: "Bearer wyr_live_..." }
+  headers: { Authorization: "Bearer knv_live_..." }
 });
 const me = await r.json();`,
     response: `{
@@ -45,13 +45,13 @@ const me = await r.json();`,
     method: "POST", action: "transcribe", cost: "10 credits / min",
     desc: "Audio / video → timestamped SRT. Billed per started minute (61s = 2 min = 20). Multipart `file`, or JSON { file_url }.",
     curl: `curl -X POST "${BASE}?action=transcribe" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -F "file=@episode.mp3"`,
     js: `const form = new FormData();
 form.append("file", audioFile);
 const r = await fetch("${BASE}?action=transcribe", {
   method: "POST",
-  headers: { Authorization: "Bearer wyr_live_..." },
+  headers: { Authorization: "Bearer knv_live_..." },
   body: form,
 });
 const { url, job_id, cost, credits_remaining } = await r.json();`,
@@ -66,13 +66,13 @@ const { url, job_id, cost, credits_remaining } = await r.json();`,
     method: "POST", action: "translate", cost: "5 credits / 1k words",
     desc: "Translate text or an SRT/VTT file (timestamps preserved). Billed per started 1000 words, minimum 5. Params: `target_lang`, `style`.",
     curl: `curl -X POST "${BASE}?action=translate" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -F "file=@subs.srt" \\
   -F "target_lang=ES"`,
     js: `const r = await fetch("${BASE}?action=translate", {
   method: "POST",
   headers: {
-    Authorization: "Bearer wyr_live_...",
+    Authorization: "Bearer knv_live_...",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({ text: "Hello world", target_lang: "ES" }),
@@ -88,13 +88,13 @@ const { url, job_id, cost, credits_remaining } = await r.json();`,
     method: "POST", action: "rephrase", cost: "3–8 credits",
     desc: "Rewrite text in a chosen style. 3 credits up to 500 words, 8 beyond. Params: `text`, `style` (professional/casual/academic/creative/simple/legal).",
     curl: `curl -X POST "${BASE}?action=rephrase" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{"text":"Hey can u send file asap","style":"professional"}'`,
     js: `const r = await fetch("${BASE}?action=rephrase", {
   method: "POST",
   headers: {
-    Authorization: "Bearer wyr_live_...",
+    Authorization: "Bearer knv_live_...",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({ text, style: "professional" }),
@@ -111,13 +111,13 @@ const { output } = await r.json();`,
     method: "POST", action: "summarize", cost: "3–6 credits",
     desc: "Summarise text. 3 credits up to 500 words, 6 beyond. Params: `text`, `format` (short/bullets/detailed).",
     curl: `curl -X POST "${BASE}?action=summarize" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{"text":"Long article…","format":"bullets"}'`,
     js: `const r = await fetch("${BASE}?action=summarize", {
   method: "POST",
   headers: {
-    Authorization: "Bearer wyr_live_...",
+    Authorization: "Bearer knv_live_...",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({ text, format: "bullets" }),
@@ -133,13 +133,13 @@ const { output } = await r.json();`,
     method: "POST", action: "humanize", cost: "5–12 credits",
     desc: "Rewrite AI text so it reads naturally. 5 credits up to 500 words, 12 beyond. Params: `text`, `level` (light/medium/strong).",
     curl: `curl -X POST "${BASE}?action=humanize" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{"text":"The aforementioned…","level":"medium"}'`,
     js: `const r = await fetch("${BASE}?action=humanize", {
   method: "POST",
   headers: {
-    Authorization: "Bearer wyr_live_...",
+    Authorization: "Bearer knv_live_...",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({ text, level: "medium" }),
@@ -155,13 +155,13 @@ const { output } = await r.json();`,
     method: "POST", action: "convert_code", cost: "4 credits",
     desc: "Convert source code between languages. Params: `code`, `from_language`, `to_language`.",
     curl: `curl -X POST "${BASE}?action=convert_code" \\
-  -H "Authorization: Bearer wyr_live_..." \\
+  -H "Authorization: Bearer knv_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{"code":"print(1)","from_language":"python","to_language":"javascript"}'`,
     js: `const r = await fetch("${BASE}?action=convert_code", {
   method: "POST",
   headers: {
-    Authorization: "Bearer wyr_live_...",
+    Authorization: "Bearer knv_live_...",
     "Content-Type": "application/json",
   },
   body: JSON.stringify({ code, from_language: "python", to_language: "javascript" }),
@@ -177,9 +177,9 @@ const { output } = await r.json();`,
     method: "GET", action: "job", cost: "0 credits",
     desc: "Fetch a job by id. Pass &id=<uuid>.",
     curl: `curl "${BASE}?action=job&id=f3a9..." \\
-  -H "Authorization: Bearer wyr_live_..."`,
+  -H "Authorization: Bearer knv_live_..."`,
     js: `const r = await fetch("${BASE}?action=job&id=" + jobId, {
-  headers: { Authorization: "Bearer wyr_live_..." }
+  headers: { Authorization: "Bearer knv_live_..." }
 });
 const { job } = await r.json();`,
     response: `{
@@ -196,9 +196,9 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "remove_background", cost: "2 credits", status: "soon",
     desc: "Cut out a transparent PNG. Runs in-browser today (free & unlimited); REST access is rolling out.",
-    curl: `# In-browser today: https://wyrlo.io/remove-background
+    curl: `# In-browser today: https://konver.app/remove-background
 # REST coming soon.`,
-    js: `// In-browser today: https://wyrlo.io/remove-background
+    js: `// In-browser today: https://konver.app/remove-background
 // REST coming soon.`,
     response: `{
   "error": "not_implemented",
@@ -208,7 +208,7 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "convert_pdf", cost: "1 credit", status: "soon",
     desc: "merge / split / compress / rotate / to_images / to_text. Runs in-browser today; REST access is rolling out.",
-    curl: `# In-browser today: https://wyrlo.io/merge-pdf (and friends)
+    curl: `# In-browser today: https://konver.app/merge-pdf (and friends)
 # REST coming soon.`,
     js: `// In-browser today; REST coming soon.`,
     response: `{
@@ -219,7 +219,7 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "convert_image", cost: "1 credit", status: "soon",
     desc: "Re-encode to a target format with quality/resize. Runs in-browser today; REST access is rolling out.",
-    curl: `# In-browser today: https://wyrlo.io/png-to-jpg (and friends)
+    curl: `# In-browser today: https://konver.app/png-to-jpg (and friends)
 # REST coming soon.`,
     js: `// In-browser today; REST coming soon.`,
     response: `{
@@ -245,7 +245,7 @@ const ERROR_EXAMPLE = `{
   "message": "This operation costs 10 credits. Your balance: 7 credits.",
   "credits_required": 10,
   "credits_available": 7,
-  "buy_credits_url": "https://wyrlo.io/pricing"
+  "buy_credits_url": "https://konver.app/pricing"
 }`;
 
 export default function ApiDocsPage() {
@@ -256,7 +256,7 @@ export default function ApiDocsPage() {
           <section>
             <h2 className="text-xl font-semibold text-ink-900">Authentication</h2>
             <p className="mt-2">
-              Send <code className="rounded bg-ink-100 px-1 py-0.5 text-sm">Authorization: Bearer wyr_live_…</code> with every request. Generate a key from your{" "}
+              Send <code className="rounded bg-ink-100 px-1 py-0.5 text-sm">Authorization: Bearer knv_live_…</code> with every request. Generate a key from your{" "}
               <Link href="/dashboard" className="text-brand-600 hover:underline">dashboard</Link> (Business plan).
               Each call spends credits from your balance — credits never expire.
             </p>

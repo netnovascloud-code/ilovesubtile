@@ -19,15 +19,15 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Wyrlo — Free Online File Converter & Tools",
-    template: "%s | Wyrlo",
+    default: "Konver — Free Online File Converter & Tools",
+    template: "%s | Konver",
   },
   description:
     "Convert anything online for free: documents, audio, video, images, subtitles, code and text. 150+ fast, focused tools. Drop your file, get your result.",
-  applicationName: "Wyrlo",
+  applicationName: "Konver",
   openGraph: {
     type: "website",
-    siteName: "Wyrlo",
+    siteName: "Konver",
     images: ["/og/default.png"],
   },
   twitter: {

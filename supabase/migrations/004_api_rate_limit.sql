@@ -1,5 +1,5 @@
 -- =====================================================================
--- Wyrlo — per-API-key rate limiting (sliding 60s window)
+-- Konver — per-API-key rate limiting (sliding 60s window)
 --
 -- Cheap, race-safe counter stored on the key row itself. Each call hits
 -- api_rate_hit(); when the window's count exceeds the limit it returns

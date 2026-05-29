@@ -43,7 +43,7 @@ function escapeText(t: string) {
 
 export function WatermarkVideoClient() {
   const [file, setFile] = useState<File | null>(null);
-  const [text, setText] = useState("Wyrlo.io");
+  const [text, setText] = useState("Konver.io");
   const [pos, setPos] = useState<string>("BR");
   const [size, setSize] = useState(48);
   const [color, setColor] = useState("white");

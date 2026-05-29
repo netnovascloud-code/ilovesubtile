@@ -57,7 +57,7 @@ export function buildToolMetadata(
       url: canonical,
       title,
       description,
-      siteName: "Wyrlo",
+      siteName: "Konver",
       locale: locale === "en" ? "en_US" : locale.replace("-", "_"),
       images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630, alt: name }],
     },
@@ -80,7 +80,7 @@ export function softwareApplicationSchema(
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: `${name} — Wyrlo`,
+    name: `${name} — Konver`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
     description: override?.metaDescription ?? tool.metaDescription,

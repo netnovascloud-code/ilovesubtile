@@ -1,4 +1,4 @@
-// Wyrlo — open the Stripe Customer Portal for the authenticated user.
+// Konver — open the Stripe Customer Portal for the authenticated user.
 //
 // POST /functions/v1/stripe-portal
 // Returns: { url: "https://billing.stripe.com/..." }
@@ -10,12 +10,12 @@ import Stripe from "https://esm.sh/stripe@17.2.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
-  "https://wyrlo.io", "https://www.wyrlo.io",
+  "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -55,7 +55,7 @@ Deno.serve(async (req) => {
   const { data: profile } = await supabase.from("profiles").select("stripe_customer_id").eq("id", caller.id).maybeSingle();
   if (!profile?.stripe_customer_id) return json({ error: "no_stripe_customer" }, { status: 400 });
 
-  const origin = req.headers.get("origin") ?? "https://wyrlo.io";
+  const origin = req.headers.get("origin") ?? "https://konver.app";
   const url = new URL(req.url);
   const returnPath = url.searchParams.get("return_path") ?? "/dashboard";
 

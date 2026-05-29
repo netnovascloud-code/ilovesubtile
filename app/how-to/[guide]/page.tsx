@@ -14,7 +14,7 @@ export function generateMetadata({ params }: { params: { guide: string } }): Met
     title: { absolute: howto.metaTitle },
     description: howto.metaDescription,
     alternates: { canonical: `/how-to/${howto.id}` },
-    openGraph: { title: howto.metaTitle, description: howto.metaDescription, url: `https://wyrlo.io/how-to/${howto.id}`, siteName: "Wyrlo", type: "article" },
+    openGraph: { title: howto.metaTitle, description: howto.metaDescription, url: `https://konver.app/how-to/${howto.id}`, siteName: "Konver", type: "article" },
   };
 }
 

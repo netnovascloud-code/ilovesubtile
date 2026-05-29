@@ -1,4 +1,4 @@
-// Wyrlo — Stripe webhook → mirrors plan into profiles + sends an
+// Konver — Stripe webhook → mirrors plan into profiles + sends an
 // upgrade confirmation email via the send-email function.
 //
 // Deploy: supabase functions deploy stripe-webhook --no-verify-jwt

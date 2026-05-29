@@ -34,6 +34,8 @@ import { PendingClient } from "@/components/tools/clients/PendingClient";
 import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
 import { RemoveBackgroundClient } from "@/components/tools/clients/RemoveBackgroundClient";
 import { PdfToTextClient } from "@/components/tools/clients/PdfToTextClient";
+import { PdfToWordClient } from "@/components/tools/clients/PdfToWordClient";
+import { MergeAudioClient } from "@/components/tools/clients/MergeAudioClient";
 import { PdfToJpgClient } from "@/components/tools/clients/PdfToJpgClient";
 import { WordToPdfClient } from "@/components/tools/clients/WordToPdfClient";
 import { HtmlToPdfClient } from "@/components/tools/clients/HtmlToPdfClient";
@@ -170,6 +172,20 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <PdfToJpgClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "pdf-to-word") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PdfToWordClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "merge-audio") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <MergeAudioClient />
       </ToolPageShell>
     );
   }

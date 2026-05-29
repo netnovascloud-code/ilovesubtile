@@ -5,14 +5,22 @@
 // and anonymous (client-gated) pass through. Mistral is never named to the user.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const cors = {
-  "Access-Control-Allow-Origin": "https://wyrlo.io",
-  "Vary": "Origin",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-function json(body: unknown, init: ResponseInit = {}) {
-  return new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+// CORS allowlist — echo the caller's Origin only when it's a trusted host
+// (production *.vercel.app, the future wyrlo.io, local dev). This stops other
+// websites from using our AI endpoint as a free backend via the browser.
+const STATIC_ORIGINS = new Set<string>([
+  "https://wyrlo.io", "https://www.wyrlo.io",
+  "http://localhost:3000", "http://127.0.0.1:3000",
+]);
+function corsFor(req: Request): Record<string, string> {
+  const o = req.headers.get("origin") ?? "";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  return {
+    "Access-Control-Allow-Origin": allow,
+    "Vary": "Origin",
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
 }
 
 const DAILY_LIMIT: Record<string, number> = { free: 5, pro: Infinity, business: Infinity };
@@ -80,6 +88,10 @@ const TOOL_BY_TASK: Record<string, string> = {
 };
 
 Deno.serve(async (req) => {
+  const cors = corsFor(req);
+  const json = (body: unknown, init: ResponseInit = {}) =>
+    new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, { status: 405 });
 

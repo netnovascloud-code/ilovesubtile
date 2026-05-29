@@ -10,15 +10,19 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://wyrlo.io",
-  "Vary": "Origin",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-function handleOptions() { return new Response("ok", { headers: corsHeaders }); }
-function json(body: unknown, init: ResponseInit = {}) {
-  return new Response(JSON.stringify(body), { ...init, headers: { ...corsHeaders, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+const STATIC_ORIGINS = new Set<string>([
+  "https://wyrlo.io", "https://www.wyrlo.io",
+  "http://localhost:3000", "http://127.0.0.1:3000",
+]);
+function corsFor(req: Request): Record<string, string> {
+  const o = req.headers.get("origin") ?? "";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://wyrlo.io";
+  return {
+    "Access-Control-Allow-Origin": allow,
+    "Vary": "Origin",
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
 }
 async function getCaller(req: Request) {
   const auth = req.headers.get("Authorization");
@@ -66,6 +70,10 @@ function segmentsFromPlainText(text: string): Segment[] {
 }
 
 Deno.serve(async (req) => {
+  const cors = corsFor(req);
+  const handleOptions = () => new Response("ok", { headers: cors });
+  const json = (body: unknown, init: ResponseInit = {}) =>
+    new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
   if (req.method === "OPTIONS") return handleOptions();
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, { status: 405 });
 

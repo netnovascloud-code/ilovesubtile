@@ -17,29 +17,30 @@
 // Secret: MISTRAL_API_KEY
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const cors = {
-  "Access-Control-Allow-Origin": "https://wyrlo.io",
-  "Vary": "Origin",
-  "Access-Control-Allow-Headers": "authorization, content-type",
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-};
 const BUY_CREDITS_URL = "https://wyrlo.io/pricing";
 
-function json(body: unknown, init: ResponseInit = {}) {
-  return new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+// CORS allowlist. We echo the caller's Origin only when it's a known host
+// (production vercel.app domains, the future wyrlo.io, and local dev);
+// otherwise we fall back to the canonical site. Server-to-server API callers
+// send no Origin and are unaffected. Note: api-gateway is JWT-free and uses
+// API-key auth, so CORS is defence-in-depth, not the primary control.
+const STATIC_ORIGINS = new Set<string>([
+  "https://wyrlo.io", "https://www.wyrlo.io",
+  "http://localhost:3000", "http://127.0.0.1:3000",
+]);
+function allowOrigin(req: Request): string {
+  const o = req.headers.get("origin") ?? "";
+  if (STATIC_ORIGINS.has(o)) return o;
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o)) return o;
+  return "https://wyrlo.io";
 }
-/** Standard error envelope used across every endpoint. */
-function err(error: string, message: string, status: number, extra: Record<string, unknown> = {}) {
-  return json({ error, message, ...extra }, { status });
-}
-function insufficient(required: number, available: number) {
-  return json({
-    error: "insufficient_credits",
-    message: `This operation costs ${required} credits. Your balance: ${available} credits.`,
-    credits_required: required,
-    credits_available: available,
-    buy_credits_url: BUY_CREDITS_URL,
-  }, { status: 402 });
+function corsFor(req: Request): Record<string, string> {
+  return {
+    "Access-Control-Allow-Origin": allowOrigin(req),
+    "Vary": "Origin",
+    "Access-Control-Allow-Headers": "authorization, content-type",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  };
 }
 async function sha256(s: string): Promise<string> {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
@@ -203,6 +204,21 @@ function textSystem(action: string, opts: { style?: string; format?: string; lev
 }
 
 Deno.serve(async (req) => {
+  // Per-request CORS + response helpers (close over the resolved origin).
+  const cors = corsFor(req);
+  const json = (body: unknown, init: ResponseInit = {}) =>
+    new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
+  const err = (error: string, message: string, status: number, extra: Record<string, unknown> = {}) =>
+    json({ error, message, ...extra }, { status });
+  const insufficient = (required: number, available: number) =>
+    json({
+      error: "insufficient_credits",
+      message: `This operation costs ${required} credits. Your balance: ${available} credits.`,
+      credits_required: required,
+      credits_available: available,
+      buy_credits_url: BUY_CREDITS_URL,
+    }, { status: 402 });
+
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
 
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");

@@ -263,6 +263,9 @@ export default function ApiDocsPage() {
             <p className="mt-2 text-sm text-ink-500">
               Base URL: <code className="rounded bg-ink-100 px-1 py-0.5 text-xs">{BASE}</code>
             </p>
+            <p className="mt-2 text-sm text-ink-500">
+              Rate limit: <strong>60 requests/minute</strong> per key. Exceeding it returns <code className="rounded bg-ink-100 px-1">429</code> with a <code className="rounded bg-ink-100 px-1">Retry-After</code> header.
+            </p>
           </section>
 
           <section>

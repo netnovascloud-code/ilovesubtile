@@ -1835,6 +1835,110 @@ TOOLS.push(
   },
 );
 
+// ── Vision (Mistral Pixtral via ai-vision edge fn) ─────────────────────────
+TOOLS.push(
+  {
+    slug: "handwriting-to-text", phase: 3, kind: "ai", category: "images", icon: FileText, tone: "amber",
+    name: "Handwriting to Text",
+    short: "Transcribe handwritten notes from a photo.",
+    h1: "Handwriting to Text Converter — AI Handwriting Recognition Free",
+    metaTitle: "Handwriting to Text Online Free — AI Recognition | Konver",
+    metaDescription: "Turn a photo of handwritten notes into editable text with AI vision. 12 languages, free with daily allowance, no sign-up to try.",
+    primaryKeyword: "handwriting to text",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "Text",
+    steps: [
+      { title: "Upload a clear photo", body: "Good lighting and contrast help a lot." },
+      { title: "AI reads it line by line", body: "Illegible passages are tagged, not guessed." },
+      { title: "Copy or download", body: "Get a clean .txt of the transcription." },
+    ],
+    faqs: codeFaqs("Handwriting to Text"),
+  },
+  {
+    slug: "business-card-scanner", phase: 3, kind: "ai", category: "utilities", icon: ScanLine, tone: "slate",
+    name: "Business Card Scanner",
+    short: "Photo of a business card → vCard contact.",
+    h1: "Business Card Scanner Online Free — Extract Contact Info",
+    metaTitle: "Business Card Scanner Online — Photo to vCard | Konver",
+    metaDescription: "Snap a business card and get a ready-to-import vCard (.vcf) with name, title, company, email, phone and website. Powered by AI vision.",
+    primaryKeyword: "business card scanner",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "vCard",
+    steps: [
+      { title: "Upload a photo", body: "Of any business card." },
+      { title: "AI extracts the fields", body: "Name, title, email, phone, website…" },
+      { title: "Download the vCard", body: "Drag into Contacts, Gmail or Outlook." },
+    ],
+    faqs: codeFaqs("Business Card Scanner"),
+  },
+  {
+    slug: "receipt-scanner", phase: 3, kind: "ai", category: "utilities", icon: ScanLine, tone: "slate",
+    name: "Receipt Scanner",
+    short: "Receipt photo → merchant, date, total & line items.",
+    h1: "Receipt Scanner Online Free — Extract Data from Receipt",
+    metaTitle: "Receipt Scanner Online — Photo to CSV Expense Report | Konver",
+    metaDescription: "Snap a receipt and get a clean CSV with merchant, date, total and every line item — ready for your expense report. Powered by AI vision.",
+    primaryKeyword: "receipt scanner",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "CSV",
+    steps: [
+      { title: "Upload a receipt photo", body: "Paper or PDF screenshot — both work." },
+      { title: "AI parses the totals", body: "Merchant, date, subtotal, tax, total, line items." },
+      { title: "Export as CSV", body: "Imports straight into Excel, Notion or your accounting tool." },
+    ],
+    faqs: codeFaqs("Receipt Scanner"),
+  },
+  {
+    slug: "screenshot-to-code", phase: 3, kind: "ai", category: "developer", icon: Code, tone: "teal",
+    name: "Screenshot to HTML/CSS",
+    short: "UI screenshot → working HTML + Tailwind.",
+    h1: "Screenshot to HTML/CSS — Convert UI Screenshot to Code Free",
+    metaTitle: "Screenshot to HTML/CSS Online — UI to Code | Konver",
+    metaDescription: "Drop a UI screenshot and get a self-contained HTML5 document with Tailwind CSS classes that recreates the layout. Live preview included.",
+    primaryKeyword: "screenshot to html",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "HTML",
+    steps: [
+      { title: "Upload a screenshot", body: "Of a website, dashboard or mockup." },
+      { title: "AI writes the markup", body: "Semantic HTML + Tailwind utilities." },
+      { title: "Preview & download", body: "Live iframe preview, then export as .html." },
+    ],
+    faqs: codeFaqs("Screenshot to HTML"),
+  },
+);
+
+// ── OCR (in-browser via Tesseract.js, no upload) ───────────────────────────
+TOOLS.push(
+  {
+    slug: "image-to-text", phase: 3, kind: "client", category: "images", icon: FileText, tone: "amber",
+    name: "Image to Text (OCR)",
+    short: "Extract text from any image with offline OCR.",
+    h1: "Image to Text — Free OCR Online, Extract Text from Photo",
+    metaTitle: "Image to Text Online — Free OCR (12 Languages) | Konver",
+    metaDescription: "Extract text from any image with browser-side OCR (Tesseract.js) in 12 languages. Free, no sign-up, your image is never uploaded.",
+    primaryKeyword: "image to text ocr",
+    accept: ["jpg", "jpeg", "png", "webp", "bmp", "tiff"], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Upload an image", body: "JPEG, PNG, WebP, BMP or TIFF — stays on your device." },
+      { title: "Pick the language", body: "12 common languages supported out of the box." },
+      { title: "Get the text", body: "Copy or download as .txt." },
+    ],
+    faqs: codeFaqs("Image to Text"),
+  },
+  {
+    slug: "pdf-ocr", phase: 3, kind: "client", category: "documents", icon: FileText, tone: "blue",
+    name: "PDF OCR",
+    short: "Make a scanned PDF searchable in your browser.",
+    h1: "PDF OCR Online Free — Extract Text from Scanned PDF",
+    metaTitle: "PDF OCR Online — Make Scanned PDF Searchable | Konver",
+    metaDescription: "Extract text from every page of a scanned PDF with browser-side OCR in 12 languages. Free, no sign-up, your PDF is never uploaded.",
+    primaryKeyword: "pdf ocr online",
+    accept: ["pdf"], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Upload a scanned PDF", body: "Stays on your device — never uploaded." },
+      { title: "Pick the document language", body: "12 common languages supported." },
+      { title: "Read & download", body: "Page-by-page OCR, exported as a single .txt." },
+    ],
+    faqs: codeFaqs("PDF OCR"),
+  },
+);
+
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(
   TOOLS.map((t) => [t.slug, t]),
 );

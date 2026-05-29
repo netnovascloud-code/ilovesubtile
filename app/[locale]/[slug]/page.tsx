@@ -79,6 +79,12 @@ import { SocialMediaCropClient } from "@/components/tools/clients/SocialMediaCro
 import { ExifViewerClient } from "@/components/tools/clients/ExifViewerClient";
 import { MarkdownToWordClient } from "@/components/tools/clients/MarkdownToWordClient";
 import { PdfRedactionClient } from "@/components/tools/clients/PdfRedactionClient";
+import { ImageToTextClient } from "@/components/tools/clients/ImageToTextClient";
+import { PdfOcrClient } from "@/components/tools/clients/PdfOcrClient";
+import { HandwritingToTextClient } from "@/components/tools/clients/HandwritingToTextClient";
+import { BusinessCardScannerClient } from "@/components/tools/clients/BusinessCardScannerClient";
+import { ReceiptScannerClient } from "@/components/tools/clients/ReceiptScannerClient";
+import { ScreenshotToCodeClient } from "@/components/tools/clients/ScreenshotToCodeClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -441,6 +447,24 @@ export default function LocalisedToolPage({
       break;
     case "pdf-redaction":
       body = <PdfRedactionClient />;
+      break;
+    case "image-to-text":
+      body = <ImageToTextClient />;
+      break;
+    case "pdf-ocr":
+      body = <PdfOcrClient />;
+      break;
+    case "handwriting-to-text":
+      body = <HandwritingToTextClient />;
+      break;
+    case "business-card-scanner":
+      body = <BusinessCardScannerClient />;
+      break;
+    case "receipt-scanner":
+      body = <ReceiptScannerClient />;
+      break;
+    case "screenshot-to-code":
+      body = <ScreenshotToCodeClient />;
       break;
     case "image-to-base64":
       body = <ImageToBase64Client />;

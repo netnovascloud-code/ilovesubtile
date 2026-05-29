@@ -23,7 +23,9 @@ function corsFor(req: Request): Record<string, string> {
   };
 }
 
-const DAILY_LIMIT: Record<string, number> = { free: 5, pro: Infinity, business: Infinity };
+// Mirror of lib/quotas.ts DAILY_LIMITS — must move together when adjusting
+// the free-tier daily cap (also enforced client-side via lib/quotas.ts).
+const DAILY_LIMIT: Record<string, number> = { free: 2, pro: Infinity, business: Infinity };
 
 // Tasks that need the stronger model.
 const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize"]);
@@ -126,7 +128,7 @@ Deno.serve(async (req) => {
     try {
       const { data: prof } = await svc.from("profiles").select("plan, daily_usage, usage_reset_at").eq("id", userId).maybeSingle();
       const plan = (prof?.plan as string) ?? "free";
-      const limit = DAILY_LIMIT[plan] ?? 5;
+      const limit = DAILY_LIMIT[plan] ?? DAILY_LIMIT.free;
       if (limit !== Infinity) {
         const now = Date.now();
         const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;

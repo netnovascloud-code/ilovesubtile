@@ -26,6 +26,12 @@ const FN_MAP: Record<string, string> = {
   "keyword-extractor": "ai-process",
   "detect-language": "ai-process",
   "smart-drop": "ai-process",
+  // Vision tools — all handled by the ai-vision function via `task` (sends
+  // a data-URL image instead of a text body; same response envelope).
+  "handwriting-to-text": "ai-vision",
+  "business-card-scanner": "ai-vision",
+  "receipt-scanner": "ai-vision",
+  "screenshot-to-code": "ai-vision",
 };
 
 export function toolFunction(slug: string): string | null {

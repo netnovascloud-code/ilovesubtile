@@ -110,9 +110,23 @@ Deno.serve(async (req) => {
 
   const srt = srtFromSegments(segments);
 
-  const filename = `${(file.name ?? "subtitles").replace(/\.[^.]+$/, "")}.srt`;
-  const folder = caller?.id ?? "anonymous";
-  const path = `${folder}/${crypto.randomUUID()}/${filename}`;
+  // Reject anonymous uploads — they otherwise share an "anonymous/" prefix and
+  // can be abused to host attacker-controlled filenames on the supabase.co
+  // domain. Authenticated users keep their own UID-namespaced folder.
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
+
+  // Sanitize the source filename: strip everything but [a-z0-9._-], drop
+  // leading dots, and cap length. This prevents storage-key injection like
+  // `../../<victim-uuid>/file.srt` even if the storage backend ever decided
+  // to normalize segments — the path is built from controlled parts only.
+  const rawBase = (file.name ?? "subtitles").replace(/\.[^.]+$/, "");
+  const safeBase = rawBase
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, "_")
+    .replace(/^\.+/, "")
+    .slice(0, 64) || "subtitles";
+  const filename = `${safeBase}.srt`;
+  const path = `${caller.id}/${crypto.randomUUID()}/${filename}`;
 
   const { error: uploadError } = await supabase.storage.from("results")
     .upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });

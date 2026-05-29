@@ -142,9 +142,18 @@ Deno.serve(async (req) => {
   const translated = cues.map((c, i) => ({ ...c, lines: translatedAll[i].split("\n") }));
   const srt = toSrt(translated);
 
-  const filename = `${(file.name ?? "translated").replace(/\.[^.]+$/, "")}.${targetLang.toLowerCase()}.srt`;
-  const folder = caller?.id ?? "anonymous";
-  const path = `${folder}/${crypto.randomUUID()}/${filename}`;
+  // Reject anonymous uploads (would otherwise share an "anonymous/" prefix)
+  // and sanitize the source filename to prevent storage-key injection like
+  // `../../<victim-uuid>/file.srt`. See process-subtitles for rationale.
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
+  const rawBase = (file.name ?? "translated").replace(/\.[^.]+$/, "");
+  const safeBase = rawBase
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, "_")
+    .replace(/^\.+/, "")
+    .slice(0, 64) || "translated";
+  const filename = `${safeBase}.${targetLang.toLowerCase()}.srt`;
+  const path = `${caller.id}/${crypto.randomUUID()}/${filename}`;
 
   await supabase.storage.from("results").upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);

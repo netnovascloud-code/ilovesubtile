@@ -1,15 +1,16 @@
 -- =====================================================================
--- Wyrlo — privacy retention: purge job rows and temp Storage objects
+-- Wyrlo — privacy retention: consolidate temp-data purge into one function
 --
 -- Privacy guarantee: Wyrlo stores NO file or document content — only
--- metadata (tool name, status, file name/size in `metadata` jsonb, the
--- short-lived signed URLs). To keep even that minimal, every job row and
--- every object in the temporary `uploads`/`results` buckets is hard-deleted
--- two hours after creation. Download links already expire after 1 hour
--- (see the send-email edge function), so a 2-hour purge never races a live
--- download.
+-- metadata (tool name, status, file name/size in the `metadata` jsonb, and
+-- short-lived signed URLs). Download links expire after 1 hour
+-- (send-email edge function), so the windows below never race a live download.
 --
--- This runs server-side via pg_cron; nothing here is reachable by clients.
+-- Context: an ad-hoc cron `wyrlo-purge-fast` already deleted `results`
+-- objects (>30 min) and `jobs` rows (>2 h), but it never touched the
+-- `uploads` bucket. This migration centralises the logic in one documented
+-- function, adds the missing `uploads` purge, and replaces the ad-hoc cron so
+-- there is a single source of truth. Everything here is server-side only.
 -- =====================================================================
 
 create or replace function public.cleanup_expired_jobs()
@@ -18,33 +19,39 @@ language plpgsql
 security definer
 set search_path = public, storage
 as $$
-declare
-  cutoff timestamptz := now() - interval '2 hours';
 begin
-  -- 1) Drop job metadata older than the retention window.
-  delete from public.jobs where created_at < cutoff;
+  -- Job metadata: keep 2 hours.
+  delete from public.jobs
+   where created_at < now() - interval '2 hours';
 
-  -- 2) Drop temporary Storage object rows older than the retention window.
-  --    Removing the row makes the object unreachable through the Storage API.
-  --    (Physical byte reclamation in the object store is handled separately
-  --    by the bucket lifecycle policy; the metadata row is the access path.)
+  -- Generated results (download artifacts): keep 30 minutes.
   delete from storage.objects
-   where bucket_id in ('uploads', 'results')
-     and created_at < cutoff;
+   where bucket_id = 'results'
+     and created_at < now() - interval '30 minutes';
+
+  -- Uploaded inputs (pre-processing temp): keep 30 minutes. THIS is the gap
+  -- the old ad-hoc cron left open.
+  delete from storage.objects
+   where bucket_id = 'uploads'
+     and created_at < now() - interval '30 minutes';
 end;
 $$;
 
 -- Only the cron scheduler (function owner) ever calls this — never clients.
 revoke execute on function public.cleanup_expired_jobs() from public, anon, authenticated;
 
--- Schedule every 15 minutes when pg_cron is available (mirrors migration 003).
+-- Replace the ad-hoc inline cron with one that calls the function above.
 do $$
 begin
   if exists (select 1 from pg_extension where extname = 'pg_cron') then
+    -- Drop the legacy ad-hoc job (inline SQL, no uploads purge) if present.
+    if exists (select 1 from cron.job where jobname = 'wyrlo-purge-fast') then
+      perform cron.unschedule('wyrlo-purge-fast');
+    end if;
     if exists (select 1 from cron.job where jobname = 'wyrlo_job_retention') then
       perform cron.unschedule('wyrlo_job_retention');
     end if;
-    perform cron.schedule('wyrlo_job_retention', '*/15 * * * *', $cron$ select public.cleanup_expired_jobs(); $cron$);
+    perform cron.schedule('wyrlo_job_retention', '*/5 * * * *', $cron$ select public.cleanup_expired_jobs(); $cron$);
   end if;
 end;
 $$;

@@ -1787,6 +1787,54 @@ TOOLS.push(
     [{ title: "Fill in your details", body: "Name, title, company, email, phone, website." }, { title: "Pick an accent colour", body: "See the signature update live." }, { title: "Copy & paste", body: "Drop it straight into Gmail or Outlook." }]),
 );
 
+// ── New file-based modules (images + documents) ────────────────────────────
+TOOLS.push(
+  imgTool("social-media-crop", Crop, "Social Media Image Cropper", "Crop images to the exact ratio for every platform.",
+    "Social Media Image Cropper — Crop for Instagram, TikTok, X & More",
+    "Social Media Image Cropper Online — Instagram, TikTok | Wyrlo",
+    "Crop any image to the exact aspect ratio for Instagram, TikTok, X, Facebook, YouTube, LinkedIn and Pinterest. Free, in-browser, never uploaded.",
+    "social media image cropper", ["jpg", "jpeg", "png", "webp"], "Image",
+    [{ title: "Upload an image", body: "JPG, PNG or WebP — stays on your device." }, { title: "Pick a platform ratio", body: "Square, portrait, story, banner and more." }, { title: "Download the crop", body: "Center-cropped at full resolution." }]),
+  imgTool("exif-viewer", ShieldCheck, "EXIF Viewer & Remover", "See and strip photo metadata (incl. GPS).",
+    "EXIF Viewer & Remover — Read and Strip Photo Metadata",
+    "EXIF Viewer & Remover Online — Strip GPS Metadata | Wyrlo",
+    "View the EXIF metadata in your photos — camera, date, even GPS location — and remove all of it in one click for privacy. Free, in-browser.",
+    "exif viewer remover", ["jpg", "jpeg", "png", "webp", "tiff"], "Image",
+    [{ title: "Upload a photo", body: "JPEG keeps the most metadata." }, { title: "Review the metadata", body: "Camera, software, date and GPS if present." }, { title: "Strip & download", body: "Re-encoded clean — no metadata left." }]),
+  {
+    slug: "markdown-to-word", phase: 3, kind: "client", category: "documents", icon: FileText, tone: "blue",
+    name: "Markdown to Word",
+    short: "Turn Markdown into an editable .docx document.",
+    h1: "Markdown to Word — Convert MD to DOCX Online Free",
+    metaTitle: "Markdown to Word Online — Convert MD to DOCX | Wyrlo",
+    metaDescription: "Convert Markdown to an editable Word (.docx) document — headings, lists and emphasis preserved. Free, in-browser, your text is never uploaded.",
+    primaryKeyword: "markdown to word",
+    accept: ["md", "markdown", "txt"], freeMaxMb: 0, outputType: "DOCX",
+    steps: [
+      { title: "Paste or load Markdown", body: "Type it in or load a .md file." },
+      { title: "We convert the structure", body: "Headings, lists, quotes and emphasis." },
+      { title: "Download the .docx", body: "Editable in Word, Google Docs or LibreOffice." },
+    ],
+    faqs: codeFaqs("Markdown to Word"),
+  },
+  {
+    slug: "pdf-redaction", phase: 3, kind: "client", category: "documents", icon: Eraser, tone: "blue",
+    name: "Redact PDF",
+    short: "Permanently black out sensitive text in a PDF.",
+    h1: "Redact PDF Online Free — Permanently Black Out Sensitive Info",
+    metaTitle: "Redact PDF Online — Permanently Remove Sensitive Info | Wyrlo",
+    metaDescription: "Black out sensitive text in any PDF and export it flattened, so the hidden content is permanently removed — not just covered. Free, in-browser.",
+    primaryKeyword: "redact pdf",
+    accept: ["pdf"], freeMaxMb: 0, outputType: "PDF",
+    steps: [
+      { title: "Upload a PDF", body: "Stays on your device — never uploaded." },
+      { title: "Draw black boxes", body: "Drag over anything sensitive, page by page." },
+      { title: "Export flattened", body: "Pages are rasterised so redactions are permanent." },
+    ],
+    faqs: codeFaqs("Redact PDF"),
+  },
+);
+
 export const TOOLS_BY_SLUG: Record<string, ToolDefinition> = Object.fromEntries(
   TOOLS.map((t) => [t.slug, t]),
 );

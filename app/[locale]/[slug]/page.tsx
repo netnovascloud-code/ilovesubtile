@@ -75,6 +75,10 @@ import { AgeCalculatorClient } from "@/components/tools/clients/AgeCalculatorCli
 import { RomanNumeralClient } from "@/components/tools/clients/RomanNumeralClient";
 import { ColorPaletteClient } from "@/components/tools/clients/ColorPaletteClient";
 import { EmailSignatureClient } from "@/components/tools/clients/EmailSignatureClient";
+import { SocialMediaCropClient } from "@/components/tools/clients/SocialMediaCropClient";
+import { ExifViewerClient } from "@/components/tools/clients/ExifViewerClient";
+import { MarkdownToWordClient } from "@/components/tools/clients/MarkdownToWordClient";
+import { PdfRedactionClient } from "@/components/tools/clients/PdfRedactionClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -425,6 +429,18 @@ export default function LocalisedToolPage({
       break;
     case "email-signature-generator":
       body = <EmailSignatureClient />;
+      break;
+    case "social-media-crop":
+      body = <SocialMediaCropClient />;
+      break;
+    case "exif-viewer":
+      body = <ExifViewerClient />;
+      break;
+    case "markdown-to-word":
+      body = <MarkdownToWordClient />;
+      break;
+    case "pdf-redaction":
+      body = <PdfRedactionClient />;
       break;
     case "image-to-base64":
       body = <ImageToBase64Client />;

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { TOOLS, ALTERNATIVES, CATEGORIES } from "@/lib/tools-config";
 import { EXTRA_ALTERNATIVES } from "@/lib/alternatives-extra";
+import { SECTOR_IDS } from "@/lib/sectors";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -45,6 +46,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
+    });
+  }
+
+  // Sector landing pages — English only.
+  for (const s of SECTOR_IDS) {
+    entries.push({
+      url: `${SITE_URL}/for/${s}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     });
   }
 

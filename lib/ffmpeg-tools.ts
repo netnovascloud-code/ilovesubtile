@@ -123,6 +123,35 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
     ],
     command: (i, o, opt) => ["-i", i, "-vf", `scale=${opt.w || "1280"}:${opt.h || "720"}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "copy", o],
   },
+  "m4a-to-mp3": {
+    label: "an M4A", accept: "audio/mp4,audio/x-m4a,audio/aac,.m4a,.aac", inputExt: "m4a", outputExt: "mp3", outputMime: "audio/mpeg",
+    options: [QUALITY_AUDIO],
+    command: (i, o, opt) => ["-i", i, "-c:a", "libmp3lame", "-b:a", opt.bitrate ?? "192k", o],
+  },
+  "change-audio-pitch": {
+    label: "an audio file", accept: "audio/*,.mp3,.wav,.m4a,.flac,.ogg,.aac", inputExt: "mp3", outputExt: "mp3", outputMime: "audio/mpeg",
+    // asetrate retunes (changes pitch + tempo); atempo restores tempo so pitch only shifts.
+    // Cents = 100 × semitones; ratio = 2^(semitones/12). We expose semitones from -12 to +12.
+    options: [
+      { id: "semi", label: "Semitones", values: [
+        { id: "-12", label: "-12 (one octave down)" }, { id: "-7", label: "-7 (a fifth down)" },
+        { id: "-3", label: "-3" }, { id: "-1", label: "-1" }, { id: "1", label: "+1" }, { id: "3", label: "+3" },
+        { id: "7", label: "+7 (a fifth up)" }, { id: "12", label: "+12 (one octave up)" },
+      ], default: "3" },
+    ],
+    command: (i, o, opt) => {
+      const semi = Number(opt.semi || "0");
+      const ratio = Math.pow(2, semi / 12);
+      // asetrate = base_rate × ratio; aresample brings sample rate back; atempo = 1/ratio.
+      // We assume 44100 base; libmp3lame accepts arbitrary input.
+      return ["-i", i, "-af", `asetrate=44100*${ratio.toFixed(6)},aresample=44100,atempo=${(1 / ratio).toFixed(6)}`, "-c:a", "libmp3lame", "-b:a", "192k", o];
+    },
+  },
+  "mp4-to-mov": {
+    label: "an MP4", accept: "video/mp4,.mp4", inputExt: "mp4", outputExt: "mov", outputMime: "video/quicktime",
+    // Stream copy when possible — no quality loss, completes in seconds.
+    command: (i, o) => ["-i", i, "-c", "copy", "-movflags", "faststart", o],
+  },
   "rotate-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
     options: [

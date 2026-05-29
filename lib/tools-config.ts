@@ -1149,6 +1149,12 @@ TOOLS.push(
     "Compare two pieces of text and see additions and deletions highlighted line by line — like a Git diff, right in your browser.",
     "text diff", "Diff",
     [{ title: "Paste the original", body: "Any plain text." }, { title: "Paste the new version", body: "We line up the changes." }, { title: "Read the diff", body: "Additions in green, deletions in red." }]),
+  utilTool("currency-converter", ArrowLeftRight, "Currency Converter", "Live exchange rates from the ECB, 28 currencies.",
+    "Currency Converter Online — Live Exchange Rates",
+    "Currency Converter Online — Live ECB Rates | Wyrlo",
+    "Convert between 28 currencies with live rates from the European Central Bank. Free, in-browser, updates hourly.",
+    "currency converter", "Money",
+    [{ title: "Pick a base currency", body: "Any of the 28 supported." }, { title: "Pick a target", body: "Same list — swap instantly." }, { title: "See the converted amount", body: "ECB rates, refreshed every hour." }]),
   utilTool("vat-calculator", Receipt, "VAT Calculator", "Net ↔ Gross with standard rates for 30 countries.",
     "VAT Calculator Online Free — Calculate Tax for Any Country",
     "VAT Calculator Online — 30 Countries, Net & Gross | Wyrlo",
@@ -1311,6 +1317,18 @@ TOOLS.push(
     "Speed up or slow down any audio file without changing pitch.",
     "change audio speed", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
     [{ title: "Upload your audio", body: "Any format." }, { title: "Pick a speed", body: "0.5× to 2× normal." }, { title: "Download the result", body: "Same pitch, new tempo." }], false),
+  avTool("m4a-to-mp3", Music, "audio", "M4A to MP3", "Convert Apple/iTunes M4A audio to MP3.",
+    "M4A to MP3 Converter — Convert Apple Audio to MP3 Free",
+    "M4A to MP3 Online — Free Converter | Wyrlo",
+    "Convert M4A (Apple, iTunes, AAC) audio files to MP3 in seconds. Pick a bitrate. Free, in-browser, no upload.",
+    "m4a to mp3", ["m4a", "aac"], "MP3",
+    [{ title: "Upload your M4A", body: "iTunes or Apple Music exports work too." }, { title: "Pick a bitrate", body: "128 to 320 kbps." }, { title: "Download the MP3", body: "Universally compatible." }], false),
+  avTool("change-audio-pitch", Music, "audio", "Change Audio Pitch", "Shift pitch in semitones without changing tempo.",
+    "Change Audio Pitch Online Free — Pitch Shifter MP3 WAV",
+    "Change Audio Pitch Online — Free Shifter | Wyrlo",
+    "Pitch-shift any audio file by up to ±12 semitones without affecting tempo. Free, runs in your browser.",
+    "change audio pitch", ["mp3", "wav", "m4a", "flac", "ogg"], "Audio",
+    [{ title: "Upload your audio", body: "Any common format." }, { title: "Pick a shift", body: "From −12 to +12 semitones." }, { title: "Download the result", body: "Tempo stays exactly the same." }], false),
 );
 
 TOOLS.push(
@@ -1350,6 +1368,12 @@ TOOLS.push(
     "Resize MP4, MOV and other videos to any resolution.",
     "resize video", ["mp4", "mov", "mkv", "webm"], "Video",
     [{ title: "Upload your video", body: "Any source resolution." }, { title: "Enter target size", body: "Lock the ratio or go custom." }, { title: "Download the result", body: "Right dimensions." }], false),
+  avTool("mp4-to-mov", Video, "video", "MP4 to MOV", "Convert MP4 to MOV for Final Cut and iMovie.",
+    "MP4 to MOV Converter Online Free — Convert for iMovie & Final Cut",
+    "MP4 to MOV Online — Free Converter | Wyrlo",
+    "Convert MP4 files to QuickTime MOV without re-encoding — perfect for iMovie, Final Cut Pro and macOS workflows. Free, in-browser.",
+    "mp4 to mov", ["mp4"], "MOV",
+    [{ title: "Upload your MP4", body: "Any size, any encoder." }, { title: "Stream-copy to MOV", body: "No re-encoding, no quality loss." }, { title: "Download your MOV", body: "Drop straight into iMovie or Final Cut." }], false),
   avTool("rotate-video", RotateCw, "video", "Rotate Video", "Rotate a video by 90, 180 or 270 degrees.",
     "Rotate Video Online — Fix Video Orientation",
     "Rotate Video Online — Free | Wyrlo",
@@ -1404,6 +1428,42 @@ TOOLS.push({
     { title: "Download transparent PNG", body: "Ready for design, slides or e-commerce." },
   ],
   faqs: codeFaqs("Background Remover"),
+});
+
+// ── Images — Flip horizontally / vertically (pure Canvas) ───────────────────
+TOOLS.push({
+  slug: "flip-image", phase: 3, kind: "client", category: "images", icon: ArrowLeftRight, tone: "amber",
+  name: "Flip Image",
+  short: "Mirror an image horizontally, vertically or both.",
+  h1: "Flip Image Online Free — Mirror Image Horizontally or Vertically",
+  metaTitle: "Flip Image Online Free — Mirror Horizontally / Vertically | Wyrlo",
+  metaDescription: "Mirror any JPG, PNG or WebP horizontally, vertically or both directions. Runs entirely in your browser — your image is never uploaded.",
+  primaryKeyword: "flip image",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Upload your image", body: "JPG, PNG or WebP — stays on your device." },
+    { title: "Pick a direction", body: "Horizontal, vertical, or both." },
+    { title: "Download the result", body: "Same format, same quality." },
+  ],
+  faqs: codeFaqs("Flip Image"),
+});
+
+// ── Dev — Image to Base64 (and back) ────────────────────────────────────────
+TOOLS.push({
+  slug: "image-to-base64", phase: 3, kind: "client", category: "developer", icon: Binary, tone: "teal",
+  name: "Image to Base64",
+  short: "Encode an image to Base64 — and decode it back.",
+  h1: "Image to Base64 Encoder — Decode Base64 to Image Free",
+  metaTitle: "Image to Base64 Online — Encode & Decode | Wyrlo",
+  metaDescription: "Convert any image to a Base64 data URI for embedding in CSS or HTML — and decode a Base64 string back to an image. Free, in-browser, private.",
+  primaryKeyword: "image to base64",
+  accept: ["jpg", "jpeg", "png", "gif", "webp", "svg"], freeMaxMb: 0, outputType: "Text",
+  steps: [
+    { title: "Upload an image", body: "JPG, PNG, GIF, WebP or SVG." },
+    { title: "Copy the data URI", body: "Or copy raw Base64 — toggle the prefix." },
+    { title: "Decode back to image", body: "Paste any Base64 string to preview and download." },
+  ],
+  faqs: codeFaqs("Image to Base64"),
 });
 
 // ── Video — Background remover (FFmpeg.wasm + @imgly, frame-by-frame) ───────

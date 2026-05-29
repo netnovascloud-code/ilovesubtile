@@ -29,6 +29,9 @@ import { UuidGeneratorClient } from "@/components/tools/clients/UuidGeneratorCli
 import { UnixTimestampClient } from "@/components/tools/clients/UnixTimestampClient";
 import { TextDiffClient } from "@/components/tools/clients/TextDiffClient";
 import { VatCalculatorClient } from "@/components/tools/clients/VatCalculatorClient";
+import { ImageToBase64Client } from "@/components/tools/clients/ImageToBase64Client";
+import { FlipImageClient } from "@/components/tools/clients/FlipImageClient";
+import { CurrencyConverterClient } from "@/components/tools/clients/CurrencyConverterClient";
 import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
 import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
 import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
@@ -325,6 +328,15 @@ export default function LocalisedToolPage({
       break;
     case "vat-calculator":
       body = <VatCalculatorClient />;
+      break;
+    case "image-to-base64":
+      body = <ImageToBase64Client />;
+      break;
+    case "flip-image":
+      body = <FlipImageClient />;
+      break;
+    case "currency-converter":
+      body = <CurrencyConverterClient />;
       break;
     case "password-generator":
       body = <PasswordGenClient />;

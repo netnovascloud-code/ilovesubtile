@@ -69,8 +69,8 @@ export function SectorPage({ sector }: { sector: Sector }) {
         <section className="rounded-lg border border-brand-200 bg-brand-50/40 p-6 md:p-8">
           <h2 className="text-2xl font-semibold text-ink-900">Get more, faster.</h2>
           <p className="mt-2 max-w-2xl text-ink-700">
-            Pro unlocks unlimited AI runs, batch processing up to 20 files, saved templates, files up to 500 MB and no ads — €9/month.
-            Business adds the public REST API and 200 included credits every month — €29/month.
+            Pro unlocks unlimited AI runs, batch processing up to 20 files, saved templates, files up to 500 MB and no ads — €12/month.
+            Business adds the public REST API and 300 included credits every month — €39/month.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href="/pricing"><Button>See pricing</Button></Link>

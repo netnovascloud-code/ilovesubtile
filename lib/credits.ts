@@ -20,14 +20,14 @@ export type CreditPack = {
 };
 
 export const CREDIT_PACKS: CreditPack[] = [
-  { id: "starter", credits: 100, priceEur: 9, perCredit: 0.09 },
-  { id: "growth", credits: 500, priceEur: 25, perCredit: 0.05 },
-  { id: "scale", credits: 2000, priceEur: 69, perCredit: 0.0345, badge: "Most popular" },
-  { id: "studio", credits: 6000, priceEur: 179, perCredit: 0.0298, badge: "Best value" },
+  { id: "starter", credits: 100, priceEur: 12, perCredit: 0.12 },
+  { id: "growth", credits: 500, priceEur: 39, perCredit: 0.078 },
+  { id: "scale", credits: 2000, priceEur: 99, perCredit: 0.0495, badge: "Most popular" },
+  { id: "studio", credits: 6000, priceEur: 249, perCredit: 0.0415, badge: "Best value" },
 ];
 
 /** Business plan auto-grant on the 1st of each month. Expires end of month. */
-export const BUSINESS_MONTHLY_CREDITS = 200;
+export const BUSINESS_MONTHLY_CREDITS = 300;
 
 /**
  * Credit cost per API operation. Text operations are tiered by length

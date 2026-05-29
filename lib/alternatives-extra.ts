@@ -17,7 +17,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
     ],
     comparison: [
       { feature: "Free tier", us: "Yes — 5 runs/day signed in", them: "Limited free, paywalled beyond" },
-      { feature: "Pro price", us: "€9/month", them: "€8.74-30/month" },
+      { feature: "Pro price", us: "€12/month", them: "€8.74-30/month" },
       { feature: "Formal / informal", us: "Toggle in the UI", them: "Pro only" },
       { feature: "Subtitle (SRT/VTT) translation", us: "Yes — same engine", them: "No" },
       { feature: "Other tools", us: "150+ in one place", them: "Translation only" },
@@ -48,7 +48,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Audio + Video", us: "Yes — FFmpeg.wasm", them: "No" },
       { feature: "AI text tools", us: "Translator, rephraser, humanizer…", them: "No" },
       { feature: "Code & dev tools", us: "JSON/YAML/XML, hash, regex…", them: "No" },
-      { feature: "Pro price", us: "€9/month", them: "€7/month" },
+      { feature: "Pro price", us: "€12/month", them: "€7/month" },
       { feature: "Free tier", us: "Most tools free forever", them: "Limited daily ops" },
       { feature: "File retention", us: "Up to 30 min", them: "2h" },
     ],
@@ -130,7 +130,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
     comparison: [
       { feature: "Daily free cap", us: "Unlimited on client tools", them: "2 tasks/day" },
       { feature: "Where conversion runs", us: "Your browser", them: "Their servers" },
-      { feature: "Pro price", us: "€9/month", them: "$9/month" },
+      { feature: "Pro price", us: "€12/month", them: "$9/month" },
       { feature: "OCR & PDF→Excel", us: "Coming soon", them: "Yes" },
       { feature: "Other categories", us: "Audio, video, AI, code, subtitles", them: "PDF + some images" },
       { feature: "Watermark", us: "Never", them: "Free plan: yes" },
@@ -160,7 +160,7 @@ export const EXTRA_ALTERNATIVES: AlternativeDef[] = [
       { feature: "Where conversion runs", us: "Your browser", them: "Their servers" },
       { feature: "Daily free limit", us: "Unlimited on client tools", them: "Time/size limited" },
       { feature: "AI subtitles", us: "Via subtitle-generator", them: "Yes (premium)" },
-      { feature: "Pro price", us: "€9/month", them: "€18+/month" },
+      { feature: "Pro price", us: "€12/month", them: "€18+/month" },
       { feature: "Other categories", us: "PDF, audio, image, code, AI", them: "Video editor focus" },
     ],
     faqs: [

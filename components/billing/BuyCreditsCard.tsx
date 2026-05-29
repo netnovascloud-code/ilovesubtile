@@ -83,7 +83,7 @@ export function BuyCreditsCard() {
 
       {error && <p className="mt-3 text-xs text-red-600">{error}</p>}
       <p className="mt-3 text-[11px] text-ink-400">
-        Business plans also include 200 credits every month (these reset monthly; purchased packs don't).
+        Business plans also include 300 credits every month (these reset monthly; purchased packs don't).
       </p>
     </div>
   );

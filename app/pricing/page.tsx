@@ -5,7 +5,7 @@ import { getToolUi } from "@/lib/i18n/tool-ui";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Free forever for browser tools. Pro at €9/month for unlimited AI, Workflow Builder and batch. Business at €29/month with the full REST API and 200 credits/month.",
+  description: "Free forever for browser tools. Pro at €12/month for unlimited AI, Workflow Builder and batch. Business at €39/month with the full REST API and 300 credits/month.",
   alternates: { canonical: "/pricing" },
 };
 

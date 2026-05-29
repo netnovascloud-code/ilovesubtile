@@ -339,7 +339,7 @@ export default function ApiDocsPage() {
           <div className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">
             <h3 className="font-semibold text-ink-900">Get an API key</h3>
             <p className="mt-2 text-sm text-ink-500">
-              The REST API is included with the Business plan (€29/month) — 200 credits every month, plus
+              The REST API is included with the Business plan (€39/month) — 300 credits every month, plus
               top-up packs that never expire.
             </p>
             <Link href="/pricing" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:underline">

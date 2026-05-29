@@ -178,7 +178,7 @@ export const COMING_SOON: ComingSoonTool[] = [
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,
-    a: `Yes. Konver is free for everyone. Free users can run ${name} a few times per day with a file size limit. Pro users (€9/month) get unlimited runs, larger files, and no ads.`,
+    a: `Yes. Konver is free for everyone. Free users can run ${name} up to 2 times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
   },
   {
     q: `Do you store my files?`,
@@ -1014,7 +1014,7 @@ TOOLS.push(
 
 // ── Konver — Text & AI (server-side AI, daily free quota) ───────────────────
 const aiFaqs = (name: string): ToolFaq[] => [
-  { q: `Is ${name} free?`, a: `Yes. Free users get 3 runs/day without an account and 5/day signed in. Pro (€9/month) removes the limit and all ads, with larger inputs.` },
+  { q: `Is ${name} free?`, a: `Yes. Free users get 2 runs/day. Pro (€12/month) removes the limit and all ads, with larger inputs.` },
   { q: `Is my text stored or used to train AI?`, a: `No. Your text is processed only to generate your result and is not used to train any model. Inputs are not retained long-term.` },
   { q: `How accurate is the result?`, a: `${name} uses an advanced language model and is strong across many languages. For high-stakes content, give the output a quick review.` },
   { q: `Which languages are supported?`, a: `Dozens — input and output work across all major world languages.` },
@@ -1922,12 +1922,12 @@ export const ALTERNATIVES: AlternativeDef[] = [
       "Looking for a VEED.io alternative? Konver is faster, cheaper (€9/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
       "AI subtitle generation with AI — modern, European, accurate.",
-      "€9/month Pro vs VEED's €18/month — and a real free tier.",
+      "€12/month Pro vs VEED's €18/month — and a real free tier.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€9/month", them: "€18/month" },
+      { feature: "Pro price", us: "€12/month", them: "€18/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Limited, watermarked" },
       { feature: "File size limit", us: "Up to 500 MB (Pro)", them: "Tiered by plan" },
       { feature: "AI subtitles", us: "AI, 30+ langs", them: "Yes" },
@@ -1936,7 +1936,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
     ],
     faqs: [
-      { q: "Is Konver really cheaper than VEED?", a: "Yes — Pro is €9/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
+      { q: "Is Konver really cheaper than VEED?", a: "Yes — Pro is €12/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
       { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any Konver tool — translate, sync, clean or burn them in." },
       { q: "Does Konver add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
       { q: "Is Konver a full video editor like VEED?", a: "No, and that's the point. Konver does subtitles only — each tool does one job fast, with no editor learning curve." },
@@ -1955,7 +1955,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       "Free tier you can actually use — no 4-minute video cap.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€9/month", them: "$16/month" },
+      { feature: "Pro price", us: "€12/month", them: "$16/month" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermark + limits" },
       { feature: "Focus", us: "Subtitles only", them: "General editor" },
       { feature: "AI subtitles", us: "AI", them: "Yes" },
@@ -1976,14 +1976,14 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Affordable HappyScribe Alternative — Konver",
     metaTitle: "HappyScribe Alternative Cheaper — Konver",
     metaDescription:
-      "HappyScribe alternative for creators, not just enterprise. €9/month vs €25/month with top-tier accuracy.",
+      "HappyScribe alternative for creators, not just enterprise. €12/month vs €25/month with top-tier accuracy.",
     bulletPoints: [
       "Modern AI engine (AI), half the price.",
       "Self-serve, no sales call required.",
       "Works for indie creators, agencies and teams alike.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€9/month", them: "~€25/month" },
+      { feature: "Pro price", us: "€12/month", them: "~€25/month" },
       { feature: "Audience", us: "Creators + teams", them: "Enterprise-first" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Trial only" },
       { feature: "AI subtitles", us: "AI", them: "Yes" },
@@ -1995,7 +1995,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { q: "Is Konver accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, at half the price." },
       { q: "Do I need to talk to sales?", a: "No. Konver is fully self-serve — sign up and start in seconds." },
       { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
-      { q: "What does it cost?", a: "Free tier, Pro at €9/month, Business at €29/month. No hidden per-minute fees on the subscription plans." },
+      { q: "What does it cost?", a: "Free tier, Pro at €12/month, Business at €39/month. No hidden per-minute fees on the subscription plans." },
     ],
   },
   {
@@ -2014,7 +2014,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "AI subtitle generation", us: "Yes (AI)", them: "No" },
       { feature: "Number of subtitle tools", us: "16", them: "~1" },
       { feature: "Translation", us: "30+ languages", them: "No" },
-      { feature: "Pro price", us: "€9/month", them: "~$9/month (all tools)" },
+      { feature: "Pro price", us: "€12/month", them: "~$9/month (all tools)" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermarked" },
       { feature: "Watermark on text", us: "Never", them: "Free plan" },
       { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },
@@ -2044,7 +2044,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Tool breadth", us: "100+ across 9 categories", them: "~25, PDF-only" },
       { feature: "AI tools", us: "Transcribe, translate, rephrase…", them: "Limited" },
       { feature: "Runs in browser", us: "Most tools, no upload", them: "Server-side" },
-      { feature: "Pro price", us: "€9/month", them: "~€7/month" },
+      { feature: "Pro price", us: "€12/month", them: "~€7/month" },
     ],
     faqs: [
       { q: "Does Konver do everything iLovePDF does?", a: "It covers the everyday PDF jobs — merge, split, compress, convert, watermark, page numbers — and adds images, audio, video, code and AI text." },
@@ -2076,7 +2076,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
     faqs: [
       { q: "Is Konver a real Acrobat replacement?", a: "For everyday tasks — merging, compressing, converting, watermarking — yes, and free. For deep editing, OCR and forms, Acrobat Pro is still ahead." },
       { q: "Do I need to install anything?", a: "No. Everything runs in the browser; most tools never upload your file." },
-      { q: "How much does it cost?", a: "Free for browser tools; Pro is €9/month for unlimited AI, batch and bigger files." },
+      { q: "How much does it cost?", a: "Free for browser tools; Pro is €12/month for unlimited AI, batch and bigger files." },
       { q: "Can it edit PDF text?", a: "Konver focuses on conversion and page operations rather than in-place text editing." },
     ],
   },
@@ -2098,7 +2098,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Rephrase / summarize", us: "Yes", them: "Separate product" },
       { feature: "Beyond text", us: "PDF, images, audio, video", them: "Text & docs" },
       { feature: "Ads on free", us: "None", them: "Char-limited free" },
-      { feature: "Pro price", us: "€9/month", them: "~€8/month" },
+      { feature: "Pro price", us: "€12/month", them: "~€8/month" },
     ],
     faqs: [
       { q: "Is the translation as good as DeepL?", a: "DeepL still leads on raw nuance for some pairs. Konver's AI is very strong and adds subtitle, rephrase and summarize features DeepL lacks." },
@@ -2152,7 +2152,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed", us: "Instant (local)", them: "Upload + queue" },
       { feature: "AI tools", us: "Yes", them: "No" },
       { feature: "Format breadth", us: "Common formats", them: "300+ formats" },
-      { feature: "Pro price", us: "€9/month", them: "from $9.99/month" },
+      { feature: "Pro price", us: "€12/month", them: "from $9.99/month" },
     ],
     faqs: [
       { q: "Why is Konver faster?", a: "Most conversions happen in your browser, so there's no upload and no server queue — the result is instant." },
@@ -2179,7 +2179,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Install / extension", us: "None — paste & go", them: "Extension / app" },
       { feature: "Translation", us: "30+ languages", them: "No" },
       { feature: "Beyond writing", us: "PDF, images, audio, video", them: "Writing only" },
-      { feature: "Pro price", us: "€9/month", them: "~€12/month" },
+      { feature: "Pro price", us: "€12/month", them: "~€12/month" },
     ],
     faqs: [
       { q: "Does Konver check grammar like Grammarly?", a: "Yes — paste your text and the AI fixes grammar, spelling and clarity, plus rephrasing and summarizing." },

@@ -2,8 +2,8 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 
 /** Per-plan daily run cap on tools that hit the backend. */
 export const DAILY_LIMITS = {
-  anonymous: 3,
-  free: 5,
+  anonymous: 2,
+  free: 2,
   pro: Infinity,
   business: Infinity,
 } as const;

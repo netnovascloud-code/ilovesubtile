@@ -178,6 +178,32 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
       return ["-i", i, "-filter_complex", `[0:v]setpts=${(1 / s).toFixed(6)}*PTS[v];[0:a]${atempo}[a]`, "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "128k", o];
     },
   },
+  // image + audio → MP4. Caller must upload BOTH files; we use the FFmpeg
+  // multi-input pattern in a custom client (see AudioToVideoClient.tsx).
+  // This entry is here so the tool surface and registration are consistent.
+  "audio-to-video": {
+    label: "an image + audio", accept: "audio/*,image/*,.mp3,.wav,.m4a,.png,.jpg,.jpeg",
+    inputExt: "mp3", outputExt: "mp4", outputMime: "video/mp4",
+    // command intentionally unused — AudioToVideoClient builds the command inline.
+    command: (i, o) => ["-i", i, o],
+  },
+  "optimize-gif": {
+    label: "a GIF", accept: "image/gif,.gif", inputExt: "gif", outputExt: "gif", outputMime: "image/gif",
+    options: [
+      { id: "level", label: "Optimisation", values: [
+        { id: "light",  label: "Light (best quality)" },
+        { id: "balanced", label: "Balanced (recommended)" },
+        { id: "heavy",  label: "Heavy (smallest file)" },
+      ], default: "balanced" },
+    ],
+    // palettegen+paletteuse gives a sharper, much smaller GIF than the default encoder.
+    command: (i, o, opt) => {
+      const level = opt.level || "balanced";
+      const colors = level === "light" ? 256 : level === "balanced" ? 128 : 64;
+      const fps = level === "light" ? 24 : level === "balanced" ? 15 : 10;
+      return ["-i", i, "-vf", `fps=${fps},split[s0][s1];[s0]palettegen=max_colors=${colors}[p];[s1][p]paletteuse=dither=bayer`, "-loop", "0", o];
+    },
+  },
   "rotate-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
     options: [

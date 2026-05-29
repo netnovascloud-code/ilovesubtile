@@ -65,6 +65,10 @@ import {
   ScanLine,
   ScanBarcode,
   FileSignature,
+  SlidersHorizontal,
+  Database,
+  CalendarClock,
+  Rows,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1173,6 +1177,12 @@ TOOLS.push(
     "Convert between 28 currencies with live rates from the European Central Bank. Free, in-browser, updates hourly.",
     "currency converter", "Money",
     [{ title: "Pick a base currency", body: "Any of the 28 supported." }, { title: "Pick a target", body: "Same list — swap instantly." }, { title: "See the converted amount", body: "ECB rates, refreshed every hour." }]),
+  utilTool("cron-builder", CalendarClock, "Cron Expression Builder", "Visual cron builder with human description + next fires.",
+    "Cron Expression Generator — Visual Cron Job Builder Online",
+    "Cron Builder Online — Free Visual Cron Generator | Wyrlo",
+    "Build cron expressions visually, see what they mean in plain English, and preview the next 5 fire times. Free, in-browser, with handy presets.",
+    "cron expression generator", "Cron",
+    [{ title: "Pick a preset or type one", body: "Every minute / hour / weekday and more." }, { title: "Edit each field", body: "Minute, hour, day, month, weekday." }, { title: "Copy the expression", body: "Drop into crontab, Vercel cron, GitHub Actions…" }]),
   utilTool("invoice-generator", FileSignature, "Invoice Generator", "Create a polished PDF invoice in minutes.",
     "Free Invoice Generator — Create PDF Invoice Online Instantly",
     "Invoice Generator Online — Free PDF Invoice Maker | Wyrlo",
@@ -1428,6 +1438,18 @@ TOOLS.push(
     "Capture a frame from any video at the timestamp of your choice. Saves as PNG in your browser — your video is never uploaded.",
     "video screenshot", ["mp4", "mov", "mkv", "webm"], "PNG",
     [{ title: "Upload your video", body: "Any common container." }, { title: "Pick a timestamp", body: "Down to the second." }, { title: "Download the still", body: "PNG, full quality." }], false),
+  avTool("optimize-gif", Film, "video", "Optimize GIF", "Shrink GIFs without losing visible quality.",
+    "GIF Optimizer Online Free — Compress Animated GIF",
+    "GIF Optimizer Online — Free, In-browser | Wyrlo",
+    "Reduce the size of animated GIFs with smart palette generation. Free, runs in your browser via FFmpeg.wasm — your file is never uploaded.",
+    "gif optimizer", ["gif"], "GIF",
+    [{ title: "Upload your GIF", body: "Any size." }, { title: "Pick an optimisation level", body: "Light, Balanced or Heavy." }, { title: "Download the smaller GIF", body: "Looks the same, weighs much less." }], false),
+  avTool("audio-to-video", Video, "video", "Audio to Video", "Combine an audio file and a cover image into an MP4.",
+    "Audio to Video Converter — Create Video from MP3 and Image Free",
+    "Audio to Video — Make a Video From an MP3 + Image | Wyrlo",
+    "Combine an audio file (MP3, WAV, M4A) with a cover image into an MP4 — perfect for uploading podcasts and tracks to YouTube. Free, runs in your browser.",
+    "audio to video", ["mp3", "wav", "m4a", "png", "jpg", "jpeg"], "MP4",
+    [{ title: "Upload audio + image", body: "Any common formats." }, { title: "We render an MP4", body: "Static cover, full-length audio." }, { title: "Download the video", body: "Ready for YouTube and social." }], false),
   avTool("change-video-speed", Gauge, "video", "Change Video Speed", "Slow motion or time-lapse — 0.25× to 4×.",
     "Change Video Speed Online Free — Slow Motion & Time Lapse",
     "Change Video Speed Online — Slow Motion & Time Lapse | Wyrlo",
@@ -1506,6 +1528,78 @@ TOOLS.push({
     { title: "Download the result", body: "Same format, same quality." },
   ],
   faqs: codeFaqs("Flip Image"),
+});
+
+// ── Images — Real-time color adjuster (Canvas filter) ─────────────────────
+TOOLS.push({
+  slug: "adjust-image", phase: 3, kind: "client", category: "images", icon: SlidersHorizontal, tone: "amber",
+  name: "Adjust Image",
+  short: "Brightness, contrast, saturation and hue in real time.",
+  h1: "Adjust Image Online Free — Brightness, Contrast, Saturation",
+  metaTitle: "Adjust Image Online — Free, Real-time Sliders | Wyrlo",
+  metaDescription: "Tweak brightness, contrast, saturation and hue with live sliders, then export the result. Runs in your browser via Canvas — your image is never uploaded.",
+  primaryKeyword: "adjust image online",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Upload your image", body: "JPG, PNG or WebP — stays on your device." },
+    { title: "Drag the sliders", body: "See changes update live." },
+    { title: "Export the result", body: "Same format, full resolution." },
+  ],
+  faqs: codeFaqs("Image Adjuster"),
+});
+
+// ── Dev — Excel → JSON (SheetJS) ───────────────────────────────────────────
+TOOLS.push({
+  slug: "excel-to-json", phase: 3, kind: "client", category: "developer", icon: FileSpreadsheet, tone: "teal",
+  name: "Excel to JSON",
+  short: "Convert .xlsx to a clean JSON array.",
+  h1: "Excel to JSON Converter Online Free — XLSX to JSON",
+  metaTitle: "Excel to JSON Online — Convert XLSX to JSON | Wyrlo",
+  metaDescription: "Convert any .xlsx or .xls into a JSON array of objects (or raw rows). Pick a sheet, pretty-print, copy or download. Free, in-browser, private.",
+  primaryKeyword: "excel to json",
+  accept: ["xlsx", "xls"], freeMaxMb: 0, outputType: "JSON",
+  steps: [
+    { title: "Upload your spreadsheet", body: ".xls or .xlsx." },
+    { title: "Pick a sheet & shape", body: "Array of objects (headers) or raw rows." },
+    { title: "Copy the JSON", body: "Or download it." },
+  ],
+  faqs: codeFaqs("Excel to JSON converter"),
+});
+
+// ── Dev — Merge CSVs (RFC-4180 parser, header alignment) ───────────────────
+TOOLS.push({
+  slug: "merge-csv", phase: 3, kind: "client", category: "developer", icon: Rows, tone: "teal",
+  name: "Merge CSV Files",
+  short: "Combine multiple CSVs into one, aligning columns by name.",
+  h1: "Merge CSV Files Online Free — Combine Multiple CSV Files",
+  metaTitle: "Merge CSV Online — Align by Column Name | Wyrlo",
+  metaDescription: "Combine multiple CSV files into a single one, aligning columns by their header names. Drag to reorder, pure in-browser parsing, free.",
+  primaryKeyword: "merge csv files",
+  accept: ["csv"], freeMaxMb: 0, outputType: "CSV",
+  steps: [
+    { title: "Add your CSVs", body: "Drop multiple files; reorder by drag." },
+    { title: "Pick a merge mode", body: "By column name (default) or stack as-is." },
+    { title: "Download the merged CSV", body: "One file, ready for the next step." },
+  ],
+  faqs: codeFaqs("CSV merger"),
+});
+
+// ── Dev — SQL ↔ JSON (INSERT parser + JSON serializer) ────────────────────
+TOOLS.push({
+  slug: "sql-to-json", phase: 3, kind: "client", category: "developer", icon: Database, tone: "teal",
+  name: "SQL to JSON",
+  short: "Convert INSERT statements to JSON — and back.",
+  h1: "SQL to JSON Converter Online Free",
+  metaTitle: "SQL to JSON Online — Convert INSERT to JSON | Wyrlo",
+  metaDescription: "Parse SQL INSERT statements into clean JSON arrays — and serialize JSON back to INSERT statements. Free, runs in your browser.",
+  primaryKeyword: "sql to json",
+  accept: [], freeMaxMb: 0, outputType: "JSON / SQL",
+  steps: [
+    { title: "Pick a direction", body: "SQL → JSON or JSON → SQL." },
+    { title: "Paste your input", body: "An INSERT or an array of objects." },
+    { title: "Copy the result", body: "Ready to drop into the other side." },
+  ],
+  faqs: codeFaqs("SQL ↔ JSON converter"),
 });
 
 // ── Dev — Image to Base64 (and back) ────────────────────────────────────────

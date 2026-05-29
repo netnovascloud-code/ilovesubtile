@@ -63,6 +63,12 @@ import { HtmlToPdfClient } from "@/components/tools/clients/HtmlToPdfClient";
 import { ExcelToPdfClient } from "@/components/tools/clients/ExcelToPdfClient";
 import { CompressPdfClient } from "@/components/tools/clients/CompressPdfClient";
 import { WatermarkVideoClient } from "@/components/tools/clients/WatermarkVideoClient";
+import { AudioToVideoClient } from "@/components/tools/clients/AudioToVideoClient";
+import { AdjustImageClient } from "@/components/tools/clients/AdjustImageClient";
+import { ExcelToJsonClient } from "@/components/tools/clients/ExcelToJsonClient";
+import { MergeCsvClient } from "@/components/tools/clients/MergeCsvClient";
+import { SqlJsonClient } from "@/components/tools/clients/SqlJsonClient";
+import { CronBuilderClient } from "@/components/tools/clients/CronBuilderClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -165,6 +171,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <PendingClient category={tool.category} accept={tool.accept.map((e) => "." + e).join(",")} />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "audio-to-video") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <AudioToVideoClient />
       </ToolPageShell>
     );
   }
@@ -400,6 +413,21 @@ export default function LocalisedToolPage({
       break;
     case "invoice-generator":
       body = <InvoiceGeneratorClient />;
+      break;
+    case "adjust-image":
+      body = <AdjustImageClient />;
+      break;
+    case "excel-to-json":
+      body = <ExcelToJsonClient />;
+      break;
+    case "merge-csv":
+      body = <MergeCsvClient />;
+      break;
+    case "sql-to-json":
+      body = <SqlJsonClient />;
+      break;
+    case "cron-builder":
+      body = <CronBuilderClient />;
       break;
     case "qr-code-reader":
       body = <QrCodeReaderClient />;

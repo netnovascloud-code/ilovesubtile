@@ -242,8 +242,14 @@ Deno.serve(async (req) => {
   const userId = keyRow.user_id as string;
   await svc.from("api_keys").update({ last_used_at: new Date().toISOString() }).eq("id", keyRow.id);
 
-  // ---- per-key rate limit (60 requests / 60s sliding window) ----
-  const { data: rl } = await svc.rpc("api_rate_hit", { p_key_id: keyRow.id, p_limit: 60 });
+  // ---- read profile (plan + balance) FIRST so we can size the rate limit ----
+  const { data: prof } = await svc.from("profiles").select("plan, credits, email, monthly_credits, monthly_credits_month").eq("id", userId).maybeSingle();
+  const plan = (prof?.plan as string) ?? "free";
+
+  // ---- plan-aware rate limit (60s sliding window) ----
+  // Business gets 120/min, anyone else (Pro paying-as-you-go + Free top-ups) 60.
+  const rateLimit = plan === "business" ? 120 : 60;
+  const { data: rl } = await svc.rpc("api_rate_hit", { p_key_id: keyRow.id, p_limit: rateLimit });
   const row = Array.isArray(rl) ? rl[0] : rl;
   if (row && row.allowed === false) {
     const retry = Number(row.retry_after ?? 60);
@@ -255,11 +261,6 @@ Deno.serve(async (req) => {
 
   const url = new URL(req.url);
   const action = url.searchParams.get("action") ?? "";
-
-  // ---- read profile (plan + balance) ----
-  // Effective balance = permanent credits + this month's Business grant.
-  // spend_credits draws the monthly bucket first; available_credits sums them.
-  const { data: prof } = await svc.from("profiles").select("plan, credits, email, monthly_credits, monthly_credits_month").eq("id", userId).maybeSingle();
   const thisMonth = new Date().toISOString().slice(0, 7);
   const monthly = prof?.monthly_credits_month === thisMonth ? (prof?.monthly_credits ?? 0) : 0;
   const balance = (prof?.credits ?? 0) + monthly;
@@ -339,8 +340,25 @@ Deno.serve(async (req) => {
       targetLang = String(form.get("target_lang") ?? "EN").toUpperCase();
       const f = form.get("file");
       if (!(f instanceof File)) return err("bad_request", "Attach a multipart `file`.", 400);
-      if (action === "translate") srtText = await f.text();
-      else file = f;
+      // File validation: cap size at the user's plan limit (in MB) and reject
+      // dangerous executable extensions outright. Free=25, Pro=500, Business=2048.
+      const planMb = (prof?.plan === "business") ? 2048 : (prof?.plan === "pro") ? 500 : 25;
+      if (f.size > planMb * 1024 * 1024) return err("file_too_large", `File exceeds your plan's ${planMb} MB limit.`, 413);
+      const name = (f.name || "").toLowerCase();
+      const bad = [".exe", ".dll", ".bat", ".cmd", ".sh", ".ps1", ".dmg", ".msi", ".scr", ".com", ".vbs", ".js", ".jar"];
+      if (bad.some((ext) => name.endsWith(ext))) return err("bad_request", "Executable file types are not accepted.", 400);
+      // For translate, the file must look like a subtitle (text-ish).
+      if (action === "translate") {
+        if (f.size > 5 * 1024 * 1024) return err("file_too_large", "Subtitle files are capped at 5 MB.", 413);
+        srtText = await f.text();
+      } else {
+        // For transcribe, require an audio/video MIME hint.
+        const t = (f.type || "").toLowerCase();
+        if (t && !t.startsWith("audio/") && !t.startsWith("video/") && t !== "application/octet-stream") {
+          return err("bad_request", `Unsupported content type: ${t}. Send an audio or video file.`, 415);
+        }
+        file = f;
+      }
     }
 
     // Pre-flight balance check against the minimum this op can cost.

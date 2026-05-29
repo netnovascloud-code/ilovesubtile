@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { isPasswordPwned } from "@/lib/leaked-password";
 
 export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login" | "register"; redirect?: string }) {
   const [email, setEmail] = useState("");
@@ -22,6 +23,12 @@ export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login"
     try {
       const supabase = getSupabaseBrowser();
       if (mode === "register") {
+        // Block known-breached passwords client-side via HIBP k-anonymity.
+        // Only the first 5 chars of the SHA-1 hash leave the device.
+        if (await isPasswordPwned(password)) {
+          setError("This password has appeared in a known data breach. Please choose a different one.");
+          return;
+        }
         const { error } = await supabase.auth.signUp({
           email,
           password,

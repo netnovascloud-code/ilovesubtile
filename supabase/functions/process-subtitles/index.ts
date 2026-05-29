@@ -86,6 +86,16 @@ Deno.serve(async (req) => {
   const form = await req.formData();
   const file = form.get("file");
   if (!(file instanceof File)) return json({ error: "no_file" }, { status: 400 });
+  // Size cap: 500 MB hard ceiling (Pro/Business). Free callers are gated by
+  // the daily-quota check at the api-gateway / client level.
+  if (file.size > 500 * 1024 * 1024) return json({ error: "file_too_large", message: "Files are capped at 500 MB." }, { status: 413 });
+  const ftype = (file.type || "").toLowerCase();
+  if (ftype && !ftype.startsWith("audio/") && !ftype.startsWith("video/") && ftype !== "application/octet-stream") {
+    return json({ error: "bad_mime", message: `Unsupported content type: ${ftype}. Send an audio or video file.` }, { status: 415 });
+  }
+  const fname = (file.name || "").toLowerCase();
+  const bad = [".exe", ".dll", ".bat", ".cmd", ".sh", ".ps1", ".dmg", ".msi", ".scr", ".com", ".vbs", ".js", ".jar"];
+  if (bad.some((ext) => fname.endsWith(ext))) return json({ error: "bad_request", message: "Executable file types are not accepted." }, { status: 400 });
 
   const voxtralForm = new FormData();
   voxtralForm.append("file", file);

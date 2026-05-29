@@ -9,6 +9,8 @@ import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
 import { localePath } from "@/lib/i18n/locales";
 import { UserMenu } from "@/components/layout/UserMenu";
+import { ToolsMenu } from "@/components/layout/ToolsMenu";
+import { CATEGORIES } from "@/lib/tools-config";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,13 +26,17 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const NAV = [
-    { href: `${localePath(locale)}#tools`, label: t.tools },
+  const toolsHref = `${localePath(locale)}#tools`;
+  const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label }));
+
+  // Flat list used only for the mobile drawer.
+  const MOBILE_NAV = [
+    { href: toolsHref, label: t.tools },
+    { href: "/workflow", label: "Workflow" },
+    { href: "/batch", label: "Batch" },
     { href: "/translator", label: "Translator" },
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
-    { href: "/batch", label: "Batch" },
-    { href: "/workflow", label: "Workflow" },
     { href: localePath(locale, "pricing"), label: t.pricing },
     { href: localePath(locale, "api"), label: t.api },
   ];
@@ -48,16 +54,12 @@ export function Header() {
           <span>Wyrlo</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="text-sm text-ink-700 transition-colors hover:text-ink-900"
-            >
-              {n.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-7 md:flex">
+          <ToolsMenu categories={categories} toolsHref={toolsHref} />
+          <Link href="/workflow" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Workflow</Link>
+          <Link href="/batch" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Batch</Link>
+          <Link href={localePath(locale, "pricing")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
+          <Link href={localePath(locale, "api")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>
 
         <div className="hidden md:flex">
@@ -84,7 +86,7 @@ export function Header() {
       {menuOpen && (
         <div className="border-t border-ink-100 bg-white md:hidden">
           <div className="container flex flex-col gap-1 py-4">
-            {NAV.map((n) => (
+            {MOBILE_NAV.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}

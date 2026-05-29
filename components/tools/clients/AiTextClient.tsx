@@ -8,6 +8,7 @@ import { callTool } from "@/lib/tool-api";
 import { AdProcessing } from "@/components/ads/AdProcessing";
 import { AI_TEXT_TOOLS, REPHRASE_STYLES, SUMMARY_FORMATS } from "@/lib/ai-text-tools";
 import { LANGUAGES } from "@/lib/languages";
+import { TemplatesBar } from "@/components/tools/TemplatesBar";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
@@ -62,6 +63,17 @@ export function AiTextClient({ slug }: { slug: string }) {
 
   return (
     <div className="space-y-4">
+      {def.control !== "none" && (
+        <TemplatesBar
+          tool={slug}
+          settings={{ language, style, format }}
+          onApply={(s) => {
+            if (typeof s.language === "string") setLanguage(s.language);
+            if (typeof s.style === "string") setStyle(s.style);
+            if (typeof s.format === "string") setFormat(s.format);
+          }}
+        />
+      )}
       {/* Per-tool control */}
       {def.control !== "none" && (
         <div className="flex flex-wrap items-center gap-2">

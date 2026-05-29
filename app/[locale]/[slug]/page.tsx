@@ -38,6 +38,10 @@ import { ComparePdfClient } from "@/components/tools/clients/ComparePdfClient";
 import { ImageToIcoClient } from "@/components/tools/clients/ImageToIcoClient";
 import { WatermarkImageClient } from "@/components/tools/clients/WatermarkImageClient";
 import { ExtractColorsClient } from "@/components/tools/clients/ExtractColorsClient";
+import { InvoiceGeneratorClient } from "@/components/tools/clients/InvoiceGeneratorClient";
+import { QrCodeReaderClient } from "@/components/tools/clients/QrCodeReaderClient";
+import { BarcodeGeneratorClient } from "@/components/tools/clients/BarcodeGeneratorClient";
+import { BarcodeReaderClient } from "@/components/tools/clients/BarcodeReaderClient";
 import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
 import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
 import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
@@ -385,6 +389,18 @@ export default function LocalisedToolPage({
       break;
     case "currency-converter":
       body = <CurrencyConverterClient />;
+      break;
+    case "invoice-generator":
+      body = <InvoiceGeneratorClient />;
+      break;
+    case "qr-code-reader":
+      body = <QrCodeReaderClient />;
+      break;
+    case "barcode-generator":
+      body = <BarcodeGeneratorClient />;
+      break;
+    case "barcode-reader":
+      body = <BarcodeReaderClient />;
       break;
     case "password-generator":
       body = <PasswordGenClient />;

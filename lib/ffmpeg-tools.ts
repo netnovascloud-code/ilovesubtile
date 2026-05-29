@@ -152,6 +152,32 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
     // Stream copy when possible — no quality loss, completes in seconds.
     command: (i, o) => ["-i", i, "-c", "copy", "-movflags", "faststart", o],
   },
+  "video-screenshot": {
+    label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "png", outputMime: "image/png",
+    options: [
+      { id: "t", label: "Time (seconds)", type: "number", min: 0, max: 36000, step: 0.1, default: "1" },
+    ],
+    // -ss before -i for fast seek, -frames:v 1 grabs a single frame as PNG.
+    command: (i, o, opt) => ["-ss", opt.t || "0", "-i", i, "-frames:v", "1", "-q:v", "2", o],
+  },
+  "change-video-speed": {
+    label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
+    options: [
+      { id: "speed", label: "Speed", values: [
+        { id: "0.25", label: "0.25× (very slow)" }, { id: "0.5", label: "0.5×" }, { id: "0.75", label: "0.75×" },
+        { id: "1.25", label: "1.25×" }, { id: "1.5", label: "1.5×" }, { id: "2.0", label: "2× (fast)" }, { id: "4.0", label: "4× (time-lapse)" },
+      ], default: "1.5" },
+    ],
+    // setpts=PTS/speed for video, atempo=speed for audio (atempo clamped to 0.5–100 per stage).
+    command: (i, o, opt) => {
+      const s = Number(opt.speed || "1");
+      // Chain atempo stages so we can hit 0.25× (0.5×0.5) and 4× (2×2). Safe for our 0.25..4 range.
+      let atempo = "atempo=" + s.toFixed(6);
+      if (s < 0.5) atempo = "atempo=0.5,atempo=" + (s / 0.5).toFixed(6);
+      if (s > 2) atempo = "atempo=2.0,atempo=" + (s / 2).toFixed(6);
+      return ["-i", i, "-filter_complex", `[0:v]setpts=${(1 / s).toFixed(6)}*PTS[v];[0:a]${atempo}[a]`, "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "128k", o];
+    },
+  },
   "rotate-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
     options: [

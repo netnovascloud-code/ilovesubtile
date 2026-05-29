@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import type { ToolDefinition } from "@/lib/tools-config";
 import { cn } from "@/lib/utils";
 import { DEFAULT_LOCALE, type Locale, localePath } from "@/lib/i18n/locales";
-import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
 
 // Soft, tasteful per-tool tint (pastel on white, Stripe/Linear-like).
@@ -26,7 +26,7 @@ export function ToolCard({
   locale?: Locale;
 }) {
   const Icon = tool.icon;
-  const i18n = locale === "en" ? null : getToolI18n(tool.slug, locale);
+  const i18n = locale === "en" ? null : resolveToolI18n(tool.slug, locale);
   const chrome = getChrome(locale);
   const name = i18n?.name ?? tool.name;
   const short = i18n?.short ?? tool.short;

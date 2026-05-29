@@ -11,7 +11,7 @@ import { getStrings } from "@/lib/i18n/strings";
 import { isRtl, localePath } from "@/lib/i18n/locales";
 import { getLocalisedFaqs } from "@/lib/i18n/faq-templates";
 import { getLocalisedSteps } from "@/lib/i18n/tool-steps";
-import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
 import { QuotaLine } from "@/components/tools/QuotaLine";
 
@@ -139,7 +139,7 @@ export function ToolPageShell({
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {related.map((rt) => {
                 const rth = categoryTheme(rt.category);
-                const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                const i18n = locale === "en" ? null : resolveToolI18n(rt.slug, locale);
                 return (
                   <Link
                     key={rt.slug}
@@ -174,7 +174,7 @@ export function ToolPageShell({
                 </h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {moreInCategory.map((rt) => {
-                    const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                    const i18n = locale === "en" ? null : resolveToolI18n(rt.slug, locale);
                     return (
                       <li key={rt.slug}>
                         <Link href={localePath(locale, rt.slug)} className="block rounded-lg border border-ink-100 bg-white px-4 py-3 text-sm transition-colors hover:border-brand-300">
@@ -192,7 +192,7 @@ export function ToolPageShell({
                 <h2 className="text-lg font-semibold text-ink-900">Also popular</h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-3">
                   {alsoPopular.map((rt) => {
-                    const i18n = locale === "en" ? null : getToolI18n(rt.slug, locale);
+                    const i18n = locale === "en" ? null : resolveToolI18n(rt.slug, locale);
                     return (
                       <li key={rt.slug}>
                         <Link href={localePath(locale, rt.slug)} className="block rounded-lg border border-ink-100 bg-white px-4 py-3 text-sm transition-colors hover:border-brand-300">

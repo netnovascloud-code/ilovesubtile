@@ -6,7 +6,7 @@ import { TOOLS } from "@/lib/tools-config";
 import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES, localePath } from "@/lib/i18n/locales";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
-import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 
 export function Footer() {
   const locale = useLocale();
@@ -28,7 +28,7 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink-900">{t.topTools}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             {featured.map((tool) => {
-              const i18n = locale === "en" ? null : getToolI18n(tool.slug, locale);
+              const i18n = locale === "en" ? null : resolveToolI18n(tool.slug, locale);
               return (
                 <li key={tool.slug}>
                   <Link href={localePath(locale, tool.slug)} className="hover:text-ink-900">

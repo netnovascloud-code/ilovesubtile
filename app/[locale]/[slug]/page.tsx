@@ -80,7 +80,7 @@ import { IMAGE_TOOLS } from "@/lib/image-tools";
 import { AI_TEXT_TOOLS } from "@/lib/ai-text-tools";
 import { buildToolMetadata } from "@/lib/seo";
 import { NON_DEFAULT_LOCALES, isLocale, localePath } from "@/lib/i18n/locales";
-import { getToolI18n } from "@/lib/i18n/tool-translations";
+import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -100,7 +100,7 @@ export function generateMetadata({
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const tool = TOOLS_BY_SLUG[params.slug];
   if (!tool) return {};
-  const i18n = getToolI18n(params.slug, params.locale);
+  const i18n = resolveToolI18n(params.slug, params.locale);
   return buildToolMetadata(tool, params.locale, i18n ?? undefined);
 }
 
@@ -113,7 +113,7 @@ export default function LocalisedToolPage({
   const tool = TOOLS_BY_SLUG[params.slug];
   if (!tool) notFound();
   const locale = params.locale;
-  const i18n = getToolI18n(params.slug, locale);
+  const i18n = resolveToolI18n(params.slug, locale);
   const override = i18n ? { name: i18n.name, h1: i18n.h1, metaDescription: i18n.metaDescription } : undefined;
 
   // Cross-links point to localised URLs.

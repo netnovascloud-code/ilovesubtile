@@ -3,6 +3,7 @@ import { TOOLS, ALTERNATIVES, CATEGORIES } from "@/lib/tools-config";
 import { EXTRA_ALTERNATIVES } from "@/lib/alternatives-extra";
 import { SECTOR_IDS } from "@/lib/sectors";
 import { VS_IDS } from "@/lib/vs";
+import { HOWTO_IDS } from "@/lib/howto";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -67,6 +68,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
+    });
+  }
+
+  // "How to …" guides — English only.
+  for (const g of HOWTO_IDS) {
+    entries.push({
+      url: `${SITE_URL}/how-to/${g}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     });
   }
 

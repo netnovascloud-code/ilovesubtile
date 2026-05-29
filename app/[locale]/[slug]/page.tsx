@@ -72,6 +72,9 @@ import { SqlJsonClient } from "@/components/tools/clients/SqlJsonClient";
 import { CronBuilderClient } from "@/components/tools/clients/CronBuilderClient";
 import { TimezoneConverterClient } from "@/components/tools/clients/TimezoneConverterClient";
 import { AgeCalculatorClient } from "@/components/tools/clients/AgeCalculatorClient";
+import { RomanNumeralClient } from "@/components/tools/clients/RomanNumeralClient";
+import { ColorPaletteClient } from "@/components/tools/clients/ColorPaletteClient";
+import { EmailSignatureClient } from "@/components/tools/clients/EmailSignatureClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -413,6 +416,15 @@ export default function LocalisedToolPage({
       break;
     case "age-calculator":
       body = <AgeCalculatorClient />;
+      break;
+    case "roman-numeral-converter":
+      body = <RomanNumeralClient />;
+      break;
+    case "color-palette-generator":
+      body = <ColorPaletteClient />;
+      break;
+    case "email-signature-generator":
+      body = <EmailSignatureClient />;
       break;
     case "image-to-base64":
       body = <ImageToBase64Client />;

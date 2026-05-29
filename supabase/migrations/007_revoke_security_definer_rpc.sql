@@ -12,10 +12,24 @@
 -- Edge Functions call these with the service role (EXECUTE retained), and
 -- trigger functions run via the trigger mechanism regardless of grants, so
 -- all real functionality is preserved.
+--
+-- Existence-guarded so a fresh `db reset` never errors (and never rolls back,
+-- which would reopen the grant) if a function happens to be absent.
 -- =====================================================================
 
-revoke execute on function public.grant_credits(uuid, integer, text, text) from public, anon, authenticated;
-revoke execute on function public.validate_api_key(text) from public, anon, authenticated;
-revoke execute on function public.handle_new_user() from public, anon, authenticated;
-revoke execute on function public.protect_profile_columns() from public, anon, authenticated;
-revoke execute on function public.rls_auto_enable() from public, anon, authenticated;
+do $$
+declare
+  fn record;
+begin
+  for fn in
+    select p.oid::regprocedure as sig
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public'
+      and p.proname in ('grant_credits','validate_api_key','handle_new_user',
+                        'protect_profile_columns','rls_auto_enable')
+  loop
+    execute format('revoke execute on function %s from public, anon, authenticated;', fn.sig);
+  end loop;
+end;
+$$;

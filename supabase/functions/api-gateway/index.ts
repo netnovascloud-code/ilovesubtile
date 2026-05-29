@@ -47,28 +47,17 @@ async function sha256(s: string): Promise<string> {
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-/** SSRF-safe fetch of a URL provided by the API caller.
- *  Hardening:
- *    - https only
- *    - block private/loopback/link-local IPv4 ranges and ::1 / fc00::
- *    - block credentials / non-default ports
- *    - 10 MB cap, 15 s timeout
- *  NOTE: DNS rebinding can still defeat hostname-based checks in extreme cases.
- *  Supabase Edge Runtime is sandboxed (no metadata service, no LAN), which
- *  removes most of the residual risk; the checks below prevent the obvious
- *  vectors (localhost, 169.254.169.254, RFC1918, etc.). */
-async function safeFetchUserUrl(raw: string, maxBytes = 10 * 1024 * 1024, timeoutMs = 15000): Promise<Response> {
+/** Validate a single URL against the SSRF denylist. Throws on rejection. */
+function assertSafeUrl(raw: string): URL {
   let u: URL;
   try { u = new URL(raw); } catch { throw new Error("invalid_url"); }
   if (u.protocol !== "https:") throw new Error("only_https_allowed");
   if (u.username || u.password) throw new Error("credentials_in_url_forbidden");
   if (u.port && u.port !== "443") throw new Error("nonstandard_port_forbidden");
   const host = u.hostname.toLowerCase();
-  // Block literal localhost names.
   if (["localhost", "ip6-localhost", "ip6-loopback", "metadata.google.internal"].includes(host)) {
     throw new Error("private_host_forbidden");
   }
-  // Block IPv4 literals in private/loopback/link-local ranges.
   const m4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
   if (m4) {
     const [a, b] = [Number(m4[1]), Number(m4[2])];
@@ -80,25 +69,43 @@ async function safeFetchUserUrl(raw: string, maxBytes = 10 * 1024 * 1024, timeou
       a >= 224;                            // multicast / reserved
     if (priv) throw new Error("private_ip_forbidden");
   }
-  // Block IPv6 literals in loopback / unique-local / link-local ranges.
   if (host.startsWith("[")) {
     const v6 = host.slice(1, -1).toLowerCase();
     if (v6 === "::1" || v6.startsWith("fc") || v6.startsWith("fd") || v6.startsWith("fe80")) {
       throw new Error("private_ip_forbidden");
     }
   }
+  return u;
+}
 
+/** SSRF-safe fetch of a URL provided by the API caller.
+ *  Hardening:
+ *    - https only, default port only, no credentials
+ *    - block private/loopback/link-local IPv4 + IPv6 ranges (incl. 169.254.169.254)
+ *    - redirects followed MANUALLY, re-validating every hop's Location so a
+ *      302 → http://169.254.169.254/ cannot bypass the first-hop check
+ *    - 10 MB cap (streamed), 15 s timeout, max 4 hops
+ *  NOTE: DNS rebinding can still defeat hostname checks in extreme cases, but
+ *  the Supabase Edge runtime is sandboxed (no metadata service, no LAN). */
+async function safeFetchUserUrl(raw: string, maxBytes = 10 * 1024 * 1024, timeoutMs = 15000): Promise<Response> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(u.toString(), {
-      method: "GET",
-      // Don't follow cross-origin redirects blindly — manual would also work
-      // but `fetch` re-validates the next hop's URL against our protocol check
-      // only on the first hop. Capping with maxBytes below is the real guard.
-      redirect: "follow",
-      signal: ctrl.signal,
-    });
+    let current = assertSafeUrl(raw);
+    let res: Response | null = null;
+    for (let hop = 0; hop < 4; hop++) {
+      res = await fetch(current.toString(), { method: "GET", redirect: "manual", signal: ctrl.signal });
+      // Manual redirect: re-validate the next hop before following it.
+      if (res.status >= 300 && res.status < 400) {
+        const loc = res.headers.get("location");
+        if (!loc) throw new Error(`upstream_${res.status}`);
+        try { await res.body?.cancel(); } catch { /* ignore */ }
+        current = assertSafeUrl(new URL(loc, current).toString()); // resolve + revalidate
+        continue;
+      }
+      break;
+    }
+    if (!res) throw new Error("no_response");
     if (!res.ok) throw new Error(`upstream_${res.status}`);
     const lenHeader = res.headers.get("content-length");
     if (lenHeader && Number(lenHeader) > maxBytes) throw new Error("response_too_large");

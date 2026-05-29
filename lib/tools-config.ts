@@ -1540,7 +1540,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { q: "Is Wyrlo accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, at half the price." },
       { q: "Do I need to talk to sales?", a: "No. Wyrlo is fully self-serve — sign up and start in seconds." },
       { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
-      { q: "What does it cost?", a: "Free tier, Pro at €12/month, Business at €49/month. No hidden per-minute fees on the subscription plans." },
+      { q: "What does it cost?", a: "Free tier, Pro at €9/month, Business at €29/month. No hidden per-minute fees on the subscription plans." },
     ],
   },
   {

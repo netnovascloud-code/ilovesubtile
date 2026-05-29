@@ -32,6 +32,12 @@ import { VatCalculatorClient } from "@/components/tools/clients/VatCalculatorCli
 import { ImageToBase64Client } from "@/components/tools/clients/ImageToBase64Client";
 import { FlipImageClient } from "@/components/tools/clients/FlipImageClient";
 import { CurrencyConverterClient } from "@/components/tools/clients/CurrencyConverterClient";
+import { WatermarkPdfClient } from "@/components/tools/clients/WatermarkPdfClient";
+import { PdfPageNumbersClient } from "@/components/tools/clients/PdfPageNumbersClient";
+import { ComparePdfClient } from "@/components/tools/clients/ComparePdfClient";
+import { ImageToIcoClient } from "@/components/tools/clients/ImageToIcoClient";
+import { WatermarkImageClient } from "@/components/tools/clients/WatermarkImageClient";
+import { ExtractColorsClient } from "@/components/tools/clients/ExtractColorsClient";
 import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
 import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
 import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
@@ -238,6 +244,48 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <CompressPdfClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "watermark-pdf") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <WatermarkPdfClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "pdf-page-numbers") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <PdfPageNumbersClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "compare-pdf") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <ComparePdfClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "image-to-ico") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <ImageToIcoClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "watermark-image") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <WatermarkImageClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "extract-colors") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <ExtractColorsClient />
       </ToolPageShell>
     );
   }

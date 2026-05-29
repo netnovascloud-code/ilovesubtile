@@ -59,6 +59,9 @@ import {
   Pilcrow,
   GitCompare,
   Receipt,
+  Stamp,
+  Pipette,
+  AppWindow,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1248,6 +1251,24 @@ TOOLS.push(
     "Convert HTML files or remote URLs to a clean PDF using a real browser engine.",
     "html to pdf", ["html", "htm"], "PDF",
     [{ title: "Upload HTML or paste URL", body: "Static files or live pages." }, { title: "We render the page", body: "Headless browser, no scaling tricks." }, { title: "Download the PDF", body: "Crisp, paginated." }], false),
+  docTool("watermark-pdf", Stamp, "Watermark PDF", "Stamp a diagonal text watermark on every page.",
+    "Add Watermark to PDF Online Free",
+    "Add Watermark to PDF Online — Free Tool | Wyrlo",
+    "Add a diagonal text watermark to every page of a PDF — choose the text, colour and opacity. Runs in your browser, your file is never uploaded.",
+    "watermark pdf", ["pdf"], "PDF",
+    [{ title: "Upload your PDF", body: "Stays on your device." }, { title: "Style the watermark", body: "Text, colour, opacity and size." }, { title: "Download the PDF", body: "Stamped on every page." }], false),
+  docTool("pdf-page-numbers", ListOrdered, "Add Page Numbers to PDF", "Number every page, your position and format.",
+    "Add Page Numbers to PDF Online Free",
+    "Add Page Numbers to PDF Online — Free Tool | Wyrlo",
+    "Add page numbers to a PDF — choose position, format and starting number. Runs entirely in your browser, no upload.",
+    "add page numbers to pdf", ["pdf"], "PDF",
+    [{ title: "Upload your PDF", body: "Stays on your device." }, { title: "Pick position & format", body: "1, 1/10 or Page 1 — any corner." }, { title: "Download the PDF", body: "Numbered, ready to print." }], false),
+  docTool("compare-pdf", GitCompare, "Compare PDFs", "Highlight text differences between two PDFs.",
+    "Compare Two PDF Files Online — Highlight Differences Free",
+    "Compare PDFs Online — Highlight Differences | Wyrlo",
+    "Compare two PDF files and see added and removed text highlighted line by line. Runs entirely in your browser — neither file is uploaded.",
+    "compare pdf", ["pdf"], "Diff",
+    [{ title: "Upload both PDFs", body: "Original and changed." }, { title: "We diff the text", body: "Line-by-line, in your browser." }, { title: "Read the changes", body: "Green added, red removed." }], false),
 );
 
 // ── Audio (server-side via FFmpeg — pending until the engine is wired) ────
@@ -1464,6 +1485,60 @@ TOOLS.push({
     { title: "Decode back to image", body: "Paste any Base64 string to preview and download." },
   ],
   faqs: codeFaqs("Image to Base64"),
+});
+
+// ── Images — ICO / favicon generator (Canvas + ICO container) ──────────────
+TOOLS.push({
+  slug: "image-to-ico", phase: 3, kind: "client", category: "images", icon: AppWindow, tone: "amber",
+  name: "Image to ICO",
+  short: "Build a multi-size favicon.ico from any image.",
+  h1: "Image to ICO Converter — Free Favicon Generator Online",
+  metaTitle: "Image to ICO — Free Favicon Generator | Wyrlo",
+  metaDescription: "Convert any PNG, JPG or WebP into a multi-size favicon.ico (16, 32, 48, 64 px) for your website. Runs in your browser — your image is never uploaded.",
+  primaryKeyword: "image to ico",
+  accept: ["png", "jpg", "jpeg", "webp"], freeMaxMb: 0, outputType: "ICO",
+  steps: [
+    { title: "Upload an image", body: "Square works best — others are letterboxed." },
+    { title: "We build every size", body: "16, 32, 48 and 64 px in one .ico." },
+    { title: "Download favicon.ico", body: "Drop it at your site root." },
+  ],
+  faqs: codeFaqs("Favicon Generator"),
+});
+
+// ── Images — Add text watermark (Canvas) ───────────────────────────────────
+TOOLS.push({
+  slug: "watermark-image", phase: 3, kind: "client", category: "images", icon: Stamp, tone: "amber",
+  name: "Add Watermark to Image",
+  short: "Burn a text watermark onto an image — any position.",
+  h1: "Add Watermark to Image Online Free — Text & Logo",
+  metaTitle: "Add Watermark to Image Online — Free Text Watermark | Wyrlo",
+  metaDescription: "Add a text watermark to any image — pick text, colour, opacity, size and position (or tile it). Runs in your browser, your image is never uploaded.",
+  primaryKeyword: "add watermark to image",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Upload your image", body: "JPG, PNG or WebP — stays on your device." },
+    { title: "Style the watermark", body: "Text, colour, opacity, size and position." },
+    { title: "Download the result", body: "Watermark burned in." },
+  ],
+  faqs: codeFaqs("Image Watermark"),
+});
+
+// ── Images — Extract colour palette (Canvas pixel sampling) ─────────────────
+TOOLS.push({
+  slug: "extract-colors", phase: 3, kind: "client", category: "images", icon: Pipette, tone: "amber",
+  name: "Extract Color Palette",
+  short: "Pull the 5 dominant colours from any image.",
+  h1: "Extract Color Palette from Image — Color Picker Online",
+  metaTitle: "Extract Color Palette from Image — Free Online | Wyrlo",
+  metaDescription: "Extract the 5 dominant colours from any image as HEX, RGB and HSL. Runs entirely in your browser — your image is never uploaded.",
+  primaryKeyword: "extract color palette from image",
+  accept: ["jpg", "jpeg", "png", "webp", "gif"], freeMaxMb: 0, outputType: "Colors",
+  steps: [
+    { title: "Upload an image", body: "Any common format." },
+    { title: "We sample the pixels", body: "Dominant colours, ranked by frequency." },
+    { title: "Copy the values", body: "HEX, RGB and HSL — one click each." },
+  ],
+  faqs: codeFaqs("Color Palette Extractor"),
 });
 
 // ── Video — Background remover (FFmpeg.wasm + @imgly, frame-by-frame) ───────

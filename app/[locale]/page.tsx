@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { getStrings } from "@/lib/i18n/strings";
+import { getHomeExplorer } from "@/lib/i18n/home-explorer";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
 import { SITE_URL } from "@/lib/utils";
 import { HREFLANG_PREFIX, LOCALES } from "@/lib/seo";
@@ -43,6 +44,14 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
   const tools = TOOLS.map(toCardSpec);
   const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label, iconName: c.iconName, tone: c.tone }));
   const categoryLabels = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
+  const hx = getHomeExplorer(locale);
+  const SUGGEST = [
+    { query: "jpg to png", category: "images" },
+    { query: "compress", category: "images" },
+    { query: "json to csv", category: "developer" },
+    { query: "translate", category: "text-ai" },
+    { query: "subtitle", category: "subtitles" },
+  ] as const;
 
   return (
     <div dir={rtl ? "rtl" : undefined}>
@@ -52,21 +61,15 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
         categoryLabels={categoryLabels}
         prefix={localePath(locale)}
         strings={{
-          title: "What do you want to convert?",
-          subtitle: "Free, fast online tools for files, images, code and text. Drop it in, get your result.",
-          placeholder: "Search tools — e.g. jpg to png, json to csv, translate…",
-          all: "All",
-          counter: `${tools.length}+ free tools · 13 languages · Files deleted instantly`,
-          suggestions: [
-            { label: "JPG → PNG", query: "jpg to png", category: "images" },
-            { label: "Compress image", query: "compress", category: "images" },
-            { label: "JSON → CSV", query: "json to csv", category: "developer" },
-            { label: "Translate text", query: "translate", category: "text-ai" },
-            { label: "Subtitles", query: "subtitle", category: "subtitles" },
-          ],
-          ai: "AI",
-          seeAll: "See all {n} tools",
-          empty: "No tool matches your search yet.",
+          title: hx.title,
+          subtitle: hx.subtitle,
+          placeholder: hx.placeholder,
+          all: hx.all,
+          counter: hx.counter.replace("{n}", String(tools.length)),
+          suggestions: SUGGEST.map((s, i) => ({ ...s, label: hx.suggestions[i] })),
+          ai: hx.ai,
+          seeAll: hx.seeAll,
+          empty: hx.empty,
         }}
       />
 

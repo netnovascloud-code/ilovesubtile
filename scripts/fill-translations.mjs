@@ -27,6 +27,8 @@ const LOCALES = [
   ["fr", "French"], ["es", "Spanish"], ["pt", "Portuguese"], ["de", "German"],
   ["it", "Italian"], ["nl", "Dutch"], ["ja", "Japanese"], ["zh", "Chinese (Simplified)"],
   ["ko", "Korean"], ["ar", "Arabic"], ["ru", "Russian"], ["hi", "Hindi"],
+  ["tr", "Turkish"], ["id", "Indonesian"], ["vi", "Vietnamese"], ["sv", "Swedish"],
+  ["pl", "Polish"], ["uk", "Ukrainian"], ["cs", "Czech"],
 ];
 
 const args = process.argv.slice(2);

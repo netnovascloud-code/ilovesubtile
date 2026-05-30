@@ -3,7 +3,7 @@ import type { ToolDefinition } from "@/lib/tools-config";
 import { SITE_URL } from "@/lib/utils";
 import { toolKeywords } from "@/lib/keywords";
 
-export const LOCALES = ["en", "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi"] as const;
+export const LOCALES = ["en", "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi", "tr", "id", "vi", "sv", "pl", "uk", "cs"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /** Path prefix used by each locale. Empty for the default (English). */
@@ -21,6 +21,13 @@ export const HREFLANG_PREFIX: Record<Locale, string> = {
   ar: "/ar",
   ru: "/ru",
   hi: "/hi",
+  tr: "/tr",
+  id: "/id",
+  vi: "/vi",
+  sv: "/sv",
+  pl: "/pl",
+  uk: "/uk",
+  cs: "/cs",
 };
 
 /** Build the canonical and hreflang alternates for a given tool + locale. */

@@ -1,7 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSupabaseSession } from "@/lib/supabase/middleware";
 
-const LOCALES = new Set(["fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi"]);
+const LOCALES = new Set([
+  "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi",
+  "tr", "id", "vi", "sv", "pl", "uk", "cs",
+]);
 // Named per Next.js convention so it lines up with the standard ecosystem.
 // We also read the legacy "wyrlo_locale" cookie so users who picked a language
 // before the Konver rename don't lose their preference on next visit.

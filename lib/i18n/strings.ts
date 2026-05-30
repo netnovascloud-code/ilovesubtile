@@ -610,10 +610,12 @@ const hi: UiStrings = {
   tool: { howItWorks: "यह कैसे काम करता है", faq: "अक्सर पूछे जाने वाले प्रश्न", breadcrumbHome: "होम", proBadge: "Pro सुविधा" },
 };
 
-export const UI_STRINGS: Record<Locale, UiStrings> = {
+// Partial<>: new locales added to the type don't need an entry here yet —
+// they fall back to English via getStrings() until someone localises them.
+export const UI_STRINGS: Partial<Record<Locale, UiStrings>> = {
   en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi,
 };
 
 export function getStrings(locale: Locale): UiStrings {
-  return UI_STRINGS[locale] ?? UI_STRINGS.en;
+  return UI_STRINGS[locale] ?? en;
 }

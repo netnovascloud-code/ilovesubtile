@@ -13,21 +13,28 @@ const CONNECTORS: Record<Locale, string[]> = {
   en: ["to"], fr: ["en", "vers"], es: ["a"], pt: ["para"], de: ["in", "zu"],
   it: ["in"], nl: ["naar"], ja: ["to"], zh: ["to"], ko: ["to"], ar: ["to"],
   ru: ["в"], hi: ["to"],
+  tr: ["ye"], id: ["ke"], vi: ["sang"], sv: ["till"], pl: ["do"], uk: ["в"], cs: ["do"],
 };
 const CONVERT: Record<Locale, string> = {
   en: "convert", fr: "convertir", es: "convertir", pt: "converter",
   de: "konvertieren", it: "convertire", nl: "converteren", ja: "変換",
   zh: "转换", ko: "변환", ar: "تحويل", ru: "конвертировать", hi: "बदलें",
+  tr: "dönüştür", id: "konversi", vi: "chuyển đổi", sv: "konvertera",
+  pl: "konwertuj", uk: "конвертувати", cs: "převést",
 };
 const ONLINE: Record<Locale, string> = {
   en: "online", fr: "en ligne", es: "online", pt: "online", de: "online",
   it: "online", nl: "online", ja: "オンライン", zh: "在线", ko: "온라인",
   ar: "عبر الإنترنت", ru: "онлайн", hi: "ऑनलाइन",
+  tr: "çevrimiçi", id: "online", vi: "trực tuyến", sv: "online",
+  pl: "online", uk: "онлайн", cs: "online",
 };
 const FREE: Record<Locale, string> = {
   en: "free", fr: "gratuit", es: "gratis", pt: "grátis", de: "kostenlos",
   it: "gratis", nl: "gratis", ja: "無料", zh: "免费", ko: "무료",
   ar: "مجاني", ru: "бесплатно", hi: "मुफ़्त",
+  tr: "ücretsiz", id: "gratis", vi: "miễn phí", sv: "gratis",
+  pl: "darmowy", uk: "безкоштовно", cs: "zdarma",
 };
 
 /** Split an "a-to-b" slug into its two format tokens, if it is one. */
@@ -65,6 +72,9 @@ const ALSO_LABEL: Record<Locale, string> = {
   pt: "Também pesquisado como", de: "Auch gesucht als", it: "Cercato anche come",
   nl: "Ook gezocht als", ja: "別名", zh: "也被搜索为", ko: "다음으로도 검색됨",
   ar: "يُبحث عنه أيضًا بـ", ru: "Также ищут как", hi: "इस रूप में भी खोजा गया",
+  tr: "Şu şekilde de aranır", id: "Juga dicari sebagai", vi: "Còn được tìm là",
+  sv: "Söks även som", pl: "Wyszukiwane też jako", uk: "Також шукають як",
+  cs: "Hledáno také jako",
 };
 
 /** A short, natural "also searched as" line for converter tools (or null). */

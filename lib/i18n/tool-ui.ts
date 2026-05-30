@@ -250,8 +250,9 @@ const hi: ToolUiStrings = {
   pricing: { monthly: "मासिक", annual: "वार्षिक", saveBadge: "~30% बचत" },
 };
 
-export const TOOL_UI: Record<Locale, ToolUiStrings> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+// Partial<>: missing locales fall back to English via getToolUi().
+export const TOOL_UI: Partial<Record<Locale, ToolUiStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
 
 export function getToolUi(locale: Locale): ToolUiStrings {
-  return TOOL_UI[locale] ?? TOOL_UI.en;
+  return TOOL_UI[locale] ?? en;
 }

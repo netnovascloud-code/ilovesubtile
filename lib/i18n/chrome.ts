@@ -294,12 +294,13 @@ const hi: ChromeStrings = {
   auth: { loginTitle: "वापसी पर स्वागत है", loginLead: "अपने Konver खाते में लॉग इन करें।", registerTitle: "अपना खाता बनाएँ", registerLead: "रोज़ 5 मुफ़्त रन। क्रेडिट कार्ड ज़रूरी नहीं।", email: "ईमेल", password: "पासवर्ड", loginCta: "लॉग इन", registerCta: "खाता बनाएँ", loading: "कृपया प्रतीक्षा करें…", orWithEmail: "या ईमेल से", google: "Google से जारी रखें", checkInbox: "पुष्टि के लिए अपना इनबॉक्स देखें।", noAccount: "खाता नहीं है?", createOne: "एक बनाएँ", hasAccount: "पहले से खाता है?", logIn: "लॉग इन" },
 };
 
-export const CHROME_STRINGS: Record<Locale, ChromeStrings> = {
+// Partial<>: missing locales fall back to English via getChrome().
+export const CHROME_STRINGS: Partial<Record<Locale, ChromeStrings>> = {
   en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi,
 };
 
 export function getChrome(locale: Locale): ChromeStrings {
-  return CHROME_STRINGS[locale] ?? CHROME_STRINGS.en;
+  return CHROME_STRINGS[locale] ?? en;
 }
 
 /** Simple {placeholder} interpolation. */

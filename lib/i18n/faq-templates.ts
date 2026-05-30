@@ -115,13 +115,14 @@ const hi: FaqFactory[] = [
   () => ({ q: `क्या मुझे साइन अप करना होगा?`, a: `कभी-कभार उपयोग के लिए कोई खाता ज़रूरी नहीं है। साइन अप करने से रोज़ कुछ अतिरिक्त रन और एक इतिहास मिलता है। Pro असीमित उपयोग खोल देता है।` }),
 ];
 
-const ALL: Record<Locale, FaqFactory[]> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+// Partial<>: missing locales fall back to the English FAQ templates.
+const ALL: Partial<Record<Locale, FaqFactory[]>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
 
 export function getLocalisedFaqs(
   locale: Locale,
   name: string,
   formats: string,
 ): ToolFaq[] {
-  const set = ALL[locale] ?? ALL.en;
+  const set = ALL[locale] ?? en;
   return set.map((fn) => fn(name, formats));
 }

@@ -18,4 +18,11 @@ export const LANGUAGE_NAMES: Record<Locale, string> = {
   ar: "العربية",
   ru: "Русский",
   hi: "हिन्दी",
+  tr: "Türkçe",
+  id: "Bahasa Indonesia",
+  vi: "Tiếng Việt",
+  sv: "Svenska",
+  pl: "Polski",
+  uk: "Українська",
+  cs: "Čeština",
 };

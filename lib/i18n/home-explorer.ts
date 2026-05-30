@@ -174,7 +174,8 @@ const hi: HomeExplorerStrings = {
   suggestions: ["JPG → PNG", "छवि संपीड़ित करें", "JSON → CSV", "टेक्स्ट अनुवाद", "सबटाइटल"],
 };
 
-const MAP: Record<Locale, HomeExplorerStrings> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+// Partial<>: missing locales fall back to English.
+const MAP: Partial<Record<Locale, HomeExplorerStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
 
 export function getHomeExplorer(locale: Locale): HomeExplorerStrings {
   return MAP[locale] ?? en;

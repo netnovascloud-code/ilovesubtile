@@ -7,6 +7,7 @@ export const DEFAULT_LOCALE: Locale = "en";
 /** Locales other than English — these live under /<locale>/... */
 export const NON_DEFAULT_LOCALES: Locale[] = [
   "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi",
+  "tr", "id", "vi", "sv", "pl", "uk", "cs",
 ];
 
 export const LANGUAGE_NAMES: Record<Locale, string> = {
@@ -23,6 +24,13 @@ export const LANGUAGE_NAMES: Record<Locale, string> = {
   ar: "العربية",
   ru: "Русский",
   hi: "हिन्दी",
+  tr: "Türkçe",
+  id: "Bahasa Indonesia",
+  vi: "Tiếng Việt",
+  sv: "Svenska",
+  pl: "Polski",
+  uk: "Українська",
+  cs: "Čeština",
 };
 
 export const RTL_LOCALES: ReadonlySet<Locale> = new Set(["ar"]);

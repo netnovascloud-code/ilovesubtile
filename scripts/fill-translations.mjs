@@ -38,7 +38,8 @@ const DRY_RUN = has("--dry-run");
 const ONLY_LOCALE = valOf("--locale");
 const LIMIT = valOf("--limit") ? Number(valOf("--limit")) : Infinity;
 const TARGET = valOf("--target") ?? "all";
-const CONCURRENCY = Number(valOf("--concurrency") ?? 4);
+const CONCURRENCY = Number(valOf("--concurrency") ?? 3);
+const MAX_RETRIES = 6;
 
 async function loadEnv() {
   // Read NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
@@ -146,39 +147,55 @@ async function processTarget(cfg) {
   console.log(`${title}: filled ${done}${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function translate(job, fields, apiTask, env) {
-  const res = await fetch(`${env.url}/functions/v1/ai-process`, {
-    method: "POST",
-    headers: {
-      apikey: env.anon,
-      Authorization: `Bearer ${env.anon}`,
-      "Content-Type": "application/json",
-      // Node's fetch doesn't set an Origin header — Supabase's edge gateway
-      // rejects requests from unknown origins. Pretend to be the production
-      // app so the function's CORS allowlist accepts us.
-      Origin: "https://konver.app",
-    },
-    body: JSON.stringify({
-      task: apiTask,
-      text: JSON.stringify(job.en),
-      options: { target: job.lang },
-    }),
-  });
-  if (!res.ok) {
-    const body = (await res.text()).slice(0, 200);
-    throw new Error(`HTTP ${res.status} ${body}`);
-  }
-  const { output, error, message } = await res.json();
-  if (!output) throw new Error(message ?? error ?? "empty response");
-  let parsed;
-  try { parsed = JSON.parse(output); }
-  catch { throw new Error(`bad model output: ${output.slice(0, 120)}`); }
-  for (const f of fields) {
-    if (typeof parsed[f] !== "string" || !parsed[f].trim()) {
-      throw new Error(`missing field "${f}" in response`);
+  let lastErr;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      // Exponential backoff with jitter: 2s, 4s, 8s, 16s, 30s(cap)…
+      const wait = Math.min(2000 * 2 ** (attempt - 1), 30_000) + Math.random() * 500;
+      await sleep(wait);
     }
+    let res;
+    try {
+      res = await fetch(`${env.url}/functions/v1/ai-process`, {
+        method: "POST",
+        headers: {
+          apikey: env.anon,
+          Authorization: `Bearer ${env.anon}`,
+          "Content-Type": "application/json",
+          // Node's fetch doesn't set an Origin header — Supabase's edge gateway
+          // rejects requests from unknown origins. Pretend to be the production
+          // app so the function's CORS allowlist accepts us.
+          Origin: "https://konver.app",
+        },
+        body: JSON.stringify({ task: apiTask, text: JSON.stringify(job.en), options: { target: job.lang } }),
+      });
+    } catch (e) {
+      lastErr = e; continue; // network blip — retry
+    }
+    // 429 (rate limit) and 5xx (incl. the edge's 502 when Mistral throttles)
+    // are transient — back off and retry. Other 4xx are fatal.
+    if (res.status === 429 || res.status >= 500) {
+      lastErr = new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 120)}`);
+      continue;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 160)}`);
+
+    const { output, error, message } = await res.json();
+    if (!output) { lastErr = new Error(message ?? error ?? "empty response"); continue; }
+    let parsed;
+    try { parsed = JSON.parse(output); }
+    catch { lastErr = new Error(`bad model output: ${output.slice(0, 120)}`); continue; }
+    let ok = true;
+    for (const f of fields) {
+      if (typeof parsed[f] !== "string" || !parsed[f].trim()) { ok = false; break; }
+    }
+    if (!ok) { lastErr = new Error("incomplete fields in response"); continue; }
+    return Object.fromEntries(fields.map((f) => [f, parsed[f].trim()]));
   }
-  return Object.fromEntries(fields.map((f) => [f, parsed[f].trim()]));
+  throw lastErr ?? new Error("exhausted retries");
 }
 
 async function flush(cfg, generated) {

@@ -1,5 +1,5 @@
 // Konver public REST gateway. Authenticated by a Konver API key
-// (cf_live_...), NOT a Supabase JWT — hence verify_jwt is disabled and we
+// (knv_live_…), NOT a Supabase JWT — hence verify_jwt is disabled and we
 // validate the key ourselves. Deducts credits per call and logs a job.
 //
 //   GET  /functions/v1/api-gateway?action=me                (cost 0)
@@ -10,7 +10,7 @@
 //   POST /functions/v1/api-gateway?action=summarize         (3 short / 6 long)
 //   POST /functions/v1/api-gateway?action=humanize          (5 short / 12 long)
 //   POST /functions/v1/api-gateway?action=convert_code      (4)
-//   Header: Authorization: Bearer cf_live_...
+//   Header: Authorization: Bearer knv_live_…
 //
 // Credit costs mirror lib/credits.ts on the frontend — keep in sync.
 // Deploy: supabase functions deploy api-gateway --no-verify-jwt

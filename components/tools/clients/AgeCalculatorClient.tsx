@@ -50,7 +50,9 @@ export function AgeCalculatorClient() {
     // Next birthday on or after the reference date.
     let nextBday = new Date(ref.getFullYear(), birth.getMonth(), birth.getDate());
     if (nextBday.getTime() < ref.getTime()) nextBday = new Date(ref.getFullYear() + 1, birth.getMonth(), birth.getDate());
-    const daysToNext = Math.round((nextBday.getTime() - ref.getTime()) / DAY_MS);
+    // ceil() so a date late in the day still reports "in N days" rather than
+    // rounding down to N-1 when the next birthday is N*24h+23h away.
+    const daysToNext = Math.ceil((nextBday.getTime() - ref.getTime()) / DAY_MS);
 
     const weekday = birth.toLocaleDateString(undefined, { weekday: "long" });
 

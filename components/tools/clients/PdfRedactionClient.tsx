@@ -111,8 +111,11 @@ export function PdfRedactionClient() {
         for (const r of rectsByPage[n] ?? []) {
           ctx.fillRect(r.x * canvas.width, r.y * canvas.height, r.w * canvas.width, r.h * canvas.height);
         }
-        const pngUrl = canvas.toDataURL("image/png");
-        const img = await out.embedPng(pngUrl);
+        // toBlob avoids holding a multi-MB string in memory for every page —
+        // a 50-page PDF would otherwise allocate ~50 MB of base64 string data
+        // before pdf-lib even starts embedding.
+        const pngBlob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), "image/png"));
+        const img = await out.embedPng(await pngBlob.arrayBuffer());
         const p = out.addPage([pt.width, pt.height]);
         p.drawImage(img, { x: 0, y: 0, width: pt.width, height: pt.height });
       }

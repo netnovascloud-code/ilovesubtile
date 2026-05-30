@@ -100,6 +100,10 @@ const TOOL_BY_TASK: Record<string, string> = {
   "analyze-file": "smart-drop",
   "cover-letter": "cover-letter",
   "contract-analyze": "contract-analyzer",
+  clean: "clean-subtitles",
+  summary: "summarize-text",
+  "i18n-tool": "i18n-fill",
+  "i18n-category": "i18n-fill",
 };
 
 Deno.serve(async (req) => {

@@ -84,8 +84,11 @@ export function PdfOcrClient() {
         const canvas = document.createElement("canvas");
         canvas.width = vp.width; canvas.height = vp.height;
         await page.render({ canvasContext: canvas.getContext("2d")!, viewport: vp }).promise;
-        const dataUrl = canvas.toDataURL("image/png");
-        const { data } = await worker.recognize(dataUrl);
+        // toBlob avoids the multi-MB string allocation that toDataURL forces
+        // for every page — critical on large scans (50+ pages on mobile would
+        // OOM the tab). Tesseract accepts Blob directly.
+        const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), "image/png"));
+        const { data } = await worker.recognize(blob);
         chunks.push(data.text.trim());
       }
       await worker.terminate();

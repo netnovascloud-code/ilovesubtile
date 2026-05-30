@@ -1838,6 +1838,22 @@ TOOLS.push(
 // ── Productivity & creative (last batch of new modules) ────────────────────
 TOOLS.push(
   {
+    slug: "video-thumbnail", phase: 3, kind: "client", category: "video", icon: Film, tone: "rose",
+    name: "Video Thumbnail Extractor",
+    short: "Grab the perfect frame from a video.",
+    h1: "Video Thumbnail Extractor — Extract Best Frame from Video Free",
+    metaTitle: "Video Thumbnail Extractor Online — Grab a Frame | Konver",
+    metaDescription: "Scrub to any moment and capture a still frame from your video as a PNG, plus auto-suggested thumbnails. Free, in-browser, never uploaded.",
+    primaryKeyword: "video thumbnail extractor",
+    accept: ["mp4", "mov", "webm", "mkv"], freeMaxMb: 0, outputType: "PNG",
+    steps: [
+      { title: "Upload a video", body: "MP4, MOV, WebM or MKV — stays on your device." },
+      { title: "Scrub or pick a suggestion", body: "We auto-generate 6 candidate frames." },
+      { title: "Download the frame", body: "PNG at the video's native resolution." },
+    ],
+    faqs: codeFaqs("Video Thumbnail Extractor"),
+  },
+  {
     slug: "change-background", phase: 3, kind: "client", category: "images", icon: WandSparkles, tone: "amber",
     name: "Change Image Background",
     short: "Replace the background with a colour, gradient or image.",

@@ -89,6 +89,7 @@ import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgro
 import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
 import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
 import { ContractAnalyzerClient } from "@/components/tools/clients/ContractAnalyzerClient";
+import { VideoThumbnailClient } from "@/components/tools/clients/VideoThumbnailClient";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
 import { AiTextClient } from "@/components/tools/clients/AiTextClient";
@@ -481,6 +482,9 @@ export default function LocalisedToolPage({
       break;
     case "contract-analyzer":
       body = <ContractAnalyzerClient />;
+      break;
+    case "video-thumbnail":
+      body = <VideoThumbnailClient />;
       break;
     case "image-to-base64":
       body = <ImageToBase64Client />;

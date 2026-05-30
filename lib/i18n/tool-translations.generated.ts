@@ -6715,6 +6715,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Chuyển đổi mảng JSON thành CSV ngay lập tức trong trình duyệt. Các cột được tự động phát hiện. Miễn phí, không giới hạn, riêng tư."
     }
   },
+  "json-to-sql": {
+    "ar": {
+      "name": "JSON إلى SQL",
+      "short": "حوّل مصفوفة JSON إلى عبارات SQL INSERT — والعكس بالعكس.",
+      "h1": "محوّل JSON إلى SQL أونلاين مجاناً",
+      "metaTitle": "JSON إلى SQL أونلاين — تحويل JSON إلى INSERT | Konver",
+      "metaDescription": "حوّل مصفوفة JSON من الكائنات إلى عبارات SQL INSERT نظيفة — واعكس العملية من SQL إلى JSON. مجاني، يعمل في متصفحك."
+    },
+    "cs": {
+      "name": "JSON na SQL",
+      "short": "Převod pole JSON na SQL INSERT příkazy — a zpět.",
+      "h1": "Převodník JSON na SQL zdarma online",
+      "metaTitle": "JSON na SQL online — převod JSON na INSERT | Konver",
+      "metaDescription": "Serializuj pole JSON objektů do čistých SQL INSERT příkazů — a analyzuj SQL zpět na JSON. Zdarma, běží přímo ve tvém prohlížeči."
+    },
+    "de": {
+      "name": "JSON zu SQL",
+      "short": "Wandle ein JSON-Array in SQL-INSERT-Anweisungen um — und zurück.",
+      "h1": "JSON-zu-SQL-Konverter online kostenlos",
+      "metaTitle": "JSON zu SQL online — Konvertieren von JSON zu INSERT | Konver",
+      "metaDescription": "Serialisiere ein JSON-Array von Objekten in saubere SQL-INSERT-Anweisungen — und parse SQL zurück zu JSON. Kostenlos, läuft in deinem Browser."
+    },
+    "es": {
+      "name": "JSON a SQL",
+      "short": "Convierte un arreglo JSON en sentencias SQL INSERT — y viceversa.",
+      "h1": "Convertidor JSON a SQL Online Gratis",
+      "metaTitle": "JSON a SQL Online — Convertir JSON a INSERT | Konver",
+      "metaDescription": "Serializa un arreglo JSON de objetos en sentencias SQL INSERT limpias — y analiza SQL de vuelta a JSON. Gratis, funciona en tu navegador."
+    },
+    "fr": {
+      "name": "JSON vers SQL",
+      "short": "Transformez un tableau JSON en requêtes SQL INSERT — et inversement.",
+      "h1": "Convertisseur JSON vers SQL en ligne gratuit",
+      "metaTitle": "JSON vers SQL en ligne — Convertir JSON en INSERT | Konver",
+      "metaDescription": "Sérialisez un tableau JSON d'objets en requêtes SQL INSERT propres — et analysez du SQL en JSON. Gratuit, fonctionne dans votre navigateur."
+    },
+    "hi": {
+      "name": "JSON से SQL",
+      "short": "JSON array को SQL INSERT statements में बदलें — और वापस भी।",
+      "h1": "ऑनलाइन मुफ़्त JSON से SQL कन्वर्टर",
+      "metaTitle": "JSON से SQL ऑनलाइन — JSON को INSERT में बदलें | Konver",
+      "metaDescription": "JSON ऑब्जेक्ट्स के array को साफ़ SQL INSERT statements में कन्वर्ट करें — और SQL को वापस JSON में पार्स करें। मुफ़्त, आपके ब्राउज़र में चलता है।"
+    },
+    "id": {
+      "name": "JSON ke SQL",
+      "short": "Ubah array JSON menjadi pernyataan INSERT SQL — dan sebaliknya.",
+      "h1": "Konverter JSON ke SQL Online Gratis",
+      "metaTitle": "JSON ke SQL Online — Konversi JSON ke INSERT | Konver",
+      "metaDescription": "Ubah array JSON objek menjadi pernyataan INSERT SQL bersih — dan parsing SQL kembali ke JSON. Gratis, berjalan di peramban Anda."
+    },
+    "it": {
+      "name": "JSON in SQL",
+      "short": "Convertisci un array JSON in istruzioni SQL INSERT — e viceversa.",
+      "h1": "Convertitore JSON in SQL Online Gratis",
+      "metaTitle": "JSON in SQL Online — Converti JSON in INSERT | Konver",
+      "metaDescription": "Serializza un array JSON di oggetti in istruzioni SQL INSERT pulite — e analizza SQL in JSON. Gratis, funziona nel tuo browser."
+    },
+    "ja": {
+      "name": "JSON から SQL",
+      "short": "JSON 配列を SQL INSERT 文に変換（逆も可）。",
+      "h1": "JSON から SQL 変換（無料オンライン）",
+      "metaTitle": "JSON から SQL へ — JSON を INSERT に変換 | Konver",
+      "metaDescription": "JSON 配列のオブジェクトをきれいな SQL INSERT 文に変換し、SQL を JSON に戻す無料ツール。ブラウザで動作します。"
+    },
+    "ko": {
+      "name": "JSON to SQL 변환기",
+      "short": "JSON 배열을 SQL INSERT 문으로 변환하고, 반대로 변환하세요.",
+      "h1": "무료 온라인 JSON to SQL 변환기",
+      "metaTitle": "JSON to SQL 온라인 — JSON을 INSERT로 변환 | Konver",
+      "metaDescription": "JSON 객체 배열을 깔끔한 SQL INSERT 문으로 직렬화하고, SQL을 다시 JSON으로 파싱하세요. 무료이며 브라우저에서 실행됩니다."
+    },
+    "nl": {
+      "name": "JSON naar SQL",
+      "short": "Zet een JSON-array om in SQL INSERT-instructies — en terug.",
+      "h1": "JSON naar SQL Converter Online Gratis",
+      "metaTitle": "JSON naar SQL Online — Converteer JSON naar INSERT | Konver",
+      "metaDescription": "Zet een JSON-array met objecten om in nette SQL INSERT-instructies — en parse SQL terug naar JSON. Gratis, werkt in je browser."
+    },
+    "pl": {
+      "name": "JSON do SQL",
+      "short": "Przekształć tablicę JSON w polecenia SQL INSERT — i odwrotnie.",
+      "h1": "Darmowy konwerter JSON do SQL online",
+      "metaTitle": "JSON do SQL online — Konwertuj JSON na INSERT | Konver",
+      "metaDescription": "Zserializuj tablicę obiektów JSON w czyste polecenia SQL INSERT — i przetłumacz SQL z powrotem na JSON. Darmowe, działa w przeglądarce."
+    },
+    "pt": {
+      "name": "JSON para SQL",
+      "short": "Converta um array JSON em instruções SQL INSERT — e vice-versa.",
+      "h1": "Conversor JSON para SQL Online Grátis",
+      "metaTitle": "JSON para SQL Online — Converter JSON para INSERT | Konver",
+      "metaDescription": "Serializa um array JSON de objetos em instruções SQL INSERT limpas — e analisa SQL de volta para JSON. Gratuito, funciona no seu navegador."
+    },
+    "ru": {
+      "name": "JSON в SQL",
+      "short": "Преобразуйте массив JSON в SQL-запросы INSERT — и обратно.",
+      "h1": "Конвертер JSON в SQL онлайн бесплатно",
+      "metaTitle": "Конвертер JSON в SQL онлайн — Преобразование JSON в INSERT | Konver",
+      "metaDescription": "Сериализуйте массив JSON объектов в SQL-запросы INSERT — и обратно. Бесплатно, работает в вашем браузере."
+    },
+    "sv": {
+      "name": "JSON till SQL",
+      "short": "Omvandla en JSON-array till SQL INSERT-satser — och tillbaka.",
+      "h1": "JSON till SQL-omvandlare Online Gratis",
+      "metaTitle": "JSON till SQL Online — Konvertera JSON till INSERT | Konver",
+      "metaDescription": "Serialisera en JSON-array av objekt till rena SQL INSERT-satser — och tolka SQL tillbaka till JSON. Gratis, körs i din webbläsare."
+    },
+    "tr": {
+      "name": "JSON to SQL",
+      "short": "JSON dizisini SQL INSERT ifadelerine — ve geriye — dönüştürün.",
+      "h1": "Ücretsiz Çevrimiçi JSON to SQL Dönüştürücü",
+      "metaTitle": "JSON to SQL Çevrimiçi — JSON’dan INSERT’e | Konver",
+      "metaDescription": "JSON nesneleri dizisini temiz SQL INSERT ifadelerine dönüştürün — ve SQL’i JSON’a geri ayrıştırın. Ücretsiz, tarayıcınızda çalışır."
+    },
+    "uk": {
+      "name": "JSON у SQL",
+      "short": "Перетворіть масив JSON на SQL-запити INSERT — і назад.",
+      "h1": "Онлайн-конвертер JSON у SQL безкоштовно",
+      "metaTitle": "JSON у SQL онлайн — конвертація JSON у INSERT | Konver",
+      "metaDescription": "Серіалізуйте масив JSON у чисті SQL-запити INSERT — і розберіть SQL назад у JSON. Безкоштовно, працює у вашому браузері."
+    },
+    "vi": {
+      "name": "JSON sang SQL",
+      "short": "Chuyển đổi mảng JSON thành câu lệnh SQL INSERT — và ngược lại.",
+      "h1": "Công cụ Chuyển đổi JSON sang SQL Online Miễn phí",
+      "metaTitle": "Chuyển JSON sang SQL Online — Chuyển đổi JSON sang INSERT | Konver",
+      "metaDescription": "Chuyển đổi mảng JSON thành câu lệnh SQL INSERT sạch sẽ — và phân tích cú pháp SQL trở lại JSON. Miễn phí, chạy ngay trong trình duyệt của bạn."
+    },
+    "zh": {
+      "name": "JSON 转 SQL",
+      "short": "将 JSON 数组转换为 SQL INSERT 语句——并可反向转换。",
+      "h1": "免费在线 JSON 转 SQL 转换器",
+      "metaTitle": "JSON 转 SQL 在线 — JSON 转 INSERT | Konver",
+      "metaDescription": "将 JSON 对象数组序列化为整洁的 SQL INSERT 语句——并将 SQL 解析回 JSON。免费，在浏览器中运行。"
+    }
+  },
   "json-to-xml": {
     "cs": {
       "name": "JSON na XML",

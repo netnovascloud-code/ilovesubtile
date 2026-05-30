@@ -510,6 +510,9 @@ export default function LocalisedToolPage({
     case "sql-to-json":
       body = <SqlJsonClient />;
       break;
+    case "json-to-sql":
+      body = <SqlJsonClient defaultDir="json_to_sql" />;
+      break;
     case "cron-builder":
       body = <CronBuilderClient />;
       break;

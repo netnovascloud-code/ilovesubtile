@@ -74,8 +74,8 @@ function jsonToInsert(table: string, rows: Record<string, unknown>[]): string {
   return `INSERT INTO ${table} (${cols.join(", ")})\nVALUES\n  ${values};\n`;
 }
 
-export function SqlJsonClient() {
-  const [dir, setDir] = useState<Dir>("sql_to_json");
+export function SqlJsonClient({ defaultDir = "sql_to_json" }: { defaultDir?: Dir } = {}) {
+  const [dir, setDir] = useState<Dir>(defaultDir);
   const [input, setInput] = useState<string>(`INSERT INTO users (id, name, age) VALUES\n  (1, 'Alice', 30),\n  (2, 'Bob', 25);`);
   const [tableName, setTableName] = useState("users");
   const [copied, setCopied] = useState(false);

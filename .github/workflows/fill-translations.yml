@@ -70,5 +70,8 @@ jobs:
             echo "No translation changes to commit."
           else
             git commit -m "i18n: fill translations via Mistral (automated)"
+            # Rebase onto any commits pushed while this run was in flight, so
+            # the push can't fail with a non-fast-forward.
+            git pull --rebase --autostash origin claude/vibrant-noether-4ISSI || true
             git push origin claude/vibrant-noether-4ISSI
           fi

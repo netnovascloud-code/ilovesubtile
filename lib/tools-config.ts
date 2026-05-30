@@ -1602,6 +1602,24 @@ TOOLS.push({
   faqs: codeFaqs("SQL ↔ JSON converter"),
 });
 
+// Same engine as sql-to-json, opens in the JSON → SQL direction by default.
+TOOLS.push({
+  slug: "json-to-sql", phase: 3, kind: "client", category: "developer", icon: Database, tone: "teal",
+  name: "JSON to SQL",
+  short: "Turn a JSON array into SQL INSERT statements — and back.",
+  h1: "JSON to SQL Converter Online Free",
+  metaTitle: "JSON to SQL Online — Convert JSON to INSERT | Konver",
+  metaDescription: "Serialize a JSON array of objects into clean SQL INSERT statements — and parse SQL back to JSON. Free, runs in your browser.",
+  primaryKeyword: "json to sql",
+  accept: [], freeMaxMb: 0, outputType: "SQL / JSON",
+  steps: [
+    { title: "Paste a JSON array", body: "An array of flat objects." },
+    { title: "Name the table", body: "Used in the generated INSERT." },
+    { title: "Copy the SQL", body: "Ready to run, or flip back to JSON." },
+  ],
+  faqs: codeFaqs("JSON ↔ SQL converter"),
+});
+
 // ── Dev — Image to Base64 (and back) ────────────────────────────────────────
 TOOLS.push({
   slug: "image-to-base64", phase: 3, kind: "client", category: "developer", icon: Binary, tone: "teal",

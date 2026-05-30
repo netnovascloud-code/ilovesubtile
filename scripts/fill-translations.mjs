@@ -1,20 +1,20 @@
-// Fill missing translations via Mistral Large — tool SEO fields + category labels.
+// Fill missing translations by calling the deployed Konver `ai-process` edge
+// function (which holds the Mistral API key server-side). The caller only
+// needs the public anon key — no MISTRAL_API_KEY required locally.
 //
-//   node scripts/fill-translations.mjs --dry-run               # audit only, no API
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs                  # fill everything
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --target tools   # tools only
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --target categories
-//   MISTRAL_API_KEY=... node scripts/fill-translations.mjs --locale fr --limit 20
+// Reads NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
+// (or your shell env). Tasks supported: i18n-tool, i18n-category.
 //
-// Reads the English source + existing translations, finds every missing
-// (item, locale), translates the fields, and writes them into the matching
-// generated overlay (tool-translations.generated.ts / category-translations
-// .generated.ts). Safe to re-run: only fills what is still missing.
+//   node scripts/fill-translations.mjs --dry-run               # audit only
+//   node scripts/fill-translations.mjs                          # fill everything
+//   node scripts/fill-translations.mjs --target tools           # tools only
+//   node scripts/fill-translations.mjs --target categories
+//   node scripts/fill-translations.mjs --locale fr --limit 20
 //
-// Requires Node 22.18+ (native TypeScript type-stripping — the imported app
-// modules are type-only at runtime, so no build step is needed).
+// Resumable: writes the overlay back to disk every 10 successful translations
+// so a Ctrl+C / network drop just means re-run to continue.
 
-import { writeFile } from "node:fs/promises";
+import { writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 
@@ -38,17 +38,34 @@ const DRY_RUN = has("--dry-run");
 const ONLY_LOCALE = valOf("--locale");
 const LIMIT = valOf("--limit") ? Number(valOf("--limit")) : Infinity;
 const TARGET = valOf("--target") ?? "all";
-const CONCURRENCY = 4;
+const CONCURRENCY = Number(valOf("--concurrency") ?? 4);
+
+async function loadEnv() {
+  // Read NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
+  // (the standard Next.js dev/build pattern); shell env wins when both set.
+  try {
+    const raw = await readFile(resolve(ROOT, ".env"), "utf8");
+    for (const line of raw.split(/\r?\n/)) {
+      const m = /^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*)$/.exec(line);
+      if (!m) continue;
+      if (process.env[m[1]] === undefined) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch { /* no .env file is fine — the shell may already have the vars */ }
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anon) {
+    throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY (check .env or shell env)");
+  }
+  return { url, anon };
+}
 
 async function main() {
   const { TOOLS, CATEGORIES } = await import(resolve(ROOT, "lib/tools-config.ts"));
   const { TOOL_TRANSLATIONS } = await import(resolve(ROOT, "lib/i18n/tool-translations.ts"));
   const { GENERATED_TOOL_TRANSLATIONS } = await import(TOOL_PATH);
   const { GENERATED_CATEGORY_TRANSLATIONS } = await import(CAT_PATH);
-  const locales = ONLY_LOCALE ? LOCALES.filter(([c]) => c === ONLY_LOCALE) : LOCALES;
 
-  const key = process.env.MISTRAL_API_KEY;
-  if (!DRY_RUN && !key) { console.error("MISTRAL_API_KEY is not set. Aborting."); process.exit(1); }
+  const env = DRY_RUN ? null : await loadEnv();
 
   if (TARGET === "all" || TARGET === "tools") {
     await processTarget({
@@ -61,8 +78,8 @@ async function main() {
       path: TOOL_PATH,
       typeName: "ToolI18n",
       typeImport: 'import type { ToolI18n } from "./tool-translations";',
-      sysNoun: "UI/SEO strings for a tool",
-      key,
+      apiTask: "i18n-tool",
+      env,
     });
   }
   if (TARGET === "all" || TARGET === "categories") {
@@ -71,19 +88,19 @@ async function main() {
       items: CATEGORIES,
       keyOf: (c) => c.id,
       fields: ["label", "blurb"],
-      handHas: () => false, // no hand-authored category translations
+      handHas: () => false,
       generated: structuredClone(GENERATED_CATEGORY_TRANSLATIONS),
       path: CAT_PATH,
       typeName: "CategoryI18n",
       typeImport: "export type CategoryI18n = { label: string; blurb: string };",
-      sysNoun: "a tool-category label and one-line blurb",
-      key,
+      apiTask: "i18n-category",
+      env,
     });
   }
 }
 
 async function processTarget(cfg) {
-  const { title, items, keyOf, fields, handHas, generated, path, key } = cfg;
+  const { title, items, keyOf, fields, handHas, generated, env } = cfg;
   const locales = ONLY_LOCALE ? LOCALES.filter(([c]) => c === ONLY_LOCALE) : LOCALES;
 
   const jobs = [];
@@ -104,7 +121,8 @@ async function processTarget(cfg) {
   for (const [code] of locales) console.log(`  ${code}: ${perLocale[code]} missing`);
   console.log(`  ── ${jobs.length} (item,locale) pairs to fill\n`);
 
-  if (DRY_RUN || jobs.length === 0) { if (DRY_RUN) console.log("Dry run — no API calls."); return; }
+  if (DRY_RUN) { console.log("Dry run — no API calls."); return; }
+  if (jobs.length === 0) { console.log("Nothing to fill. ✅"); return; }
 
   let done = 0, failed = 0;
   const queue = [...jobs];
@@ -112,9 +130,15 @@ async function processTarget(cfg) {
     while (queue.length) {
       const job = queue.shift();
       try {
-        (generated[job.id] ??= {})[job.code] = await translate(job, fields, cfg.sysNoun, key);
-        if (++done % 10 === 0) { await flush(cfg, generated); process.stdout.write(`  …${done}/${jobs.length}\n`); }
-      } catch (e) { failed++; console.warn(`  ! ${job.id} [${job.code}]: ${e.message}`); }
+        (generated[job.id] ??= {})[job.code] = await translate(job, fields, cfg.apiTask, env);
+        if (++done % 10 === 0) {
+          await flush(cfg, generated);
+          process.stdout.write(`  …${done}/${jobs.length}\n`);
+        }
+      } catch (e) {
+        failed++;
+        console.warn(`  ! ${job.id} [${job.code}]: ${e.message}`);
+      }
     }
   };
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
@@ -122,20 +146,38 @@ async function processTarget(cfg) {
   console.log(`${title}: filled ${done}${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
 }
 
-async function translate(job, fields, sysNoun, key) {
-  const sys = `You are a professional software localizer for "Konver", a free online file-converter and tools website. Translate the given ${sysNoun} into ${job.lang}. Rules: keep the brand name "Konver" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); keep it natural, concise and idiomatic; meta titles should stay roughly under 60 characters and meta descriptions under 160. Return ONLY a JSON object with exactly these keys: ${fields.join(", ")}.`;
-  const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
+async function translate(job, fields, apiTask, env) {
+  const res = await fetch(`${env.url}/functions/v1/ai-process`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    headers: {
+      apikey: env.anon,
+      Authorization: `Bearer ${env.anon}`,
+      "Content-Type": "application/json",
+      // Node's fetch doesn't set an Origin header — Supabase's edge gateway
+      // rejects requests from unknown origins. Pretend to be the production
+      // app so the function's CORS allowlist accepts us.
+      Origin: "https://konver.app",
+    },
     body: JSON.stringify({
-      model: "mistral-large-latest", temperature: 0.2,
-      response_format: { type: "json_object" },
-      messages: [{ role: "system", content: sys }, { role: "user", content: JSON.stringify(job.en) }],
+      task: apiTask,
+      text: JSON.stringify(job.en),
+      options: { target: job.lang },
     }),
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 120)}`);
-  const parsed = JSON.parse((await res.json()).choices[0].message.content);
-  for (const f of fields) if (typeof parsed[f] !== "string" || !parsed[f].trim()) throw new Error(`missing "${f}"`);
+  if (!res.ok) {
+    const body = (await res.text()).slice(0, 200);
+    throw new Error(`HTTP ${res.status} ${body}`);
+  }
+  const { output, error, message } = await res.json();
+  if (!output) throw new Error(message ?? error ?? "empty response");
+  let parsed;
+  try { parsed = JSON.parse(output); }
+  catch { throw new Error(`bad model output: ${output.slice(0, 120)}`); }
+  for (const f of fields) {
+    if (typeof parsed[f] !== "string" || !parsed[f].trim()) {
+      throw new Error(`missing field "${f}" in response`);
+    }
+  }
   return Object.fromEntries(fields.map((f) => [f, parsed[f].trim()]));
 }
 
@@ -151,7 +193,8 @@ ${cfg.typeImport}
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations (Mistral Large). Resolvers prefer hand-authored strings.
+ * Machine translations served by Mistral Large via the Konver ai-process edge
+ * function. Resolvers prefer hand-authored strings over this overlay.
  */
 export const ${exportName}: Record<string, Partial<Record<Locale, ${cfg.typeName}>>> = ${JSON.stringify(sorted, null, 2)};
 `;

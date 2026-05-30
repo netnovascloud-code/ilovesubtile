@@ -28,7 +28,7 @@ function corsFor(req: Request): Record<string, string> {
 const DAILY_LIMIT: Record<string, number> = { free: 2, pro: Infinity, business: Infinity };
 
 // Tasks that need the stronger model.
-const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
+const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze", "i18n-tool", "i18n-category"]);
 
 function buildSystem(task: string, opts: { target?: string; style?: string; format?: string; register?: string; level?: string }): string | null {
   switch (task) {
@@ -78,6 +78,10 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `You receive a JSON with the user's profile (name, current role, key skills, target job description). Write a professional, well-structured cover letter of 3-4 short paragraphs in ${opts.target || "English"}. Open with a hook that links the candidate's strongest skill to the role, explain fit with concrete examples, show genuine interest in the company/mission, close with a confident call to action. Avoid clichés and over-formal phrasing. Output ONLY the letter body — no greeting line, no signature, no commentary.`;
     case "contract-analyze":
       return `You receive the plain text of a contract. Return ONLY a JSON object with these keys: parties (array of strings — the contracting entities), effective_date (ISO YYYY-MM-DD or null), term (string describing duration / termination), payment_terms (string), liability (string — caps / waivers / indemnities, or null), confidentiality (string or null), governing_law (string or null), notable_clauses (array of {title, summary} — 3-6 items the reader should not miss), red_flags (array of strings — anything one-sided or unusual, possibly empty). Be concise; use null when a field is genuinely absent.`;
+    case "i18n-tool":
+      return `You are a professional software localizer for "Konver", a free online file-converter and tools website. The user message is a JSON object with five English fields: name, short, h1, metaTitle, metaDescription. Translate every field into ${opts.target || "the target language"} so it reads naturally and idiomatically. Rules: keep the brand name "Konver" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); metaTitle stays under ~60 characters; metaDescription stays under ~160 characters. Return ONLY a JSON object with the SAME five keys.`;
+    case "i18n-category":
+      return `You are a professional software localizer for "Konver", a free online file-converter and tools website. The user message is a JSON object with two English fields: label (a short category name) and blurb (a one-line description). Translate both into ${opts.target || "the target language"} naturally and concisely. Keep the brand name "Konver" unchanged. Return ONLY a JSON object with the SAME two keys.`;
     default:
       return null;
   }
@@ -155,7 +159,7 @@ Deno.serve(async (req) => {
   }
 
   const model = LARGE.has(task) ? "mistral-large-latest" : "mistral-small-latest";
-  const wantsJson = task === "analyze-file" || task === "contract-analyze";
+  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category";
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },

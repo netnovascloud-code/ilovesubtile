@@ -1,5 +1,5 @@
-// Konver smoke test — runs in GitHub Actions against a freshly-built prod
-// Next server on localhost:3000. For each tool slug:
+// Konver smoke test (v2) — runs in GitHub Actions against a freshly-built
+// prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
 //   3) assert an <h1> renders

@@ -98,6 +98,16 @@ export function TimezoneConverterClient() {
 
   const swap = () => { setFromZone(toZone); setToZone(fromZone); };
 
+  // Why a mount gate: Intl.supportedValuesOf("timeZone") returns a different
+  // list under Node ICU than V8 ICU in the browser, so each <option> in the
+  // zone <select> mismatches on hydration (React #425). Gate the full render
+  // and the SSR ships a tiny skeleton; the client renders for real after mount.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return <div className="space-y-5"><div className="h-9 w-full animate-pulse rounded-md bg-ink-100" /><div className="h-9 w-72 animate-pulse rounded-md bg-ink-100" /></div>;
+  }
+
   return (
     <div className="space-y-5">
       <div className="grid items-end gap-3 sm:grid-cols-[1fr_auto_1fr]">

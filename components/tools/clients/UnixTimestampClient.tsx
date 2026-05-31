@@ -53,6 +53,16 @@ export function UnixTimestampClient() {
     } catch {}
   }
 
+  // Why a mount gate: date.toLocaleString and dateInput's datetime-local
+  // initial value both depend on the runtime's timezone and ICU build, so SSR
+  // (Node, UTC) and the client (browser, user TZ) can diverge in the rendered
+  // timestamp rows. SSR ships a skeleton and the client renders for real.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return <div className="space-y-6"><div className="h-14 w-full animate-pulse rounded-md bg-ink-100" /><div className="h-40 w-full animate-pulse rounded-md bg-ink-100" /></div>;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3 rounded-lg border border-ink-100 bg-white p-4">

@@ -1,4 +1,4 @@
-# Konver smoke test — 158/158 passed
+# Konver smoke test — 162/162 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -31,6 +31,7 @@ _None._
 - jwt-decoder
 - word-counter
 - clean-ai-export
+- anonymize-text
 - xml-to-json
 - json-to-yaml
 - yaml-to-json
@@ -151,6 +152,9 @@ _None._
 - receipt-scanner
 - screenshot-to-code
 - image-to-table
+- voice-to-text
+- synonyms-finder
+- conjugation
 - image-to-text
 - pdf-ocr
 - age-calculator [interactive]

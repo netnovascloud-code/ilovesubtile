@@ -154,16 +154,20 @@ const INTERACTIVE = [
     page.on("pageerror", (e) => consoleErrs.push("pageerror: " + e.message));
     await page.locator('input[type="file"]').first().setInputFiles({ name: "tone.wav", mimeType: "audio/wav", buffer: WAV });
     await page.getByRole("button", { name: /^Convert$/ }).first().click();
-    // Race success (download link) vs failure (error paragraph) — whichever first.
+    // Success = a download link; failure = the "Conversion failed:" paragraph.
+    // Match the error string EXACTLY (the old matcher greedily matched the
+    // benign "Loading FFmpeg…" status and aborted before the conversion ran).
     const dl = page.locator("a[download]").first();
-    const errP = page.locator("text=/Conversion failed|FFmpeg|failed|error/i").first();
+    const errP = page.locator("text=/Conversion failed/i").first();
     const winner = await Promise.race([
-      dl.waitFor({ state: "visible", timeout: 150_000 }).then(() => "ok").catch(() => null),
-      errP.waitFor({ state: "visible", timeout: 150_000 }).then(() => "err").catch(() => null),
+      dl.waitFor({ state: "visible", timeout: 150_000 }).then(() => "ok").catch(() => "timeout"),
+      errP.waitFor({ state: "visible", timeout: 150_000 }).then(() => "err").catch(() => "timeout"),
     ]);
     if (winner === "ok") return;
-    const onPage = await errP.innerText().catch(() => "(no error text)");
-    throw new Error(`no download. on-page="${onPage.slice(0, 160)}" console=${JSON.stringify(consoleErrs.slice(0, 3))}`);
+    const onPage = await errP.innerText().catch(() => "");
+    const status = await page.locator("body").innerText().catch(() => "");
+    const stuck = /Loading FFmpeg|Converting/.test(status) ? " [still in loading/converting state — load() hung]" : "";
+    throw new Error(`no download (${winner})${stuck}. err="${onPage.slice(0, 140)}" console=${JSON.stringify(consoleErrs.slice(0, 3))}`);
   }},
 ];
 

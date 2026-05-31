@@ -1,10 +1,9 @@
-# Konver smoke test — 155/156 passed
+# Konver smoke test — 156/156 passed
 
-❌ 1 failures — see below.
+✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
 ## Failures
-
-- **wav-to-mp3 [interactive]** — no download (err). err="Conversion failed: Error: Cannot find module 'blob:http://localhost:3000/60bbaa5a-3f5f-4516-9aae-2c6d5319d2bb'" console=["FFmpeg conversion error: Error: Cannot find module 'bl
+_None._
 
 ## Passes
 - subtitle-generator
@@ -162,3 +161,4 @@
 - unit-converter [interactive]
 - case-converter [interactive]
 - qr-generator [interactive]
+- wav-to-mp3 [interactive]

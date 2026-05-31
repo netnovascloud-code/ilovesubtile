@@ -1,0 +1,164 @@
+# Konver smoke test — 150/155 passed
+
+❌ 5 failures — see below.
+
+## Failures
+
+- **api** — console: Failed to fetch RSC payload for http://localhost:3000/dashboard. Falling back to browser navigation. TypeError: Failed to fetch
+    at f (http://localhost:3000/_next/static/chunks/2117-d39510
+- **lorem-ipsum** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+- **uuid-generator** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+- **unix-timestamp** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+- **timezone-converter** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+
+## Passes
+- subtitle-generator
+- add-subtitles-to-video
+- srt-to-vtt
+- vtt-to-srt
+- translate-subtitles
+- sync-subtitles
+- extract-subtitles
+- subtitle-editor
+- tiktok-subtitles
+- clean-subtitles
+- srt-to-text
+- youtube-chapters
+- batch-translate
+- style-subtitles
+- auto-sync
+- format-json
+- json-to-csv
+- csv-to-json
+- json-to-xml
+- base64
+- url-encode
+- jwt-decoder
+- word-counter
+- xml-to-json
+- json-to-yaml
+- yaml-to-json
+- markdown-to-html
+- html-to-markdown
+- minify-css
+- format-sql
+- regex-tester
+- jpg-to-png
+- png-to-jpg
+- jpg-to-webp
+- png-to-webp
+- svg-to-png
+- compress-image
+- resize-image
+- crop-image
+- rotate-image
+- grayscale-image
+- avif-to-jpg
+- avif-to-png
+- translate-text
+- rephrase-text
+- summarize-text
+- fix-grammar
+- simplify-text
+- professional-email
+- product-description
+- hashtag-generator
+- sentiment-analysis
+- keyword-extractor
+- detect-language
+- color-converter
+- number-base-converter
+- hash-generator
+- unit-converter
+- password-generator
+- case-converter
+- text-diff
+- currency-converter
+- cron-builder
+- invoice-generator
+- vat-calculator
+- merge-pdf
+- split-pdf
+- rotate-pdf
+- images-to-pdf
+- compress-pdf
+- pdf-to-jpg
+- pdf-to-text
+- pdf-to-word
+- word-to-pdf
+- excel-to-pdf
+- html-to-pdf
+- pdf-to-excel
+- watermark-pdf
+- pdf-page-numbers
+- compare-pdf
+- mp3-to-wav
+- wav-to-mp3
+- compress-audio
+- cut-audio
+- merge-audio
+- audio-from-video
+- change-volume
+- change-speed
+- m4a-to-mp3
+- change-audio-pitch
+- compress-video
+- mp4-to-gif
+- gif-to-mp4
+- trim-video
+- mp4-to-webm
+- resize-video
+- mp4-to-mov
+- video-screenshot
+- optimize-gif
+- audio-to-video
+- change-video-speed
+- rotate-video
+- add-watermark
+- create-zip
+- extract-zip
+- remove-background
+- flip-image
+- adjust-image
+- excel-to-json
+- merge-csv
+- sql-to-json
+- json-to-sql
+- image-to-base64
+- image-to-ico
+- watermark-image
+- extract-colors
+- remove-video-background
+- qr-generator
+- qr-code-reader
+- barcode-generator
+- barcode-reader
+- age-calculator
+- roman-numeral-converter
+- color-palette-generator
+- email-signature-generator
+- social-media-crop
+- exif-viewer
+- markdown-to-word
+- pdf-redaction
+- video-thumbnail
+- change-background
+- resume-builder
+- cover-letter
+- contract-analyzer
+- handwriting-to-text
+- business-card-scanner
+- receipt-scanner
+- screenshot-to-code
+- image-to-text
+- pdf-ocr
+- age-calculator [interactive]
+- roman-numeral-converter [interactive]
+- color-palette-generator [interactive]
+- timezone-converter [interactive]
+- email-signature-generator [interactive]
+- hash-generator [interactive]
+- color-converter [interactive]
+- unit-converter [interactive]
+- case-converter [interactive]
+- qr-generator [interactive]

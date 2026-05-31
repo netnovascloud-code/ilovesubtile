@@ -1,11 +1,9 @@
-# Konver smoke test — 153/155 passed
+# Konver smoke test — 155/155 passed
 
-❌ 2 failures — see below.
+✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
 ## Failures
-
-- **unix-timestamp** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
-- **timezone-converter** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+_None._
 
 ## Passes
 - subtitle-generator
@@ -71,6 +69,7 @@
 - case-converter
 - lorem-ipsum
 - uuid-generator
+- unix-timestamp
 - text-diff
 - currency-converter
 - cron-builder
@@ -132,6 +131,7 @@
 - qr-code-reader
 - barcode-generator
 - barcode-reader
+- timezone-converter
 - age-calculator
 - roman-numeral-converter
 - color-palette-generator

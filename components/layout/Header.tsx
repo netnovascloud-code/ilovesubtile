@@ -38,7 +38,9 @@ export function Header() {
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
     { href: localePath(locale, "pricing"), label: t.pricing },
-    { href: localePath(locale, "api"), label: t.api },
+    // /api, /workflow, /batch have no localized route — link them un-prefixed
+    // (the header itself stays translated via the locale cookie).
+    { href: "/api", label: t.api },
   ];
 
   return (
@@ -59,7 +61,7 @@ export function Header() {
           <Link href="/workflow" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Workflow</Link>
           <Link href="/batch" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Batch</Link>
           <Link href={localePath(locale, "pricing")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
-          <Link href={localePath(locale, "api")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
+          <Link href="/api" className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>
 
         <div className="hidden md:flex">

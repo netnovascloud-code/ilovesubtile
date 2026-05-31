@@ -20,7 +20,7 @@ export function Footer() {
           <div className="font-semibold text-ink-900">Konver</div>
           <p className="mt-3 max-w-sm text-sm text-ink-500">{t.tagline}</p>
           <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
-            <ShieldCheck className="h-3.5 w-3.5" /> GDPR Compliant · Files never stored
+            <ShieldCheck className="h-3.5 w-3.5" /> {t.gdprBadge}
           </span>
         </div>
 
@@ -49,7 +49,8 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href={localePath(locale, "api")} className="hover:text-ink-900">
+              {/* /api has no localized route — link un-prefixed to avoid a 404. */}
+              <Link href="/api" className="hover:text-ink-900">
                 {t.api}
               </Link>
             </li>

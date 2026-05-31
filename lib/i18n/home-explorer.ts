@@ -174,8 +174,92 @@ const hi: HomeExplorerStrings = {
   suggestions: ["JPG → PNG", "छवि संपीड़ित करें", "JSON → CSV", "टेक्स्ट अनुवाद", "सबटाइटल"],
 };
 
+const tr: HomeExplorerStrings = {
+  title: "Neyi dönüştürmek istiyorsunuz?",
+  subtitle: "Dosyalar, görüntüler, kod ve metin için ücretsiz, hızlı çevrimiçi araçlar. Bırakın, sonucunuzu alın.",
+  placeholder: "Araç ara — ör. jpg'den png'ye, json'dan csv'ye, çevir…",
+  all: "Tümü",
+  counter: "{n}+ ücretsiz araç · 20 dil · Dosyalar anında silinir",
+  ai: "AI",
+  seeAll: "{n} aracın tümünü gör",
+  empty: "Aramanızla eşleşen henüz bir araç yok.",
+  suggestions: ["JPG → PNG", "Görüntü sıkıştır", "JSON → CSV", "Metin çevir", "Altyazılar"],
+};
+
+const id: HomeExplorerStrings = {
+  title: "Apa yang ingin Anda konversi?",
+  subtitle: "Alat online gratis dan cepat untuk file, gambar, kode, dan teks. Letakkan, dapatkan hasilnya.",
+  placeholder: "Cari alat — mis. jpg ke png, json ke csv, terjemahkan…",
+  all: "Semua",
+  counter: "{n}+ alat gratis · 20 bahasa · File dihapus seketika",
+  ai: "AI",
+  seeAll: "Lihat semua {n} alat",
+  empty: "Belum ada alat yang cocok dengan pencarian Anda.",
+  suggestions: ["JPG → PNG", "Kompres gambar", "JSON → CSV", "Terjemahkan teks", "Subtitle"],
+};
+
+const vi: HomeExplorerStrings = {
+  title: "Bạn muốn chuyển đổi gì?",
+  subtitle: "Công cụ trực tuyến miễn phí, nhanh cho tệp, hình ảnh, mã và văn bản. Thả vào, nhận kết quả.",
+  placeholder: "Tìm công cụ — vd. jpg sang png, json sang csv, dịch…",
+  all: "Tất cả",
+  counter: "{n}+ công cụ miễn phí · 20 ngôn ngữ · Tệp xóa tức thì",
+  ai: "AI",
+  seeAll: "Xem tất cả {n} công cụ",
+  empty: "Chưa có công cụ nào khớp với tìm kiếm của bạn.",
+  suggestions: ["JPG → PNG", "Nén hình ảnh", "JSON → CSV", "Dịch văn bản", "Phụ đề"],
+};
+
+const sv: HomeExplorerStrings = {
+  title: "Vad vill du konvertera?",
+  subtitle: "Gratis, snabba onlineverktyg för filer, bilder, kod och text. Släpp in, få ditt resultat.",
+  placeholder: "Sök verktyg — t.ex. jpg till png, json till csv, översätt…",
+  all: "Alla",
+  counter: "{n}+ gratis verktyg · 20 språk · Filer raderas direkt",
+  ai: "AI",
+  seeAll: "Se alla {n} verktyg",
+  empty: "Inget verktyg matchar din sökning ännu.",
+  suggestions: ["JPG → PNG", "Komprimera bild", "JSON → CSV", "Översätt text", "Undertexter"],
+};
+
+const pl: HomeExplorerStrings = {
+  title: "Co chcesz przekonwertować?",
+  subtitle: "Darmowe, szybkie narzędzia online do plików, obrazów, kodu i tekstu. Upuść i pobierz wynik.",
+  placeholder: "Szukaj narzędzi — np. jpg na png, json na csv, tłumacz…",
+  all: "Wszystko",
+  counter: "{n}+ darmowych narzędzi · 20 języków · Pliki usuwane natychmiast",
+  ai: "AI",
+  seeAll: "Zobacz wszystkie {n} narzędzi",
+  empty: "Żadne narzędzie nie pasuje jeszcze do Twojego wyszukiwania.",
+  suggestions: ["JPG → PNG", "Kompresuj obraz", "JSON → CSV", "Tłumacz tekst", "Napisy"],
+};
+
+const uk: HomeExplorerStrings = {
+  title: "Що ви хочете конвертувати?",
+  subtitle: "Безкоштовні швидкі онлайн-інструменти для файлів, зображень, коду та тексту. Перетягніть і отримайте результат.",
+  placeholder: "Пошук інструментів — напр. jpg у png, json у csv, перекласти…",
+  all: "Усі",
+  counter: "{n}+ безкоштовних інструментів · 20 мов · Файли видаляються миттєво",
+  ai: "AI",
+  seeAll: "Переглянути всі {n} інструментів",
+  empty: "Жоден інструмент поки не відповідає вашому пошуку.",
+  suggestions: ["JPG → PNG", "Стиснути зображення", "JSON → CSV", "Перекласти текст", "Субтитри"],
+};
+
+const cs: HomeExplorerStrings = {
+  title: "Co chcete převést?",
+  subtitle: "Bezplatné, rychlé online nástroje pro soubory, obrázky, kód a text. Přetáhněte a získejte výsledek.",
+  placeholder: "Hledat nástroje — např. jpg na png, json na csv, přeložit…",
+  all: "Vše",
+  counter: "{n}+ bezplatných nástrojů · 20 jazyků · Soubory mazány okamžitě",
+  ai: "AI",
+  seeAll: "Zobrazit všech {n} nástrojů",
+  empty: "Vašemu hledání zatím neodpovídá žádný nástroj.",
+  suggestions: ["JPG → PNG", "Komprimovat obrázek", "JSON → CSV", "Přeložit text", "Titulky"],
+};
+
 // Partial<>: missing locales fall back to English.
-const MAP: Partial<Record<Locale, HomeExplorerStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+const MAP: Partial<Record<Locale, HomeExplorerStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi, tr, id, vi, sv, pl, uk, cs };
 
 export function getHomeExplorer(locale: Locale): HomeExplorerStrings {
   return MAP[locale] ?? en;

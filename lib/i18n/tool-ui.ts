@@ -250,8 +250,99 @@ const hi: ToolUiStrings = {
   pricing: { monthly: "मासिक", annual: "वार्षिक", saveBadge: "~30% बचत" },
 };
 
+const tr: ToolUiStrings = {
+  translate: { sourceLang: "Kaynak dil", targetLang: "Hedef dil", autoDetect: "Otomatik algıla", translateNow: "Şimdi çevir", helper: "Orijinal zamanlamayı koruyarak her satırı çeviririz." },
+  chapters: { uploadOrPaste: "Bir SRT/VTT yükleyin veya transkriptinizi yapıştırın", pasteHere: "Transkriptinizi buraya yapıştırın…", generate: "Bölümler oluştur", copy: "Bölümleri kopyala", copied: "Kopyalandı!", chaptersTitle: "YouTube bölümleriniz" },
+  batch: { selectTargets: "Çevrilecek dilleri seçin", atLeast2: "En az bir dil seçin.", translating: "Çevriliyor…", allDone: "Tüm çeviriler hazır", perLanguage: "Dil başına" },
+  autoSync: { videoFile: "Video veya ses dosyası", subtitleFile: "SRT veya VTT dosyası", bothNeeded: "Her iki dosya da gerekli — ses referanstır.", align: "AI ile hizala" },
+  extract: { selectTracks: "Bulunan altyazı parçaları", noTracks: "Bu dosyada altyazı parçası bulunamadı.", track: "Parça" },
+  burnIn: { videoFile: "Video dosyası", subtitleFile: "Altyazı dosyası", style: "Altyazı stili", customise: "Görünümü özelleştir", burnNow: "Altyazıları göm" },
+  style: { font: "Yazı tipi", size: "Boyut", color: "Metin rengi", outline: "Kontur rengi", outlineWidth: "Kontur kalınlığı", position: "Konum", align: "Hizalama", bold: "Kalın", italic: "İtalik", top: "Üst", middle: "Orta", bottom: "Alt", preview: "Önizleme", previewText: "Pijamalı hasta yağız şoföre çabucak güvendi", download: "Stilize dosyayı indir" },
+  generator: { outputFormat: "Çıktı biçimi", srt: "SRT", vtt: "VTT", sourceLang: "Konuşulan dil", autoDetect: "Otomatik algıla", generate: "Altyazı oluştur" },
+  tiktok: { pickPreset: "Bir hazır ayar seçin", classic: "Klasik", karaoke: "Karaoke", popup: "Açılır", bigBold: "Büyük & Kalın", render: "Altyazılı video oluştur" },
+  pricing: { monthly: "Aylık", annual: "Yıllık", saveBadge: "~%30 tasarruf" },
+};
+
+const id: ToolUiStrings = {
+  translate: { sourceLang: "Bahasa sumber", targetLang: "Bahasa tujuan", autoDetect: "Deteksi otomatis", translateNow: "Terjemahkan sekarang", helper: "Kami menerjemahkan setiap baris sambil mempertahankan timing asli." },
+  chapters: { uploadOrPaste: "Unggah SRT/VTT atau tempel transkrip Anda", pasteHere: "Tempel transkrip Anda di sini…", generate: "Buat bab", copy: "Salin bab", copied: "Disalin!", chaptersTitle: "Bab YouTube Anda" },
+  batch: { selectTargets: "Pilih bahasa untuk diterjemahkan", atLeast2: "Pilih setidaknya satu bahasa.", translating: "Menerjemahkan…", allDone: "Semua terjemahan siap", perLanguage: "Per bahasa" },
+  autoSync: { videoFile: "File video atau audio", subtitleFile: "File SRT atau VTT", bothNeeded: "Kedua file diperlukan — audio adalah referensinya.", align: "Selaraskan dengan AI" },
+  extract: { selectTracks: "Trek subtitle ditemukan", noTracks: "Tidak ada trek subtitle dalam file itu.", track: "Trek" },
+  burnIn: { videoFile: "File video", subtitleFile: "File subtitle", style: "Gaya subtitle", customise: "Sesuaikan tampilan", burnNow: "Sematkan subtitle" },
+  style: { font: "Font", size: "Ukuran", color: "Warna teks", outline: "Warna garis luar", outlineWidth: "Tebal garis luar", position: "Posisi", align: "Perataan", bold: "Tebal", italic: "Miring", top: "Atas", middle: "Tengah", bottom: "Bawah", preview: "Pratinjau", previewText: "Rubah cokelat cepat melompati anjing malas", download: "Unduh file bergaya" },
+  generator: { outputFormat: "Format keluaran", srt: "SRT", vtt: "VTT", sourceLang: "Bahasa lisan", autoDetect: "Deteksi otomatis", generate: "Buat subtitle" },
+  tiktok: { pickPreset: "Pilih preset", classic: "Klasik", karaoke: "Karaoke", popup: "Pop-up", bigBold: "Besar & Tebal", render: "Render video bersubtitle" },
+  pricing: { monthly: "Bulanan", annual: "Tahunan", saveBadge: "Hemat ~30%" },
+};
+
+const vi: ToolUiStrings = {
+  translate: { sourceLang: "Ngôn ngữ nguồn", targetLang: "Ngôn ngữ đích", autoDetect: "Tự động phát hiện", translateNow: "Dịch ngay", helper: "Chúng tôi dịch từng dòng trong khi giữ nguyên thời gian gốc." },
+  chapters: { uploadOrPaste: "Tải lên SRT/VTT hoặc dán bản chép lời của bạn", pasteHere: "Dán bản chép lời của bạn vào đây…", generate: "Tạo chương", copy: "Sao chép chương", copied: "Đã sao chép!", chaptersTitle: "Các chương YouTube của bạn" },
+  batch: { selectTargets: "Chọn ngôn ngữ để dịch", atLeast2: "Chọn ít nhất một ngôn ngữ.", translating: "Đang dịch…", allDone: "Tất cả bản dịch đã sẵn sàng", perLanguage: "Theo ngôn ngữ" },
+  autoSync: { videoFile: "Tệp video hoặc âm thanh", subtitleFile: "Tệp SRT hoặc VTT", bothNeeded: "Cần cả hai tệp — âm thanh là tham chiếu.", align: "Căn chỉnh bằng AI" },
+  extract: { selectTracks: "Đã tìm thấy track phụ đề", noTracks: "Không tìm thấy track phụ đề trong tệp đó.", track: "Track" },
+  burnIn: { videoFile: "Tệp video", subtitleFile: "Tệp phụ đề", style: "Kiểu phụ đề", customise: "Tùy chỉnh giao diện", burnNow: "Ghi phụ đề vào" },
+  style: { font: "Phông chữ", size: "Cỡ", color: "Màu chữ", outline: "Màu viền", outlineWidth: "Độ dày viền", position: "Vị trí", align: "Căn lề", bold: "Đậm", italic: "Nghiêng", top: "Trên", middle: "Giữa", bottom: "Dưới", preview: "Xem trước", previewText: "Con cáo nâu nhanh nhẹn nhảy qua con chó lười", download: "Tải tệp đã tạo kiểu" },
+  generator: { outputFormat: "Định dạng đầu ra", srt: "SRT", vtt: "VTT", sourceLang: "Ngôn ngữ nói", autoDetect: "Tự động phát hiện", generate: "Tạo phụ đề" },
+  tiktok: { pickPreset: "Chọn mẫu", classic: "Cổ điển", karaoke: "Karaoke", popup: "Bật lên", bigBold: "To & Đậm", render: "Kết xuất video có phụ đề" },
+  pricing: { monthly: "Hàng tháng", annual: "Hàng năm", saveBadge: "Tiết kiệm ~30%" },
+};
+
+const sv: ToolUiStrings = {
+  translate: { sourceLang: "Källspråk", targetLang: "Målspråk", autoDetect: "Identifiera automatiskt", translateNow: "Översätt nu", helper: "Vi översätter varje rad och behåller den ursprungliga timingen." },
+  chapters: { uploadOrPaste: "Ladda upp en SRT/VTT eller klistra in din transkription", pasteHere: "Klistra in din transkription här…", generate: "Generera kapitel", copy: "Kopiera kapitel", copied: "Kopierat!", chaptersTitle: "Dina YouTube-kapitel" },
+  batch: { selectTargets: "Välj språk att översätta till", atLeast2: "Välj minst ett språk.", translating: "Översätter…", allDone: "Alla översättningar är klara", perLanguage: "Per språk" },
+  autoSync: { videoFile: "Video- eller ljudfil", subtitleFile: "SRT- eller VTT-fil", bothNeeded: "Båda filerna krävs — ljudet är referensen.", align: "Justera med AI" },
+  extract: { selectTracks: "Hittade undertextspår", noTracks: "Inga undertextspår hittades i filen.", track: "Spår" },
+  burnIn: { videoFile: "Videofil", subtitleFile: "Undertextfil", style: "Undertextstil", customise: "Anpassa utseendet", burnNow: "Bränn in undertexter" },
+  style: { font: "Typsnitt", size: "Storlek", color: "Textfärg", outline: "Konturfärg", outlineWidth: "Konturbredd", position: "Position", align: "Justering", bold: "Fet", italic: "Kursiv", top: "Topp", middle: "Mitten", bottom: "Botten", preview: "Förhandsgranska", previewText: "Flygande bäckasiner söka hwila på mjuka tuvor", download: "Ladda ner stylad fil" },
+  generator: { outputFormat: "Utdataformat", srt: "SRT", vtt: "VTT", sourceLang: "Talat språk", autoDetect: "Identifiera automatiskt", generate: "Generera undertexter" },
+  tiktok: { pickPreset: "Välj en förinställning", classic: "Klassisk", karaoke: "Karaoke", popup: "Popup", bigBold: "Stor & Fet", render: "Rendera textad video" },
+  pricing: { monthly: "Månadsvis", annual: "Årsvis", saveBadge: "Spara ~30 %" },
+};
+
+const pl: ToolUiStrings = {
+  translate: { sourceLang: "Język źródłowy", targetLang: "Język docelowy", autoDetect: "Wykryj automatycznie", translateNow: "Przetłumacz teraz", helper: "Tłumaczymy każdy wiersz, zachowując oryginalne czasy." },
+  chapters: { uploadOrPaste: "Prześlij SRT/VTT lub wklej transkrypcję", pasteHere: "Wklej transkrypcję tutaj…", generate: "Generuj rozdziały", copy: "Kopiuj rozdziały", copied: "Skopiowano!", chaptersTitle: "Twoje rozdziały YouTube" },
+  batch: { selectTargets: "Wybierz języki docelowe", atLeast2: "Wybierz co najmniej jeden język.", translating: "Tłumaczenie…", allDone: "Wszystkie tłumaczenia gotowe", perLanguage: "Na język" },
+  autoSync: { videoFile: "Plik wideo lub audio", subtitleFile: "Plik SRT lub VTT", bothNeeded: "Oba pliki są wymagane — dźwięk jest punktem odniesienia.", align: "Wyrównaj z AI" },
+  extract: { selectTracks: "Znalezione ścieżki napisów", noTracks: "Nie znaleziono ścieżek napisów w tym pliku.", track: "Ścieżka" },
+  burnIn: { videoFile: "Plik wideo", subtitleFile: "Plik napisów", style: "Styl napisów", customise: "Dostosuj wygląd", burnNow: "Wypal napisy" },
+  style: { font: "Czcionka", size: "Rozmiar", color: "Kolor tekstu", outline: "Kolor obrysu", outlineWidth: "Grubość obrysu", position: "Pozycja", align: "Wyrównanie", bold: "Pogrubienie", italic: "Kursywa", top: "Góra", middle: "Środek", bottom: "Dół", preview: "Podgląd", previewText: "Zażółć gęślą jaźń", download: "Pobierz plik ze stylem" },
+  generator: { outputFormat: "Format wyjściowy", srt: "SRT", vtt: "VTT", sourceLang: "Język mówiony", autoDetect: "Wykryj automatycznie", generate: "Generuj napisy" },
+  tiktok: { pickPreset: "Wybierz ustawienie", classic: "Klasyczny", karaoke: "Karaoke", popup: "Pop-up", bigBold: "Duży i pogrubiony", render: "Renderuj wideo z napisami" },
+  pricing: { monthly: "Miesięcznie", annual: "Rocznie", saveBadge: "Oszczędź ~30%" },
+};
+
+const uk: ToolUiStrings = {
+  translate: { sourceLang: "Мова джерела", targetLang: "Цільова мова", autoDetect: "Автовизначення", translateNow: "Перекласти зараз", helper: "Ми перекладаємо кожен рядок, зберігаючи оригінальний тайминг." },
+  chapters: { uploadOrPaste: "Завантажте SRT/VTT або вставте транскрипт", pasteHere: "Вставте транскрипт сюди…", generate: "Створити розділи", copy: "Копіювати розділи", copied: "Скопійовано!", chaptersTitle: "Ваші розділи YouTube" },
+  batch: { selectTargets: "Виберіть мови для перекладу", atLeast2: "Виберіть принаймні одну мову.", translating: "Переклад…", allDone: "Усі переклади готові", perLanguage: "На мову" },
+  autoSync: { videoFile: "Відео- або аудіофайл", subtitleFile: "Файл SRT або VTT", bothNeeded: "Потрібні обидва файли — аудіо є еталоном.", align: "Вирівняти з AI" },
+  extract: { selectTracks: "Знайдені доріжки субтитрів", noTracks: "У цьому файлі не знайдено доріжок субтитрів.", track: "Доріжка" },
+  burnIn: { videoFile: "Відеофайл", subtitleFile: "Файл субтитрів", style: "Стиль субтитрів", customise: "Налаштувати вигляд", burnNow: "Вшити субтитри" },
+  style: { font: "Шрифт", size: "Розмір", color: "Колір тексту", outline: "Колір обведення", outlineWidth: "Товщина обведення", position: "Позиція", align: "Вирівнювання", bold: "Жирний", italic: "Курсив", top: "Угорі", middle: "Посередині", bottom: "Внизу", preview: "Перегляд", previewText: "Жебракують філософи при ґанку церкви в Гадячі", download: "Завантажити стилізований файл" },
+  generator: { outputFormat: "Формат виводу", srt: "SRT", vtt: "VTT", sourceLang: "Мова мовлення", autoDetect: "Автовизначення", generate: "Створити субтитри" },
+  tiktok: { pickPreset: "Виберіть пресет", classic: "Класичний", karaoke: "Караоке", popup: "Спливаючий", bigBold: "Великий і жирний", render: "Рендер відео із субтитрами" },
+  pricing: { monthly: "Щомісяця", annual: "Щороку", saveBadge: "Економія ~30 %" },
+};
+
+const cs: ToolUiStrings = {
+  translate: { sourceLang: "Zdrojový jazyk", targetLang: "Cílový jazyk", autoDetect: "Automatická detekce", translateNow: "Přeložit nyní", helper: "Překládáme každý řádek a zachováváme původní časování." },
+  chapters: { uploadOrPaste: "Nahrajte SRT/VTT nebo vložte přepis", pasteHere: "Vložte přepis sem…", generate: "Vytvořit kapitoly", copy: "Kopírovat kapitoly", copied: "Zkopírováno!", chaptersTitle: "Vaše kapitoly YouTube" },
+  batch: { selectTargets: "Vyberte cílové jazyky", atLeast2: "Vyberte alespoň jeden jazyk.", translating: "Překládání…", allDone: "Všechny překlady jsou hotové", perLanguage: "Na jazyk" },
+  autoSync: { videoFile: "Video nebo audio soubor", subtitleFile: "Soubor SRT nebo VTT", bothNeeded: "Jsou potřeba oba soubory — zvuk je referencí.", align: "Zarovnat pomocí AI" },
+  extract: { selectTracks: "Nalezené stopy titulků", noTracks: "V tomto souboru nebyly nalezeny žádné stopy titulků.", track: "Stopa" },
+  burnIn: { videoFile: "Video soubor", subtitleFile: "Soubor titulků", style: "Styl titulků", customise: "Přizpůsobit vzhled", burnNow: "Vypálit titulky" },
+  style: { font: "Písmo", size: "Velikost", color: "Barva textu", outline: "Barva obrysu", outlineWidth: "Tloušťka obrysu", position: "Pozice", align: "Zarovnání", bold: "Tučné", italic: "Kurzíva", top: "Nahoře", middle: "Uprostřed", bottom: "Dole", preview: "Náhled", previewText: "Příliš žluťoučký kůň úpěl ďábelské ódy", download: "Stáhnout stylovaný soubor" },
+  generator: { outputFormat: "Výstupní formát", srt: "SRT", vtt: "VTT", sourceLang: "Mluvený jazyk", autoDetect: "Automatická detekce", generate: "Vytvořit titulky" },
+  tiktok: { pickPreset: "Vyberte předvolbu", classic: "Klasický", karaoke: "Karaoke", popup: "Vyskakovací", bigBold: "Velké a tučné", render: "Vykreslit video s titulky" },
+  pricing: { monthly: "Měsíčně", annual: "Ročně", saveBadge: "Ušetřete ~30 %" },
+};
+
 // Partial<>: missing locales fall back to English via getToolUi().
-export const TOOL_UI: Partial<Record<Locale, ToolUiStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+export const TOOL_UI: Partial<Record<Locale, ToolUiStrings>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi, tr, id, vi, sv, pl, uk, cs };
 
 export function getToolUi(locale: Locale): ToolUiStrings {
   return TOOL_UI[locale] ?? en;

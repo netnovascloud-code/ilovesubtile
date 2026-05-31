@@ -4,6 +4,7 @@ export type ChromeStrings = {
   nav: { tools: string; pricing: string; api: string; login: string; start: string };
   footer: {
     tagline: string;
+    gdprBadge: string;
     topTools: string;
     product: string;
     legal: string;
@@ -75,7 +76,7 @@ export type ChromeStrings = {
 
 const en: ChromeStrings = {
   nav: { tools: "Tools", pricing: "Pricing", api: "API", login: "Log in", start: "Get started" },
-  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", topTools: "Top tools", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
+  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", gdprBadge: "GDPR Compliant · Files never stored", topTools: "Top tools", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
   card: { open: "Open", pro: "Pro" },
   account: { billing: "Billing", logout: "Log out" },
   upload: { instant: "Instant conversion — runs in your browser, no upload needed", dropOrClick: "Drop your file or click to upload", dropHere: "Drop the file here", formats: "Accepted formats", maxFree: "Max {mb} MB on the free plan.", selectFile: "Select a file", fileTooLarge: "This file is {size}. Free limit is {mb} MB — upgrade to Pro for up to 500 MB." },
@@ -92,7 +93,7 @@ const en: ChromeStrings = {
 
 const fr: ChromeStrings = {
   nav: { tools: "Outils", pricing: "Tarifs", api: "API", login: "Connexion", start: "Commencer" },
-  footer: { tagline: "Outils de sous-titrage gratuits — générer, traduire, synchroniser, convertir. Un outil par tâche, tout dans votre navigateur.", topTools: "Outils phares", product: "Produit", legal: "Mentions légales", pricing: "Tarifs", api: "API", dashboard: "Tableau de bord", vsVeed: "vs VEED.io", privacy: "Confidentialité", terms: "CGU", rights: "Tous droits réservés." },
+  footer: { tagline: "Outils de conversion en ligne gratuits — fichiers, images, code, texte et plus. Un outil simple par tâche.", gdprBadge: "Conforme RGPD · Fichiers jamais stockés", topTools: "Outils phares", product: "Produit", legal: "Mentions légales", pricing: "Tarifs", api: "API", dashboard: "Tableau de bord", vsVeed: "vs VEED.io", privacy: "Confidentialité", terms: "CGU", rights: "Tous droits réservés." },
   card: { open: "Ouvrir", pro: "Pro" },
   account: { billing: "Facturation", logout: "Déconnexion" },
   upload: { instant: "Conversion instantanée — dans votre navigateur, aucun envoi requis", dropOrClick: "Déposez votre fichier ou cliquez pour téléverser", dropHere: "Déposez le fichier ici", formats: "Formats acceptés", maxFree: "Max {mb} Mo sur l'offre gratuite.", selectFile: "Choisir un fichier", fileTooLarge: "Ce fichier fait {size}. Limite gratuite : {mb} Mo — passez Pro pour jusqu'à 500 Mo." },
@@ -109,7 +110,7 @@ const fr: ChromeStrings = {
 
 const es: ChromeStrings = {
   nav: { tools: "Herramientas", pricing: "Precios", api: "API", login: "Iniciar sesión", start: "Empezar" },
-  footer: { tagline: "Herramientas gratuitas de subtítulos — generar, traducir, sincronizar, convertir. Una herramienta por tarea, todo en tu navegador.", topTools: "Herramientas destacadas", product: "Producto", legal: "Legal", pricing: "Precios", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Privacidad", terms: "Términos", rights: "Todos los derechos reservados." },
+  footer: { tagline: "Herramientas de conversión online gratis — archivos, imágenes, código, texto y más. Una herramienta simple por tarea.", gdprBadge: "Conforme con el RGPD · Archivos nunca almacenados", topTools: "Herramientas destacadas", product: "Producto", legal: "Legal", pricing: "Precios", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Privacidad", terms: "Términos", rights: "Todos los derechos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Facturación", logout: "Cerrar sesión" },
   upload: { instant: "Conversión instantánea — en tu navegador, sin subir nada", dropOrClick: "Suelta tu archivo o haz clic para subirlo", dropHere: "Suelta el archivo aquí", formats: "Formatos aceptados", maxFree: "Máx. {mb} MB en el plan gratis.", selectFile: "Elegir un archivo", fileTooLarge: "Este archivo pesa {size}. El límite gratis es {mb} MB — pasa a Pro hasta 500 MB." },
@@ -126,7 +127,7 @@ const es: ChromeStrings = {
 
 const pt: ChromeStrings = {
   nav: { tools: "Ferramentas", pricing: "Preços", api: "API", login: "Entrar", start: "Começar" },
-  footer: { tagline: "Ferramentas grátis de legendas — gerar, traduzir, sincronizar, converter. Uma ferramenta por tarefa, tudo no navegador.", topTools: "Ferramentas em destaque", product: "Produto", legal: "Legal", pricing: "Preços", api: "API", dashboard: "Painel", vsVeed: "vs VEED.io", privacy: "Privacidade", terms: "Termos", rights: "Todos os direitos reservados." },
+  footer: { tagline: "Ferramentas de conversão online grátis — arquivos, imagens, código, texto e mais. Uma ferramenta simples por tarefa.", gdprBadge: "Em conformidade com o RGPD · Arquivos nunca armazenados", topTools: "Ferramentas em destaque", product: "Produto", legal: "Legal", pricing: "Preços", api: "API", dashboard: "Painel", vsVeed: "vs VEED.io", privacy: "Privacidade", terms: "Termos", rights: "Todos os direitos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Faturamento", logout: "Sair" },
   upload: { instant: "Conversão instantânea — no seu navegador, sem upload", dropOrClick: "Solte seu arquivo ou clique para enviar", dropHere: "Solte o arquivo aqui", formats: "Formatos aceitos", maxFree: "Máx. {mb} MB no plano grátis.", selectFile: "Escolher arquivo", fileTooLarge: "Este arquivo tem {size}. Limite grátis: {mb} MB — vá Pro até 500 MB." },
@@ -143,7 +144,7 @@ const pt: ChromeStrings = {
 
 const de: ChromeStrings = {
   nav: { tools: "Tools", pricing: "Preise", api: "API", login: "Anmelden", start: "Loslegen" },
-  footer: { tagline: "Kostenlose Untertitel-Tools — erzeugen, übersetzen, synchronisieren, umwandeln. Ein Tool pro Aufgabe, alles im Browser.", topTools: "Top-Tools", product: "Produkt", legal: "Rechtliches", pricing: "Preise", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Datenschutz", terms: "AGB", rights: "Alle Rechte vorbehalten." },
+  footer: { tagline: "Kostenlose Online-Konvertierungstools — Dateien, Bilder, Code, Text und mehr. Ein einfaches Tool pro Aufgabe.", gdprBadge: "DSGVO-konform · Dateien werden nie gespeichert", topTools: "Top-Tools", product: "Produkt", legal: "Rechtliches", pricing: "Preise", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Datenschutz", terms: "AGB", rights: "Alle Rechte vorbehalten." },
   card: { open: "Öffnen", pro: "Pro" },
   account: { billing: "Abrechnung", logout: "Abmelden" },
   upload: { instant: "Sofortige Konvertierung — im Browser, kein Upload nötig", dropOrClick: "Datei hier ablegen oder klicken zum Hochladen", dropHere: "Datei hier ablegen", formats: "Akzeptierte Formate", maxFree: "Max. {mb} MB im Gratis-Plan.", selectFile: "Datei wählen", fileTooLarge: "Diese Datei ist {size}. Gratis-Limit: {mb} MB — Pro bis 500 MB." },
@@ -160,7 +161,7 @@ const de: ChromeStrings = {
 
 const it: ChromeStrings = {
   nav: { tools: "Strumenti", pricing: "Prezzi", api: "API", login: "Accedi", start: "Inizia" },
-  footer: { tagline: "Strumenti gratuiti per sottotitoli — generare, tradurre, sincronizzare, convertire. Uno strumento per attività, tutto nel browser.", topTools: "Strumenti principali", product: "Prodotto", legal: "Legale", pricing: "Prezzi", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Termini", rights: "Tutti i diritti riservati." },
+  footer: { tagline: "Strumenti di conversione online gratuiti — file, immagini, codice, testo e altro. Uno strumento semplice per attività.", gdprBadge: "Conforme al GDPR · File mai memorizzati", topTools: "Strumenti principali", product: "Prodotto", legal: "Legale", pricing: "Prezzi", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Termini", rights: "Tutti i diritti riservati." },
   card: { open: "Apri", pro: "Pro" },
   account: { billing: "Fatturazione", logout: "Esci" },
   upload: { instant: "Conversione istantanea — nel browser, nessun upload", dropOrClick: "Trascina il file o clicca per caricare", dropHere: "Rilascia il file qui", formats: "Formati accettati", maxFree: "Max {mb} MB nel piano gratuito.", selectFile: "Scegli un file", fileTooLarge: "Questo file è {size}. Limite gratis: {mb} MB — passa a Pro fino a 500 MB." },
@@ -177,7 +178,7 @@ const it: ChromeStrings = {
 
 const nl: ChromeStrings = {
   nav: { tools: "Tools", pricing: "Prijzen", api: "API", login: "Inloggen", start: "Aan de slag" },
-  footer: { tagline: "Gratis ondertitel-tools — genereren, vertalen, synchroniseren, converteren. Eén tool per taak, alles in je browser.", topTools: "Top-tools", product: "Product", legal: "Juridisch", pricing: "Prijzen", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Voorwaarden", rights: "Alle rechten voorbehouden." },
+  footer: { tagline: "Gratis online conversietools — bestanden, afbeeldingen, code, tekst en meer. Eén eenvoudige tool per taak.", gdprBadge: "AVG-conform · Bestanden nooit opgeslagen", topTools: "Top-tools", product: "Product", legal: "Juridisch", pricing: "Prijzen", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Voorwaarden", rights: "Alle rechten voorbehouden." },
   card: { open: "Openen", pro: "Pro" },
   account: { billing: "Facturering", logout: "Uitloggen" },
   upload: { instant: "Directe conversie — in je browser, geen upload nodig", dropOrClick: "Sleep je bestand of klik om te uploaden", dropHere: "Bestand hier neerzetten", formats: "Geaccepteerde formaten", maxFree: "Max. {mb} MB op het gratis abonnement.", selectFile: "Bestand kiezen", fileTooLarge: "Dit bestand is {size}. Gratis limiet: {mb} MB — upgrade naar Pro tot 500 MB." },
@@ -194,7 +195,7 @@ const nl: ChromeStrings = {
 
 const ja: ChromeStrings = {
   nav: { tools: "ツール", pricing: "料金", api: "API", login: "ログイン", start: "始める" },
-  footer: { tagline: "無料の字幕ツール — 生成、翻訳、同期、変換。1 つの作業に 1 つのツール、すべてブラウザで。", topTools: "主要ツール", product: "プロダクト", legal: "法的事項", pricing: "料金", api: "API", dashboard: "ダッシュボード", vsVeed: "VEED.io との比較", privacy: "プライバシー", terms: "利用規約", rights: "All rights reserved." },
+  footer: { tagline: "無料のオンライン変換ツール — ファイル、画像、コード、テキストなど。作業ごとにシンプルなツール 1 つ。", gdprBadge: "GDPR 準拠 · ファイルは保存されません", topTools: "主要ツール", product: "プロダクト", legal: "法的事項", pricing: "料金", api: "API", dashboard: "ダッシュボード", vsVeed: "VEED.io との比較", privacy: "プライバシー", terms: "利用規約", rights: "All rights reserved." },
   card: { open: "開く", pro: "Pro" },
   account: { billing: "請求", logout: "ログアウト" },
   upload: { instant: "即時変換 — ブラウザ内で実行、アップロード不要", dropOrClick: "ファイルをドロップまたはクリックしてアップロード", dropHere: "ここにファイルをドロップ", formats: "対応形式", maxFree: "無料プランは最大 {mb} MB。", selectFile: "ファイルを選択", fileTooLarge: "このファイルは {size} です。無料の上限は {mb} MB — Pro なら 500 MB まで。" },
@@ -211,7 +212,7 @@ const ja: ChromeStrings = {
 
 const zh: ChromeStrings = {
   nav: { tools: "工具", pricing: "价格", api: "API", login: "登录", start: "开始使用" },
-  footer: { tagline: "免费字幕工具 — 生成、翻译、同步、转换。一项任务一个工具,全部在浏览器中完成。", topTools: "热门工具", product: "产品", legal: "法律", pricing: "价格", api: "API", dashboard: "面板", vsVeed: "对比 VEED.io", privacy: "隐私", terms: "条款", rights: "保留所有权利。" },
+  footer: { tagline: "免费在线转换工具 — 文件、图像、代码、文本等。每项任务一个简单工具。", gdprBadge: "符合 GDPR · 文件从不存储", topTools: "热门工具", product: "产品", legal: "法律", pricing: "价格", api: "API", dashboard: "面板", vsVeed: "对比 VEED.io", privacy: "隐私", terms: "条款", rights: "保留所有权利。" },
   card: { open: "打开", pro: "Pro" },
   account: { billing: "账单", logout: "退出登录" },
   upload: { instant: "即时转换 — 在浏览器中运行,无需上传", dropOrClick: "拖入文件或点击上传", dropHere: "将文件拖到这里", formats: "支持的格式", maxFree: "免费版最大 {mb} MB。", selectFile: "选择文件", fileTooLarge: "此文件 {size}。免费上限 {mb} MB — 升级 Pro 最大 500 MB。" },
@@ -228,7 +229,7 @@ const zh: ChromeStrings = {
 
 const ko: ChromeStrings = {
   nav: { tools: "도구", pricing: "요금", api: "API", login: "로그인", start: "시작하기" },
-  footer: { tagline: "무료 자막 도구 — 생성, 번역, 동기화, 변환. 작업당 하나의 도구, 모두 브라우저에서.", topTools: "주요 도구", product: "프로덕트", legal: "법적 사항", pricing: "요금", api: "API", dashboard: "대시보드", vsVeed: "VEED.io 비교", privacy: "개인정보", terms: "이용약관", rights: "All rights reserved." },
+  footer: { tagline: "무료 온라인 변환 도구 — 파일, 이미지, 코드, 텍스트 등. 작업마다 간단한 도구 하나.", gdprBadge: "GDPR 준수 · 파일은 저장되지 않습니다", topTools: "주요 도구", product: "프로덕트", legal: "법적 사항", pricing: "요금", api: "API", dashboard: "대시보드", vsVeed: "VEED.io 비교", privacy: "개인정보", terms: "이용약관", rights: "All rights reserved." },
   card: { open: "열기", pro: "Pro" },
   account: { billing: "결제", logout: "로그아웃" },
   upload: { instant: "즉시 변환 — 브라우저에서 실행, 업로드 불필요", dropOrClick: "파일을 끌어다 놓거나 클릭하여 업로드", dropHere: "여기에 파일을 놓으세요", formats: "지원 형식", maxFree: "무료 플랜은 최대 {mb} MB.", selectFile: "파일 선택", fileTooLarge: "이 파일은 {size} 입니다. 무료 한도 {mb} MB — Pro 는 최대 500 MB." },
@@ -245,7 +246,7 @@ const ko: ChromeStrings = {
 
 const ar: ChromeStrings = {
   nav: { tools: "الأدوات", pricing: "الأسعار", api: "API", login: "تسجيل الدخول", start: "ابدأ" },
-  footer: { tagline: "أدوات مجانية للترجمة — توليد وترجمة ومزامنة وتحويل. أداة واحدة لكل مهمة، الكل في متصفحك.", topTools: "الأدوات الأساسية", product: "المنتج", legal: "قانوني", pricing: "الأسعار", api: "API", dashboard: "لوحة التحكم", vsVeed: "مقارنة بـ VEED.io", privacy: "الخصوصية", terms: "الشروط", rights: "جميع الحقوق محفوظة." },
+  footer: { tagline: "أدوات تحويل مجانية عبر الإنترنت — ملفات وصور وأكواد ونصوص والمزيد. أداة بسيطة لكل مهمة.", gdprBadge: "متوافق مع GDPR · لا يتم تخزين الملفات أبدًا", topTools: "الأدوات الأساسية", product: "المنتج", legal: "قانوني", pricing: "الأسعار", api: "API", dashboard: "لوحة التحكم", vsVeed: "مقارنة بـ VEED.io", privacy: "الخصوصية", terms: "الشروط", rights: "جميع الحقوق محفوظة." },
   card: { open: "افتح", pro: "Pro" },
   account: { billing: "الفوترة", logout: "تسجيل الخروج" },
   upload: { instant: "تحويل فوري — داخل متصفحك، بلا رفع", dropOrClick: "أفلت ملفك أو انقر للرفع", dropHere: "أفلت الملف هنا", formats: "الصيغ المقبولة", maxFree: "أقصى {mb} ميجا في الخطة المجانية.", selectFile: "اختر ملفًا", fileTooLarge: "هذا الملف {size}. الحد المجاني {mb} ميجا — Pro حتى 500 ميجا." },
@@ -262,7 +263,7 @@ const ar: ChromeStrings = {
 
 const ru: ChromeStrings = {
   nav: { tools: "Инструменты", pricing: "Тарифы", api: "API", login: "Войти", start: "Начать" },
-  footer: { tagline: "Бесплатные инструменты для субтитров — генерировать, переводить, синхронизировать, конвертировать. Один инструмент на задачу, всё в браузере.", topTools: "Основные инструменты", product: "Продукт", legal: "Правовое", pricing: "Тарифы", api: "API", dashboard: "Панель", vsVeed: "Сравнение с VEED.io", privacy: "Конфиденциальность", terms: "Условия", rights: "Все права защищены." },
+  footer: { tagline: "Бесплатные онлайн-инструменты конвертации — файлы, изображения, код, текст и другое. Один простой инструмент на задачу.", gdprBadge: "Соответствует GDPR · Файлы никогда не хранятся", topTools: "Основные инструменты", product: "Продукт", legal: "Правовое", pricing: "Тарифы", api: "API", dashboard: "Панель", vsVeed: "Сравнение с VEED.io", privacy: "Конфиденциальность", terms: "Условия", rights: "Все права защищены." },
   card: { open: "Открыть", pro: "Pro" },
   account: { billing: "Оплата", logout: "Выйти" },
   upload: { instant: "Мгновенная конвертация — в браузере, без загрузки", dropOrClick: "Перетащите файл или нажмите для загрузки", dropHere: "Бросьте файл сюда", formats: "Допустимые форматы", maxFree: "Макс. {mb} МБ на бесплатном тарифе.", selectFile: "Выбрать файл", fileTooLarge: "Файл размером {size}. Бесплатный лимит {mb} МБ — Pro до 500 МБ." },
@@ -279,7 +280,7 @@ const ru: ChromeStrings = {
 
 const hi: ChromeStrings = {
   nav: { tools: "टूल", pricing: "मूल्य", api: "API", login: "लॉग इन", start: "शुरू करें" },
-  footer: { tagline: "मुफ़्त सबटाइटल टूल — बनाएँ, अनुवाद करें, सिंक करें, बदलें। हर काम के लिए एक टूल, सब ब्राउज़र में।", topTools: "मुख्य टूल", product: "उत्पाद", legal: "क़ानूनी", pricing: "मूल्य", api: "API", dashboard: "डैशबोर्ड", vsVeed: "VEED.io से तुलना", privacy: "गोपनीयता", terms: "शर्तें", rights: "सर्वाधिकार सुरक्षित।" },
+  footer: { tagline: "मुफ़्त ऑनलाइन रूपांतरण टूल — फ़ाइलें, इमेज, कोड, टेक्स्ट और बहुत कुछ। हर काम के लिए एक सरल टूल।", gdprBadge: "GDPR अनुपालन · फ़ाइलें कभी संग्रहीत नहीं", topTools: "मुख्य टूल", product: "उत्पाद", legal: "क़ानूनी", pricing: "मूल्य", api: "API", dashboard: "डैशबोर्ड", vsVeed: "VEED.io से तुलना", privacy: "गोपनीयता", terms: "शर्तें", rights: "सर्वाधिकार सुरक्षित।" },
   card: { open: "खोलें", pro: "Pro" },
   account: { billing: "बिलिंग", logout: "लॉग आउट" },
   upload: { instant: "तुरंत रूपांतरण — आपके ब्राउज़र में, अपलोड की ज़रूरत नहीं", dropOrClick: "फ़ाइल छोड़ें या अपलोड करने के लिए क्लिक करें", dropHere: "फ़ाइल यहाँ छोड़ें", formats: "स्वीकृत प्रारूप", maxFree: "मुफ़्त प्लान में अधिकतम {mb} MB।", selectFile: "फ़ाइल चुनें", fileTooLarge: "यह फ़ाइल {size} है. मुफ़्त सीमा {mb} MB — Pro में 500 MB तक।" },
@@ -294,9 +295,128 @@ const hi: ChromeStrings = {
   auth: { loginTitle: "वापसी पर स्वागत है", loginLead: "अपने Konver खाते में लॉग इन करें।", registerTitle: "अपना खाता बनाएँ", registerLead: "रोज़ 5 मुफ़्त रन। क्रेडिट कार्ड ज़रूरी नहीं।", email: "ईमेल", password: "पासवर्ड", loginCta: "लॉग इन", registerCta: "खाता बनाएँ", loading: "कृपया प्रतीक्षा करें…", orWithEmail: "या ईमेल से", google: "Google से जारी रखें", checkInbox: "पुष्टि के लिए अपना इनबॉक्स देखें।", noAccount: "खाता नहीं है?", createOne: "एक बनाएँ", hasAccount: "पहले से खाता है?", logIn: "लॉग इन" },
 };
 
+const tr: ChromeStrings = {
+  nav: { tools: "Araçlar", pricing: "Fiyatlar", api: "API", login: "Giriş yap", start: "Başla" },
+  footer: { tagline: "Ücretsiz çevrimiçi dönüştürme araçları — dosyalar, görüntüler, kod, metin ve daha fazlası. Her iş için tek bir basit araç.", gdprBadge: "GDPR uyumlu · Dosyalar asla saklanmaz", topTools: "En iyi araçlar", product: "Ürün", legal: "Yasal", pricing: "Fiyatlar", api: "API", dashboard: "Panel", vsVeed: "VEED.io karşılaştırması", privacy: "Gizlilik", terms: "Şartlar", rights: "Tüm hakları saklıdır." },
+  card: { open: "Aç", pro: "Pro" },
+  account: { billing: "Faturalandırma", logout: "Çıkış yap" },
+  upload: { instant: "Anında dönüştürme — tarayıcınızda çalışır, yükleme gerekmez", dropOrClick: "Dosyanızı bırakın veya yüklemek için tıklayın", dropHere: "Dosyayı buraya bırakın", formats: "Kabul edilen biçimler", maxFree: "Ücretsiz planda en fazla {mb} MB.", selectFile: "Dosya seç", fileTooLarge: "Bu dosya {size}. Ücretsiz sınır {mb} MB — 500 MB'a kadar için Pro'ya geçin." },
+  processing: { working: "Dosyanız işleniyor…", uploading: "Yükleniyor…", processing: "İşleniyor…", takes: "Genellikle 30–90 saniye sürer", ad: "Reklam" },
+  result: { ready: "Dosyanız hazır", download: "İndir", tryAnother: "Başka bir dosya işle", whatNext: "Sırada ne var?", preview: "Önizleme" },
+  adblock: { title: "Konver reklamlar sayesinde ücretsizdir", body1: "Reklamları şu şekilde devre dışı bırakabilirsiniz:", goPro: "ayda 9 €'ya Pro'ya geçerek", body2: " veya bu sitede reklamlara izin vererek.", dismiss: "Kapat" },
+  errors: { serverReturned: "Sunucu {status} döndürdü. Birazdan tekrar deneyin.", noResultUrl: "Sunucu bir sonuç URL'si döndürmedi.", network: "Ağ hatası.", notWiredUp: "Bu araç henüz bir arka uca bağlı değil. İlgili Supabase işlevini yapılandırın.", noCues: "Altyazı satırı bulunamadı.", badFormat: "SRT veya VTT biçimi algılanamadı.", cantParse: "Bu dosya ayrıştırılamadı.", wrongFormat: "Bu bir {fmt} dosyası gibi görünüyor. Bunun yerine {other} dönüştürücüyü deneyin." },
+  sync: { prompt: "Ne kadar kaydıralım?", help: "Pozitif sayılar altyazıları geciktirir, negatif sayılar öne alır.", seconds: "Saniye", millis: "Milisaniye", apply: "Kaydırmayı uygula", cancel: "İptal" },
+  clean: { title: "Neyi temizleyelim?", summary: "{a} satır girdi · temizlikten sonra {b}.", cancel: "İptal", download: "Temizlenmiş dosyayı indir", stripSdh: "[müzik] (iç çeker) gibi SDH etiketlerini kaldır", removeDup: "Ardışık yinelenen satırları kaldır", shouting: "BÜYÜK HARFLERİ cümle düzenine çevir", collapseWs: "Birden çok boşluğu birleştir", trim: "Her satırın etrafındaki boşlukları kırp" },
+  editor: { openAnother: "Başka aç", export: "Dışa aktar", delete: "Sil", openFile: "Dosya aç", cues: "{n} satır" },
+  srtToText: { merged: "Düzen: birleştirilmiş paragraflar", perCue: "Düzen: her altyazı için bir satır" },
+  auth: { loginTitle: "Tekrar hoş geldiniz", loginLead: "Konver hesabınıza giriş yapın.", registerTitle: "Hesabınızı oluşturun", registerLead: "Günde 5 ücretsiz kullanım. Kredi kartı gerekmez.", email: "E-posta", password: "Şifre", loginCta: "Giriş yap", registerCta: "Hesap oluştur", loading: "Lütfen bekleyin…", orWithEmail: "veya e-posta ile", google: "Google ile devam et", checkInbox: "E-postanızı onaylamak için gelen kutunuzu kontrol edin.", noAccount: "Hesabınız yok mu?", createOne: "Bir tane oluşturun", hasAccount: "Zaten hesabınız var mı?", logIn: "Giriş yap" },
+};
+
+const id: ChromeStrings = {
+  nav: { tools: "Alat", pricing: "Harga", api: "API", login: "Masuk", start: "Mulai" },
+  footer: { tagline: "Alat konversi online gratis — file, gambar, kode, teks, dan lainnya. Satu alat sederhana per tugas.", gdprBadge: "Patuh GDPR · File tidak pernah disimpan", topTools: "Alat unggulan", product: "Produk", legal: "Hukum", pricing: "Harga", api: "API", dashboard: "Dasbor", vsVeed: "vs VEED.io", privacy: "Privasi", terms: "Ketentuan", rights: "Semua hak dilindungi." },
+  card: { open: "Buka", pro: "Pro" },
+  account: { billing: "Penagihan", logout: "Keluar" },
+  upload: { instant: "Konversi instan — berjalan di browser Anda, tanpa unggah", dropOrClick: "Letakkan file Anda atau klik untuk mengunggah", dropHere: "Letakkan file di sini", formats: "Format yang diterima", maxFree: "Maks {mb} MB pada paket gratis.", selectFile: "Pilih file", fileTooLarge: "File ini {size}. Batas gratis {mb} MB — tingkatkan ke Pro hingga 500 MB." },
+  processing: { working: "Memproses file Anda…", uploading: "Mengunggah…", processing: "Memproses…", takes: "Biasanya butuh 30–90 detik", ad: "Iklan" },
+  result: { ready: "File Anda siap", download: "Unduh", tryAnother: "Proses file lain", whatNext: "Selanjutnya?", preview: "Pratinjau" },
+  adblock: { title: "Konver gratis berkat iklan", body1: "Anda dapat menonaktifkan iklan dengan", goPro: "beralih ke Pro seharga €9/bulan", body2: ", atau dengan mengizinkan iklan di situs ini.", dismiss: "Tutup" },
+  errors: { serverReturned: "Server mengembalikan {status}. Coba lagi sebentar.", noResultUrl: "Server tidak mengembalikan URL hasil.", network: "Kesalahan jaringan.", notWiredUp: "Alat ini belum terhubung ke backend. Konfigurasikan fungsi Supabase yang sesuai.", noCues: "Tidak ada teks ditemukan.", badFormat: "Format SRT atau VTT tidak terdeteksi.", cantParse: "Tidak dapat mengurai file itu.", wrongFormat: "Itu tampak seperti file {fmt}. Coba konverter {other}." },
+  sync: { prompt: "Berapa banyak menggeser?", help: "Angka positif menunda subtitle, negatif memajukannya.", seconds: "Detik", millis: "Milidetik", apply: "Terapkan offset", cancel: "Batal" },
+  clean: { title: "Apa yang harus dibersihkan?", summary: "{a} baris masuk · {b} setelah pembersihan.", cancel: "Batal", download: "Unduh file bersih", stripSdh: "Hapus tag SDH seperti [musik] (mendesah)", removeDup: "Hapus baris duplikat berturut-turut", shouting: "Ubah HURUF KAPITAL ke huruf kalimat", collapseWs: "Gabungkan beberapa spasi", trim: "Pangkas spasi di sekitar setiap baris" },
+  editor: { openAnother: "Buka lainnya", export: "Ekspor", delete: "Hapus", openFile: "Buka file", cues: "{n} baris" },
+  srtToText: { merged: "Tata letak: paragraf digabung", perCue: "Tata letak: satu baris per teks" },
+  auth: { loginTitle: "Selamat datang kembali", loginLead: "Masuk ke akun Konver Anda.", registerTitle: "Buat akun Anda", registerLead: "5 penggunaan gratis per hari. Tanpa kartu kredit.", email: "Email", password: "Kata sandi", loginCta: "Masuk", registerCta: "Buat akun", loading: "Mohon tunggu…", orWithEmail: "atau dengan email", google: "Lanjutkan dengan Google", checkInbox: "Periksa kotak masuk untuk konfirmasi email.", noAccount: "Belum punya akun?", createOne: "Buat satu", hasAccount: "Sudah punya akun?", logIn: "Masuk" },
+};
+
+const vi: ChromeStrings = {
+  nav: { tools: "Công cụ", pricing: "Giá", api: "API", login: "Đăng nhập", start: "Bắt đầu" },
+  footer: { tagline: "Công cụ chuyển đổi trực tuyến miễn phí — tệp, hình ảnh, mã, văn bản và hơn thế. Một công cụ đơn giản cho mỗi tác vụ.", gdprBadge: "Tuân thủ GDPR · Tệp không bao giờ được lưu trữ", topTools: "Công cụ hàng đầu", product: "Sản phẩm", legal: "Pháp lý", pricing: "Giá", api: "API", dashboard: "Bảng điều khiển", vsVeed: "So với VEED.io", privacy: "Quyền riêng tư", terms: "Điều khoản", rights: "Bảo lưu mọi quyền." },
+  card: { open: "Mở", pro: "Pro" },
+  account: { billing: "Thanh toán", logout: "Đăng xuất" },
+  upload: { instant: "Chuyển đổi tức thì — chạy trong trình duyệt, không cần tải lên", dropOrClick: "Thả tệp của bạn hoặc nhấp để tải lên", dropHere: "Thả tệp vào đây", formats: "Định dạng được chấp nhận", maxFree: "Tối đa {mb} MB ở gói miễn phí.", selectFile: "Chọn tệp", fileTooLarge: "Tệp này {size}. Giới hạn miễn phí {mb} MB — nâng cấp Pro lên đến 500 MB." },
+  processing: { working: "Đang xử lý tệp của bạn…", uploading: "Đang tải lên…", processing: "Đang xử lý…", takes: "Thường mất 30–90 giây", ad: "Quảng cáo" },
+  result: { ready: "Tệp của bạn đã sẵn sàng", download: "Tải xuống", tryAnother: "Xử lý tệp khác", whatNext: "Tiếp theo?", preview: "Xem trước" },
+  adblock: { title: "Konver miễn phí nhờ quảng cáo", body1: "Bạn có thể tắt quảng cáo bằng cách", goPro: "lên Pro với giá 9 €/tháng", body2: ", hoặc cho phép quảng cáo trên trang này.", dismiss: "Đóng" },
+  errors: { serverReturned: "Máy chủ trả về {status}. Thử lại sau giây lát.", noResultUrl: "Máy chủ không trả về URL kết quả.", network: "Lỗi mạng.", notWiredUp: "Công cụ này chưa được kết nối với backend. Cấu hình hàm Supabase tương ứng.", noCues: "Không tìm thấy phụ đề.", badFormat: "Không phát hiện định dạng SRT hoặc VTT.", cantParse: "Không thể phân tích tệp đó.", wrongFormat: "Đó có vẻ là tệp {fmt}. Hãy thử bộ chuyển đổi {other}." },
+  sync: { prompt: "Dịch chuyển bao nhiêu?", help: "Số dương làm trễ phụ đề, số âm làm sớm hơn.", seconds: "Giây", millis: "Mili giây", apply: "Áp dụng độ lệch", cancel: "Hủy" },
+  clean: { title: "Cần dọn dẹp gì?", summary: "{a} dòng vào · {b} sau khi dọn dẹp.", cancel: "Hủy", download: "Tải tệp đã dọn dẹp", stripSdh: "Xóa thẻ SDH như [nhạc] (thở dài)", removeDup: "Xóa các dòng trùng lặp liên tiếp", shouting: "Chuyển CHỮ HOA thành kiểu câu", collapseWs: "Gộp nhiều khoảng trắng", trim: "Cắt khoảng trắng quanh mỗi dòng" },
+  editor: { openAnother: "Mở tệp khác", export: "Xuất", delete: "Xóa", openFile: "Mở tệp", cues: "{n} dòng" },
+  srtToText: { merged: "Bố cục: đoạn văn được gộp", perCue: "Bố cục: một dòng cho mỗi phụ đề" },
+  auth: { loginTitle: "Chào mừng trở lại", loginLead: "Đăng nhập vào tài khoản Konver của bạn.", registerTitle: "Tạo tài khoản của bạn", registerLead: "5 lượt miễn phí mỗi ngày. Không cần thẻ tín dụng.", email: "Email", password: "Mật khẩu", loginCta: "Đăng nhập", registerCta: "Tạo tài khoản", loading: "Vui lòng đợi…", orWithEmail: "hoặc bằng email", google: "Tiếp tục với Google", checkInbox: "Kiểm tra hộp thư để xác nhận email.", noAccount: "Chưa có tài khoản?", createOne: "Tạo một tài khoản", hasAccount: "Đã có tài khoản?", logIn: "Đăng nhập" },
+};
+
+const sv: ChromeStrings = {
+  nav: { tools: "Verktyg", pricing: "Priser", api: "API", login: "Logga in", start: "Kom igång" },
+  footer: { tagline: "Gratis onlineverktyg för konvertering — filer, bilder, kod, text och mer. Ett enkelt verktyg per uppgift.", gdprBadge: "GDPR-kompatibel · Filer lagras aldrig", topTools: "Toppverktyg", product: "Produkt", legal: "Juridik", pricing: "Priser", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Integritet", terms: "Villkor", rights: "Alla rättigheter förbehållna." },
+  card: { open: "Öppna", pro: "Pro" },
+  account: { billing: "Fakturering", logout: "Logga ut" },
+  upload: { instant: "Direkt konvertering — körs i din webbläsare, ingen uppladdning behövs", dropOrClick: "Släpp din fil eller klicka för att ladda upp", dropHere: "Släpp filen här", formats: "Accepterade format", maxFree: "Max {mb} MB på gratisplanen.", selectFile: "Välj en fil", fileTooLarge: "Den här filen är {size}. Gratisgränsen är {mb} MB — uppgradera till Pro för upp till 500 MB." },
+  processing: { working: "Bearbetar din fil…", uploading: "Laddar upp…", processing: "Bearbetar…", takes: "Tar oftast 30–90 sekunder", ad: "Annons" },
+  result: { ready: "Din fil är klar", download: "Ladda ner", tryAnother: "Bearbeta en annan fil", whatNext: "Vad händer nu?", preview: "Förhandsgranska" },
+  adblock: { title: "Konver är gratis tack vare annonser", body1: "Du kan inaktivera annonser genom att", goPro: "gå Pro för 9 €/månad", body2: ", eller genom att tillåta annonser på den här webbplatsen.", dismiss: "Stäng" },
+  errors: { serverReturned: "Servern returnerade {status}. Försök igen om en stund.", noResultUrl: "Servern returnerade ingen resultat-URL.", network: "Nätverksfel.", notWiredUp: "Det här verktyget är inte kopplat till en backend än. Konfigurera motsvarande Supabase-funktion.", noCues: "Inga textrader hittades.", badFormat: "Kunde inte identifiera SRT- eller VTT-format.", cantParse: "Kunde inte tolka filen.", wrongFormat: "Det ser ut som en {fmt}-fil. Prova {other}-konverteraren istället." },
+  sync: { prompt: "Hur mycket ska vi förskjuta?", help: "Positiva tal fördröjer undertexter, negativa tidigarelägger dem.", seconds: "Sekunder", millis: "Millisekunder", apply: "Tillämpa förskjutning", cancel: "Avbryt" },
+  clean: { title: "Vad ska vi rensa?", summary: "{a} rader in · {b} efter rensning.", cancel: "Avbryt", download: "Ladda ner rensad fil", stripSdh: "Ta bort SDH-taggar som [musik] (suck)", removeDup: "Ta bort upprepade dubbletter", shouting: "Konvertera VERSALER till meningsform", collapseWs: "Slå ihop flera mellanslag", trim: "Trimma blanksteg runt varje rad" },
+  editor: { openAnother: "Öppna en annan", export: "Exportera", delete: "Ta bort", openFile: "Öppna fil", cues: "{n} rader" },
+  srtToText: { merged: "Layout: sammanslagna stycken", perCue: "Layout: en rad per textrad" },
+  auth: { loginTitle: "Välkommen tillbaka", loginLead: "Logga in på ditt Konver-konto.", registerTitle: "Skapa ditt konto", registerLead: "5 gratis körningar per dag. Inget kreditkort krävs.", email: "E-post", password: "Lösenord", loginCta: "Logga in", registerCta: "Skapa konto", loading: "Vänta…", orWithEmail: "eller med e-post", google: "Fortsätt med Google", checkInbox: "Kolla din inkorg för att bekräfta din e-post.", noAccount: "Har du inget konto?", createOne: "Skapa ett", hasAccount: "Har du redan ett konto?", logIn: "Logga in" },
+};
+
+const pl: ChromeStrings = {
+  nav: { tools: "Narzędzia", pricing: "Cennik", api: "API", login: "Zaloguj się", start: "Zacznij" },
+  footer: { tagline: "Darmowe narzędzia konwersji online — pliki, obrazy, kod, tekst i więcej. Jedno proste narzędzie do każdego zadania.", gdprBadge: "Zgodny z RODO · Pliki nigdy nie są przechowywane", topTools: "Najlepsze narzędzia", product: "Produkt", legal: "Informacje prawne", pricing: "Cennik", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Prywatność", terms: "Warunki", rights: "Wszelkie prawa zastrzeżone." },
+  card: { open: "Otwórz", pro: "Pro" },
+  account: { billing: "Rozliczenia", logout: "Wyloguj się" },
+  upload: { instant: "Natychmiastowa konwersja — działa w przeglądarce, bez przesyłania", dropOrClick: "Upuść plik lub kliknij, aby przesłać", dropHere: "Upuść plik tutaj", formats: "Akceptowane formaty", maxFree: "Maks. {mb} MB w planie darmowym.", selectFile: "Wybierz plik", fileTooLarge: "Ten plik ma {size}. Limit darmowy to {mb} MB — przejdź na Pro do 500 MB." },
+  processing: { working: "Przetwarzanie pliku…", uploading: "Przesyłanie…", processing: "Przetwarzanie…", takes: "Zwykle trwa 30–90 sekund", ad: "Reklama" },
+  result: { ready: "Twój plik jest gotowy", download: "Pobierz", tryAnother: "Przetwórz kolejny plik", whatNext: "Co dalej?", preview: "Podgląd" },
+  adblock: { title: "Konver jest darmowy dzięki reklamom", body1: "Możesz wyłączyć reklamy,", goPro: "przechodząc na Pro za 9 €/mies.", body2: ", lub zezwalając na reklamy w tej witrynie.", dismiss: "Zamknij" },
+  errors: { serverReturned: "Serwer zwrócił {status}. Spróbuj ponownie za chwilę.", noResultUrl: "Serwer nie zwrócił adresu URL wyniku.", network: "Błąd sieci.", notWiredUp: "To narzędzie nie jest jeszcze podłączone do backendu. Skonfiguruj odpowiednią funkcję Supabase.", noCues: "Nie znaleziono napisów.", badFormat: "Nie wykryto formatu SRT lub VTT.", cantParse: "Nie można przetworzyć tego pliku.", wrongFormat: "To wygląda jak plik {fmt}. Wypróbuj konwerter {other}." },
+  sync: { prompt: "O ile przesunąć?", help: "Liczby dodatnie opóźniają napisy, ujemne je przyspieszają.", seconds: "Sekundy", millis: "Milisekundy", apply: "Zastosuj przesunięcie", cancel: "Anuluj" },
+  clean: { title: "Co wyczyścić?", summary: "{a} wierszy na wejściu · {b} po czyszczeniu.", cancel: "Anuluj", download: "Pobierz wyczyszczony plik", stripSdh: "Usuń tagi SDH, np. [muzyka] (westchnienie)", removeDup: "Usuń kolejne zduplikowane wiersze", shouting: "Zamień WIELKIE LITERY na zdaniowe", collapseWs: "Scal wielokrotne spacje", trim: "Przytnij spacje wokół każdego wiersza" },
+  editor: { openAnother: "Otwórz inny", export: "Eksportuj", delete: "Usuń", openFile: "Otwórz plik", cues: "{n} wierszy" },
+  srtToText: { merged: "Układ: scalone akapity", perCue: "Układ: jeden wiersz na napis" },
+  auth: { loginTitle: "Witaj ponownie", loginLead: "Zaloguj się na konto Konver.", registerTitle: "Utwórz konto", registerLead: "5 darmowych użyć dziennie. Bez karty.", email: "E-mail", password: "Hasło", loginCta: "Zaloguj się", registerCta: "Utwórz konto", loading: "Proszę czekać…", orWithEmail: "lub przez e-mail", google: "Kontynuuj z Google", checkInbox: "Sprawdź skrzynkę, aby potwierdzić e-mail.", noAccount: "Nie masz konta?", createOne: "Utwórz je", hasAccount: "Masz już konto?", logIn: "Zaloguj się" },
+};
+
+const uk: ChromeStrings = {
+  nav: { tools: "Інструменти", pricing: "Ціни", api: "API", login: "Увійти", start: "Почати" },
+  footer: { tagline: "Безкоштовні онлайн-інструменти конвертації — файли, зображення, код, текст тощо. Один простий інструмент на завдання.", gdprBadge: "Відповідає GDPR · Файли ніколи не зберігаються", topTools: "Найкращі інструменти", product: "Продукт", legal: "Юридична інформація", pricing: "Ціни", api: "API", dashboard: "Панель", vsVeed: "проти VEED.io", privacy: "Конфіденційність", terms: "Умови", rights: "Усі права захищено." },
+  card: { open: "Відкрити", pro: "Pro" },
+  account: { billing: "Оплата", logout: "Вийти" },
+  upload: { instant: "Миттєва конвертація — у вашому браузері, без завантаження", dropOrClick: "Перетягніть файл або натисніть, щоб завантажити", dropHere: "Перетягніть файл сюди", formats: "Прийнятні формати", maxFree: "Макс. {mb} МБ у безкоштовному плані.", selectFile: "Вибрати файл", fileTooLarge: "Цей файл {size}. Безкоштовний ліміт {mb} МБ — перейдіть на Pro до 500 МБ." },
+  processing: { working: "Обробка вашого файлу…", uploading: "Завантаження…", processing: "Обробка…", takes: "Зазвичай триває 30–90 секунд", ad: "Реклама" },
+  result: { ready: "Ваш файл готовий", download: "Завантажити", tryAnother: "Обробити інший файл", whatNext: "Що далі?", preview: "Попередній перегляд" },
+  adblock: { title: "Konver безкоштовний завдяки рекламі", body1: "Ви можете вимкнути рекламу,", goPro: "перейшовши на Pro за 9 €/міс", body2: ", або дозволивши рекламу на цьому сайті.", dismiss: "Закрити" },
+  errors: { serverReturned: "Сервер повернув {status}. Спробуйте за мить.", noResultUrl: "Сервер не повернув URL результату.", network: "Помилка мережі.", notWiredUp: "Цей інструмент ще не підключено до бекенду. Налаштуйте відповідну функцію Supabase.", noCues: "Субтитрів не знайдено.", badFormat: "Не вдалося визначити формат SRT або VTT.", cantParse: "Не вдалося розібрати цей файл.", wrongFormat: "Схоже на файл {fmt}. Спробуйте конвертер {other}." },
+  sync: { prompt: "На скільки зсунути?", help: "Додатні числа затримують субтитри, від'ємні — пришвидшують.", seconds: "Секунди", millis: "Мілісекунди", apply: "Застосувати зсув", cancel: "Скасувати" },
+  clean: { title: "Що очистити?", summary: "{a} рядків на вході · {b} після очищення.", cancel: "Скасувати", download: "Завантажити очищений файл", stripSdh: "Видалити теги SDH, як-от [музика] (зітхання)", removeDup: "Видалити послідовні дублікати рядків", shouting: "Перетворити ВЕЛИКІ ЛІТЕРИ на регістр речення", collapseWs: "Об'єднати кілька пробілів", trim: "Обрізати пробіли навколо кожного рядка" },
+  editor: { openAnother: "Відкрити інший", export: "Експорт", delete: "Видалити", openFile: "Відкрити файл", cues: "{n} рядків" },
+  srtToText: { merged: "Макет: об'єднані абзаци", perCue: "Макет: один рядок на субтитр" },
+  auth: { loginTitle: "З поверненням", loginLead: "Увійдіть до облікового запису Konver.", registerTitle: "Створіть обліковий запис", registerLead: "5 безкоштовних запусків на день. Без картки.", email: "Електронна пошта", password: "Пароль", loginCta: "Увійти", registerCta: "Створити обліковий запис", loading: "Зачекайте…", orWithEmail: "або через email", google: "Продовжити з Google", checkInbox: "Перевірте пошту для підтвердження.", noAccount: "Немає облікового запису?", createOne: "Створіть його", hasAccount: "Уже маєте обліковий запис?", logIn: "Увійти" },
+};
+
+const cs: ChromeStrings = {
+  nav: { tools: "Nástroje", pricing: "Ceny", api: "API", login: "Přihlásit se", start: "Začít" },
+  footer: { tagline: "Bezplatné online nástroje pro konverzi — soubory, obrázky, kód, text a další. Jeden jednoduchý nástroj na úkol.", gdprBadge: "V souladu s GDPR · Soubory se nikdy neukládají", topTools: "Hlavní nástroje", product: "Produkt", legal: "Právní informace", pricing: "Ceny", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Soukromí", terms: "Podmínky", rights: "Všechna práva vyhrazena." },
+  card: { open: "Otevřít", pro: "Pro" },
+  account: { billing: "Fakturace", logout: "Odhlásit se" },
+  upload: { instant: "Okamžitá konverze — běží ve vašem prohlížeči, bez nahrávání", dropOrClick: "Přetáhněte soubor nebo klikněte pro nahrání", dropHere: "Sem přetáhněte soubor", formats: "Přijímané formáty", maxFree: "Max. {mb} MB v bezplatném plánu.", selectFile: "Vybrat soubor", fileTooLarge: "Tento soubor má {size}. Bezplatný limit je {mb} MB — přejděte na Pro až 500 MB." },
+  processing: { working: "Zpracování vašeho souboru…", uploading: "Nahrávání…", processing: "Zpracování…", takes: "Obvykle trvá 30–90 sekund", ad: "Reklama" },
+  result: { ready: "Váš soubor je připraven", download: "Stáhnout", tryAnother: "Zpracovat další soubor", whatNext: "Co dál?", preview: "Náhled" },
+  adblock: { title: "Konver je zdarma díky reklamám", body1: "Reklamy můžete vypnout", goPro: "přechodem na Pro za 9 €/měsíc", body2: ", nebo povolením reklam na tomto webu.", dismiss: "Zavřít" },
+  errors: { serverReturned: "Server vrátil {status}. Zkuste to za chvíli znovu.", noResultUrl: "Server nevrátil URL výsledku.", network: "Chyba sítě.", notWiredUp: "Tento nástroj ještě není připojen k backendu. Nakonfigurujte odpovídající funkci Supabase.", noCues: "Nenalezeny žádné titulky.", badFormat: "Nepodařilo se rozpoznat formát SRT nebo VTT.", cantParse: "Tento soubor nelze zpracovat.", wrongFormat: "Vypadá to jako soubor {fmt}. Zkuste místo toho převodník {other}." },
+  sync: { prompt: "O kolik posunout?", help: "Kladná čísla zpožďují titulky, záporná je urychlují.", seconds: "Sekundy", millis: "Milisekundy", apply: "Použít posun", cancel: "Zrušit" },
+  clean: { title: "Co vyčistit?", summary: "{a} řádků na vstupu · {b} po vyčištění.", cancel: "Zrušit", download: "Stáhnout vyčištěný soubor", stripSdh: "Odstranit SDH značky jako [hudba] (povzdech)", removeDup: "Odstranit po sobě jdoucí duplicitní řádky", shouting: "Převést VELKÁ PÍSMENA na větný formát", collapseWs: "Sloučit více mezer", trim: "Oříznout mezery kolem každého řádku" },
+  editor: { openAnother: "Otevřít jiný", export: "Exportovat", delete: "Smazat", openFile: "Otevřít soubor", cues: "{n} řádků" },
+  srtToText: { merged: "Rozvržení: sloučené odstavce", perCue: "Rozvržení: jeden řádek na titulek" },
+  auth: { loginTitle: "Vítejte zpět", loginLead: "Přihlaste se ke svému účtu Konver.", registerTitle: "Vytvořte si účet", registerLead: "5 bezplatných použití denně. Bez karty.", email: "E-mail", password: "Heslo", loginCta: "Přihlásit se", registerCta: "Vytvořit účet", loading: "Čekejte prosím…", orWithEmail: "nebo e-mailem", google: "Pokračovat s Google", checkInbox: "Zkontrolujte schránku pro potvrzení e-mailu.", noAccount: "Nemáte účet?", createOne: "Vytvořte si ho", hasAccount: "Už máte účet?", logIn: "Přihlásit se" },
+};
+
 // Partial<>: missing locales fall back to English via getChrome().
 export const CHROME_STRINGS: Partial<Record<Locale, ChromeStrings>> = {
-  en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi,
+  en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi, tr, id, vi, sv, pl, uk, cs,
 };
 
 export function getChrome(locale: Locale): ChromeStrings {

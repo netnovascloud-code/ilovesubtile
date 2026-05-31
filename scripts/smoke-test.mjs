@@ -17,7 +17,9 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = process.env.SMOKE_BASE_URL ?? "http://localhost:3000";
-const SUMMARY = process.env.GITHUB_STEP_SUMMARY ?? "/tmp/smoke-report.md";
+// Always write the full report to a stable repo-relative path so CI can
+// commit it back. GITHUB_STEP_SUMMARY is appended in addition.
+const REPORT_PATH = process.env.SMOKE_REPORT_PATH ?? resolve(ROOT, "SMOKE_TEST_REPORT.md");
 
 // Import the actual tools array straight from the app source (Node 22 strips
 // the TS types; lib/tools-config.ts has no runtime imports beyond lucide).
@@ -166,7 +168,7 @@ const md = [
   ...results.filter((r) => r.ok).map((r) => `- ${r.slug}`),
 ];
 const out = md.join("\n");
-writeFileSync(SUMMARY, out, "utf8");
+writeFileSync(REPORT_PATH, out, "utf8");
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, "\n" + out);
 console.log("\n" + out);
 

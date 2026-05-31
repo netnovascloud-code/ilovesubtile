@@ -17,7 +17,7 @@ on:
       - "scripts/smoke-test.mjs"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: smoke-test
@@ -78,6 +78,8 @@ jobs:
 
       - name: Run smoke test
         id: smoke
+        env:
+          SMOKE_REPORT_PATH: ${{ github.workspace }}/SMOKE_TEST_REPORT.md
         run: node scripts/smoke-test.mjs
         continue-on-error: true
 
@@ -85,6 +87,27 @@ jobs:
         if: always()
         run: |
           if [ -f /tmp/next.pid ]; then kill $(cat /tmp/next.pid) 2>/dev/null || true; fi
+
+      - name: Commit smoke report back
+        # Lets the offline session detect completion via the bot's commit, and
+        # gives anyone reviewing the repo a one-click view of the last run.
+        if: always()
+        run: |
+          if [ ! -f SMOKE_TEST_REPORT.md ]; then
+            echo "# Konver smoke test — runner crashed before producing a report" > SMOKE_TEST_REPORT.md
+            echo "" >> SMOKE_TEST_REPORT.md
+            echo "See the workflow run logs for details." >> SMOKE_TEST_REPORT.md
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add SMOKE_TEST_REPORT.md
+          if git diff --staged --quiet; then
+            echo "Report unchanged."
+          else
+            git commit -m "ci(smoke): update SMOKE_TEST_REPORT.md"
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
+            git push origin HEAD:${{ github.ref_name }}
+          fi
 
       - name: Upload Next logs (on failure)
         if: failure() || steps.smoke.outcome == 'failure'
@@ -97,5 +120,5 @@ jobs:
       - name: Fail the job if smoke failed
         if: steps.smoke.outcome == 'failure'
         run: |
-          echo "Smoke test reported failures — see the step summary above."
+          echo "Smoke test reported failures — see SMOKE_TEST_REPORT.md."
           exit 1

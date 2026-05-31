@@ -47,10 +47,15 @@ export function ToolPageShell({
   const rtl = isRtl(locale);
 
   // Localised FAQs (template-generated) + steps (per tool × locale).
+  // In-browser tools (kind: "client") get the "client" FAQ variant — no
+  // formats / watermark / quota questions — so utility pages like the Password
+  // Generator no longer render the file/subtitle template (which produced
+  // "accepte the supported formats" + SRT references in non-English locales).
+  const faqVariant = tool.kind === "client" ? "client" : "file";
   const formats = tool.accept.length
     ? tool.accept.map((a) => a.toUpperCase()).join(", ")
-    : "the supported formats";
-  const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats);
+    : "plain text";
+  const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats, faqVariant);
   const steps = (locale === "en" ? null : getLocalisedSteps(tool.slug, locale)) ?? tool.steps;
 
   // Related tools for the "What to do next" cross-sell. Explicit mapping first,

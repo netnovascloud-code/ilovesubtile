@@ -115,14 +115,118 @@ const hi: FaqFactory[] = [
   () => ({ q: `क्या मुझे साइन अप करना होगा?`, a: `कभी-कभार उपयोग के लिए कोई खाता ज़रूरी नहीं है। साइन अप करने से रोज़ कुछ अतिरिक्त रन और एक इतिहास मिलता है। Pro असीमित उपयोग खोल देता है।` }),
 ];
 
+// ── Client-tool FAQs ───────────────────────────────────────────────────────
+// In-browser tools (kind: "client") never upload, have no per-day cap and no
+// watermark, so the file/subtitle template above is wrong for them — it was
+// producing nonsense like "accepte the supported formats" + watermark/SRT
+// answers on pages like the Password Generator. These mirror the English
+// codeFaqs() and ignore the `formats` argument.
+const enC: FaqFactory[] = [
+  (name) => ({ q: `Is ${name} free?`, a: `Yes — completely free and unlimited, with no account required. It runs entirely in your browser, so there are no usage limits.` }),
+  (name) => ({ q: `Are my files or data uploaded?`, a: `No. ${name} runs 100% locally in your browser. Your data never leaves your device and is never sent to a server.` }),
+  () => ({ q: `Does it work offline?`, a: `Once the page has loaded, processing runs on your device, so it keeps working even with a flaky connection.` }),
+  () => ({ q: `Is there a size limit?`, a: `There's no hard limit — you're only bound by your device's memory. Very large inputs may be slower to process.` }),
+  (name) => ({ q: `Do I need to install anything?`, a: `No. ${name} is a web tool — just open the page and start. Nothing to download or install.` }),
+];
+const frC: FaqFactory[] = [
+  (name) => ({ q: `${name} est-il gratuit ?`, a: `Oui — entièrement gratuit et illimité, sans compte. Tout s'exécute dans votre navigateur, donc aucune limite d'utilisation.` }),
+  (name) => ({ q: `Mes fichiers ou données sont-ils envoyés ?`, a: `Non. ${name} fonctionne 100 % localement dans votre navigateur. Vos données ne quittent jamais votre appareil et ne sont jamais envoyées à un serveur.` }),
+  () => ({ q: `Fonctionne-t-il hors ligne ?`, a: `Une fois la page chargée, le traitement se fait sur votre appareil : il continue de fonctionner même avec une connexion instable.` }),
+  () => ({ q: `Y a-t-il une limite de taille ?`, a: `Aucune limite stricte — vous n'êtes limité que par la mémoire de votre appareil. Les entrées très volumineuses peuvent être plus lentes.` }),
+  (name) => ({ q: `Dois-je installer quelque chose ?`, a: `Non. ${name} est un outil web — ouvrez la page et c'est parti. Rien à télécharger ni à installer.` }),
+];
+const esC: FaqFactory[] = [
+  (name) => ({ q: `¿${name} es gratis?`, a: `Sí — totalmente gratis e ilimitado, sin cuenta. Todo se ejecuta en tu navegador, así que no hay límites de uso.` }),
+  (name) => ({ q: `¿Se suben mis archivos o datos?`, a: `No. ${name} funciona 100 % localmente en tu navegador. Tus datos nunca salen de tu dispositivo ni se envían a un servidor.` }),
+  () => ({ q: `¿Funciona sin conexión?`, a: `Una vez cargada la página, el proceso ocurre en tu dispositivo, así que sigue funcionando incluso con una conexión inestable.` }),
+  () => ({ q: `¿Hay límite de tamaño?`, a: `Sin límite estricto — solo te limita la memoria de tu dispositivo. Las entradas muy grandes pueden ser más lentas.` }),
+  (name) => ({ q: `¿Necesito instalar algo?`, a: `No. ${name} es una herramienta web — abre la página y empieza. Nada que descargar ni instalar.` }),
+];
+const ptC: FaqFactory[] = [
+  (name) => ({ q: `${name} é grátis?`, a: `Sim — totalmente grátis e ilimitado, sem conta. Tudo roda no seu navegador, então não há limites de uso.` }),
+  (name) => ({ q: `Meus arquivos ou dados são enviados?`, a: `Não. ${name} roda 100% localmente no seu navegador. Seus dados nunca saem do seu dispositivo nem são enviados a um servidor.` }),
+  () => ({ q: `Funciona offline?`, a: `Depois que a página carrega, o processamento ocorre no dispositivo, então continua funcionando mesmo com conexão instável.` }),
+  () => ({ q: `Há limite de tamanho?`, a: `Sem limite rígido — você é limitado apenas pela memória do dispositivo. Entradas muito grandes podem ser mais lentas.` }),
+  (name) => ({ q: `Preciso instalar algo?`, a: `Não. ${name} é uma ferramenta web — abra a página e comece. Nada para baixar ou instalar.` }),
+];
+const deC: FaqFactory[] = [
+  (name) => ({ q: `Ist ${name} kostenlos?`, a: `Ja — komplett kostenlos und unbegrenzt, ohne Konto. Alles läuft in deinem Browser, also keine Nutzungslimits.` }),
+  (name) => ({ q: `Werden meine Dateien oder Daten hochgeladen?`, a: `Nein. ${name} läuft zu 100 % lokal in deinem Browser. Deine Daten verlassen nie dein Gerät und werden nie an einen Server gesendet.` }),
+  () => ({ q: `Funktioniert es offline?`, a: `Sobald die Seite geladen ist, läuft die Verarbeitung auf dem Gerät — auch bei wackliger Verbindung.` }),
+  () => ({ q: `Gibt es ein Größenlimit?`, a: `Kein hartes Limit — nur der Arbeitsspeicher deines Geräts begrenzt dich. Sehr große Eingaben können langsamer sein.` }),
+  (name) => ({ q: `Muss ich etwas installieren?`, a: `Nein. ${name} ist ein Web-Tool — Seite öffnen und loslegen. Nichts herunterzuladen oder zu installieren.` }),
+];
+const itC: FaqFactory[] = [
+  (name) => ({ q: `${name} è gratis?`, a: `Sì — completamente gratis e illimitato, senza account. Tutto gira nel tuo browser, quindi nessun limite d'uso.` }),
+  (name) => ({ q: `I miei file o dati vengono caricati?`, a: `No. ${name} gira al 100% localmente nel tuo browser. I tuoi dati non lasciano mai il dispositivo e non vengono mai inviati a un server.` }),
+  () => ({ q: `Funziona offline?`, a: `Una volta caricata la pagina, l'elaborazione avviene sul dispositivo, quindi continua a funzionare anche con una connessione instabile.` }),
+  () => ({ q: `C'è un limite di dimensione?`, a: `Nessun limite rigido — sei vincolato solo dalla memoria del dispositivo. Input molto grandi possono essere più lenti.` }),
+  (name) => ({ q: `Devo installare qualcosa?`, a: `No. ${name} è uno strumento web — apri la pagina e inizia. Niente da scaricare o installare.` }),
+];
+const nlC: FaqFactory[] = [
+  (name) => ({ q: `Is ${name} gratis?`, a: `Ja — volledig gratis en onbeperkt, zonder account. Alles draait in je browser, dus geen gebruikslimieten.` }),
+  (name) => ({ q: `Worden mijn bestanden of gegevens geüpload?`, a: `Nee. ${name} draait 100% lokaal in je browser. Je gegevens verlaten nooit je apparaat en worden nooit naar een server gestuurd.` }),
+  () => ({ q: `Werkt het offline?`, a: `Zodra de pagina is geladen, draait de verwerking op je apparaat, dus het blijft werken zelfs bij een wankele verbinding.` }),
+  () => ({ q: `Is er een groottelimiet?`, a: `Geen harde limiet — je wordt alleen beperkt door het geheugen van je apparaat. Erg grote invoer kan trager zijn.` }),
+  (name) => ({ q: `Moet ik iets installeren?`, a: `Nee. ${name} is een webtool — open de pagina en begin. Niets te downloaden of installeren.` }),
+];
+const jaC: FaqFactory[] = [
+  (name) => ({ q: `${name} は無料ですか？`, a: `はい — 完全無料で無制限、アカウント不要。すべてブラウザ内で動作するため、利用制限はありません。` }),
+  (name) => ({ q: `ファイルやデータはアップロードされますか？`, a: `いいえ。${name} は 100% ブラウザ内でローカルに動作します。データが端末を離れることはなく、サーバーに送信されることもありません。` }),
+  () => ({ q: `オフラインで動作しますか？`, a: `ページの読み込み後は端末上で処理されるため、接続が不安定でも動作し続けます。` }),
+  () => ({ q: `サイズ制限はありますか？`, a: `厳密な制限はありません。端末のメモリにのみ依存します。非常に大きな入力は処理が遅くなることがあります。` }),
+  (name) => ({ q: `インストールは必要ですか？`, a: `いいえ。${name} はウェブツールです。ページを開くだけで始められ、ダウンロードやインストールは不要です。` }),
+];
+const zhC: FaqFactory[] = [
+  (name) => ({ q: `${name} 是免费的吗?`, a: `是的 — 完全免费且无限制,无需账户。一切都在您的浏览器中运行,因此没有使用限制。` }),
+  (name) => ({ q: `我的文件或数据会被上传吗?`, a: `不会。${name} 100% 在您的浏览器本地运行。您的数据从不离开设备,也绝不发送到服务器。` }),
+  () => ({ q: `可以离线使用吗?`, a: `页面加载后,处理在设备上进行,因此即使连接不稳定也能继续工作。` }),
+  () => ({ q: `有大小限制吗?`, a: `没有硬性限制 — 仅受设备内存限制。非常大的输入处理会更慢。` }),
+  (name) => ({ q: `需要安装什么吗?`, a: `不需要。${name} 是网页工具 — 打开页面即可开始。无需下载或安装。` }),
+];
+const koC: FaqFactory[] = [
+  (name) => ({ q: `${name} 는 무료인가요?`, a: `네 — 완전 무료이며 무제한, 계정이 필요 없습니다. 모든 처리가 브라우저에서 실행되어 사용 제한이 없습니다.` }),
+  (name) => ({ q: `내 파일이나 데이터가 업로드되나요?`, a: `아니요. ${name} 는 100% 브라우저에서 로컬로 실행됩니다. 데이터는 기기를 떠나지 않으며 서버로 전송되지 않습니다.` }),
+  () => ({ q: `오프라인에서 작동하나요?`, a: `페이지가 로드되면 기기에서 처리되므로 연결이 불안정해도 계속 작동합니다.` }),
+  () => ({ q: `크기 제한이 있나요?`, a: `엄격한 제한은 없습니다. 기기 메모리에만 영향을 받습니다. 매우 큰 입력은 처리가 느릴 수 있습니다.` }),
+  (name) => ({ q: `설치가 필요한가요?`, a: `아니요. ${name} 는 웹 도구입니다. 페이지를 열면 바로 시작되며 다운로드나 설치가 필요 없습니다.` }),
+];
+const arC: FaqFactory[] = [
+  (name) => ({ q: `هل ${name} مجاني؟`, a: `نعم — مجاني تمامًا وغير محدود، بلا حساب. كل شيء يعمل داخل متصفحك، لذا لا قيود على الاستخدام.` }),
+  (name) => ({ q: `هل تُرفع ملفاتي أو بياناتي؟`, a: `لا. ${name} يعمل محليًا بنسبة 100% داخل متصفحك. بياناتك لا تغادر جهازك أبدًا ولا تُرسل إلى أي خادم.` }),
+  () => ({ q: `هل يعمل دون اتصال؟`, a: `بمجرد تحميل الصفحة، تتم المعالجة على جهازك، لذا يستمر العمل حتى مع اتصال غير مستقر.` }),
+  () => ({ q: `هل هناك حد للحجم؟`, a: `لا حد صارم — أنت مقيد فقط بذاكرة جهازك. قد تكون المدخلات الكبيرة جدًا أبطأ.` }),
+  (name) => ({ q: `هل أحتاج إلى تثبيت شيء؟`, a: `لا. ${name} أداة ويب — افتح الصفحة وابدأ. لا شيء للتنزيل أو التثبيت.` }),
+];
+const ruC: FaqFactory[] = [
+  (name) => ({ q: `${name} бесплатно?`, a: `Да — полностью бесплатно и без ограничений, без аккаунта. Всё выполняется в вашем браузере, поэтому лимитов нет.` }),
+  (name) => ({ q: `Загружаются ли мои файлы или данные?`, a: `Нет. ${name} работает на 100% локально в вашем браузере. Ваши данные никогда не покидают устройство и не отправляются на сервер.` }),
+  () => ({ q: `Работает ли офлайн?`, a: `После загрузки страницы обработка идёт на устройстве, поэтому всё работает даже при нестабильном соединении.` }),
+  () => ({ q: `Есть ли ограничение размера?`, a: `Жёсткого лимита нет — вас ограничивает только память устройства. Очень большие данные могут обрабатываться медленнее.` }),
+  (name) => ({ q: `Нужно ли что-то устанавливать?`, a: `Нет. ${name} — это веб-инструмент: откройте страницу и начните. Ничего скачивать или устанавливать не нужно.` }),
+];
+const hiC: FaqFactory[] = [
+  (name) => ({ q: `क्या ${name} मुफ़्त है?`, a: `हाँ — पूरी तरह मुफ़्त और असीमित, बिना खाते के। सब कुछ आपके ब्राउज़र में चलता है, इसलिए कोई उपयोग सीमा नहीं।` }),
+  (name) => ({ q: `क्या मेरी फ़ाइलें या डेटा अपलोड होते हैं?`, a: `नहीं। ${name} आपके ब्राउज़र में 100% स्थानीय रूप से चलता है। आपका डेटा कभी आपका डिवाइस नहीं छोड़ता और किसी सर्वर पर नहीं भेजा जाता।` }),
+  () => ({ q: `क्या यह ऑफ़लाइन काम करता है?`, a: `पेज लोड होने के बाद प्रोसेसिंग आपके डिवाइस पर होती है, इसलिए अस्थिर कनेक्शन पर भी काम करता रहता है।` }),
+  () => ({ q: `क्या आकार की कोई सीमा है?`, a: `कोई सख़्त सीमा नहीं — आप केवल अपने डिवाइस की मेमोरी से बंधे हैं। बहुत बड़े इनपुट धीमे हो सकते हैं।` }),
+  (name) => ({ q: `क्या मुझे कुछ इंस्टॉल करना होगा?`, a: `नहीं। ${name} एक वेब टूल है — पेज खोलें और शुरू करें। कुछ डाउनलोड या इंस्टॉल करने की ज़रूरत नहीं।` }),
+];
+
 // Partial<>: missing locales fall back to the English FAQ templates.
-const ALL: Partial<Record<Locale, FaqFactory[]>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+const FILE_ALL: Partial<Record<Locale, FaqFactory[]>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
+const CLIENT_ALL: Partial<Record<Locale, FaqFactory[]>> = { en: enC, fr: frC, es: esC, pt: ptC, de: deC, it: itC, nl: nlC, ja: jaC, zh: zhC, ko: koC, ar: arC, ru: ruC, hi: hiC };
+
+/** "client" = in-browser tool (no upload, no quota, no watermark, no formats). */
+export type FaqVariant = "file" | "client";
 
 export function getLocalisedFaqs(
   locale: Locale,
   name: string,
   formats: string,
+  variant: FaqVariant = "file",
 ): ToolFaq[] {
-  const set = ALL[locale] ?? en;
+  const map = variant === "client" ? CLIENT_ALL : FILE_ALL;
+  const set = map[locale] ?? (variant === "client" ? enC : en);
   return set.map((fn) => fn(name, formats));
 }

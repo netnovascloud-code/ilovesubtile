@@ -1,13 +1,9 @@
-# Konver smoke test — 150/155 passed
+# Konver smoke test — 153/155 passed
 
-❌ 5 failures — see below.
+❌ 2 failures — see below.
 
 ## Failures
 
-- **api** — console: Failed to fetch RSC payload for http://localhost:3000/dashboard. Falling back to browser navigation. TypeError: Failed to fetch
-    at f (http://localhost:3000/_next/static/chunks/2117-d39510
-- **lorem-ipsum** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
-- **uuid-generator** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
 - **unix-timestamp** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
 - **timezone-converter** — pageerror: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
 
@@ -27,6 +23,7 @@
 - batch-translate
 - style-subtitles
 - auto-sync
+- api
 - format-json
 - json-to-csv
 - csv-to-json
@@ -72,6 +69,8 @@
 - unit-converter
 - password-generator
 - case-converter
+- lorem-ipsum
+- uuid-generator
 - text-diff
 - currency-converter
 - cron-builder

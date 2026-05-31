@@ -11,6 +11,7 @@ import { LANGUAGES } from "@/lib/languages";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { CharMeter } from "@/components/tools/CharMeter";
 import { useCharLimit } from "@/hooks/useCharLimit";
+import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
@@ -19,6 +20,7 @@ export function AiTextClient({ slug }: { slug: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [quotaReason, setQuotaReason] = useState<QuotaReason | null>(null);
 
   const [language, setLanguage] = useState("French");
   const [style, setStyle] = useState<string>(REPHRASE_STYLES[0]);
@@ -41,10 +43,15 @@ export function AiTextClient({ slug }: { slug: string }) {
       const res = await callTool(slug, { task: def.task, text: input, options });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        if (data.error === "daily_limit" || data.error === "monthly_limit") {
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
         setError(
-          data.error === "daily_limit"
-            ? "You've hit today's free limit. Sign in or upgrade to Pro for a higher monthly quota."
-            : data.error === "text_too_long"
+          data.error === "text_too_long"
             ? "That text is too long — please shorten it and try again."
             : "Something went wrong. Please try again in a moment.",
         );
@@ -152,6 +159,7 @@ export function AiTextClient({ slug }: { slug: string }) {
       )}
 
       {loading && <AdProcessing />}
+      <QuotaReachedModal reason={quotaReason} onClose={() => setQuotaReason(null)} />
     </div>
   );
 }

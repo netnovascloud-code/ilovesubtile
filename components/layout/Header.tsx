@@ -10,6 +10,7 @@ import { getChrome } from "@/lib/i18n/chrome";
 import { localePath } from "@/lib/i18n/locales";
 import { UserMenu } from "@/components/layout/UserMenu";
 import { ToolsMenu } from "@/components/layout/ToolsMenu";
+import { AiQuotaPill } from "@/components/billing/AiQuotaPill";
 import { CATEGORIES } from "@/lib/tools-config";
 
 export function Header() {
@@ -64,7 +65,8 @@ export function Header() {
           <Link href="/api" className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>
 
-        <div className="hidden md:flex">
+        <div className="hidden md:flex md:items-center md:gap-3">
+          <AiQuotaPill />
           <UserMenu
             labels={{
               login: t.login,

@@ -8,6 +8,7 @@ import { callTool } from "@/lib/tool-api";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { CharMeter } from "@/components/tools/CharMeter";
 import { useCharLimit } from "@/hooks/useCharLimit";
+import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
 
 const STYLES = [
   "Professional", "Casual", "Academic", "Creative",
@@ -78,6 +79,7 @@ export function RephraserClient() {
   const [style, setStyle] = useState<string>(STYLES[0]);
   const [reformulated, setReformulated] = useState<string>("");
   const [copied, setCopied] = useState(false);
+  const [quotaReason, setQuotaReason] = useState<QuotaReason | null>(null);
   const reqId = useRef(0);
   const meter = useCharLimit(input);
 
@@ -88,7 +90,17 @@ export function RephraserClient() {
     try {
       const res = await callTool("fix-grammar", { task: "grammar", text });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) { setError(data.error === "daily_limit" ? "Daily free limit reached." : "Could not run the correction."); return; }
+      if (!res.ok) {
+        if (data.error === "daily_limit" || data.error === "monthly_limit") {
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
+        setError("Could not run the correction.");
+        return;
+      }
       setCorrected(data.output ?? "");
     } catch { setError("Network error — please try again."); }
     finally { setLoading(false); }
@@ -107,6 +119,14 @@ export function RephraserClient() {
         const res = await callTool("rephrase-text", { task: "rephrase", text, options: { style } });
         const data = await res.json().catch(() => ({}));
         if (id !== reqId.current) return;
+        if (!res.ok && (data.error === "daily_limit" || data.error === "monthly_limit")) {
+          setReformulated("");
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
         setReformulated(res.ok ? (data.output ?? "") : "—");
       } catch {
         if (id === reqId.current) setReformulated("—");
@@ -257,6 +277,7 @@ export function RephraserClient() {
 
       {error && <p className="flex items-start gap-1.5 text-sm text-red-600"><AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {error}</p>}
       <p className="text-xs text-ink-400">Your text is never stored. Powered by advanced AI.</p>
+      <QuotaReachedModal reason={quotaReason} onClose={() => setQuotaReason(null)} />
     </div>
   );
 }

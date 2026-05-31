@@ -23,9 +23,15 @@ function corsFor(req: Request): Record<string, string> {
   };
 }
 
-// Mirror of lib/quotas.ts DAILY_LIMITS — must move together when adjusting
-// the free-tier daily cap (also enforced client-side via lib/quotas.ts).
-const DAILY_LIMIT: Record<string, number> = { free: 2, pro: Infinity, business: Infinity };
+// Quota mirrors of lib/quotas.ts — keep in sync when adjusting limits.
+// Free is a rolling 24-hour counter; Pro and Business are monthly (UTC
+// calendar month). Anonymous traffic is gated client-side.
+const DAILY_LIMIT: Record<string, number> = { free: 2, pro: 0, business: 0 };
+const MONTHLY_LIMIT: Record<string, number> = { free: 0, pro: 500, business: 3000 };
+function utcMonth(): string {
+  const d = new Date();
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+}
 
 // Tasks that need the stronger model. i18n-tool / i18n-category deliberately
 // use the small model: the strings are short UI/SEO snippets where small is
@@ -174,20 +180,49 @@ Deno.serve(async (req) => {
 
   if (userId) {
     try {
-      const { data: prof } = await svc.from("profiles").select("plan, daily_usage, usage_reset_at").eq("id", userId).maybeSingle();
+      const { data: prof } = await svc.from("profiles")
+        .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
+        .eq("id", userId).maybeSingle();
       const plan = (prof?.plan as string) ?? "free";
-      const limit = DAILY_LIMIT[plan] ?? DAILY_LIMIT.free;
-      if (limit !== Infinity) {
+
+      if (plan === "free") {
+        // Free: rolling 24-hour counter.
+        const limit = DAILY_LIMIT.free;
         const now = Date.now();
         const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;
         const overdue = now - resetAt > 24 * 3600 * 1000;
         const current = overdue ? 0 : (prof?.daily_usage ?? 0);
         if (current >= limit) {
-          return json({ error: "daily_limit", resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() }, { status: 429 });
+          return json({
+            error: "daily_limit", plan, limit,
+            used: current, remaining: 0,
+            resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString(),
+          }, { status: 429 });
         }
         await svc.from("profiles").update({
           daily_usage: current + 1,
           usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
+        }).eq("id", userId);
+      } else {
+        // Pro / Business: monthly counter keyed by UTC YYYY-MM.
+        const limit = MONTHLY_LIMIT[plan] ?? MONTHLY_LIMIT.pro;
+        const month = utcMonth();
+        const sameMonth = prof?.monthly_ai_month === month;
+        const used = sameMonth ? (prof?.monthly_ai_usage ?? 0) : 0;
+        if (used >= limit) {
+          // Reset at the first day of next month, 00:00 UTC.
+          const next = new Date();
+          next.setUTCDate(1); next.setUTCHours(0, 0, 0, 0);
+          next.setUTCMonth(next.getUTCMonth() + 1);
+          return json({
+            error: "monthly_limit", plan, limit,
+            used, remaining: 0,
+            resetAt: next.toISOString(),
+          }, { status: 429 });
+        }
+        await svc.from("profiles").update({
+          monthly_ai_usage: used + 1,
+          monthly_ai_month: month,
         }).eq("id", userId);
       }
     } catch { /* fail-open: never block on a quota bookkeeping error */ }

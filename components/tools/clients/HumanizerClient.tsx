@@ -9,6 +9,7 @@ import { AdProcessing } from "@/components/ads/AdProcessing";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { CharMeter } from "@/components/tools/CharMeter";
 import { useCharLimit } from "@/hooks/useCharLimit";
+import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
 
 const LEVELS = [
   { id: "light", label: "Light" },
@@ -35,6 +36,7 @@ export function HumanizerClient() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [score, setScore] = useState(0);
+  const [quotaReason, setQuotaReason] = useState<QuotaReason | null>(null);
   const meter = useCharLimit(input);
 
   async function run() {
@@ -44,7 +46,14 @@ export function HumanizerClient() {
       const res = await callTool("ai-humanizer", { task: "humanize", text: input, options: { level } });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error === "daily_limit" ? "Daily free limit reached — sign in or upgrade for a higher monthly quota." : "Something went wrong. Try again.");
+        if (data.error === "daily_limit" || data.error === "monthly_limit") {
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
+        setError("Something went wrong. Try again.");
         return;
       }
       const out = data.output ?? "";
@@ -117,6 +126,7 @@ export function HumanizerClient() {
       {error && <p className="flex items-start gap-1.5 text-sm text-red-600"><AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {error}</p>}
       <p className="text-xs text-ink-400">Rewrites text you own to read more naturally. Your text is never stored. {loading ? "" : ""}</p>
       {loading && <AdProcessing />}
+      <QuotaReachedModal reason={quotaReason} onClose={() => setQuotaReason(null)} />
     </div>
   );
 }

@@ -18,7 +18,7 @@
 //     boot scripts in 14.x; nonce-based CSP would need an app-wide refactor.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://unpkg.com https://*.supabase.co https://checkout.stripe.com https://js.stripe.com https://m.stripe.network https://www.ezojs.com https://*.ezojs.com https://*.ezoic.net https://*.ezoic.com",
+  "script-src 'self' blob: 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://esm.sh https://unpkg.com https://*.supabase.co https://checkout.stripe.com https://js.stripe.com https://m.stripe.network https://www.ezojs.com https://*.ezojs.com https://*.ezoic.net https://*.ezoic.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' data: https://fonts.gstatic.com",
   "img-src 'self' data: blob: https: *.supabase.co",
@@ -45,11 +45,6 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
-  // Transpile @ffmpeg/ffmpeg so Webpack processes its
-  // `new Worker(new URL("./worker.js", import.meta.url))` and emits the worker
-  // chunk — without this the FFmpeg API worker never loads and every audio/
-  // video conversion fails with "Conversion failed: undefined".
-  transpilePackages: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   images: {
     formats: ["image/avif", "image/webp"],
   },

@@ -3,31 +3,37 @@
 // the core twice. Single-threaded @ffmpeg/core@0.12.6 — note this build does NOT
 // include libass, so the `subtitles`/`ass` video filters are unavailable.
 //
-// IMPORTANT — root cause of "Conversion failed: undefined" on every audio/
-// video tool, and why this exact setup fixes it:
+// Root cause of "Conversion failed: undefined" on every audio/video tool, and
+// the only setup that survives Next/Webpack + our CSP:
 //
-//   • @ffmpeg/ffmpeg@0.12.x resolves (under Next/Webpack) to its ESM build,
-//     whose FFmpeg.load() creates the API worker as a MODULE worker:
-//        new Worker(new URL("./worker.js", import.meta.url), { type: "module" })
-//     Webpack only emits that worker chunk when it transpiles the package —
-//     hence `transpilePackages: ["@ffmpeg/ffmpeg"]` in next.config.mjs. Without
-//     it the worker never loads and load() rejects with a non-Error.
+//   • @ffmpeg/ffmpeg@0.12.x's FFmpeg.load() builds its worker from
+//     `new Worker(new URL("./worker.js", import.meta.url), { type: "module" })`.
+//     - Without transpilePackages Webpack never emits that chunk → worker dead.
+//     - WITH transpilePackages Webpack rewrites the worker's dynamic
+//       `import(coreURL)` into a static require → at runtime it throws
+//       "Cannot find module 'blob:…'". Both break, oppositely.
 //
-//   • Webpack emits that worker as a CLASSIC worker (the built code shows
-//     `{ type: void 0 }`), so inside it importScripts() IS available and the
-//     worker loads the core via importScripts(coreURL). That needs the UMD
-//     core (/dist/umd/ffmpeg-core.js). The ESM core has no importScripts entry
-//     and its `import().default` path returned undefined → ERROR_IMPORT_FAILURE
-//     (the "Conversion failed: undefined" we saw). So: UMD core + classic
-//     bundled worker. (No classWorkerURL — the package's UMD 814 worker has
-//     its import() stubbed to MODULE_NOT_FOUND, which would re-break loading.)
+//   • Fix: bypass Webpack's worker handling entirely. We self-host the
+//     package's own ESM worker (worker.js + const.js + errors.js) under
+//     /public/ffmpeg and pass it as `classWorkerURL`. It's same-origin (CSP
+//     worker-src 'self'), its relative imports resolve natively, and its
+//     dynamic `import(coreURL)` stays native — so a blob core URL loads fine.
 //
-//   • The single-threaded core does NOT use SharedArrayBuffer, so we do NOT
-//     enable COOP/COEP isolation — that would break the ~30 client tools that
-//     load from esm.sh/unpkg without CORP headers (pdf.js, tesseract, @imgly,
-//     jsQR, zxing), plus Google Fonts and Ezoic ads.
+//   • The worker is type:"module", so importScripts() is absent and it loads
+//     the core via `import(coreURL).default` → that needs the ESM core
+//     (/dist/esm), whose default export is createFFmpegCore. (UMD core has no
+//     default export.) Importing a blob: script requires `blob:` in the CSP
+//     script-src (added in next.config.mjs).
+//
+//   • Single-threaded core → no SharedArrayBuffer → we deliberately do NOT
+//     enable COOP/COEP isolation, which would break the ~30 other client tools
+//     loading from esm.sh/unpkg without CORP (pdf.js, tesseract, @imgly, jsQR,
+//     zxing), plus Google Fonts and Ezoic ads.
 
-const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
+// Self-hosted ESM worker (copied from @ffmpeg/ffmpeg/dist/esm) — same-origin so
+// it isn't mangled by Webpack and satisfies the CSP worker-src 'self'.
+const WORKER_URL = "/ffmpeg/worker.js";
 
 export type FfmpegInstance = {
   exec: (args: string[]) => Promise<number>;
@@ -48,6 +54,7 @@ export async function getFfmpeg(onProgress?: (p: number) => void): Promise<Ffmpe
       await ffmpeg.load({
         coreURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, "text/javascript"),
         wasmURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, "application/wasm"),
+        classWorkerURL: new URL(WORKER_URL, window.location.origin).href,
       });
       return ffmpeg;
     })();

@@ -792,6 +792,29 @@ TOOLS.push(
     ],
     faqs: codeFaqs("Clean AI Text"),
   },
+  {
+    slug: "anonymize-text",
+    phase: 3,
+    kind: "client",
+    category: "text-ai",
+    icon: ShieldCheck,
+    tone: "green",
+    name: "Anonymize Text (RGPD)",
+    short: "Redact emails, phones, IBANs and cards — in your browser.",
+    h1: "Anonymize Text Online — Redact Personal Data (GDPR) Free",
+    metaTitle: "Anonymize / Redact Text Online — GDPR, In-Browser | Konver",
+    metaDescription: "Redact personal data — emails, phone numbers, IBANs, card numbers, IP addresses — from any text. 100% in your browser, nothing uploaded. Free & GDPR-friendly.",
+    primaryKeyword: "anonymize text online",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "Text",
+    steps: [
+      { title: "Paste your text", body: "Logs, transcripts, documents — anything with personal data." },
+      { title: "Choose a style", body: "Typed labels like [EMAIL], a •••• mask, or full removal." },
+      { title: "Copy or download", body: "The redaction runs locally — your text never leaves the page." },
+    ],
+    faqs: codeFaqs("Anonymize Text"),
+  },
 );
 
 TOOLS.push(

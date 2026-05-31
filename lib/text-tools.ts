@@ -626,4 +626,45 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
         .trim();
     },
   },
+
+  // Anonymize / Redact (RGPD) — masks personal data (email, phone, IBAN, card,
+  // SSN, IP) entirely in the browser. The text never leaves the device, which
+  // is the whole point of a privacy tool.
+  "anonymize-text": {
+    inputLabel: "Text to anonymize",
+    inputPlaceholder: "Paste text containing names, emails, phone numbers…",
+    outputLabel: "Anonymized text",
+    modes: [
+      { id: "label", label: "Typed labels" },
+      { id: "mask", label: "Mask (••••)" },
+      { id: "remove", label: "Remove" },
+    ],
+    defaultMode: "label",
+    download: { ext: "txt", mime: "text/plain;charset=utf-8" },
+    run: (input, mode) => {
+      // Order matters: consume structured numbers (IBAN/card/SSN/IP) before the
+      // looser phone pattern so it can't re-match them. Replacements never
+      // contain digits, so later passes skip already-redacted spans.
+      const PII: { type: string; re: RegExp }[] = [
+        { type: "EMAIL", re: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi },
+        { type: "IBAN", re: /\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/gi },
+        { type: "CARD", re: /\b(?:\d[ -]?){13,19}\b/g },
+        { type: "SSN", re: /\b\d{3}-\d{2}-\d{4}\b/g },
+        { type: "IP", re: /\b(?:\d{1,3}\.){3}\d{1,3}\b/g },
+        // Loose phone span (international formats); the replacer rejects it
+        // unless it holds 7+ digits, so it won't redact stray short numbers.
+        { type: "PHONE", re: /(?:\+|00)?\d[\d\s.()\-]{5,}\d/g },
+      ];
+      const replacer = (type: string) => (m: string) => {
+        const digits = m.replace(/\D/g, "").length;
+        if (type === "PHONE" && (digits < 7 || digits > 15)) return m;
+        if (mode === "remove") return "";
+        if (mode === "mask") return "•".repeat(Math.min(12, Math.max(4, m.replace(/\s/g, "").length)));
+        return `[${type}]`;
+      };
+      let s = input;
+      for (const { type, re } of PII) s = s.replace(re, replacer(type));
+      return mode === "remove" ? s.replace(/[ \t]{2,}/g, " ").replace(/[ \t]+\n/g, "\n").trim() : s;
+    },
+  },
 };

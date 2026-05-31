@@ -45,6 +45,11 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+  // Transpile @ffmpeg/ffmpeg so Webpack processes its
+  // `new Worker(new URL("./worker.js", import.meta.url))` and emits the worker
+  // chunk — without this the FFmpeg API worker never loads and every audio/
+  // video conversion fails with "Conversion failed: undefined".
+  transpilePackages: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   images: {
     formats: ["image/avif", "image/webp"],
   },

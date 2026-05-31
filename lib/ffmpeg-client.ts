@@ -3,23 +3,30 @@
 // the core twice. Single-threaded @ffmpeg/core@0.12.6 — note this build does NOT
 // include libass, so the `subtitles`/`ass` video filters are unavailable.
 //
-// IMPORTANT — why `classWorkerURL` is set explicitly:
-// @ffmpeg/ffmpeg@0.12.x's FFmpeg.load() spins up its API worker via
-//   new Worker(new URL("./worker.js", import.meta.url), { type: "module" })
-// which Next/Webpack does NOT reliably emit as a chunk — the worker silently
-// fails to load and load() rejects with a non-Error, surfacing to users as
-// "Conversion failed: undefined". Passing classWorkerURL (the package's own
-// 814.ffmpeg.js, fetched from the CDN as a blob) bypasses Webpack's worker
-// resolution entirely and fixes every audio/video tool.
+// IMPORTANT — root cause of "Conversion failed: undefined" on every audio/
+// video tool, and why this exact setup fixes it:
 //
-// NOTE — the single-threaded core does NOT need SharedArrayBuffer, so we do
-// NOT enable COOP/COEP cross-origin isolation: that would break the ~30 other
-// client tools that load libraries from esm.sh/unpkg without CORP headers
-// (pdf.js, tesseract.js, @imgly, jsQR, zxing…), plus Google Fonts and ads.
+//   • @ffmpeg/ffmpeg@0.12.x resolves (under Next/Webpack) to its ESM build,
+//     whose FFmpeg.load() creates the API worker as a MODULE worker:
+//        new Worker(new URL("./worker.js", import.meta.url), { type: "module" })
+//     Webpack only emits that worker chunk when it transpiles the package —
+//     hence `transpilePackages: ["@ffmpeg/ffmpeg"]` in next.config.mjs. Without
+//     it the worker never loads and load() rejects with a non-Error.
+//
+//   • Inside that MODULE worker, importScripts() doesn't exist, so the worker
+//     loads the core via dynamic `import(coreURL)` and reads `.default`. A UMD
+//     core has no ESM default export → ERROR_IMPORT_FAILURE. So we MUST point
+//     coreURL at the ESM core (/dist/esm), whose default export is
+//     createFFmpegCore. (We do NOT pass classWorkerURL: the package's UMD
+//     814 worker has its dynamic import() stubbed to MODULE_NOT_FOUND by its
+//     own bundling, which would re-break core loading.)
+//
+//   • The single-threaded core does NOT use SharedArrayBuffer, so we do NOT
+//     enable COOP/COEP isolation — that would break the ~30 client tools that
+//     load from esm.sh/unpkg without CORP headers (pdf.js, tesseract, @imgly,
+//     jsQR, zxing), plus Google Fonts and Ezoic ads.
 
-const FFMPEG_VERSION = "0.12.15"; // keep in sync with package.json @ffmpeg/ffmpeg
-const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-const WORKER_URL = `https://unpkg.com/@ffmpeg/ffmpeg@${FFMPEG_VERSION}/dist/umd/814.ffmpeg.js`;
+const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
 
 export type FfmpegInstance = {
   exec: (args: string[]) => Promise<number>;
@@ -40,7 +47,6 @@ export async function getFfmpeg(onProgress?: (p: number) => void): Promise<Ffmpe
       await ffmpeg.load({
         coreURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, "text/javascript"),
         wasmURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, "application/wasm"),
-        classWorkerURL: await toBlobURL(WORKER_URL, "text/javascript"),
       });
       return ffmpeg;
     })();

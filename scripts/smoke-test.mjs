@@ -146,12 +146,24 @@ const INTERACTIVE = [
     if (after < Math.max(1, before)) throw new Error("no QR canvas/svg rendered");
   }},
   // REAL FFmpeg end-to-end: uploads a generated WAV and converts it to MP3.
-  // This is the definitive check that the classWorkerURL fix works and that
-  // the audio/video tools are unblocked. Allow time for the ~30 MB core fetch.
+  // On failure we surface the on-page error text + console errors so CI tells
+  // us exactly why (instead of a bare timeout).
   { slug: "wav-to-mp3", run: async (page) => {
+    const consoleErrs = [];
+    page.on("console", (m) => m.type() === "error" && consoleErrs.push(m.text()));
+    page.on("pageerror", (e) => consoleErrs.push("pageerror: " + e.message));
     await page.locator('input[type="file"]').first().setInputFiles({ name: "tone.wav", mimeType: "audio/wav", buffer: WAV });
     await page.getByRole("button", { name: /^Convert$/ }).first().click();
-    await page.locator("a[download]").first().waitFor({ state: "visible", timeout: 150_000 });
+    // Race success (download link) vs failure (error paragraph) — whichever first.
+    const dl = page.locator("a[download]").first();
+    const errP = page.locator("text=/Conversion failed|FFmpeg|failed|error/i").first();
+    const winner = await Promise.race([
+      dl.waitFor({ state: "visible", timeout: 150_000 }).then(() => "ok").catch(() => null),
+      errP.waitFor({ state: "visible", timeout: 150_000 }).then(() => "err").catch(() => null),
+    ]);
+    if (winner === "ok") return;
+    const onPage = await errP.innerText().catch(() => "(no error text)");
+    throw new Error(`no download. on-page="${onPage.slice(0, 160)}" console=${JSON.stringify(consoleErrs.slice(0, 3))}`);
   }},
 ];
 

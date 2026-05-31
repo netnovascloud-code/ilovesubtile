@@ -43,7 +43,7 @@ export function AiTextClient({ slug }: { slug: string }) {
       if (!res.ok) {
         setError(
           data.error === "daily_limit"
-            ? "You've hit today's free limit. Sign in or upgrade to Pro for unlimited use."
+            ? "You've hit today's free limit. Sign in or upgrade to Pro for a higher monthly quota."
             : data.error === "text_too_long"
             ? "That text is too long — please shorten it and try again."
             : "Something went wrong. Please try again in a moment.",

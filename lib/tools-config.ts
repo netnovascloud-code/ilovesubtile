@@ -162,7 +162,7 @@ export const COMING_SOON: ComingSoonTool[] = [];
 const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   {
     q: `Is ${name} free to use?`,
-    a: `Yes. Konver is free for everyone. Free users can run ${name} up to 2 times per day with a file size limit. Pro users (€12/month) get unlimited runs, larger files, and no ads.`,
+    a: `Yes. Konver is free for everyone. Free users can run ${name} up to 2 times per day with a file size limit. Pro users (€12/month) get a higher monthly quota, larger files, and no ads.`,
   },
   {
     q: `Do you store my files?`,
@@ -178,7 +178,7 @@ const baseFaqs = (name: string, ext: string): ToolFaq[] => [
   },
   {
     q: `Do I need to sign up?`,
-    a: `No account is required for casual use. Signing up gives you a few extra runs per day and a history of your last files. Pro unlocks unlimited usage.`,
+    a: `No account is required for casual use. Signing up gives you a few extra runs per day and a history of your last files. Pro unlocks a much higher monthly quota.`,
   },
 ];
 
@@ -1183,7 +1183,7 @@ TOOLS.push(
 
 // ── Konver — Documents (PDF tools, client-side via pdf-lib + pending) ──────
 const docFaqs = (name: string): ToolFaq[] => [
-  { q: `Is ${name} free?`, a: `Yes — free with a daily limit on the free plan. Pro unlocks unlimited use and bigger files.` },
+  { q: `Is ${name} free?`, a: `Yes — free with a daily limit on the free plan. Pro unlocks a higher monthly quota and bigger files.` },
   { q: `Where is the PDF processed?`, a: `Real PDF tools (merge, split, rotate, images→PDF) run entirely in your browser — your file is never uploaded. Server-side tools delete files immediately after download.` },
   { q: `Will my formatting be preserved?`, a: `Yes, the original structure and metadata are kept as-is whenever the operation allows.` },
   { q: `Is there a file size limit?`, a: `Free tier supports up to 50 MB. Pro raises this to 500 MB.` },
@@ -1294,7 +1294,7 @@ TOOLS.push(
 
 // ── Audio (server-side via FFmpeg — pending until the engine is wired) ────
 const avFaqs = (name: string): ToolFaq[] => [
-  { q: `Is ${name} free?`, a: `Yes — free daily use on every Konver tool. Pro unlocks unlimited runs and bigger files.` },
+  { q: `Is ${name} free?`, a: `Yes — free daily use on every Konver tool. Pro unlocks a higher monthly quota and bigger files.` },
   { q: `Where is my file processed?`, a: `On a secure server we control. As soon as your download link is generated, the file is deleted — never stored beyond the conversion.` },
   { q: `What about quality?`, a: `We use industry-standard FFmpeg encoders with sensible defaults — the same engine professional editors trust.` },
   { q: `File size limit?`, a: `Free tier up to 200 MB. Pro raises it to 2 GB.` },
@@ -2109,7 +2109,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Best Free VEED.io Alternative — Konver",
     metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | Konver",
     metaDescription:
-      "Looking for a VEED.io alternative? Konver is faster, cheaper (€9/mo vs €18/mo) and focused on subtitles only.",
+      "Looking for a VEED.io alternative? Konver is faster, cheaper (€12/mo vs €18/mo) and focused on subtitles only.",
     bulletPoints: [
       "AI subtitle generation with AI — modern, European, accurate.",
       "€12/month Pro vs VEED's €18/month — and a real free tier.",
@@ -2256,7 +2256,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       "A whole conversion suite (image, audio, video, code, AI text) alongside.",
     ],
     comparison: [
-      { feature: "Price", us: "Free / €9/mo Pro", them: "~€19/month" },
+      { feature: "Price", us: "Free / €12/mo Pro", them: "~€19/month" },
       { feature: "Install", us: "None — web", them: "Desktop app" },
       { feature: "Everyday PDF jobs", us: "Yes, free", them: "Yes, paid" },
       { feature: "Runs in browser", us: "Yes, no upload", them: "App / cloud" },

@@ -44,7 +44,7 @@ export function HumanizerClient() {
       const res = await callTool("ai-humanizer", { task: "humanize", text: input, options: { level } });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error === "daily_limit" ? "Daily free limit reached — sign in or upgrade for unlimited use." : "Something went wrong. Try again.");
+        setError(data.error === "daily_limit" ? "Daily free limit reached — sign in or upgrade for a higher monthly quota." : "Something went wrong. Try again.");
         return;
       }
       const out = data.output ?? "";

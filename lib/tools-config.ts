@@ -1987,6 +1987,22 @@ TOOLS.push(
     ],
     faqs: codeFaqs("Screenshot to HTML"),
   },
+  {
+    slug: "image-to-table", phase: 3, kind: "ai", category: "documents", icon: FileSpreadsheet, tone: "green",
+    name: "Image to Excel / CSV / JSON",
+    short: "Photo or screenshot of a table → Excel, CSV or JSON.",
+    h1: "Image to Excel / CSV / JSON — Extract a Table from a Photo Free",
+    metaTitle: "Image to Excel — Photo of Table to XLSX/CSV/JSON | Konver",
+    metaDescription: "Turn a photo or screenshot of a table into a clean spreadsheet with AI vision. Download as Excel (.xlsx), CSV or JSON. Free, no sign-up to try.",
+    primaryKeyword: "image to excel",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "Excel",
+    steps: [
+      { title: "Upload a table image", body: "A photo, scan or screenshot of any table or spreadsheet." },
+      { title: "AI reads the cells", body: "Rows and columns are reconstructed into clean data." },
+      { title: "Export your data", body: "Download as Excel (.xlsx), CSV or JSON — one click." },
+    ],
+    faqs: codeFaqs("Image to Excel / CSV / JSON"),
+  },
 );
 
 // ── OCR (in-browser via Tesseract.js, no upload) ───────────────────────────

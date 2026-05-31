@@ -85,6 +85,7 @@ import { HandwritingToTextClient } from "@/components/tools/clients/HandwritingT
 import { BusinessCardScannerClient } from "@/components/tools/clients/BusinessCardScannerClient";
 import { ReceiptScannerClient } from "@/components/tools/clients/ReceiptScannerClient";
 import { ScreenshotToCodeClient } from "@/components/tools/clients/ScreenshotToCodeClient";
+import { ImageToTableClient } from "@/components/tools/clients/ImageToTableClient";
 import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
 import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
 import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
@@ -470,6 +471,9 @@ export default function LocalisedToolPage({
       break;
     case "screenshot-to-code":
       body = <ScreenshotToCodeClient />;
+      break;
+    case "image-to-table":
+      body = <ImageToTableClient />;
       break;
     case "change-background":
       body = <ChangeBackgroundClient />;

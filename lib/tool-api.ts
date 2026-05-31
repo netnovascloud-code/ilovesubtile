@@ -34,6 +34,7 @@ const FN_MAP: Record<string, string> = {
   "business-card-scanner": "ai-vision",
   "receipt-scanner": "ai-vision",
   "screenshot-to-code": "ai-vision",
+  "image-to-table": "ai-vision",
 };
 
 export function toolFunction(slug: string): string | null {

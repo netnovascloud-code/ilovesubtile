@@ -4,10 +4,7 @@
 
 ## Failures
 
-- **wav-to-mp3 [interactive]** — locator.waitFor: Timeout 150000ms exceeded.
-Call log:
-  - waiting for locator('a[download]').first() to be visible
-
+- **wav-to-mp3 [interactive]** — no download. on-page="Loading FFmpeg…" console=[]
 
 ## Passes
 - subtitle-generator

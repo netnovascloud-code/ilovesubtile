@@ -1,4 +1,4 @@
-// Konver smoke test (v3) — runs in GitHub Actions against a freshly-built
+// Konver smoke test (v4) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -37,6 +37,21 @@ function record(slug, ok, detail = "") {
 }
 
 const browser = await chromium.launch();
+
+// Minimal valid 16-bit PCM mono WAV (~0.2s) generated in-memory — used to
+// drive a REAL FFmpeg conversion through the browser worker pipeline.
+function makeWav() {
+  const sampleRate = 8000, n = Math.floor(sampleRate * 0.2);
+  const data = Buffer.alloc(n * 2);
+  for (let i = 0; i < n; i++) data.writeInt16LE(Math.round(Math.sin(i / 8) * 3000), i * 2);
+  const h = Buffer.alloc(44);
+  h.write("RIFF", 0); h.writeUInt32LE(36 + data.length, 4); h.write("WAVE", 8);
+  h.write("fmt ", 12); h.writeUInt32LE(16, 16); h.writeUInt16LE(1, 20); h.writeUInt16LE(1, 22);
+  h.writeUInt32LE(sampleRate, 24); h.writeUInt32LE(sampleRate * 2, 28); h.writeUInt16LE(2, 32); h.writeUInt16LE(16, 34);
+  h.write("data", 36); h.writeUInt32LE(data.length, 40);
+  return Buffer.concat([h, data]);
+}
+const WAV = makeWav();
 
 // ── Pass 1 — every route loads cleanly ────────────────────────────────────
 for (const tool of TOOLS) {
@@ -129,6 +144,14 @@ const INTERACTIVE = [
     await page.waitForTimeout(500);
     const after = await page.locator("svg, canvas").count();
     if (after < Math.max(1, before)) throw new Error("no QR canvas/svg rendered");
+  }},
+  // REAL FFmpeg end-to-end: uploads a generated WAV and converts it to MP3.
+  // This is the definitive check that the classWorkerURL fix works and that
+  // the audio/video tools are unblocked. Allow time for the ~30 MB core fetch.
+  { slug: "wav-to-mp3", run: async (page) => {
+    await page.locator('input[type="file"]').first().setInputFiles({ name: "tone.wav", mimeType: "audio/wav", buffer: WAV });
+    await page.getByRole("button", { name: /^Convert$/ }).first().click();
+    await page.locator("a[download]").first().waitFor({ state: "visible", timeout: 150_000 });
   }},
 ];
 

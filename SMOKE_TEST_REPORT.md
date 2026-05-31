@@ -1,9 +1,13 @@
-# Konver smoke test — 155/155 passed
+# Konver smoke test — 155/156 passed
 
-✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
+❌ 1 failures — see below.
 
 ## Failures
-_None._
+
+- **wav-to-mp3 [interactive]** — locator.waitFor: Timeout 150000ms exceeded.
+Call log:
+  - waiting for locator('a[download]').first() to be visible
+
 
 ## Passes
 - subtitle-generator

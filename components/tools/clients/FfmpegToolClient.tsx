@@ -50,7 +50,12 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
       try { await ff.deleteFile(inputName); await ff.deleteFile(outputName); } catch {}
       setProgress(100); setPhase("done");
     } catch (e) {
-      setError(`Conversion failed: ${(e as Error).message}`);
+      // Surface a useful message: FFmpeg sometimes rejects with a bare string
+      // or a non-Error, so never render the raw `.message` (which can be
+      // "undefined"). Log the original for diagnostics.
+      console.error("FFmpeg conversion error:", e);
+      const detail = e instanceof Error ? e.message : typeof e === "string" ? e : JSON.stringify(e);
+      setError(`Conversion failed: ${detail || "the conversion engine could not start. Please retry."}`);
       setPhase("idle");
     }
   }

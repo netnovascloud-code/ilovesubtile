@@ -13,20 +13,21 @@
 //     hence `transpilePackages: ["@ffmpeg/ffmpeg"]` in next.config.mjs. Without
 //     it the worker never loads and load() rejects with a non-Error.
 //
-//   • Inside that MODULE worker, importScripts() doesn't exist, so the worker
-//     loads the core via dynamic `import(coreURL)` and reads `.default`. A UMD
-//     core has no ESM default export → ERROR_IMPORT_FAILURE. So we MUST point
-//     coreURL at the ESM core (/dist/esm), whose default export is
-//     createFFmpegCore. (We do NOT pass classWorkerURL: the package's UMD
-//     814 worker has its dynamic import() stubbed to MODULE_NOT_FOUND by its
-//     own bundling, which would re-break core loading.)
+//   • Webpack emits that worker as a CLASSIC worker (the built code shows
+//     `{ type: void 0 }`), so inside it importScripts() IS available and the
+//     worker loads the core via importScripts(coreURL). That needs the UMD
+//     core (/dist/umd/ffmpeg-core.js). The ESM core has no importScripts entry
+//     and its `import().default` path returned undefined → ERROR_IMPORT_FAILURE
+//     (the "Conversion failed: undefined" we saw). So: UMD core + classic
+//     bundled worker. (No classWorkerURL — the package's UMD 814 worker has
+//     its import() stubbed to MODULE_NOT_FOUND, which would re-break loading.)
 //
 //   • The single-threaded core does NOT use SharedArrayBuffer, so we do NOT
 //     enable COOP/COEP isolation — that would break the ~30 client tools that
 //     load from esm.sh/unpkg without CORP headers (pdf.js, tesseract, @imgly,
 //     jsQR, zxing), plus Google Fonts and Ezoic ads.
 
-const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
+const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
 export type FfmpegInstance = {
   exec: (args: string[]) => Promise<number>;

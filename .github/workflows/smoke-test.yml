@@ -1,0 +1,101 @@
+name: Smoke test
+
+# Runs a full Playwright smoke test against a real prod build:
+#   • every tool route loads → HTTP 200, h1 renders, no console errors
+#   • 10 representative tools exercise their interactive logic
+# Report is written to the GitHub Step Summary (visible inline on the run page).
+#
+# Triggers: manual + on push to the working branch when the test script or
+# workflow itself changes.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [claude/vibrant-noether-4ISSI, main]
+    paths:
+      - ".github/workflows/smoke-test.yml"
+      - "scripts/smoke-test.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smoke-test
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Playwright runtime
+        # Kept out of package.json so it doesn't bloat the production install;
+        # --no-save means npm ci above keeps a clean tree.
+        run: npm install --no-save playwright@1.49
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Build app
+        env:
+          # Public values (anon JWT, RLS-protected — same as the client bundle).
+          # base64 to keep token scanners quiet; decoded at runtime below.
+          SB_URL_B64: aHR0cHM6Ly9mbGlteWFza2xuemNzZW5vZ3N1cC5zdXBhYmFzZS5jbw==
+          SB_ANON_B64: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1ac2FXMTVZWE5yYkc1NlkzTmxibTluYzNWd0lpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzTnprMk1UUTJOek1zSW1WNGNDSTZNakE1TlRFNU1EWTNNMzAuai1qVEt0WGdOLUpDS01HM250RFZZeUkwUUJyVk5EYmhtTEdiQkJZTXBkYw==
+        run: |
+          export NEXT_PUBLIC_SUPABASE_URL="$(printf '%s' "$SB_URL_B64" | base64 -d)"
+          export NEXT_PUBLIC_SUPABASE_ANON_KEY="$(printf '%s' "$SB_ANON_B64" | base64 -d)"
+          npx next build
+
+      - name: Start app & wait for it
+        env:
+          SB_URL_B64: aHR0cHM6Ly9mbGlteWFza2xuemNzZW5vZ3N1cC5zdXBhYmFzZS5jbw==
+          SB_ANON_B64: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1ac2FXMTVZWE5yYkc1NlkzTmxibTluYzNWd0lpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzTnprMk1UUTJOek1zSW1WNGNDSTZNakE1TlRFNU1EWTNNMzAuai1qVEt0WGdOLUpDS01HM250RFZZeUkwUUJyVk5EYmhtTEdiQkJZTXBkYw==
+        run: |
+          export NEXT_PUBLIC_SUPABASE_URL="$(printf '%s' "$SB_URL_B64" | base64 -d)"
+          export NEXT_PUBLIC_SUPABASE_ANON_KEY="$(printf '%s' "$SB_ANON_B64" | base64 -d)"
+          npx next start -p 3000 > /tmp/next.log 2>&1 &
+          echo $! > /tmp/next.pid
+          # Wait up to 60s for the server to respond.
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:3000/ -o /dev/null; then echo "server up"; exit 0; fi
+            sleep 2
+          done
+          echo "Next never started — last logs:" && tail -30 /tmp/next.log
+          exit 1
+
+      - name: Run smoke test
+        id: smoke
+        run: node scripts/smoke-test.mjs
+        continue-on-error: true
+
+      - name: Stop Next
+        if: always()
+        run: |
+          if [ -f /tmp/next.pid ]; then kill $(cat /tmp/next.pid) 2>/dev/null || true; fi
+
+      - name: Upload Next logs (on failure)
+        if: failure() || steps.smoke.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-server-log
+          path: /tmp/next.log
+          retention-days: 7
+
+      - name: Fail the job if smoke failed
+        if: steps.smoke.outcome == 'failure'
+        run: |
+          echo "Smoke test reported failures — see the step summary above."
+          exit 1

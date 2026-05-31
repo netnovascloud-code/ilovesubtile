@@ -4,7 +4,7 @@
 
 ## Failures
 
-- **wav-to-mp3 [interactive]** — no download. on-page="Loading FFmpeg…" console=[]
+- **wav-to-mp3 [interactive]** — no download (err). err="Conversion failed: undefined" console=[]
 
 ## Passes
 - subtitle-generator

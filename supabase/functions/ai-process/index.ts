@@ -40,7 +40,7 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "clean":
       return `You receive subtitle text. Fix obvious transcription errors, normalise punctuation, and remove [music] / (sigh) style annotations. Preserve every line break.`;
     case "summary":
-      return `You receive a transcript. Return a 4-bullet summary in plain markdown.`;
+      return `You receive a transcript. Return a 4-point summary, one point per line, each line starting with "• ". Plain text only.`;
     case "translate": {
       const reg = opts.register === "formal" ? " Use a polite, formal register (e.g. vouvoiement in French, Sie in German)."
         : opts.register === "informal" ? " Use a casual, informal register (e.g. tutoiement in French, du in German)."
@@ -58,7 +58,7 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "summarize":
       if (opts.format === "sentence") return `Summarise the user's text in a single concise sentence. Output only that sentence.`;
       if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs. Output only the summary.`;
-      return `Summarise the user's text as 3-6 key bullet points in markdown. Output only the bullets.`;
+      return `Summarise the user's text as 3-6 key points, one per line, each line starting with "• ". Output only the points, plain text.`;
     case "grammar":
       return `Correct spelling, grammar and punctuation in the user's text. Keep the same language, meaning and formatting. Output ONLY the corrected text.`;
     case "simplify":
@@ -88,6 +88,21 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     default:
       return null;
   }
+}
+
+// Part 4 — strip Markdown so answers render as clean plain text. Users
+// complained about ** and * (and the odd heading/back-tick) leaking into
+// rephrase / humanize / summary output. Never run this on JSON tasks.
+function stripMarkdown(s: string): string {
+  return s
+    .replace(/\*\*(.+?)\*\*/gs, "$1")     // **bold** → bold
+    .replace(/__(.+?)__/gs, "$1")          // __bold__ → bold
+    .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")  // "## heading" → "heading"
+    .replace(/^[ \t]*\*[ \t]+/gm, "• ")    // "* item" bullet → "• item"
+    .replace(/`{1,3}/g, "")                // strip code fences / back-ticks
+    .replace(/\*/g, "")                    // any stray emphasis asterisks
+    .replace(/\n{3,}/g, "\n\n")            // tidy oversized gaps
+    .trim();
 }
 
 const TOOL_BY_TASK: Record<string, string> = {
@@ -126,8 +141,21 @@ Deno.serve(async (req) => {
   };
   const task = body.task ?? "";
   const text = (body.text ?? "").trim();
-  const system = buildSystem(task, body.options ?? {});
-  if (!system || !text) return json({ error: "bad_request" }, { status: 400 });
+  const baseSystem = buildSystem(task, body.options ?? {});
+  if (!baseSystem || !text) return json({ error: "bad_request" }, { status: 400 });
+
+  // wantsJson: tasks whose contract is a JSON object — they must keep their raw
+  // structured output (no plain-text rewrite, no markdown stripping).
+  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category";
+  // Tasks that legitimately emit a *specific* language (a translation/letter in
+  // opts.target, an i18n fill) or a fixed structured label — these are exempt
+  // from the "answer in the input's language" rule.
+  const TARGET_OR_STRUCTURED = new Set(["translate", "cover-letter", "i18n-tool", "i18n-category", "detect-language", "analyze-file", "contract-analyze"]);
+  let system = baseSystem;
+  // Part 4 — force clean plain text on every prose task.
+  if (!wantsJson) system += ` Write your answer in plain text only — no Markdown, no asterisks (*), no bold or italic markers, no headings, no code fences.`;
+  // Part 3 — make the model answer in the SAME language as the input.
+  if (!TARGET_OR_STRUCTURED.has(task)) system += ` IMPORTANT: Reply in the SAME language as the user's text — detect that language and write your entire answer in it. Never switch to English unless the user's text is itself in English.`;
   // Contracts can run long — bump the cap to 120 KB only for that task to
   // keep memory predictable on the smaller default tasks.
   const maxLen = task === "contract-analyze" ? 120_000 : 40_000;
@@ -166,7 +194,6 @@ Deno.serve(async (req) => {
   }
 
   const model = LARGE.has(task) ? "mistral-large-latest" : "mistral-small-latest";
-  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category";
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${mistralKey}`, "Content-Type": "application/json" },
@@ -180,7 +207,10 @@ Deno.serve(async (req) => {
 
   if (!res.ok) return json({ error: "processing_failed", message: await res.text() }, { status: 502 });
   const data = (await res.json()) as { choices: { message: { content: string } }[] };
-  const output = data.choices?.[0]?.message?.content?.trim() ?? "";
+  let output = data.choices?.[0]?.message?.content?.trim() ?? "";
+  // Part 4 — clean markdown out of prose answers (skip JSON tasks and hashtags,
+  // whose '#' must survive).
+  if (!wantsJson && task !== "hashtags") output = stripMarkdown(output);
 
   if (userId) {
     await svc.from("jobs").insert({

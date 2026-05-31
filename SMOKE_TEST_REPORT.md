@@ -4,7 +4,7 @@
 
 ## Failures
 
-- **wav-to-mp3 [interactive]** — no download (err). err="Conversion failed: undefined" console=[]
+- **wav-to-mp3 [interactive]** — no download (err). err="Conversion failed: Error: Cannot find module 'blob:http://localhost:3000/60bbaa5a-3f5f-4516-9aae-2c6d5319d2bb'" console=["FFmpeg conversion error: Error: Cannot find module 'bl
 
 ## Passes
 - subtitle-generator

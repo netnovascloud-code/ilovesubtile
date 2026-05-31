@@ -769,6 +769,29 @@ TOOLS.push(
     ],
     faqs: codeFaqs("the word counter"),
   },
+  {
+    slug: "clean-ai-export",
+    phase: 3,
+    kind: "client",
+    category: "text-ai",
+    icon: Eraser,
+    tone: "green",
+    name: "Clean AI Text",
+    short: "Remove invisible AI watermarks, markdown and boilerplate.",
+    h1: "Clean AI Text — Remove Watermarks, Markdown & Boilerplate Free",
+    metaTitle: "Clean AI Text Online — Remove ChatGPT Watermarks | Konver",
+    metaDescription: "Strip invisible watermark characters, Markdown formatting and 'As an AI…' boilerplate from ChatGPT, Claude or Gemini output. Free, in-browser, private.",
+    primaryKeyword: "remove ai watermark text",
+    accept: [],
+    freeMaxMb: 0,
+    outputType: "Text",
+    steps: [
+      { title: "Paste AI output", body: "From ChatGPT, Claude, Gemini or any LLM." },
+      { title: "Pick how clean", body: "Standard, invisible-chars only, strip formatting, or plain text." },
+      { title: "Copy or download", body: "Get tidy plain text with no hidden characters." },
+    ],
+    faqs: codeFaqs("Clean AI Text"),
+  },
 );
 
 TOOLS.push(

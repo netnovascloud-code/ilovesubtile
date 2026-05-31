@@ -575,4 +575,55 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
       ].join("\n");
     },
   },
+
+  // Clean AI export — strip the invisible watermark characters, Markdown
+  // artefacts and "As an AI…" boilerplate that LLMs leave in copy-pasted text.
+  // 100% in-browser, no AI, no quota.
+  "clean-ai-export": {
+    inputLabel: "Paste your AI text",
+    inputPlaceholder: "Paste text from ChatGPT, Claude, Gemini…",
+    outputLabel: "Clean text",
+    modes: [
+      { id: "standard", label: "Standard" },
+      { id: "invisible", label: "Invisible chars only" },
+      { id: "markdown", label: "Strip formatting" },
+      { id: "plain", label: "Plain text" },
+    ],
+    defaultMode: "standard",
+    download: { ext: "txt", mime: "text/plain;charset=utf-8" },
+    run: (input, mode) => {
+      // Zero-width / bidi / soft-hyphen / BOM characters used as AI "watermarks".
+      const INVISIBLE = /[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF\u00AD\u180E\u061C]/g;
+      let s = input.replace(INVISIBLE, "").replace(/\r\n?/g, "\n");
+      if (mode === "invisible") {
+        return s.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+      }
+      // Strip Markdown emphasis, headings, bullets and code fences.
+      s = s
+        .replace(/\*\*(.+?)\*\*/gs, "$1")
+        .replace(/__(.+?)__/gs, "$1")
+        .replace(/(^|[^*])\*(?!\*)([^*\n]+?)\*(?!\*)/g, "$1$2")
+        .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")
+        .replace(/^[ \t]*[*+\-][ \t]+/gm, "• ")
+        .replace(/`{1,3}/g, "");
+      if (mode !== "markdown") {
+        // Drop common AI boilerplate openers.
+        s = s.replace(/^\s*(as an ai(?: language model)?|as a large language model|i'?m just an ai)\b[^.\n]*[.:]\s*/gim, "");
+      }
+      if (mode === "plain") {
+        // Straighten smart punctuation to plain ASCII.
+        s = s
+          .replace(/[‘’‚‛]/g, "'")
+          .replace(/[“”„‟]/g, '"')
+          .replace(/[–—―]/g, "-")
+          .replace(/…/g, "...")
+          .replace(/\u00A0/g, " ");
+      }
+      return s
+        .replace(/[ \t]{2,}/g, " ")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+    },
+  },
 };

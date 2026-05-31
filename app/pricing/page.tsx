@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PricingTiles } from "@/components/billing/PricingTiles";
 import { getStrings } from "@/lib/i18n/strings";
 import { getToolUi } from "@/lib/i18n/tool-ui";
+import { getPlanFeatures } from "@/lib/i18n/plan-features";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -30,6 +31,7 @@ export default function PricingPage() {
             business: ui.business,
           }}
           intervalLabels={intervalLabels}
+          features={getPlanFeatures("en")}
         />
 
         <p className="mt-10 text-center text-xs text-ink-400">{ui.footnote}</p>

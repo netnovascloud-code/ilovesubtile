@@ -8,6 +8,7 @@ import { IntervalToggle, type Interval } from "@/components/billing/IntervalTogg
 import { UpgradeButton } from "@/components/billing/UpgradeButton";
 import { PLANS, FREE_PLAN } from "@/lib/stripe";
 import type { ToolUiStrings } from "@/lib/i18n/tool-ui";
+import type { PlanFeatures } from "@/lib/i18n/plan-features";
 
 type Strings = {
   mostPopular: string;
@@ -21,9 +22,11 @@ type Strings = {
 export function PricingTiles({
   strings,
   intervalLabels,
+  features,
 }: {
   strings: Strings;
   intervalLabels: ToolUiStrings["pricing"];
+  features: PlanFeatures;
 }) {
   const [interval, setInterval] = useState<Interval>("monthly");
 
@@ -47,7 +50,7 @@ export function PricingTiles({
             <span className="text-sm text-ink-500">/ {strings.forever}</span>
           </div>
           <ul className="mt-6 space-y-3 text-sm text-ink-700">
-            {FREE_PLAN.features.map((f) => (
+            {features.free.map((f) => (
               <li key={f} className="flex gap-2">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
                 <span>{f}</span>
@@ -75,7 +78,7 @@ export function PricingTiles({
             <div className="mt-1 text-xs text-ink-400">€{proAnnualTotal} billed yearly</div>
           )}
           <ul className="mt-6 space-y-3 text-sm text-ink-700">
-            {PLANS.pro.features.map((f) => (
+            {features.pro.map((f) => (
               <li key={f} className="flex gap-2">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
                 <span>{f}</span>
@@ -98,7 +101,7 @@ export function PricingTiles({
             <div className="mt-1 text-xs text-ink-400">€{bizAnnualTotal} billed yearly</div>
           )}
           <ul className="mt-6 space-y-3 text-sm text-ink-700">
-            {PLANS.business.features.map((f) => (
+            {features.business.map((f) => (
               <li key={f} className="flex gap-2">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
                 <span>{f}</span>

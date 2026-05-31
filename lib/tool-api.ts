@@ -5,6 +5,7 @@ import { SUPABASE_URL } from "@/lib/utils";
 const FN_MAP: Record<string, string> = {
   "subtitle-generator": "process-subtitles",
   "tiktok-subtitles": "process-subtitles",
+  "voice-to-text": "process-subtitles",
   "translate-subtitles": "translate-subtitles",
   "batch-translate": "translate-subtitles",
   "youtube-chapters": "ai-process",

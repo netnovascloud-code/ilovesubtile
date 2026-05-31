@@ -2051,6 +2051,26 @@ TOOLS.push(
   },
 );
 
+// ── Voice → text (AI transcription via process-subtitles, SRT→text) ────────
+TOOLS.push(
+  {
+    slug: "voice-to-text", phase: 3, kind: "ai", category: "text-ai", icon: FileText, tone: "indigo",
+    name: "Voice to Text",
+    short: "Transcribe audio or video to clean, editable text with AI.",
+    h1: "Voice to Text — Free AI Audio & Video Transcription Online",
+    metaTitle: "Voice to Text — Free AI Audio/Video Transcription | Konver",
+    metaDescription: "Transcribe any audio or video file to clean, editable text with AI. 30+ languages, paragraph breaks, copy or download .txt. Free, no sign-up to try.",
+    primaryKeyword: "voice to text",
+    accept: ["mp3", "wav", "m4a", "flac", "ogg", "mp4", "mov", "webm", "mkv"], freeMaxMb: 100, outputType: "Text",
+    steps: [
+      { title: "Upload audio or video", body: "MP3, WAV, M4A, MP4, MOV and more — up to 100 MB free." },
+      { title: "AI transcribes it", body: "Accurate transcription in 30+ languages, with paragraph breaks." },
+      { title: "Edit, copy or download", body: "Tidy editable text — copy it or save a .txt." },
+    ],
+    faqs: codeFaqs("Voice to Text"),
+  },
+);
+
 // ── OCR (in-browser via Tesseract.js, no upload) ───────────────────────────
 TOOLS.push(
   {

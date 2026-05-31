@@ -78,4 +78,14 @@ export const AI_TEXT_TOOLS: Record<string, AiTextDef> = {
     inputLabel: "Text", inputPlaceholder: "Paste text in any language…",
     outputLabel: "Detected language", cta: "Detect language",
   },
+  "synonyms-finder": {
+    task: "synonyms", control: "none",
+    inputLabel: "Word or phrase", inputPlaceholder: "e.g. happy · heureux · feliz · 幸せ",
+    outputLabel: "Synonyms", cta: "Find synonyms",
+  },
+  "conjugation": {
+    task: "conjugate", control: "none",
+    inputLabel: "Verb", inputPlaceholder: "e.g. to run · courir · correr · essen",
+    outputLabel: "Conjugation", cta: "Conjugate",
+  },
 };

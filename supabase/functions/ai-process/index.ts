@@ -81,6 +81,10 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `Extract the 8-12 most important keywords and key phrases from the user's text. Output ONLY a comma-separated list, most important first.`;
     case "detect-language":
       return `Identify the language of the user's text. Output exactly one line: "<Language name> (<ISO 639-1 code>)". Nothing else.`;
+    case "synonyms":
+      return `You are a multilingual thesaurus. For the user's word or short phrase, give the most useful synonyms — most natural first — as a single comma-separated line. If the word has clearly distinct senses, put each sense on its own line, prefixed with a short "(sense)" label. Output only the synonyms.`;
+    case "conjugate":
+      return `You are a verb conjugation engine. Conjugate the user's verb across its language's main tenses and moods. Output one block per tense: a line with the tense name, then each person on its own line (e.g. "je …", "tu …", or "I …", "you …"). Cover at least the present, a past, a future and the common compound/perfect tense. Output only the conjugation.`;
     case "analyze-file":
       return `You receive a JSON describing a file the user just dropped, plus a catalogue of available tools. Pick the 3 most relevant tools for what the user likely wants to do. Return ONLY JSON of the shape: {"suggestions":[{"slug":"<tool-slug>","why":"<one short sentence>"}, ... 3 items]}. Use only slugs that appear in the provided catalogue.`;
     case "cover-letter":
@@ -118,6 +122,8 @@ const TOOL_BY_TASK: Record<string, string> = {
   "email-pro": "professional-email", "product-description": "product-description",
   hashtags: "hashtag-generator", sentiment: "sentiment-analysis", keywords: "keyword-extractor",
   "detect-language": "detect-language",
+  synonyms: "synonyms-finder",
+  conjugate: "conjugation",
   "analyze-file": "smart-drop",
   "cover-letter": "cover-letter",
   "contract-analyze": "contract-analyzer",

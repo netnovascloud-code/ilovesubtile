@@ -2069,6 +2069,38 @@ TOOLS.push(
     ],
     faqs: codeFaqs("Voice to Text"),
   },
+  {
+    slug: "synonyms-finder", phase: 3, kind: "ai", category: "text-ai", icon: SpellCheck, tone: "indigo",
+    name: "Synonyms Finder",
+    short: "Find synonyms for any word in 30+ languages with AI.",
+    h1: "Synonyms Finder — Free AI Thesaurus in 30+ Languages",
+    metaTitle: "Synonyms Finder — Free AI Thesaurus Online | Konver",
+    metaDescription: "Find the best synonyms for any word or phrase in 30+ languages with AI. Sense-aware, natural alternatives. Free, no sign-up to try.",
+    primaryKeyword: "synonyms finder",
+    accept: [], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Type a word", body: "In any language — the AI detects it automatically." },
+      { title: "Get sense-aware synonyms", body: "Grouped by meaning when a word has several senses." },
+      { title: "Copy what fits", body: "Most natural alternatives first." },
+    ],
+    faqs: codeFaqs("Synonyms Finder"),
+  },
+  {
+    slug: "conjugation", phase: 3, kind: "ai", category: "text-ai", icon: Languages, tone: "indigo",
+    name: "Verb Conjugation",
+    short: "Conjugate any verb across every tense with AI.",
+    h1: "Verb Conjugation — Free AI Conjugator in 30+ Languages",
+    metaTitle: "Verb Conjugation — Free AI Conjugator Online | Konver",
+    metaDescription: "Conjugate any verb across all tenses and moods in 30+ languages with AI. French, Spanish, German, Italian and more. Free, no sign-up to try.",
+    primaryKeyword: "verb conjugation",
+    accept: [], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Enter a verb", body: "In its infinitive — any language is detected automatically." },
+      { title: "AI conjugates it", body: "All main tenses and moods, person by person." },
+      { title: "Copy the table", body: "Clean plain text, ready to paste." },
+    ],
+    faqs: codeFaqs("Verb Conjugation"),
+  },
 );
 
 // ── OCR (in-browser via Tesseract.js, no upload) ───────────────────────────

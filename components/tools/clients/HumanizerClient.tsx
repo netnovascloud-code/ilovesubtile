@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { callTool } from "@/lib/tool-api";
 import { AdProcessing } from "@/components/ads/AdProcessing";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { CharMeter } from "@/components/tools/CharMeter";
+import { useCharLimit } from "@/hooks/useCharLimit";
 
 const LEVELS = [
   { id: "light", label: "Light" },
@@ -33,9 +35,10 @@ export function HumanizerClient() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [score, setScore] = useState(0);
+  const meter = useCharLimit(input);
 
   async function run() {
-    if (!input.trim() || loading) return;
+    if (!input.trim() || loading || meter.over) return;
     setLoading(true); setError(null); setOutput(""); setScore(0);
     try {
       const res = await callTool("ai-humanizer", { task: "humanize", text: input, options: { level } });
@@ -90,7 +93,9 @@ export function HumanizerClient() {
         <div>
           <label className="mb-1.5 block text-sm font-medium text-ink-700">AI-generated text</label>
           <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste the AI text you want to humanize…"
-            className="h-72 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100" />
+            className={cn("h-72 w-full resize-y rounded-lg border bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2",
+              meter.over ? "border-red-300 focus:border-red-400 focus:ring-red-100" : "border-ink-200 focus:border-brand-400 focus:ring-brand-100")} />
+          <CharMeter state={meter} />
         </div>
         <div>
           <div className="mb-1.5 flex items-center justify-between">
@@ -105,7 +110,7 @@ export function HumanizerClient() {
         </div>
       </div>
 
-      <Button onClick={run} disabled={!input.trim() || loading} size="lg">
+      <Button onClick={run} disabled={!input.trim() || loading || meter.over} size="lg">
         <Sparkles className="h-4 w-4" /> {loading ? "Working…" : "Humanize text"}
       </Button>
 

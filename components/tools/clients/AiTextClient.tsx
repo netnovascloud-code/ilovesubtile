@@ -9,6 +9,8 @@ import { AdProcessing } from "@/components/ads/AdProcessing";
 import { AI_TEXT_TOOLS, REPHRASE_STYLES, SUMMARY_FORMATS } from "@/lib/ai-text-tools";
 import { LANGUAGES } from "@/lib/languages";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { CharMeter } from "@/components/tools/CharMeter";
+import { useCharLimit } from "@/hooks/useCharLimit";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
@@ -21,11 +23,12 @@ export function AiTextClient({ slug }: { slug: string }) {
   const [language, setLanguage] = useState("French");
   const [style, setStyle] = useState<string>(REPHRASE_STYLES[0]);
   const [format, setFormat] = useState<string>(SUMMARY_FORMATS[1].id);
+  const meter = useCharLimit(input);
 
   if (!def) return null;
 
   async function run() {
-    if (!input.trim() || loading) return;
+    if (!input.trim() || loading || meter.over) return;
     setLoading(true);
     setError(null);
     setOutput("");
@@ -116,8 +119,12 @@ export function AiTextClient({ slug }: { slug: string }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={def.inputPlaceholder}
-            className="h-64 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100"
+            className={cn(
+              "h-64 w-full resize-y rounded-lg border bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2",
+              meter.over ? "border-red-300 focus:border-red-400 focus:ring-red-100" : "border-ink-200 focus:border-brand-400 focus:ring-brand-100",
+            )}
           />
+          <CharMeter state={meter} />
         </div>
         <div>
           <div className="mb-1.5 flex items-center justify-between">
@@ -133,7 +140,7 @@ export function AiTextClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <Button onClick={run} disabled={!input.trim() || loading} size="lg">
+      <Button onClick={run} disabled={!input.trim() || loading || meter.over} size="lg">
         <Sparkles className="h-4 w-4" />
         {loading ? "Processing…" : def.cta}
       </Button>

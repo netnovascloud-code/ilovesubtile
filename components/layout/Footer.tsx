@@ -54,7 +54,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/dashboard" className="hover:text-ink-900">
+              <Link href="/dashboard" prefetch={false} className="hover:text-ink-900">
                 {t.dashboard}
               </Link>
             </li>

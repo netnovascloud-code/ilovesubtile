@@ -257,7 +257,7 @@ export default function ApiDocsPage() {
             <h2 className="text-xl font-semibold text-ink-900">Authentication</h2>
             <p className="mt-2">
               Send <code className="rounded bg-ink-100 px-1 py-0.5 text-sm">Authorization: Bearer knv_live_…</code> with every request. Generate a key from your{" "}
-              <Link href="/dashboard" className="text-brand-600 hover:underline">dashboard</Link> (Business plan).
+              <Link href="/dashboard" prefetch={false} className="text-brand-600 hover:underline">dashboard</Link> (Business plan).
               Each call spends credits from your balance — credits never expire.
             </p>
             <p className="mt-2 text-sm text-ink-500">

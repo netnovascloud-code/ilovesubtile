@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Copy, Check, RefreshCw, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,9 +27,15 @@ export function UuidGeneratorClient() {
   const [seed, setSeed] = useState(0);
   const [copiedAll, setCopiedAll] = useState(false);
   const [copiedOne, setCopiedOne] = useState<number | null>(null);
+  // SSR can't run crypto.randomUUID; we'd otherwise hydration-mismatch when
+  // the client generates fresh ids. Gate the list on `mounted` so SSR ships
+  // an empty <ul> and the client populates it after hydration.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const ids = useMemo(() => {
     void seed;
+    if (!mounted) return [];
     const make = version === "v7" ? uuidv7 : () => crypto.randomUUID();
     const list = Array.from({ length: count }, make);
     return list.map((id) => {
@@ -38,7 +44,7 @@ export function UuidGeneratorClient() {
       if (upper) s = s.toUpperCase();
       return s;
     });
-  }, [version, count, hyphens, upper, seed]);
+  }, [version, count, hyphens, upper, seed, mounted]);
 
   async function copyOne(i: number) {
     try {

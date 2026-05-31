@@ -12,13 +12,21 @@ function toLocalISO(d: Date) {
 const ZONES = ["UTC", "America/New_York", "America/Los_Angeles", "Europe/London", "Europe/Paris", "Asia/Tokyo", "Asia/Shanghai"];
 
 export function UnixTimestampClient() {
-  const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
-  const [tsInput, setTsInput] = useState(String(now));
+  // SSR can't pick a stable "now", so we start at 0 and let useEffect seed
+  // the real values after mount. Without this the rendered seconds-since-epoch
+  // and the local-ISO datetime input differ between SSR and hydration and
+  // throw React #425.
+  const [now, setNow] = useState(0);
+  const [tsInput, setTsInput] = useState("");
   const [unit, setUnit] = useState<"s" | "ms">("s");
-  const [dateInput, setDateInput] = useState(toLocalISO(new Date()));
+  const [dateInput, setDateInput] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
 
   useEffect(() => {
+    const seed = Math.floor(Date.now() / 1000);
+    setNow(seed);
+    setTsInput(String(seed));
+    setDateInput(toLocalISO(new Date()));
     const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000);
     return () => clearInterval(id);
   }, []);

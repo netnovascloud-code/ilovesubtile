@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRightLeft } from "lucide-react";
 
 /** Full IANA zone list when the engine supports it; otherwise a sane fallback. */
@@ -65,9 +65,17 @@ function fmtOffset(ms: number): string {
 
 export function TimezoneConverterClient() {
   const zones = useMemo(zoneList, []);
-  const [fromZone, setFromZone] = useState(browserZone());
+  // browserZone() and nowLocalInput() both depend on the runtime environment.
+  // SSR resolves UTC + an arbitrary build-time minute, then the client
+  // resolves the user's real zone + the current minute → React #425 mismatch.
+  // Seed deterministic defaults and overwrite in useEffect after mount.
+  const [fromZone, setFromZone] = useState("UTC");
   const [toZone, setToZone] = useState("UTC");
-  const [local, setLocal] = useState(nowLocalInput());
+  const [local, setLocal] = useState("");
+  useEffect(() => {
+    setFromZone(browserZone());
+    setLocal(nowLocalInput());
+  }, []);
 
   const out = useMemo(() => {
     const instant = wallTimeToInstant(local, fromZone);

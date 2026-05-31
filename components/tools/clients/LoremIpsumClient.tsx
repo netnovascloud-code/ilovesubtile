@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Copy, Check, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -29,9 +29,15 @@ export function LoremIpsumClient() {
   const [classic, setClassic] = useState(true);
   const [seed, setSeed] = useState(0);
   const [copied, setCopied] = useState(false);
+  // SSR rolls one Math.random sequence and the client rolls a different one,
+  // causing a hydration mismatch on the rendered text. Gate the output on a
+  // mounted flag so SSR renders an empty placeholder and the client fills it.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const output = useMemo(() => {
     void seed;
+    if (!mounted) return "";
     if (unit === "paragraphs") {
       return Array.from({ length: Math.max(1, count) }, (_, i) => makeParagraph(classic && i === 0)).join("\n\n");
     }
@@ -44,7 +50,7 @@ export function LoremIpsumClient() {
     if (classic) all.push(...["Lorem", "ipsum", "dolor", "sit", "amet"]);
     while (all.length < Math.max(1, count)) all.push(WORDS[rand(0, WORDS.length - 1)]);
     return all.slice(0, count).join(" ");
-  }, [unit, count, classic, seed]);
+  }, [unit, count, classic, seed, mounted]);
 
   async function copy() {
     try {

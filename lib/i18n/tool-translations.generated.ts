@@ -379,6 +379,276 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "根据出生日期精确计算年龄（年、月、日），还包括总周数、天数及下一个生日。免费、即时、在浏览器中运行。"
     }
   },
+  "ai-detector": {
+    "ar": {
+      "name": "كاشف المحتوى الاصطناعي",
+      "short": "قم بتقدير احتمالية كتابة النص بواسطة ChatGPT أو Claude أو Gemini.",
+      "h1": "كاشف المحتوى الاصطناعي — هل كتب هذا بواسطة ChatGPT؟ مجاني عبر الإنترنت",
+      "metaTitle": "كاشف المحتوى الاصطناعي — ChatGPT / Claude / Gemini | Konver",
+      "metaDescription": "قم بتقدير احتمالية كتابة فقرة بواسطة ذكاء اصطناعي. احصل على درجة من 0 إلى 100 مع عبارات مشبوهة وأسبابها. مجاني، بدون تسجيل للمحاولة."
+    },
+    "cs": {
+      "name": "Detektor AI obsahu",
+      "short": "Odhadněte pravděpodobnost, že text napsal ChatGPT, Claude nebo Gemini.",
+      "h1": "Detektor AI obsahu — Byl napsán pomocí ChatGPT? Zdarma online",
+      "metaTitle": "Detektor AI obsahu — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Odhadněte, jaká je pravděpodobnost, že odstavec napsala umělá inteligence. Získejte skóre 0–100 s označenými frázemi a důvody. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "KI-Inhaltsprüfer",
+      "short": "Schätze die Wahrscheinlichkeit, dass ein Text von ChatGPT, Claude oder Gemini stammt.",
+      "h1": "KI-Inhaltsprüfer — Wurde das von ChatGPT geschrieben? Kostenlos online",
+      "metaTitle": "KI-Inhaltsprüfer — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Ermittle die Wahrscheinlichkeit, dass ein Absatz von einer KI verfasst wurde. Erhalte eine 0–100-Bewertung mit markierten Phrasen und Begründungen. Kostenlos, ohne Anmeldung nutzbar."
+    },
+    "es": {
+      "name": "Detector de Contenido IA",
+      "short": "Estima la probabilidad de que un texto haya sido escrito por ChatGPT, Claude o Gemini.",
+      "h1": "Detector de Contenido IA — ¿Fue escrito por ChatGPT? Gratis Online",
+      "metaTitle": "Detector de Contenido IA — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Estima la probabilidad de que un párrafo haya sido generado por IA. Obtén una puntuación de 0 a 100 con frases marcadas y razones. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Détecteur de contenu IA",
+      "short": "Estimez la probabilité qu'un texte ait été écrit par ChatGPT, Claude ou Gemini.",
+      "h1": "Détecteur de contenu IA — Ce texte a-t-il été écrit par ChatGPT ? Outil en ligne gratuit",
+      "metaTitle": "Détecteur de contenu IA — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Estimez la probabilité qu'un paragraphe ait été généré par une IA. Obtenez un score de 0 à 100 avec phrases et raisons signalées. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "AI सामग्री पहचानकर्ता",
+      "short": "पता लगाएं कि क्या टेक्स्ट ChatGPT, Claude या Gemini द्वारा लिखा गया था।",
+      "h1": "AI सामग्री पहचानकर्ता — क्या इसे ChatGPT ने लिखा है? मुफ्त ऑनलाइन",
+      "metaTitle": "AI सामग्री पहचानकर्ता — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "पता लगाएं कि क्या किसी पैराग्राफ को AI द्वारा लिखा गया है। 0–100 स्कोर, चिह्नित वाक्यांश और कारणों के साथ। मुफ्त, बिना साइन-अप के प्रयास करें।"
+    },
+    "id": {
+      "name": "Detektor Konten AI",
+      "short": "Perkirakan kemungkinan teks ditulis oleh ChatGPT, Claude, atau Gemini.",
+      "h1": "Detektor Konten AI — Apakah Ini Ditulis oleh ChatGPT? Gratis Online",
+      "metaTitle": "Detektor Konten AI — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Perkirakan kemungkinan suatu paragraf ditulis oleh AI. Dapatkan skor 0–100 dengan frasa yang disorot dan alasannya. Gratis, tanpa daftar untuk mencoba."
+    },
+    "it": {
+      "name": "Rilevatore di Contenuti AI",
+      "short": "Stima la probabilità che un testo sia stato scritto da ChatGPT, Claude o Gemini.",
+      "h1": "Rilevatore di Contenuti AI — È stato scritto da ChatGPT? Strumento Online Gratuito",
+      "metaTitle": "Rilevatore di Contenuti AI — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Stima la probabilità che un paragrafo sia stato scritto da un'intelligenza artificiale. Ottieni un punteggio da 0 a 100 con frasi segnalate e motivazioni. Gratuito, senza registrazione."
+    },
+    "ja": {
+      "name": "AIコンテンツ検出ツール",
+      "short": "テキストがChatGPT、Claude、GeminiなどのAIで生成された可能性を推定します。",
+      "h1": "AIコンテンツ検出ツール — これはChatGPTで書かれた？無料オンライン",
+      "metaTitle": "AIコンテンツ検出 — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "段落がAIで書かれた可能性を0～100のスコアで推定。フレーズのフラグ付けと理由を表示。無料、登録不要。"
+    },
+    "ko": {
+      "name": "AI 콘텐츠 감지 도구",
+      "short": "텍스트가 ChatGPT, Claude 또는 Gemini에 의해 작성되었을 확률을 추정합니다.",
+      "h1": "AI 콘텐츠 감지 도구 — ChatGPT가 썼나요? 무료 온라인 도구",
+      "metaTitle": "AI 콘텐츠 감지 도구 — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "문단이 AI에 의해 작성되었을 가능성을 추정합니다. 0~100점 점수와 플래그된 문구, 이유를 제공합니다. 무료이며 가입 없이 사용 가능합니다."
+    },
+    "nl": {
+      "name": "AI-inhouddetector",
+      "short": "Schat de waarschijnlijkheid dat tekst is gegenereerd door ChatGPT, Claude of Gemini.",
+      "h1": "AI-inhouddetector — Is dit door ChatGPT geschreven? Gratis online tool",
+      "metaTitle": "AI-inhouddetector — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Bepaal de kans dat een alinea door AI is gegenereerd. Ontvang een score van 0–100 met gemarkeerde zinnen en redenen. Gratis, zonder aanmelding."
+    },
+    "pl": {
+      "name": "Wykrywacz treści AI",
+      "short": "Oszacuj prawdopodobieństwo, że tekst został napisany przez ChatGPT, Claude lub Gemini.",
+      "h1": "Wykrywacz treści AI — Czy to napisał ChatGPT? Darmowy online",
+      "metaTitle": "Wykrywacz treści AI — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Oszacuj prawdopodobieństwo, że akapit został napisany przez sztuczną inteligencję. Uzyskaj wynik 0–100 z wyróżnionymi frazami i powodami. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Detector de Conteúdo por IA",
+      "short": "Estime a probabilidade de um texto ter sido escrito pelo ChatGPT, Claude ou Gemini.",
+      "h1": "Detector de Conteúdo por IA — Foi Escrito pelo ChatGPT? Ferramenta Online Gratuita",
+      "metaTitle": "Detector de IA — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Avalie a probabilidade de um parágrafo ter sido gerado por IA. Obtenha uma pontuação de 0 a 100 com frases sinalizadas e justificativas. Gratuito, sem cadastro."
+    },
+    "ru": {
+      "name": "Определитель ИИ-контента",
+      "short": "Оцените вероятность того, что текст написан ChatGPT, Claude или Gemini.",
+      "h1": "Определитель ИИ-контента — Написано ли это ChatGPT? Бесплатный онлайн-сервис",
+      "metaTitle": "Определитель ИИ-контента — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Оцените вероятность написания абзаца ИИ. Получите оценку 0–100 с выделенными фразами и причинами. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "AI-innehållsdetektor",
+      "short": "Uppskatta sannolikheten att texten skrevs av ChatGPT, Claude eller Gemini.",
+      "h1": "AI-innehållsdetektor — Skrevs detta av ChatGPT? Gratis online",
+      "metaTitle": "AI-innehållsdetektor — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Uppskatta sannolikheten att en text är skriven av AI. Få ett 0–100-poäng med flaggade fraser och skäl. Gratis, inget konto krävs."
+    },
+    "tr": {
+      "name": "Yapay Zeka İçerik Dedektörü",
+      "short": "Bir metnin ChatGPT, Claude veya Gemini tarafından yazılıp yazılmadığını tahmin edin.",
+      "h1": "Yapay Zeka İçerik Dedektörü — Bu Metin ChatGPT Tarafından mı Yazıldı? Ücretsiz Çevrimiçi",
+      "metaTitle": "Yapay Zeka İçerik Dedektörü — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Bir paragrafın olasılıkla yapay zeka tarafından yazılıp yazılmadığını tahmin edin. 0–100 puan, uyarılan ifadeler ve sebeplerle birlikte. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Визначник AI-контенту",
+      "short": "Оцініть ймовірність того, що текст був написаний ChatGPT, Claude або Gemini.",
+      "h1": "Визначник AI-контенту — Чи написано це ChatGPT? Безкоштовний онлайн-інструмент",
+      "metaTitle": "Визначник AI-контенту — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Оцініть ймовірність того, що абзац написано штучним інтелектом. Отримайте оцінку 0–100 з позначеними фразами та причинами. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Bộ Phát Hiện Nội Dung AI",
+      "short": "Ước tính xác suất văn bản được viết bởi ChatGPT, Claude hoặc Gemini.",
+      "h1": "Bộ Phát Hiện Nội Dung AI — Đoạn Văn Này Có Phải Do AI Viết? Miễn Phí Trực Tuyến",
+      "metaTitle": "Bộ Phát Hiện Nội Dung AI — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "Ước tính khả năng một đoạn văn được viết bởi AI. Nhận điểm 0–100 kèm cụm từ cảnh báo và lý do. Hoàn toàn miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "AI 内容检测器",
+      "short": "估算文本由 ChatGPT、Claude 或 Gemini 生成的概率。",
+      "h1": "AI 内容检测器 — 这是 ChatGPT 写的吗？免费在线工具",
+      "metaTitle": "AI 内容检测器 — ChatGPT / Claude / Gemini | Konvertools",
+      "metaDescription": "估算段落由 AI 生成的可能性。提供 0–100 分评分，并标注可疑短语与原因。免费使用，无需注册。"
+    }
+  },
+  "anonymize-text": {
+    "ar": {
+      "name": "إخفاء البيانات النصية (الخصوصية الأوروبية)",
+      "short": "أخفِ عناوين البريد الإلكتروني، الهواتف، الأرقام البنكية، وأرقام البطاقات — في متصفحك.",
+      "h1": "إخفاء البيانات النصية أونلاين — إخفاء البيانات الشخصية (الخصوصية الأوروبية) مجاناً",
+      "metaTitle": "إخفاء/تعتيم النص أونلاين — الخصوصية الأوروبية، في المتصفح | Konvertools",
+      "metaDescription": "أخفِ البيانات الشخصية — عناوين البريد، أرقام الهواتف، الأرقام البنكية، أرقام البطاقات، عناوين IP — من أي نص. 100% في متصفحك، لا يتم تحميل أي شيء. مجاني ومتوافق مع الخصوصية الأوروبية."
+    },
+    "cs": {
+      "name": "Text anonymizovat (RGPD)",
+      "short": "Zakryjte e-maily, telefony, IBANy a platební karty — přímo ve svém prohlížeči.",
+      "h1": "Anonymizovat text online — zakryjte osobní údaje (GDPR) zdarma",
+      "metaTitle": "Anonymizovat / zakrýt text online — GDPR, v prohlížeči | Konvertools",
+      "metaDescription": "Zakryjte osobní údaje — e-maily, telefonní čísla, IBANy, čísla platebních karet, IP adresy — z libovolného textu. 100% ve vašem prohlížeči, nic se neodesílá. Zdarma a v souladu s GDPR."
+    },
+    "de": {
+      "name": "Text anonymisieren (DSGVO)",
+      "short": "E-Mails, Telefonnummern, IBANs und Karten — direkt in deinem Browser.",
+      "h1": "Text online anonymisieren — Persönliche Daten redigieren (DSGVO) kostenlos",
+      "metaTitle": "Text anonymisieren / redigieren online — DSGVO, im Browser | Konvertools",
+      "metaDescription": "Persönliche Daten redigieren — E-Mails, Telefonnummern, IBANs, Kartennummern, IP-Adressen — aus jedem Text. 100 % in deinem Browser, nichts wird hochgeladen. Kostenlos & DSGVO-konform."
+    },
+    "es": {
+      "name": "Anonimizar Texto (RGPD)",
+      "short": "Oculta correos, teléfonos, IBANs y tarjetas — en tu navegador.",
+      "h1": "Anonimizar Texto Online — Eliminar Datos Personales (GDPR) Gratis",
+      "metaTitle": "Anonimizar / Ocultar Texto Online — GDPR, En Navegador | Konvertools",
+      "metaDescription": "Elimina datos personales — correos, números de teléfono, IBANs, números de tarjeta, direcciones IP — de cualquier texto. 100% en tu navegador, sin subir nada. Gratis y compatible con GDPR."
+    },
+    "fr": {
+      "name": "Anonymiser du texte (RGPD)",
+      "short": "Masquez les emails, numéros de téléphone, IBAN et cartes — directement dans votre navigateur.",
+      "h1": "Anonymiser du texte en ligne — Masquer les données personnelles (RGPD) Gratuit",
+      "metaTitle": "Anonymiser / Masquer du texte en ligne — RGPD, navigateur | Konvertools",
+      "metaDescription": "Masquez les données personnelles — emails, numéros de téléphone, IBAN, numéros de carte, adresses IP — dans n'importe quel texte. 100 % dans votre navigateur, rien n'est envoyé. Gratuit et conforme RGPD."
+    },
+    "hi": {
+      "name": "टेक्स्ट एनोनिमाइज़ करें (RGPD)",
+      "short": "अपने ब्राउज़र में ईमेल, फोन, आईबीएएन और कार्ड्स को रिडैक्ट करें।",
+      "h1": "टेक्स्ट एनोनिमाइज़ करें ऑनलाइन — व्यक्तिगत डेटा रिडैक्ट करें (जीडीपीआर) मुफ़्त",
+      "metaTitle": "टेक्स्ट एनोनिमाइज़ / रिडैक्ट करें ऑनलाइन — जीडीपीआर, ब्राउज़र में | Konvertools",
+      "metaDescription": "किसी भी टेक्स्ट से व्यक्तिगत डेटा — ईमेल, फोन नंबर, आईबीएएन, कार्ड नंबर, आईपी एड्रेस — रिडैक्ट करें। 100% आपके ब्राउज़र में, कुछ भी अपलोड नहीं। मुफ़्त एवं जीडीपीआर-अनुकूल।"
+    },
+    "id": {
+      "name": "Anonimkan Teks (RGPD)",
+      "short": "Sembunyikan email, telepon, IBAN, dan kartu — langsung di peramban Anda.",
+      "h1": "Anonimkan Teks Secara Online — Sembunyikan Data Pribadi (GDPR) Gratis",
+      "metaTitle": "Anonimkan / Sembunyikan Teks Online — GDPR, Di Peramban | Konvertools",
+      "metaDescription": "Sembunyikan data pribadi — email, nomor telepon, IBAN, nomor kartu, alamat IP — dari teks apa pun. 100% di peramban Anda, tidak ada yang diunggah. Gratis & ramah GDPR."
+    },
+    "it": {
+      "name": "Anonimizza testo (GDPR)",
+      "short": "Anonimizza email, numeri di telefono, IBAN e carte — direttamente nel browser.",
+      "h1": "Anonimizza testo online — Rimuovi dati personali (GDPR) gratis",
+      "metaTitle": "Anonimizza testo online — GDPR, nel browser | Konvertools",
+      "metaDescription": "Anonimizza dati personali — email, numeri di telefono, IBAN, numeri di carta, indirizzi IP — da qualsiasi testo. 100% nel tuo browser, senza upload. Gratis e conforme al GDPR."
+    },
+    "ja": {
+      "name": "テキスト匿名化（RGPD）",
+      "short": "メール、電話番号、IBAN、カード番号をブラウザ内で自動削除。",
+      "h1": "オンラインでテキストを匿名化 — 個人情報を再編集（GDPR）無料",
+      "metaTitle": "テキストを匿名化・再編集 — GDPR、ブラウザ内 | Konvertools",
+      "metaDescription": "メール、電話番号、IBAN、カード番号、IPアドレスなどの個人情報をテキストから削除。完全にブラウザ内で処理され、アップロード不要。無料でGDPR対応。"
+    },
+    "ko": {
+      "name": "텍스트 익명화 (RGPD)",
+      "short": "이메일, 전화번호, IBAN, 카드 번호 등 개인정보를 브라우저에서 삭제하세요.",
+      "h1": "온라인 텍스트 익명화 — 개인정보 삭제 (GDPR) 무료",
+      "metaTitle": "텍스트 익명화 / 삭제 — GDPR, 브라우저 내 처리 | Konvertools",
+      "metaDescription": "이메일, 전화번호, IBAN, 카드 번호, IP 주소 등 개인정보를 모든 텍스트에서 삭제합니다. 브라우저에서 100% 처리되며 업로드되지 않습니다. 무료 & GDPR 준수."
+    },
+    "nl": {
+      "name": "Tekst Anonimiseren (AVG)",
+      "short": "Verwijder e-mails, telefoonnummers, IBAN’s en kaartnummers — in je browser.",
+      "h1": "Tekst Anonimiseren Online — Persoonlijke Gegevens Verwijderen (GDPR) Gratis",
+      "metaTitle": "Tekst Anonimiseren / Verwijderen Online — GDPR, Browser | Konvertools",
+      "metaDescription": "Verwijder persoonlijke gegevens — e-mails, telefoonnummers, IBAN’s, kaartnummers, IP-adressen — uit elke tekst. 100% in je browser, niets geüpload. Gratis & AVG-vriendelijk."
+    },
+    "pl": {
+      "name": "Anonimizuj Tekst (RODO)",
+      "short": "Usuń e-maile, numery telefonów, IBAN-y i dane kart — w przeglądarce.",
+      "h1": "Anonimizuj Tekst Online — Usuwanie Danych Osobowych (RODO) Za Darmo",
+      "metaTitle": "Anonimizuj / Usuń Dane Tekstu Online — RODO, W Przeglądarce | Konvertools",
+      "metaDescription": "Usuń dane osobowe — adresy e-mail, numery telefonów, IBAN-y, numery kart, adresy IP — z dowolnego tekstu. 100% w przeglądarce, nic nie jest przesyłane. Darmowe & zgodne z RODO."
+    },
+    "pt": {
+      "name": "Anonimizar Texto (RGPD)",
+      "short": "Redija e-mails, telefones, IBANs e cartões — no seu navegador.",
+      "h1": "Anonimizar Texto Online — Redigir Dados Pessoais (GDPR) Grátis",
+      "metaTitle": "Anonimizar / Redigir Texto Online — GDPR, No Navegador | Konvertools",
+      "metaDescription": "Redija dados pessoais — e-mails, números de telefone, IBANs, números de cartão, endereços IP — de qualquer texto. 100% no seu navegador, nada é enviado. Grátis e compatível com GDPR."
+    },
+    "ru": {
+      "name": "Анонимизация текста (RGPD)",
+      "short": "Удаляйте email, телефоны, IBAN и номера карт — прямо в браузере.",
+      "h1": "Анонимизируйте текст онлайн — удаляйте личные данные (GDPR) бесплатно",
+      "metaTitle": "Анонимизировать / удалить текст онлайн — GDPR, в браузере | Konvertools",
+      "metaDescription": "Удаляйте личные данные — email, номера телефонов, IBAN, номера карт, IP-адреса — из любого текста. На 100% в вашем браузере, ничего не загружается. Бесплатно и соответствует GDPR."
+    },
+    "sv": {
+      "name": "Anonymisera text (GDPR)",
+      "short": "Maskera e-post, telefonnummer, IBAN och kort — direkt i webbläsaren.",
+      "h1": "Anonymisera text online — maskera personuppgifter (GDPR) gratis",
+      "metaTitle": "Anonymisera / maskera text online — GDPR, i webbläsaren | Konvertools",
+      "metaDescription": "Maskera personuppgifter — e-post, telefonnummer, IBAN, kortnummer, IP-adresser — från valfri text. 100% i din webbläsare, inget laddas upp. Gratis & GDPR-anpassat."
+    },
+    "tr": {
+      "name": "Metni Anonimleştir (RGPD)",
+      "short": "E-postaları, telefonları, IBAN'ları ve kartları — tarayıcınızda gizleyin.",
+      "h1": "Metni Çevrimiçi Anonimleştir — Kişisel Verileri Gizle (GDPR) Ücretsiz",
+      "metaTitle": "Metni Anonimleştir / Gizle — GDPR, Tarayıcıda | Konvertools",
+      "metaDescription": "E-postalar, telefon numaraları, IBAN'lar, kart numaraları, IP adresleri gibi kişisel verileri herhangi bir metinden gizleyin. Tamamen tarayıcınızda, hiçbir şey yüklenmez. Ücretsiz & GDPR uyumlu."
+    },
+    "uk": {
+      "name": "Анонімізувати текст (RGPD)",
+      "short": "Приховати електронні адреси, телефони, IBAN та номери карток — у вашому браузері.",
+      "h1": "Анонімізувати текст онлайн — приховати персональні дані (GDPR) безкоштовно",
+      "metaTitle": "Анонімізувати / приховати текст онлайн — GDPR, у браузері | Konvertools",
+      "metaDescription": "Приховати персональні дані — електронні адреси, номери телефонів, IBAN, номери карток, IP-адреси — з будь-якого тексту. 100% у вашому браузері, нічого не завантажується. Безкоштовно та відповідно до GDPR."
+    },
+    "vi": {
+      "name": "Ẩn danh Văn bản (RGPD)",
+      "short": "Ẩn email, số điện thoại, IBAN và thẻ — ngay trong trình duyệt của bạn.",
+      "h1": "Ẩn danh Văn bản Trực tuyến — Ẩn Dữ liệu Cá nhân (GDPR) Miễn phí",
+      "metaTitle": "Ẩn danh / Ẩn Dữ liệu Văn bản Trực tuyến — GDPR, Trong Trình Duyệt | Konvertools",
+      "metaDescription": "Ẩn dữ liệu cá nhân — email, số điện thoại, IBAN, số thẻ, địa chỉ IP — khỏi bất kỳ văn bản nào. 100% trong trình duyệt, không tải lên. Miễn phí & tuân thủ GDPR."
+    },
+    "zh": {
+      "name": "文本脱敏（RGPD）",
+      "short": "在浏览器中隐藏邮箱、电话、IBAN和卡号等敏感信息。",
+      "h1": "在线文本脱敏 — 隐藏个人数据（GDPR合规）免费",
+      "metaTitle": "在线脱敏/隐藏文本 — GDPR合规，本地处理 | Konvertools",
+      "metaDescription": "隐藏文本中的个人数据（邮箱、电话号码、IBAN、卡号、IP地址）等。100%在浏览器中完成，无需上传。免费且符合GDPR要求。"
+    }
+  },
   "api": {
     "cs": {
       "name": "Veřejné API",
@@ -1309,6 +1579,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Công cụ chuyên nghiệp: dịch một tệp SRT sang tối đa 30 ngôn ngữ trong một lần. Hoàn hảo cho ra mắt toàn cầu và bản địa hóa nội dung."
     }
   },
+  "bmi-calculator": {
+    "ar": {
+      "name": "حاسبة مؤشر كتلة الجسم",
+      "short": "مؤشر كتلة الجسم بوحدات متريّة أو إمبراطوريّة.",
+      "h1": "حاسبة مؤشر كتلة الجسم — حساب مؤشر كتلة الجسم بوحدات متريّة أو إمبراطوريّة",
+      "metaTitle": "حاسبة مؤشر كتلة الجسم مجاناً عبر الإنترنت — وحدات متريّة وإمبراطوريّة | Konvertools",
+      "metaDescription": "احسب مؤشر كتلة جسمك من الطول والوزن باستخدام وحدات متريّة أو إمبراطوريّة، مع تحديد الفئة الصحيّة. مجاناً، فوريّاً، داخل المتصفّح."
+    },
+    "cs": {
+      "name": "Kalkulačka BMI",
+      "short": "Index tělesné hmotnosti v metrických nebo imperiálních jednotkách.",
+      "h1": "Kalkulačka BMI — Index tělesné hmotnosti v metrických nebo imperiálních jednotkách",
+      "metaTitle": "Online kalkulačka BMI zdarma — Metrické & imperiální | Konvertools",
+      "metaDescription": "Spočítejte si svůj index tělesné hmotnosti z výšky a váhy v metrických nebo imperiálních jednotkách včetně kategorie zdravé hmotnosti. Zdarma, okamžitě, přímo v prohlížeči."
+    },
+    "de": {
+      "name": "BMI-Rechner",
+      "short": "Body-Mass-Index in metrischen oder angloamerikanischen Einheiten.",
+      "h1": "BMI-Rechner — Body-Mass-Index in metrischen oder angloamerikanischen Einheiten",
+      "metaTitle": "BMI-Rechner Online Kostenlos — Metrisch & Angloamerikanisch | Konvertools",
+      "metaDescription": "Berechne deinen Body-Mass-Index aus Größe und Gewicht in metrischen oder angloamerikanischen Einheiten inklusive gesunder Bereich. Kostenlos, sofort und direkt im Browser."
+    },
+    "es": {
+      "name": "Calculadora de IMC",
+      "short": "Índice de masa corporal en unidades métricas o imperiales.",
+      "h1": "Calculadora de IMC — Índice de Masa Corporal en Métrico o Imperial",
+      "metaTitle": "Calculadora de IMC Online Gratis — Métrico e Imperial | Konvertools",
+      "metaDescription": "Calcula tu Índice de Masa Corporal a partir de altura y peso en unidades métricas o imperiales, con la categoría de rango saludable. Gratis, instantáneo, en el navegador."
+    },
+    "fr": {
+      "name": "Calculateur d'IMC",
+      "short": "Indice de masse corporelle en unités métriques ou impériales.",
+      "h1": "Calculateur d'IMC — Indice de masse corporelle en unités métriques ou impériales",
+      "metaTitle": "Calculateur d'IMC en ligne gratuit — Métrique & Impérial | Konvertools",
+      "metaDescription": "Calculez votre indice de masse corporelle à partir de la taille et du poids en unités métriques ou impériales, avec la catégorie de poids santé. Gratuit, instantané, dans le navigateur."
+    },
+    "hi": {
+      "name": "बीएमआई कैलकुलेटर",
+      "short": "मीट्रिक या इंपीरियल इकाइयों में बॉडी मास इंडेक्स।",
+      "h1": "बीएमआई कैलकुलेटर — मीट्रिक या इंपीरियल में बॉडी मास इंडेक्स",
+      "metaTitle": "बीएमआई कैलकुलेटर ऑनलाइन मुफ़्त — मीट्रिक और इंपीरियल | Konvertools",
+      "metaDescription": "ऊंचाई और वजन से अपने बॉडी मास इंडेक्स की गणना करें, स्वस्थ श्रेणी के साथ। मुफ़्त, तुरंत, ब्राउज़र में।"
+    },
+    "id": {
+      "name": "Kalkulator IMT",
+      "short": "Indeks Massa Tubuh dalam satuan metrik atau imperial.",
+      "h1": "Kalkulator IMT — Indeks Massa Tubuh dalam Satuan Metrik atau Imperial",
+      "metaTitle": "Kalkulator IMT Online Gratis — Metrik & Imperial | Konvertools",
+      "metaDescription": "Hitung Indeks Massa Tubuh Anda dari tinggi dan berat badan dalam satuan metrik atau imperial, beserta kategori rentang sehat. Gratis, instan, di peramban."
+    },
+    "it": {
+      "name": "Calcolatore BMI",
+      "short": "Indice di massa corporea in unità metriche o imperiali.",
+      "h1": "Calcolatore BMI — Indice di Massa Corporea in Metrico o Imperiale",
+      "metaTitle": "Calcolatore BMI Online Gratis — Metrico & Imperiale | Konvertools",
+      "metaDescription": "Calcola il tuo Indice di Massa Corporea da altezza e peso in unità metriche o imperiali, con la categoria del range salutare. Gratis, istantaneo, nel browser."
+    },
+    "ja": {
+      "name": "BMI 計算機",
+      "short": "身長と体重から体格指数（BMI）をメートル法またはヤード・ポンド法で算出します。",
+      "h1": "BMI 計算機 — 身長と体重から体格指数を算出",
+      "metaTitle": "BMI 計算機（無料・オンライン） — Konver",
+      "metaDescription": "身長と体重から体格指数（BMI）をメートル法またはヤード・ポンド法で算出し、健康的な範囲を表示します。無料・即時・ブラウザ内で動作。"
+    },
+    "ko": {
+      "name": "BMI 계산기",
+      "short": "미터법 또는 야드파운드법 단위의 체질량 지수(BMI) 계산기입니다.",
+      "h1": "BMI 계산기 — 미터법 또는 야드파운드법 단위의 체질량 지수(BMI)",
+      "metaTitle": "무료 온라인 BMI 계산기 — 미터법 & 야드파운드법 | Konver",
+      "metaDescription": "키와 체중을 미터법 또는 야드파운드법 단위로 입력하여 체질량 지수(BMI)와 건강 범주를 즉시 계산하세요. 브라우저에서 무료로 사용 가능합니다."
+    },
+    "nl": {
+      "name": "BMI-rekentool",
+      "short": "Body Mass Index in metrische of imperiale eenheden.",
+      "h1": "BMI-rekentool — Body Mass Index in Metrisch of Imperiaal",
+      "metaTitle": "BMI-rekentool Online Gratis — Metrisch & Imperiaal | Konvertools",
+      "metaDescription": "Bereken je Body Mass Index op basis van lengte en gewicht in metrische of imperiale eenheden, inclusief de gezonde-rangecategorie. Gratis, direct, in de browser."
+    },
+    "pl": {
+      "name": "Kalkulator BMI",
+      "short": "Wskaźnik masy ciała w jednostkach metrycznych lub imperialnych.",
+      "h1": "Kalkulator BMI — Wskaźnik masy ciała w jednostkach metrycznych lub imperialnych",
+      "metaTitle": "Darmowy kalkulator BMI online — metryczny & imperialny | Konvertools",
+      "metaDescription": "Oblicz swój wskaźnik masy ciała (BMI) na podstawie wzrostu i wagi w jednostkach metrycznych lub imperialnych, z uwzględnieniem kategorii zdrowego zakresu. Darmowe, natychmiastowe, w przeglądarce."
+    },
+    "pt": {
+      "name": "Calculadora de IMC",
+      "short": "Índice de Massa Corporal em unidades métricas ou imperiais.",
+      "h1": "Calculadora de IMC — Índice de Massa Corporal em Métrico ou Imperial",
+      "metaTitle": "Calculadora de IMC Online Grátis — Métrico & Imperial | Konvertools",
+      "metaDescription": "Calcule seu Índice de Massa Corporal a partir da altura e peso em unidades métricas ou imperiais, com a categoria de faixa saudável. Grátis, instantâneo, no navegador."
+    },
+    "ru": {
+      "name": "Калькулятор ИМТ",
+      "short": "Индекс массы тела в метрических или британских единицах измерения.",
+      "h1": "Калькулятор ИМТ — Индекс массы тела в метрических или британских единицах",
+      "metaTitle": "Онлайн-калькулятор ИМТ бесплатно — Метрические и британские единицы | Konvertools",
+      "metaDescription": "Рассчитайте индекс массы тела по росту и весу в метрических или британских единицах, с указанием категории здорового диапазона. Бесплатно, мгновенно, в браузере."
+    },
+    "sv": {
+      "name": "BMI-kalkylator",
+      "short": "Kroppsmasseindex i metriska eller brittiska enheter.",
+      "h1": "BMI-kalkylator — Kroppsmasseindex i metriska eller brittiska enheter",
+      "metaTitle": "BMI-kalkylator online gratis — Metriska & brittiska | Konvertools",
+      "metaDescription": "Beräkna ditt kroppsmasseindex från längd och vikt i metriska eller brittiska enheter, inklusive hälsosamt intervall. Gratis, direkt i webbläsaren."
+    },
+    "tr": {
+      "name": "VKİ Hesaplayıcı",
+      "short": "Metrik veya imparatorluk birimlerinde vücut kitle indeksi hesaplama aracı.",
+      "h1": "VKİ Hesaplayıcı — Metrik veya İmparatorluk Birimlerinde Vücut Kitle İndeksi",
+      "metaTitle": "Ücretsiz Online VKİ Hesaplayıcı — Metrik & İmparatorluk | Konvertools",
+      "metaDescription": "Boy ve kilonuzdan vücut kitle indeksinizi hesaplayın, sağlıklı aralık kategorisiyle birlikte. Ücretsiz, anında, tarayıcı içinde."
+    },
+    "uk": {
+      "name": "Калькулятор ІМТ",
+      "short": "Індекс маси тіла в метричній або імперській системі одиниць.",
+      "h1": "Калькулятор ІМТ — Індекс маси тіла в метричній або імперській системі",
+      "metaTitle": "Онлайн-калькулятор ІМТ безкоштовно — метрична та імперська | Konvertools",
+      "metaDescription": "Розрахуйте свій індекс маси тіла за зростом і вагою в метричній або імперській системі, з категорією здорового діапазону. Безкоштовно, миттєво, у браузері."
+    },
+    "vi": {
+      "name": "Máy Tính Chỉ Số BMI",
+      "short": "Chỉ số khối cơ thể (BMI) theo hệ mét hoặc hệ Anh.",
+      "h1": "Máy Tính Chỉ Số BMI — Chỉ Số Khối Cơ Thể (Hệ Mét & Hệ Anh)",
+      "metaTitle": "Máy Tính BMI Trực Tuyến Miễn Phí — Hệ Mét & Hệ Anh | Konvertools",
+      "metaDescription": "Tính chỉ số khối cơ thể (BMI) từ chiều cao và cân nặng theo hệ mét hoặc hệ Anh, bao gồm phạm vi sức khỏe. Miễn phí, tức thì, ngay trên trình duyệt."
+    },
+    "zh": {
+      "name": "BMI 计算器",
+      "short": "用公制或英制单位计算身体质量指数。",
+      "h1": "BMI 计算器 — 公制或英制身体质量指数",
+      "metaTitle": "在线免费 BMI 计算器 — 公制 & 英制 | Konvertools",
+      "metaDescription": "根据身高体重计算身体质量指数（BMI）及健康范围分类。免费、即时、浏览器内运算。"
+    }
+  },
   "business-card-scanner": {
     "ar": {
       "name": "ماسح بطاقات العمل",
@@ -2086,6 +2491,276 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Tăng hoặc giảm âm lượng của bất kỳ tệp MP3 hoặc WAV nào mà không bị méo tiếng."
     }
   },
+  "citation-generator": {
+    "ar": {
+      "name": "مولّد الاقتباسات",
+      "short": "اصنع اقتباسات بتنسيق APA أو MLA أو شيكاغو أو هارفارد أو IEEE باستخدام الذكاء الاصطناعي.",
+      "h1": "مولّد الاقتباسات — مجاني APA / MLA / شيكاغو / هارفارد / IEEE",
+      "metaTitle": "مولّد الاقتباسات — APA، MLA، شيكاغو، هارفارد، IEEE | Konver",
+      "metaDescription": "اصنع اقتباسات بتنسيق APA أو MLA أو شيكاغو أو هارفارد أو IEEE من أي تفاصيل مصدر باستخدام الذكاء الاصطناعي. يتضمن الاقتباس النصي. مجاني، لا يلزم التسجيل للتجربة."
+    },
+    "cs": {
+      "name": "Generátor citací",
+      "short": "Generujte citace v APA, MLA, Chicago, Harvard nebo IEEE pomocí AI.",
+      "h1": "Generátor citací — Zdarma APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Generátor citací — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Generujte citace v APA, MLA, Chicago, Harvard nebo IEEE z libovolných zdrojových údajů pomocí AI. Obsahuje i textovou citaci. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "Zitaten-Generator",
+      "short": "Generiere APA-, MLA-, Chicago-, Harvard- oder IEEE-Zitate mit KI.",
+      "h1": "Zitaten-Generator — Kostenlos APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Zitaten-Generator — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Generiere Zitate in APA, MLA, Chicago, Harvard oder IEEE aus beliebigen Quellenangaben mit KI. Enthält auch die Textreferenz. Kostenlos, ohne Anmeldung testbar."
+    },
+    "es": {
+      "name": "Generador de citas",
+      "short": "Genera citas en APA, MLA, Chicago, Harvard o IEEE con IA.",
+      "h1": "Generador de citas — APA / MLA / Chicago / Harvard / IEEE gratis",
+      "metaTitle": "Generador de citas — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Genera citas en APA, MLA, Chicago, Harvard o IEEE a partir de cualquier fuente con IA. Incluye la referencia en el texto. Gratis, sin registro para probar."
+    },
+    "fr": {
+      "name": "Générateur de citations",
+      "short": "Générez des citations APA, MLA, Chicago, Harvard ou IEEE avec l'IA.",
+      "h1": "Générateur de citations — Gratuit APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Générateur de citations — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Générez des citations au format APA, MLA, Chicago, Harvard ou IEEE à partir de n'importe quelle source avec l'IA. Inclut la référence dans le texte. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "उद्धरण जनरेटर",
+      "short": "AI के साथ APA, MLA, शिकागो, हार्वर्ड या IEEE उद्धरण उत्पन्न करें।",
+      "h1": "उद्धरण जनरेटर — मुफ्त APA / MLA / शिकागो / हार्वर्ड / IEEE",
+      "metaTitle": "उद्धरण जनरेटर — APA, MLA, शिकागो, हार्वर्ड, IEEE | Konvertools",
+      "metaDescription": "AI के साथ किसी भी स्रोत विवरण से APA, MLA, शिकागो, हार्वर्ड या IEEE में उद्धरण उत्पन्न करें। इसमें पाठ्य उद्धरण भी शामिल है। प्रयास करने के लिए निशुल्क, साइन-अप की आवश्यकता नहीं।"
+    },
+    "id": {
+      "name": "Pembuat Kutipan",
+      "short": "Hasilkan kutipan APA, MLA, Chicago, Harvard, atau IEEE dengan AI.",
+      "h1": "Pembuat Kutipan — Gratis APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Pembuat Kutipan — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Hasilkan kutipan dalam format APA, MLA, Chicago, Harvard, atau IEEE dari detail sumber apa pun dengan AI. Termasuk referensi dalam teks. Gratis, tanpa pendaftaran untuk mencoba."
+    },
+    "it": {
+      "name": "Generatore di citazioni",
+      "short": "Genera citazioni APA, MLA, Chicago, Harvard o IEEE con l'IA.",
+      "h1": "Generatore di citazioni — Gratis APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Generatore di citazioni — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Genera citazioni in formato APA, MLA, Chicago, Harvard o IEEE da qualsiasi fonte con l'IA. Include anche il riferimento nel testo. Prova gratis, senza registrazione."
+    },
+    "ja": {
+      "name": "引用ジェネレーター",
+      "short": "AIでAPA、MLA、シカゴ、ハーバード、IEEE形式の引用文を生成。",
+      "h1": "引用ジェネレーター — 無料のAPA / MLA / シカゴ / ハーバード / IEEE形式",
+      "metaTitle": "引用ジェネレーター — APA、MLA、シカゴ、ハーバード、IEEE | Konvertools",
+      "metaDescription": "AIを使って、あらゆるソース情報からAPA、MLA、シカゴ、ハーバード、IEEE形式の引用文を生成。本文中の参考文献も含む。無料で、登録不要。"
+    },
+    "ko": {
+      "name": "인용문 생성기",
+      "short": "AI로 APA, MLA, 시카고, 하버드, IEEE 인용문 생성하기",
+      "h1": "인용문 생성기 — 무료 APA / MLA / 시카고 / 하버드 / IEEE",
+      "metaTitle": "인용문 생성기 — APA, MLA, 시카고, 하버드, IEEE | Konvertools",
+      "metaDescription": "AI로 모든 출처 정보에서 APA, MLA, 시카고, 하버드 또는 IEEE 인용문을 생성하세요. 본문 인용문도 포함됩니다. 무료, 가입 없이 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Citatiegenerator",
+      "short": "Genereer APA-, MLA-, Chicago-, Harvard- of IEEE-citaten met AI.",
+      "h1": "Citatiegenerator — Gratis APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Citatiegenerator — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Genereer citaten in APA, MLA, Chicago, Harvard of IEEE vanuit elke bron met AI. Inclusief de in-text referentie. Gratis, zonder aanmelding uitproberen."
+    },
+    "pl": {
+      "name": "Generator cytowań",
+      "short": "Generuj cytowania w formatach APA, MLA, Chicago, Harvard lub IEEE z pomocą AI.",
+      "h1": "Generator cytowań — Darmowe APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Generator cytowań — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Generuj cytowania w formatach APA, MLA, Chicago, Harvard lub IEEE na podstawie danych źródła z pomocą AI. Zawiera cytowanie w tekście. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Gerador de Citações",
+      "short": "Gere citações APA, MLA, Chicago, Harvard ou IEEE com IA.",
+      "h1": "Gerador de Citações — Grátis APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Gerador de Citações — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Gere citações em APA, MLA, Chicago, Harvard ou IEEE a partir de qualquer detalhe de fonte com IA. Inclui a referência no texto. Grátis, sem cadastro para testar."
+    },
+    "ru": {
+      "name": "Генератор цитирования",
+      "short": "Создавайте цитаты в форматах APA, MLA, Chicago, Harvard или IEEE с помощью ИИ.",
+      "h1": "Генератор цитирования — Бесплатный APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Генератор цитирования — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Создавайте цитаты в форматах APA, MLA, Chicago, Harvard или IEEE из любых данных источника с помощью ИИ. Включает внутритекстовую ссылку. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Generera källhänvisningar",
+      "short": "Generera APA-, MLA-, Chicago-, Harvard- eller IEEE-källhänvisningar med AI.",
+      "h1": "Källhänvisningsgenerator — Gratis APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Källhänvisningsgenerator — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Generera källhänvisningar i APA, MLA, Chicago, Harvard eller IEEE från valfri källdata med AI. Inkluderar referens i texten. Gratis, ingen registrering krävs."
+    },
+    "tr": {
+      "name": "Alıntı Oluşturucu",
+      "short": "APA, MLA, Chicago, Harvard veya IEEE alıntıları yapay zeka ile oluşturun.",
+      "h1": "Alıntı Oluşturucu — Ücretsiz APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Alıntı Oluşturucu — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Herhangi bir kaynak bilgilerinden APA, MLA, Chicago, Harvard veya IEEE alıntıları yapay zeka ile oluşturun. Metin içi referans dahil. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Генератор цитувань",
+      "short": "Створюйте цитати за стандартами APA, MLA, Chicago, Harvard або IEEE за допомогою ШІ.",
+      "h1": "Генератор цитувань — безкоштовно APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Генератор цитувань — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Створюйте цитати за APA, MLA, Chicago, Harvard або IEEE з будь-яких даних джерела за допомогою ШІ. Включає текстове посилання. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Tạo Trích Dẫn",
+      "short": "Tạo trích dẫn APA, MLA, Chicago, Harvard hoặc IEEE bằng AI.",
+      "h1": "Tạo Trích Dẫn — Miễn phí APA / MLA / Chicago / Harvard / IEEE",
+      "metaTitle": "Tạo Trích Dẫn — APA, MLA, Chicago, Harvard, IEEE | Konvertools",
+      "metaDescription": "Tạo trích dẫn theo định dạng APA, MLA, Chicago, Harvard hoặc IEEE từ bất kỳ nguồn nào bằng AI. Bao gồm tham chiếu trong văn bản. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "引用生成器",
+      "short": "使用 AI 生成 APA、MLA、芝加哥、哈佛或 IEEE 引用格式。",
+      "h1": "引用生成器 — 免费 APA / MLA / 芝加哥 / 哈佛 / IEEE",
+      "metaTitle": "引用生成器 — APA、MLA、芝加哥、哈佛、IEEE | Konvertools",
+      "metaDescription": "使用 AI 从任意来源信息生成 APA、MLA、芝加哥、哈佛或 IEEE 引用格式，包含文内引用。免费使用，无需注册。"
+    }
+  },
+  "clean-ai-export": {
+    "ar": {
+      "name": "نص ذكاء اصطناعي نقي",
+      "short": "إزالة العلامات المائية الخفية للذكاء الاصطناعي، التنسيق النصي (Markdown) والنص النمطي.",
+      "h1": "نص ذكاء اصطناعي نقي — إزالة العلامات المائية، التنسيق النصي والنمطي مجاناً",
+      "metaTitle": "نص ذكاء اصطناعي نقي عبر الإنترنت — إزالة علامات ChatGPT المائية | Konvertools",
+      "metaDescription": "إزالة العلامات المائية غير المرئية، تنسيق Markdown والنصوص النمطية (مثل \"بصفة being AI...\") من مخرجات ChatGPT أو Claude أو Gemini. مجاني، في المتصفح، خاص."
+    },
+    "cs": {
+      "name": "Čistý AI text",
+      "short": "Odstraňte neviditelné AI vodoznaky, formátování Markdown a textové šablony.",
+      "h1": "Čistý AI text — Odstraňte vodoznaky, Markdown a šablony zdarma",
+      "metaTitle": "Čistý AI text online — Odstraňte vodoznaky z ChatGPT | Konvertools",
+      "metaDescription": "Odstraňte neviditelné vodoznaky, formátování Markdown a textové šablony z odpovědí ChatGPT, Clauda nebo Gemin. Zdarma, přímo v prohlížeči, soukromě."
+    },
+    "de": {
+      "name": "KI-Text bereinigen",
+      "short": "Entferne unsichtbare KI-Wasserzeichen, Markdown und Standardtexte.",
+      "h1": "KI-Text bereinigen — Wasserzeichen, Markdown & Standardtexte entfernen — kostenlos",
+      "metaTitle": "KI-Text online bereinigen — ChatGPT-Wasserzeichen entfernen | Konvertools",
+      "metaDescription": "Entferne unsichtbare Wasserzeichen, Markdown-Formatierungen und Standardtexte wie „Als KI-Assistent…“ aus ChatGPT-, Claude- oder Gemini-Ausgaben. Kostenlos, im Browser, privat."
+    },
+    "es": {
+      "name": "Texto IA Limpio",
+      "short": "Elimina marcas de agua ocultas de IA, markdown y texto genérico.",
+      "h1": "Texto IA Limpio — Elimina marcas de agua, Markdown y texto genérico gratis",
+      "metaTitle": "Texto IA Limpio Online — Eliminar marcas de ChatGPT | Konvertools",
+      "metaDescription": "Elimina caracteres ocultos de marcas de agua, formato Markdown y texto genérico de respuestas de ChatGPT, Claude o Gemini. Gratis, en el navegador y privado."
+    },
+    "fr": {
+      "name": "Texte IA Nettoyé",
+      "short": "Supprime les filigranes invisibles de l'IA, le Markdown et le texte générique.",
+      "h1": "Texte IA Nettoyé — Supprimez les filigranes, Markdown & texte générique gratuitement",
+      "metaTitle": "Nettoyer du texte IA en ligne — Supprimer les filigranes ChatGPT | Konvertools",
+      "metaDescription": "Éliminez les caractères de filigrane invisibles, le formatage Markdown et les phrases génériques de type 'En tant qu'IA…' des réponses de ChatGPT, Claude ou Gemini. Gratuit, dans le navigateur, confidentiel."
+    },
+    "hi": {
+      "name": "साफ़ AI पाठ",
+      "short": "अदृश्य AI वॉटरमार्क, मार्कडाउन और सामान्य शब्दों को हटाएं।",
+      "h1": "साफ़ AI पाठ — वॉटरमार्क, मार्कडाउन और सामान्य शब्द हटाएं मुफ़्त",
+      "metaTitle": "साफ़ AI पाठ ऑनलाइन — ChatGPT वॉटरमार्क हटाएं | Konvertools",
+      "metaDescription": "ChatGPT, Claude या Gemini आउटपुट से अदृश्य वॉटरमार्क वर्ण, मार्कडाउन फ़ॉर्मेटिंग और 'एक AI के रूप में...' जैसे सामान्य शब्द हटाएं। मुफ़्त, ब्राउज़र में, निजी।"
+    },
+    "id": {
+      "name": "Bersih Teks AI",
+      "short": "Hapus tanda air AI yang tidak terlihat, markdown, dan teks baku. Gratis.",
+      "h1": "Bersih Teks AI — Hapus Tanda Air, Markdown & Teks Baku Gratis",
+      "metaTitle": "Bersih Teks AI Online — Hapus Tanda Air ChatGPT | Konver",
+      "metaDescription": "Hapus karakter tanda air tak terlihat, format Markdown, dan teks baku 'Sebagai AI…' dari keluaran ChatGPT, Claude, atau Gemini. Gratis, di peramban, privat."
+    },
+    "it": {
+      "name": "Testo AI Pulito",
+      "short": "Rimuovi filigrane AI invisibili, markdown e boilerplate.",
+      "h1": "Testo AI Pulito — Rimuovi Filigrane, Markdown & Boilerplate Gratis",
+      "metaTitle": "Testo AI Pulito Online — Rimuovi Filigrane ChatGPT | Konvertools",
+      "metaDescription": "Elimina caratteri di filigrana invisibili, formattazione Markdown e boilerplate tipo \"Come AI...\" da output di ChatGPT, Claude o Gemini. Gratis, nel browser, privato."
+    },
+    "ja": {
+      "name": "AIテキストクリーナー",
+      "short": "目に見えないAI透かし、Markdown、定型文を除去します。",
+      "h1": "AIテキストクリーナー — 透かし・Markdown・定型文を無料で除去",
+      "metaTitle": "AIテキストクリーナー（オンライン） — ChatGPT透かし除去 | Konvertools",
+      "metaDescription": "ChatGPT、Claude、Geminiの出力から目に見えない透かし文字、Markdown形式、定型文を取り除く無料ツール。ブラウザ内で動作し、プライバシーを保護します。"
+    },
+    "ko": {
+      "name": "AI 텍스트 정리",
+      "short": "불visible AI 워터마크, 마크다운, 상투어 제거",
+      "h1": "AI 텍스트 정리 — 워터마크, 마크다운 & 상투어 무료 제거",
+      "metaTitle": "AI 텍스트 정리 온라인 — ChatGPT 워터마크 제거 | Konvertools",
+      "metaDescription": "ChatGPT, Claude, Gemini 출력물에서 invisible 워터마크·마크다운·'AI로써…' 상투어 제거. 무료, 브라우저 내 처리, 개인정보 보호."
+    },
+    "nl": {
+      "name": "AI-tekst opschonen",
+      "short": "Verwijder onzichtbare AI-watermerken, Markdown en standaardtekst.",
+      "h1": "AI-tekst opschonen — Verwijder watermerken, Markdown & standaardtekst gratis",
+      "metaTitle": "AI-tekst opschonen online — Verwijder ChatGPT-watermerken | Konvertools",
+      "metaDescription": "Verwijder onzichtbare watermerktekens, Markdown-opmaak en standaardzinnen zoals 'Als AI-assistent…' uit ChatGPT-, Claude- of Gemini-uitvoer. Gratis, in de browser, privé."
+    },
+    "pl": {
+      "name": "Czyszczenie tekstu AI",
+      "short": "Usuń niewidoczne znaki wodne AI, składnię Markdown i szablonowe wypełniacze.",
+      "h1": "Czyszczenie tekstu AI — Usuń znaki wodne, Markdown i szablony za darmo",
+      "metaTitle": "Czyszczenie tekstu AI online — usuń znaki wodne ChatGPT | Konvertools",
+      "metaDescription": "Usuń niewidoczne znaki wodne, formatowanie Markdown oraz szablonowe wypełniacze typu „Jako AI…” z odpowiedzi ChatGPT, Claude lub Gemini. Darmowe, w przeglądarce, prywatne."
+    },
+    "pt": {
+      "name": "Texto IA Limpo",
+      "short": "Remova marcas d'água invisíveis de IA, formatação Markdown e textos genéricos.",
+      "h1": "Texto IA Limpo — Remova Marca d'Água, Markdown & Textos Genéricos Grátis",
+      "metaTitle": "Texto IA Limpo Online — Remova Marca d'Água do ChatGPT | Konvertools",
+      "metaDescription": "Elimine caracteres de marca d'água invisível, formatação Markdown e textos genéricos do tipo 'Como assistente de IA...' de saídas do ChatGPT, Claude ou Gemini. Grátis, no navegador, privado."
+    },
+    "ru": {
+      "name": "Очистка AI-текста",
+      "short": "Удаляет невидимые водяные знаки ИИ, разметку Markdown и шаблонный текст.",
+      "h1": "Очистка AI-текста — Удаление водяных знаков, Markdown и шаблонов бесплатно",
+      "metaTitle": "Очистка AI-текста онлайн — Удаление водяных знаков ChatGPT | Konvertools",
+      "metaDescription": "Удалите невидимые водяные знаки, форматирование Markdown и шаблонные фразы из ответов ChatGPT, Claude или Gemini. Бесплатно, в браузере, конфиденциально."
+    },
+    "sv": {
+      "name": "Rensa AI-text",
+      "short": "Ta bort osynliga AI-vattenstämplar, Markdown och standardtext.",
+      "h1": "Rensa AI-text — Ta bort vattenstämplar, Markdown & standardtext gratis",
+      "metaTitle": "Rensa AI-text online — Ta bort ChatGPT-vattenstämplar | Konvertools",
+      "metaDescription": "Ta bort osynliga vattenstämpelkaraktärer, Markdown-formatering och standardtext som \"Som en AI…\" från ChatGPT-, Claude- eller Gemini-utdata. Gratis, i webbläsaren, privat."
+    },
+    "tr": {
+      "name": "Temiz AI Metni",
+      "short": "Görünmez AI filigranlarını, markdown ve standart metinleri kaldırın.",
+      "h1": "Temiz AI Metni — Filigranları, Markdown ve Standart Metinleri Ücretsiz Kaldırın",
+      "metaTitle": "Temiz AI Metni Çevrimiçi — ChatGPT Filigranlarını Kaldır | Konvertools",
+      "metaDescription": "ChatGPT, Claude veya Gemini çıktısından görünmez filigran karakterlerini, Markdown biçimlendirmesini ve 'Bir AI olarak...' standart metinlerini ücretsiz, tarayıcıda ve gizlilik içinde kaldırın."
+    },
+    "uk": {
+      "name": "Очищення AI-тексту",
+      "short": "Видаляє невидимі водяні знаки AI, розмітку Markdown та шаблонні фрази.",
+      "h1": "Очищення AI-тексту — видаляє водяні знаки, Markdown та шаблони безкоштовно",
+      "metaTitle": "Очищення AI-тексту онлайн — видаляє водяні знаки ChatGPT | Konvertools",
+      "metaDescription": "Видаляє невидимі водяні знаки, розмітку Markdown та шаблонні фрази на кшталт «Як AI-модель...». Безкоштовно, у браузері, конфіденційно."
+    },
+    "vi": {
+      "name": "Làm sạch Văn bản AI",
+      "short": "Gỡ bỏ các dấu watermark vô hình, định dạng Markdown và nội dung rườm rà từ AI.",
+      "h1": "Làm sạch Văn bản AI — Gỡ Dấu Watermark, Markdown & Nội dung Rườm rà Miễn phí",
+      "metaTitle": "Làm sạch Văn bản AI Trực tuyến — Gỡ Dấu ChatGPT | Konvertools",
+      "metaDescription": "Loại bỏ các ký tự dấu watermark vô hình, định dạng Markdown và nội dung rườm rà kiểu 'Là một AI…' từ đầu ra của ChatGPT, Claude hoặc Gemini. Miễn phí, trong trình duyệt, bảo mật."
+    },
+    "zh": {
+      "name": "清理 AI 文本",
+      "short": "移除隐形 AI 水印、Markdown 与模板冗余内容。",
+      "h1": "清理 AI 文本 — 免费移除水印、Markdown 与模板冗余",
+      "metaTitle": "在线清理 AI 文本 — 移除 ChatGPT 水印 | Konvertools",
+      "metaDescription": "去除 ChatGPT、Claude 或 Gemini 输出中的隐形水印字符、Markdown 格式与‘作为 AI…’等模板冗余内容。免费、在线处理、隐私保护。"
+    }
+  },
   "clean-subtitles": {
     "cs": {
       "name": "Vyčistit titulky",
@@ -2828,6 +3503,276 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "Nén Video Trực Tuyến — Tệp MP4 Nhỏ Hơn",
       "metaTitle": "Nén Video Trực Tuyến — Công Cụ Miễn Phí | Konvertools",
       "metaDescription": "Thu nhỏ video MP4, MOV và các định dạng khác — lý tưởng cho email và web."
+    }
+  },
+  "conjugation": {
+    "ar": {
+      "name": "تصريف الأفعال",
+      "short": "صغ أي فعل في جميع الأزمنة باستخدام الذكاء الاصطناعي.",
+      "h1": "تصريف الأفعال — أداة ذكاء اصطناعي مجانية لتصريف الأفعال لأكثر من 30 لغة",
+      "metaTitle": "تصريف الأفعال — أداة ذكاء اصطناعي مجانية عبر الإنترنت | Konver",
+      "metaDescription": "صغ أي فعل في جميع الأزمنة والميول لأكثر من 30 لغة باستخدام الذكاء الاصطناعي. الفرنسية، الإسبانية، الألمانية، الإيطالية وأكثر. مجاناً، بدون تسجيل للمحاولة."
+    },
+    "cs": {
+      "name": "Slovesné časování",
+      "short": "Časujte jakékoli sloveso ve všech časech pomocí AI.",
+      "h1": "Slovesné časování — Zdarma AI časovač ve 30+ jazycích",
+      "metaTitle": "Slovesné časování — Zdarma online AI časovač | Konvertools",
+      "metaDescription": "Časujte jakékoli sloveso ve všech časech a způsobech ve 30+ jazycích pomocí AI. Francouzština, španělština, němčina, italština a další. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "Verbkonjugation",
+      "short": "Konjugiere jedes Verb in allen Zeitformen mit KI.",
+      "h1": "Verbkonjugation — Kostenloser KI-Konjugator in 30+ Sprachen",
+      "metaTitle": "Verbkonjugation — Kostenloser KI-Konjugator online | Konvertools",
+      "metaDescription": "Konjugiere jedes Verb in allen Zeitformen und Modi in 30+ Sprachen mit KI. Französisch, Spanisch, Deutsch, Italienisch und mehr. Kostenlos, ohne Anmeldung testbar."
+    },
+    "es": {
+      "name": "Conjugación de verbos",
+      "short": "Conjuga cualquier verbo en todos los tiempos con IA.",
+      "h1": "Conjugación de verbos — Conjugador de IA gratuito en 30+ idiomas",
+      "metaTitle": "Conjugación de verbos — Conjugador de IA online gratis | Konvertools",
+      "metaDescription": "Conjuga cualquier verbo en todos los tiempos y modos en 30+ idiomas con IA. Francés, español, alemán, italiano y más. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Conjugaison de verbes",
+      "short": "Conjuguez n'importe quel verbe dans tous les temps avec l'IA.",
+      "h1": "Conjugaison de verbes — Conjugueur IA gratuit en 30+ langues",
+      "metaTitle": "Conjugaison de verbes — Conjugueur IA en ligne gratuit | Konvertools",
+      "metaDescription": "Conjuguez n'importe quel verbe dans tous les temps et modes en 30+ langues avec l'IA. Français, espagnol, allemand, italien et plus. Gratuit, sans inscription pour essayer."
+    },
+    "hi": {
+      "name": "क्रिया संयुग्मन",
+      "short": "किसी भी क्रिया को AI के साथ हर काल में संयुग्मित करें।",
+      "h1": "क्रिया संयुग्मन — 30+ भाषाओं में मुफ्त AI संयुग्मक",
+      "metaTitle": "क्रिया संयुग्मन — मुफ्त ऑनलाइन AI संयुग्मक | Konvertools",
+      "metaDescription": "30+ भाषाओं में किसी भी क्रिया को सभी काल और भावों में AI के साथ संयुग्मित करें। फ्रेंच, स्पेनिश, जर्मन, इतालवी और अधिक। प्रयास करने के लिए मुफ्त, साइन-अप की आवश्यकता नहीं।"
+    },
+    "id": {
+      "name": "Konjugasi Kata Kerja",
+      "short": "Konjugasikan kata kerja apa pun di semua tenses dengan AI.",
+      "h1": "Konjugasi Kata Kerja — Konjugator AI Gratis dalam 30+ Bahasa",
+      "metaTitle": "Konjugasi Kata Kerja — Konjugator AI Online Gratis | Konvertools",
+      "metaDescription": "Konjugasikan kata kerja apa pun di semua tenses dan modus dalam 30+ bahasa dengan AI. Prancis, Spanyol, Jerman, Italia, dan lainnya. Gratis, tanpa daftar untuk mencoba."
+    },
+    "it": {
+      "name": "Coniugazione verbi",
+      "short": "Coniuga qualsiasi verbo in tutti i tempi con l'IA.",
+      "h1": "Coniugazione verbi — Coniugatore AI gratuito in 30+ lingue",
+      "metaTitle": "Coniugazione verbi — Coniugatore AI online gratuito | Konvertools",
+      "metaDescription": "Coniuga qualsiasi verbo in tutti i tempi e modi in 30+ lingue con l'IA. Francese, spagnolo, tedesco, italiano e altro. Provalo gratis senza registrazione."
+    },
+    "ja": {
+      "name": "動詞活用変換",
+      "short": "任意の動詞を全ての時制でAIにより活用変換します。",
+      "h1": "動詞活用変換 — 30以上の言語に対応した無料AI活用変換ツール",
+      "metaTitle": "動詞活用変換 — 無料オンラインAI活用変換 | Konvertools",
+      "metaDescription": "30以上の言語で動詞を全ての時制・法でAIにより活用変換。フランス語、スペイン語、ドイツ語、イタリア語など。登録不要で無料でお試し可能。"
+    },
+    "ko": {
+      "name": "동사 활용",
+      "short": "AI로 모든 시제에 걸쳐 동사를 활용하세요.",
+      "h1": "동사 활용 — 30+개 언어 무료 AI 활용 도구 | Konver",
+      "metaTitle": "동사 활용 — 무료 AI 활용 도구 온라인 | Konver",
+      "metaDescription": "30+개 언어의 모든 시제와 mood에서 동사를 AI로 활용하세요. 프랑스어, 스페인어, 독일어, 이탈리아어 등. 무료이며 가입 없이 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Werkwoordvervoeging",
+      "short": "Verbuig elk werkwoord in alle tijden met AI.",
+      "h1": "Werkwoordvervoeging — Gratis AI-verbuiger in 30+ talen",
+      "metaTitle": "Werkwoordvervoeging — Gratis online AI-verbuiger | Konvertools",
+      "metaDescription": "Verbuig elk werkwoord in alle tijden en wijs in 30+ talen met AI. Frans, Spaans, Duits, Italiaans en meer. Gratis, zonder aanmelding te proberen."
+    },
+    "pl": {
+      "name": "Odmiana czasowników",
+      "short": "Odmieniaj dowolny czasownik przez wszystkie czasy z pomocą AI.",
+      "h1": "Odmiana czasowników — darmowy konwerter AI w 30+ językach",
+      "metaTitle": "Odmiana czasowników — darmowy konwerter AI online | Konvertools",
+      "metaDescription": "Odmieniaj dowolny czasownik przez wszystkie czasy i tryby w ponad 30 językach z pomocą AI. Francuski, hiszpański, niemiecki, włoski i więcej. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Conjugação de Verbos",
+      "short": "Conjugue qualquer verbo em todos os tempos com IA.",
+      "h1": "Conjugação de Verbos — Conjugador de IA Gratuito em 30+ Idiomas",
+      "metaTitle": "Conjugação de Verbos — Conjugador de IA Online Gratuito | Konvertools",
+      "metaDescription": "Conjugue qualquer verbo em todos os tempos e modos em 30+ idiomas com IA. Francês, espanhol, alemão, italiano e mais. Gratuito, sem cadastro para testar."
+    },
+    "ru": {
+      "name": "Спряжение глаголов",
+      "short": "Спрягайте любой глагол во всех временах с помощью ИИ.",
+      "h1": "Спряжение глаголов — Бесплатный ИИ-спрягатель на 30+ языках",
+      "metaTitle": "Спряжение глаголов — Бесплатный онлайн ИИ-спрягатель | Konvertools",
+      "metaDescription": "Спрягайте любой глагол во всех временах и наклонениях на 30+ языках с помощью ИИ. Французский, испанский, немецкий, итальянский и другие. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Böjningsverktyg för verb",
+      "short": "Böj vilket verb som helst i alla tempus med AI.",
+      "h1": "Verbkonjugering — Gratis AI-verktyg för verbböjning på 30+ språk",
+      "metaTitle": "Verbkonjugering — Gratis AI-verktyg online | Konvertools",
+      "metaDescription": "Böj vilket verb som helst i alla tempus och modus på 30+ språk med AI. Franska, spanska, tyska, italienska med mera. Gratis, inget konto krävs."
+    },
+    "tr": {
+      "name": "Fiil Çekimleme",
+      "short": "Herhangi bir fiili tüm zamanlarda AI ile çekimleyin.",
+      "h1": "Fiil Çekimleme — 30+ Dilde Ücretsiz AI Çekimleyici",
+      "metaTitle": "Fiil Çekimleme — Ücretsiz Online AI Çekimleyici | Konvertools",
+      "metaDescription": "30+ dilde tüm zaman ve kiplerle fiil çekimleyin. Fransızca, İspanyolca, Almanca, İtalyanca ve daha fazlası. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Відмінювання дієслів",
+      "short": "Відмінюйте будь-яке дієслово за всіма часами за допомогою ШІ.",
+      "h1": "Відмінювання дієслів — безкоштовний ШІ-відмінювач на 30+ мовах",
+      "metaTitle": "Відмінювання дієслів — безкоштовний онлайн-відмінювач | Konvertools",
+      "metaDescription": "Відмінюйте будь-яке дієслово за всіма часами та способами у 30+ мовах за допомогою ШІ. Французька, іспанська, німецька, італійська та інші. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Chia động từ",
+      "short": "Chia bất kỳ động từ nào qua mọi thì bằng AI.",
+      "h1": "Chia Động Từ — Công Cụ AI Miễn Phí Hơn 30 Ngôn Ngữ",
+      "metaTitle": "Chia Động Từ — Công Cụ AI Miễn Phí Trực Tuyến | Konver",
+      "metaDescription": "Chia bất kỳ động từ nào qua mọi thì và thức trong hơn 30 ngôn ngữ bằng AI. Tiếng Pháp, Tây Ban Nha, Đức, Ý và nhiều hơn nữa. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "动词变位",
+      "short": "用 AI 对任何动词进行时态变位。",
+      "h1": "动词变位 — 30+ 种语言免费 AI 变位工具",
+      "metaTitle": "动词变位 — 在线免费 AI 变位工具 | Konver",
+      "metaDescription": "用 AI 对 30+ 种语言的动词进行所有时态和语气的变位。支持法语、西班牙语、德语、意大利语等。免费使用，无需注册。"
+    }
+  },
+  "context-examples": {
+    "ar": {
+      "name": "أمثلة سياقية",
+      "short": "شاهد الكلمة مستخدمة في جمل حقيقية مع الترجمات.",
+      "h1": "أمثلة سياقية — جمل ثنائية اللغة مجانية (على غرار Reverso)",
+      "metaTitle": "أمثلة سياقية — جمل ثنائية اللغة مجانية | Konver",
+      "metaDescription": "شاهد كيف تُستخدم الكلمة أو العبارة في جمل حقيقية ثنائية اللغة. يكتشف اللغة المصدر تلقائيًا ويترجمها إلى اللغة المستهدفة. مجانًا."
+    },
+    "cs": {
+      "name": "Příklady v kontextu",
+      "short": "Podívejte se, jak se slovo používá v reálných větách s překlady.",
+      "h1": "Příklady v kontextu — Zdarma dvojjazyčné příklady vět (ve stylu Reverso)",
+      "metaTitle": "Příklady v kontextu — Zdarma dvojjazyčné příklady vět | Konvertools",
+      "metaDescription": "Podívejte se, jak se slovo nebo fráze používá v reálných dvojjazyčných příkladech. Automaticky detekuje zdrojový jazyk a překládá do cílového. Zdarma."
+    },
+    "de": {
+      "name": "Beispielsätze im Kontext",
+      "short": "Sehe ein Wort in echten Sätzen mit Übersetzungen verwendet.",
+      "h1": "Kontext-Beispiele — Kostenlose zweisprachige Beispielsätze (Reverso-Style)",
+      "metaTitle": "Kontext-Beispiele — Kostenlose zweisprachige Beispielsätze | Konvertools",
+      "metaDescription": "Sehe, wie ein Wort oder eine Phrase in echten zweisprachigen Beispielsätzen verwendet wird. Erkennt die Quellsprache automatisch und übersetzt in deine Zielsprache. Kostenlos."
+    },
+    "es": {
+      "name": "Ejemplos de contexto",
+      "short": "Consulta una palabra usada en frases reales con traducciones.",
+      "h1": "Ejemplos de contexto — Frases bilingües gratuitas (estilo Reverso)",
+      "metaTitle": "Ejemplos de contexto — Frases bilingües gratuitas | Konvertools",
+      "metaDescription": "Consulta cómo se usa una palabra o frase en ejemplos bilingües reales. Detecta el idioma de origen y traduce al tuyo automáticamente. Gratis."
+    },
+    "fr": {
+      "name": "Exemples de contexte",
+      "short": "Voyez un mot utilisé dans des phrases réelles avec leurs traductions.",
+      "h1": "Exemples de contexte — Phrases bilingues gratuites (style Reverso)",
+      "metaTitle": "Exemples de contexte — Phrases bilingues gratuites | Konvertools",
+      "metaDescription": "Voyez comment un mot ou une expression est utilisé dans des phrases bilingues réelles. Détecte automatiquement la langue source et traduit vers votre cible. Gratuit."
+    },
+    "hi": {
+      "name": "उदाहरण संदर्भ",
+      "short": "वास्तविक वाक्यों में शब्द का प्रयोग देखें।",
+      "h1": "उदाहरण संदर्भ — नि:शुल्क द्विभाषी उदाहरण वाक्य (रेवर्सो-शैली)",
+      "metaTitle": "उदाहरण संदर्भ — नि:शुल्क द्विभाषी उदाहरण वाक्य | Konvertools",
+      "metaDescription": "देखें कि किसी शब्द या वाक्यांश का वास्तविक द्विभाषी उदाहरण वाक्यों में कैसे प्रयोग किया जाता है। स्रोत भाषा का स्वचालित रूप से पता लगाएं और अपने लक्ष्य भाषा में अनुवाद करें। नि:शुल्क।"
+    },
+    "id": {
+      "name": "Contoh Konteks",
+      "short": "Lihat kata yang digunakan dalam kalimat nyata dengan terjemahan.",
+      "h1": "Contoh Konteks — Kalimat Contoh Bilingual Gratis (Gaya Reverso)",
+      "metaTitle": "Contoh Konteks — Kalimat Contoh Bilingual Gratis | Konvertools",
+      "metaDescription": "Lihat bagaimana kata atau frasa digunakan dalam kalimat nyata bilingual. Mendeteksi bahasa sumber secara otomatis dan menerjemahkan ke bahasa target Anda. Gratis."
+    },
+    "it": {
+      "name": "Esempi di Contesto",
+      "short": "Vedi una parola usata in frasi reali con traduzioni.",
+      "h1": "Esempi di Contesto — Frasi Bilingui Gratuite (Stile Reverso)",
+      "metaTitle": "Esempi di Contesto — Frasi Bilingui Gratuite | Konvertools",
+      "metaDescription": "Vedi come una parola o frase viene usata in frasi bilingui reali. Rileva automaticamente la lingua di origine e traduce nella tua lingua target. Gratis."
+    },
+    "ja": {
+      "name": "例文コンテキスト",
+      "short": "実例の文章で単語の使い方を確認。翻訳付き。",
+      "h1": "例文コンテキスト — 無料の日英対訳例文集（Reverso風）",
+      "metaTitle": "例文コンテキスト — 無料日英例文 | Konver",
+      "metaDescription": "実例の日英対訳例文で単語やフレーズの使い方を確認。自動で言語を検出し、翻訳します。完全無料。"
+    },
+    "ko": {
+      "name": "예문 보기",
+      "short": "실제 문장에서 단어 사용 예시와 번역을 확인하세요.",
+      "h1": "예문 보기 — 무료 양방향 예문 문장 (Reverso 스타일)",
+      "metaTitle": "예문 보기 — 무료 양방향 예문 | Konvertools",
+      "metaDescription": "단어 또는 구문이 실제 양방향 예문 문장에서 어떻게 사용되는지 확인하세요. 소스 언어를 자동 감지하고 대상 언어로 번역합니다. 무료."
+    },
+    "nl": {
+      "name": "Voorbeeldzinnen in context",
+      "short": "Zie een woord gebruikt in echte zinnen met vertalingen.",
+      "h1": "Voorbeeldzinnen in context — Gratis tweetalige voorbeeldzinnen (Reverso-stijl)",
+      "metaTitle": "Voorbeeldzinnen in context — Gratis tweetalige voorbeelden | Konvertools",
+      "metaDescription": "Zie hoe een woord of uitdrukking wordt gebruikt in echte tweetalige voorbeeldzinnen. Detecteert automatisch de brontaal en vertaalt naar je doeltaal. Gratis."
+    },
+    "pl": {
+      "name": "Przykłady w kontekście",
+      "short": "Zobacz słowo użyte w zdaniach z tłumaczeniem.",
+      "h1": "Przykłady w kontekście — Darmowe dwujęzyczne zdania przykładowe (styl Reverso)",
+      "metaTitle": "Przykłady w kontekście — Darmowe zdania przykładowe | Konvertools",
+      "metaDescription": "Zobacz, jak dane słowo lub wyrażenie jest używane w realnych zdaniach dwujęzycznych. Automatycznie wykrywa język źródłowy i tłumaczy na twój język docelowy. Darmowe."
+    },
+    "pt": {
+      "name": "Exemplos de Contexto",
+      "short": "Veja uma palavra usada em frases reais com traduções.",
+      "h1": "Exemplos de Contexto — Frases de Exemplo Bilingues Grátis (Estilo Reverso)",
+      "metaTitle": "Exemplos de Contexto — Frases de Exemplo Bilingues Grátis | Konvertools",
+      "metaDescription": "Veja como uma palavra ou expressão é usada em frases reais bilíngues. Detecta automaticamente a língua de origem e traduz para o seu idioma-alvo. Grátis."
+    },
+    "ru": {
+      "name": "Примеры в контексте",
+      "short": "Посмотрите, как слово используется в реальных предложениях с переводом.",
+      "h1": "Примеры в контексте — Бесплатные двуязычные примеры предложений (стиль Reverso)",
+      "metaTitle": "Примеры в контексте — Бесплатные двуязычные примеры | Konvertools",
+      "metaDescription": "Посмотрите, как слово или фраза используется в реальных двуязычных примерах. Автоматически определяет исходный язык и переводит на ваш целевой. Бесплатно."
+    },
+    "sv": {
+      "name": "Exempelsammanhang",
+      "short": "Se ett ord använt i verkliga meningar med översättningar.",
+      "h1": "Exempelsammanhang — Gratis tvåspråkiga exempelmeningar (Reverso-stil) | Konver",
+      "metaTitle": "Exempelsammanhang — Gratis tvåspråkiga exempelmeningar | Konver",
+      "metaDescription": "Se hur ett ord eller uttryck används i verkliga tvåspråkiga exempelmeningar. Upptäcker källspråket automatiskt och översätter till ditt mål. Gratis."
+    },
+    "tr": {
+      "name": "Bağlam Örnekleri",
+      "short": "Bir kelimenin gerçek cümlelerde kullanımını ve çevirilerini görüntüleyin.",
+      "h1": "Bağlam Örnekleri — Ücretsiz Çift Dilli Örnek Cümleler (Reverso tarzı)",
+      "metaTitle": "Bağlam Örnekleri — Ücretsiz Çift Dilli Örnek Cümleler | Konvertools",
+      "metaDescription": "Bir kelime veya deyimin gerçek çift dilli örnek cümlelerde nasıl kullanıldığını görün. Kaynak dilini otomatik olarak algılar ve hedef dile çevirir. Ücretsiz."
+    },
+    "uk": {
+      "name": "Приклади вживання",
+      "short": "Подивіться, як слово вживається у реальних реченнях із перекладами.",
+      "h1": "Приклади вживання — Безкоштовні двомовні приклади речень (стиль Reverso)",
+      "metaTitle": "Приклади вживання — Безкоштовні двомовні речення | Konvertools",
+      "metaDescription": "Подивіться, як слово чи фраза вживаються у реальних двомовних прикладах. Автоматично визначає мову джерела та перекладає на вашу цільову. Безкоштовно."
+    },
+    "vi": {
+      "name": "Ví dụ ngữ cảnh",
+      "short": "Xem từ được sử dụng trong câu thực tế kèm bản dịch.",
+      "h1": "Ví dụ Ngữ Cảnh — Câu Ví Dụ Song Ngữ Miễn Phí (Kiểu Reverso)",
+      "metaTitle": "Ví dụ Ngữ Cảnh — Câu Ví Dụ Song Ngữ Miễn Phí | Konvertools",
+      "metaDescription": "Xem cách một từ hoặc cụm từ được sử dụng trong các câu song ngữ thực tế. Tự động phát hiện ngôn ngữ nguồn và dịch sang ngôn ngữ đích. Miễn phí."
+    },
+    "zh": {
+      "name": "上下文示例",
+      "short": "查看单词在真实句子中的使用示例及翻译。",
+      "h1": "上下文示例 — 免费双语例句（类似 Reverso）",
+      "metaTitle": "上下文示例 — 免费双语例句 | Konvertools",
+      "metaDescription": "查看单词或短语在真实双语例句中的用法。自动检测源语言并翻译为目标语言。免费使用。"
     }
   },
   "contract-analyzer": {
@@ -4570,6 +5515,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Mở và giải nén bất kỳ tệp ZIP nào trực tiếp trên trình duyệt của bạn. Tải xuống từng tệp riêng lẻ."
     }
   },
+  "fill-pdf-form": {
+    "ar": {
+      "name": "ملء استمارة PDF",
+      "short": "املأ أي استمارة PDF — بالكامل في متصفحك.",
+      "h1": "املأ استمارة PDF أونلاين مجانًا — استمارات PDF قابلة للتعبئة في متصفحك",
+      "metaTitle": "املأ استمارة PDF أونلاين — مجانًا، في المتصفح | Konvertools",
+      "metaDescription": "املأ أي استمارة PDF (حقول نص، مربعات اختيار، اختيارات، قوائم منسدلة) وقم بتنزيل النتيجة — مسطحة إذا أردت. 100% في متصفحك، دون تحميل."
+    },
+    "cs": {
+      "name": "Vyplnit PDF formulář",
+      "short": "Vyplňte jakýkoli PDF formulář přímo ve svém prohlížeči.",
+      "h1": "Vyplňte PDF formulář online zdarma — Vyplnitelné PDF formuláře ve vašem prohlížeči",
+      "metaTitle": "Vyplnit PDF formulář online — Zdarma, v prohlížeči | Konvertools",
+      "metaDescription": "Vyplňte jakýkoli PDF formulář (textová pole, zaškrtávací políčka, přepínače, rozevírací seznamy) a stáhněte si výsledek — zploštěný dle vašeho výběru. 100 % ve vašem prohlížeči, nikdy neodesláno."
+    },
+    "de": {
+      "name": "PDF-Formular ausfüllen",
+      "short": "Fülle jedes PDF-Formular direkt in deinem Browser aus.",
+      "h1": "PDF-Formular online kostenlos ausfüllen — Ausfüllbare PDF-Formulare im Browser",
+      "metaTitle": "PDF-Formular online ausfüllen — Kostenlos, im Browser | Konvertools",
+      "metaDescription": "Fülle jedes PDF-Formular (Textfelder, Kontrollkästchen, Optionsfelder, Dropdowns) aus und lade das Ergebnis herunter — optional abgeflacht. 100 % in deinem Browser, nie hochgeladen."
+    },
+    "es": {
+      "name": "Rellenar formulario PDF",
+      "short": "Rellena cualquier formulario PDF directamente en tu navegador.",
+      "h1": "Rellena formularios PDF online gratis — Formularios PDF rellenables en tu navegador",
+      "metaTitle": "Rellenar formulario PDF online — Gratis, en el navegador | Konvertools",
+      "metaDescription": "Rellena cualquier formulario PDF (campos de texto, casillas, botones de opción, listas desplegables) y descarga el resultado — aplanado si lo deseas. 100% en tu navegador, nunca se sube."
+    },
+    "fr": {
+      "name": "Remplir un formulaire PDF",
+      "short": "Remplissez n'importe quel formulaire PDF directement dans votre navigateur.",
+      "h1": "Remplir un formulaire PDF en ligne gratuitement — Formulaires PDF remplissables dans votre navigateur",
+      "metaTitle": "Remplir un formulaire PDF en ligne — Gratuit, dans le navigateur | Konvertools",
+      "metaDescription": "Remplissez n'importe quel formulaire PDF (champs de texte, cases à cocher, boutons radio, listes déroulantes) et téléchargez le résultat — aplati si vous le souhaitez. 100 % dans votre navigateur, jamais envoyé."
+    },
+    "hi": {
+      "name": "पीडीएफ फॉर्म भरें",
+      "short": "अपने ब्राउज़र में ही किसी भी पीडीएफ फॉर्म को भरें।",
+      "h1": "पीडीएफ फॉर्म ऑनलाइन मुफ्त भरें — अपने ब्राउज़र में भरने योग्य पीडीएफ फॉर्म",
+      "metaTitle": "पीडीएफ फॉर्म ऑनलाइन भरें — मुफ्त, ब्राउज़र में | Konvertools",
+      "metaDescription": "पीडीएफ फॉर्म (टेक्स्ट फील्ड, चेकबॉक्स, रेडियो, ड्रॉपडाउन) भरें और परिणाम डाउनलोड करें — चाहें तो फ्लैटेन भी कर सकते हैं। पूरी तरह आपके ब्राउज़र में, कभी अपलोड नहीं किया जाता।"
+    },
+    "id": {
+      "name": "Isi Formulir PDF",
+      "short": "Isi formulir PDF apa pun — sepenuhnya di peramban Anda.",
+      "h1": "Isi Formulir PDF Online Gratis — Formulir PDF yang Dapat Diisi di Peramban Anda",
+      "metaTitle": "Isi Formulir PDF Online — Gratis, di Peramban | Konvertools",
+      "metaDescription": "Isi formulir PDF apa pun (bidang teks, kotak centang, radio, dropdown) dan unduh hasilnya — diratakan jika diinginkan. 100% di peramban Anda, tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Compila modulo PDF",
+      "short": "Compila qualsiasi modulo PDF direttamente nel tuo browser.",
+      "h1": "Compila Moduli PDF Online Gratis — Moduli PDF Editabili nel Browser",
+      "metaTitle": "Compila Modulo PDF Online — Gratis, nel Browser | Konvertools",
+      "metaDescription": "Compila qualsiasi modulo PDF (campi di testo, caselle, opzioni, menu a tendina) e scarica il risultato — anche appiattito. 100% nel tuo browser, mai caricato."
+    },
+    "ja": {
+      "name": "PDFフォーム入力",
+      "short": "ブラウザ上であらゆるPDFフォームに入力。",
+      "h1": "PDFフォームをオンラインで無料入力 — ブラウザで入力可能なPDFフォーム",
+      "metaTitle": "PDFフォームをオンラインで入力 — 無料・ブラウザ内 | Konvertools",
+      "metaDescription": "テキストボックス、チェックボックス、ラジオボタン、ドロップダウンを含むあらゆるPDFフォームに入力し、結果をダウンロード。ブラウザ内で完結し、アップロードされることはありません。"
+    },
+    "ko": {
+      "name": "PDF 양식 채우기",
+      "short": "PDF 양식을 브라우저에서 직접 채우세요.",
+      "h1": "PDF 양식 온라인 무료 채우기 — 브라우저에서 채워지는 PDF 양식",
+      "metaTitle": "PDF 양식 온라인 무료 — 브라우저에서 바로 | Konvertools",
+      "metaDescription": "모든 PDF 양식(텍스트 필드, 체크박스, 라디오 버튼, 드롭다운)을 채우고 결과를 다운로드하세요. 브라우저에서 100% 완료되며, 절대 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "PDF-formulier invullen",
+      "short": "Vul elk PDF-formulier in — volledig in je browser.",
+      "h1": "PDF-formulier online gratis invullen — Vulbare PDF-formulieren in je browser",
+      "metaTitle": "PDF-formulier online invullen — Gratis, in browser | Konvertools",
+      "metaDescription": "Vul elk PDF-formulier in (tekstvelden, selectievakjes, keuzerondjes, keuzelijsten) en download het resultaat — afgevlakt als je wilt. 100% in je browser, nooit geüpload."
+    },
+    "pl": {
+      "name": "Wypełnij formularz PDF",
+      "short": "Wypełniaj dowolne formularze PDF — całkowicie w przeglądarce.",
+      "h1": "Wypełniaj formularze PDF online za darmo — wypełnialne formularze PDF w przeglądarce",
+      "metaTitle": "Wypełnij formularz PDF online — darmowo, w przeglądarce | Konvertools",
+      "metaDescription": "Wypełniaj dowolne formularze PDF (pola tekstowe, checkboxy, przyciski radiowe, listy rozwijane) i pobierz wynik — spłaszczony, jeśli chcesz. W 100% w przeglądarce, nigdy nie przesyłane."
+    },
+    "pt": {
+      "name": "Preencher Formulário PDF",
+      "short": "Preencha qualquer formulário PDF — diretamente no seu navegador.",
+      "h1": "Preencher Formulário PDF Online Grátis — Formulários Preenchíveis no Seu Navegador",
+      "metaTitle": "Preencher Formulário PDF Online — Grátis, no Navegador | Konvertools",
+      "metaDescription": "Preencha qualquer formulário PDF (campos de texto, caixas de seleção, botões de opção, listas suspensas) e baixe o resultado — achatado se preferir. 100% no seu navegador, nunca enviado para servidores."
+    },
+    "ru": {
+      "name": "Заполнить PDF-форму",
+      "short": "Заполните любую PDF-форму прямо в браузере.",
+      "h1": "Заполнить PDF-форму онлайн бесплатно — интерактивные PDF в браузере",
+      "metaTitle": "Заполнить PDF-форму онлайн — бесплатно, в браузере | Konvertools",
+      "metaDescription": "Заполните любую PDF-форму (текстовые поля, флажки, переключатели, выпадающие списки) и скачайте результат — сведённый в один слой при необходимости. 100% в вашем браузере, никогда не загружается на сервер."
+    },
+    "sv": {
+      "name": "Fyll i PDF-formulär",
+      "short": "Fyll i vilket PDF-formulär som helst — helt i din webbläsare.",
+      "h1": "Fyll i PDF-formulär online gratis — Fyllbara PDF-formulär i din webbläsare",
+      "metaTitle": "Fyll i PDF-formulär online — Gratis, i webbläsaren | Konvertools",
+      "metaDescription": "Fyll i vilket PDF-formulär som helst (textfält, kryssrutor, radioknappar, rullgardinsmenyer) och ladda ner resultatet — plattat om du vill. 100 % i din webbläsare, aldrig uppladdat."
+    },
+    "tr": {
+      "name": "PDF Formu Doldur",
+      "short": "Herhangi bir PDF formunu tarayıcınızda doldurun.",
+      "h1": "Ücretsiz PDF Formu Doldur — Tarayıcınızda Doldurulabilir PDF Formları",
+      "metaTitle": "PDF Formu Doldur — Ücretsiz, Tarayıcıda | Konvertools",
+      "metaDescription": "Metin alanları, onay kutuları, radyo düğmeleri ve açılır menüler içeren herhangi bir PDF formunu doldurun ve sonucu indirin — istediğiniz gibi düzleştirilmiş. Tamamen tarayıcınızda, asla yüklenmez."
+    },
+    "uk": {
+      "name": "Заповнити PDF-форму",
+      "short": "Заповніть будь-яку PDF-форму — повністю у вашому браузері.",
+      "h1": "Заповнити PDF-форму онлайн безкоштовно — Інтерактивні PDF у вашому браузері",
+      "metaTitle": "Заповнити PDF-форму онлайн — Безкоштовно, у браузері | Konvertools",
+      "metaDescription": "Заповніть будь-яку PDF-форму (текстові поля, прапорці, перемикачі, випадаючі списки) та завантажте результат — зведено до одного шару, якщо потрібно. 100% у вашому браузері, ніколи не завантажується на сервер."
+    },
+    "vi": {
+      "name": "Điền vào biểu mẫu PDF",
+      "short": "Điền vào bất kỳ biểu mẫu PDF nào — hoàn toàn trong trình duyệt của bạn.",
+      "h1": "Điền vào biểu mẫu PDF trực tuyến miễn phí — Biểu mẫu PDF có thể điền trong trình duyệt",
+      "metaTitle": "Điền vào biểu mẫu PDF trực tuyến — Miễn phí, trong trình duyệt | Konvertools",
+      "metaDescription": "Điền vào bất kỳ biểu mẫu PDF nào (các trường văn bản, hộp kiểm, nút chọn, danh sách thả xuống) và tải xuống kết quả — có thể nén nếu bạn muốn. 100% trong trình duyệt, không bao giờ tải lên."
+    },
+    "zh": {
+      "name": "填写 PDF 表单",
+      "short": "在浏览器中直接填写任何 PDF 表单。",
+      "h1": "在线免费填写 PDF 表单 — 在浏览器中填写可填写 PDF 表单",
+      "metaTitle": "在线填写 PDF 表单 — 免费、在浏览器中 | Konvertools",
+      "metaDescription": "填写任何 PDF 表单（文本框、复选框、单选按钮、下拉菜单），并下载结果 — 如需可扁平化处理。100% 在浏览器中完成，永不上传。"
+    }
+  },
   "fix-grammar": {
     "ar": {
       "name": "مصحح القواعد",
@@ -5989,6 +7069,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "将 PNG、JPG 或 WebP 图片转换为多尺寸网站图标文件（16、32、48、64 像素），无需上传，在浏览器中运行。"
     }
   },
+  "image-to-table": {
+    "ar": {
+      "name": "صورة إلى إكسيل / سي إس في / جيسون",
+      "short": "صورة أو لقطة شاشة لجدول → إكسيل، سي إس في أو جيسون.",
+      "h1": "صورة إلى إكسيل / سي إس في / جيسون — استخراج جدول من صورة مجاناً",
+      "metaTitle": "صورة إلى إكسيل — تحويل صورة جدول إلى إكس إل إس إكس/سي إس في/جيسون | كونفر",
+      "metaDescription": "حول صورة أو لقطة شاشة لجدول إلى جدول نظيف باستخدام رؤية الذكاء الاصطناعي. تحميل كملف إكسيل (.إكس إل إس إكس) أو سي إس في أو جيسون. مجاني، لا حاجة للتسجيل."
+    },
+    "cs": {
+      "name": "Obrázek do Excelu / CSV / JSON",
+      "short": "Fotografie nebo snímek obrazovky tabulky → Excel, CSV nebo JSON.",
+      "h1": "Obrázek do Excelu / CSV / JSON — Získejte tabulku z fotografie zdarma",
+      "metaTitle": "Obrázek do Excelu — Tabulka z fotky do XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Přeměňte fotografii nebo snímek obrazovky tabulky na čistý tabulkový dokument pomocí AI. Stáhněte jako Excel (.xlsx), CSV nebo JSON. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "Bild zu Excel / CSV / JSON",
+      "short": "Foto oder Screenshot einer Tabelle → Excel, CSV oder JSON.",
+      "h1": "Bild zu Excel / CSV / JSON — Tabelle aus einem Foto extrahieren kostenlos",
+      "metaTitle": "Bild zu Excel — Foto einer Tabelle zu XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Wandle ein Foto oder einen Screenshot einer Tabelle mit KI-Unterstützung in eine saubere Tabellenkalkulation um. Als Excel (.xlsx), CSV oder JSON herunterladen. Kostenlos, ohne Anmeldung testbar."
+    },
+    "es": {
+      "name": "Imagen a Excel / CSV / JSON",
+      "short": "Foto o captura de pantalla de una tabla → Excel, CSV o JSON.",
+      "h1": "Imagen a Excel / CSV / JSON — Extrae una tabla de una foto gratis",
+      "metaTitle": "Imagen a Excel — Foto de tabla a XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Convierte una foto o captura de pantalla de una tabla en una hoja de cálculo limpia con visión por IA. Descarga como Excel (.xlsx), CSV o JSON. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Image vers Excel / CSV / JSON",
+      "short": "Photo ou capture d'écran d'un tableau → Excel, CSV ou JSON.",
+      "h1": "Image vers Excel / CSV / JSON — Extraire un tableau d'une photo gratuitement",
+      "metaTitle": "Image vers Excel — Photo de tableau en XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Transformez une photo ou une capture d'écran de tableau en feuille de calcul propre grâce à la vision par IA. Téléchargez en Excel (.xlsx), CSV ou JSON. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "इमेज से एक्सेल / सीएसवी / जेसन",
+      "short": "तस्वीर या टेबल का स्क्रीनशॉट → एक्सेल, सीएसवी या जेसन में बदलें।",
+      "h1": "इमेज से एक्सेल / सीएसवी / जेसन — फोटो से टेबल निकालें मुफ़्त",
+      "metaTitle": "इमेज टू एक्सेल — फोटो से टेबल को XLSX/CSV/JSON में | Konvertools",
+      "metaDescription": "तस्वीर या टेबल के स्क्रीनशॉट को एआई विज़न से साफ स्प्रेडशीट में बदलें। एक्सेल (.xlsx), सीएसवी या जेसन के रूप में डाउनलोड करें। मुफ़्त, बिना साइन-अप के इस्तेमाल करें।"
+    },
+    "id": {
+      "name": "Gambar ke Excel / CSV / JSON",
+      "short": "Foto atau tangkapan layar tabel → Excel, CSV, atau JSON.",
+      "h1": "Gambar ke Excel / CSV / JSON — Ekstrak Tabel dari Foto Secara Gratis",
+      "metaTitle": "Gambar ke Excel — Foto Tabel ke XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Ubah foto atau tangkapan layar tabel menjadi spreadsheet bersih dengan AI vision. Unduh dalam format Excel (.xlsx), CSV, atau JSON. Gratis, tanpa daftar untuk mencoba."
+    },
+    "it": {
+      "name": "Immagine in Excel / CSV / JSON",
+      "short": "Foto o screenshot di una tabella → Excel, CSV o JSON.",
+      "h1": "Immagine in Excel / CSV / JSON — Estrai una tabella da una foto gratis",
+      "metaTitle": "Immagine in Excel — Foto di tabella in XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Trasforma una foto o screenshot di una tabella in un foglio di calcolo pulito con visione AI. Scarica come Excel (.xlsx), CSV o JSON. Gratis, senza registrazione per provare."
+    },
+    "ja": {
+      "name": "画像を Excel / CSV / JSON に変換",
+      "short": "写真やスクリーンショットの表を Excel、CSV、JSON に変換します。",
+      "h1": "画像を Excel / CSV / JSON に変換 — 写真から表を無料で抽出",
+      "metaTitle": "画像を Excel に — 表の写真を XLSX/CSV/JSON に | Konvertools",
+      "metaDescription": "写真やスクリーンショットの表を AI 画像認識で整理されたスプレッドシートに変換。Excel (.xlsx)、CSV、JSON でダウンロード。無料、登録不要でお試し可能。"
+    },
+    "ko": {
+      "name": "이미지에서 엑셀 / CSV / JSON 변환",
+      "short": "사진이나 표 스크린샷 → 엑셀, CSV 또는 JSON으로 변환",
+      "h1": "이미지에서 엑셀 / CSV / JSON — 사진 속 표를 무료로 추출하기",
+      "metaTitle": "이미지에서 엑셀 — 사진 속 표를 XLSX/CSV/JSON으로 | Konvertools",
+      "metaDescription": "AI 이미지 분석으로 사진이나 스크린샷 속 표를 깔끔한 스프레드시트로 변환하세요. 엑셀(.xlsx), CSV 또는 JSON으로 다운로드. 무료이며 가입 없이 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Afbeelding naar Excel / CSV / JSON",
+      "short": "Foto of screenshot van een tabel → Excel, CSV of JSON.",
+      "h1": "Afbeelding naar Excel / CSV / JSON — Haal een tabel uit een foto, gratis",
+      "metaTitle": "Afbeelding naar Excel — Foto van tabel naar XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Zet een foto of screenshot van een tabel om in een schone spreadsheet met AI-visie. Download als Excel (.xlsx), CSV of JSON. Gratis, zonder registratie."
+    },
+    "pl": {
+      "name": "Obraz do Excela / CSV / JSON",
+      "short": "Zdjęcie lub zrzut ekranu tabeli → Excel, CSV lub JSON.",
+      "h1": "Obraz do Excela / CSV / JSON — Wyodrębnij tabelę ze zdjęcia za darmo",
+      "metaTitle": "Obraz do Excela — Zrzut tabeli na XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Przekształć zdjęcie lub zrzut ekranu tabeli w czysty arkusz kalkulacyjny dzięki AI. Pobierz jako Excel (.xlsx), CSV lub JSON. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Imagem para Excel / CSV / JSON",
+      "short": "Foto ou captura de tela de uma tabela → Excel, CSV ou JSON.",
+      "h1": "Imagem para Excel / CSV / JSON — Extraia uma Tabela de uma Foto Grátis",
+      "metaTitle": "Imagem para Excel — Foto de Tabela para XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Transforme uma foto ou captura de tela de uma tabela em uma planilha limpa com visão por IA. Baixe como Excel (.xlsx), CSV ou JSON. Grátis, sem cadastro para testar."
+    },
+    "ru": {
+      "name": "Изображение в Excel / CSV / JSON",
+      "short": "Фото или скриншот таблицы → Excel, CSV или JSON.",
+      "h1": "Изображение в Excel / CSV / JSON — Бесплатное извлечение таблицы из фото",
+      "metaTitle": "Изображение в Excel — Таблица с фото в XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Преобразуйте фото или скриншот таблицы в чистую электронную таблицу с помощью ИИ. Скачайте в формате Excel (.xlsx), CSV или JSON. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Bild till Excel / CSV / JSON",
+      "short": "Foto eller skärmdump av en tabell → Excel, CSV eller JSON.",
+      "h1": "Bild till Excel / CSV / JSON — Extrahera en tabell från ett foto gratis",
+      "metaTitle": "Bild till Excel — Foto av tabell till XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Omvandla ett foto eller en skärmdump av en tabell till ett rent kalkylblad med AI-vision. Ladda ner som Excel (.xlsx), CSV eller JSON. Gratis, inget konto krävs."
+    },
+    "tr": {
+      "name": "Resimden Excel / CSV / JSON",
+      "short": "Tablo fotoğrafı veya ekran görüntüsü → Excel, CSV veya JSON.",
+      "h1": "Resimden Excel / CSV / JSON — Ücretsiz Tablo Çıkarımı",
+      "metaTitle": "Resimden Excel — Fotoğraftan XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Bir tablonun fotoğrafını veya ekran görüntüsünü AI görüntüleme ile temiz bir elektronik tabloya dönüştürün. Excel (.xlsx), CSV veya JSON olarak indirin. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Зображення в Excel / CSV / JSON",
+      "short": "Фото або скріншот таблиці → Excel, CSV чи JSON.",
+      "h1": "Зображення в Excel / CSV / JSON — Безкоштовне вилучення таблиці з фото",
+      "metaTitle": "Зображення в Excel — Фото таблиці в XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Перетворіть фото або скріншот таблиці на чисту електронну таблицю за допомогою штучного інтелекту. Завантажте у форматі Excel (.xlsx), CSV чи JSON. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Ảnh sang Excel / CSV / JSON",
+      "short": "Ảnh chụp hoặc ảnh chụp màn hình bảng → Excel, CSV hoặc JSON.",
+      "h1": "Ảnh sang Excel / CSV / JSON — Trích xuất bảng từ ảnh miễn phí",
+      "metaTitle": "Ảnh sang Excel — Chuyển ảnh bảng sang XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "Chuyển ảnh chụp hoặc ảnh chụp màn hình bảng thành bảng tính sạch bằng công nghệ AI. Tải xuống dưới dạng Excel (.xlsx), CSV hoặc JSON. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "图像转 Excel / CSV / JSON",
+      "short": "表格图片或截图 → Excel、CSV 或 JSON",
+      "h1": "图像转 Excel / CSV / JSON — 免费从照片提取表格",
+      "metaTitle": "图像转 Excel — 表格照片转 XLSX/CSV/JSON | Konvertools",
+      "metaDescription": "将表格图片或截图用 AI 视觉转换为干净的电子表格。可下载为 Excel (.xlsx)、CSV 或 JSON。免费使用，无需注册。"
+    }
+  },
   "image-to-text": {
     "ar": {
       "name": "نص من صورة (OCR)",
@@ -7136,6 +8351,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "AI 关键词提取器 — 从文本中提取关键词",
       "metaTitle": "在线关键词提取器 — 免费 SEO 工具 | Konvertools",
       "metaDescription": "使用 AI 从任何文本中提取最重要的关键词和短语。适合 SEO 和研究使用。每日免费使用。"
+    }
+  },
+  "loan-calculator": {
+    "ar": {
+      "name": "حاسبة القرض",
+      "short": "الدفعة الشهرية، إجمالي الفائدة والمبلغ المدفوع بالكامل.",
+      "h1": "حاسبة القرض — الدفعة الشهرية وإجمالي الفائدة",
+      "metaTitle": "حاسبة القروض والرهن العقاري مجاناً عبر الإنترنت — الدفعة الشهرية | Konvertools",
+      "metaDescription": "قم بتقدير الدفعة الشهرية، إجمالي الفائدة والتكلفة الإجمالية للقرض أو الرهن العقاري الثابت. مجاناً، فوري، داخل المتصفح."
+    },
+    "cs": {
+      "name": "Kalkulačka půjčky",
+      "short": "Měsíční splátka, celkový úrok a celková částka k zaplacení.",
+      "h1": "Kalkulačka půjčky — Měsíční splátka a celkový úrok",
+      "metaTitle": "Online kalkulačka půjček a hypoték zdarma — Měsíční splátka | Konvertools",
+      "metaDescription": "Odhadněte měsíční splátku, celkový úrok a celkovou cenu fixní půjčky či hypotéky. Zdarma, okamžitě, přímo v prohlížeči."
+    },
+    "de": {
+      "name": "Kreditrechner",
+      "short": "Monatliche Rate, Zinsen gesamt und Rückzahlungssumme.",
+      "h1": "Kreditrechner — Monatliche Rate & Zinsen gesamt",
+      "metaTitle": "Kredit- & Hypothekenrechner online kostenlos — Monatsrate | Konvertools",
+      "metaDescription": "Berechne die monatliche Rate, Zinsen gesamt und Gesamtkosten eines Festzinskredits oder einer Hypothek. Kostenlos, sofort und direkt im Browser."
+    },
+    "es": {
+      "name": "Calculadora de préstamos",
+      "short": "Cuota mensual, intereses totales y total pagado.",
+      "h1": "Calculadora de préstamos — Cuota mensual e intereses totales",
+      "metaTitle": "Calculadora de préstamos e hipotecas online gratis — Cuota mensual | Konvertools",
+      "metaDescription": "Calcula la cuota mensual, intereses totales y coste total de un préstamo o hipoteca a tipo fijo. Gratis, instantáneo y en el navegador."
+    },
+    "fr": {
+      "name": "Calculateur de prêt",
+      "short": "Mensualité, intérêts totaux et montant total remboursé.",
+      "h1": "Calculateur de prêt — Mensualité et intérêts totaux",
+      "metaTitle": "Calculateur de prêt et crédit immobilier en ligne gratuit — Mensualité | Konvertools",
+      "metaDescription": "Estimez la mensualité, les intérêts totaux et le coût total d’un prêt ou crédit immobilier à taux fixe. Gratuit, instantané, dans le navigateur."
+    },
+    "hi": {
+      "name": "ऋण कैलकुलेटर",
+      "short": "मासिक भुगतान, कुल ब्याज और कुल चुकाया गया राशि।",
+      "h1": "ऋण कैलकुलेटर — मासिक भुगतान और कुल ब्याज",
+      "metaTitle": "ऋण और बंधक कैलकुलेटर ऑनलाइन मुफ्त — मासिक भुगतान | Konvertools",
+      "metaDescription": "निश्चित दर वाले ऋण या बंधक के मासिक भुगतान, कुल ब्याज और कुल लागत का अनुमान लगाएं। निःशुल्क, त्वरित, ब्राउज़र में।"
+    },
+    "id": {
+      "name": "Kalkulator Pinjaman",
+      "short": "Cicilan bulanan, total bunga, dan total pembayaran.",
+      "h1": "Kalkulator Pinjaman — Cicilan Bulanan & Total Bunga",
+      "metaTitle": "Kalkulator Pinjaman & Hipotek Online Gratis — Cicilan Bulanan | Konvertools",
+      "metaDescription": "Perkirakan cicilan bulanan, total bunga, dan total biaya pinjaman atau hipotek dengan suku bunga tetap. Gratis, instan, di peramban."
+    },
+    "it": {
+      "name": "Calcolatore di prestiti",
+      "short": "Rata mensile, interessi totali e importo totale rimborsato.",
+      "h1": "Calcolatore di prestiti — Rata mensile e interessi totali",
+      "metaTitle": "Calcolatore di prestiti e mutui online gratis — Rata mensile | Konvertools",
+      "metaDescription": "Stima la rata mensile, gli interessi totali e il costo totale di un prestito o mutuo a tasso fisso. Gratuito, istantaneo, nel browser."
+    },
+    "ja": {
+      "name": "ローン計算機",
+      "short": "月々の支払額、総利息、総返済額を算出します。",
+      "h1": "ローン計算機 — 月々の支払額と総利息",
+      "metaTitle": "ローン・住宅ローンの無料オンライン計算機 — 月々の支払額 | Konvertools",
+      "metaDescription": "固定金利のローンや住宅ローンの月々の支払額、総利息、総費用を無料で即座に算出します。ブラウザ上で動作します。"
+    },
+    "ko": {
+      "name": "대출 계산기",
+      "short": "월별 납입액, 총 이자, 총 상환액을 계산합니다.",
+      "h1": "대출 계산기 — 월별 납입액 및 총 이자",
+      "metaTitle": "무료 온라인 대출 및 모기지 계산기 — 월별 납입액 | Konvertools",
+      "metaDescription": "고정금리 대출 또는 모기지의 월별 납입액, 총 이자, 총 비용을 무료로 즉시 계산하세요. 브라우저에서 바로 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Leningcalculator",
+      "short": "Maandelijkse betaling, totale rente en totaal terugbetaald bedrag.",
+      "h1": "Leningcalculator — Maandelijkse Betaling & Totale Rente",
+      "metaTitle": "Lening- & Hypotheekcalculator Online Gratis — Maandbedrag | Konvertools",
+      "metaDescription": "Bereken de maandelijkse betaling, totale rente en totale kosten van een lening of hypotheek met vaste rente. Gratis, direct en in je browser."
+    },
+    "pl": {
+      "name": "Kalkulator kredytu",
+      "short": "Miesięczna rata, całkowite odsetki i całkowita kwota spłaty.",
+      "h1": "Kalkulator kredytu — Miesięczna rata i całkowite odsetki",
+      "metaTitle": "Darmowy kalkulator kredytu i hipoteki online — Miesięczna rata | Konvertools",
+      "metaDescription": "Oszacuj miesięczną ratę, całkowite odsetki i całkowity koszt kredytu lub hipoteki o stałym oprocentowaniu. Darmowy, natychmiastowy, w przeglądarce."
+    },
+    "pt": {
+      "name": "Calculadora de Empréstimo",
+      "short": "Prestação mensal, juros totais e valor total pago.",
+      "h1": "Calculadora de Empréstimo — Prestação Mensal & Juros Totais",
+      "metaTitle": "Calculadora de Empréstimo & Hipoteca Online Grátis — Prestação | Konvertools",
+      "metaDescription": "Calcule a prestação mensal, juros totais e custo total de um empréstimo ou hipoteca de taxa fixa. Grátis, instantâneo e no navegador."
+    },
+    "ru": {
+      "name": "Калькулятор кредита",
+      "short": "Ежемесячный платёж, общие проценты и общая сумма выплат.",
+      "h1": "Калькулятор кредита — Ежемесячный платёж и общие проценты",
+      "metaTitle": "Калькулятор кредита и ипотеки онлайн бесплатно — Ежемесячный платёж | Konvertools",
+      "metaDescription": "Рассчитайте ежемесячный платёж, общие проценты и полную стоимость кредита или ипотеки с фиксированной ставкой. Бесплатно, мгновенно, в браузере."
+    },
+    "sv": {
+      "name": "Lånekalkylator",
+      "short": "Månadskostnad, total ränta och totalt återbetalat belopp.",
+      "h1": "Lånekalkylator — Månadskostnad & Total Ränta",
+      "metaTitle": "Låne- & Bolånekalkylator Online Gratis — Månadskostnad | Konver",
+      "metaDescription": "Beräkna månadskostnad, total ränta och totalkostnad för lån eller bolån med fast ränta. Gratis, direkt i webbläsaren."
+    },
+    "tr": {
+      "name": "Kredi Hesaplayıcı",
+      "short": "Aylık ödeme, toplam faiz ve toplam geri ödeme.",
+      "h1": "Kredi Hesaplayıcı — Aylık Ödeme & Toplam Faiz",
+      "metaTitle": "Kredi & Mortgage Hesaplayıcı Ücretsiz Online — Aylık Ödeme | Konvertools",
+      "metaDescription": "Sabit faizli kredi veya mortgage için aylık ödeme, toplam faiz ve toplam maliyeti tahmin edin. Ücretsiz, anında, tarayıcı içinde."
+    },
+    "uk": {
+      "name": "Калькулятор кредиту",
+      "short": "Щомісячний платіж, загальний відсоток та загальна сума до сплати.",
+      "h1": "Калькулятор кредиту — Щомісячний платіж та загальний відсоток",
+      "metaTitle": "Онлайн-калькулятор кредиту та іпотеки безкоштовно — Щомісячний платіж | Konvertools",
+      "metaDescription": "Розрахуйте щомісячний платіж, загальний відсоток та загальну вартість кредиту чи іпотеки з фіксованою ставкою. Безкоштовно, миттєво, у браузері."
+    },
+    "vi": {
+      "name": "Máy Tính Khoản Vay",
+      "short": "Số tiền trả hàng tháng, tổng lãi suất và tổng số tiền phải trả lại.",
+      "h1": "Máy Tính Khoản Vay — Thanh Toán Hàng Tháng & Lãi Suất",
+      "metaTitle": "Tính Toán Khoản Vay & Thế Chấp Miễn Phí Trực Tuyến — Trả Hàng Tháng | Konvertools",
+      "metaDescription": "Ước tính khoản thanh toán hàng tháng, tổng lãi suất và tổng chi phí của khoản vay hoặc thế chấp lãi suất cố định. Miễn phí, tức thì, trong trình duyệt."
+    },
+    "zh": {
+      "name": "贷款计算器",
+      "short": "月供、总利息及还款总额。",
+      "h1": "贷款计算器 — 月供与总利息",
+      "metaTitle": "在线免费贷款与抵押贷款计算器 — 月供 | Konvertools",
+      "metaDescription": "免费即时计算固定利率贷款或抵押贷款的月供、总利息及总成本，无需安装，浏览器内运行。"
     }
   },
   "lorem-ipsum": {
@@ -9352,6 +10702,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Chuyển đổi PDF của bạn thành tài liệu Word có thể chỉnh sửa trong khi giữ nguyên bố cục ban đầu."
     }
   },
+  "percentage-calculator": {
+    "ar": {
+      "name": "حاسبة النسبة المئوية",
+      "short": "النسبة المئوية من رقم، ما هي نسبة X من Y، والتغير في النسبة.",
+      "h1": "حاسبة النسبة المئوية — نسبة رقم والتغير في النسبة | كونفر",
+      "metaTitle": "حاسبة النسبة المئوية أونلاين مجاناً — % من، تغير النسبة | كونفر",
+      "metaDescription": "احسب نسبة مئوية من رقم، ما هي نسبة قيمة من أخرى، وزيادة أو نقصان النسبة المئوية. مجاني، فوري، داخل المتصفح."
+    },
+    "cs": {
+      "name": "Kalkulačka procent",
+      "short": "Procenta z čísla, X je kolik % z Y, a změna v procentech.",
+      "h1": "Kalkulačka procent — Procenta z čísla a změna v procentech | Konver",
+      "metaTitle": "Online kalkulačka procent zdarma — % z, % změna | Konvertools",
+      "metaDescription": "Vypočítejte procento z čísla, kolik procent je jedno číslo z druhého a procentní nárůst či pokles. Zdarma, okamžitě, přímo v prohlížeči."
+    },
+    "de": {
+      "name": "Prozentrechner",
+      "short": "Prozent von einer Zahl, X ist wie viel % von Y, und % Änderung.",
+      "h1": "Prozentrechner — % von einer Zahl & Prozentuale Änderung",
+      "metaTitle": "Prozentrechner Online Kostenlos — % von, % Änderung | Konvertools",
+      "metaDescription": "Berechne einen Prozentsatz einer Zahl, wie viel Prozent ein Wert von einem anderen ist, und prozentuale Steigerung oder Verringerung. Kostenlos, sofort, im Browser."
+    },
+    "es": {
+      "name": "Calculadora de Porcentajes",
+      "short": "Porcentaje de un número, X es qué % de Y, y cambio de %.",
+      "h1": "Calculadora de Porcentajes — % de un Número y Cambio de %",
+      "metaTitle": "Calculadora de Porcentajes Online Gratis — % de, % Cambio | Konvertools",
+      "metaDescription": "Calcula el porcentaje de un número, qué porcentaje es un valor de otro, y el aumento o disminución porcentual. Gratis, instantáneo, en el navegador."
+    },
+    "fr": {
+      "name": "Calculateur de pourcentage",
+      "short": "Pourcentage d'un nombre, X est quel % de Y, et variation en %.",
+      "h1": "Calculateur de pourcentage — % d'un nombre & variation en %",
+      "metaTitle": "Calculateur de pourcentage en ligne gratuit — % de, % de variation | Konvertools",
+      "metaDescription": "Calculez un pourcentage d'un nombre, quel pourcentage représente une valeur par rapport à une autre, et l'augmentation ou la diminution en pourcentage. Gratuit, instantané, dans le navigateur."
+    },
+    "hi": {
+      "name": "प्रतिशत कैलकुलेटर",
+      "short": "किसी संख्या का प्रतिशत, X, Y का कितना % है, और % परिवर्तन।",
+      "h1": "प्रतिशत कैलकुलेटर — संख्या का % और प्रतिशत परिवर्तन",
+      "metaTitle": "ऑनलाइन मुफ्त प्रतिशत कैलकुलेटर — % ऑफ़, % परिवर्तन | Konvertools",
+      "metaDescription": "किसी संख्या का प्रतिशत निकालें, एक मान दूसरे का कितना प्रतिशत है, और प्रतिशत वृद्धि या कमी। मुफ्त, तुरंत, ब्राउज़र में।"
+    },
+    "id": {
+      "name": "Kalkulator Persentase",
+      "short": "Persentase dari angka, X adalah berapa % dari Y, dan perubahan persentase.",
+      "h1": "Kalkulator Persentase — Persentase dari Angka & Perubahan Persentase",
+      "metaTitle": "Kalkulator Persentase Online Gratis — % dari, % Perubahan | Konvertools",
+      "metaDescription": "Hitung persentase dari angka, persentase suatu nilai terhadap nilai lain, serta kenaikan atau penurunan persentase. Gratis, instan, di peramban."
+    },
+    "it": {
+      "name": "Calcolatrice delle percentuali",
+      "short": "Percentuale di un numero, X è quale % di Y, e variazione percentuale.",
+      "h1": "Calcolatrice delle Percentuali — % di un Numero e Variazione Percentuale",
+      "metaTitle": "Calcolatrice delle Percentuali Online Gratis — % di, % Cambio | Konvertools",
+      "metaDescription": "Calcola una percentuale di un numero, quale percentuale rappresenta un valore rispetto a un altro e l'aumento o la diminuzione percentuale. Gratis, istantaneo, nel browser."
+    },
+    "ja": {
+      "name": "パーセント計算機",
+      "short": "数値の○%を求める、XはYの何%か、%変化を計算。",
+      "h1": "パーセント計算機 — 数値の○%と%変化",
+      "metaTitle": "オンライン無料パーセント計算機 — ○%、%変化 | Konvertools",
+      "metaDescription": "数値の○%を求めたり、ある数値が別の数値の何%か、増減率を計算できます。無料・瞬時・ブラウザ上で動作。"
+    },
+    "ko": {
+      "name": "백분율 계산기",
+      "short": "숫자의 백분율, X가 Y의 몇 %인지, 백분율 변화 계산",
+      "h1": "백분율 계산기 — 숫자의 % 및 백분율 변화",
+      "metaTitle": "온라인 무료 백분율 계산기 — % 계산, % 변화 | Konvertools",
+      "metaDescription": "숫자의 백분율, 한 값이 다른 값의 몇 %인지, 증가/감소 백분율 계산. 무료, 즉시, 브라우저에서 사용 가능."
+    },
+    "nl": {
+      "name": "Rekenmachine voor percentages",
+      "short": "Percentage van een getal, X is hoeveel % van Y, en % verandering.",
+      "h1": "Rekenmachine voor percentages — % van een getal & % verandering",
+      "metaTitle": "Online Percentagecalculator Gratis — % van, % verandering | Konvertools",
+      "metaDescription": "Bereken een percentage van een getal, hoeveel procent één waarde is van een andere, en procentuele stijging of daling. Gratis, direct, in de browser."
+    },
+    "pl": {
+      "name": "Kalkulator procentów",
+      "short": "Procent z liczby, X to jaki % z Y, oraz zmiana procentowa.",
+      "h1": "Kalkulator procentów — % z liczby i zmiana procentowa",
+      "metaTitle": "Darmowy kalkulator procentów online — % z, % zmiana | Konvertools",
+      "metaDescription": "Oblicz procent z liczby, jaki procent stanowi jedna wartość z drugiej oraz procentowy wzrost lub spadek. Darmowe, natychmiastowe, w przeglądarce."
+    },
+    "pt": {
+      "name": "Calculadora de Porcentagem",
+      "short": "Porcentagem de um número, X é que % de Y, e variação de %",
+      "h1": "Calculadora de Porcentagem — % de um Número & Variação Percentual",
+      "metaTitle": "Calculadora de Porcentagem Online Grátis — % de, % de Variação | Konvertools",
+      "metaDescription": "Calcule a porcentagem de um número, que porcentagem um valor representa de outro e o aumento ou diminuição percentual. Grátis, instantâneo, no navegador."
+    },
+    "ru": {
+      "name": "Калькулятор процентов",
+      "short": "Процент от числа, X это сколько % от Y, и изменение на %.",
+      "h1": "Калькулятор процентов — % от числа и изменение процента",
+      "metaTitle": "Онлайн-калькулятор процентов бесплатно — % от, % изменение | Konvertools",
+      "metaDescription": "Вычислите процент от числа, сколько процентов одно значение составляет от другого, а также увеличение или уменьшение процента. Бесплатно, мгновенно, в браузере."
+    },
+    "sv": {
+      "name": "Procenträknare",
+      "short": "Procent av ett tal, X är vad % av Y, och %-förändring.",
+      "h1": "Procenträknare — % av ett tal & %-förändring",
+      "metaTitle": "Procenträknare online gratis — % av, % ändring | Konvertools",
+      "metaDescription": "Beräkna procent av ett tal, hur många procent ett värde är av ett annat, samt procentuell ökning eller minskning. Gratis, direkt i webbläsaren."
+    },
+    "tr": {
+      "name": "Yüzde Hesaplayıcı",
+      "short": "Bir sayının yüzdesi, X, Y’nin yüzde kaçı ve yüzde değişimi.",
+      "h1": "Yüzde Hesaplayıcı — Sayı Yüzdesi & Yüzde Değişimi",
+      "metaTitle": "Ücretsiz Online Yüzde Hesaplayıcı — %’si, % Değişimi | Konvertools",
+      "metaDescription": "Bir sayının yüzdesini hesaplayın, bir değerin diğerinin yüzde kaçı olduğunu bulun ve yüzde artışını/azalışını hesaplayın. Ücretsiz, anında, tarayıcı içinde."
+    },
+    "uk": {
+      "name": "Калькулятор відсотків",
+      "short": "Відсоток від числа, X це який % від Y, та зміна у відсотках.",
+      "h1": "Калькулятор відсотків — % від числа та зміна у відсотках",
+      "metaTitle": "Онлайн-калькулятор відсотків безкоштовно — % від, зміна % | Konvertools",
+      "metaDescription": "Обчисліть відсоток від числа, який відсоток складає одне значення від іншого, а також збільшення чи зменшення у відсотках. Безкоштовно, миттєво, у браузері."
+    },
+    "vi": {
+      "name": "Máy tính phần trăm",
+      "short": "Tính phần trăm của một số, X chiếm bao nhiêu % của Y, và thay đổi phần trăm.",
+      "h1": "Máy tính phần trăm — % của một số & thay đổi phần trăm",
+      "metaTitle": "Máy tính phần trăm trực tuyến miễn phí — % của, % thay đổi | Konvertools",
+      "metaDescription": "Tính phần trăm của một số, xác định giá trị này chiếm bao nhiêu phần trăm của giá trị khác, cũng như phần trăm tăng hoặc giảm. Miễn phí, tức thì, ngay trên trình duyệt."
+    },
+    "zh": {
+      "name": "百分比计算器",
+      "short": "计算某数的百分比、X 是 Y 的百分之几，以及百分比变化。",
+      "h1": "百分比计算器 — 数值百分比与变化率",
+      "metaTitle": "在线免费百分比计算器 — 百分比、变化率 | Konvertools",
+      "metaDescription": "计算某数的百分比、一个值占另一个值的百分比，以及百分比增减。免费、即时、在浏览器中运行。"
+    }
+  },
   "png-to-jpg": {
     "ar": {
       "name": "PNG إلى JPG",
@@ -11548,6 +13033,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "使用 AI 分析评论、评论和消息的情感倾向——积极、消极、中性或混合。每日免费使用。"
     }
   },
+  "sign-pdf": {
+    "ar": {
+      "name": "توقيع ملف PDF",
+      "short": "ارسم توقيعك وضعه على ملف PDF — داخل المتصفح مباشرةً",
+      "h1": "وقّع ملف PDF أونلاين مجاناً — ارسم وأضف توقيعك لأي ملف PDF",
+      "metaTitle": "وقّع ملف PDF أونلاين — ارسم توقيعك مجاناً | Konver",
+      "metaDescription": "وقّع ملف PDF أونلاين: ارسم توقيعك على لوحة ثم ضعها على ملف PDF. 100% داخل المتصفح — لن يتم رفع مستندك أبداً."
+    },
+    "cs": {
+      "name": "Podepsat PDF",
+      "short": "Nakreslete si podpis a vložte ho přímo do PDF — vše přímo v prohlížeči.",
+      "h1": "Podepsat PDF online zdarma — Nakreslete si podpis a přidejte ho k jakémukoli PDF",
+      "metaTitle": "Podepsat PDF online — Nakreslete si podpis, zdarma | Konvertools",
+      "metaDescription": "Podepište PDF online: nakreslete si podpis na plátno a vložte ho přímo do PDF. 100 % ve vašem prohlížeči — váš dokument se nikdy neodesílá."
+    },
+    "de": {
+      "name": "PDF signieren",
+      "short": "Zeichne deine Unterschrift und füge sie direkt in dein PDF ein — alles im Browser.",
+      "h1": "PDF online kostenlos signieren — Zeichne & füge deine Unterschrift hinzu",
+      "metaTitle": "PDF online signieren — Zeichne deine Unterschrift, kostenlos | Konvertools",
+      "metaDescription": "Signiere ein PDF online: zeichne deine Unterschrift auf einer Leinwand und füge sie in dein PDF ein. 100 % in deinem Browser — dein Dokument wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Firmar PDF",
+      "short": "Dibuja tu firma y aplícala a tu PDF directamente en el navegador.",
+      "h1": "Firma PDF Online Gratis — Dibuja e Inserta Tu Firma en Cualquier PDF",
+      "metaTitle": "Firma PDF Online — Dibuja Tu Firma, Gratis | Konvertools",
+      "metaDescription": "Firma un PDF en línea: dibuja tu firma en un lienzo y aplícala al documento. 100 % en tu navegador — tu archivo nunca se sube."
+    },
+    "fr": {
+      "name": "Signer un PDF",
+      "short": "Dessinez votre signature et appliquez-la à votre PDF directement dans votre navigateur.",
+      "h1": "Signer un PDF en ligne gratuitement — Dessinez et ajoutez votre signature à n'importe quel PDF",
+      "metaTitle": "Signer un PDF en ligne — Dessinez votre signature, gratuit | Konvertools",
+      "metaDescription": "Signez un PDF en ligne : dessinez votre signature sur une toile et appliquez-la à votre PDF. 100 % dans votre navigateur — votre document n'est jamais téléchargé."
+    },
+    "hi": {
+      "name": "पीडीएफ पर हस्ताक्षर करें",
+      "short": "अपने पीडीएफ पर हस्ताक्षर करें और उसे स्टाम्प करें — ब्राउज़र में ही।",
+      "h1": "पीडीएफ ऑनलाइन निशुल्क पर हस्ताक्षर करें — अपनी हस्ताक्षर बनाएं और किसी भी पीडीएफ में जोड़ें",
+      "metaTitle": "पीडीएफ ऑनलाइन पर हस्ताक्षर करें — निशुल्क अपनी हस्ताक्षर बनाएं | Konvertools",
+      "metaDescription": "पीडीएफ पर ऑनलाइन हस्ताक्षर करें: कैनवास पर अपनी हस्ताक्षर बनाएं और उसे पीडीएफ में स्टाम्प करें। 100% आपके ब्राउज़र में — आपका दस्तावेज़ कभी अपलोड नहीं होता।"
+    },
+    "id": {
+      "name": "Tandai PDF",
+      "short": "Gambar tanda tangan dan tempelkan ke PDF Anda — langsung di peramban.",
+      "h1": "Tandai PDF Online Gratis — Gambar & Tambahkan Tanda Tangan ke PDF Mana Pun",
+      "metaTitle": "Tandai PDF Online — Gambar Tanda Tangan, Gratis | Konvertools",
+      "metaDescription": "Tandai PDF secara online: gambar tanda tangan di kanvas dan tempelkan ke PDF. 100% di peramban — dokumen Anda tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Firma PDF",
+      "short": "Disegna la tua firma e applicala al tuo PDF direttamente nel browser.",
+      "h1": "Firma PDF Online Gratis — Disegna e Aggiungi la Tua Firma a Qualsiasi PDF",
+      "metaTitle": "Firma PDF Online — Disegna la Tua Firma, Gratis | Konvertools",
+      "metaDescription": "Firma un PDF online: disegna la tua firma su una tela e applicala al documento. 100% nel tuo browser — il file non viene mai caricato."
+    },
+    "ja": {
+      "name": "PDFに署名",
+      "short": "署名を描画してPDFにスタンプ。ブラウザ上で完結。",
+      "h1": "PDFをオンラインで無料署名 — 署名を描画して任意のPDFに追加",
+      "metaTitle": "PDFをオンラインで署名 — 署名を描画、無料 | Konvertools",
+      "metaDescription": "PDFをオンラインで署名：署名をキャンバスに描画してPDFにスタンプ。完全にブラウザ内で完結 — ドキュメントはアップロードされません。"
+    },
+    "ko": {
+      "name": "PDF 서명하기",
+      "short": "서명을 그리고 PDF에 삽입하세요 — 브라우저에서 바로 가능합니다.",
+      "h1": "PDF 온라인 무료 서명 — 서명 그리기 및 추가",
+      "metaTitle": "PDF 서명하기 — 서명 그리기, 무료 | Konvertools",
+      "metaDescription": "PDF를 온라인에서 서명하세요: 캔버스에 서명을 그리고 PDF에 삽입하세요. 100% 브라우저에서 처리됩니다 — 문서는 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "PDF ondertekenen",
+      "short": "Teken een handtekening en voeg deze toe aan je PDF — direct in de browser.",
+      "h1": "PDF Online Gratis Ondertekenen — Teken & Voeg Je Handtekening Toe aan Elke PDF",
+      "metaTitle": "PDF Online Ondertekenen — Teken Je Handtekening, Gratis | Konvertools",
+      "metaDescription": "Onderteken een PDF online: teken je handtekening op een canvas en voeg deze toe aan je PDF. 100 % in je browser — je document wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Podpisz PDF",
+      "short": "Narysuj podpis i dodaj go do swojego PDF — bezpośrednio w przeglądarce.",
+      "h1": "Podpisz PDF online za darmo — narysuj i dodaj swój podpis do każdego PDF",
+      "metaTitle": "Podpisz PDF online — narysuj podpis, za darmo | Konvertools",
+      "metaDescription": "Podpisz PDF online: narysuj podpis na płótnie i dodaj go do dokumentu. W 100% w przeglądarce — twój plik nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Assinar PDF",
+      "short": "Desenhe sua assinatura e adicione-a ao seu PDF — diretamente no navegador.",
+      "h1": "Assine PDF Online Grátis — Desenhe e Adicione Sua Assinatura a Qualquer PDF",
+      "metaTitle": "Assinar PDF Online — Desenhe Sua Assinatura, Grátis | Konvertools",
+      "metaDescription": "Assine um PDF online: desenhe sua assinatura em um painel e adicione-a ao PDF. 100% no seu navegador — seu documento nunca é enviado."
+    },
+    "ru": {
+      "name": "Подписать PDF",
+      "short": "Нарисуйте подпись и добавьте её на PDF — прямо в браузере.",
+      "h1": "Подписать PDF онлайн бесплатно — нарисуйте и добавьте подпись к любому PDF",
+      "metaTitle": "Подписать PDF онлайн — нарисуйте подпись, бесплатно | Konvertools",
+      "metaDescription": "Подпишите PDF онлайн: нарисуйте подпись на холсте и добавьте её на документ. 100 % в вашем браузере — файл не загружается на сервер."
+    },
+    "sv": {
+      "name": "Signera PDF",
+      "short": "Rita din signatur och lägg till den direkt i ditt PDF-dokument — direkt i webbläsaren.",
+      "h1": "Signera PDF Online Gratis — Rita & Lägg Till Din Signatur i Valfritt PDF",
+      "metaTitle": "Signera PDF Online — Rita Din Signatur, Gratis | Konver",
+      "metaDescription": "Signera en PDF online: rita din signatur på en duk och lägg till den i PDF:en. 100 % i din webbläsare — ditt dokument laddas aldrig upp."
+    },
+    "tr": {
+      "name": "PDF İmzala",
+      "short": "İmzanızı çizin ve PDF dosyanızın üzerine yerleştirin — tarayıcı içinde.",
+      "h1": "PDF'yi Ücretsiz Online İmzalayın — İmzanızı Çizin ve Herhangi Bir PDF'ye Ekleyin",
+      "metaTitle": "PDF'yi Online İmzalayın — İmzanızı Çizin, Ücretsiz | Konvertools",
+      "metaDescription": "PDF'yi online imzalayın: imzanızı bir tuvalde çizin ve PDF dosyanızın üzerine yerleştirin. Tamamen tarayıcınızda — belge hiçbir zaman yüklenmez."
+    },
+    "uk": {
+      "name": "Підписати PDF",
+      "short": "Намалюйте свій підпис і додайте його до PDF — безпосередньо у браузері.",
+      "h1": "Підписати PDF онлайн безкоштовно — намалюйте та додайте свій підпис до будь-якого PDF",
+      "metaTitle": "Підписати PDF онлайн — Намалюйте свій підпис, безкоштовно | Konvertools",
+      "metaDescription": "Підпишіть PDF онлайн: намалюйте свій підпис на полотні та додайте його до PDF. 100% у вашому браузері — документ ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Ký PDF",
+      "short": "Vẽ chữ ký của bạn và đóng dấu vào tệp PDF ngay trong trình duyệt.",
+      "h1": "Ký PDF Trực tuyến Miễn Phí — Vẽ & Thêm Chữ Ký Vào Bất Kỳ Tệp PDF Nào",
+      "metaTitle": "Ký PDF Trực tuyến — Vẽ Chữ Ký Miễn Phí | Konvertools",
+      "metaDescription": "Ký tệp PDF trực tuyến: vẽ chữ ký của bạn trên khung vẽ và đóng dấu vào tệp PDF. 100% trong trình duyệt — tài liệu của bạn không bao giờ bị tải lên."
+    },
+    "zh": {
+      "name": "签名PDF",
+      "short": "在浏览器中绘制签名并将其盖在PDF上。",
+      "h1": "在线免费签名PDF — 绘制并添加签名到任意PDF",
+      "metaTitle": "在线签名PDF — 绘制签名，免费 | Konvertools",
+      "metaDescription": "在线签名PDF：在画布上绘制签名并将其盖在PDF上。100%在浏览器内完成——文档永不上传。"
+    }
+  },
   "simplify-text": {
     "ar": {
       "name": "مبسط النصوص",
@@ -12580,6 +14200,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Dịch chuyển tất cả dòng phụ đề theo giây hoặc mili giây chính xác. Sửa lỗi lệch thời gian SRT và VTT trong vài giây."
     }
   },
+  "synonyms-finder": {
+    "ar": {
+      "name": "مُبْحَث المترادفات",
+      "short": "ابحث عن المترادفات لأي كلمة بلغات 30+ باستخدام الذكاء الاصطناعي.",
+      "h1": "مُبْحَث المترادفات — معجم ذكاء اصطناعي مجاني بلغات 30+",
+      "metaTitle": "مُبْحَث المترادفات — معجم ذكاء اصطناعي مجاني عبر الإنترنت | Konvertools",
+      "metaDescription": "ابحث عن أفضل المترادفات لأي كلمة أو عبارة بلغات 30+ باستخدام الذكاء الاصطناعي. بدائل طبيعية واعية بالمعنى. مجاني، لا حاجة للتسجيل للتجربة."
+    },
+    "cs": {
+      "name": "Nástroj pro hledání synonym",
+      "short": "Najděte synonymy pro jakékoli slovo ve 30+ jazycích pomocí AI.",
+      "h1": "Nástroj pro hledání synonym — Bezplatný AI slovník v 30+ jazycích",
+      "metaTitle": "Nástroj pro hledání synonym — Online AI slovník zdarma | Konvertools",
+      "metaDescription": "Najděte nejlepší synonymy pro jakékoli slovo či frázi ve 30+ jazycích pomocí AI. Citlivé na význam, přirozené alternativy. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "Synonymen-Finder",
+      "short": "Finde Synonyme für jedes Wort in 30+ Sprachen mit KI.",
+      "h1": "Synonymen-Finder — Kostenloser KI-Thesaurus in 30+ Sprachen",
+      "metaTitle": "Synonymen-Finder — Kostenloser KI-Thesaurus online | Konvertools",
+      "metaDescription": "Finde die besten Synonyme für jedes Wort oder jede Phrase in 30+ Sprachen mit KI. Sinnbewusste, natürliche Alternativen. Kostenlos, ohne Anmeldung testbar."
+    },
+    "es": {
+      "name": "Buscador de sinónimos",
+      "short": "Encuentra sinónimos para cualquier palabra en 30+ idiomas con IA.",
+      "h1": "Buscador de sinónimos — Tesauro de IA gratuito en 30+ idiomas",
+      "metaTitle": "Buscador de sinónimos — Tesauro de IA online gratuito | Konvertools",
+      "metaDescription": "Encuentra los mejores sinónimos para cualquier palabra o frase en 30+ idiomas con IA. Alternativas naturales y contextuales. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Chercheur de synonymes",
+      "short": "Trouvez des synonymes pour n'importe quel mot en 30+ langues avec l'IA.",
+      "h1": "Chercheur de synonymes — Thésaurus IA gratuit en 30+ langues",
+      "metaTitle": "Chercheur de synonymes — Thésaurus IA en ligne gratuit | Konvertools",
+      "metaDescription": "Trouvez les meilleurs synonymes pour n'importe quel mot ou expression en 30+ langues grâce à l'IA. Alternatives naturelles et précises. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "पर्यायवाची खोजक",
+      "short": "30+ भाषाओं में किसी भी शब्द के पर्यायवाची AI के साथ खोजें।",
+      "h1": "पर्यायवाची खोजक — 30+ भाषाओं में मुफ्त AI कोश",
+      "metaTitle": "पर्यायवाची खोजक — मुफ्त ऑनलाइन AI कोश | Konvertools",
+      "metaDescription": "AI के साथ किसी भी शब्द या वाक्यांश के सर्वोत्तम पर्यायवाची 30+ भाषाओं में खोजें। अर्थ-जागरूक, प्राकृतिक विकल्प। मुफ्त, बिना साइन-अप के प्रयास करें।"
+    },
+    "id": {
+      "name": "Pencari Sinonim",
+      "short": "Temukan sinonim untuk kata apa pun dalam 30+ bahasa dengan AI.",
+      "h1": "Pencari Sinonim — Tesaurus AI Gratis dalam 30+ Bahasa",
+      "metaTitle": "Pencari Sinonim — Tesaurus AI Online Gratis | Konvertools",
+      "metaDescription": "Temukan sinonim terbaik untuk kata atau frasa apa pun dalam 30+ bahasa dengan AI. Alternatif alami dan tepat makna. Gratis, tanpa pendaftaran."
+    },
+    "it": {
+      "name": "Ricerca sinonimi",
+      "short": "Trova sinonimi per qualsiasi parola in 30+ lingue con l'IA.",
+      "h1": "Ricerca sinonimi — Thesaurus AI gratuito in 30+ lingue",
+      "metaTitle": "Ricerca sinonimi — Thesaurus AI gratuito online | Konvertools",
+      "metaDescription": "Trova i migliori sinonimi per qualsiasi parola o frase in 30+ lingue con l'IA. Alternative naturali e contestuali. Gratuito, senza registrazione."
+    },
+    "ja": {
+      "name": "類義語検索ツール",
+      "short": "30以上の言語で任意の単語の類義語をAIで検索。",
+      "h1": "Synonyms Finder — 30以上の言語に対応した無料AI類義語辞典",
+      "metaTitle": "Synonyms Finder — 無料オンラインAI類義語辞典 | Konvertools",
+      "metaDescription": "30以上の言語で単語やフレーズの最適な類義語をAIが検索。文脈を考慮した自然な代替語を提案。登録不要で無料利用可能。"
+    },
+    "ko": {
+      "name": "유의어 찾기",
+      "short": "30개 이상의 언어에서 AI로 모든 단어의 유의어를 찾으세요.",
+      "h1": "유의어 찾기 — 무료 AI 시소러스 (30개 언어 지원)",
+      "metaTitle": "유의어 찾기 — 무료 AI 시소러스 온라인 | Konver",
+      "metaDescription": "AI로 30개 이상의 언어에서 단어 또는 문구의 최적의 유의어를 찾으세요. 의미 인식, 자연스러운 대체어 제공. 무료, 가입 없이 사용 가능."
+    },
+    "nl": {
+      "name": "Vind synoniemen",
+      "short": "Vind synoniemen voor elk woord in 30+ talen met AI.",
+      "h1": "Synoniemen Vinder — Gratis AI Thesaurus in 30+ Talen",
+      "metaTitle": "Synoniemen Vinder — Gratis Online AI Thesaurus | Konvertools",
+      "metaDescription": "Vind de beste synoniemen voor elk woord of zinsdeel in 30+ talen met AI. Contextbewust en natuurlijke alternatieven. Gratis, geen aanmelding nodig."
+    },
+    "pl": {
+      "name": "Wyszukiwarka synonimów",
+      "short": "Znajdź synonimy dla dowolnego słowa w 30+ językach z pomocą AI.",
+      "h1": "Wyszukiwarka synonimów — Darmowy AI tezaurus w 30+ językach",
+      "metaTitle": "Wyszukiwarka synonimów — Darmowy AI tezaurus online | Konvertools",
+      "metaDescription": "Znajdź najlepsze synonimy dla dowolnego słowa lub frazy w 30+ językach z pomocą AI. Naturalne, kontekstowe odpowiedniki. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Buscador de Sinônimos",
+      "short": "Encontre sinônimos para qualquer palavra em 30+ idiomas com IA.",
+      "h1": "Buscador de Sinônimos — Dicionário de Sinônimos Gratuito com IA em 30+ Idiomas",
+      "metaTitle": "Buscador de Sinônimos — Sinônimos Online Grátis com IA | Konvertools",
+      "metaDescription": "Encontre os melhores sinônimos para qualquer palavra ou expressão em 30+ idiomas com IA. Alternativas naturais e precisas. Grátis, sem cadastro para testar."
+    },
+    "ru": {
+      "name": "Поиск синонимов",
+      "short": "Найдите синонимы к любому слову на 30+ языках с помощью ИИ.",
+      "h1": "Поиск синонимов — Бесплатный ИИ-тезаурус на 30+ языках",
+      "metaTitle": "Поиск синонимов — Бесплатный ИИ-тезаурус онлайн | Konvertools",
+      "metaDescription": "Найдите лучшие синонимы к любому слову или фразе на 30+ языках с помощью ИИ. Точные по смыслу, естественные варианты. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Synonymsökare",
+      "short": "Hitta synonymer för vilket ord som helst på 30+ språk med AI.",
+      "h1": "Synonymsökare — Gratis AI-ordbok på 30+ språk",
+      "metaTitle": "Synonymsökare — Gratis AI-ordbok online | Konvertools",
+      "metaDescription": "Hitta de bästa synonymerna för vilket ord eller uttryck som helst på 30+ språk med AI. Meningsmedvetna, naturliga alternativ. Gratis, inget konto krävs."
+    },
+    "tr": {
+      "name": "Eş Anlamlı Sözcük Bulucu",
+      "short": "30+ dilde herhangi bir kelimenin eş anlamlılarını AI ile bulun.",
+      "h1": "Eş Anlamlı Sözcük Bulucu — 30+ Dilde Ücretsiz AI Sözlük",
+      "metaTitle": "Eş Anlamlı Sözcük Bulucu — Ücretsiz Online AI Sözlük | Konvertools",
+      "metaDescription": "30+ dilde herhangi bir kelime veya deyim için AI destekli en iyi eş anlamlıları bulun. Anlam odaklı, doğal alternatifler. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Пошук синонімів",
+      "short": "Знайдіть синоніми до будь-якого слова 30+ мовами за допомогою ШІ.",
+      "h1": "Пошук синонімів — Безкоштовний AI-синонімікон 30+ мовами",
+      "metaTitle": "Пошук синонімів — Безкоштовний AI-синонімікон онлайн | Konvertools",
+      "metaDescription": "Знайдіть найкращі синоніми до будь-якого слова чи словосполучення 30+ мовами за допомогою ШІ. Точні за змістом, природні альтернативи. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Tìm từ đồng nghĩa",
+      "short": "Tìm từ đồng nghĩa cho bất kỳ từ nào trong 30+ ngôn ngữ bằng AI.",
+      "h1": "Tìm từ Đồng nghĩa — Từ điển Đồng nghĩa AI Miễn phí trong 30+ Ngôn ngữ",
+      "metaTitle": "Tìm từ Đồng nghĩa — Từ điển Đồng nghĩa AI Miễn phí Trực tuyến | Konvertools",
+      "metaDescription": "Tìm từ đồng nghĩa tốt nhất cho bất kỳ từ hoặc cụm từ nào trong 30+ ngôn ngữ bằng AI. Lựa chọn tự nhiên, nhận biết nghĩa. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "同义词查找器",
+      "short": "用 AI 在 30+ 种语言中为任何单词查找同义词。",
+      "h1": "Konver 同义词查找器 — 30+ 语言免费 AI 同义词典",
+      "metaTitle": "Konver 同义词查找器 — 在线免费 AI 同义词典 | Konvertools",
+      "metaDescription": "用 AI 在 30+ 种语言中为任意单词或短语查找最佳同义词。智能感知语义，提供自然替换词。免费使用，无需注册。"
+    }
+  },
   "text-diff": {
     "ar": {
       "name": "مقارنة النصوص",
@@ -12899,6 +14654,276 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "时区转换器 — 城市与时区间的时间转换",
       "metaTitle": "时区转换器 — 世界时钟与时差 | Konvertools",
       "metaDescription": "在任意两个时区间转换日期与时间，自动处理夏令时。免费、即时、在浏览器中运行 — 无需注册。"
+    }
+  },
+  "tip-calculator": {
+    "ar": {
+      "name": "حاسبة الإكرامية",
+      "short": "قيمة الإكرامية والمبلغ الإجمالي والتقسيم لكل شخص.",
+      "h1": "حاسبة الإكرامية — قسّم الفاتورة واحسب الإكرامية",
+      "metaTitle": "حاسبة الإكرامية أونلاين مجاناً — قسّم الفاتورة | Konvertools",
+      "metaDescription": "احسب الإكرامية والمبلغ الإجمالي ومقدار ما يدفعه كل شخص عند تقسيم الفاتورة. مجاناً، فوري، داخل المتصفح."
+    },
+    "cs": {
+      "name": "Kalkulačka spropitného",
+      "short": "Spropitné, celková částka a rozdělení na osobu.",
+      "h1": "Kalkulačka spropitného — Rozdělte účet a spočítejte spropitné",
+      "metaTitle": "Online kalkulačka spropitného zdarma — Rozdělte účet | Konvertools",
+      "metaDescription": "Spočítejte si spropitné, celkovou částku a kolik zaplatí každý při rozdělení účtu. Zdarma, okamžitě, přímo v prohlížeči."
+    },
+    "de": {
+      "name": "Trinkgeldrechner",
+      "short": "Trinkgeldbetrag, Gesamtkosten und Aufteilung pro Person.",
+      "h1": "Trinkgeldrechner — Rechnung teilen & Trinkgeld berechnen",
+      "metaTitle": "Trinkgeldrechner Online Kostenlos — Rechnung teilen | Konvertools",
+      "metaDescription": "Berechne das Trinkgeld, den Gesamtbetrag und wie viel jeder zahlt, wenn die Rechnung geteilt wird. Kostenlos, sofort und direkt im Browser."
+    },
+    "es": {
+      "name": "Calculadora de propinas",
+      "short": "Monto de la propina, total y división por persona.",
+      "h1": "Calculadora de propinas — Divide la cuenta y calcula la propina",
+      "metaTitle": "Calculadora de propinas online gratis — Divide una cuenta | Konvertools",
+      "metaDescription": "Calcula la propina, el total y cuánto paga cada persona al dividir una cuenta. Gratis, instantáneo y en el navegador."
+    },
+    "fr": {
+      "name": "Calculateur de pourboire",
+      "short": "Montant du pourboire, total et répartition par personne.",
+      "h1": "Calculateur de pourboire — Partagez l'addition et calculez le pourboire",
+      "metaTitle": "Calculateur de pourboire en ligne gratuit — Partager une addition | Konvertools",
+      "metaDescription": "Calculez le pourboire, le total et la part de chacun lors du partage d'une addition. Gratuit, instantané, dans votre navigateur."
+    },
+    "hi": {
+      "name": "टिप कैलकुलेटर",
+      "short": "टिप राशि, कुल राशि और प्रति व्यक्ति बंटवारा।",
+      "h1": "टिप कैलकुलेटर — बिल बाँटें और टिप निकालें | Konver",
+      "metaTitle": "टिप कैलकुलेटर ऑनलाइन मुफ़्त — बिल बाँटें | Konvertools",
+      "metaDescription": "टिप, कुल राशि और बिल बाँटने पर हर व्यक्ति के हिस्से की गणना करें। मुफ़्त, तुरंत, ब्राउज़र में।"
+    },
+    "id": {
+      "name": "Kalkulator Tip",
+      "short": "Jumlah tip, total, dan pembagian per orang.",
+      "h1": "Kalkulator Tip — Bagi Tagihan & Hitung Tip",
+      "metaTitle": "Kalkulator Tip Online Gratis — Bagi Tagihan | Konvertools",
+      "metaDescription": "Hitung tip, total, dan berapa yang harus dibayar setiap orang saat membagi tagihan. Gratis, instan, di peramban."
+    },
+    "it": {
+      "name": "Calcolatrice delle Mance",
+      "short": "Importo della mancia, totale e divisione per persona.",
+      "h1": "Calcolatrice delle Mance — Dividi il Conto e Calcola la Mancia",
+      "metaTitle": "Calcolatrice delle Mance Online Gratis — Dividi un Conto | Konvertools",
+      "metaDescription": "Calcola la mancia, il totale e quanto paga ogni persona quando si divide un conto. Gratis, istantaneo, nel browser."
+    },
+    "ja": {
+      "name": "チップ計算機",
+      "short": "チップ額、合計、一人当たりの割り勘額を計算。",
+      "h1": "チップ計算機 — 割り勘額を算出 | Konver",
+      "metaTitle": "オンライン無料チップ計算機 — 割り勘額を算出 | Konvertools",
+      "metaDescription": "チップ額、合計、割り勘額を瞬時に計算。ブラウザ上で無料・即時処理。"
+    },
+    "ko": {
+      "name": "팁 계산기",
+      "short": "팁 금액, 총액 및 인당 분할 금액을 계산합니다.",
+      "h1": "팁 계산기 — 계산서 나누고 팁 계산하기 | Konver",
+      "metaTitle": "온라인 무료 팁 계산기 — 계산서 나누기 | Konvertools",
+      "metaDescription": "팁 금액, 총액 및 인당 지불액을 계산하여 계산서를 나눠 계산하세요. 무료, 즉시, 브라우저에서 사용 가능."
+    },
+    "nl": {
+      "name": "Rekenmachine fooi",
+      "short": "Fooi bedrag, totaal en verdeling per persoon.",
+      "h1": "Fooi Calculator — Reken de fooi uit & deel de rekening",
+      "metaTitle": "Online Fooi Calculator Gratis — Rekening splitsen | Konvertools",
+      "metaDescription": "Bereken de fooi, het totaalbedrag en hoeveel iedereen betaalt bij het splitsen van een rekening. Gratis, direct en in de browser."
+    },
+    "pl": {
+      "name": "Kalkulator napiwków",
+      "short": "Kwota napiwku, łączna suma i podział na osobę.",
+      "h1": "Kalkulator napiwków — Podziel rachunek i oblicz napiwek",
+      "metaTitle": "Darmowy kalkulator napiwków online — Podziel rachunek | Konvertools",
+      "metaDescription": "Oblicz napiwek, łączną kwotę do zapłaty i udział każdej osoby przy dzieleniu rachunku. Darmowe, natychmiastowe, w przeglądarce."
+    },
+    "pt": {
+      "name": "Calculadora de Gorjeta",
+      "short": "Valor da gorjeta, total e divisão por pessoa.",
+      "h1": "Calculadora de Gorjeta — Divida a Conta & Calcule a Gorjeta",
+      "metaTitle": "Calculadora de Gorjeta Online Grátis — Divida uma Conta | Konvertools",
+      "metaDescription": "Calcule a gorjeta, o total e quanto cada pessoa paga ao dividir uma conta. Grátis, instantâneo, no navegador."
+    },
+    "ru": {
+      "name": "Калькулятор чаевых",
+      "short": "Сумма чаевых, итог и разделение на каждого человека.",
+      "h1": "Калькулятор чаевых — Разделите счёт и рассчитайте чаевые",
+      "metaTitle": "Калькулятор чаевых онлайн бесплатно — Разделите счёт | Konvertools",
+      "metaDescription": "Рассчитайте сумму чаевых, итоговый счёт и сколько платит каждый человек при разделе счёта. Бесплатно, мгновенно, в браузере."
+    },
+    "sv": {
+      "name": "Beräkningsverktyg för dricks",
+      "short": "Belopp för dricks, totalsumma och uppdelning per person.",
+      "h1": "Beräkningsverktyg för dricks — Dela notan och räkna ut dricksen",
+      "metaTitle": "Online-beräknare för dricks gratis — Dela notan | Konvertools",
+      "metaDescription": "Räkna ut dricksen, totalsumman och hur mycket varje person ska betala när ni delar notan. Gratis, direkt i webbläsaren."
+    },
+    "tr": {
+      "name": "Bahşiş Hesaplayıcı",
+      "short": "Bahşiş miktarı, toplam ve kişi başı bölüşüm.",
+      "h1": "Bahşiş Hesaplayıcı — Hesap Paylaş ve Bahşişi Bul",
+      "metaTitle": "Ücretsiz Online Bahşiş Hesaplayıcı — Hesap Paylaş | Konvertools",
+      "metaDescription": "Bahşişi, toplamı ve hesap paylaşılırken kişi başı ödenecek miktarı hesaplayın. Ücretsiz, anında, tarayıcı içinde."
+    },
+    "uk": {
+      "name": "Калькулятор чайових",
+      "short": "Сума чайових, загальна сума та розподіл на кожну людину.",
+      "h1": "Калькулятор чайових — Розділити рахунок та розрахувати чайові",
+      "metaTitle": "Онлайн-калькулятор чайових безкоштовно — Розділити рахунок | Konvertools",
+      "metaDescription": "Розрахуйте чайові, загальну суму та скільки платить кожна людина при поділі рахунку. Безкоштовно, миттєво, у браузері."
+    },
+    "vi": {
+      "name": "Máy Tính Tiền Típ",
+      "short": "Số tiền tip, tổng cộng và chia theo người.",
+      "h1": "Máy Tính Tiền Típ — Chia Hóa Đơn & Tính Tiền Típ",
+      "metaTitle": "Máy Tính Tiền Típ Miễn Phí Trực Tuyến — Chia Hóa Đơn | Konvertools",
+      "metaDescription": "Tính tiền tip, tổng hóa đơn và số tiền mỗi người phải trả khi chia hóa đơn. Miễn phí, tức thì, ngay trên trình duyệt."
+    },
+    "zh": {
+      "name": "小费计算器",
+      "short": "计算小费金额、总额及人均分摊。",
+      "h1": "小费计算器 — 分摊账单并计算小费",
+      "metaTitle": "在线免费小费计算器 — 分摊账单 | Konvertools",
+      "metaDescription": "计算小费金额、总账单及人均分摊金额。免费、即时、无需安装，直接在浏览器中使用。"
+    }
+  },
+  "translate-document-with-layout": {
+    "ar": {
+      "name": "ترجمة المستند (الحفاظ على التنسيق)",
+      "short": "ترجمة ملف وورد .docx إلى أي لغة مع الحفاظ على التنسيق الأصلي.",
+      "h1": "ترجمة مستندات وورد أونلاين — الحفاظ على التنسيق، مجاناً",
+      "metaTitle": "ترجمة مستندات وورد أونلاين — الحفاظ على التنسيق | Konvertools",
+      "metaDescription": "ترجمة ملفات وورد .docx إلى أكثر من 30 لغة مع الحفاظ على الخطوط، العناوين، الجداول، القوائم والصور في مكانها. مدعوم بالذكاء الاصطناعي، مجاني للتجربة."
+    },
+    "cs": {
+      "name": "Přeložit dokument (zachována úprava)",
+      "short": "Přeložte dokument Word .docx do jakéhokoli jazyka a zachovejte jeho úpravu.",
+      "h1": "Přeložte dokument online — Word .docx, zachována úprava, zdarma",
+      "metaTitle": "Přeložte dokument Word online — zachována úprava | Konvertools",
+      "metaDescription": "Přeložte dokument Word .docx do více než 30 jazyků a zachovejte veškerá písma, nadpisy, tabulky, seznamy a obrázky přesně tam, kde byly. AI poháněno, zkuste zdarma."
+    },
+    "de": {
+      "name": "Dokument übersetzen (Layout beibehalten)",
+      "short": "Übersetze eine Word-Datei (.docx) in jede Sprache, während das Layout erhalten bleibt.",
+      "h1": "Dokument online übersetzen — Word .docx Layout beibehalten, kostenlos",
+      "metaTitle": "Word-Dokument online übersetzen — Layout beibehalten | Konvertools",
+      "metaDescription": "Übersetze eine Word-Datei (.docx) in über 30 Sprachen, während Schriftarten, Überschriften, Tabellen, Listen und Bilder exakt an ihrer Position bleiben. KI-gestützt, kostenlos testbar."
+    },
+    "es": {
+      "name": "Traducir documento (conservar diseño)",
+      "short": "Traduce un archivo Word .docx a cualquier idioma conservando el diseño.",
+      "h1": "Traduce documentos en línea — Word .docx con diseño intacto, gratis",
+      "metaTitle": "Traducir documento Word en línea — Diseño conservado | Konvertools",
+      "metaDescription": "Traduce un archivo Word .docx a más de 30 idiomas manteniendo fuentes, encabezados, tablas, listas e imágenes exactamente en su lugar. Potenciado por IA, prueba gratis."
+    },
+    "fr": {
+      "name": "Traduire un document (mise en page conservée)",
+      "short": "Traduisez un fichier Word .docx dans n'importe quelle langue tout en conservant la mise en page.",
+      "h1": "Traduire un document en ligne — Word .docx, mise en page conservée, gratuit",
+      "metaTitle": "Traduire un document Word en ligne — Mise en page conservée | Konvertools",
+      "metaDescription": "Traduisez un fichier Word .docx dans plus de 30 langues en conservant polices, titres, tableaux, listes et images à leur place. IA intégrée, essai gratuit."
+    },
+    "hi": {
+      "name": "दस्तावेज़ अनुवाद करें (लेआउट सुरक्षित रखा गया)",
+      "short": "वर्ड .docx फ़ाइल को किसी भी भाषा में अनुवाद करें और उसका लेआउट बरकरार रखें।",
+      "h1": "ऑनलाइन दस्तावेज़ अनुवाद करें — वर्ड .docx लेआउट सुरक्षित, मुफ़्त",
+      "metaTitle": "वर्ड दस्तावेज़ ऑनलाइन अनुवाद करें — लेआउट सुरक्षित | Konvertools",
+      "metaDescription": "वर्ड .docx फ़ाइल को 30+ भाषाओं में अनुवाद करें और हर फ़ॉन्ट, शीर्षक, टेबल, सूची और चित्र को बिल्कुल उसी जगह रखें। AI-संचालित, मुफ़्त में आज़माएं।"
+    },
+    "id": {
+      "name": "Terjemahkan Dokumen (Tata Letak Dipertahankan)",
+      "short": "Terjemahkan file Word .docx ke bahasa apa pun sambil mempertahankan tata letaknya.",
+      "h1": "Terjemahkan Dokumen Online — Tata Letak Word .docx Dipertahankan, Gratis",
+      "metaTitle": "Terjemahkan Dokumen Word Online — Tata Letak Dipertahankan | Konvertools",
+      "metaDescription": "Terjemahkan file Word .docx ke 30+ bahasa sambil mempertahankan font, judul, tabel, daftar, dan gambar tetap di tempatnya. Berbasis AI, coba gratis."
+    },
+    "it": {
+      "name": "Traduci Documento (Layout Conservato)",
+      "short": "Traduci un file Word .docx in qualsiasi lingua mantenendo il layout originale.",
+      "h1": "Traduci Documento Online — Word .docx Layout Conservato, Gratis",
+      "metaTitle": "Traduci Documento Word Online — Layout Conservato | Konvertools",
+      "metaDescription": "Traduci un file Word .docx in oltre 30 lingue mantenendo caratteri, titoli, tabelle, elenchi e immagini esattamente dove si trovano. Traduzione AI, gratuita da provare."
+    },
+    "ja": {
+      "name": "文書を翻訳（レイアウト保持）",
+      "short": "Word .docx を任意の言語に翻訳し、レイアウトを保持します。",
+      "h1": "オンラインで文書を翻訳 — Word .docx レイアウト保持、無料",
+      "metaTitle": "Word 文書をオンラインで翻訳 — レイアウト保持 | Konvertools",
+      "metaDescription": "Word .docx を 30 以上の言語に翻訳し、フォント、見出し、表、リスト、画像の位置を完全に保持します。AI 翻訳、無料でお試し可能。"
+    },
+    "ko": {
+      "name": "문서 번역 (레이아웃 보존)",
+      "short": "워드 .docx 파일을 레이아웃을 그대로 유지한 채 원하는 언어로 번역합니다.",
+      "h1": "온라인 문서 번역 — 워드 .docx 레이아웃 보존, 무료",
+      "metaTitle": "워드 문서 온라인 번역 — 레이아웃 보존 | Konvertools",
+      "metaDescription": "워드 .docx 파일을 30개 이상의 언어로 번역하며 글꼴, 제목, 표, 목록, 이미지의 위치까지 그대로 보존합니다. AI 기반 무료 서비스."
+    },
+    "nl": {
+      "name": "Document vertalen (opmaak behouden)",
+      "short": "Vertaal een Word .docx-bestand naar elke taal terwijl de opmaak behouden blijft.",
+      "h1": "Document online vertalen — Word .docx-opmaak behouden, gratis",
+      "metaTitle": "Word-document online vertalen — Opmaak behouden | Konvertools",
+      "metaDescription": "Vertaal een Word .docx-bestand naar 30+ talen terwijl elke letter, kop, tabel, lijst en afbeelding precies op dezelfde plek blijft. AI-gegenereerd, gratis uit te proberen."
+    },
+    "pl": {
+      "name": "Tłumaczenie dokumentu (układ zachowany)",
+      "short": "Tłumacz dokument Word .docx na dowolny język, zachowując układ.",
+      "h1": "Tłumacz dokumenty online — Word .docx, układ zachowany, za darmo",
+      "metaTitle": "Tłumacz dokumenty Word online — układ zachowany | Konvertools",
+      "metaDescription": "Tłumacz dokument Word .docx na ponad 30 języków, zachowując czcionki, nagłówki, tabele, listy i obrazy w oryginalnych miejscach. Wspomagane AI, darmowe do wypróbowania."
+    },
+    "pt": {
+      "name": "Traduzir Documento (Layout Preservado)",
+      "short": "Traduza um arquivo Word .docx para qualquer idioma mantendo o layout original.",
+      "h1": "Traduza Documentos Online — Word .docx com Layout Preservado, Grátis",
+      "metaTitle": "Traduzir Documento Word Online — Layout Preservado | Konvertools",
+      "metaDescription": "Traduza um arquivo Word .docx para mais de 30 idiomas mantendo fontes, títulos, tabelas, listas e imagens exatamente como estavam. IA integrada, teste grátis."
+    },
+    "ru": {
+      "name": "Перевести документ (сохранение разметки)",
+      "short": "Переведите документ Word .docx на любой язык, сохранив разметку.",
+      "h1": "Перевести документ онлайн — Word .docx с сохранением разметки, бесплатно",
+      "metaTitle": "Перевести документ Word онлайн — с сохранением разметки | Konvertools",
+      "metaDescription": "Переведите документ Word .docx на 30+ языков, сохранив шрифты, заголовки, таблицы, списки и изображения на своих местах. ИИ-технологии, бесплатный пробный перевод."
+    },
+    "sv": {
+      "name": "Översätt dokument (layout bevarad)",
+      "short": "Översätt en Word .docx till vilket språk som helst samtidigt som layouten bevaras.",
+      "h1": "Översätt dokument online — Word .docx-layout bevarad, gratis",
+      "metaTitle": "Översätt Word-dokument online — Layout bevarad | Konvertools",
+      "metaDescription": "Översätt en Word .docx till 30+ språk samtidigt som alla teckensnitt, rubriker, tabeller, listor och bilder bevaras på exakt rätt plats. AI-drivet, prova gratis."
+    },
+    "tr": {
+      "name": "Belgeyi Çevir (Düzen Korunur)",
+      "short": "Word .docx dosyasını herhangi bir dile çevirin ve düzenini koruyun.",
+      "h1": "Belgeyi Çevir — Word .docx Düzeni Korunarak, Ücretsiz",
+      "metaTitle": "Word Belgesini Çevir — Düzen Korunur | Konvertools",
+      "metaDescription": "Word .docx dosyasını 30+ dile çevirin ve her bir font, başlık, tablo, liste ve görüntüyü orijinal konumunda koruyun. AI destekli, denemek ücretsiz."
+    },
+    "uk": {
+      "name": "Перекласти документ (збереження макета)",
+      "short": "Перекладіть документ Word .docx на будь-яку мову, зберігши макет.",
+      "h1": "Перекласти документ онлайн — Word .docx з збереженням макета, безкоштовно",
+      "metaTitle": "Перекласти документ Word онлайн — збереження макета | Konvertools",
+      "metaDescription": "Перекладіть документ Word .docx на 30+ мов, зберігши шрифти, заголовки, таблиці, списки та зображення на своїх місцях. Штучний інтелект, безкоштовно для тестування."
+    },
+    "vi": {
+      "name": "Dịch Tài liệu (Bố cục Giữ nguyên)",
+      "short": "Dịch tệp Word .docx sang bất kỳ ngôn ngữ nào nhưng vẫn giữ nguyên bố cục.",
+      "h1": "Dịch Tài liệu Trực tuyến — Word .docx Bố cục Giữ nguyên, Miễn phí",
+      "metaTitle": "Dịch Tài liệu Word Trực tuyến — Bố cục Giữ nguyên | Konvertools",
+      "metaDescription": "Dịch tệp Word .docx sang hơn 30 ngôn ngữ khác nhau trong khi vẫn giữ nguyên mọi phông chữ, tiêu đề, bảng biểu, danh sách và hình ảnh. Sử dụng AI, hoàn toàn miễn phí."
+    },
+    "zh": {
+      "name": "文档翻译（保留布局）",
+      "short": "将 Word .docx 文档翻译成任意语言，同时保留原有布局。",
+      "h1": "在线翻译文档 — Word .docx 布局完整保留，免费",
+      "metaTitle": "在线翻译 Word 文档 — 布局完整保留 | Konvertools",
+      "metaDescription": "将 Word .docx 文档翻译成 30+ 种语言，同时保留所有字体、标题、表格、列表和图片的原始位置。AI 驱动，免费试用。"
     }
   },
   "translate-subtitles": {
@@ -13997,6 +16022,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "视频缩略图提取器 — 免费提取视频最佳帧",
       "metaTitle": "在线视频缩略图提取器 — 提取帧 | Konvertools",
       "metaDescription": "滑动到任意时刻，将视频中的静态帧保存为PNG，并自动生成缩略图建议。免费、在线、无需上传。"
+    }
+  },
+  "voice-to-text": {
+    "ar": {
+      "name": "نص من صوت",
+      "short": "انقل الصوت أو الفيديو إلى نص نظيف وقابل للتعديل باستخدام الذكاء الاصطناعي.",
+      "h1": "نص من صوت — تحويل الصوت والفيديو إلى نص مجاناً باستخدام الذكاء الاصطناعي عبر الإنترنت",
+      "metaTitle": "نص من صوت — تحويل مجاني للصوت/الفيديو إلى نص باستخدام الذكاء الاصطناعي | Konvertools",
+      "metaDescription": "انقل أي ملف صوت أو فيديو إلى نص نظيف وقابل للتعديل باستخدام الذكاء الاصطناعي. يدعم أكثر من 30 لغة، مع فواصل فقرات، نسخ أو تحميل ملف .txt. مجاناً، بدون تسجيل."
+    },
+    "cs": {
+      "name": "Hlas na text",
+      "short": "Přepisujte audio nebo video na čistý, upravitelný text pomocí AI.",
+      "h1": "Hlas na text — Zdarma AI přepis audio a videa online",
+      "metaTitle": "Hlas na text — Zdarma AI přepis audio/video | Konvertools",
+      "metaDescription": "Přepište jakýkoli audio nebo video soubor na čistý, upravitelný text pomocí AI. 30+ jazyků, odstavce, kopírování nebo stahování .txt. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "Sprache zu Text",
+      "short": "Transkribiere Audio- oder Videodateien in sauberen, bearbeitbaren Text mit KI.",
+      "h1": "Sprache zu Text — Kostenlose KI-Audio- & Video-Transkription online",
+      "metaTitle": "Sprache zu Text — Kostenlose KI-Audio/Video-Transkription | Konvertools",
+      "metaDescription": "Transkribiere jede Audio- oder Videodatei in sauberen, bearbeitbaren Text mit KI. 30+ Sprachen, Absatzumbrüche, kopieren oder .txt herunterladen. Kostenlos, ohne Anmeldung zum Ausprobieren."
+    },
+    "es": {
+      "name": "Voz a Texto",
+      "short": "Transcribe audio o vídeo a texto limpio y editable con IA.",
+      "h1": "Voz a Texto — Transcripción gratuita de audio y vídeo con IA en línea",
+      "metaTitle": "Voz a Texto — Transcripción IA gratuita de audio/vídeo | Konvertools",
+      "metaDescription": "Transcribe cualquier archivo de audio o vídeo a texto limpio y editable con IA. Más de 30 idiomas, saltos de párrafo, copiar o descargar .txt. Gratis, sin registro para probar."
+    },
+    "fr": {
+      "name": "Texte à partir de la voix",
+      "short": "Transcrivez des fichiers audio ou vidéo en texte propre et modifiable avec l'IA.",
+      "h1": "Texte à partir de la voix — Transcription IA gratuite en ligne pour audio et vidéo",
+      "metaTitle": "Texte à partir de la voix — Transcription IA gratuite | Konvertools",
+      "metaDescription": "Transcrivez n'importe quel fichier audio ou vidéo en texte propre et modifiable avec l'IA. 30+ langues, sauts de paragraphe, copier ou télécharger en .txt. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "ध्वनि से पाठ",
+      "short": "ऑडियो या वीडियो को एआई के साथ साफ़, संपादन योग्य पाठ में ट्रांसक्राइब करें।",
+      "h1": "ध्वनि से पाठ — मुफ़्त एआई ऑडियो और वीडियो ट्रांसक्रिप्शन ऑनलाइन",
+      "metaTitle": "ध्वनि से पाठ — मुफ़्त एआई ऑडियो/वीडियो ट्रांसक्रिप्शन | Konvertools",
+      "metaDescription": "किसी भी ऑडियो या वीडियो फ़ाइल को एआई के साथ साफ़, संपादन योग्य पाठ में ट्रांसक्राइब करें। 30+ भाषाएँ, पैराग्राफ ब्रेक, कॉपी या .txt डाउनलोड करें। मुफ़्त, बिना साइन-अप किए प्रयास करें।"
+    },
+    "id": {
+      "name": "Ucapan ke Teks",
+      "short": "Transkripsikan audio atau video menjadi teks bersih dan dapat diedit dengan AI.",
+      "h1": "Ucapan ke Teks — Transkripsi AI Audio & Video Gratis Online",
+      "metaTitle": "Ucapan ke Teks — Transkripsi AI Audio/Video Gratis | Konvertools",
+      "metaDescription": "Transkripsikan file audio atau video apa pun menjadi teks bersih dan dapat diedit dengan AI. 30+ bahasa, jeda paragraf, salin atau unduh .txt. Gratis, tanpa pendaftaran untuk mencoba."
+    },
+    "it": {
+      "name": "Testo da Voce",
+      "short": "Trascrivi audio o video in testo pulito e modificabile con l'IA.",
+      "h1": "Testo da Voce — Trascrizione AI Gratuita di Audio e Video Online",
+      "metaTitle": "Testo da Voce — Trascrizione AI Gratuita Audio/Video | Konvertools",
+      "metaDescription": "Trascrivi qualsiasi file audio o video in testo pulito e modificabile con l'IA. 30+ lingue, a capo automatici, copia o scarica in .txt. Gratuito, senza registrazione."
+    },
+    "ja": {
+      "name": "音声テキスト変換",
+      "short": "音声・動画をAIで書き起こし、編集可能なテキストに変換します。",
+      "h1": "音声テキスト変換 — 無料AI音声・動画文字起こしツール | Konver",
+      "metaTitle": "音声テキスト変換 — 無料AI音声/動画文字起こし | Konvertools",
+      "metaDescription": "音声・動画ファイルをAIで書き起こし、編集可能なテキストに。30以上の言語に対応、段落分け、コピーや.txtダウンロードも可能。登録不要で無料お試し。"
+    },
+    "ko": {
+      "name": "음성 텍스트 변환",
+      "short": "AI로 오디오 또는 비디오를 깔끔하고 편집 가능한 텍스트로 변환하세요.",
+      "h1": "음성 텍스트 변환 — 무료 AI 오디오/비디오 변환 온라인",
+      "metaTitle": "음성 텍스트 변환 — 무료 AI 오디오/비디오 변환 | Konvertools",
+      "metaDescription": "AI로 모든 오디오/비디오 파일을 깔끔하고 편집 가능한 텍스트로 변환하세요. 30개 이상의 언어, 문단 구분, 복사 또는 .txt 다운로드. 가입 없이 무료로 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Spraak naar tekst",
+      "short": "Transcribeer audio of video naar schone, bewerkbare tekst met AI.",
+      "h1": "Spraak naar tekst — Gratis AI Audio & Video Transcriptie Online",
+      "metaTitle": "Spraak naar tekst — Gratis AI Audio/Video Transcriptie | Konvertools",
+      "metaDescription": "Transcribeer elk audio- of videobestand naar schone, bewerkbare tekst met AI. 30+ talen, alinea’s, kopiëren of download .txt. Gratis, geen registratie nodig."
+    },
+    "pl": {
+      "name": "Głos do tekstu",
+      "short": "Przepisz dźwięk lub wideo na czysty, edytowalny tekst z pomocą AI.",
+      "h1": "Głos do tekstu — darmowa transkrypcja audio i wideo online z AI",
+      "metaTitle": "Głos do tekstu — darmowa transkrypcja AI audio/wideo | Konvertools",
+      "metaDescription": "Przepisz dowolny plik audio lub wideo na czysty, edytowalny tekst z pomocą AI. Obsługa 30+ języków, podziały akapitów, kopiuj lub pobierz .txt. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Voz para Texto",
+      "short": "Transcreva áudio ou vídeo em texto limpo e editável com IA.",
+      "h1": "Voz para Texto — Transcrição Gratuita de Áudio & Vídeo com IA Online",
+      "metaTitle": "Voz para Texto — Transcrição Gratuita de Áudio/Vídeo com IA | Konvertools",
+      "metaDescription": "Transcreva qualquer arquivo de áudio ou vídeo em texto limpo e editável com IA. 30+ idiomas, quebras de parágrafo, copiar ou baixar .txt. Grátis, sem cadastro para testar."
+    },
+    "ru": {
+      "name": "Преобразование речи в текст",
+      "short": "Транскрибируйте аудио или видео в чистый редактируемый текст с помощью ИИ.",
+      "h1": "Преобразование речи в текст — Бесплатная онлайн-транскрибация аудио и видео с ИИ",
+      "metaTitle": "Преобразование речи в текст — Бесплатная транскрибация | Konvertools",
+      "metaDescription": "Транскрибируйте любые аудио- или видеофайлы в чистый редактируемый текст с помощью ИИ. 30+ языков, абзацы, копирование или скачивание .txt. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Tal till text",
+      "short": "Transkribera ljud eller video till ren, redigerbar text med AI.",
+      "h1": "Tal till text — Gratis AI-ljud- & videotranskribering online",
+      "metaTitle": "Tal till text — Gratis AI-ljud/video-transkribering | Konvertools",
+      "metaDescription": "Transkribera valfritt ljud- eller videofiler till ren, redigerbar text med AI. 30+ språk, styckeindelning, kopiera eller ladda ner som .txt. Gratis, inget konto krävs för att prova."
+    },
+    "tr": {
+      "name": "Ses Metni",
+      "short": "Ses veya video dosyalarını temiz, düzenlenebilir metne AI ile dönüştürün.",
+      "h1": "Ses Metni — Ücretsiz AI Ses & Video Dönüştürme Aracı",
+      "metaTitle": "Ses Metni — Ücretsiz AI Ses/Video Dönüştürme | Konvertools",
+      "metaDescription": "Herhangi bir ses veya video dosyasını temiz, düzenlenebilir metne AI ile dönüştürün. 30+ dil, paragraf ayırımları, kopyalayın veya .txt olarak indirin. Ücretsiz, denemek için kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Текст з голосу",
+      "short": "Перетворюйте аудіо чи відео на чистий, редагований текст за допомогою ШІ.",
+      "h1": "Текст з голосу — безкоштовне онлайн-транскрибування аудіо та відео за допомогою ШІ",
+      "metaTitle": "Текст з голосу — безкоштовне ШІ-транскрибування аудіо/відео | Konvertools",
+      "metaDescription": "Транскрибуйте будь-які аудіо чи відео файли у чистий, редагований текст за допомогою ШІ. 30+ мов, абзаци, копіювання чи завантаження у форматі .txt. Безкоштовно, без реєстрації для тесту."
+    },
+    "vi": {
+      "name": "Chuyển giọng thành văn bản",
+      "short": "Chuyển đổi âm thanh hoặc video thành văn bản sạch, có thể chỉnh sửa bằng AI.",
+      "h1": "Chuyển giọng thành văn bản — Chuyển giọng nói & video thành văn bản miễn phí bằng AI",
+      "metaTitle": "Chuyển giọng thành văn bản — Chuyển giọng nói/video miễn phí | Konvertools",
+      "metaDescription": "Chuyển đổi bất kỳ tệp âm thanh hoặc video nào thành văn bản sạch, có thể chỉnh sửa bằng AI. Hơn 30 ngôn ngữ, ngắt đoạn, sao chép hoặc tải xuống .txt. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "语音转文本",
+      "short": "用 AI 将音频或视频转录为干净、可编辑的文本。",
+      "h1": "语音转文本 — 免费在线 AI 音频/视频转录工具",
+      "metaTitle": "语音转文本 — 免费 AI 音频/视频转录 | Konvertools",
+      "metaDescription": "用 AI 将任意音频或视频文件转录为干净、可编辑的文本。支持 30+ 语言，自动分段，可复制或下载 .txt。免费使用，无需注册。"
     }
   },
   "vtt-to-srt": {

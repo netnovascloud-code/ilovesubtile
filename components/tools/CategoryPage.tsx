@@ -116,6 +116,33 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
           }),
         }}
       />
+      {/* CollectionPage + ItemList — lets Google enumerate every tool in this
+          category as a single hub (improves sitelinks / category indexing). */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: `All ${def.label} Tools — Konver`,
+            description: def.blurb,
+            url: `https://konver.app/${category}`,
+            inLanguage: "en",
+            isPartOf: { "@type": "WebSite", name: "Konver", url: "https://konver.app/" },
+            mainEntity: {
+              "@type": "ItemList",
+              numberOfItems: tools.length,
+              itemListElement: tools.map((t, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                url: `https://konver.app/${t.slug}`,
+                name: t.name,
+                description: t.short,
+              })),
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
+import { CATEGORIES } from "@/lib/tools-config";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -53,6 +54,44 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Ezoic — display ads. No-op until the domain is verified in Ezoic. */}
         <Script id="ezoic-sa" src="//www.ezojs.com/ezoic/sa.min.js" strategy="afterInteractive" async />
+        {/* Site-level structured data: WebSite (with sitelink-search action),
+            Organization, and a SiteNavigationElement listing every category
+            hub. Helps Google understand the catalogue and surface category
+            sitelinks. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                name: "Konver",
+                url: SITE_URL,
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: `${SITE_URL}/?q={search_term_string}`,
+                  "query-input": "required name=search_term_string",
+                },
+              },
+              {
+                "@type": "Organization",
+                name: "Konver",
+                url: SITE_URL,
+                logo: `${SITE_URL}/og/default.png`,
+              },
+              {
+                "@type": "SiteNavigationElement",
+                name: "Tool categories",
+                hasPart: CATEGORIES.map((c) => ({
+                  "@type": "WebPage",
+                  name: `${c.label} tools`,
+                  url: `${SITE_URL}/${c.id}`,
+                  description: c.blurb,
+                })),
+              },
+            ],
+          }) }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         {/* Syncs <html lang>/<dir> to the URL locale without opting out of SSG. */}

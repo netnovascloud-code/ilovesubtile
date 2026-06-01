@@ -93,6 +93,10 @@ export function softwareApplicationSchema(
     description: override?.metaDescription ?? tool.metaDescription,
     inLanguage: locale,
     url: `${SITE_URL}${HREFLANG_PREFIX[locale]}/${tool.slug}`,
+    // Surface the same keyword variants that drive the meta tag so crawlers
+    // see them in structured data too (esp. useful for Bing / Yandex / search
+    // generative engines).
+    keywords: toolKeywords(tool, locale).join(", "),
     offers: {
       "@type": "Offer",
       price: "0",

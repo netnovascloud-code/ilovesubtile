@@ -2153,6 +2153,22 @@ TOOLS.push(
     faqs: codeFaqs("AI Content Detector"),
   },
   {
+    slug: "translate-document-with-layout", phase: 3, kind: "ai", category: "documents", icon: Languages, tone: "indigo",
+    name: "Translate Document (Layout Preserved)",
+    short: "Translate a Word .docx into any language while keeping the layout.",
+    h1: "Translate Document Online — Word .docx Layout Preserved, Free",
+    metaTitle: "Translate Word Document Online — Layout Preserved | Konver",
+    metaDescription: "Translate a Word .docx into 30+ languages while keeping every font, heading, table, list and image exactly where it was. AI-powered, free to try.",
+    primaryKeyword: "translate word document with layout",
+    accept: ["docx"], freeMaxMb: 25, outputType: "DOCX",
+    steps: [
+      { title: "Upload your .docx", body: "Word documents (.docx) — fonts, headings, tables and images stay put." },
+      { title: "Pick a target language", body: "30+ languages with AI-native fluency." },
+      { title: "Download the translated copy", body: "Same layout, every paragraph translated — even headers and footers." },
+    ],
+    faqs: codeFaqs("Translate Document (Layout Preserved)"),
+  },
+  {
     slug: "fill-pdf-form", phase: 3, kind: "client", category: "documents", icon: FileSignature, tone: "blue",
     name: "Fill PDF Form",
     short: "Fill in any PDF form — entirely in your browser.",

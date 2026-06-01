@@ -91,6 +91,7 @@ import { CitationGeneratorClient } from "@/components/tools/clients/CitationGene
 import { AiDetectorClient } from "@/components/tools/clients/AiDetectorClient";
 import { SignPdfClient } from "@/components/tools/clients/SignPdfClient";
 import { FillPdfFormClient } from "@/components/tools/clients/FillPdfFormClient";
+import { TranslateDocumentClient } from "@/components/tools/clients/TranslateDocumentClient";
 import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
 import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
 import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
@@ -494,6 +495,9 @@ export default function LocalisedToolPage({
       break;
     case "fill-pdf-form":
       body = <FillPdfFormClient />;
+      break;
+    case "translate-document-with-layout":
+      body = <TranslateDocumentClient />;
       break;
     case "change-background":
       body = <ChangeBackgroundClient />;

@@ -9,6 +9,7 @@ const FN_MAP: Record<string, string> = {
   "citation-generator": "ai-process",
   "ai-detector": "ai-process",
   "context-examples": "ai-process",
+  "translate-document-with-layout": "ai-process",
   "translate-subtitles": "translate-subtitles",
   "batch-translate": "translate-subtitles",
   "youtube-chapters": "ai-process",

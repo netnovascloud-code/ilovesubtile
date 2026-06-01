@@ -72,6 +72,10 @@ import {
   PenLine,
   BookOpen,
   ScanSearch,
+  Percent,
+  Landmark,
+  Coins,
+  Scale,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1228,6 +1232,30 @@ TOOLS.push(
     "Calculate VAT from a net or gross amount with the standard rates of 30 European countries. Free, in-browser, no sign-up.",
     "vat calculator", "Money",
     [{ title: "Pick a country", body: "Pre-loaded standard rates for 30 countries." }, { title: "Pick a direction", body: "Net → Gross or Gross → Net." }, { title: "Read the breakdown", body: "Net, VAT and total — copy as you go." }]),
+  utilTool("percentage-calculator", Percent, "Percentage Calculator", "Percent of a number, X is what % of Y, and % change.",
+    "Percentage Calculator — % of a Number & Percent Change",
+    "Percentage Calculator Online Free — % of, % Change | Konver",
+    "Work out a percentage of a number, what percent one value is of another, and percentage increase or decrease. Free, instant, in-browser.",
+    "percentage calculator", "Result",
+    [{ title: "Pick a mode", body: "% of a number, X is what % of Y, or % change." }, { title: "Enter two values", body: "Results update as you type." }, { title: "Copy the answer", body: "Exact figure, ready to use." }]),
+  utilTool("loan-calculator", Landmark, "Loan Calculator", "Monthly payment, total interest and total repaid.",
+    "Loan Calculator — Monthly Payment & Total Interest",
+    "Loan & Mortgage Calculator Online Free — Monthly Payment | Konver",
+    "Estimate the monthly payment, total interest and total cost of a fixed-rate loan or mortgage. Free, instant, in-browser.",
+    "loan calculator", "Payment",
+    [{ title: "Enter the loan", body: "Amount, annual rate and term in years." }, { title: "See the payment", body: "Amortised monthly payment instantly." }, { title: "Check the cost", body: "Total interest and total repaid." }]),
+  utilTool("tip-calculator", Coins, "Tip Calculator", "Tip amount, total and per-person split.",
+    "Tip Calculator — Split the Bill & Work Out the Tip",
+    "Tip Calculator Online Free — Split a Bill | Konver",
+    "Calculate the tip, the total and how much each person pays when splitting a bill. Free, instant, in-browser.",
+    "tip calculator", "Per person",
+    [{ title: "Enter the bill", body: "Amount, tip percentage and party size." }, { title: "Pick a quick tip", body: "10, 15, 18, 20 or 25% in one tap." }, { title: "Split fairly", body: "Tip, total and per-person amount." }]),
+  utilTool("bmi-calculator", Scale, "BMI Calculator", "Body Mass Index in metric or imperial units.",
+    "BMI Calculator — Body Mass Index in Metric or Imperial",
+    "BMI Calculator Online Free — Metric & Imperial | Konver",
+    "Calculate your Body Mass Index from height and weight in metric or imperial units, with the healthy-range category. Free, instant, in-browser.",
+    "bmi calculator", "BMI",
+    [{ title: "Choose units", body: "Metric (cm / kg) or imperial (ft / lb)." }, { title: "Enter height & weight", body: "BMI updates as you type." }, { title: "Read your category", body: "Underweight, healthy, overweight or obese." }]),
 );
 
 // ── Konver — Documents (PDF tools, client-side via pdf-lib + pending) ──────

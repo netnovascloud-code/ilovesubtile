@@ -31,6 +31,10 @@ const UuidGeneratorClient = dynamic(() => import("@/components/tools/clients/Uui
 const UnixTimestampClient = dynamic(() => import("@/components/tools/clients/UnixTimestampClient").then((m) => ({ default: m.UnixTimestampClient })));
 const TextDiffClient = dynamic(() => import("@/components/tools/clients/TextDiffClient").then((m) => ({ default: m.TextDiffClient })));
 const VatCalculatorClient = dynamic(() => import("@/components/tools/clients/VatCalculatorClient").then((m) => ({ default: m.VatCalculatorClient })));
+const PercentageCalculatorClient = dynamic(() => import("@/components/tools/clients/PercentageCalculatorClient").then((m) => ({ default: m.PercentageCalculatorClient })));
+const LoanCalculatorClient = dynamic(() => import("@/components/tools/clients/LoanCalculatorClient").then((m) => ({ default: m.LoanCalculatorClient })));
+const TipCalculatorClient = dynamic(() => import("@/components/tools/clients/TipCalculatorClient").then((m) => ({ default: m.TipCalculatorClient })));
+const BmiCalculatorClient = dynamic(() => import("@/components/tools/clients/BmiCalculatorClient").then((m) => ({ default: m.BmiCalculatorClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -433,6 +437,18 @@ export default function LocalisedToolPage({
       break;
     case "vat-calculator":
       body = <VatCalculatorClient />;
+      break;
+    case "percentage-calculator":
+      body = <PercentageCalculatorClient />;
+      break;
+    case "loan-calculator":
+      body = <LoanCalculatorClient />;
+      break;
+    case "tip-calculator":
+      body = <TipCalculatorClient />;
+      break;
+    case "bmi-calculator":
+      body = <BmiCalculatorClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

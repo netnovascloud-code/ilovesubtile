@@ -1,4 +1,4 @@
-# Konver smoke test — 166/166 passed
+# Konver smoke test — 167/167 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -155,6 +155,7 @@ _None._
 - voice-to-text
 - synonyms-finder
 - conjugation
+- context-examples
 - citation-generator
 - ai-detector
 - fill-pdf-form

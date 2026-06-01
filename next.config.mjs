@@ -50,6 +50,9 @@ const nextConfig = {
   },
   experimental: {
     typedRoutes: false,
+    // Tree-shake icon imports so we don't ship the whole lucide-react index per
+    // page (123 import statements across the repo). Saves ~30-50 kB on shared.
+    optimizePackageImports: ["lucide-react"],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

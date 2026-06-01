@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Upload, X, Download, Loader2 } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
@@ -40,6 +39,7 @@ export function CompressPdfClient() {
     try {
       const cfg = PRESETS.find((p) => p.id === preset)!;
       const pdfjs = await loadPdfjs();
+      const { PDFDocument } = await import("pdf-lib");
       const src = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
       const out = await PDFDocument.create();
       for (let i = 1; i <= src.numPages; i++) {

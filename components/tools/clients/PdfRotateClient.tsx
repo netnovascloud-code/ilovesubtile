@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Upload, X, Download, Loader2, RotateCw } from "lucide-react";
-import { PDFDocument, degrees } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
 
@@ -19,6 +18,7 @@ export function PdfRotateClient() {
     if (!file || busy) return;
     setBusy(true); setError(null); setResultUrl(null);
     try {
+      const { PDFDocument, degrees } = await import("pdf-lib");
       const doc = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: true });
       for (const page of doc.getPages()) {
         const cur = page.getRotation().angle;

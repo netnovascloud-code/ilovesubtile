@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
-import QRCode from "qrcode";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +27,7 @@ export function QrGeneratorClient() {
     (async () => {
       if (!text.trim()) { setDataUrl(""); return; }
       try {
+        const QRCode = (await import("qrcode")).default;
         const url = await QRCode.toDataURL(text, { width: size, errorCorrectionLevel: level as "L" | "M" | "Q" | "H", margin: 2, color: { dark: fg, light: bg } });
         if (alive) { setDataUrl(url); setError(null); }
       } catch (e) {

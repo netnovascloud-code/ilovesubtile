@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,10 +65,19 @@ export function Header() {
               }
             }
           }}
-          className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
+          className="flex items-center"
+          aria-label="Konvertools — Home"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-[17px] font-extrabold leading-none text-white shadow-sm">K</span>
-          <span>Konvertools</span>
+          {/* Brand wordmark — 647x122 source, rendered at 32px tall.
+              `priority` because it's above the fold on every page. */}
+          <Image
+            src="/logo.png"
+            alt="Konvertools"
+            width={170}
+            height={32}
+            priority
+            className="h-8 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

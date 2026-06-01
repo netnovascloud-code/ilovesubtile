@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { TOOLS } from "@/lib/tools-config";
-import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES, localePath } from "@/lib/i18n/locales";
+import { localePath } from "@/lib/i18n/locales";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
 export function Footer() {
   const locale = useLocale();
@@ -92,16 +93,7 @@ export function Footer() {
       <div className="border-t border-ink-100">
         <div className="container flex flex-col gap-3 py-6 text-xs text-ink-400 md:flex-row md:items-center md:justify-between">
           <div>© {new Date().getFullYear()} Konver. {t.rights}</div>
-          <div className="flex flex-wrap gap-x-3 gap-y-1">
-            <Link href="/" hrefLang="en" className="hover:text-ink-700">
-              {LANGUAGE_NAMES.en}
-            </Link>
-            {NON_DEFAULT_LOCALES.map((loc) => (
-              <Link key={loc} href={`/${loc}`} hrefLang={loc} className="hover:text-ink-700">
-                {LANGUAGE_NAMES[loc]}
-              </Link>
-            ))}
-          </div>
+          <LanguageSwitcher current={locale} />
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -47,6 +47,17 @@ export function HomeExplorer({
 }) {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<ToolCategory | "all">("all");
+
+  const scrollToTop = () => { if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); };
+
+  // The header logo links to "/" but, when we're already on the homepage, that
+  // navigation doesn't remount this component — so a category filter would stay
+  // "stuck". The logo dispatches "konver:home" which we use to reset the view.
+  useEffect(() => {
+    const reset = () => { setActive("all"); setQuery(""); scrollToTop(); };
+    window.addEventListener("konver:home", reset);
+    return () => window.removeEventListener("konver:home", reset);
+  }, []);
 
   const q = query.trim().toLowerCase();
 
@@ -187,7 +198,7 @@ export function HomeExplorer({
                       <h2 className="text-xl font-bold tracking-tight text-ink-900">{categoryLabels[chip.id] ?? chip.label}</h2>
                       {total > PREVIEW_PER_CATEGORY && (
                         <button
-                          onClick={() => { setActive(chip.id); setQuery(""); }}
+                          onClick={() => { setActive(chip.id); setQuery(""); scrollToTop(); }}
                           className={cn("ml-auto inline-flex items-center gap-1 text-sm font-semibold hover:underline", th.accentText)}
                         >
                           {strings.seeAll.replace("{n}", String(total))} <ArrowRight className="h-3.5 w-3.5" />

@@ -1047,11 +1047,11 @@ TOOLS.push(
 
 // ── Konver — Text & AI (server-side AI, daily free quota) ───────────────────
 const aiFaqs = (name: string): ToolFaq[] => [
-  { q: `Is ${name} free?`, a: `Yes. Free users get 2 runs/day. Pro (€12/month) removes the limit and all ads, with larger inputs.` },
+  { q: `Is ${name} free?`, a: `Yes. Free users get 2 runs/day. Pro (€12/month) gives 500 AI runs per month and Business 3,000, with larger inputs and no ads.` },
   { q: `Is my text stored or used to train AI?`, a: `No. Your text is processed only to generate your result and is not used to train any model. Inputs are not retained long-term.` },
   { q: `How accurate is the result?`, a: `${name} uses an advanced language model and is strong across many languages. For high-stakes content, give the output a quick review.` },
   { q: `Which languages are supported?`, a: `Dozens — input and output work across all major world languages.` },
-  { q: `Do I need an account?`, a: `Not for casual use. Sign in for more daily runs, or go Pro for unlimited use with no ads.` },
+  { q: `Do I need an account?`, a: `Not for casual use. Sign in for more daily runs, or go Pro for a much higher monthly quota with no ads.` },
 ];
 const aiTool = (
   slug: string, icon: LucideIcon, tone: ToolDefinition["tone"], name: string, short: string, h1: string,
@@ -1986,7 +1986,7 @@ TOOLS.push(
       { title: "AI reads it line by line", body: "Illegible passages are tagged, not guessed." },
       { title: "Copy or download", body: "Get a clean .txt of the transcription." },
     ],
-    faqs: codeFaqs("Handwriting to Text"),
+    faqs: aiFaqs("Handwriting to Text"),
   },
   {
     slug: "business-card-scanner", phase: 3, kind: "ai", category: "utilities", icon: ScanLine, tone: "slate",
@@ -2002,7 +2002,7 @@ TOOLS.push(
       { title: "AI extracts the fields", body: "Name, title, email, phone, website…" },
       { title: "Download the vCard", body: "Drag into Contacts, Gmail or Outlook." },
     ],
-    faqs: codeFaqs("Business Card Scanner"),
+    faqs: aiFaqs("Business Card Scanner"),
   },
   {
     slug: "receipt-scanner", phase: 3, kind: "ai", category: "utilities", icon: ScanLine, tone: "slate",
@@ -2018,7 +2018,7 @@ TOOLS.push(
       { title: "AI parses the totals", body: "Merchant, date, subtotal, tax, total, line items." },
       { title: "Export as CSV", body: "Imports straight into Excel, Notion or your accounting tool." },
     ],
-    faqs: codeFaqs("Receipt Scanner"),
+    faqs: aiFaqs("Receipt Scanner"),
   },
   {
     slug: "screenshot-to-code", phase: 3, kind: "ai", category: "developer", icon: Code, tone: "teal",
@@ -2034,7 +2034,7 @@ TOOLS.push(
       { title: "AI writes the markup", body: "Semantic HTML + Tailwind utilities." },
       { title: "Preview & download", body: "Live iframe preview, then export as .html." },
     ],
-    faqs: codeFaqs("Screenshot to HTML"),
+    faqs: aiFaqs("Screenshot to HTML"),
   },
   {
     slug: "image-to-table", phase: 3, kind: "ai", category: "documents", icon: FileSpreadsheet, tone: "green",
@@ -2050,7 +2050,7 @@ TOOLS.push(
       { title: "AI reads the cells", body: "Rows and columns are reconstructed into clean data." },
       { title: "Export your data", body: "Download as Excel (.xlsx), CSV or JSON — one click." },
     ],
-    faqs: codeFaqs("Image to Excel / CSV / JSON"),
+    faqs: aiFaqs("Image to Excel / CSV / JSON"),
   },
 );
 
@@ -2070,7 +2070,7 @@ TOOLS.push(
       { title: "AI transcribes it", body: "Accurate transcription in 30+ languages, with paragraph breaks." },
       { title: "Edit, copy or download", body: "Tidy editable text — copy it or save a .txt." },
     ],
-    faqs: codeFaqs("Voice to Text"),
+    faqs: aiFaqs("Voice to Text"),
   },
   {
     slug: "synonyms-finder", phase: 3, kind: "ai", category: "text-ai", icon: SpellCheck, tone: "indigo",
@@ -2086,7 +2086,7 @@ TOOLS.push(
       { title: "Get sense-aware synonyms", body: "Grouped by meaning when a word has several senses." },
       { title: "Copy what fits", body: "Most natural alternatives first." },
     ],
-    faqs: codeFaqs("Synonyms Finder"),
+    faqs: aiFaqs("Synonyms Finder"),
   },
   {
     slug: "conjugation", phase: 3, kind: "ai", category: "text-ai", icon: Languages, tone: "indigo",
@@ -2102,7 +2102,7 @@ TOOLS.push(
       { title: "AI conjugates it", body: "All main tenses and moods, person by person." },
       { title: "Copy the table", body: "Clean plain text, ready to paste." },
     ],
-    faqs: codeFaqs("Verb Conjugation"),
+    faqs: aiFaqs("Verb Conjugation"),
   },
   {
     slug: "context-examples", phase: 3, kind: "ai", category: "text-ai", icon: BookOpen, tone: "indigo",
@@ -2118,7 +2118,7 @@ TOOLS.push(
       { title: "Choose a translation language", body: "30+ languages supported." },
       { title: "Read in-context examples", body: "Six bilingual pairs across registers — pick the right shade." },
     ],
-    faqs: codeFaqs("Context Examples"),
+    faqs: aiFaqs("Context Examples"),
   },
   {
     slug: "citation-generator", phase: 3, kind: "ai", category: "text-ai", icon: BookOpen, tone: "indigo",
@@ -2134,7 +2134,7 @@ TOOLS.push(
       { title: "Paste source details", body: "Title, authors, year, publisher / URL — anything you have." },
       { title: "Copy your citation", body: "Full reference plus an in-text example, ready to paste." },
     ],
-    faqs: codeFaqs("Citation Generator"),
+    faqs: aiFaqs("Citation Generator"),
   },
   {
     slug: "ai-detector", phase: 3, kind: "ai", category: "text-ai", icon: ScanSearch, tone: "rose",
@@ -2150,7 +2150,7 @@ TOOLS.push(
       { title: "AI analyses the style", body: "Looks for AI tells — over-formal transitions, uniform pacing, hedging clichés." },
       { title: "Get a score", body: "0–100 likelihood plus flagged phrases and reasons." },
     ],
-    faqs: codeFaqs("AI Content Detector"),
+    faqs: aiFaqs("AI Content Detector"),
   },
   {
     slug: "translate-document-with-layout", phase: 3, kind: "ai", category: "documents", icon: Languages, tone: "indigo",
@@ -2166,7 +2166,7 @@ TOOLS.push(
       { title: "Pick a target language", body: "30+ languages with AI-native fluency." },
       { title: "Download the translated copy", body: "Same layout, every paragraph translated — even headers and footers." },
     ],
-    faqs: codeFaqs("Translate Document (Layout Preserved)"),
+    faqs: aiFaqs("Translate Document (Layout Preserved)"),
   },
   {
     slug: "fill-pdf-form", phase: 3, kind: "client", category: "documents", icon: FileSignature, tone: "blue",

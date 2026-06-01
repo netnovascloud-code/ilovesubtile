@@ -1,4 +1,4 @@
-# Konver smoke test — 178/178 passed
+# Konver smoke test — 182/182 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -77,6 +77,10 @@ _None._
 - cron-builder
 - invoice-generator
 - vat-calculator
+- percentage-calculator
+- loan-calculator
+- tip-calculator
+- bmi-calculator
 - merge-pdf
 - split-pdf
 - rotate-pdf

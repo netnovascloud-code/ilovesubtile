@@ -1,4 +1,4 @@
-// Konver smoke test (v11) — runs in GitHub Actions against a freshly-built
+// Konver smoke test (v12) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -188,6 +188,89 @@ for (const { slug, run } of INTERACTIVE) {
 }
 
 await browser.close();
+
+// ── Pass 3 — real AI calls against the deployed edge functions ────────────
+// Bypasses the browser and hits the prod Supabase functions directly so we
+// detect Mistral / quota / CORS regressions, not just page load. Anonymous
+// calls are allowed by design (client-gated); CORS allows localhost:3000.
+// Cost is bounded: 6 small Mistral calls per run.
+const SB_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+async function aiCall(fn, body, timeoutMs = 60_000) {
+  if (!SB_URL) throw new Error("NEXT_PUBLIC_SUPABASE_URL not set");
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const r = await fetch(`${SB_URL}/functions/v1/${fn}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "http://localhost:3000" },
+      body: JSON.stringify(body),
+      signal: ctrl.signal,
+    });
+    const text = await r.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch { /* leave as text */ }
+    return { ok: r.ok, status: r.status, json, text };
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+const AI = [
+  { name: "ai-process:synonyms", run: async () => {
+    const r = await aiCall("ai-process", { task: "synonyms", text: "happy" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    const out = String(r.json?.output ?? "");
+    if (out.length < 5) throw new Error(`empty output: "${out}"`);
+  }},
+  { name: "ai-process:conjugate", run: async () => {
+    const r = await aiCall("ai-process", { task: "conjugate", text: "to run" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    const out = String(r.json?.output ?? "");
+    if (!/run|ran|running/i.test(out)) throw new Error(`no conjugation of 'run' in: "${out.slice(0, 160)}"`);
+  }},
+  { name: "ai-process:rephrase (no markdown)", run: async () => {
+    const r = await aiCall("ai-process", { task: "rephrase", text: "Hey can u send file asap thx", options: { style: "Professional" } });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    const out = String(r.json?.output ?? "");
+    if (out.length < 5) throw new Error(`empty output: "${out}"`);
+    if (/\*\*|^#{1,6} /m.test(out)) throw new Error(`markdown leaked: "${out.slice(0, 160)}"`);
+  }},
+  { name: "ai-process:translate (target lang)", run: async () => {
+    const r = await aiCall("ai-process", { task: "translate", text: "Hello world", options: { target: "French" } });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    const out = String(r.json?.output ?? "").toLowerCase();
+    if (!/(bonjour|monde|salut)/.test(out)) throw new Error(`not French: "${out.slice(0, 160)}"`);
+  }},
+  { name: "ai-process:ai-detect (JSON shape)", run: async () => {
+    const r = await aiCall("ai-process", {
+      task: "ai-detect",
+      text: "The aforementioned methodology facilitates the optimization of operational efficiencies across the organization, enabling stakeholders to leverage synergies in a holistic manner. Furthermore, it is crucial to note that the implementation of such a paradigm shift requires a comprehensive evaluation of existing frameworks.",
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    let parsed;
+    try { parsed = JSON.parse(r.json?.output ?? ""); } catch { throw new Error(`output is not JSON: ${String(r.json?.output).slice(0, 160)}`); }
+    if (typeof parsed.score !== "number" || parsed.score < 0 || parsed.score > 100) throw new Error(`bad score: ${parsed.score}`);
+    if (!Array.isArray(parsed.reasons)) throw new Error("reasons missing");
+  }},
+  { name: "ai-process:citation (APA)", run: async () => {
+    const r = await aiCall("ai-process", {
+      task: "citation",
+      text: "style: APA\nTitle: The Selfish Gene\nAuthor: Richard Dawkins\nYear: 1976\nPublisher: Oxford University Press",
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    const out = String(r.json?.output ?? "");
+    if (!/Dawkins/.test(out) || !/1976/.test(out)) throw new Error(`missing Dawkins/1976 in: "${out.slice(0, 160)}"`);
+  }},
+];
+
+if (SB_URL) {
+  for (const t of AI) {
+    try { await t.run(); record(`AI ${t.name}`, true); }
+    catch (e) { record(`AI ${t.name}`, false, (e instanceof Error ? e.message : String(e)).slice(0, 220)); }
+  }
+} else {
+  process.stdout.write("SKIP AI live tests — NEXT_PUBLIC_SUPABASE_URL not set\n");
+}
 
 // ── Report ────────────────────────────────────────────────────────────────
 const passCount = results.filter((r) => r.ok).length;

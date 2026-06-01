@@ -53,7 +53,7 @@ const FPS = 12;
 type PlanLimit = { label: string; seconds: number };
 function limitFor(user: boolean, plan: string): PlanLimit {
   if (plan === "business") return { label: "Business", seconds: Infinity };
-  if (plan === "pro") return { label: "Pro", seconds: 180 };
+  if (plan === "pro") return { label: "Pro", seconds: 300 }; // 5 min — matches the pricing promise
   if (user) return { label: "Free", seconds: 30 };
   return { label: "anonymous", seconds: 15 };
 }
@@ -271,7 +271,7 @@ export function RemoveVideoBackgroundClient() {
       <p className="flex items-center gap-1.5 text-xs text-ink-400">
         <Lock className="h-3 w-3" /> 100% in your browser via WebAssembly — your video is never uploaded.{" "}
         {Number.isFinite(limit.seconds) && (
-          <span>On the {limit.label} tier, clips are capped at {limit.seconds}s — <Link href="/pricing" className="text-rose-600 hover:underline">upgrade</Link> for up to 3 min (Pro) or unlimited (Business).</span>
+          <span>On the {limit.label} tier, clips are capped at {limit.seconds}s — <Link href="/pricing" className="text-rose-600 hover:underline">upgrade</Link> for up to 5 min (Pro) or unlimited (Business).</span>
         )}
       </p>
       {error && <p className="text-sm text-red-600">{error}</p>}

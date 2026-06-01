@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
-import { TOOLS } from "@/lib/tools-config";
+import { TOOLS, CATEGORIES } from "@/lib/tools-config";
 import { localePath } from "@/lib/i18n/locales";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
@@ -16,13 +16,29 @@ export function Footer() {
 
   return (
     <footer className="mt-24 border-t border-ink-100 bg-white">
-      <div className="container grid grid-cols-2 gap-10 py-12 md:grid-cols-5">
+      <div className="container grid grid-cols-2 gap-10 py-12 md:grid-cols-6">
         <div className="col-span-2 md:col-span-2">
           <div className="font-semibold text-ink-900">Konver</div>
           <p className="mt-3 max-w-sm text-sm text-ink-500">{t.tagline}</p>
           <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
             <ShieldCheck className="h-3.5 w-3.5" /> {t.gdprBadge}
           </span>
+        </div>
+
+        <div>
+          {/* Crawlable links to every category hub — the only internal <a> path
+              to them (homepage chips are client-side filters). Routes are
+              English-only, so they're linked un-prefixed. */}
+          <div className="text-sm font-semibold text-ink-900">{t.categories ?? "Categories"}</div>
+          <ul className="mt-3 space-y-2 text-sm text-ink-500">
+            {CATEGORIES.map((c) => (
+              <li key={c.id}>
+                <Link href={`/${c.id}`} className="hover:text-ink-900">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

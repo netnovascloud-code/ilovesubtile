@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, ChevronRight, ArrowRight } from "lucide-react";
 import { TOOLS, CATEGORY_BY_ID, type ToolCategory } from "@/lib/tools-config";
 import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
+import { ogImageUrl } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 /** Shared category landing — lists every tool in the category, plus a brief
@@ -148,7 +150,7 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
 }
 
 /** SEO metadata builder shared by all category routes. */
-export function categoryMetadata(category: ToolCategory) {
+export function categoryMetadata(category: ToolCategory): Metadata {
   const def = CATEGORY_BY_ID[category];
   const titles: Record<ToolCategory, string> = {
     documents: "All Document Conversion Tools — Free Online",
@@ -161,9 +163,45 @@ export function categoryMetadata(category: ToolCategory) {
     utilities: "Online Utilities — QR, Colors, Units, Currencies & More",
     archives: "Archive Tools — Create & Extract ZIP Online Free",
   };
+  // Group-level keyword seeds — the broad terms people type for a whole
+  // category, complementing the per-tool keywords on each tool page.
+  const seeds: Record<ToolCategory, string[]> = {
+    documents: ["pdf tools", "document converter", "pdf converter online", "merge pdf", "compress pdf", "pdf to word"],
+    audio: ["audio converter", "convert audio online", "mp3 converter", "compress audio", "extract audio", "audio editor online"],
+    video: ["video converter", "convert video online", "mp4 converter", "compress video", "video to gif", "trim video"],
+    images: ["image converter", "convert image online", "image editor", "compress image", "resize image", "remove background"],
+    subtitles: ["subtitle tools", "generate subtitles", "srt converter", "translate subtitles", "subtitle editor online"],
+    developer: ["developer tools", "code formatter", "json formatter", "base64 encode", "code converter online"],
+    "text-ai": ["ai text tools", "ai translator", "paraphrasing tool", "summarize text", "ai humanizer", "free ai writer"],
+    utilities: ["online utilities", "qr code generator", "color picker", "unit converter", "currency converter"],
+    archives: ["archive tools", "create zip online", "extract zip", "unzip online free", "zip files"],
+  };
+  const title = titles[category];
+  const description = `${def.blurb} Free, fast, browser-first — no sign-up needed.`;
+  // Mix the broad group seeds with each member tool's primary keyword so the
+  // hub ranks for both the category term and its individual tools. Capped to
+  // avoid keyword stuffing.
+  const toolPks = TOOLS.filter((t) => t.category === category).map((t) => t.primaryKeyword.toLowerCase());
+  const keywords = Array.from(new Set([
+    `${def.label.toLowerCase()} tools`,
+    `free ${def.label.toLowerCase()} tools online`,
+    ...seeds[category],
+    ...toolPks,
+  ])).slice(0, 28);
   return {
-    title: { absolute: `${titles[category]} | Konver` },
-    description: `${def.blurb} Free, fast, browser-first — no sign-up needed.`,
+    title: { absolute: `${title} | Konver` },
+    description,
+    keywords,
     alternates: { canonical: `/${category}` },
+    openGraph: {
+      type: "website",
+      url: `https://konver.app/${category}`,
+      title: `${title} | Konver`,
+      description,
+      siteName: "Konver",
+      images: [ogImageUrl(title, def.blurb)],
+    },
+    twitter: { card: "summary_large_image", title: `${title} | Konver`, images: [ogImageUrl(title, def.blurb)] },
+    robots: { index: true, follow: true },
   };
 }

@@ -10,7 +10,7 @@ const BRAND = "#2563EB";
 
 export function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const title = (searchParams.get("title") || "Konver").slice(0, 80);
+  const title = (searchParams.get("title") || "Konvertools").slice(0, 80);
   const sub = (searchParams.get("sub") || "Free online tools — no sign-up").slice(0, 130);
 
   return new ImageResponse(
@@ -48,7 +48,7 @@ export function GET(req: Request) {
           >
             K
           </div>
-          <div style={{ fontSize: "34px", fontWeight: 700, color: "#0f172a" }}>Konver</div>
+          <div style={{ fontSize: "34px", fontWeight: 700, color: "#0f172a" }}>Konvertools</div>
         </div>
 
         {/* title + subtitle */}

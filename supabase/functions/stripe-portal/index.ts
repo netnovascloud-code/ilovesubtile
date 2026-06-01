@@ -1,4 +1,4 @@
-// Konver — open the Stripe Customer Portal for the authenticated user.
+// Konvertools — open the Stripe Customer Portal for the authenticated user.
 //
 // POST /functions/v1/stripe-portal
 // Returns: { url: "https://billing.stripe.com/..." }

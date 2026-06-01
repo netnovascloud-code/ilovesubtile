@@ -19,7 +19,7 @@ export function generateMetadata({ params }: { params: { sector: string } }): Me
       title: sector.metaTitle,
       description: sector.metaDescription,
       url: `https://konver.app/for/${sector.id}`,
-      siteName: "Konver",
+      siteName: "Konvertools",
       type: "website",
       images: [ogImageUrl(sector.metaTitle, sector.metaDescription)],
     },

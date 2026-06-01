@@ -1,4 +1,4 @@
-// Konver — Mistral Vision tasks (Pixtral Large). POST JSON:
+// Konvertools — Mistral Vision tasks (Pixtral Large). POST JSON:
 //   { task, image, prompt? }
 // where `image` is a data URL (data:image/...;base64,...) OR a publicly
 // reachable URL. Returns either `{ output: string }` or `{ data: object }`

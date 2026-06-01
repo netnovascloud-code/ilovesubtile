@@ -1,4 +1,4 @@
-// Konver — Mistral-powered text tasks. Self-contained (no shared imports) so it
+// Konvertools — Mistral-powered text tasks. Self-contained (no shared imports) so it
 // deploys cleanly. POST JSON: { task, text, options? }.
 //   options: { target?, style?, format? }
 // Auth: optional user JWT. Free signed-in users are capped per day; Pro/Business
@@ -100,9 +100,9 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "contract-analyze":
       return `You receive the plain text of a contract. Return ONLY a JSON object with these keys: parties (array of strings — the contracting entities), effective_date (ISO YYYY-MM-DD or null), term (string describing duration / termination), payment_terms (string), liability (string — caps / waivers / indemnities, or null), confidentiality (string or null), governing_law (string or null), notable_clauses (array of {title, summary} — 3-6 items the reader should not miss), red_flags (array of strings — anything one-sided or unusual, possibly empty). Be concise; use null when a field is genuinely absent.`;
     case "i18n-tool":
-      return `You are a professional software localizer for "Konver", a free online file-converter and tools website. The user message is a JSON object with five English fields: name, short, h1, metaTitle, metaDescription. Translate every field into ${opts.target || "the target language"} so it reads naturally and idiomatically. Rules: keep the brand name "Konver" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); metaTitle stays under ~60 characters; metaDescription stays under ~160 characters. Return ONLY a JSON object with the SAME five keys.`;
+      return `You are a professional software localizer for "Konvertools", a free online file-converter and tools website. The user message is a JSON object with five English fields: name, short, h1, metaTitle, metaDescription. Translate every field into ${opts.target || "the target language"} so it reads naturally and idiomatically. Rules: keep the brand name "Konvertools" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); metaTitle stays under ~60 characters; metaDescription stays under ~160 characters. Return ONLY a JSON object with the SAME five keys.`;
     case "i18n-category":
-      return `You are a professional software localizer for "Konver", a free online file-converter and tools website. The user message is a JSON object with two English fields: label (a short category name) and blurb (a one-line description). Translate both into ${opts.target || "the target language"} naturally and concisely. Keep the brand name "Konver" unchanged. Return ONLY a JSON object with the SAME two keys.`;
+      return `You are a professional software localizer for "Konvertools", a free online file-converter and tools website. The user message is a JSON object with two English fields: label (a short category name) and blurb (a one-line description). Translate both into ${opts.target || "the target language"} naturally and concisely. Keep the brand name "Konvertools" unchanged. Return ONLY a JSON object with the SAME two keys.`;
     default:
       return null;
   }

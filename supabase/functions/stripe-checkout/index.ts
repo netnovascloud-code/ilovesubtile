@@ -1,4 +1,4 @@
-// Konver — create a Stripe Checkout session for the authenticated user.
+// Konvertools — create a Stripe Checkout session for the authenticated user.
 //
 // Subscriptions:
 //   POST /functions/v1/stripe-checkout?plan=pro|business&interval=monthly|annual

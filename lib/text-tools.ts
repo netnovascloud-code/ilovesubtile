@@ -384,7 +384,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "json-to-xml": {
     inputLabel: "JSON input",
-    inputPlaceholder: '{"book":{"title":"Konver","pages":3}}',
+    inputPlaceholder: '{"book":{"title":"Konvertools","pages":3}}',
     outputLabel: "XML",
     download: { ext: "xml", mime: "application/xml" },
     mono: true,
@@ -450,7 +450,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "xml-to-json": {
     inputLabel: "XML input",
-    inputPlaceholder: "<book><title>Konver</title><pages>3</pages></book>",
+    inputPlaceholder: "<book><title>Konvertools</title><pages>3</pages></book>",
     outputLabel: "JSON",
     download: { ext: "json", mime: "application/json" },
     mono: true,
@@ -490,7 +490,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "json-to-yaml": {
     inputLabel: "JSON input",
-    inputPlaceholder: '{"name":"Konver","tags":["fast","free"]}',
+    inputPlaceholder: '{"name":"Konvertools","tags":["fast","free"]}',
     outputLabel: "YAML",
     download: { ext: "yaml", mime: "text/yaml" },
     mono: true,
@@ -505,7 +505,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "yaml-to-json": {
     inputLabel: "YAML input",
-    inputPlaceholder: "name: Konver\ntags:\n  - fast\n  - free",
+    inputPlaceholder: "name: Konvertools\ntags:\n  - fast\n  - free",
     outputLabel: "JSON",
     download: { ext: "json", mime: "application/json" },
     mono: true,

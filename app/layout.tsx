@@ -20,20 +20,20 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Konver — Free Online File Converter & Tools",
-    template: "%s | Konver",
+    default: "Konvertools — Free Online File Converter & Tools",
+    template: "%s | Konvertools",
   },
   description:
     "Convert anything online for free: documents, audio, video, images, subtitles, code and text. 150+ fast, focused tools. Drop your file, get your result.",
-  applicationName: "Konver",
+  applicationName: "Konvertools",
   openGraph: {
     type: "website",
-    siteName: "Konver",
-    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konver — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
+    siteName: "Konvertools",
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konvertools — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   twitter: {
     card: "summary_large_image",
-    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konver — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konvertools — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   alternates: {
     canonical: "/",
@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@graph": [
               {
                 "@type": "WebSite",
-                name: "Konver",
+                name: "Konvertools",
                 url: SITE_URL,
                 potentialAction: {
                   "@type": "SearchAction",
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               },
               {
                 "@type": "Organization",
-                name: "Konver",
+                name: "Konvertools",
                 url: SITE_URL,
                 logo: `${SITE_URL}/og/default.png`,
               },

@@ -49,7 +49,7 @@ const en: UiStrings = {
   home: {
     toolsTitle: "All subtitle tools",
     toolsLead: "Pick the tool you need. Drop your file. Get your result.",
-    whyTitle: "Why Konver?",
+    whyTitle: "Why Konvertools?",
     reasons: [
       { title: "Built for one thing", body: "Each tool does exactly one job. No bloated video editor, no learning curve." },
       { title: "Powered by AI", body: "State-of-the-art AI for transcription and translation — accurate in 30+ languages." },
@@ -93,7 +93,7 @@ const fr: UiStrings = {
   home: {
     toolsTitle: "Tous les outils de sous-titrage",
     toolsLead: "Choisissez votre outil. Déposez votre fichier. Récupérez le résultat.",
-    whyTitle: "Pourquoi Konver ?",
+    whyTitle: "Pourquoi Konvertools ?",
     reasons: [
       { title: "Une seule mission par outil", body: "Chaque outil fait exactement une chose. Pas d'éditeur vidéo lourd, pas de courbe d'apprentissage." },
       { title: "Propulsé par l'IA", body: "Une IA de pointe pour la transcription et la traduction — précise dans 30+ langues." },
@@ -137,7 +137,7 @@ const es: UiStrings = {
   home: {
     toolsTitle: "Todas las herramientas de subtítulos",
     toolsLead: "Elige la herramienta. Suelta tu archivo. Descarga el resultado.",
-    whyTitle: "¿Por qué Konver?",
+    whyTitle: "¿Por qué Konvertools?",
     reasons: [
       { title: "Una sola misión por herramienta", body: "Cada herramienta hace exactamente una cosa. Sin editor de vídeo pesado, sin curva de aprendizaje." },
       { title: "Impulsado por AI", body: "AI transcribe, AI traduce — preciso en más de 30 idiomas." },
@@ -181,7 +181,7 @@ const pt: UiStrings = {
   home: {
     toolsTitle: "Todas as ferramentas de legendas",
     toolsLead: "Escolha a ferramenta. Solte seu arquivo. Baixe o resultado.",
-    whyTitle: "Por que Konver?",
+    whyTitle: "Por que Konvertools?",
     reasons: [
       { title: "Uma só missão por ferramenta", body: "Cada ferramenta faz exatamente uma coisa. Sem editor de vídeo pesado, sem curva de aprendizado." },
       { title: "Powered by AI", body: "AI transcreve, AI traduz — preciso em mais de 30 idiomas." },
@@ -225,7 +225,7 @@ const de: UiStrings = {
   home: {
     toolsTitle: "Alle Untertitel-Tools",
     toolsLead: "Tool wählen. Datei hochladen. Ergebnis herunterladen.",
-    whyTitle: "Warum Konver?",
+    whyTitle: "Warum Konvertools?",
     reasons: [
       { title: "Eine Aufgabe pro Tool", body: "Jedes Tool macht genau eine Sache. Kein überladener Video-Editor, keine Lernkurve." },
       { title: "Powered by AI", body: "AI transkribiert, AI übersetzt — präzise in 30+ Sprachen." },
@@ -269,7 +269,7 @@ const it: UiStrings = {
   home: {
     toolsTitle: "Tutti gli strumenti per sottotitoli",
     toolsLead: "Scegli lo strumento. Carica il file. Scarica il risultato.",
-    whyTitle: "Perché Konver?",
+    whyTitle: "Perché Konvertools?",
     reasons: [
       { title: "Una missione per strumento", body: "Ogni strumento fa esattamente una cosa. Niente editor video pesante, nessuna curva di apprendimento." },
       { title: "Powered by AI", body: "AI per la trascrizione, AI per la traduzione — preciso in 30+ lingue." },
@@ -313,7 +313,7 @@ const nl: UiStrings = {
   home: {
     toolsTitle: "Alle ondertitel-tools",
     toolsLead: "Kies je tool. Upload je bestand. Download het resultaat.",
-    whyTitle: "Waarom Konver?",
+    whyTitle: "Waarom Konvertools?",
     reasons: [
       { title: "Eén taak per tool", body: "Elke tool doet precies één ding. Geen overladen video-editor, geen leercurve." },
       { title: "Powered by AI", body: "AI transcribeert, AI vertaalt — nauwkeurig in 30+ talen." },
@@ -357,7 +357,7 @@ const ja: UiStrings = {
   home: {
     toolsTitle: "すべての字幕ツール",
     toolsLead: "ツールを選んで、ファイルをドロップして、結果を受け取る。",
-    whyTitle: "Konverを選ぶ理由",
+    whyTitle: "Konvertoolsを選ぶ理由",
     reasons: [
       { title: "1ツール1機能", body: "各ツールはひとつの仕事だけをこなします。重い動画エディタも学習コストも不要。" },
       { title: "AI搭載", body: "AIが文字起こし、AIが翻訳を担当 — 30以上の言語で高精度。" },
@@ -401,7 +401,7 @@ const zh: UiStrings = {
   home: {
     toolsTitle: "所有字幕工具",
     toolsLead: "选择工具，上传文件，下载结果。",
-    whyTitle: "为什么选择 Konver？",
+    whyTitle: "为什么选择 Konvertools？",
     reasons: [
       { title: "每个工具只做一件事", body: "每个工具只完成一项任务。没有臃肿的视频编辑器，没有学习曲线。" },
       { title: "由 AI 驱动", body: "AI 负责转录,AI 负责翻译 — 在 30 多种语言中保持准确。" },
@@ -445,7 +445,7 @@ const ko: UiStrings = {
   home: {
     toolsTitle: "모든 자막 도구",
     toolsLead: "도구를 선택하고, 파일을 올리고, 결과를 받으세요.",
-    whyTitle: "왜 Konver인가요?",
+    whyTitle: "왜 Konvertools인가요?",
     reasons: [
       { title: "도구당 한 가지 작업", body: "각 도구는 정확히 한 가지 일만 합니다. 무거운 영상 편집기도, 학습 곡선도 없습니다." },
       { title: "AI 기반", body: "AI가 전사, AI가 번역 — 30개 이상의 언어에서 정확합니다." },
@@ -489,7 +489,7 @@ const ar: UiStrings = {
   home: {
     toolsTitle: "كل أدوات الترجمة",
     toolsLead: "اختر الأداة. ارفع الملف. حمّل النتيجة.",
-    whyTitle: "لماذا Konver؟",
+    whyTitle: "لماذا Konvertools؟",
     reasons: [
       { title: "مهمة واحدة لكل أداة", body: "كل أداة تقوم بمهمة واحدة بالضبط. لا محرر فيديو ثقيل، لا منحنى تعلم." },
       { title: "مدعوم بـ AI", body: "AI للتفريغ، AI للترجمة — دقيق في أكثر من 30 لغة." },
@@ -533,7 +533,7 @@ const ru: UiStrings = {
   home: {
     toolsTitle: "Все инструменты для субтитров",
     toolsLead: "Выберите инструмент. Загрузите файл. Скачайте результат.",
-    whyTitle: "Почему Konver?",
+    whyTitle: "Почему Konvertools?",
     reasons: [
       { title: "Один инструмент — одна задача", body: "Каждый инструмент делает ровно одно дело. Никаких громоздких редакторов, никакого обучения." },
       { title: "На базе AI", body: "AI транскрибирует, AI переводит — точно в 30+ языках." },
@@ -577,7 +577,7 @@ const hi: UiStrings = {
   home: {
     toolsTitle: "सभी सबटाइटल टूल",
     toolsLead: "टूल चुनें। फ़ाइल अपलोड करें। परिणाम डाउनलोड करें।",
-    whyTitle: "Konver क्यों?",
+    whyTitle: "Konvertools क्यों?",
     reasons: [
       { title: "एक टूल, एक काम", body: "हर टूल ठीक एक काम करता है। न भारी वीडियो एडिटर, न सीखने की ज़रूरत।" },
       { title: "AI द्वारा संचालित", body: "AI ट्रांसक्रिप्शन करता है, AI अनुवाद करता है — 30+ भाषाओं में सटीक।" },
@@ -621,7 +621,7 @@ const tr: UiStrings = {
   home: {
     toolsTitle: "Tüm araçlar",
     toolsLead: "İhtiyacınız olan aracı seçin. Dosyanızı bırakın. Sonucu alın.",
-    whyTitle: "Neden Konver?",
+    whyTitle: "Neden Konvertools?",
     reasons: [
       { title: "Tek bir iş için tasarlandı", body: "Her araç tam olarak bir işi yapar. Şişkin video düzenleyici yok, öğrenme eğrisi yok." },
       { title: "AI destekli", body: "Transkripsiyon ve çeviri için son teknoloji AI — 30+ dilde doğru." },
@@ -659,7 +659,7 @@ const id: UiStrings = {
   home: {
     toolsTitle: "Semua alat",
     toolsLead: "Pilih alat yang Anda butuhkan. Letakkan file Anda. Dapatkan hasilnya.",
-    whyTitle: "Mengapa Konver?",
+    whyTitle: "Mengapa Konvertools?",
     reasons: [
       { title: "Dibuat untuk satu hal", body: "Setiap alat melakukan tepat satu pekerjaan. Tanpa editor video yang berat, tanpa kurva belajar." },
       { title: "Didukung AI", body: "AI canggih untuk transkripsi dan terjemahan — akurat dalam 30+ bahasa." },
@@ -697,7 +697,7 @@ const vi: UiStrings = {
   home: {
     toolsTitle: "Tất cả công cụ",
     toolsLead: "Chọn công cụ bạn cần. Thả tệp của bạn. Nhận kết quả.",
-    whyTitle: "Tại sao chọn Konver?",
+    whyTitle: "Tại sao chọn Konvertools?",
     reasons: [
       { title: "Được tạo cho một việc", body: "Mỗi công cụ làm đúng một việc. Không có trình chỉnh sửa video cồng kềnh, không cần học." },
       { title: "Hỗ trợ bởi AI", body: "AI tiên tiến cho phiên âm và dịch — chính xác trong hơn 30 ngôn ngữ." },
@@ -735,7 +735,7 @@ const sv: UiStrings = {
   home: {
     toolsTitle: "Alla verktyg",
     toolsLead: "Välj verktyget du behöver. Släpp din fil. Få ditt resultat.",
-    whyTitle: "Varför Konver?",
+    whyTitle: "Varför Konvertools?",
     reasons: [
       { title: "Byggt för en sak", body: "Varje verktyg gör exakt en sak. Ingen uppsvälld videoredigerare, ingen inlärningskurva." },
       { title: "Drivs av AI", body: "Toppmodern AI för transkribering och översättning — exakt på 30+ språk." },
@@ -773,7 +773,7 @@ const pl: UiStrings = {
   home: {
     toolsTitle: "Wszystkie narzędzia",
     toolsLead: "Wybierz potrzebne narzędzie. Upuść plik. Pobierz wynik.",
-    whyTitle: "Dlaczego Konver?",
+    whyTitle: "Dlaczego Konvertools?",
     reasons: [
       { title: "Stworzone do jednego zadania", body: "Każde narzędzie robi dokładnie jedną rzecz. Bez rozdętego edytora wideo, bez nauki." },
       { title: "Napędzane przez AI", body: "Najnowocześniejsze AI do transkrypcji i tłumaczenia — dokładne w ponad 30 językach." },
@@ -811,7 +811,7 @@ const uk: UiStrings = {
   home: {
     toolsTitle: "Усі інструменти",
     toolsLead: "Виберіть потрібний інструмент. Перетягніть файл. Отримайте результат.",
-    whyTitle: "Чому Konver?",
+    whyTitle: "Чому Konvertools?",
     reasons: [
       { title: "Створено для однієї задачі", body: "Кожен інструмент робить рівно одну справу. Жодного громіздкого відеоредактора, жодного навчання." },
       { title: "На базі AI", body: "Найсучасніший AI для транскрипції та перекладу — точно понад 30 мовами." },
@@ -849,7 +849,7 @@ const cs: UiStrings = {
   home: {
     toolsTitle: "Všechny nástroje",
     toolsLead: "Vyberte nástroj, který potřebujete. Přetáhněte soubor. Získejte výsledek.",
-    whyTitle: "Proč Konver?",
+    whyTitle: "Proč Konvertools?",
     reasons: [
       { title: "Vytvořeno pro jednu věc", body: "Každý nástroj dělá přesně jednu věc. Žádný nabubřelý videoeditor, žádná křivka učení." },
       { title: "Poháněno AI", body: "Špičková AI pro přepis a překlad — přesné ve více než 30 jazycích." },

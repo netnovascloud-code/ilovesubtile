@@ -1,4 +1,4 @@
-/** "Konver vs <competitor>" comparison pages — high-intent switching traffic.
+/** "Konvertools vs <competitor>" comparison pages — high-intent switching traffic.
  *  Honest by design: every page includes a "When <competitor> is the better
  *  pick" section, which reads as credible and ranks better.
  */
@@ -20,10 +20,10 @@ export const VS: Record<string, Vs> = {
   ilovepdf: {
     id: "ilovepdf",
     competitor: "iLovePDF",
-    hero: "Konver vs iLovePDF — More Tools, Free AI, No Ads",
-    metaTitle: "Konver vs iLovePDF — More Tools, Free AI, No Ads | Konver",
-    metaDescription: "Konver vs iLovePDF compared: 98+ tools beyond PDF, free AI text & subtitle tools, no ads on the free tier, and most processing runs in your browser.",
-    intro: "iLovePDF is a solid PDF suite. Konver covers PDF too — merge, split, compress, convert — and adds images, audio, video, code, subtitles and AI text tools, with most processing happening right in your browser.",
+    hero: "Konvertools vs iLovePDF — More Tools, Free AI, No Ads",
+    metaTitle: "Konvertools vs iLovePDF — More Tools, Free AI, No Ads | Konvertools",
+    metaDescription: "Konvertools vs iLovePDF compared: 98+ tools beyond PDF, free AI text & subtitle tools, no ads on the free tier, and most processing runs in your browser.",
+    intro: "iLovePDF is a solid PDF suite. Konvertools covers PDF too — merge, split, compress, convert — and adds images, audio, video, code, subtitles and AI text tools, with most processing happening right in your browser.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "~€7/mo Premium", win: false },
       { feature: "Free tier", konver: "All browser tools, unlimited", them: "Limited tasks/day", win: true },
@@ -39,16 +39,16 @@ export const VS: Record<string, Vs> = {
       "The free tier is genuinely unlimited for browser-side tools, with no ads.",
       "Most conversions never leave your device, so they're instant and private.",
     ],
-    whenThem: "iLovePDF has a polished mobile app and desktop app, and some advanced PDF-specific features (OCR, signatures) that Konver doesn't offer yet. If you live entirely in PDFs and want native apps, it's a fair choice.",
+    whenThem: "iLovePDF has a polished mobile app and desktop app, and some advanced PDF-specific features (OCR, signatures) that Konvertools doesn't offer yet. If you live entirely in PDFs and want native apps, it's a fair choice.",
     ctaSlugs: ["merge-pdf", "pdf-to-word", "compress-pdf"],
   },
   convertio: {
     id: "convertio",
     competitor: "Convertio",
-    hero: "Konver vs Convertio — Faster, Free, No File Limits",
-    metaTitle: "Konver vs Convertio — Faster, Free, No File Limits | Konver",
-    metaDescription: "Konver vs Convertio compared: browser-side conversions with no upload, no daily minute caps on free browser tools, plus AI text and subtitle tools.",
-    intro: "Convertio converts hundreds of formats on its servers. Konver converts the most-used formats right in your browser — so there's no upload, no queue, and no per-day minute cap on the free browser tools.",
+    hero: "Konvertools vs Convertio — Faster, Free, No File Limits",
+    metaTitle: "Konvertools vs Convertio — Faster, Free, No File Limits | Konvertools",
+    metaDescription: "Konvertools vs Convertio compared: browser-side conversions with no upload, no daily minute caps on free browser tools, plus AI text and subtitle tools.",
+    intro: "Convertio converts hundreds of formats on its servers. Konvertools converts the most-used formats right in your browser — so there's no upload, no queue, and no per-day minute cap on the free browser tools.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from $9.99/mo", win: true },
       { feature: "Free tier", konver: "Unlimited browser tools", them: "10 conversions/day, 100 MB", win: true },
@@ -69,10 +69,10 @@ export const VS: Record<string, Vs> = {
   smallpdf: {
     id: "smallpdf",
     competitor: "Smallpdf",
-    hero: "Konver vs Smallpdf — Free Forever, No Sign-up Needed",
-    metaTitle: "Konver vs Smallpdf — Free Forever, No Sign-up | Konver",
-    metaDescription: "Konver vs Smallpdf compared: no sign-up to use the tools, unlimited free browser-side PDF and conversion tools, plus AI and subtitle tools Smallpdf lacks.",
-    intro: "Smallpdf is a clean PDF toolkit that nudges you to sign up and caps free use. Konver's browser tools are free and unlimited with no account, and the catalogue goes well beyond PDF.",
+    hero: "Konvertools vs Smallpdf — Free Forever, No Sign-up Needed",
+    metaTitle: "Konvertools vs Smallpdf — Free Forever, No Sign-up | Konvertools",
+    metaDescription: "Konvertools vs Smallpdf compared: no sign-up to use the tools, unlimited free browser-side PDF and conversion tools, plus AI and subtitle tools Smallpdf lacks.",
+    intro: "Smallpdf is a clean PDF toolkit that nudges you to sign up and caps free use. Konvertools's browser tools are free and unlimited with no account, and the catalogue goes well beyond PDF.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "~€12/mo", win: false },
       { feature: "Sign-up to use", konver: "Never", them: "Pushed / required", win: true },
@@ -93,10 +93,10 @@ export const VS: Record<string, Vs> = {
   "adobe-acrobat": {
     id: "adobe-acrobat",
     competitor: "Adobe Acrobat",
-    hero: "Konver vs Adobe Acrobat — Free Alternative Online",
-    metaTitle: "Konver vs Adobe Acrobat — Free Online Alternative | Konver",
-    metaDescription: "Konver vs Adobe Acrobat compared: a free, no-install, browser-based alternative for the everyday PDF jobs — merge, split, compress, convert — plus much more.",
-    intro: "Adobe Acrobat is the professional standard, with a price to match. For the everyday jobs — merge, split, compress, convert, watermark, page numbers — Konver does them free in your browser with nothing to install.",
+    hero: "Konvertools vs Adobe Acrobat — Free Alternative Online",
+    metaTitle: "Konvertools vs Adobe Acrobat — Free Online Alternative | Konvertools",
+    metaDescription: "Konvertools vs Adobe Acrobat compared: a free, no-install, browser-based alternative for the everyday PDF jobs — merge, split, compress, convert — plus much more.",
+    intro: "Adobe Acrobat is the professional standard, with a price to match. For the everyday jobs — merge, split, compress, convert, watermark, page numbers — Konvertools does them free in your browser with nothing to install.",
     rows: [
       { feature: "Price", konver: "Free / €12/mo Pro", them: "~€19/mo", win: true },
       { feature: "Install", konver: "None — web", them: "Desktop app", win: true },
@@ -117,10 +117,10 @@ export const VS: Record<string, Vs> = {
   zamzar: {
     id: "zamzar",
     competitor: "Zamzar",
-    hero: "Konver vs Zamzar — Faster Conversions, No Email Required",
-    metaTitle: "Konver vs Zamzar — Faster, No Email Required | Konver",
-    metaDescription: "Konver vs Zamzar compared: instant browser-side conversions with no email and no upload wait, plus AI text and subtitle tools Zamzar doesn't offer.",
-    intro: "Zamzar emails you a download link after a server conversion. Konver converts the common formats instantly in your browser — no email, no upload, no waiting room.",
+    hero: "Konvertools vs Zamzar — Faster Conversions, No Email Required",
+    metaTitle: "Konvertools vs Zamzar — Faster, No Email Required | Konvertools",
+    metaDescription: "Konvertools vs Zamzar compared: instant browser-side conversions with no email and no upload wait, plus AI text and subtitle tools Zamzar doesn't offer.",
+    intro: "Zamzar emails you a download link after a server conversion. Konvertools converts the common formats instantly in your browser — no email, no upload, no waiting room.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from $9/mo", win: true },
       { feature: "Free tier", konver: "Unlimited browser tools", them: "Limited, watermarked", win: true },
@@ -141,10 +141,10 @@ export const VS: Record<string, Vs> = {
   cloudconvert: {
     id: "cloudconvert",
     competitor: "CloudConvert",
-    hero: "Konver vs CloudConvert — Free Alternative, No Credits",
-    metaTitle: "Konver vs CloudConvert — Free, No Credits | Konver",
-    metaDescription: "Konver vs CloudConvert compared: no per-conversion credit system on free browser tools, instant local processing, plus AI text and subtitle tools.",
-    intro: "CloudConvert meters everything with a credit/minute system. Konver's browser tools are free and uncounted — the credits only exist for the optional REST API.",
+    hero: "Konvertools vs CloudConvert — Free Alternative, No Credits",
+    metaTitle: "Konvertools vs CloudConvert — Free, No Credits | Konvertools",
+    metaDescription: "Konvertools vs CloudConvert compared: no per-conversion credit system on free browser tools, instant local processing, plus AI text and subtitle tools.",
+    intro: "CloudConvert meters everything with a credit/minute system. Konvertools's browser tools are free and uncounted — the credits only exist for the optional REST API.",
     rows: [
       { feature: "Pricing model", konver: "Free browser tools; API credits optional", them: "Credits/minutes for everything", win: true },
       { feature: "Free tier", konver: "Unlimited browser tools", them: "25 conversions/day", win: true },
@@ -165,10 +165,10 @@ export const VS: Record<string, Vs> = {
   veed: {
     id: "veed",
     competitor: "VEED",
-    hero: "Konver vs VEED — Free Video & Subtitle Tools",
-    metaTitle: "Konver vs VEED — Free Video & Subtitle Tools | Konver",
-    metaDescription: "Konver vs VEED compared: free, watermark-free subtitle generation, translation and quick video edits in your browser, without a full editor or subscription.",
-    intro: "VEED is a full online video editor. If you mainly need subtitles, audio extraction and quick edits, Konver does those free in your browser — and adds PDF, image, code and AI text tools.",
+    hero: "Konvertools vs VEED — Free Video & Subtitle Tools",
+    metaTitle: "Konvertools vs VEED — Free Video & Subtitle Tools | Konvertools",
+    metaDescription: "Konvertools vs VEED compared: free, watermark-free subtitle generation, translation and quick video edits in your browser, without a full editor or subscription.",
+    intro: "VEED is a full online video editor. If you mainly need subtitles, audio extraction and quick edits, Konvertools does those free in your browser — and adds PDF, image, code and AI text tools.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from ~$18/mo", win: true },
       { feature: "Free watermark", konver: "Only on burned-in subs (free)", them: "Yes, on exports", win: true },
@@ -189,10 +189,10 @@ export const VS: Record<string, Vs> = {
   kapwing: {
     id: "kapwing",
     competitor: "Kapwing",
-    hero: "Konver vs Kapwing — Free Online Media Tools",
-    metaTitle: "Konver vs Kapwing — Free Online Media Tools | Konver",
-    metaDescription: "Konver vs Kapwing compared: free, no-watermark conversion and subtitle tools that run in your browser, without a collaborative editor or subscription.",
-    intro: "Kapwing is a collaborative content studio. For the conversion and subtitle jobs around your content, Konver is free, browser-side and watermark-free on text outputs.",
+    hero: "Konvertools vs Kapwing — Free Online Media Tools",
+    metaTitle: "Konvertools vs Kapwing — Free Online Media Tools | Konvertools",
+    metaDescription: "Konvertools vs Kapwing compared: free, no-watermark conversion and subtitle tools that run in your browser, without a collaborative editor or subscription.",
+    intro: "Kapwing is a collaborative content studio. For the conversion and subtitle jobs around your content, Konvertools is free, browser-side and watermark-free on text outputs.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from ~$16/mo", win: true },
       { feature: "Free watermark", konver: "Only on burned-in subs", them: "Yes", win: true },
@@ -213,10 +213,10 @@ export const VS: Record<string, Vs> = {
   reverso: {
     id: "reverso",
     competitor: "Reverso",
-    hero: "Konver vs Reverso — AI Rephraser + Translation Free",
-    metaTitle: "Konver vs Reverso — AI Rephraser + Translation | Konver",
-    metaDescription: "Konver vs Reverso compared: AI translation, rephrasing, summarizing and grammar in 30+ languages — plus a full conversion suite Reverso doesn't have.",
-    intro: "Reverso is great for translation and language learning. Konver covers translation too, adds rephrasing, summarizing, grammar and humanizing — and a whole file-conversion suite alongside.",
+    hero: "Konvertools vs Reverso — AI Rephraser + Translation Free",
+    metaTitle: "Konvertools vs Reverso — AI Rephraser + Translation | Konvertools",
+    metaDescription: "Konvertools vs Reverso compared: AI translation, rephrasing, summarizing and grammar in 30+ languages — plus a full conversion suite Reverso doesn't have.",
+    intro: "Reverso is great for translation and language learning. Konvertools covers translation too, adds rephrasing, summarizing, grammar and humanizing — and a whole file-conversion suite alongside.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from ~$7/mo", win: false },
       { feature: "Translation", konver: "AI, 30+ languages", them: "Yes, with context", win: false },
@@ -237,10 +237,10 @@ export const VS: Record<string, Vs> = {
   grammarly: {
     id: "grammarly",
     competitor: "Grammarly",
-    hero: "Konver vs Grammarly — Free Grammar Checker + More",
-    metaTitle: "Konver vs Grammarly — Free Grammar Checker + More | Konver",
-    metaDescription: "Konver vs Grammarly compared: free AI grammar fixing, rephrasing and summarizing with no install — plus translation and a full conversion suite.",
-    intro: "Grammarly is a polished writing assistant that lives in your browser and apps. Konver offers free grammar fixing, rephrasing, summarizing and humanizing on demand — no extension, plus translation and file tools.",
+    hero: "Konvertools vs Grammarly — Free Grammar Checker + More",
+    metaTitle: "Konvertools vs Grammarly — Free Grammar Checker + More | Konvertools",
+    metaDescription: "Konvertools vs Grammarly compared: free AI grammar fixing, rephrasing and summarizing with no install — plus translation and a full conversion suite.",
+    intro: "Grammarly is a polished writing assistant that lives in your browser and apps. Konvertools offers free grammar fixing, rephrasing, summarizing and humanizing on demand — no extension, plus translation and file tools.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from ~$12/mo", win: true },
       { feature: "Free grammar", konver: "Yes, AI", them: "Yes, basic", win: false },
@@ -261,10 +261,10 @@ export const VS: Record<string, Vs> = {
   deepl: {
     id: "deepl",
     competitor: "DeepL",
-    hero: "Konver vs DeepL — Free Translator with More Tools",
-    metaTitle: "Konver vs DeepL — Free Translator + More Tools | Konver",
-    metaDescription: "Konver vs DeepL compared: free AI translation in 30+ languages plus subtitle translation, rephrasing and a full conversion suite DeepL doesn't offer.",
-    intro: "DeepL is renowned for translation quality. Konver translates in 30+ languages too, and adds subtitle translation, rephrasing, summarizing and a complete file-conversion suite.",
+    hero: "Konvertools vs DeepL — Free Translator with More Tools",
+    metaTitle: "Konvertools vs DeepL — Free Translator + More Tools | Konvertools",
+    metaDescription: "Konvertools vs DeepL compared: free AI translation in 30+ languages plus subtitle translation, rephrasing and a full conversion suite DeepL doesn't offer.",
+    intro: "DeepL is renowned for translation quality. Konvertools translates in 30+ languages too, and adds subtitle translation, rephrasing, summarizing and a complete file-conversion suite.",
     rows: [
       { feature: "Price (paid)", konver: "€12/mo Pro", them: "from ~€8/mo", win: false },
       { feature: "Translation quality", konver: "AI, very strong", them: "Best-in-class", win: false },
@@ -285,10 +285,10 @@ export const VS: Record<string, Vs> = {
   "remove-bg": {
     id: "remove-bg",
     competitor: "Remove.bg",
-    hero: "Konver vs Remove.bg — Free Background Remover + More",
-    metaTitle: "Konver vs Remove.bg — Free Background Remover + More | Konver",
-    metaDescription: "Konver vs Remove.bg compared: free, full-resolution AI background removal that runs in your browser with no credits — plus a full image and conversion suite.",
-    intro: "Remove.bg pioneered one-click background removal but meters full-resolution output with credits. Konver removes backgrounds free, at full resolution, entirely in your browser — and does much more.",
+    hero: "Konvertools vs Remove.bg — Free Background Remover + More",
+    metaTitle: "Konvertools vs Remove.bg — Free Background Remover + More | Konvertools",
+    metaDescription: "Konvertools vs Remove.bg compared: free, full-resolution AI background removal that runs in your browser with no credits — plus a full image and conversion suite.",
+    intro: "Remove.bg pioneered one-click background removal but meters full-resolution output with credits. Konvertools removes backgrounds free, at full resolution, entirely in your browser — and does much more.",
     rows: [
       { feature: "Price", konver: "Free, full-res", them: "Free preview; credits for HD", win: true },
       { feature: "Full resolution free", konver: "Yes", them: "No (paid)", win: true },

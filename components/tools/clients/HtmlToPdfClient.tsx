@@ -5,7 +5,7 @@ import { Upload, X, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const SAMPLE = `<h1>Konver</h1>
+const SAMPLE = `<h1>Konvertools</h1>
 <p>Free online conversion tools — files, images, code, text and more.</p>
 <ul>
   <li>PDF: Merge, Split, Rotate, Images→PDF</li>

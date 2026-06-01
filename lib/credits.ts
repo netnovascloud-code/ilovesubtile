@@ -1,5 +1,5 @@
 /**
- * Konver credit system — single source of truth for the public REST API.
+ * Konvertools credit system — single source of truth for the public REST API.
  *
  * Pure data, no SDK. The Supabase Edge Function `api-gateway` mirrors the
  * cost logic in Deno (it can't import this file), so keep the two in sync —

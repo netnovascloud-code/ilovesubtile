@@ -1,4 +1,4 @@
-// Konver smoke test (v20) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v21) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -108,10 +108,10 @@ const INTERACTIVE = [
   }},
   { slug: "email-signature-generator", run: async (page) => {
     // First text input is "Full name" — change it and verify the preview reflects it.
-    await page.locator('input[type="text"]').first().fill("Test Konver");
+    await page.locator('input[type="text"]').first().fill("Test Konvertools");
     await page.waitForTimeout(300);
     const body = await page.locator("body").innerText();
-    if (!body.includes("Test Konver")) throw new Error("preview didn't update");
+    if (!body.includes("Test Konvertools")) throw new Error("preview didn't update");
   }},
   { slug: "hash-generator", run: async (page) => {
     await page.locator("textarea").first().fill("hello");
@@ -193,7 +193,7 @@ await browser.close();
 // Every page's og:image points at /og/i — verify it returns a real PNG so we
 // never regress back to blank social previews.
 try {
-  const r = await fetch(`${BASE}/og/i?title=Smoke+Test&sub=Konver`, { signal: AbortSignal.timeout(20_000) });
+  const r = await fetch(`${BASE}/og/i?title=Smoke+Test&sub=Konvertools`, { signal: AbortSignal.timeout(20_000) });
   const ct = r.headers.get("content-type") || "";
   const buf = new Uint8Array(await r.arrayBuffer());
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -310,7 +310,7 @@ if (SB_URL) {
 const passCount = results.filter((r) => r.ok).length;
 const failed = results.filter((r) => !r.ok);
 const md = [
-  `# Konver smoke test — ${passCount}/${results.length} passed`,
+  `# Konvertools smoke test — ${passCount}/${results.length} passed`,
   "",
   failed.length === 0
     ? "✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass."

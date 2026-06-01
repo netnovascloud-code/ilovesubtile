@@ -67,7 +67,7 @@ export function Header() {
           className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
         >
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-[17px] font-extrabold leading-none text-white shadow-sm">K</span>
-          <span>Konver</span>
+          <span>Konvertools</span>
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

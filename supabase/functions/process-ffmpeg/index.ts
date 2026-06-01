@@ -1,4 +1,4 @@
-// Konver — forwarder to a self-hosted FFmpeg worker.
+// Konvertools — forwarder to a self-hosted FFmpeg worker.
 //
 // This function is dormant. There is no VPS, and the three tools it used to
 // route to (add-subtitles-to-video, extract-subtitles, style-subtitles) run

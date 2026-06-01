@@ -3,7 +3,7 @@ export type CategoryI18n = { label: string; blurb: string };
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations served by Mistral Large via the Konver ai-process edge
+ * Machine translations served by Mistral Large via the Konvertools ai-process edge
  * function. Resolvers prefer hand-authored strings over this overlay.
  */
 export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Locale, CategoryI18n>>> = {
@@ -62,7 +62,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "ru": {
       "label": "Архивы",
-      "blurb": "Создавайте и извлекайте ZIP-архивы прямо в браузере с помощью Konver."
+      "blurb": "Создавайте и извлекайте ZIP-архивы прямо в браузере с помощью Konvertools."
     },
     "sv": {
       "label": "Arkiv",
@@ -136,7 +136,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "pt": {
       "label": "Áudio",
-      "blurb": "Converta, comprima, corte e transcreva áudio com o Konver."
+      "blurb": "Converta, comprima, corte e transcreva áudio com o Konvertools."
     },
     "ru": {
       "label": "Аудио",
@@ -642,7 +642,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "de": {
       "label": "Video",
-      "blurb": "Videos konvertieren, komprimieren, schneiden und bearbeiten mit Konver."
+      "blurb": "Videos konvertieren, komprimieren, schneiden und bearbeiten mit Konvertools."
     },
     "es": {
       "label": "Vídeo",
@@ -686,7 +686,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "ru": {
       "label": "Видео",
-      "blurb": "Конвертируйте, сжимайте, обрезайте и редактируйте видео с помощью Konver."
+      "blurb": "Конвертируйте, сжимайте, обрезайте и редактируйте видео с помощью Konvertools."
     },
     "sv": {
       "label": "Video",

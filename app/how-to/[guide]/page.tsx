@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { guide: string } }): Met
     title: { absolute: howto.metaTitle },
     description: howto.metaDescription,
     alternates: { canonical: `/how-to/${howto.id}` },
-    openGraph: { title: howto.metaTitle, description: howto.metaDescription, url: `https://konver.app/how-to/${howto.id}`, siteName: "Konver", type: "article", images: [ogImageUrl(howto.metaTitle, howto.metaDescription)] },
+    openGraph: { title: howto.metaTitle, description: howto.metaDescription, url: `https://konver.app/how-to/${howto.id}`, siteName: "Konvertools", type: "article", images: [ogImageUrl(howto.metaTitle, howto.metaDescription)] },
     twitter: { card: "summary_large_image", images: [ogImageUrl(howto.metaTitle, howto.metaDescription)] },
   };
 }

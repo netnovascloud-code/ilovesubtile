@@ -1,4 +1,4 @@
-// Konver — translate SRT/VTT via Mistral chat (JSON mode).
+// Konvertools — translate SRT/VTT via Mistral chat (JSON mode).
 //
 // Deploy: supabase functions deploy translate-subtitles
 // Secret:  supabase secrets set MISTRAL_API_KEY=...

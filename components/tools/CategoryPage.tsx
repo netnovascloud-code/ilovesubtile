@@ -126,11 +126,11 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: `All ${def.label} Tools — Konver`,
+            name: `All ${def.label} Tools — Konvertools`,
             description: def.blurb,
             url: `https://konver.app/${category}`,
             inLanguage: "en",
-            isPartOf: { "@type": "WebSite", name: "Konver", url: "https://konver.app/" },
+            isPartOf: { "@type": "WebSite", name: "Konvertools", url: "https://konver.app/" },
             mainEntity: {
               "@type": "ItemList",
               numberOfItems: tools.length,
@@ -189,19 +189,19 @@ export function categoryMetadata(category: ToolCategory): Metadata {
     ...toolPks,
   ])).slice(0, 28);
   return {
-    title: { absolute: `${title} | Konver` },
+    title: { absolute: `${title} | Konvertools` },
     description,
     keywords,
     alternates: { canonical: `/${category}` },
     openGraph: {
       type: "website",
       url: `https://konver.app/${category}`,
-      title: `${title} | Konver`,
+      title: `${title} | Konvertools`,
       description,
-      siteName: "Konver",
+      siteName: "Konvertools",
       images: [ogImageUrl(title, def.blurb)],
     },
-    twitter: { card: "summary_large_image", title: `${title} | Konver`, images: [ogImageUrl(title, def.blurb)] },
+    twitter: { card: "summary_large_image", title: `${title} | Konvertools`, images: [ogImageUrl(title, def.blurb)] },
     robots: { index: true, follow: true },
   };
 }

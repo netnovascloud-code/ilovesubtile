@@ -1,4 +1,4 @@
-// Fill missing translations by calling the deployed Konver `ai-process` edge
+// Fill missing translations by calling the deployed Konvertools `ai-process` edge
 // function (which holds the Mistral API key server-side). The caller only
 // needs the public anon key — no MISTRAL_API_KEY required locally.
 //
@@ -210,7 +210,7 @@ ${cfg.typeImport}
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations served by Mistral Large via the Konver ai-process edge
+ * Machine translations served by Mistral Large via the Konvertools ai-process edge
  * function. Resolvers prefer hand-authored strings over this overlay.
  */
 export const ${exportName}: Record<string, Partial<Record<Locale, ${cfg.typeName}>>> = ${JSON.stringify(sorted, null, 2)};

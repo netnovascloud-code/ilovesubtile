@@ -97,7 +97,7 @@ jobs:
         if: always()
         run: |
           if [ ! -f SMOKE_TEST_REPORT.md ]; then
-            echo "# Konver smoke test — runner crashed before producing a report" > SMOKE_TEST_REPORT.md
+            echo "# Konvertools smoke test — runner crashed before producing a report" > SMOKE_TEST_REPORT.md
             echo "" >> SMOKE_TEST_REPORT.md
             echo "See the workflow run logs for details." >> SMOKE_TEST_REPORT.md
           fi

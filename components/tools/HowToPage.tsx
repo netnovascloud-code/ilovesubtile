@@ -41,7 +41,7 @@ export function HowToPage({ howto }: { howto: HowTo }) {
               ))}
             </ol>
 
-            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Konver for this</h2>
+            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Konvertools for this</h2>
             <p className="mt-3 text-ink-600">{howto.why}</p>
 
             <h2 className="mt-10 text-2xl font-semibold text-ink-900">FAQ</h2>

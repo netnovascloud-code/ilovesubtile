@@ -26,18 +26,18 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/`;
   alts["x-default"] = `${SITE_URL}/`;
   return {
-    title: { absolute: `Konver — ${ui.hero.title}` },
+    title: { absolute: `Konvertools — ${ui.hero.title}` },
     description: ui.hero.subtitle,
     alternates: { canonical: canonicalPath, languages: alts },
     openGraph: {
-      title: `Konver — ${ui.hero.title}`,
+      title: `Konvertools — ${ui.hero.title}`,
       description: ui.hero.subtitle,
       url: `${SITE_URL}${canonicalPath}`,
-      siteName: "Konver",
+      siteName: "Konvertools",
       locale,
-      images: [ogImageUrl(`Konver — ${ui.hero.title}`, ui.hero.subtitle)],
+      images: [ogImageUrl(`Konvertools — ${ui.hero.title}`, ui.hero.subtitle)],
     },
-    twitter: { card: "summary_large_image", images: [ogImageUrl(`Konver — ${ui.hero.title}`, ui.hero.subtitle)] },
+    twitter: { card: "summary_large_image", images: [ogImageUrl(`Konvertools — ${ui.hero.title}`, ui.hero.subtitle)] },
   };
 }
 

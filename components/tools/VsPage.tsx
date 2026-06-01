@@ -28,7 +28,7 @@ export function VsPage({ vs }: { vs: Vs }) {
             <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
               <tr>
                 <th className="px-4 py-3">Feature</th>
-                <th className="px-4 py-3 text-brand-700">Konver</th>
+                <th className="px-4 py-3 text-brand-700">Konvertools</th>
                 <th className="px-4 py-3">{vs.competitor}</th>
               </tr>
             </thead>
@@ -50,7 +50,7 @@ export function VsPage({ vs }: { vs: Vs }) {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink-900">What Konver does better</h2>
+          <h2 className="text-xl font-semibold text-ink-900">What Konvertools does better</h2>
           <ul className="mt-4 space-y-2">
             {vs.better.map((b) => (
               <li key={b} className="flex items-start gap-2 text-ink-700">

@@ -7,7 +7,7 @@ import { isLocale, type Locale, DEFAULT_LOCALE, isRtl } from "@/lib/i18n/locales
 
 export const metadata: Metadata = {
   title: "Create an account",
-  description: "Sign up for Konver — free tier with a few daily runs.",
+  description: "Sign up for Konvertools — free tier with a few daily runs.",
   robots: { index: false, follow: false },
 };
 

@@ -1,4 +1,4 @@
-// Konver — Stripe webhook → mirrors plan into profiles + sends an
+// Konvertools — Stripe webhook → mirrors plan into profiles + sends an
 // upgrade confirmation email via the send-email function.
 //
 // Deploy: supabase functions deploy stripe-webhook --no-verify-jwt

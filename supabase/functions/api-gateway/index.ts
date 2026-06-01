@@ -1,4 +1,4 @@
-// Konver public REST gateway. Authenticated by a Konver API key
+// Konvertools public REST gateway. Authenticated by a Konvertools API key
 // (knv_live_…), NOT a Supabase JWT — hence verify_jwt is disabled and we
 // validate the key ourselves. Deducts credits per call and logs a job.
 //
@@ -232,11 +232,11 @@ Deno.serve(async (req) => {
   if (!mistralKey) return err("server_error", "Service misconfigured.", 500);
   const svc = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
-  // ---- authenticate the Konver API key ----
+  // ---- authenticate the Konvertools API key ----
   const authz = req.headers.get("Authorization") ?? "";
   const raw = authz.replace(/^Bearer\s+/i, "").trim();
   // Accept the current knv_ prefix and the legacy wyr_ / cf_ prefixes (keys
-  // issued before the Konver rename / pre-Wyrlo CaptionFlow era). Validation
+  // issued before the Konvertools rename / pre-Wyrlo CaptionFlow era). Validation
   // is hash-based, so old keys keep working.
   if (!/^(knv|wyr|cf)_/.test(raw)) return err("missing_api_key", "Send Authorization: Bearer knv_live_…", 401);
   const hash = await sha256(raw);

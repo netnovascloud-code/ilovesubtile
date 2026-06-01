@@ -56,7 +56,7 @@ export function CompetitorPage({ alt }: { alt: AlternativeDef }) {
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-16">
           <h2 className="text-2xl font-semibold text-ink-900">
-            Why creators switch from {alt.competitor} to Konver
+            Why creators switch from {alt.competitor} to Konvertools
           </h2>
           <ul className="mt-8 grid gap-4 md:grid-cols-2">
             {alt.bulletPoints.map((b) => (
@@ -75,14 +75,14 @@ export function CompetitorPage({ alt }: { alt: AlternativeDef }) {
       <section className="border-t border-ink-100 bg-surface">
         <div className="container py-16">
           <h2 className="text-2xl font-semibold text-ink-900">
-            Konver vs {alt.competitor}
+            Konvertools vs {alt.competitor}
           </h2>
           <div className="mt-8 overflow-x-auto rounded-lg border border-ink-100 bg-white shadow-card">
             <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr className="border-b border-ink-100 text-left">
                   <th className="px-5 py-3 font-medium text-ink-500">Feature</th>
-                  <th className="px-5 py-3 font-semibold text-brand-700">Konver</th>
+                  <th className="px-5 py-3 font-semibold text-brand-700">Konvertools</th>
                   <th className="px-5 py-3 font-medium text-ink-500">{alt.competitor}</th>
                 </tr>
               </thead>
@@ -102,7 +102,7 @@ export function CompetitorPage({ alt }: { alt: AlternativeDef }) {
 
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-16">
-          <h2 className="text-2xl font-semibold text-ink-900">Most-used tools on Konver</h2>
+          <h2 className="text-2xl font-semibold text-ink-900">Most-used tools on Konvertools</h2>
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((t) => (
               <ToolCard key={t.slug} tool={t} />

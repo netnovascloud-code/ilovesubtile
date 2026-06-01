@@ -88,4 +88,9 @@ export const AI_TEXT_TOOLS: Record<string, AiTextDef> = {
     inputLabel: "Verb", inputPlaceholder: "e.g. to run · courir · correr · essen",
     outputLabel: "Conjugation", cta: "Conjugate",
   },
+  "context-examples": {
+    task: "context-examples", control: "language",
+    inputLabel: "Word or phrase", inputPlaceholder: "e.g. break the ice · faire la grasse matinée · echar de menos",
+    outputLabel: "Example sentences in context", cta: "Find examples",
+  },
 };

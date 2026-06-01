@@ -2105,6 +2105,22 @@ TOOLS.push(
     faqs: codeFaqs("Verb Conjugation"),
   },
   {
+    slug: "context-examples", phase: 3, kind: "ai", category: "text-ai", icon: BookOpen, tone: "indigo",
+    name: "Context Examples",
+    short: "See a word used in real sentences with translations.",
+    h1: "Context Examples — Free Bilingual Example Sentences (Reverso-style)",
+    metaTitle: "Context Examples — Free Bilingual Example Sentences | Konver",
+    metaDescription: "See how a word or phrase is used in real bilingual example sentences. Detects the source language automatically and translates to your target. Free.",
+    primaryKeyword: "context examples",
+    accept: [], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Type a word", body: "Idiom, verb, noun — any language is detected." },
+      { title: "Choose a translation language", body: "30+ languages supported." },
+      { title: "Read in-context examples", body: "Six bilingual pairs across registers — pick the right shade." },
+    ],
+    faqs: codeFaqs("Context Examples"),
+  },
+  {
     slug: "citation-generator", phase: 3, kind: "ai", category: "text-ai", icon: BookOpen, tone: "indigo",
     name: "Citation Generator",
     short: "Generate APA, MLA, Chicago, Harvard or IEEE citations with AI.",

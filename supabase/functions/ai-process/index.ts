@@ -87,6 +87,10 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `You are a verb conjugation engine. Conjugate the user's verb across its language's main tenses and moods. Output one block per tense: a line with the tense name, then each person on its own line (e.g. "je …", "tu …", or "I …", "you …"). Cover at least the present, a past, a future and the common compound/perfect tense. Output only the conjugation.`;
     case "citation":
       return `You generate academic citations. The user's message starts with a "style: <APA|MLA|Chicago|Harvard|IEEE>" line, then the source details (title, authors, year, publisher/journal/URL, etc.). Produce the citation in the requested style on the first line, then a blank line, then a parenthetical / in-text reference example. If a field is missing, do your best with what's given; never invent authors or years. Output ONLY those two blocks.`;
+    case "context-examples": {
+      const tgt = opts.target || "the same language";
+      return `You give bilingual example sentences in context for a word or phrase (Reverso-Context style). The user's text is the word or short phrase. Detect its language automatically. Produce 6 natural example sentences using the term, each followed on the next line by a translation into ${tgt}. Use diverse registers (literature, news, casual speech, technical) so the user can pick the right shade. Output ONLY the 6 example/translation pairs, each pair separated by a blank line. No commentary.`;
+    }
     case "ai-detect":
       return `You are an AI-writing detector. Estimate the probability the user's text was written by a language model (ChatGPT, Claude, Gemini, etc.). Be specific: cite phrases that read AI-generated (over-formal transitions, uniform sentence length, hedging clichés, "as an AI" boilerplate). Return ONLY a JSON object: {"score": <0-100 integer, higher = more AI-like>, "verdict": "human"|"mixed"|"likely_ai"|"very_likely_ai", "reasons": [<short string>, ...3-5 items], "flagged": [<verbatim short snippet>, ...0-5 items]}. Use "human" for <25, "mixed" for 25-49, "likely_ai" for 50-79, "very_likely_ai" for ≥80.`;
     case "analyze-file":
@@ -130,6 +134,7 @@ const TOOL_BY_TASK: Record<string, string> = {
   conjugate: "conjugation",
   citation: "citation-generator",
   "ai-detect": "ai-detector",
+  "context-examples": "context-examples",
   "analyze-file": "smart-drop",
   "cover-letter": "cover-letter",
   "contract-analyze": "contract-analyzer",
@@ -168,7 +173,7 @@ Deno.serve(async (req) => {
   // Tasks that legitimately emit a *specific* language (a translation/letter in
   // opts.target, an i18n fill) or a fixed structured label — these are exempt
   // from the "answer in the input's language" rule.
-  const TARGET_OR_STRUCTURED = new Set(["translate", "cover-letter", "i18n-tool", "i18n-category", "detect-language", "analyze-file", "contract-analyze"]);
+  const TARGET_OR_STRUCTURED = new Set(["translate", "cover-letter", "i18n-tool", "i18n-category", "detect-language", "analyze-file", "contract-analyze", "context-examples"]);
   let system = baseSystem;
   // Part 4 — force clean plain text on every prose task.
   if (!wantsJson) system += ` Write your answer in plain text only — no Markdown, no asterisks (*), no bold or italic markers, no headings, no code fences.`;

@@ -8,6 +8,7 @@ const FN_MAP: Record<string, string> = {
   "voice-to-text": "process-subtitles",
   "citation-generator": "ai-process",
   "ai-detector": "ai-process",
+  "context-examples": "ai-process",
   "translate-subtitles": "translate-subtitles",
   "batch-translate": "translate-subtitles",
   "youtube-chapters": "ai-process",

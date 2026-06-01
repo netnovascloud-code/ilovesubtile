@@ -213,12 +213,110 @@ const hiC: FaqFactory[] = [
   (name) => ({ q: `क्या मुझे कुछ इंस्टॉल करना होगा?`, a: `नहीं। ${name} एक वेब टूल है — पेज खोलें और शुरू करें। कुछ डाउनलोड या इंस्टॉल करने की ज़रूरत नहीं।` }),
 ];
 
+// ── AI-tool FAQs ───────────────────────────────────────────────────────────
+// Server-side AI tools (kind: "ai") send input to a model for processing —
+// so the "client" variant's "runs 100% locally, never uploaded" claim would
+// be a lie. These mirror the EN aiFaqs() in tools-config.ts and state the
+// truth: transient processing, not stored, not used for training, quota model.
+const enA: FaqFactory[] = [
+  (name) => ({ q: `Is ${name} free?`, a: `Yes. Free users get 2 runs/day. Pro (€12/month) gives 500 AI runs per month and Business 3,000, with larger inputs and no ads.` }),
+  () => ({ q: `Is my text stored or used to train AI?`, a: `No. Your input is processed only to generate your result and is not used to train any model. Inputs are not retained long-term.` }),
+  (name) => ({ q: `How accurate is the result?`, a: `${name} uses an advanced language model and is strong across many languages. For high-stakes content, give the output a quick review.` }),
+  () => ({ q: `Which languages are supported?`, a: `Dozens — input and output work across all major world languages, with automatic detection where it applies.` }),
+  () => ({ q: `Do I need an account?`, a: `Not for casual use. Sign in for more daily runs, or go Pro for a much higher monthly quota with no ads.` }),
+];
+const frA: FaqFactory[] = [
+  (name) => ({ q: `${name} est-il gratuit ?`, a: `Oui. Les utilisateurs gratuits ont 2 utilisations par jour. Pro (12 €/mois) donne 500 utilisations IA par mois, Business 3 000, avec des entrées plus grandes et sans pub.` }),
+  () => ({ q: `Mon texte est-il stocké ou utilisé pour entraîner l'IA ?`, a: `Non. Votre saisie est traitée uniquement pour générer votre résultat et n'est jamais utilisée pour entraîner un modèle. Aucune conservation à long terme.` }),
+  (name) => ({ q: `Quelle est la précision du résultat ?`, a: `${name} s'appuie sur un modèle de langage avancé et est performant dans de nombreuses langues. Pour les contenus à enjeu, relisez la sortie.` }),
+  () => ({ q: `Quelles langues sont prises en charge ?`, a: `Des dizaines — l'entrée et la sortie fonctionnent dans toutes les grandes langues du monde, avec détection automatique le cas échéant.` }),
+  () => ({ q: `Faut-il un compte ?`, a: `Pas pour un usage ponctuel. Connectez-vous pour plus d'utilisations quotidiennes, ou passez Pro pour un quota mensuel bien plus élevé et sans pub.` }),
+];
+const esA: FaqFactory[] = [
+  (name) => ({ q: `¿${name} es gratis?`, a: `Sí. Los usuarios gratuitos tienen 2 usos al día. Pro (12 €/mes) ofrece 500 usos de IA al mes, Business 3.000, con entradas más grandes y sin anuncios.` }),
+  () => ({ q: `¿Se almacena mi texto o se usa para entrenar IA?`, a: `No. Tu entrada se procesa solo para generar tu resultado y nunca se utiliza para entrenar modelos. No se retiene a largo plazo.` }),
+  (name) => ({ q: `¿Qué tan preciso es el resultado?`, a: `${name} usa un modelo de lenguaje avanzado y rinde bien en muchos idiomas. Para contenidos importantes, revisa la salida.` }),
+  () => ({ q: `¿Qué idiomas se admiten?`, a: `Decenas — entrada y salida funcionan en todos los grandes idiomas del mundo, con detección automática cuando aplica.` }),
+  () => ({ q: `¿Necesito una cuenta?`, a: `No para usos puntuales. Inicia sesión para más usos diarios o pasa a Pro para una cuota mensual mucho mayor sin anuncios.` }),
+];
+const ptA: FaqFactory[] = [
+  (name) => ({ q: `${name} é grátis?`, a: `Sim. Usuários grátis têm 2 usos por dia. Pro (€12/mês) oferece 500 usos de IA por mês, Business 3.000, com entradas maiores e sem anúncios.` }),
+  () => ({ q: `Meu texto é armazenado ou usado para treinar IA?`, a: `Não. Sua entrada é processada apenas para gerar seu resultado e nunca é usada para treinar modelos. Sem retenção de longo prazo.` }),
+  (name) => ({ q: `Qual é a precisão do resultado?`, a: `${name} usa um modelo de linguagem avançado e tem bom desempenho em muitos idiomas. Para conteúdos importantes, revise a saída.` }),
+  () => ({ q: `Quais idiomas são suportados?`, a: `Dezenas — entrada e saída funcionam em todos os grandes idiomas do mundo, com detecção automática quando aplicável.` }),
+  () => ({ q: `Preciso de uma conta?`, a: `Não para uso ocasional. Entre para mais usos diários ou vá Pro para uma cota mensal muito maior sem anúncios.` }),
+];
+const deA: FaqFactory[] = [
+  (name) => ({ q: `Ist ${name} kostenlos?`, a: `Ja. Gratis-Nutzer haben 2 Durchläufe pro Tag. Pro (12 €/Monat) bietet 500 KI-Durchläufe pro Monat, Business 3.000, mit größeren Eingaben und ohne Werbung.` }),
+  () => ({ q: `Wird mein Text gespeichert oder zum Training verwendet?`, a: `Nein. Deine Eingabe wird nur zur Erzeugung deines Ergebnisses verarbeitet und nie zum Trainieren von Modellen verwendet. Keine langfristige Speicherung.` }),
+  (name) => ({ q: `Wie genau ist das Ergebnis?`, a: `${name} nutzt ein fortschrittliches Sprachmodell und ist in vielen Sprachen stark. Bei wichtigen Inhalten die Ausgabe kurz prüfen.` }),
+  () => ({ q: `Welche Sprachen werden unterstützt?`, a: `Dutzende — Ein- und Ausgabe in allen wichtigen Weltsprachen, mit automatischer Erkennung, wo zutreffend.` }),
+  () => ({ q: `Brauche ich ein Konto?`, a: `Nicht für gelegentliche Nutzung. Melde dich an für mehr tägliche Durchläufe oder hol dir Pro für ein deutlich höheres Monatskontingent ohne Werbung.` }),
+];
+const itA: FaqFactory[] = [
+  (name) => ({ q: `${name} è gratis?`, a: `Sì. Gli utenti gratuiti hanno 2 utilizzi al giorno. Pro (12 €/mese) offre 500 utilizzi IA al mese, Business 3.000, con input più grandi e niente pubblicità.` }),
+  () => ({ q: `Il mio testo viene memorizzato o usato per addestrare l'IA?`, a: `No. Il tuo input viene elaborato solo per generare il risultato e non è mai usato per addestrare modelli. Nessuna conservazione a lungo termine.` }),
+  (name) => ({ q: `Quanto è accurato il risultato?`, a: `${name} usa un modello linguistico avanzato e funziona bene in molte lingue. Per contenuti delicati, rileggi l'output.` }),
+  () => ({ q: `Quali lingue sono supportate?`, a: `Decine — input e output funzionano in tutte le principali lingue del mondo, con rilevamento automatico quando applicabile.` }),
+  () => ({ q: `Serve un account?`, a: `Non per l'uso occasionale. Accedi per più utilizzi giornalieri o passa a Pro per una quota mensile molto più alta senza pubblicità.` }),
+];
+const nlA: FaqFactory[] = [
+  (name) => ({ q: `Is ${name} gratis?`, a: `Ja. Gratis gebruikers krijgen 2 runs per dag. Pro (€12/maand) geeft 500 AI-runs per maand, Business 3.000, met grotere invoer en geen advertenties.` }),
+  () => ({ q: `Wordt mijn tekst opgeslagen of gebruikt om AI te trainen?`, a: `Nee. Je invoer wordt alleen verwerkt om je resultaat te genereren en nooit gebruikt om modellen te trainen. Geen langetermijnopslag.` }),
+  (name) => ({ q: `Hoe nauwkeurig is het resultaat?`, a: `${name} gebruikt een geavanceerd taalmodel en presteert sterk in veel talen. Voor belangrijke content: even nakijken.` }),
+  () => ({ q: `Welke talen worden ondersteund?`, a: `Tientallen — invoer en uitvoer werken in alle grote wereldtalen, met automatische detectie waar van toepassing.` }),
+  () => ({ q: `Heb ik een account nodig?`, a: `Niet voor incidenteel gebruik. Log in voor meer dagelijkse runs of ga Pro voor een veel hoger maandquotum zonder advertenties.` }),
+];
+const jaA: FaqFactory[] = [
+  (name) => ({ q: `${name} は無料ですか？`, a: `はい。無料ユーザーは 1 日 2 回。Pro（月 12 ユーロ）は月 500 回の AI 実行、Business は 3,000 回。大きな入力に対応、広告なし。` }),
+  () => ({ q: `テキストは保存されたり AI の学習に使われたりしますか？`, a: `いいえ。入力は結果生成のためだけに処理され、モデル学習には使用されません。長期保存は行いません。` }),
+  (name) => ({ q: `結果の精度は？`, a: `${name} は高度な言語モデルを使用し、多くの言語で高精度です。重要な内容は出力を確認してください。` }),
+  () => ({ q: `対応言語は？`, a: `数十言語。入力・出力ともに主要言語に対応し、必要に応じて自動検出します。` }),
+  () => ({ q: `アカウントは必要ですか？`, a: `単発利用なら不要です。ログインで 1 日の利用回数が増え、Pro なら月間クォータが大幅に拡張、広告なし。` }),
+];
+const zhA: FaqFactory[] = [
+  (name) => ({ q: `${name} 是免费的吗?`, a: `是的。免费用户每天 2 次。Pro（每月 12 欧元）每月 500 次 AI 调用,Business 3,000 次,支持更大输入且无广告。` }),
+  () => ({ q: `我的文本会被存储或用于训练 AI 吗?`, a: `不会。您的输入仅用于生成结果,从不用于训练任何模型,也不会长期保留。` }),
+  (name) => ({ q: `结果有多准确?`, a: `${name} 采用先进的语言模型,在许多语言中表现优秀。对于重要内容,请快速复核输出。` }),
+  () => ({ q: `支持哪些语言?`, a: `数十种 — 输入和输出适用于所有主要世界语言,适用时自动检测。` }),
+  () => ({ q: `需要账户吗?`, a: `偶尔使用无需账户。登录可获得更多每日调用,Pro 享有大幅提升的每月配额且无广告。` }),
+];
+const koA: FaqFactory[] = [
+  (name) => ({ q: `${name} 는 무료인가요?`, a: `네. 무료 사용자는 하루 2회. Pro(월 12유로)는 월 500회 AI 실행, Business는 3,000회. 더 큰 입력 지원, 광고 없음.` }),
+  () => ({ q: `텍스트가 저장되거나 AI 학습에 사용되나요?`, a: `아니요. 입력은 결과 생성에만 사용되며 모델 학습에는 사용되지 않습니다. 장기 보관도 없습니다.` }),
+  (name) => ({ q: `결과의 정확도는?`, a: `${name} 는 첨단 언어 모델을 사용해 많은 언어에서 강한 성능을 보입니다. 중요한 콘텐츠는 출력을 검토하세요.` }),
+  () => ({ q: `어떤 언어를 지원하나요?`, a: `수십 개 — 입력과 출력 모두 주요 세계 언어를 지원하며 해당 시 자동 감지합니다.` }),
+  () => ({ q: `계정이 필요한가요?`, a: `간헐적 사용에는 필요 없습니다. 로그인하면 일일 사용량이 증가하고 Pro는 훨씬 높은 월간 할당량과 광고 없음을 제공합니다.` }),
+];
+const arA: FaqFactory[] = [
+  (name) => ({ q: `هل ${name} مجاني؟`, a: `نعم. للمستخدمين المجانيين مرّتان يوميًا. Pro (12 يورو/شهر) يمنح 500 استخدام AI شهريًا، و Business 3,000، مع مدخلات أكبر وبلا إعلانات.` }),
+  () => ({ q: `هل يُخزَّن نصي أو يُستخدم لتدريب الذكاء الاصطناعي؟`, a: `لا. تتم معالجة مدخلاتك فقط لإنتاج نتيجتك ولا تُستخدم أبدًا لتدريب أي نموذج. لا حفظ طويل الأمد.` }),
+  (name) => ({ q: `ما مدى دقة النتيجة؟`, a: `${name} يستخدم نموذجًا لغويًا متقدمًا وأداؤه قوي في لغات كثيرة. للمحتوى الحساس، راجع المخرجات بسرعة.` }),
+  () => ({ q: `ما اللغات المدعومة؟`, a: `العشرات — المدخلات والمخرجات تعمل بجميع اللغات العالمية الكبرى مع كشف تلقائي عند الاقتضاء.` }),
+  () => ({ q: `هل أحتاج إلى حساب؟`, a: `ليس للاستخدام العرضي. سجّل الدخول لمزيد من الاستخدامات اليومية أو رقّ إلى Pro لحصة شهرية أعلى بكثير وبدون إعلانات.` }),
+];
+const ruA: FaqFactory[] = [
+  (name) => ({ q: `${name} бесплатно?`, a: `Да. Бесплатные пользователи получают 2 запуска в день. Pro (12 €/мес) даёт 500 ИИ-запусков в месяц, Business — 3000, с большими входами и без рекламы.` }),
+  () => ({ q: `Хранится ли мой текст или используется для обучения ИИ?`, a: `Нет. Ваш ввод обрабатывается только для генерации результата и никогда не используется для обучения моделей. Долговременного хранения нет.` }),
+  (name) => ({ q: `Насколько точен результат?`, a: `${name} использует современную языковую модель и сильна во многих языках. Для ответственных текстов стоит просмотреть вывод.` }),
+  () => ({ q: `Какие языки поддерживаются?`, a: `Десятки — ввод и вывод работают на всех основных мировых языках, с автоопределением, где это применимо.` }),
+  () => ({ q: `Нужен ли аккаунт?`, a: `Не для разовых задач. Войдите для большего числа дневных запусков или перейдите на Pro для значительно более высокой месячной квоты без рекламы.` }),
+];
+const hiA: FaqFactory[] = [
+  (name) => ({ q: `क्या ${name} मुफ़्त है?`, a: `हाँ. मुफ़्त उपयोगकर्ता रोज़ 2 बार. Pro (€12/माह) महीने में 500 AI रन देता है, Business 3,000, बड़े इनपुट और कोई विज्ञापन नहीं.` }),
+  () => ({ q: `क्या मेरा टेक्स्ट संग्रहीत होता है या AI प्रशिक्षण में उपयोग होता है?`, a: `नहीं. आपका इनपुट केवल आपका परिणाम बनाने के लिए संसाधित होता है और किसी मॉडल को प्रशिक्षित करने के लिए कभी उपयोग नहीं किया जाता. कोई दीर्घकालिक भंडारण नहीं.` }),
+  (name) => ({ q: `परिणाम कितना सटीक है?`, a: `${name} एक उन्नत भाषा मॉडल का उपयोग करता है और कई भाषाओं में सशक्त है. महत्वपूर्ण सामग्री के लिए आउटपुट की समीक्षा करें.` }),
+  () => ({ q: `कौन सी भाषाएँ समर्थित हैं?`, a: `दर्जनों — इनपुट और आउटपुट सभी प्रमुख विश्व भाषाओं में काम करते हैं, लागू होने पर स्वचालित पहचान के साथ.` }),
+  () => ({ q: `क्या मुझे खाते की आवश्यकता है?`, a: `कभी-कभार उपयोग के लिए नहीं. अधिक दैनिक रन के लिए साइन इन करें, या बहुत अधिक मासिक कोटा और बिना विज्ञापनों के लिए Pro लें.` }),
+];
+
 // Partial<>: missing locales fall back to the English FAQ templates.
 const FILE_ALL: Partial<Record<Locale, FaqFactory[]>> = { en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
 const CLIENT_ALL: Partial<Record<Locale, FaqFactory[]>> = { en: enC, fr: frC, es: esC, pt: ptC, de: deC, it: itC, nl: nlC, ja: jaC, zh: zhC, ko: koC, ar: arC, ru: ruC, hi: hiC };
+const AI_ALL: Partial<Record<Locale, FaqFactory[]>> = { en: enA, fr: frA, es: esA, pt: ptA, de: deA, it: itA, nl: nlA, ja: jaA, zh: zhA, ko: koA, ar: arA, ru: ruA, hi: hiA };
 
-/** "client" = in-browser tool (no upload, no quota, no watermark, no formats). */
-export type FaqVariant = "file" | "client";
+/** "client" = in-browser tool (no upload). "ai" = server-side AI (transient, not stored). */
+export type FaqVariant = "file" | "client" | "ai";
 
 export function getLocalisedFaqs(
   locale: Locale,
@@ -226,7 +324,8 @@ export function getLocalisedFaqs(
   formats: string,
   variant: FaqVariant = "file",
 ): ToolFaq[] {
-  const map = variant === "client" ? CLIENT_ALL : FILE_ALL;
-  const set = map[locale] ?? (variant === "client" ? enC : en);
+  const map = variant === "client" ? CLIENT_ALL : variant === "ai" ? AI_ALL : FILE_ALL;
+  const fallback = variant === "client" ? enC : variant === "ai" ? enA : en;
+  const set = map[locale] ?? fallback;
   return set.map((fn) => fn(name, formats));
 }

@@ -51,7 +51,7 @@ export function ToolPageShell({
   // formats / watermark / quota questions — so utility pages like the Password
   // Generator no longer render the file/subtitle template (which produced
   // "accepte the supported formats" + SRT references in non-English locales).
-  const faqVariant = tool.kind === "client" ? "client" : "file";
+  const faqVariant = tool.kind === "client" ? "client" : tool.kind === "ai" ? "ai" : "file";
   const formats = tool.accept.length
     ? tool.accept.map((a) => a.toUpperCase()).join(", ")
     : "plain text";

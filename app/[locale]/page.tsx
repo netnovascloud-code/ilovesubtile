@@ -11,7 +11,7 @@ import { getStrings } from "@/lib/i18n/strings";
 import { getHomeExplorer } from "@/lib/i18n/home-explorer";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
 import { SITE_URL } from "@/lib/utils";
-import { HREFLANG_PREFIX, LOCALES } from "@/lib/seo";
+import { HREFLANG_PREFIX, LOCALES, ogImageUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
   return NON_DEFAULT_LOCALES.map((locale) => ({ locale }));
@@ -35,7 +35,9 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       url: `${SITE_URL}${canonicalPath}`,
       siteName: "Konver",
       locale,
+      images: [ogImageUrl(`Konver — ${ui.hero.title}`, ui.hero.subtitle)],
     },
+    twitter: { card: "summary_large_image", images: [ogImageUrl(`Konver — ${ui.hero.title}`, ui.hero.subtitle)] },
   };
 }
 

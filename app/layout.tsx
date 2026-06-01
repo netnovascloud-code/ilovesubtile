@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Konver",
-    images: ["/og/default.png"],
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konver — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og/default.png"],
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konver — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   alternates: {
     canonical: "/",

@@ -59,6 +59,10 @@ import {
   QrCode,
   Archive,
   FileArchive,
+  PenLine,
+  BookOpen,
+  ScanSearch,
+  FileSignature,
   type LucideIcon,
 } from "lucide-react";
 
@@ -121,6 +125,10 @@ const ICONS: Record<string, LucideIcon> = {
   QrCode,
   Archive,
   FileArchive,
+  PenLine,
+  BookOpen,
+  ScanSearch,
+  FileSignature,
 };
 
 export function ToolIcon({

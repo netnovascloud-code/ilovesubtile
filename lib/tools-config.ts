@@ -69,6 +69,9 @@ import {
   Database,
   CalendarClock,
   Rows,
+  PenLine,
+  BookOpen,
+  ScanSearch,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -2100,6 +2103,54 @@ TOOLS.push(
       { title: "Copy the table", body: "Clean plain text, ready to paste." },
     ],
     faqs: codeFaqs("Verb Conjugation"),
+  },
+  {
+    slug: "citation-generator", phase: 3, kind: "ai", category: "text-ai", icon: BookOpen, tone: "indigo",
+    name: "Citation Generator",
+    short: "Generate APA, MLA, Chicago, Harvard or IEEE citations with AI.",
+    h1: "Citation Generator — Free APA / MLA / Chicago / Harvard / IEEE",
+    metaTitle: "Citation Generator — APA, MLA, Chicago, Harvard, IEEE | Konver",
+    metaDescription: "Generate citations in APA, MLA, Chicago, Harvard or IEEE from any source details with AI. Includes the in-text reference. Free, no sign-up to try.",
+    primaryKeyword: "citation generator",
+    accept: [], freeMaxMb: 0, outputType: "Text",
+    steps: [
+      { title: "Pick a style", body: "APA, MLA, Chicago, Harvard or IEEE." },
+      { title: "Paste source details", body: "Title, authors, year, publisher / URL — anything you have." },
+      { title: "Copy your citation", body: "Full reference plus an in-text example, ready to paste." },
+    ],
+    faqs: codeFaqs("Citation Generator"),
+  },
+  {
+    slug: "ai-detector", phase: 3, kind: "ai", category: "text-ai", icon: ScanSearch, tone: "rose",
+    name: "AI Content Detector",
+    short: "Estimate the probability text was written by ChatGPT, Claude or Gemini.",
+    h1: "AI Content Detector — Was This Written by ChatGPT? Free Online",
+    metaTitle: "AI Content Detector — ChatGPT / Claude / Gemini | Konver",
+    metaDescription: "Estimate the likelihood that a paragraph was written by an AI. Get a 0–100 score with flagged phrases and reasons. Free, no sign-up to try.",
+    primaryKeyword: "ai content detector",
+    accept: [], freeMaxMb: 0, outputType: "Score",
+    steps: [
+      { title: "Paste a paragraph", body: "At least a few sentences for a useful estimate." },
+      { title: "AI analyses the style", body: "Looks for AI tells — over-formal transitions, uniform pacing, hedging clichés." },
+      { title: "Get a score", body: "0–100 likelihood plus flagged phrases and reasons." },
+    ],
+    faqs: codeFaqs("AI Content Detector"),
+  },
+  {
+    slug: "sign-pdf", phase: 3, kind: "client", category: "documents", icon: PenLine, tone: "blue",
+    name: "Sign PDF",
+    short: "Draw a signature and stamp it onto your PDF — in-browser.",
+    h1: "Sign PDF Online Free — Draw & Add Your Signature to Any PDF",
+    metaTitle: "Sign PDF Online — Draw Your Signature, Free | Konver",
+    metaDescription: "Sign a PDF online: draw your signature on a canvas and stamp it onto your PDF. 100 % in your browser — your document is never uploaded.",
+    primaryKeyword: "sign pdf online",
+    accept: ["pdf"], freeMaxMb: 0, outputType: "PDF",
+    steps: [
+      { title: "Upload your PDF", body: "Drops into your browser — never leaves your device." },
+      { title: "Draw your signature", body: "Mouse, trackpad or finger on a clean canvas." },
+      { title: "Download the signed PDF", body: "Signature lands on the last page, bottom-right." },
+    ],
+    faqs: codeFaqs("Sign PDF"),
   },
 );
 

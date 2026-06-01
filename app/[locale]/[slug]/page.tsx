@@ -87,6 +87,9 @@ import { ReceiptScannerClient } from "@/components/tools/clients/ReceiptScannerC
 import { ScreenshotToCodeClient } from "@/components/tools/clients/ScreenshotToCodeClient";
 import { ImageToTableClient } from "@/components/tools/clients/ImageToTableClient";
 import { VoiceToTextClient } from "@/components/tools/clients/VoiceToTextClient";
+import { CitationGeneratorClient } from "@/components/tools/clients/CitationGeneratorClient";
+import { AiDetectorClient } from "@/components/tools/clients/AiDetectorClient";
+import { SignPdfClient } from "@/components/tools/clients/SignPdfClient";
 import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
 import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
 import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
@@ -478,6 +481,15 @@ export default function LocalisedToolPage({
       break;
     case "voice-to-text":
       body = <VoiceToTextClient maxMb={tool.freeMaxMb} />;
+      break;
+    case "citation-generator":
+      body = <CitationGeneratorClient />;
+      break;
+    case "ai-detector":
+      body = <AiDetectorClient />;
+      break;
+    case "sign-pdf":
+      body = <SignPdfClient />;
       break;
     case "change-background":
       body = <ChangeBackgroundClient />;

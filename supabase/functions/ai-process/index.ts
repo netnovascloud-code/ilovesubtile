@@ -85,6 +85,10 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `You are a multilingual thesaurus. For the user's word or short phrase, give the most useful synonyms — most natural first — as a single comma-separated line. If the word has clearly distinct senses, put each sense on its own line, prefixed with a short "(sense)" label. Output only the synonyms.`;
     case "conjugate":
       return `You are a verb conjugation engine. Conjugate the user's verb across its language's main tenses and moods. Output one block per tense: a line with the tense name, then each person on its own line (e.g. "je …", "tu …", or "I …", "you …"). Cover at least the present, a past, a future and the common compound/perfect tense. Output only the conjugation.`;
+    case "citation":
+      return `You generate academic citations. The user's message starts with a "style: <APA|MLA|Chicago|Harvard|IEEE>" line, then the source details (title, authors, year, publisher/journal/URL, etc.). Produce the citation in the requested style on the first line, then a blank line, then a parenthetical / in-text reference example. If a field is missing, do your best with what's given; never invent authors or years. Output ONLY those two blocks.`;
+    case "ai-detect":
+      return `You are an AI-writing detector. Estimate the probability the user's text was written by a language model (ChatGPT, Claude, Gemini, etc.). Be specific: cite phrases that read AI-generated (over-formal transitions, uniform sentence length, hedging clichés, "as an AI" boilerplate). Return ONLY a JSON object: {"score": <0-100 integer, higher = more AI-like>, "verdict": "human"|"mixed"|"likely_ai"|"very_likely_ai", "reasons": [<short string>, ...3-5 items], "flagged": [<verbatim short snippet>, ...0-5 items]}. Use "human" for <25, "mixed" for 25-49, "likely_ai" for 50-79, "very_likely_ai" for ≥80.`;
     case "analyze-file":
       return `You receive a JSON describing a file the user just dropped, plus a catalogue of available tools. Pick the 3 most relevant tools for what the user likely wants to do. Return ONLY JSON of the shape: {"suggestions":[{"slug":"<tool-slug>","why":"<one short sentence>"}, ... 3 items]}. Use only slugs that appear in the provided catalogue.`;
     case "cover-letter":
@@ -124,6 +128,8 @@ const TOOL_BY_TASK: Record<string, string> = {
   "detect-language": "detect-language",
   synonyms: "synonyms-finder",
   conjugate: "conjugation",
+  citation: "citation-generator",
+  "ai-detect": "ai-detector",
   "analyze-file": "smart-drop",
   "cover-letter": "cover-letter",
   "contract-analyze": "contract-analyzer",
@@ -158,7 +164,7 @@ Deno.serve(async (req) => {
 
   // wantsJson: tasks whose contract is a JSON object — they must keep their raw
   // structured output (no plain-text rewrite, no markdown stripping).
-  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category";
+  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category" || task === "ai-detect";
   // Tasks that legitimately emit a *specific* language (a translation/letter in
   // opts.target, an i18n fill) or a fixed structured label — these are exempt
   // from the "answer in the input's language" rule.

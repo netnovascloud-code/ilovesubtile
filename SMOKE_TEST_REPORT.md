@@ -1,4 +1,4 @@
-# Konver smoke test — 182/182 passed
+# Konvertools smoke test — 182/182 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 

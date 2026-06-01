@@ -1,4 +1,4 @@
-# Konver smoke test — 175/175 passed
+# Konver smoke test — 178/178 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -175,6 +175,9 @@ _None._
 - qr-generator [interactive]
 - wav-to-mp3 [interactive]
 - og-image /og/i
+- favicon /icon
+- apple-icon /apple-icon
+- manifest /manifest.webmanifest
 - AI ai-process:synonyms
 - AI ai-process:conjugate
 - AI ai-process:rephrase (no markdown)

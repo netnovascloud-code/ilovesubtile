@@ -7,7 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
-import { DAILY_LIMITS, type PlanKey } from "@/lib/quotas";
+import { type PlanKey } from "@/lib/quotas";
+import { planLimit, type Plan } from "@/lib/ai-quotas";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -20,6 +21,8 @@ export default async function DashboardPage() {
   let credits = 0;
   let dailyUsage = 0;
   let usageResetAt: string | null = null;
+  let monthlyAiUsage = 0;
+  let monthlyAiMonth: string | null = null;
   let jobs: { id: string; tool: string; status: string; created_at: string; output_file_url: string | null }[] = [];
 
   try {
@@ -29,12 +32,14 @@ export default async function DashboardPage() {
     if (userData.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month")
+        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
       dailyUsage = profile?.daily_usage ?? 0;
       usageResetAt = profile?.usage_reset_at ?? null;
+      monthlyAiUsage = profile?.monthly_ai_usage ?? 0;
+      monthlyAiMonth = profile?.monthly_ai_month ?? null;
       // Effective balance = permanent credits + this month's Business grant.
       const thisMonth = new Date().toISOString().slice(0, 7);
       const monthly = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
@@ -52,12 +57,20 @@ export default async function DashboardPage() {
     // Supabase env not configured — render an empty shell so the page still works.
   }
 
-  // Reset the displayed counter if the 24h window has expired.
-  const resetMs = usageResetAt ? new Date(usageResetAt).getTime() : 0;
-  const overdue = Date.now() - resetMs > 24 * 3600 * 1000;
-  const displayedUsage = overdue ? 0 : dailyUsage;
-  const limit = DAILY_LIMITS[plan];
-  const limitLabel = limit === Infinity ? "∞" : String(limit);
+  // AI quota: free is a rolling 24h counter, Pro/Business are monthly (UTC).
+  const { kind, limit } = planLimit(plan as Plan);
+  let displayedUsage: number;
+  if (kind === "daily") {
+    const resetMs = usageResetAt ? new Date(usageResetAt).getTime() : 0;
+    const overdue = Date.now() - resetMs > 24 * 3600 * 1000;
+    displayedUsage = overdue ? 0 : dailyUsage;
+  } else {
+    const thisMonth = new Date().toISOString().slice(0, 7);
+    displayedUsage = monthlyAiMonth === thisMonth ? monthlyAiUsage : 0;
+  }
+  const limitLabel = String(limit);
+  const periodLabel = kind === "daily" ? "Runs in the last 24 hours" : "AI conversions this month";
+  const atLimit = displayedUsage >= limit;
 
   return (
     <div className="container py-10">
@@ -85,16 +98,16 @@ export default async function DashboardPage() {
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>Daily usage</CardTitle>
-            <CardDescription>Runs in the last 24 hours</CardDescription>
+            <CardTitle>AI usage</CardTitle>
+            <CardDescription>{periodLabel}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-semibold text-ink-900">
               {displayedUsage} / {limitLabel}
             </div>
-            {limit !== Infinity && displayedUsage >= limit && (
+            {atLimit && (
               <p className="mt-2 text-xs text-amber-700">
-                Daily limit reached. Resets every 24h.
+                {kind === "daily" ? "Daily limit reached. Resets every 24h." : "Monthly quota reached. Resets on the 1st."}
               </p>
             )}
           </CardContent>

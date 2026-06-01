@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Copy, KeyRound, Trash2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { edgeFnUrl } from "@/lib/utils";
 
@@ -23,6 +24,8 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [name, setName] = useState("");
+  const [pendingRevoke, setPendingRevoke] = useState<ApiKey | null>(null);
+  const [revoking, setRevoking] = useState(false);
 
   const isBusiness = plan === "business";
 
@@ -76,9 +79,18 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
     }
   }
 
-  async function revoke(id: string) {
-    await authedFetch({ action: "revoke", id });
-    await load();
+  async function confirmRevoke() {
+    if (!pendingRevoke) return;
+    setRevoking(true);
+    try {
+      await authedFetch({ action: "revoke", id: pendingRevoke.id });
+      await load();
+      setPendingRevoke(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not revoke the key.");
+    } finally {
+      setRevoking(false);
+    }
   }
 
   return (
@@ -143,7 +155,7 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
                   </p>
                 </div>
                 <button
-                  onClick={() => revoke(k.id)}
+                  onClick={() => setPendingRevoke(k)}
                   className="inline-flex items-center gap-1 rounded p-1 text-xs text-ink-400 hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-3.5 w-3.5" /> Revoke
@@ -172,6 +184,19 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
           {creating ? "Generating…" : "Generate API key"}
         </Button>
       </div>
+
+      <ConfirmDialog
+        open={pendingRevoke !== null}
+        busy={revoking}
+        options={{
+          title: "Revoke this API key?",
+          body: `"${pendingRevoke?.name || "API key"}" (${pendingRevoke?.key_prefix ?? ""}…) will stop working immediately and any app using it will get 401 errors. This can't be undone.`,
+          confirmLabel: "Revoke key",
+          danger: true,
+        }}
+        onConfirm={confirmRevoke}
+        onClose={() => setPendingRevoke(null)}
+      />
     </div>
   );
 }

@@ -150,12 +150,8 @@ Deno.serve(async (req) => {
   const out = (await res.json()) as { choices: { message: { content: string } }[] };
   const content = out.choices?.[0]?.message?.content?.trim() ?? "";
 
-  if (userId) {
-    await svc.from("jobs").insert({
-      user_id: userId, tool: `vision-${task}`, status: "done",
-      metadata: { task }, completed_at: new Date().toISOString(),
-    });
-  }
+  // Privacy + DB hygiene: vision results are returned inline and never stored,
+  // so we don't log a jobs row. Quota lives on the profiles counter above.
 
   if (wantsJson) {
     try { return json({ data: JSON.parse(content) }); }

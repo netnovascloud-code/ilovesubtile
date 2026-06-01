@@ -264,12 +264,9 @@ Deno.serve(async (req) => {
   // whose '#' must survive).
   if (!wantsJson && task !== "hashtags") output = stripMarkdown(output);
 
-  if (userId) {
-    await svc.from("jobs").insert({
-      user_id: userId, tool: TOOL_BY_TASK[task] ?? "ai-process", status: "done",
-      metadata: { task }, completed_at: new Date().toISOString(),
-    });
-  }
+  // Privacy + DB hygiene: text tasks produce no stored artifact, so we do NOT
+  // log a jobs row. Quota is tracked on the (single, in-place) profiles
+  // counter above — nothing per-run is persisted.
 
   return json({ output });
 });

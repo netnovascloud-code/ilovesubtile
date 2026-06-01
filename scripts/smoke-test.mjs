@@ -1,4 +1,4 @@
-// Konver smoke test (v16) — runs in GitHub Actions against a freshly-built
+// Konver smoke test (v17) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -188,6 +188,21 @@ for (const { slug, run } of INTERACTIVE) {
 }
 
 await browser.close();
+
+// ── Pass 2.5 — the dynamic OG image renders ───────────────────────────────
+// Every page's og:image points at /og/i — verify it returns a real PNG so we
+// never regress back to blank social previews.
+try {
+  const r = await fetch(`${BASE}/og/i?title=Smoke+Test&sub=Konver`, { signal: AbortSignal.timeout(20_000) });
+  const ct = r.headers.get("content-type") || "";
+  const buf = new Uint8Array(await r.arrayBuffer());
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  if (!/image\/(png|jpeg)/.test(ct)) throw new Error(`content-type=${ct}`);
+  if (buf.length < 1000) throw new Error(`tiny image (${buf.length} bytes)`);
+  record("og-image /og/i", true);
+} catch (e) {
+  record("og-image /og/i", false, (e instanceof Error ? e.message : String(e)).slice(0, 160));
+}
 
 // ── Pass 3 — real AI calls against the deployed edge functions ────────────
 // Bypasses the browser and hits the prod Supabase functions directly so we

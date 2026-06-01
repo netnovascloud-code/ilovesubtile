@@ -90,6 +90,7 @@ import { VoiceToTextClient } from "@/components/tools/clients/VoiceToTextClient"
 import { CitationGeneratorClient } from "@/components/tools/clients/CitationGeneratorClient";
 import { AiDetectorClient } from "@/components/tools/clients/AiDetectorClient";
 import { SignPdfClient } from "@/components/tools/clients/SignPdfClient";
+import { FillPdfFormClient } from "@/components/tools/clients/FillPdfFormClient";
 import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
 import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
 import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
@@ -490,6 +491,9 @@ export default function LocalisedToolPage({
       break;
     case "sign-pdf":
       body = <SignPdfClient />;
+      break;
+    case "fill-pdf-form":
+      body = <FillPdfFormClient />;
       break;
     case "change-background":
       body = <ChangeBackgroundClient />;

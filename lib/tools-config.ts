@@ -2137,6 +2137,22 @@ TOOLS.push(
     faqs: codeFaqs("AI Content Detector"),
   },
   {
+    slug: "fill-pdf-form", phase: 3, kind: "client", category: "documents", icon: FileSignature, tone: "blue",
+    name: "Fill PDF Form",
+    short: "Fill in any PDF form — entirely in your browser.",
+    h1: "Fill PDF Form Online Free — Fillable PDF Forms in Your Browser",
+    metaTitle: "Fill PDF Form Online — Free, In-Browser | Konver",
+    metaDescription: "Fill in any PDF form (text fields, checkboxes, radios, dropdowns) and download the result — flattened if you want. 100% in your browser, never uploaded.",
+    primaryKeyword: "fill pdf form online",
+    accept: ["pdf"], freeMaxMb: 0, outputType: "PDF",
+    steps: [
+      { title: "Upload a fillable PDF", body: "Anything with AcroForm fields — IRS, school, application forms…" },
+      { title: "Fill the fields", body: "Text, checkboxes, radios and dropdowns are detected automatically." },
+      { title: "Download (flattened or editable)", body: "Toggle flatten to lock the values into the PDF." },
+    ],
+    faqs: codeFaqs("Fill PDF Form"),
+  },
+  {
     slug: "sign-pdf", phase: 3, kind: "client", category: "documents", icon: PenLine, tone: "blue",
     name: "Sign PDF",
     short: "Draw a signature and stamp it onto your PDF — in-browser.",

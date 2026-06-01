@@ -1,4 +1,4 @@
-# Konver smoke test — 168/168 passed
+# Konver smoke test — 174/174 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -174,3 +174,9 @@ _None._
 - case-converter [interactive]
 - qr-generator [interactive]
 - wav-to-mp3 [interactive]
+- AI ai-process:synonyms
+- AI ai-process:conjugate
+- AI ai-process:rephrase (no markdown)
+- AI ai-process:translate (target lang)
+- AI ai-process:ai-detect (JSON shape)
+- AI ai-process:citation (APA)

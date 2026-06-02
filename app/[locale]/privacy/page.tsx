@@ -1,13 +1,14 @@
-// Localized Privacy Policy route. Until native translations land, all 19
-// non-English locales render the English source with a clearly-flagged
-// "translation in progress" notice. The English version remains the
-// legally-binding version. hreflang is wired in lib/seo.ts.
+// Localized Privacy Policy. Renders the translated version from
+// PRIVACY_TRANSLATIONS if present, otherwise falls back to the English
+// source with a "translation in progress" notice. hreflang wired below.
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import PrivacyPage from "@/app/privacy/page";
 import { LOCALES, HREFLANG_PREFIX, type Locale } from "@/lib/seo";
 import { SITE_URL } from "@/lib/utils";
+import { LegalRender } from "@/lib/legal/render";
+import { PRIVACY_EN } from "@/lib/legal/privacy-en";
+import { PRIVACY_TRANSLATIONS } from "@/lib/legal/legal-translations.generated";
 
 export function generateStaticParams() {
   return LOCALES.filter((l) => l !== "en").map((locale) => ({ locale }));
@@ -36,6 +37,11 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
+  const translated = PRIVACY_TRANSLATIONS[locale];
+  // Once the locale has been translated, render the native version with no
+  // banner. Until then, render EN with the pending notice. Either way, the
+  // English version remains the legally-binding one (see Terms section 13).
+  if (translated) return <LegalRender doc={translated} />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -46,7 +52,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <PrivacyPage />
+      <LegalRender doc={PRIVACY_EN} />
     </>
   );
 }

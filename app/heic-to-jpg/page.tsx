@@ -1,0 +1,16 @@
+import type { Metadata } from "next";
+import { TOOLS_BY_SLUG } from "@/lib/tools-config";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
+import { HeicConvertClient } from "@/components/tools/clients/HeicConvertClient";
+import { buildToolMetadata } from "@/lib/seo";
+
+const tool = TOOLS_BY_SLUG["heic-to-jpg"];
+export const metadata: Metadata = buildToolMetadata(tool);
+
+export default function Page() {
+  return (
+    <ToolPageShell tool={tool}>
+      <HeicConvertClient target="jpeg" />
+    </ToolPageShell>
+  );
+}

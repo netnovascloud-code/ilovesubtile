@@ -40,6 +40,7 @@ const MemeGeneratorClient = dynamic(() => import("@/components/tools/clients/Mem
 const PhotoEditorClient = dynamic(() => import("@/components/tools/clients/PhotoEditorClient").then((m) => ({ default: m.PhotoEditorClient })));
 const HtmlToImageClient = dynamic(() => import("@/components/tools/clients/HtmlToImageClient").then((m) => ({ default: m.HtmlToImageClient })));
 const BlurFaceClient = dynamic(() => import("@/components/tools/clients/BlurFaceClient").then((m) => ({ default: m.BlurFaceClient })));
+const HeicConvertClient = dynamic(() => import("@/components/tools/clients/HeicConvertClient").then((m) => ({ default: m.HeicConvertClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -469,6 +470,12 @@ export default function LocalisedToolPage({
       break;
     case "blur-face":
       body = <BlurFaceClient />;
+      break;
+    case "heic-to-jpg":
+      body = <HeicConvertClient target="jpeg" />;
+      break;
+    case "heic-to-png":
+      body = <HeicConvertClient target="png" />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

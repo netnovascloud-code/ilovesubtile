@@ -1000,6 +1000,18 @@ TOOLS.push(
     "Convert PNG to WebP instantly in your browser. Transparency is preserved and files shrink dramatically. Free and unlimited.",
     "png to webp", ["png"], "WebP",
     [{ title: "Upload your PNG", body: "Transparency is kept." }, { title: "Choose quality", body: "WebP supports alpha at a fraction of the size." }, { title: "Download the WebP", body: "Smaller transparent images." }]),
+  imgTool("webp-to-jpg", ImageIcon, "WebP to JPG", "Reverse convert: WebP → universal JPG.",
+    "WebP to JPG Converter — Convert WebP to JPEG Online",
+    "WebP to JPG Converter Online — Free & Instant | Konvertools",
+    "Convert WebP images to JPG instantly in your browser. Adjustable quality, transparent areas flattened to white. Free and unlimited.",
+    "webp to jpg", ["webp"], "JPG",
+    [{ title: "Upload your WebP", body: "Any .webp image." }, { title: "Pick a quality", body: "Balance file size and clarity." }, { title: "Download the JPG", body: "Universally compatible." }]),
+  imgTool("webp-to-png", ImageIcon, "WebP to PNG", "Lossless WebP → PNG, transparency preserved.",
+    "WebP to PNG Converter — Convert WebP to PNG Online",
+    "WebP to PNG Converter Online — Free & Instant | Konvertools",
+    "Convert WebP to PNG instantly in your browser. Lossless output, transparency preserved. Free and unlimited.",
+    "webp to png", ["webp"], "PNG",
+    [{ title: "Upload your WebP", body: "Transparency is kept." }, { title: "Click convert", body: "Re-encoded as PNG." }, { title: "Download", body: "Lossless and ready to use." }]),
   imgTool("svg-to-png", ImageIcon, "SVG to PNG", "Crisp raster output at any resolution.",
     "SVG to PNG Converter — Rasterize SVG Online",
     "SVG to PNG Converter Online — Free & Instant | Konvertools",
@@ -1840,6 +1852,41 @@ TOOLS.push({
     { title: "Render & download", body: "Done in your browser." },
   ],
   faqs: codeFaqs("HTML to Image"),
+});
+
+// ── HEIC (iPhone) — decoded via heic2any/libheif.wasm at runtime ────────────
+TOOLS.push({
+  slug: "heic-to-jpg", phase: 3, kind: "client", category: "images", icon: FileCode, tone: "amber",
+  name: "Convert HEIC to JPG",
+  short: "iPhone HEIC photos to universal JPG, in your browser.",
+  h1: "HEIC to JPG Online Free — iPhone Photo Converter",
+  metaTitle: "HEIC to JPG Online — Free iPhone Photo Converter | Konvertools",
+  metaDescription: "Convert iPhone HEIC / HEIF photos to JPG with adjustable quality. Browser-only via WebAssembly — your photos never leave your device.",
+  primaryKeyword: "heic to jpg",
+  accept: ["heic", "heif"], freeMaxMb: 0, outputType: "JPG",
+  steps: [
+    { title: "Drop your HEIC photo", body: "From an iPhone or iPad." },
+    { title: "Pick a quality", body: "92 is great for photo prints." },
+    { title: "Download JPG", body: "Universally compatible." },
+  ],
+  faqs: codeFaqs("HEIC to JPG"),
+});
+
+TOOLS.push({
+  slug: "heic-to-png", phase: 3, kind: "client", category: "images", icon: FileCode, tone: "amber",
+  name: "Convert HEIC to PNG",
+  short: "iPhone HEIC photos to lossless PNG, in your browser.",
+  h1: "HEIC to PNG Online Free — iPhone Photo Converter",
+  metaTitle: "HEIC to PNG Online — Free, Lossless | Konvertools",
+  metaDescription: "Convert iPhone HEIC / HEIF photos to lossless PNG. Browser-only via WebAssembly — your photos never leave your device.",
+  primaryKeyword: "heic to png",
+  accept: ["heic", "heif"], freeMaxMb: 0, outputType: "PNG",
+  steps: [
+    { title: "Drop your HEIC photo", body: "From an iPhone or iPad." },
+    { title: "Click convert", body: "Decoded via WebAssembly in your browser." },
+    { title: "Download PNG", body: "Lossless, transparency-friendly." },
+  ],
+  faqs: codeFaqs("HEIC to PNG"),
 });
 
 TOOLS.push({

@@ -1,4 +1,4 @@
-# Konvertools smoke test — 194/194 passed
+# Konvertools smoke test — 197/197 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -98,6 +98,9 @@ _None._
 - watermark-pdf
 - pdf-page-numbers
 - compare-pdf
+- organize-pdf
+- extract-pdf-pages
+- edit-pdf-metadata
 - mp3-to-wav
 - wav-to-mp3
 - compress-audio

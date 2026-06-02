@@ -18,7 +18,7 @@ export function generateMetadata({ params }: { params: { sector: string } }): Me
     openGraph: {
       title: sector.metaTitle,
       description: sector.metaDescription,
-      url: `https://konver.app/for/${sector.id}`,
+      url: `https://konvertools.com/for/${sector.id}`,
       siteName: "Konvertools",
       type: "website",
       images: [ogImageUrl(sector.metaTitle, sector.metaDescription)],

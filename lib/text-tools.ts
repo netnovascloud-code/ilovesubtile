@@ -416,7 +416,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "url-encode": {
     inputLabel: "Text / URL",
-    inputPlaceholder: "https://konver.app/search?q=a b&x=1",
+    inputPlaceholder: "https://konvertools.com/search?q=a b&x=1",
     outputLabel: "Result",
     mono: true,
     modes: [
@@ -518,7 +518,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "markdown-to-html": {
     inputLabel: "Markdown",
-    inputPlaceholder: "# Title\n\nSome **bold** text and a [link](https://konver.app).",
+    inputPlaceholder: "# Title\n\nSome **bold** text and a [link](https://konvertools.com).",
     outputLabel: "HTML",
     download: { ext: "html", mime: "text/html" },
     mono: true,

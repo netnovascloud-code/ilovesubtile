@@ -14,7 +14,7 @@ const LEVELS = [
 ] as const;
 
 export function QrGeneratorClient() {
-  const [text, setText] = useState("https://konver.app");
+  const [text, setText] = useState("https://konvertools.com");
   const [size, setSize] = useState<number>(512);
   const [level, setLevel] = useState<string>("M");
   const [fg, setFg] = useState("#0B0F19");

@@ -112,8 +112,8 @@ export function SectorPage({ sector }: { sector: Sector }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
-              { "@type": "ListItem", position: 2, name: `For ${sector.id}`, item: `https://konver.app/for/${sector.id}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+              { "@type": "ListItem", position: 2, name: `For ${sector.id}`, item: `https://konvertools.com/for/${sector.id}` },
             ],
           }),
         }}

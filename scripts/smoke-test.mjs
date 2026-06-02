@@ -1,4 +1,4 @@
-// Konvertools smoke test (v25) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v26) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -140,7 +140,7 @@ const INTERACTIVE = [
   }},
   { slug: "qr-generator", run: async (page) => {
     const before = await page.locator("svg, canvas").count();
-    await page.locator('input, textarea').first().fill("https://konver.app");
+    await page.locator('input, textarea').first().fill("https://konvertools.com");
     await page.waitForTimeout(500);
     const after = await page.locator("svg, canvas").count();
     if (after < Math.max(1, before)) throw new Error("no QR canvas/svg rendered");

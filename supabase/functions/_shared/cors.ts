@@ -3,8 +3,9 @@
 // rejects the cross-site call. Additional origins (preview deploys, local
 // dev) can be added by setting KONVER_EXTRA_ORIGINS as a comma-separated env.
 const STATIC_ORIGINS = new Set<string>([
-  "https://konver.app",
-  "https://www.konver.app",
+  "https://konvertools.com",
+  "https://konver.app", "https://www.konver.app",
+  "https://www.konvertools.com",
   "http://localhost:3000",
   "http://127.0.0.1:3000",
 ]);
@@ -34,7 +35,8 @@ export function buildCors(req: Request): Record<string, string> {
 
 // Legacy export retained for the rare static use; new code should use buildCors(req).
 export const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://konver.app",
+  "Access-Control-Allow-Origin": "https://konvertools.com",
+  "https://konver.app", "https://www.konver.app",
   "Vary": "Origin",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",

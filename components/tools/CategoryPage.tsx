@@ -112,8 +112,8 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
-              { "@type": "ListItem", position: 2, name: def.label, item: `https://konver.app/${category}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+              { "@type": "ListItem", position: 2, name: def.label, item: `https://konvertools.com/${category}` },
             ],
           }),
         }}
@@ -128,16 +128,16 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
             "@type": "CollectionPage",
             name: `All ${def.label} Tools — Konvertools`,
             description: def.blurb,
-            url: `https://konver.app/${category}`,
+            url: `https://konvertools.com/${category}`,
             inLanguage: "en",
-            isPartOf: { "@type": "WebSite", name: "Konvertools", url: "https://konver.app/" },
+            isPartOf: { "@type": "WebSite", name: "Konvertools", url: "https://konvertools.com/" },
             mainEntity: {
               "@type": "ItemList",
               numberOfItems: tools.length,
               itemListElement: tools.map((t, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
-                url: `https://konver.app/${t.slug}`,
+                url: `https://konvertools.com/${t.slug}`,
                 name: t.name,
                 description: t.short,
               })),
@@ -195,7 +195,7 @@ export function categoryMetadata(category: ToolCategory): Metadata {
     alternates: { canonical: `/${category}` },
     openGraph: {
       type: "website",
-      url: `https://konver.app/${category}`,
+      url: `https://konvertools.com/${category}`,
       title: `${title} | Konvertools`,
       description,
       siteName: "Konvertools",

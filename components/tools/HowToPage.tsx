@@ -103,9 +103,9 @@ export function HowToPage({ howto }: { howto: HowTo }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
-              { "@type": "ListItem", position: 2, name: "Guides", item: "https://konver.app/how-to" },
-              { "@type": "ListItem", position: 3, name: howto.h1, item: `https://konver.app/how-to/${howto.id}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+              { "@type": "ListItem", position: 2, name: "Guides", item: "https://konvertools.com/how-to" },
+              { "@type": "ListItem", position: 3, name: howto.h1, item: `https://konvertools.com/how-to/${howto.id}` },
             ],
           }),
         }}

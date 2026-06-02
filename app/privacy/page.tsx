@@ -39,8 +39,8 @@ export default function Page() {
         <h2 className="mt-8 text-lg font-semibold text-ink-900">Your rights</h2>
         <p>
           You can request export or deletion of your account at any time. Write to{" "}
-          <a className="text-brand-600 underline" href="mailto:privacy@konver.app">
-            privacy@konver.app
+          <a className="text-brand-600 underline" href="mailto:privacy@konvertools.com">
+            privacy@konvertools.com
           </a>
           .
         </p>

@@ -168,7 +168,7 @@ async function translate(job, fields, apiTask, env) {
           // Node's fetch doesn't set an Origin header — Supabase's edge gateway
           // rejects requests from unknown origins. Pretend to be the production
           // app so the function's CORS allowlist accepts us.
-          Origin: "https://konver.app",
+          Origin: "https://konvertools.com",
         },
         body: JSON.stringify({ task: apiTask, text: JSON.stringify(job.en), options: { target: job.lang } }),
       });

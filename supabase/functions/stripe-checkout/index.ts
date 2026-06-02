@@ -16,12 +16,13 @@ import Stripe from "https://esm.sh/stripe@17.2.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konvertools.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -55,7 +56,7 @@ Deno.serve(async (req) => {
   if (!caller) return json({ error: "unauthorized" }, { status: 401 });
 
   const url = new URL(req.url);
-  const origin = req.headers.get("origin") ?? "https://konver.app";
+  const origin = req.headers.get("origin") ?? "https://konvertools.com";
 
   const stripe = new Stripe(stripeKey, {
     apiVersion: "2024-09-30.acacia",

@@ -17,14 +17,15 @@
 // Secret: MISTRAL_API_KEY
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const BUY_CREDITS_URL = "https://konver.app/pricing";
+const BUY_CREDITS_URL = "https://konvertools.com/pricing";
 
 // CORS allowlist. We echo the caller's Origin only when it's a known host
-// (production vercel.app domains, the future konver.app, and local dev);
+// (production vercel.app domains, the future konvertools.com, and local dev);
 // otherwise we fall back to the canonical site. Server-to-server API callers
 // send no Origin and are unaffected. Note: api-gateway is JWT-free and uses
 // API-key auth, so CORS is defence-in-depth, not the primary control.
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
@@ -32,7 +33,7 @@ function allowOrigin(req: Request): string {
   const o = req.headers.get("origin") ?? "";
   if (STATIC_ORIGINS.has(o)) return o;
   if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o)) return o;
-  return "https://konver.app";
+  return "https://konvertools.com";
 }
 function corsFor(req: Request): Record<string, string> {
   return {

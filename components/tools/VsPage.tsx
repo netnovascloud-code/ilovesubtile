@@ -96,8 +96,8 @@ export function VsPage({ vs }: { vs: Vs }) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
-              { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://konver.app/vs/${vs.id}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+              { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://konvertools.com/vs/${vs.id}` },
             ],
           }),
         }}

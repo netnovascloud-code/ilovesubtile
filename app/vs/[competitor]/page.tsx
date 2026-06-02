@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { competitor: string } })
     title: { absolute: vs.metaTitle },
     description: vs.metaDescription,
     alternates: { canonical: `/vs/${vs.id}` },
-    openGraph: { title: vs.metaTitle, description: vs.metaDescription, url: `https://konver.app/vs/${vs.id}`, siteName: "Konvertools", type: "website", images: [ogImageUrl(vs.metaTitle, vs.metaDescription)] },
+    openGraph: { title: vs.metaTitle, description: vs.metaDescription, url: `https://konvertools.com/vs/${vs.id}`, siteName: "Konvertools", type: "website", images: [ogImageUrl(vs.metaTitle, vs.metaDescription)] },
     twitter: { card: "summary_large_image", images: [ogImageUrl(vs.metaTitle, vs.metaDescription)] },
   };
 }

@@ -196,9 +196,9 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "remove_background", cost: "2 credits", status: "soon",
     desc: "Cut out a transparent PNG. Runs in-browser today (free & unlimited); REST access is rolling out.",
-    curl: `# In-browser today: https://konver.app/remove-background
+    curl: `# In-browser today: https://konvertools.com/remove-background
 # REST coming soon.`,
-    js: `// In-browser today: https://konver.app/remove-background
+    js: `// In-browser today: https://konvertools.com/remove-background
 // REST coming soon.`,
     response: `{
   "error": "not_implemented",
@@ -208,7 +208,7 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "convert_pdf", cost: "1 credit", status: "soon",
     desc: "merge / split / compress / rotate / to_images / to_text. Runs in-browser today; REST access is rolling out.",
-    curl: `# In-browser today: https://konver.app/merge-pdf (and friends)
+    curl: `# In-browser today: https://konvertools.com/merge-pdf (and friends)
 # REST coming soon.`,
     js: `// In-browser today; REST coming soon.`,
     response: `{
@@ -219,7 +219,7 @@ const { job } = await r.json();`,
   {
     method: "POST", action: "convert_image", cost: "1 credit", status: "soon",
     desc: "Re-encode to a target format with quality/resize. Runs in-browser today; REST access is rolling out.",
-    curl: `# In-browser today: https://konver.app/png-to-jpg (and friends)
+    curl: `# In-browser today: https://konvertools.com/png-to-jpg (and friends)
 # REST coming soon.`,
     js: `// In-browser today; REST coming soon.`,
     response: `{
@@ -245,7 +245,7 @@ const ERROR_EXAMPLE = `{
   "message": "This operation costs 10 credits. Your balance: 7 credits.",
   "credits_required": 10,
   "credits_available": 7,
-  "buy_credits_url": "https://konver.app/pricing"
+  "buy_credits_url": "https://konvertools.com/pricing"
 }`;
 
 export default function ApiDocsPage() {

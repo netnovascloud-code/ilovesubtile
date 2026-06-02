@@ -63,7 +63,7 @@ export function GET(req: Request) {
 
         {/* footer */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ fontSize: "26px", fontWeight: 600, color: BRAND }}>konver.app</div>
+          <div style={{ fontSize: "26px", fontWeight: 600, color: BRAND }}>konvertools.com</div>
           <div style={{ display: "flex", gap: "12px" }}>
             {["Free", "In your browser", "No sign-up"].map((t) => (
               <div key={t} style={{ fontSize: "22px", color: "#475569", background: "#fff", border: "1px solid #e2e8f0", borderRadius: "999px", padding: "8px 18px", display: "flex" }}>

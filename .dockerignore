@@ -1,0 +1,21 @@
+# Don't ship build artefacts, local secrets or VCS noise into the image.
+node_modules
+.next
+.git
+.gitignore
+.dockerignore
+Dockerfile
+.env*
+.vercel
+.vscode
+.idea
+*.log
+npm-debug.log*
+README.md
+SMOKE_TEST_REPORT.md
+
+# Smoke-test / CI / Supabase function sources aren't needed at runtime —
+# only their deployed versions are called from the running Next server.
+.github
+scripts
+supabase

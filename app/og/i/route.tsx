@@ -3,8 +3,9 @@ import { ImageResponse } from "next/og";
 // Dynamic Open Graph image generator. Every page's og:image / twitter:image
 // points here with ?title=&sub= — replacing the 157 static /og/<slug>.png
 // files that never existed (so social previews were blank). Lives under
-// /og/ which the i18n middleware already skips. Runs on the edge.
-export const runtime = "edge";
+// /og/ which the i18n middleware already skips. Runs on Node (works on any
+// host, not just Vercel/Cloudflare's V8 edge runtime).
+export const runtime = "nodejs";
 
 const BRAND = "#2563EB";
 

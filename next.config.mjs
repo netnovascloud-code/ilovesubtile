@@ -45,6 +45,12 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+  // Standalone output produces a minimal Node server in .next/standalone/
+  // (~50 MB instead of ~500 MB with full node_modules). Required for the
+  // Docker build and any non-Vercel host (Coolify, Railway, Render, Fly,
+  // Cloud Run, a plain VPS, …). Vercel ignores this flag, so previews still
+  // work unchanged.
+  output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
   },

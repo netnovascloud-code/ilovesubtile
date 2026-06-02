@@ -1,4 +1,4 @@
-# Konvertools smoke test — 190/190 passed
+# Konvertools smoke test — 194/194 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -44,6 +44,8 @@ _None._
 - png-to-jpg
 - jpg-to-webp
 - png-to-webp
+- webp-to-jpg
+- webp-to-png
 - svg-to-png
 - compress-image
 - resize-image
@@ -137,6 +139,8 @@ _None._
 - image-to-jpg
 - image-from-jpg
 - html-to-image
+- heic-to-jpg
+- heic-to-png
 - blur-face
 - extract-colors
 - remove-video-background

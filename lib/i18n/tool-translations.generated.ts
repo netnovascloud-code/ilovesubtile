@@ -5008,6 +5008,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "编辑任意 PDF 文档的标题、作者、主题和关键词。完全在浏览器中运行（使用 pdf-lib），无需上传。"
     }
   },
+  "email-checker": {
+    "ar": {
+      "name": "محقق البريد الإلكتروني",
+      "short": "تحقق مما إذا كان عنوان البريد الإلكتروني صالحًا وفعليًا وقابلًا للتسليم.",
+      "h1": "محقق البريد الإلكتروني المجاني — تحقق من صلاحية عنوان البريد الإلكتروني",
+      "metaTitle": "محقق البريد الإلكتروني المجاني — تحقق من صلاحية البريد الإلكتروني | Konvertools",
+      "metaDescription": "تحقق من أي عنوان بريد إلكتروني: التركيب، وجود النطاق، سجلات MX (البريد) وكشف مقدمي البريد المؤقت. احصل على درجة موثوقية من 0 إلى 100 فورًا. مجانًا، بدون تسجيل."
+    },
+    "cs": {
+      "name": "Ověřovač e-mailů",
+      "short": "Zkontrolujte, zda je e-mailová adresa platná, skutečná a doručitelná.",
+      "h1": "Ověřovač e-mailů zdarma — Zjistěte, zda je e-mailová adresa platná",
+      "metaTitle": "Ověřovač e-mailů zdarma — Zkontrolujte platnost e-mailu | Konvertools",
+      "metaDescription": "Ověřte jakoukoli e-mailovou adresu: syntaxi, existenci domény, MX záznamy a detekci jednorázových poskytovatelů. Okamžitě získejte skóre spolehlivosti 0–100. Zdarma, bez registrace."
+    },
+    "de": {
+      "name": "E-Mail-Prüfer",
+      "short": "Prüfe, ob eine E-Mail-Adresse gültig, echt und zustellbar ist.",
+      "h1": "Kostenloser E-Mail-Prüfer — Prüfe, ob eine E-Mail-Adresse gültig ist",
+      "metaTitle": "Kostenloser E-Mail-Prüfer — E-Mail auf Gültigkeit prüfen | Konvertools",
+      "metaDescription": "Prüfe jede E-Mail-Adresse: Syntax, Domain-Existenz, MX-Records und Erkennung von Wegwerf-Anbietern. Erhalte sofort eine Zuverlässigkeitsbewertung von 0–100. Kostenlos, ohne Anmeldung."
+    },
+    "es": {
+      "name": "Verificador de Correos Electrónicos",
+      "short": "Comprueba si una dirección de correo electrónico es válida, real y entregable.",
+      "h1": "Verificador de Correos Electrónicos Gratis — Verifica si un Correo es Válido",
+      "metaTitle": "Verificador de Correos Electrónicos Gratis — Verifica si un Correo es Válido | Konvertools",
+      "metaDescription": "Verifica cualquier dirección de correo: sintaxis, existencia del dominio, registros MX y detección de proveedores desechables. Obtén una puntuación de fiabilidad del 0 al 100 al instante. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Vérificateur d'e-mails",
+      "short": "Vérifiez si une adresse e-mail est valide, réelle et livrable.",
+      "h1": "Vérificateur d'e-mails gratuit — Vérifiez si une adresse e-mail est valide",
+      "metaTitle": "Vérificateur d'e-mails gratuit — Vérifiez si un e-mail est valide & réel | Konvertools",
+      "metaDescription": "Vérifiez n'importe quelle adresse e-mail : syntaxe, existence du domaine, enregistrements MX et détection des fournisseurs jetables. Obtenez un score de fiabilité de 0 à 100 instantanément. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "ईमेल सत्यापनकर्ता",
+      "short": "जांचें कि क्या कोई ईमेल पता मान्य, वास्तविक और डिलीवर करने योग्य है।",
+      "h1": "नि:शुल्क ईमेल सत्यापनकर्ता — जानें क्या ईमेल पता वैध है",
+      "metaTitle": "नि:शुल्क ईमेल सत्यापनकर्ता — ईमेल वैधता जांचें | Konvertools",
+      "metaDescription": "किसी भी ईमेल पते का सत्यापन करें: वाक्यविन्यास, डोमेन अस्तित्व, MX (मेल) रिकॉर्ड और डिस्पोजेबल प्रदाता का पता लगाएं। तुरंत 0-100 विश्वसनीयता स्कोर प्राप्त करें। नि:शुल्क, बिना साइन-अप।"
+    },
+    "id": {
+      "name": "Pemeriksa Email",
+      "short": "Periksa apakah alamat email valid, asli, dan dapat dikirimkan.",
+      "h1": "Pemeriksa Email Gratis — Periksa Apakah Email Valid",
+      "metaTitle": "Pemeriksa Email Gratis — Cek Validitas & Keaslian Email | Konvertools",
+      "metaDescription": "Verifikasi alamat email apa pun: sintaks, keberadaan domain, catatan MX (surat), dan deteksi penyedia sekali pakai. Dapatkan skor keandalan 0-100 secara instan. Gratis, tanpa daftar."
+    },
+    "it": {
+      "name": "Verificatore di Email",
+      "short": "Verifica se un indirizzo email è valido, reale e recapitabile.",
+      "h1": "Verificatore di Email Gratuito — Controlla se un Indirizzo Email È Valido",
+      "metaTitle": "Verificatore di Email Gratuito — Controlla se un’Email È Valida & Reale | Konvertools",
+      "metaDescription": "Verifica qualsiasi indirizzo email: sintassi, dominio, record MX e rilevamento provider usa-e-getta. Ottieni un punteggio di affidabilità 0-100 in tempo reale. Gratis, senza registrazione."
+    },
+    "ja": {
+      "name": "メールアドレス検証ツール",
+      "short": "メールアドレスが有効で、実在し、配信可能かどうかを確認します。",
+      "h1": "無料のメールアドレス検証ツール — メールアドレスが有効かどうかを確認",
+      "metaTitle": "無料メールアドレス検証 — メールの有効性を確認 | Konvertools",
+      "metaDescription": "あらゆるメールアドレスを検証：構文、ドメインの存在、MX（メール）レコード、使い捨てプロバイダーの検出。信頼性スコア0-100を瞬時に取得。登録不要、完全無料。"
+    },
+    "ko": {
+      "name": "이메일 검증기",
+      "short": "이메일 주소가 유효하고 실제이며 배달 가능한지 확인하세요.",
+      "h1": "무료 이메일 검증기 — 이메일 주소 유효성 확인",
+      "metaTitle": "무료 이메일 검증 — 이메일 유효성 확인 | Konvertools",
+      "metaDescription": "모든 이메일 주소 검증: 구문, 도메인 존재 여부, MX(메일) 레코드, 임시 이메일 제공자 감지. 0~100 신뢰도 점수를 즉시 확인하세요. 무료, 회원가입 없이 사용 가능."
+    },
+    "nl": {
+      "name": "E-mailverifier",
+      "short": "Controleer of een e-mailadres geldig, echt en bezorgbaar is.",
+      "h1": "Gratis E-mailverifier — Controleer of een E-mailadres Geldig Is",
+      "metaTitle": "Gratis E-mailverifier — Controleer of een E-mail Geldig & Echt Is | Konvertools",
+      "metaDescription": "Verifieer elk e-mailadres: syntax, domeinexistentie, MX-records en detectie van wegwerpproviders. Ontvang direct een betrouwbaarheidsscore van 0-100. Gratis, zonder aanmelding."
+    },
+    "pl": {
+      "name": "Weryfikator adresów e-mail",
+      "short": "Sprawdź, czy adres e-mail jest prawidłowy, istniejący i dostarczalny.",
+      "h1": "Darmowy weryfikator adresów e-mail — sprawdź, czy e-mail jest ważny",
+      "metaTitle": "Darmowy weryfikator adresów e-mail — sprawdź ważność e-maila | Konvertools",
+      "metaDescription": "Zweryfikuj dowolny adres e-mail: poprawność składni, istnienie domeny, rekordy MX oraz wykrywanie dostawców tymczasowych. Uzyskaj natychmiastową ocenę niezawodności 0-100. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Verificador de E-mails",
+      "short": "Verifique se um endereço de e-mail é válido, real e entregável.",
+      "h1": "Verificador de E-mails Grátis — Verifique se um E-mail É Válido",
+      "metaTitle": "Verificador de E-mails Grátis — Verifique se um E-mail É Válido | Konvertools",
+      "metaDescription": "Verifique qualquer endereço de e-mail: sintaxe, existência de domínio, registros MX e detecção de provedores descartáveis. Obtenha uma pontuação de confiabilidade de 0 a 100 instantaneamente. Grátis, sem cadastro."
+    },
+    "ru": {
+      "name": "Проверка Email",
+      "short": "Проверьте, действителен ли адрес электронной почты, существует ли он и доставляется ли.",
+      "h1": "Бесплатная проверка Email — Узнайте, действителен ли адрес электронной почты",
+      "metaTitle": "Бесплатная проверка Email — Проверка действительности и существования | Konvertools",
+      "metaDescription": "Проверьте любой адрес электронной почты: синтаксис, наличие домена, MX-записи и обнаружение одноразовых сервисов. Получите мгновенный рейтинг надёжности от 0 до 100. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "E-postverifierare",
+      "short": "Kontrollera om en e-postadress är giltig, äkta och mottaglig.",
+      "h1": "Gratis E-postverifierare — Kontrollera om en e-postadress är giltig",
+      "metaTitle": "Gratis E-postverifierare — Kontrollera om en e-post är giltig & äkta | Konvertools",
+      "metaDescription": "Verifiera alla e-postadresser: syntax, domänens existens, MX-poster (e-post) och engångsleverantörer. Få ett tillförlitlighetsbetyg 0-100 direkt. Gratis, ingen registrering."
+    },
+    "tr": {
+      "name": "E-posta Doğrulayıcı",
+      "short": "Bir e-posta adresinin geçerli, gerçek ve teslim edilebilir olup olmadığını kontrol edin.",
+      "h1": "Ücretsiz E-posta Doğrulayıcı — E-posta Adresi Geçerli mi?",
+      "metaTitle": "Ücretsiz E-posta Doğrulayıcı — E-postayı Doğrula & Kontrol Et | Konvertools",
+      "metaDescription": "Herhangi bir e-posta adresini doğrulayın: söz dizimi, alan adı varlığı, MX (e-posta) kayıtları ve tek kullanımlık sağlayıcı tespiti. 0-100 güvenilirlik puanı alın. Ücretsiz, kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Перевірка Email",
+      "short": "Перевірте, чи дійсний, реальний та доставляється електронний лист.",
+      "h1": "Безкоштовна перевірка Email — чи дійсний електронний лист",
+      "metaTitle": "Безкоштовна перевірка Email — чи дійсний та реальний | Konvertools",
+      "metaDescription": "Перевірте будь-який електронний лист: синтаксис, існування домену, MX-записи та виявлення одноразових провайдерів. Отримайте миттєву оцінку надійності 0-100. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Xác minh Email",
+      "short": "Kiểm tra xem địa chỉ email có hợp lệ, tồn tại và có thể gửi thư được hay không.",
+      "h1": "Xác minh Email Miễn phí — Kiểm tra Địa chỉ Email Có Hợp lệ hay Không",
+      "metaTitle": "Xác minh Email Miễn phí — Kiểm tra Email Có Hợp lệ & Thực tế | Konvertools",
+      "metaDescription": "Xác minh bất kỳ địa chỉ email nào: cú pháp, sự tồn tại của tên miền, bản ghi MX (thư) và phát hiện nhà cung cấp tạm thời. Nhận ngay điểm độ tin cậy từ 0-100. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "邮箱验证器",
+      "short": "检查邮箱地址是否有效、真实且可送达。",
+      "h1": "免费邮箱验证器 — 验证邮箱地址是否有效",
+      "metaTitle": "免费邮箱验证器 — 验证邮箱是否有效真实 | Konvertools",
+      "metaDescription": "验证任意邮箱地址：语法、域名存在性、MX（邮件）记录及一次性邮箱检测。即时获取 0-100 可信度评分。免费使用，无需注册。"
+    }
+  },
   "email-signature-generator": {
     "ar": {
       "name": "مُنشئ توقيع البريد الإلكتروني",
@@ -12592,6 +12727,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "计算某数的百分比、一个值占另一个值的百分比，以及百分比增减。免费、即时、在浏览器中运行。"
     }
   },
+  "phishing-detector": {
+    "ar": {
+      "name": "كاشف رسائل التصيد الاحتيالي",
+      "short": "تحقق مما إذا كانت الرسالة الإلكترونية عملية نصب أو محاولة تصيد.",
+      "h1": "كاشف رسائل التصيد الاحتيالي — تحقق مما إذا كانت الرسالة الإلكترونية عملية نصب",
+      "metaTitle": "كاشف رسائل التصيد الاحتيالي — هل هذه الرسالة الإلكترونية عملية نصب؟ | Konvertools",
+      "metaDescription": "الصق رسالة إلكترونية مشبوهة لتحصل على تقييم مخاطر بمساعدة الذكاء الاصطناعي مع العلامات التحذيرية الدقيقة مثل الإلحاح، انتحال العلامات التجارية، طلب البيانات، بالإضافة إلى فحص روابطك عبر جوجل ساف بروزنج. مجاناً."
+    },
+    "cs": {
+      "name": "Detektor podvodných e-mailů",
+      "short": "Zjistěte, zda je e-mail podvodný či phishingový pokus.",
+      "h1": "Detektor podvodných e-mailů — Zjistěte, zda je e-mail podvod",
+      "metaTitle": "Detektor podvodných e-mailů — Je tento e-mail podvod? | Konvertools",
+      "metaDescription": "Vložte podezřelý e-mail a získejte AI asistované hodnocení rizika včetně konkrétních varovných signálů — naléhavost, napodobování značek, požadavky na data — a kontrolu všech odkazů pomocí Google Safe Browsing. Zdarma."
+    },
+    "de": {
+      "name": "Phishing-E-Mail-Detektor",
+      "short": "Prüfe, ob eine E-Mail ein Betrug oder Phishing-Versuch ist.",
+      "h1": "Phishing-E-Mail-Detektor — Ist diese E-Mail ein Betrug?",
+      "metaTitle": "Phishing-E-Mail-Detektor — Ist diese E-Mail ein Betrug? | Konvertools",
+      "metaDescription": "Füge eine verdächtige E-Mail ein und erhalte eine KI-gestützte Risikobewertung mit den genauen Warnsignalen — Dringlichkeit, Markenfälschung, Datenanfragen — sowie eine Google Safe Browsing-Prüfung aller Links. Kostenlos."
+    },
+    "es": {
+      "name": "Detector de Correos Electrónicos de Phishing",
+      "short": "Comprueba si un correo es un fraude o intento de phishing.",
+      "h1": "Detector de Correos Electrónicos de Phishing — ¿Es un correo un timo?",
+      "metaTitle": "Detector de Phishing — ¿Es este correo un timo? | Konvertools",
+      "metaDescription": "Pega un correo sospechoso y obtén una puntuación de riesgo con IA que incluye las señales exactas — urgencia, suplantación de marcas, solicitud de datos — además de una verificación con Google Safe Browsing de cada enlace. Gratis."
+    },
+    "fr": {
+      "name": "Détecteur d'emails d'hameçonnage",
+      "short": "Vérifiez si un email est une arnaque ou une tentative de phishing.",
+      "h1": "Détecteur d'emails d'hameçonnage — Vérifiez si un email est une arnaque",
+      "metaTitle": "Détecteur d'emails d'hameçonnage — Cet email est-il une arnaque ? | Konvertools",
+      "metaDescription": "Collez un email suspect et obtenez une évaluation de risque assistée par IA avec les signes d'alerte précis — urgence, usurpation de marque, demandes de données — ainsi qu'une vérification Google Safe Browsing de chaque lien. Gratuit."
+    },
+    "hi": {
+      "name": "फ़िशिंग ईमेल डिटेक्टर",
+      "short": "जांचें कि क्या कोई ईमेल धोखाधड़ी या फ़िशिंग प्रयास है।",
+      "h1": "फ़िशिंग ईमेल डिटेक्टर — क्या यह ईमेल धोखाधड़ी है",
+      "metaTitle": "फ़िशिंग ईमेल डिटेक्टर — क्या यह ईमेल धोखाधड़ी है? | Konvertools",
+      "metaDescription": "संदिग्ध ईमेल पेस्ट करें और AI-सहायता प्राप्त जोखिम स्कोर प्राप्त करें — तात्कालिकता, ब्रांड प्रतिरूपण, डेटा अनुरोध — तथा हर लिंक की Google Safe Browsing जांच। नि:शुल्क।"
+    },
+    "id": {
+      "name": "Pendeteksi Email Phishing",
+      "short": "Periksa apakah email tersebut penipuan atau upaya phishing.",
+      "h1": "Pendeteksi Email Phishing — Periksa Apakah Email Merupakan Penipuan",
+      "metaTitle": "Pendeteksi Email Phishing — Apakah Email Ini Penipuan? | Konvertools",
+      "metaDescription": "Tempel email mencurigakan dan dapatkan skor risiko berbantuan AI dengan tanda bahaya tepat — urgensi, peniruan merek, permintaan data — serta pemeriksaan Google Safe Browsing untuk setiap tautan. Gratis."
+    },
+    "it": {
+      "name": "Rilevatore di Email di Phishing",
+      "short": "Verifica se un'email è una truffa o un tentativo di phishing.",
+      "h1": "Rilevatore di Email di Phishing — Controlla se un'Email è una Truffa",
+      "metaTitle": "Rilevatore di Email di Phishing — È una Truffa? | Konvertools",
+      "metaDescription": "Incolla un'email sospetta e ottieni un punteggio di rischio assistito da AI con i segnali di pericolo esatti — urgenza, impersonificazione di marchi, richieste di dati — più un controllo Google Safe Browsing di ogni link. Gratis."
+    },
+    "ja": {
+      "name": "フィッシングメール検出ツール",
+      "short": "メールが詐欺やフィッシングかどうかをチェックします。",
+      "h1": "フィッシングメール検出ツール — メールが詐欺かどうか確認",
+      "metaTitle": "フィッシングメール検出ツール — このメールは詐欺？ | Konvertools",
+      "metaDescription": "疑わしいメールを貼り付けてAIによるリスクスコアと具体的な警告サイン（緊急性、ブランドの偽装、データ要求など）を取得。リンクはGoogle Safe Browsingで確認。無料でご利用いただけます。"
+    },
+    "ko": {
+      "name": "피싱 이메일 탐지기",
+      "short": "이메일이 사기 또는 피싱 시도인지 확인하세요.",
+      "h1": "피싱 이메일 탐지기 — 이메일이 사기인지 확인하기",
+      "metaTitle": "피싱 이메일 탐지기 — 이메일이 사기인가요? | Konvertools",
+      "metaDescription": "의심스러운 이메일을 붙여넣고 AI가 분석한 위험 점수와 긴급성, 브랜드 사칭, 데이터 요청 등 경고 신호를 확인하세요. 모든 링크는 구글 안전 브라우징으로 검증됩니다. 무료입니다."
+    },
+    "nl": {
+      "name": "E-mail Phishingdetector",
+      "short": "Controleer of een e-mail een oplichting of phishingpoging is.",
+      "h1": "E-mail Phishingdetector — Controleer of een e-mail een oplichting is",
+      "metaTitle": "E-mail Phishingdetector — Is deze e-mail een oplichting? | Konvertools",
+      "metaDescription": "Plak een verdachte e-mail en ontvang een door AI gegenereerde risicoscore met de exacte waarschuwingssignalen — urgentie, imitatie van merken, gegevensverzoeken — plus een Google Safe Browsing-check van elke link. Gratis."
+    },
+    "pl": {
+      "name": "Wykrywacz e-maili phishingowych",
+      "short": "Sprawdź, czy e-mail jest oszustwem lub próbą phishingu.",
+      "h1": "Wykrywacz e-maili phishingowych — Sprawdź, czy e-mail to oszustwo",
+      "metaTitle": "Wykrywacz e-maili phishingowych — Czy to oszustwo? | Konvertools",
+      "metaDescription": "Wklej podejrzany e-mail, aby uzyskać ocenę ryzyka z pomocą AI wraz z dokładnymi sygnałami ostrzegawczymi — np. pilność, podszywanie się pod marki, prośby o dane — oraz sprawdź wszystkie linki przez Google Safe Browsing. Darmowe."
+    },
+    "pt": {
+      "name": "Detector de E-mails de Phishing",
+      "short": "Verifique se um e-mail é uma fraude ou tentativa de phishing.",
+      "h1": "Detector de E-mails de Phishing — Verifique se um E-mail é uma Fraude",
+      "metaTitle": "Detector de E-mails de Phishing — Este E-mail é uma Fraude? | Konvertools",
+      "metaDescription": "Cole um e-mail suspeito e obtenha uma pontuação de risco com IA, incluindo os sinais exatos — urgência, falsificação de marcas, pedidos de dados — além de uma verificação no Google Safe Browsing de todos os links. Grátis."
+    },
+    "ru": {
+      "name": "Определитель фишинговых писем",
+      "short": "Проверьте, является ли письмо мошенническим или фишинговой атакой.",
+      "h1": "Определитель фишинговых писем — Проверьте, мошенническое ли это письмо",
+      "metaTitle": "Определитель фишинговых писем — Это мошенническое письмо? | Konvertools",
+      "metaDescription": "Вставьте подозрительное письмо, чтобы получить оценку риска с помощью ИИ и точные признаки угрозы — срочность, подражание брендам, запросы данных — а также проверку всех ссылок через Google Safe Browsing. Бесплатно."
+    },
+    "sv": {
+      "name": "Detektor för nätfiske-e-post",
+      "short": "Kontrollera om en e-post är ett bedrägeri eller nätfiskeförsök.",
+      "h1": "Detektor för nätfiske-e-post — Kontrollera om en e-post är ett bedrägeri",
+      "metaTitle": "Detektor för nätfiske-e-post — Är e-posten ett bedrägeri? | Konvertools",
+      "metaDescription": "Klistra in en misstänkt e-post och få en AI-baserad riskbedömning med exakta varningstecken — brådska, varumärkesförfalskning, dataförfrågningar — samt en Google Safe Browsing-kontroll av alla länkar. Gratis."
+    },
+    "tr": {
+      "name": "E-posta Dolandırıcılığı Tespit Aracı",
+      "short": "Bir e-postanın sahte ya da dolandırıcılık olup olmadığını kontrol edin.",
+      "h1": "E-posta Dolandırıcılığı Tespit Aracı — E-postanız Sahte mi?",
+      "metaTitle": "E-posta Dolandırıcılığı Tespit Aracı | Konvertools",
+      "metaDescription": "Şüpheli bir e-postayı yapıştırın ve aciliyet, marka taklitleri, veri talepleri gibi uyarı işaretlerini AI yardımıyla analiz edin. Tüm bağlantılar için Google Safe Browsing kontrolü de ücretsiz."
+    },
+    "uk": {
+      "name": "Визначник фішингових листів",
+      "short": "Перевірте, чи лист є шахрайським або фішинговою спробою.",
+      "h1": "Визначник фішингових листів — Перевірте, чи лист є шахрайством",
+      "metaTitle": "Визначник фішингових листів — Це лист шахрайство? | Konvertools",
+      "metaDescription": "Вставте підозрілий лист і отримайте оцінку ризику за допомогою ШІ з точними ознаками — терміновість, підробка бренду, запити даних — а також перевірку кожного посилання через Google Safe Browsing. Безкоштовно."
+    },
+    "vi": {
+      "name": "Trình phát hiện email lừa đảo",
+      "short": "Kiểm tra xem email có phải là lừa đảo hay nỗ lực phishing hay không.",
+      "h1": "Trình phát hiện email lừa đảo — Kiểm tra email có phải lừa đảo không",
+      "metaTitle": "Trình phát hiện email lừa đảo — Email này có lừa đảo? | Konvertools",
+      "metaDescription": "Dán email đáng ngờ vào đây để nhận điểm rủi ro được hỗ trợ bởi AI cùng dấu hiệu cảnh báo chính xác — mức độ khẩn cấp, mạo danh thương hiệu, yêu cầu dữ liệu — kèm kiểm tra Safe Browsing của Google cho mọi liên kết. Miễn phí."
+    },
+    "zh": {
+      "name": "钓鱼邮件检测器",
+      "short": "检查邮件是否为诈骗或钓鱼邮件。",
+      "h1": "钓鱼邮件检测器 — 检查邮件是否为诈骗",
+      "metaTitle": "钓鱼邮件检测器 — 该邮件是诈骗吗？ | Konvertools",
+      "metaDescription": "粘贴可疑邮件，获取AI辅助风险评分及具体警示信号（如紧急程度、品牌冒充、数据请求），并检查所有链接的Google安全浏览状态。免费使用。"
+    }
+  },
   "photo-editor": {
     "ar": {
       "name": "محرر الصور",
@@ -14651,6 +14921,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "Xoay Video Trực Tuyến — Sửa Lại Hướng Video",
       "metaTitle": "Xoay Video Trực Tuyến — Miễn Phí | Konvertools",
       "metaDescription": "Sửa video bị quay ngang hoặc lộn ngược chỉ bằng một cú nhấp chuột."
+    }
+  },
+  "scan-file": {
+    "ar": {
+      "name": "ماسح الفيروسات",
+      "short": "افحص أي ملف بحثًا عن برامج ضارة باستخدام أكثر من 70 محركًا مضادًا للفيروسات.",
+      "h1": "ماسح فيروسات مجاني عبر الإنترنت — افحص الملفات بحثًا عن برامج ضارة",
+      "metaTitle": "ماسح فيروسات مجاني عبر الإنترنت — افحص ملفًا بحثًا عن برامج ضارة | Konvertools",
+      "metaDescription": "افحص أي ملف بحثًا عن الفيروسات والبرامج الضارة باستخدام أكثر من 70 محركًا مضادًا للفيروسات عبر VirusTotal. نتحقق من البصمة SHA-256 للملف — دون تحميل الملف نفسه. مجاني، بدون تسجيل."
+    },
+    "cs": {
+      "name": "Skener virů",
+      "short": "Zkontrolujte libovolný soubor na malware pomocí více než 70 antivirových enginů.",
+      "h1": "Bezplatný online skener virů — Kontrola souborů na malware",
+      "metaTitle": "Bezplatný online skener virů — Zkontrolujte soubor na malware | Konvertools",
+      "metaDescription": "Zkontrolujte libovolný soubor na viry a malware pomocí více než 70 antivirových enginů prostřednictvím VirusTotal. Kontrolujeme otisk SHA-256 souboru — samotný soubor se nikdy neodesílá. Zdarma, bez registrace."
+    },
+    "de": {
+      "name": "Viren-Scanner",
+      "short": "Scanne jede Datei auf Malware mit über 70 Antiviren-Engines.",
+      "h1": "Kostenloser Online-Viren-Scanner — Dateien auf Malware prüfen",
+      "metaTitle": "Kostenloser Online-Viren-Scanner — Datei auf Malware prüfen | Konvertools",
+      "metaDescription": "Scanne jede Datei auf Viren und Malware mit über 70 Antiviren-Engines über VirusTotal. Wir prüfen den SHA-256-Fingerabdruck der Datei — die Datei selbst wird nie hochgeladen. Kostenlos, ohne Anmeldung."
+    },
+    "es": {
+      "name": "Escáner de virus",
+      "short": "Analiza cualquier archivo en busca de malware con más de 70 motores antivirus.",
+      "h1": "Escáner de virus online gratuito — Analiza archivos en busca de malware",
+      "metaTitle": "Escáner de virus online gratuito — Analiza un archivo en busca de malware | Konvertools",
+      "metaDescription": "Analiza cualquier archivo en busca de virus y malware con más de 70 motores antivirus mediante VirusTotal. Verificamos la huella SHA-256 del archivo, sin subirlo. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Analyseur de virus",
+      "short": "Analysez n'importe quel fichier à la recherche de logiciels malveillants avec plus de 70 moteurs antivirus.",
+      "h1": "Analyseur de virus en ligne gratuit — Recherchez des malwares dans vos fichiers",
+      "metaTitle": "Analyseur de virus en ligne gratuit — Vérifiez un fichier | Konvertools",
+      "metaDescription": "Analysez vos fichiers à la recherche de virus et malwares via VirusTotal, avec plus de 70 moteurs antivirus. Nous vérifions l'empreinte SHA-256 du fichier — le fichier n'est jamais téléchargé. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "वायरस स्कैनर",
+      "short": "70+ एंटीवायरस इंजनों के विरुद्ध किसी भी फ़ाइल को मैलवेयर के लिए स्कैन करें।",
+      "h1": "नि:शुल्क ऑनलाइन वायरस स्कैनर — फ़ाइलों को मैलवेयर के लिए स्कैन करें",
+      "metaTitle": "नि:शुल्क ऑनलाइन वायरस स्कैनर — मैलवेयर के लिए फ़ाइल स्कैन करें | Konvertools",
+      "metaDescription": "VirusTotal के माध्यम से 70+ एंटीवायरस इंजनों के विरुद्ध किसी भी फ़ाइल को वायरस और मैलवेयर के लिए स्कैन करें। हम फ़ाइल के SHA-256 फ़िंगरप्रिंट की जाँच करते हैं — फ़ाइल स्वयं अपलोड नहीं की जाती। नि:शुल्क, साइन-अप की आवश्यकता नहीं।"
+    },
+    "id": {
+      "name": "Pemindai Virus",
+      "short": "Pindai file apa pun untuk malware menggunakan lebih dari 70 mesin antivirus.",
+      "h1": "Pemindai Virus Online Gratis — Periksa File dari Malware",
+      "metaTitle": "Pemindai Virus Online Gratis — Periksa File dari Malware | Konvertools",
+      "metaDescription": "Pindai file apa pun untuk virus dan malware menggunakan lebih dari 70 mesin antivirus melalui VirusTotal. Kami memeriksa sidik jari SHA-256 file — file itu sendiri tidak pernah diunggah. Gratis, tanpa pendaftaran."
+    },
+    "it": {
+      "name": "Scansiona virus",
+      "short": "Scansiona qualsiasi file alla ricerca di malware con oltre 70 motori antivirus.",
+      "h1": "Scansiona virus online gratuitamente — Analizza file per malware",
+      "metaTitle": "Scansiona virus online gratuitamente | Konvertools",
+      "metaDescription": "Analizza qualsiasi file alla ricerca di virus e malware con oltre 70 motori antivirus tramite VirusTotal. Verifichiamo l'impronta SHA-256 del file — il file non viene mai caricato. Gratis, senza registrazione."
+    },
+    "ja": {
+      "name": "ウイルススキャナー",
+      "short": "70以上のアンチウイルスエンジンでファイルをマルウェアスキャン。",
+      "h1": "無料オンライン ウイルススキャナー — ファイルのマルウェアをスキャン",
+      "metaTitle": "無料オンライン ウイルススキャナー | Konvertools",
+      "metaDescription": "VirusTotalを使用して70以上のアンチウイルスエンジンでファイルのウイルス・マルウェアをスキャン。SHA-256ハッシュで検査し、ファイル自体はアップロードされません。無料、登録不要。"
+    },
+    "ko": {
+      "name": "바이러스 스캐너",
+      "short": "70개 이상의 안티바이러스 엔진으로 모든 파일을 악성 코드 검사",
+      "h1": "무료 온라인 바이러스 스캐너 — 파일 악성 코드 검사",
+      "metaTitle": "무료 온라인 바이러스 스캐너 — 파일 악성 코드 검사 | Konvertools",
+      "metaDescription": "VirusTotal을 통해 70개 이상의 안티바이러스 엔진으로 파일을 검사합니다. SHA-256 핑거프린트를 확인하며, 파일 자체는 업로드되지 않습니다. 무료, 가입 없이 사용 가능합니다."
+    },
+    "nl": {
+      "name": "Virus Scanner",
+      "short": "Scan elk bestand op malware met behulp van meer dan 70 antivirusengines.",
+      "h1": "Gratis Online Virus Scanner — Scan bestanden op malware",
+      "metaTitle": "Gratis Online Virus Scanner — Scan een bestand op malware | Konvertools",
+      "metaDescription": "Scan elk bestand op virussen en malware met behulp van meer dan 70 antivirusengines via VirusTotal. We controleren de SHA-256 vingerafdruk van het bestand — het bestand zelf wordt nooit geüpload. Gratis, zonder aanmelding."
+    },
+    "pl": {
+      "name": "Skaner wirusów",
+      "short": "Skanuj dowolny plik pod kątem złośliwego oprogramowania przy użyciu ponad 70 silników antywirusowych.",
+      "h1": "Darmowy skaner wirusów online — sprawdzanie plików pod kątem złośliwego oprogramowania",
+      "metaTitle": "Darmowy skaner wirusów online — sprawdź plik pod kątem wirusów | Konvertools",
+      "metaDescription": "Skanuj dowolne pliki w poszukiwaniu wirusów i złośliwego oprogramowania przy użyciu ponad 70 silników antywirusowych przez VirusTotal. Sprawdzamy odcisk SHA-256 pliku — sam plik nie jest przesyłany. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Verificador de Vírus",
+      "short": "Verifique qualquer arquivo em busca de malware com mais de 70 motores antivírus.",
+      "h1": "Verificador de Vírus Online Grátis — Analise Arquivos por Malware",
+      "metaTitle": "Verificador de Vírus Online Grátis — Analise um Arquivo por Malware | Konvertools",
+      "metaDescription": "Verifique qualquer arquivo em busca de vírus e malware com mais de 70 motores antivírus via VirusTotal. Analisamos a impressão digital SHA-256 do arquivo — o arquivo em si nunca é carregado. Grátis, sem cadastro."
+    },
+    "ru": {
+      "name": "Сканер вирусов",
+      "short": "Проверьте любой файл на вредоносное ПО с помощью более чем 70 антивирусных движков.",
+      "h1": "Бесплатный онлайн-сканер вирусов — проверка файлов на вредоносное ПО",
+      "metaTitle": "Бесплатный онлайн-сканер вирусов — проверка файла на вредоносное ПО | Konvertools",
+      "metaDescription": "Проверьте любой файл на вирусы и вредоносное ПО с помощью более чем 70 антивирусных движков через VirusTotal. Мы проверяем SHA-256-файла — сам файл не загружается. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "Virusskanner",
+      "short": "Skanna valfri fil efter skadlig kod mot 70+ antivirusmotorer.",
+      "h1": "Gratis online-virusskanner — Skanna filer efter skadlig kod",
+      "metaTitle": "Gratis online-virusskanner — Skanna en fil efter skadlig kod | Konvertools",
+      "metaDescription": "Skanna valfri fil efter virus och skadlig kod mot 70+ antivirusmotorer via VirusTotal. Vi kontrollerar filens SHA-256-fingeravtryck — filen laddas aldrig upp. Gratis, ingen registrering."
+    },
+    "tr": {
+      "name": "Virüs Tarayıcı",
+      "short": "Dosyalarınızı 70+ antivirüs motoruna karşı kötü amaçlı yazılımlar için tarayın.",
+      "h1": "Ücretsiz Çevrimiçi Virüs Tarayıcı — Dosyaları Kötü Amaçlı Yazılımlar için Tarayın",
+      "metaTitle": "Ücretsiz Çevrimiçi Virüs Tarayıcı — Dosya Tarama | Konvertools",
+      "metaDescription": "Dosyalarınızı VirusTotal üzerinden 70+ antivirüs motoruna karşı virüs ve kötü amaçlı yazılımlar için tarayın. Dosyanın SHA-256 parmak izi kontrol edilir — dosya asla yüklenmez. Ücretsiz, kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Сканер вірусів",
+      "short": "Перевірте будь-який файл на шкідливе ПЗ за допомогою понад 70 антивірусних рушіїв.",
+      "h1": "Безкоштовний онлайн-сканер вірусів — перевірка файлів на шкідливе ПЗ",
+      "metaTitle": "Безкоштовний онлайн-сканер вірусів — перевірка файлу | Konvertools",
+      "metaDescription": "Перевірте будь-який файл на віруси та шкідливе ПЗ за допомогою понад 70 антивірусних рушіїв через VirusTotal. Ми аналізуємо SHA-256 файл — сам файл не завантажується. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Quét Virus",
+      "short": "Quét bất kỳ tệp nào để phát hiện phần mềm độc hại trên hơn 70+ công cụ diệt virus.",
+      "h1": "Công Cụ Quét Virus Miễn Phí Trực Tuyến — Kiểm Tra Tệp Độc Hại",
+      "metaTitle": "Quét Virus Miễn Phí Trực Tuyến — Kiểm Tra Tệp Độc Hại | Konvertools",
+      "metaDescription": "Quét bất kỳ tệp nào để phát hiện virus và phần mềm độc hại trên hơn 70+ công cụ diệt virus thông qua VirusTotal. Chúng tôi kiểm tra dấu vân tay SHA-256 của tệp — bản thân tệp không bao giờ được tải lên. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "病毒扫描器",
+      "short": "使用70+款杀毒引擎扫描任意文件中的恶意软件。",
+      "h1": "免费在线病毒扫描器 — 扫描文件检测恶意软件",
+      "metaTitle": "免费在线病毒扫描器 — 扫描文件检测恶意软件 | Konvertools",
+      "metaDescription": "使用VirusTotal的70+款杀毒引擎扫描文件中的病毒与恶意软件。仅检查文件的SHA-256指纹，文件本身不会上传。免费使用，无需注册。"
     }
   },
   "screenshot-to-code": {
@@ -17372,6 +17777,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "Mã hóa & Giải mã URL — Mã hóa phần trăm URL trực tuyến",
       "metaTitle": "Mã hóa / Giải mã URL Trực tuyến — Miễn phí & Ngay lập tức | Konvertools",
       "metaDescription": "Mã hóa phần trăm hoặc giải mã các tham số URL và truy vấn ngay lập tức trong trình duyệt. Miễn phí, không giới hạn, riêng tư."
+    }
+  },
+  "url-scanner": {
+    "ar": {
+      "name": "ماسح الروابط",
+      "short": "تحقق مما إذا كان الرابط آمنًا أو يؤدي إلى برامج ضارة أو تصيد.",
+      "h1": "ماسح روابط مجاني — تحقق من أمان الرابط أو خطورته",
+      "metaTitle": "ماسح روابط مجاني — هل هذا الرابط آمن؟ | Konvertools",
+      "metaDescription": "الصق أي رابط وفحصه باستخدام قاعدة بيانات جوجل لحماية المستخدم من البرامج الضارة والتصيد. احصل على نتيجة فورية حول سلامة الرابط أو خطورته. مجاني، بدون تسجيل."
+    },
+    "cs": {
+      "name": "Skener URL",
+      "short": "Zkontrolujte, zda je odkaz bezpečný, nebo vede na malware/phishing.",
+      "h1": "Bezplatný skener URL — Zjistěte, zda je odkaz bezpečný či škodlivý",
+      "metaTitle": "Bezplatný skener URL — Je tento odkaz bezpečný? | Konvertools",
+      "metaDescription": "Vložte jakýkoli odkaz a zkontrolujte jej proti databázi Google Safe Browsing kvůli malwaru, phishingu a nežádoucímu softwaru. Získejte okamžitý verdikt bezpečný/nebezpečný. Zdarma, bez nutnosti registrace."
+    },
+    "de": {
+      "name": "URL-Scanner",
+      "short": "Prüfe, ob ein Link sicher ist oder zu Malware/Phishing führt.",
+      "h1": "Kostenloser URL-Scanner — Prüfe, ob ein Link sicher oder gefährlich ist",
+      "metaTitle": "Kostenloser URL-Scanner — Ist dieser Link sicher? | Konvertools",
+      "metaDescription": "Füge jeden Link ein und prüfe ihn mit Google Safe Browsing auf Malware, Phishing und unerwünschte Software. Sofortiges Ergebnis: sicher/gefährlich. Kostenlos, ohne Anmeldung."
+    },
+    "es": {
+      "name": "Escáner de URLs",
+      "short": "Comprueba si un enlace es seguro o lleva a malware/phishing.",
+      "h1": "Escáner de URLs Gratis — Verifica si un Enlace Es Seguro o Malicioso",
+      "metaTitle": "Escáner de URLs Gratis — ¿Este enlace es seguro? | Konvertools",
+      "metaDescription": "Pega cualquier URL y verifícala con Google Safe Browsing para detectar malware, phishing y software no deseado. Obtén un veredicto instantáneo de seguro/peligroso. Gratis, sin registro."
+    },
+    "fr": {
+      "name": "Analyseur d'URL",
+      "short": "Vérifiez si un lien est sûr ou mène vers des logiciels malveillants ou du phishing.",
+      "h1": "Analyseur d'URL gratuit — Vérifiez si un lien est sûr ou malveillant",
+      "metaTitle": "Analyseur d'URL gratuit — Ce lien est-il sûr ? | Konvertools",
+      "metaDescription": "Collez n'importe quelle URL et vérifiez-la avec Google Safe Browsing pour détecter les logiciels malveillants, le phishing et les logiciels indésirables. Obtenez un verdict immédiat : sûr ou dangereux. Gratuit, sans inscription."
+    },
+    "hi": {
+      "name": "यूआरएल स्कैनर",
+      "short": "जांचें कि कोई लिंक सुरक्षित है या मालवेयर/फिशिंग की ओर ले जाता है।",
+      "h1": "नि:शुल्क यूआरएल स्कैनर — लिंक सुरक्षित है या दुर्भावनापूर्ण?",
+      "metaTitle": "नि:शुल्क यूआरएल स्कैनर — क्या यह लिंक सुरक्षित है? | Konvertools",
+      "metaDescription": "किसी भी यूआरएल को पेस्ट करें और इसे Google Safe Browsing के विरुद्ध जांचें। मालवेयर, फिशिंग और अवांछित सॉफ़्टवेयर के लिए तुरंत सुरक्षित/खतरनाक निर्णय प्राप्त करें। नि:शुल्क, बिना साइन-अप।"
+    },
+    "id": {
+      "name": "Pemindai URL",
+      "short": "Periksa apakah tautan aman atau mengarah ke malware/phising.",
+      "h1": "Pemindai URL Gratis — Periksa Apakah Tautan Aman atau Berbahaya",
+      "metaTitle": "Pemindai URL Gratis — Apakah Tautan Ini Aman? | Konvertools",
+      "metaDescription": "Tempelkan tautan apa pun dan periksa melalui Google Safe Browsing untuk mendeteksi malware, phising, dan perangkat lunak yang tidak diinginkan. Dapatkan hasil aman/berbahaya secara instan. Gratis, tanpa pendaftaran."
+    },
+    "it": {
+      "name": "Scansione URL",
+      "short": "Verifica se un link è sicuro o porta a malware/phishing.",
+      "h1": "Scansione URL gratuita — Controlla se un link è sicuro o dannoso",
+      "metaTitle": "Scansione URL gratuita — Questo link è sicuro? | Konvertools",
+      "metaDescription": "Incolla qualsiasi URL e verificalo con Google Safe Browsing per malware, phishing e software indesiderati. Ottieni un responso immediato sicuro/dannoso. Gratis, senza registrazione."
+    },
+    "ja": {
+      "name": "URLスキャナー",
+      "short": "リンクが安全か、マルウェアやフィッシングサイトかを確認します。",
+      "h1": "無料URLスキャナー — リンクが安全か危険かをチェック",
+      "metaTitle": "無料URLスキャナー — このリンクは安全？ | Konvertools",
+      "metaDescription": "URLを入力してGoogle Safe Browsingでマルウェア、フィッシング、不要なソフトウェアをチェック。即座に安全か危険かの判定を表示します。登録不要、完全無料。"
+    },
+    "ko": {
+      "name": "URL 스캐너",
+      "short": "링크가 안전하거나 악성/피싱 사이트로 연결되는지 확인하세요.",
+      "h1": "무료 URL 스캐너 — 링크가 안전하거나 악성인지 확인",
+      "metaTitle": "무료 URL 스캐너 — 이 링크가 안전합니까? | Konvertools",
+      "metaDescription": "어떤 URL이든 붙여넣고 Google Safe Browsing을 통해 악성 코드, 피싱, 원치 않는 소프트웨어를 확인하세요. 즉시 안전/위험 판정을 받으세요. 무료, 가입 없이 사용 가능."
+    },
+    "nl": {
+      "name": "URL-scanner",
+      "short": "Controleer of een link veilig is of leidt naar malware/phishing.",
+      "h1": "Gratis URL-scanner — Controleer of een link veilig of kwaadaardig is",
+      "metaTitle": "Gratis URL-scanner — Is deze link veilig? | Konvertools",
+      "metaDescription": "Plak elke URL en controleer deze met Google Safe Browsing op malware, phishing en ongewenste software. Ontvang direct een veilig/gevaarlijk oordeel. Gratis, zonder aanmelding."
+    },
+    "pl": {
+      "name": "Skaner adresów URL",
+      "short": "Sprawdź, czy link jest bezpieczny lub prowadzi do złośliwego oprogramowania/phishingu.",
+      "h1": "Darmowy skaner adresów URL — sprawdź, czy link jest bezpieczny czy złośliwy",
+      "metaTitle": "Darmowy skaner adresów URL — Czy ten link jest bezpieczny? | Konvertools",
+      "metaDescription": "Wklej dowolny adres URL i sprawdź go w Google Safe Browsing pod kątem złośliwego oprogramowania, phishingu i niechcianego oprogramowania. Uzyskaj natychmiastowy wynik bezpieczny/niebezpieczny. Darmowe, bez rejestracji."
+    },
+    "pt": {
+      "name": "Analisador de URLs",
+      "short": "Verifique se um link é seguro ou leva a malware/phishing.",
+      "h1": "Analisador Gratuito de URLs — Verifique se um Link é Seguro ou Malicioso",
+      "metaTitle": "Analisador Gratuito de URLs — Este Link é Seguro? | Konvertools",
+      "metaDescription": "Cole qualquer URL e verifique no Google Safe Browsing por malware, phishing e softwares indesejados. Receba um veredito instantâneo de seguro/perigoso. Gratuito, sem cadastro."
+    },
+    "ru": {
+      "name": "Сканер URL",
+      "short": "Проверьте, безопасна ли ссылка или ведёт на вредоносный/фишинговый сайт.",
+      "h1": "Бесплатный сканер URL — Проверьте, безопасна ли ссылка",
+      "metaTitle": "Бесплатный сканер URL — Безопасна ли ссылка? | Konvertools",
+      "metaDescription": "Вставьте любую ссылку и проверьте её в Google Safe Browsing на наличие вредоносного ПО, фишинга и нежелательных программ. Получите моментальный вердикт: безопасно/опасно. Бесплатно, без регистрации."
+    },
+    "sv": {
+      "name": "URL-skanner",
+      "short": "Kontrollera om en länk är säker eller leder till skadlig programvara/fishing.",
+      "h1": "Gratis URL-skanner — Kontrollera om en länk är säker eller skadlig",
+      "metaTitle": "Gratis URL-skanner — Är länken säker? | Konvertools",
+      "metaDescription": "Klistra in valfri URL och kontrollera den mot Googles säkerhetsdatabas för skadlig programvara, phishing och oönskad programvara. Få ett omedelbart säkert/farligt utlåtande. Gratis, ingen registrering."
+    },
+    "tr": {
+      "name": "URL Tarayıcı",
+      "short": "Bağlantının güvenli olup olmadığını veya kötü amaçlı yazılımlara/kimlik avı saldırılarına yönlendirip yönlendirmediğini kontrol edin.",
+      "h1": "Ücretsiz URL Tarayıcı — Bağlantı Güvenli mi Yoksa Zararlı mı?",
+      "metaTitle": "Ücretsiz URL Tarayıcı — Bu Bağlantı Güvenli mi? | Konvertools",
+      "metaDescription": "Herhangi bir URL'yi yapıştırın ve Google Safe Browsing'e karşı kontrol edin. Kötü amaçlı yazılım, kimlik avı ve istenmeyen yazılımlar için anında güvenli/tehlikeli sonucu alın. Ücretsiz, kayıt gerekmez."
+    },
+    "uk": {
+      "name": "Сканер посилань",
+      "short": "Перевірте, чи безпечне посилання або веде до шкідливого ПЗ/фішингу.",
+      "h1": "Безкоштовний сканер посилань — перевірте, чи безпечне посилання",
+      "metaTitle": "Безкоштовний сканер посилань — чи безпечне посилання? | Konvertools",
+      "metaDescription": "Вставте будь-яке посилання та перевірте його за допомогою Google Safe Browsing на наявність шкідливого ПЗ, фішингу чи небажаного програмного забезпечення. Отримайте миттєвий вердикт: безпечне/небезпечне. Безкоштовно, без реєстрації."
+    },
+    "vi": {
+      "name": "Quét URL",
+      "short": "Kiểm tra xem một liên kết có an toàn hay dẫn đến phần mềm độc hại/lừa đảo không.",
+      "h1": "Công cụ Quét URL Miễn Phí — Kiểm Tra Liên Kết Có An Toàn Hay Nguy Hiểm",
+      "metaTitle": "Quét URL Miễn Phí — Liên Kết Có An Toàn? | Konvertools",
+      "metaDescription": "Dán bất kỳ URL nào và kiểm tra trên Google Safe Browsing để phát hiện phần mềm độc hại, lừa đảo và phần mềm không mong muốn. Nhận kết quả ngay lập tức. Miễn phí, không cần đăng ký."
+    },
+    "zh": {
+      "name": "网址扫描器",
+      "short": "检查链接是否安全或包含恶意软件/钓鱼网站。",
+      "h1": "免费网址扫描器 — 检查链接是否安全或恶意",
+      "metaTitle": "免费网址扫描器 — 此链接安全吗？ | Konvertools",
+      "metaDescription": "粘贴任意网址，使用 Google Safe Browsing 数据库检测恶意软件、钓鱼网站和不需要的软件。即时获取安全/危险判定。免费使用，无需注册。"
     }
   },
   "uuid-generator": {

@@ -1,11 +1,9 @@
-# Konvertools smoke test — 206/208 passed
+# Konvertools smoke test — 208/208 passed
 
-❌ 2 failures — see below.
+✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
 ## Failures
-
-- **AI security:scan_url (safe)** — HTTP 503 {"error":"service_unavailable","message":"URL scanning is temporarily unavailable."}
-- **AI security:scan_file EICAR (dangerous)** — HTTP 503 {"error":"service_unavailable","message":"File scanning is temporarily unavailable."}
+_None._
 
 ## Passes
 - subtitle-generator
@@ -213,4 +211,6 @@
 - AI ai-process:citation (APA)
 - AI security:validate_email (gmail valid)
 - AI security:validate_email (no domain)
+- AI security:scan_url (safe)
+- AI security:scan_file EICAR (dangerous)
 - AI security:analyze_phishing (scam → flagged)

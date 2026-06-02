@@ -105,6 +105,12 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
       return `You are a professional software localizer for "Konvertools", a free online file-converter and tools website. The user message is a JSON object with five English fields: name, short, h1, metaTitle, metaDescription. Translate every field into ${opts.target || "the target language"} so it reads naturally and idiomatically. Rules: keep the brand name "Konvertools" unchanged; keep technical/format tokens unchanged (SRT, VTT, MP4, PDF, HEX, RGB, JSON, etc.); metaTitle stays under ~60 characters; metaDescription stays under ~160 characters. Return ONLY a JSON object with the SAME five keys.`;
     case "i18n-category":
       return `You are a professional software localizer for "Konvertools", a free online file-converter and tools website. The user message is a JSON object with two English fields: label (a short category name) and blurb (a one-line description). Translate both into ${opts.target || "the target language"} naturally and concisely. Keep the brand name "Konvertools" unchanged. Return ONLY a JSON object with the SAME two keys.`;
+    case "translate-legal":
+      // KONVER Part 5: batch-translate a JSON array of legal-prose strings
+      // into the target language in ONE call. Uses mistral-small for higher
+      // throughput. Preserves inline markdown markers used by the
+      // LegalRender component (**bold**, [label](url)).
+      return `You are a professional legal translator working for "Konvertools". The user message is a JSON array of English strings drawn from a Privacy Policy or Terms of Service. Translate EVERY string into ${opts.target || "the target language"} so it reads as natural, native legal prose for that language. Rules: keep the brand name "Konvertools" unchanged; keep technical/format tokens (GDPR, SHA-256, MX, AES, RGB, SRT, MP4, etc.) untranslated; preserve the inline markdown markers **bold** and [label](url) EXACTLY where they appear — never alter URLs or mailto addresses; preserve numbered section headings (e.g. "1. Acceptance" -> "1. Acceptation"); keep article numbers like "Art. 6(1)(b)" or "L. 221-28" untouched. Return ONLY a valid JSON array of the SAME length, in the SAME order. Do not add commentary or wrap the array in any object.`;
     default:
       return null;
   }
@@ -171,11 +177,11 @@ Deno.serve(async (req) => {
 
   // wantsJson: tasks whose contract is a JSON object — they must keep their raw
   // structured output (no plain-text rewrite, no markdown stripping).
-  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category" || task === "ai-detect";
+  const wantsJson = task === "analyze-file" || task === "contract-analyze" || task === "i18n-tool" || task === "i18n-category" || task === "ai-detect" || task === "translate-legal";
   // Tasks that legitimately emit a *specific* language (a translation/letter in
   // opts.target, an i18n fill) or a fixed structured label — these are exempt
   // from the "answer in the input's language" rule.
-  const TARGET_OR_STRUCTURED = new Set(["translate", "cover-letter", "i18n-tool", "i18n-category", "detect-language", "analyze-file", "contract-analyze", "context-examples"]);
+  const TARGET_OR_STRUCTURED = new Set(["translate", "cover-letter", "i18n-tool", "i18n-category", "detect-language", "analyze-file", "contract-analyze", "context-examples", "translate-legal"]);
   let system = baseSystem;
   // Part 4 — force clean plain text on every prose task.
   if (!wantsJson) system += ` Write your answer in plain text only — no Markdown, no asterisks (*), no bold or italic markers, no headings, no code fences.`;

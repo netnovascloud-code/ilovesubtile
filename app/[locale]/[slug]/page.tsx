@@ -44,6 +44,8 @@ const HeicConvertClient = dynamic(() => import("@/components/tools/clients/HeicC
 const OrganizePdfClient = dynamic(() => import("@/components/tools/clients/OrganizePdfClient").then((m) => ({ default: m.OrganizePdfClient })));
 const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/ExtractPdfPagesClient").then((m) => ({ default: m.ExtractPdfPagesClient })));
 const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
+const ImagesToGifClient = dynamic(() => import("@/components/tools/clients/ImagesToGifClient").then((m) => ({ default: m.ImagesToGifClient })));
+const ImageCollageClient = dynamic(() => import("@/components/tools/clients/ImageCollageClient").then((m) => ({ default: m.ImageCollageClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -488,6 +490,12 @@ export default function LocalisedToolPage({
       break;
     case "edit-pdf-metadata":
       body = <EditPdfMetadataClient />;
+      break;
+    case "images-to-gif":
+      body = <ImagesToGifClient />;
+      break;
+    case "image-collage":
+      body = <ImageCollageClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

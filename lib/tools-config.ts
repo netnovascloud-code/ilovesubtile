@@ -79,6 +79,8 @@ import {
   EyeOff,
   LayoutGrid,
   FilePen,
+  PlayCircle,
+  Frame,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1907,6 +1909,42 @@ TOOLS.push({
     { title: "Download PNG", body: "Lossless, transparency-friendly." },
   ],
   faqs: codeFaqs("HEIC to PNG"),
+});
+
+// Animated GIF from a sequence of images (gif.js wasm worker).
+TOOLS.push({
+  slug: "images-to-gif", phase: 3, kind: "client", category: "images", icon: PlayCircle, tone: "amber",
+  name: "Create Animated GIF",
+  short: "Turn a sequence of images into an animated GIF.",
+  h1: "Create Animated GIF from Images Online Free",
+  metaTitle: "Animated GIF Maker Online — Images to GIF Free | Konvertools",
+  metaDescription: "Build an animated GIF from a sequence of JPG, PNG or WebP images. Set frame delay, size and loop, in your browser — never uploaded.",
+  primaryKeyword: "create animated gif",
+  accept: ["jpg", "jpeg", "png", "webp", "gif"], freeMaxMb: 0, outputType: "GIF",
+  steps: [
+    { title: "Drop your images", body: "2 or more frames — drag to reorder." },
+    { title: "Set timing & size", body: "Frame delay, output size, loop." },
+    { title: "Build GIF", body: "Encoded in a Web Worker, downloads instantly." },
+  ],
+  faqs: codeFaqs("Animated GIF Maker"),
+});
+
+// Photo collage — composite N images on a single canvas in a chosen layout.
+TOOLS.push({
+  slug: "image-collage", phase: 3, kind: "client", category: "images", icon: Frame, tone: "amber",
+  name: "Photo Collage Maker",
+  short: "Combine multiple photos into one collage.",
+  h1: "Photo Collage Maker Online Free — Multiple Photos in One",
+  metaTitle: "Photo Collage Maker Online — Free, Drag & Drop | Konvertools",
+  metaDescription: "Pick a grid or strip layout and combine multiple photos into a single collage. Adjustable gap, background colour and output size. Browser-only, never uploaded.",
+  primaryKeyword: "photo collage maker",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Drop your photos", body: "JPG, PNG or WebP — any number." },
+    { title: "Pick a layout", body: "2×1, 2×2, 3×3 or strip." },
+    { title: "Tune & export", body: "Gap, background, size — download as PNG." },
+  ],
+  faqs: codeFaqs("Collage Maker"),
 });
 
 TOOLS.push({

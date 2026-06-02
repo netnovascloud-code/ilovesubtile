@@ -1579,6 +1579,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Công cụ chuyên nghiệp: dịch một tệp SRT sang tối đa 30 ngôn ngữ trong một lần. Hoàn hảo cho ra mắt toàn cầu và bản địa hóa nội dung."
     }
   },
+  "blur-face": {
+    "ar": {
+      "name": "تشويش الوجه في الصورة",
+      "short": "اسحب مربعًا فوق الوجوه لإخفائها.",
+      "h1": "تشويش الوجه في الصورة أونلاين مجانًا — إخفاء الصور",
+      "metaTitle": "تشويش الوجه في الصورة أونلاين — محرر خصوصية الصور | Konvertools",
+      "metaDescription": "انقر واسحب مربعات فوق الوجوه أو أي مناطق حساسة — ستتم تشويش البكسلات الأساسية. يعمل داخل متصفحك، بدون تحميل، لا تغادر بيانات الوجه."
+    },
+    "cs": {
+      "name": "Zastření tváře v obrázku",
+      "short": "Přetáhněte rámeček přes obličeje a anonymizujte je.",
+      "h1": "Zastřít tvář v obrázku online zdarma — anonymizujte fotografie",
+      "metaTitle": "Zastření tváře v obrázku online — editor soukromí | Konvertools",
+      "metaDescription": "Klikněte a přetáhněte obdélníky přes obličeje či jiné citlivé oblasti — podkladové pixely se rozmažou. Funguje přímo ve vašem prohlížeči, bez nahrávání, žádná data o tvářích neopustí vaše zařízení."
+    },
+    "de": {
+      "name": "Gesichter in Bildern unkenntlich machen",
+      "short": "Ziehe ein Rechteck über Gesichter, um sie zu anonymisieren.",
+      "h1": "Gesichter in Bildern online kostenlos unkenntlich machen — Fotos anonymisieren",
+      "metaTitle": "Gesichter in Bildern unkenntlich machen online — Privatsphäre-Fotoeditor | Konvertools",
+      "metaDescription": "Klicke und ziehe Rechtecke über Gesichter oder sensible Bereiche — die darunterliegenden Pixel werden unscharf. Läuft in deinem Browser, keine Uploads, keine Gesichtsdaten verlassen das Gerät."
+    },
+    "es": {
+      "name": "Difuminar rostro en imagen",
+      "short": "Arrastra un recuadro sobre los rostros para anonimizarlos.",
+      "h1": "Difumina rostros en imágenes online gratis — Anonimiza fotos",
+      "metaTitle": "Difuminar rostro en imagen online — Editor de privacidad | Konvertools",
+      "metaDescription": "Haz clic y arrastra rectángulos sobre rostros u otras áreas sensibles: los píxeles se difuminan. Funciona en tu navegador, sin subir archivos ni compartir datos faciales."
+    },
+    "fr": {
+      "name": "Flouter un visage dans une image",
+      "short": "Dessinez un rectangle sur les visages pour les anonymiser.",
+      "h1": "Flouter un visage dans une image en ligne gratuitement — Anonymisez vos photos",
+      "metaTitle": "Flouter un visage en ligne — Éditeur photo pour la confidentialité | Konvertools",
+      "metaDescription": "Cliquez et glissez pour dessiner des rectangles sur les visages ou zones sensibles — les pixels sous-jacents sont floutés. Fonctionne dans votre navigateur, sans téléchargement ni partage de données."
+    },
+    "hi": {
+      "name": "इमेज में चेहरा धुंधला करें",
+      "short": "चेहरे को गोपनीय बनाने के लिए एक बॉक्स को खींचें।",
+      "h1": "ऑनलाइन फ्री में चेहरा धुंधला करें — फोटो को गुमनाम करें",
+      "metaTitle": "इमेज में चेहरा ऑनलाइन धुंधला करें — गोपनीयता फोटो संपादक | Konvertools",
+      "metaDescription": "अपने ब्राउज़र में क्लिक करें और आयत खींचें — चेहरे या संवेदनशील क्षेत्र के नीचे के पिक्सेल धुंधले हो जाते हैं। कोई अपलोड नहीं, चेहरे का डेटा बाहर नहीं जाता।"
+    },
+    "id": {
+      "name": "Kaburkan Wajah di Gambar",
+      "short": "Seret kotak di atas wajah untuk membuatnya tidak dikenali.",
+      "h1": "Kaburkan Wajah di Gambar Secara Online Gratis — Anonimkan Foto",
+      "metaTitle": "Kaburkan Wajah di Gambar Online — Editor Foto Privasi | Konvertools",
+      "metaDescription": "Klik dan seret persegi panjang di atas wajah atau area sensitif lainnya — piksel di bawahnya akan dikaburkan. Berjalan di peramban Anda, tanpa unggahan, data wajah tidak meninggalkan perangkat."
+    },
+    "it": {
+      "name": "Sfoca Volti nelle Immagini",
+      "short": "Trascina un riquadro sui volti per renderli anonimi.",
+      "h1": "Sfoca Volti nelle Immagini Online Gratis — Anonimizza Foto",
+      "metaTitle": "Sfoca Volti nelle Immagini Online — Editor Foto Privacy | Konvertools",
+      "metaDescription": "Clicca e trascina rettangoli sui volti o su qualsiasi area sensibile: i pixel sottostanti verranno sfocati. Funziona nel tuo browser, senza upload, nessun dato dei volti viene trasmesso."
+    },
+    "ja": {
+      "name": "画像の顔をぼかす",
+      "short": "顔を囲むボックスをドラッグして匿名化します。",
+      "h1": "画像の顔をオンラインで無料でぼかす — 写真を匿名化",
+      "metaTitle": "画像の顔をオンラインでぼかす — プライバシー写真エディタ | Konvertools",
+      "metaDescription": "顔や機密エリアをクリックして四角形をドラッグすると、ピクセルがぼかされます。ブラウザ上で動作し、アップロード不要で顔データは外部に送信されません。"
+    },
+    "ko": {
+      "name": "이미지 얼굴 흐리게 하기",
+      "short": "얼굴 위에 박스를 드래그하여 익명화하세요.",
+      "h1": "온라인에서 무료로 얼굴 흐리게 하기 — 사진 익명화 도구",
+      "metaTitle": "이미지 얼굴 흐리게 하기 — 개인정보 보호 사진 편집기 | Konvertools",
+      "metaDescription": "얼굴이나 민감한 부분 위에 사각형을 클릭하고 드래그하세요 — 픽셀이 흐려집니다. 브라우저에서 바로 실행되며, 업로드 없이 데이터가 외부로 나가지 않습니다."
+    },
+    "nl": {
+      "name": "Vervagen gezicht in afbeelding",
+      "short": "Sleep een kader over gezichten om ze te anonimiseren.",
+      "h1": "Gezicht vervagen in afbeelding online gratis — Foto’s anonimiseren",
+      "metaTitle": "Gezicht vervagen in afbeelding online — Privacy-foto-editor | Konvertools",
+      "metaDescription": "Klik en sleep rechthoeken over gezichten of andere gevoelige gebieden — de onderliggende pixels worden vervaagd. Werkt in je browser, geen uploads, geen gezichtsgegevens verlaten je apparaat."
+    },
+    "pl": {
+      "name": "Rozmyj twarz na obrazie",
+      "short": "Przeciągnij prostokąt nad twarzami, aby je zanonimizować.",
+      "h1": "Rozmyj twarz na obrazie online za darmo — anonimizuj zdjęcia",
+      "metaTitle": "Rozmyj twarz na obrazie online — edytor prywatności | Konvertools",
+      "metaDescription": "Kliknij i przeciągnij prostokąty nad twarzami lub innymi wrażliwymi obszarami — piksele zostaną rozmyte. Działa w przeglądarce, bez przesyłania, dane nie opuszczają urządzenia."
+    },
+    "pt": {
+      "name": "Desfocar Rostos em Imagem",
+      "short": "Arraste uma caixa sobre os rostos para anonimizá-los.",
+      "h1": "Desfocar Rostos em Imagem Online Grátis — Anonimizar Fotos",
+      "metaTitle": "Desfocar Rostos em Imagem Online — Editor de Privacidade | Konvertools",
+      "metaDescription": "Clique e arraste retângulos sobre rostos ou áreas sensíveis — os pixels subjacentes são desfocados. Funciona no seu navegador, sem uploads, nenhum dado de rosto é enviado."
+    },
+    "ru": {
+      "name": "Размыть лицо на изображении",
+      "short": "Обведите лица рамкой, чтобы скрыть их.",
+      "h1": "Размыть лицо на изображении онлайн бесплатно — анонимизация фото",
+      "metaTitle": "Размыть лицо на изображении онлайн — редактор приватности | Konvertools",
+      "metaDescription": "Нажмите и перетащите прямоугольники на лица или любые конфиденциальные области — пиксели будут размыты. Работает в браузере, без загрузки, данные не уходят."
+    },
+    "sv": {
+      "name": "Sudda ansikten i bild",
+      "short": "Dra en ruta över ansikten för att anonymisera dem.",
+      "h1": "Sudda ansikten i bild online gratis — Anonymisera foton",
+      "metaTitle": "Sudda ansikten i bild online — Integritetskänslig bildredigerare | Konvertools",
+      "metaDescription": "Klicka och dra rektanglar över ansikten eller andra känsliga områden — underliggande pixlar suddas ut. Körs i din webbläsare, inga uppladdningar, inga ansiktsdata lämnar enheten."
+    },
+    "tr": {
+      "name": "Görüntüdeki Yüzleri Bulanıklaştır",
+      "short": "Yüzleri anonimleştirmek için bir kutu çizin.",
+      "h1": "Ücretsiz Online Görüntüde Yüz Bulanıklaştırma — Fotoğrafları Anonimleştir",
+      "metaTitle": "Görüntüde Yüz Bulanıklaştırma Online — Gizlilik Fotoğraf Düzenleyici | Konvertools",
+      "metaDescription": "Yüzler veya hassas alanlar üzerine tıklayın ve dikdörtgenler çizin — arka plandaki pikseller bulanıklaşır. Tarayıcınızda çalışır, yükleme yapılmaz, yüz verisi dışarı çıkmaz."
+    },
+    "uk": {
+      "name": "Розмити обличчя на зображенні",
+      "short": "Намалюйте рамку навколо обличчя, щоб анонімізувати його.",
+      "h1": "Розмити обличчя на зображенні онлайн безкоштовно — анонімізуйте фото",
+      "metaTitle": "Розмити обличчя на зображенні онлайн — редактор конфіденційності | Konvertools",
+      "metaDescription": "Натисніть та перетягніть прямокутники над обличчями чи іншими чутливими ділянками — пікселі під ними розмиються. Працює у вашому браузері, без завантажень, жодні дані про обличчя не залишають пристрій."
+    },
+    "vi": {
+      "name": "Làm mờ khuôn mặt trong ảnh",
+      "short": "Kéo một khung xung quanh khuôn mặt để ẩn danh chúng.",
+      "h1": "Làm mờ khuôn mặt trong ảnh trực tuyến miễn phí — Ẩn danh ảnh",
+      "metaTitle": "Làm mờ khuôn mặt trong ảnh trực tuyến — Chỉnh sửa ảnh bảo mật | Konvertools",
+      "metaDescription": "Nhấp và kéo khung xung quanh khuôn mặt hoặc bất kỳ vùng nhạy cảm nào — các pixel bên dưới sẽ bị làm mờ. Hoạt động ngay trong trình duyệt, không tải lên, không dữ liệu khuôn mặt bị rò rỉ."
+    },
+    "zh": {
+      "name": "图像人脸模糊",
+      "short": "在图像上拖动方框模糊人脸以匿名处理。",
+      "h1": "在线免费模糊图像人脸 — 照片匿名处理工具",
+      "metaTitle": "在线模糊图像人脸 — 隐私照片编辑器 | Konvertools",
+      "metaDescription": "点击并拖动方框覆盖人脸或任何敏感区域，底层像素将被模糊。在浏览器中运行，无需上传，人脸数据不会外泄。"
+    }
+  },
   "bmi-calculator": {
     "ar": {
       "name": "حاسبة مؤشر كتلة الجسم",
@@ -4873,6 +5008,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "为Gmail与Outlook创建专业HTML邮件签名。填入个人信息、选择强调色、复制粘贴即可。免费且无需安装。"
     }
   },
+  "enhance-image": {
+    "ar": {
+      "name": "تحسين الصورة",
+      "short": "أضِئ الصورة، وحِدِّدها، وازداد ألوانها بنقرة واحدة.",
+      "h1": "تحسين الصورة أونلاين مجاناً — أضِئ و حدِّد الصور",
+      "metaTitle": "تحسين الصورة أونلاين — أضِئ، حدِّد، ازدد ألواناً | Konvertools",
+      "metaDescription": "حسّن أي صورة بضغطة واحدة لزيادة السطوع والتباين والتشبع والتحديد. يعمل في متصفحك — لن يتم تحميل صورتك أبداً."
+    },
+    "cs": {
+      "name": "Vylepšit obrázek",
+      "short": "Zesvětlit, zostřit a zvýraznit barvy jediným kliknutím.",
+      "h1": "Vylepšit obrázek online zdarma — zesvětlit a zostřit fotografie",
+      "metaTitle": "Vylepšit obrázek online — zesvětlit, zostřit, zvýraznit barvy | Konvertools",
+      "metaDescription": "Zlepšete jakoukoli fotografii jediným kliknutím na zesvětlení, kontrast, sytost a zostření. Probíhá ve vašem prohlížeči — váš obrázek není nikdy nahráván."
+    },
+    "de": {
+      "name": "Bild verbessern",
+      "short": "Helle, schärfe und verstärke Farben mit einem Klick auf.",
+      "h1": "Bild online kostenlos verbessern — Helle & schärfe Fotos",
+      "metaTitle": "Bild online verbessern — Helle, schärfe, Farben verstärken | Konvertools",
+      "metaDescription": "Verbessere jedes Foto mit einem Klick auf Helligkeit, Kontrast, Sättigung und Schärfe. Läuft in deinem Browser — dein Bild wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Mejorar imagen",
+      "short": "Aclara, enfoca y realza los colores con un solo clic.",
+      "h1": "Mejorar imagen en línea gratis — Aclarar y enfocar fotos",
+      "metaTitle": "Mejorar imagen en línea — Aclarar, enfocar, realzar colores | Konvertools",
+      "metaDescription": "Mejora cualquier foto con brillo, contraste, saturación y enfoque automáticos. Funciona en tu navegador — tu imagen nunca se sube."
+    },
+    "fr": {
+      "name": "Améliorer l'image",
+      "short": "Rendre plus lumineuse, plus nette et faire ressortir les couleurs en un clic.",
+      "h1": "Améliorer une image en ligne gratuitement — Rendre plus lumineuse et plus nette",
+      "metaTitle": "Améliorer une image en ligne — Luminosité, netteté, couleurs | Konvertools",
+      "metaDescription": "Améliorez n'importe quelle photo en un clic : luminosité, contraste, saturation et netteté. Fonctionne dans votre navigateur — votre image n'est jamais téléchargée."
+    },
+    "hi": {
+      "name": "इमेज सुधारें",
+      "short": "एक क्लिक में चमका, तेज करें और रंगों को जीवंत बनाएं।",
+      "h1": "ऑनलाइन मुफ्त इमेज सुधारें — फोटो चमकाएं और तेज करें",
+      "metaTitle": "ऑनलाइन इमेज सुधारें — चमकाएं, तेज करें, रंगों को जीवंत बनाएं | Konvertools",
+      "metaDescription": "एक क्लिक में ब्राइटनेस, कंट्रास्ट, सेचुरेशन और तेज़ी से अपनी तस्वीर को बेहतर बनाएं। आपके ब्राउज़र में चलता है — आपकी इमेज कभी अपलोड नहीं होती।"
+    },
+    "id": {
+      "name": "Tingkatkan Gambar",
+      "short": "Terang, tajam, dan warna lebih hidup hanya dengan sekali klik.",
+      "h1": "Tingkatkan Gambar Secara Online Gratis — Terang & Tajamkan Foto",
+      "metaTitle": "Tingkatkan Gambar Online — Terang, Tajam, Warna Cerah | Konvertools",
+      "metaDescription": "Perbaiki foto apa pun dengan peningkatan kecerahan, kontras, saturasi, dan ketajaman hanya sekali klik. Berjalan di peramban Anda — gambar tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Migliora immagine",
+      "short": "Rendi più luminosa, nitida e vivaci i colori con un clic.",
+      "h1": "Migliora immagine online gratis — Rendi più luminose e nitide le foto",
+      "metaTitle": "Migliora immagine online — Schiarisci, nitidisci, vivacizza i colori | Konvertools",
+      "metaDescription": "Migliora qualsiasi foto con luminosità, contrasto, saturazione e nitidezza in un clic. Funziona nel tuo browser — l'immagine non viene mai caricata."
+    },
+    "ja": {
+      "name": "画像を鮮明化",
+      "short": "明るさ、鮮鋭化、色彩をワンタップで向上。",
+      "h1": "オンラインで無料画像鮮明化 — 明るく、シャープに、色を鮮やかに",
+      "metaTitle": "画像鮮明化オンライン — 明るく、シャープに、色を鮮やかに | Konvertools",
+      "metaDescription": "明るさ、コントラスト、彩度、鮮鋭化をワンタップで改善。ブラウザ上で動作し、画像は一切アップロードされません。"
+    },
+    "ko": {
+      "name": "이미지 향상",
+      "short": "한 번의 클릭으로 밝기, 선명도, 색상을 강조하세요.",
+      "h1": "온라인 무료 이미지 향상 — 밝기 및 선명도 조정",
+      "metaTitle": "이미지 향상 온라인 — 밝기, 선명도, 색상 강조 | Konvertools",
+      "metaDescription": "한 번의 클릭으로 밝기, 대비, 채도, 선명도를 개선하세요. 브라우저에서 바로 실행되며 이미지는 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Afbeelding verbeteren",
+      "short": "Verlicht, verscherp en laat kleuren opvallen met één klik.",
+      "h1": "Afbeelding online gratis verbeteren — Verlicht & verscherp foto's",
+      "metaTitle": "Afbeelding online verbeteren — Verlicht, verscherp, kleuren opvallend | Konvertools",
+      "metaDescription": "Verbeter elke foto met één klik op helderheid, contrast, verzadiging en scherpte. Werkt in je browser — je afbeelding wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Ulepsz obraz",
+      "short": "Rozjaśnij, wyostrz i nasyć kolory jednym kliknięciem.",
+      "h1": "Ulepsz obraz online za darmo — rozjaśnij i wyostrz zdjęcia",
+      "metaTitle": "Ulepsz obraz online — rozjaśnij, wyostrz, nasyć kolory | Konvertools",
+      "metaDescription": "Popraw dowolne zdjęcie jednym kliknięciem, zwiększając jasność, kontrast, nasycenie i wyostrzanie. Działa w przeglądarce — twoje zdjęcie nigdy nie jest przesyłane."
+    },
+    "pt": {
+      "name": "Melhorar Imagem",
+      "short": "Ajuste brilho, nitidez e cores em um clique.",
+      "h1": "Melhore Imagens Online Grátis — Brilho e Nitidez | Konvertools",
+      "metaTitle": "Melhorar Imagem Online — Brilho, Nitidez e Cores Vivas | Konvertools",
+      "metaDescription": "Melhore qualquer foto com ajuste automático de brilho, contraste, saturação e nitidez. Funciona no navegador — sua imagem nunca é enviada."
+    },
+    "ru": {
+      "name": "Улучшить изображение",
+      "short": "Осветлить, сделать резче и насытить цвета одним кликом.",
+      "h1": "Улучшите изображение онлайн бесплатно — осветление и резкость фото",
+      "metaTitle": "Улучшение изображений онлайн — яркость, резкость, насыщенность | Konvertools",
+      "metaDescription": "Улучшите любое фото за один клик: яркость, контраст, насыщенность и резкость. Работает в браузере — изображение не загружается."
+    },
+    "sv": {
+      "name": "Förbättra bild",
+      "short": "Ljusa upp, skärpa och förbättra färger med ett klick.",
+      "h1": "Förbättra bild online gratis — Ljusa upp & skärpa foton",
+      "metaTitle": "Förbättra bild online — Ljusa upp, skärpa, förbättra färger | Konvertools",
+      "metaDescription": "Förbättra vilken bild som helst med ett klick för ljusstyrka, kontrast, mättnad och skärpa. Körs i din webbläsare — bilden laddas aldrig upp."
+    },
+    "tr": {
+      "name": "Görüntüyü Geliştir",
+      "short": "Bir tıklamayla parlaklığı artırın, netliği iyileştirin ve renkleri canlandırın.",
+      "h1": "Ücretsiz Online Görüntü Geliştir — Fotoğrafları Aydınlat ve Netleştir",
+      "metaTitle": "Görüntü Geliştir Online — Parlaklık, Netlik, Renk Canlılığı | Konvertools",
+      "metaDescription": "Herhangi bir fotoğrafı tek tıklamayla parlaklık, kontrast, doygunluk ve netlik ile iyileştirin. Tarayıcınızda çalışır — görüntünüz asla yüklenmez."
+    },
+    "uk": {
+      "name": "Покращити зображення",
+      "short": "Зробити яскравішим, чіткішим та насиченішим кольори за один клік.",
+      "h1": "Покращити зображення онлайн безкоштовно — освітлення та чіткість фото",
+      "metaTitle": "Покращити зображення онлайн — яскравість, чіткість, насиченість | Konvertools",
+      "metaDescription": "Покращуйте будь-яке фото за один клік: яскравість, контраст, насиченість та чіткість. Працює у вашому браузері — зображення не завантажується на сервер."
+    },
+    "vi": {
+      "name": "Nâng cao hình ảnh",
+      "short": "Làm sáng, nét và nổi bật màu sắc chỉ với một cú nhấp chuột.",
+      "h1": "Nâng cao Hình ảnh Trực tuyến Miễn phí — Làm sáng & Nét Ảnh",
+      "metaTitle": "Nâng cao Hình ảnh Trực tuyến — Làm sáng, Nét, Nổi bật Màu sắc | Konvertools",
+      "metaDescription": "Cải thiện bất kỳ bức ảnh nào chỉ với một cú nhấp: độ sáng, tương phản, độ bão hòa và độ nét. Hoạt động ngay trong trình duyệt — ảnh của bạn không bao giờ bị tải lên."
+    },
+    "zh": {
+      "name": "图像增强",
+      "short": "一键提亮、锐化并增强色彩。",
+      "h1": "免费在线增强图像 — 提亮与锐化照片",
+      "metaTitle": "在线增强图像 — 提亮、锐化、增强色彩 | Konvertools",
+      "metaDescription": "一键提升照片亮度、对比度、饱和度与锐化效果。在浏览器中运行 — 您的图像不会被上传。"
+    }
+  },
   "excel-to-json": {
     "ar": {
       "name": "إكسيل إلى جيسون",
@@ -6613,6 +6883,411 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "通过 AI 从话题中生成相关热门话题标签，支持 Instagram、TikTok 等平台。每日免费使用。"
     }
   },
+  "heic-to-jpg": {
+    "ar": {
+      "name": "تحويل HEIC إلى JPG",
+      "short": "صور آيفون بصيغة HEIC إلى JPG عالمية، في متصفحك.",
+      "h1": "تحويل HEIC إلى JPG أونلاين مجانًا — محول صور آيفون",
+      "metaTitle": "تحويل HEIC إلى JPG أونلاين — محول صور آيفون مجاني | Konvertools",
+      "metaDescription": "قم بتحويل صور آيفون بصيغة HEIC/HEIF إلى JPG مع جودة قابلة للتعديل. عبر المتصفح فقط باستخدام WebAssembly — لا تغادر صورك جهازك."
+    },
+    "cs": {
+      "name": "Převést HEIC na JPG",
+      "short": "iPhone HEIC fotografie na univerzální JPG přímo ve vašem prohlížeči.",
+      "h1": "Převod HEIC na JPG online zdarma — převodník iPhone fotografií",
+      "metaTitle": "Převod HEIC na JPG online — bezplatný převodník iPhone fotografií | Konvertools",
+      "metaDescription": "Převod fotografií z iPhonu z formátu HEIC/HEIF na JPG s nastavitelnou kvalitou. Pouze v prohlížeči pomocí WebAssembly — vaše fotografie nikdy neopustí vaše zařízení."
+    },
+    "de": {
+      "name": "HEIC zu JPG konvertieren",
+      "short": "iPhone-HEIC-Fotos zu universellem JPG im Browser.",
+      "h1": "HEIC zu JPG online kostenlos — iPhone-Fotokonverter",
+      "metaTitle": "HEIC zu JPG online — Kostenloser iPhone-Konverter | Konvertools",
+      "metaDescription": "Konvertiere iPhone-HEIC/HEIF-Fotos zu JPG mit einstellbarer Qualität. Nur im Browser via WebAssembly — deine Fotos verlassen nie dein Gerät."
+    },
+    "es": {
+      "name": "Convertir HEIC a JPG",
+      "short": "Fotos HEIC de iPhone a JPG universal, en tu navegador.",
+      "h1": "Convertir HEIC a JPG Online Gratis — Conversor de Fotos iPhone",
+      "metaTitle": "Convertir HEIC a JPG Online — Conversor Gratis iPhone | Konvertools",
+      "metaDescription": "Convierte fotos HEIC/HEIF de iPhone a JPG con calidad ajustable. Solo en navegador mediante WebAssembly: tus fotos nunca salen de tu dispositivo."
+    },
+    "fr": {
+      "name": "Convertir HEIC en JPG",
+      "short": "Photos HEIC de l'iPhone en JPG universel, directement dans votre navigateur.",
+      "h1": "Convertir HEIC en JPG en ligne gratuitement — Convertisseur de photos iPhone",
+      "metaTitle": "Convertir HEIC en JPG en ligne — Convertisseur gratuit iPhone | Konvertools",
+      "metaDescription": "Convertissez les photos HEIC/HEIF de l'iPhone en JPG avec une qualité réglable. Traitement dans le navigateur via WebAssembly — vos photos restent sur votre appareil."
+    },
+    "hi": {
+      "name": "HEIC से JPG में बदलें",
+      "short": "iPhone HEIC फ़ोटो को सार्वभौमिक JPG में बदलें, आपके ब्राउज़र में।",
+      "h1": "HEIC से JPG ऑनलाइन मुफ़्त — iPhone फ़ोटो कन्वर्टर",
+      "metaTitle": "HEIC से JPG ऑनलाइन — मुफ़्त iPhone फ़ोटो कन्वर्टर | Konvertools",
+      "metaDescription": "अपने iPhone HEIC/HEIF फ़ोटो को गुणवत्ता समायोजित करके JPG में बदलें। ब्राउज़र-केवल वेबअसेंबली के माध्यम से — आपकी तस्वीरें कभी भी आपका डिवाइस नहीं छोड़तीं।"
+    },
+    "id": {
+      "name": "Konversi HEIC ke JPG",
+      "short": "Ubah foto HEIC iPhone ke JPG universal, langsung di peramban Anda.",
+      "h1": "HEIC ke JPG Online Gratis — Konverter Foto iPhone",
+      "metaTitle": "HEIC ke JPG Online — Konverter Foto iPhone Gratis | Konvertools",
+      "metaDescription": "Konversi foto HEIC/HEIF iPhone ke JPG dengan kualitas yang dapat disesuaikan. Hanya di peramban via WebAssembly — foto Anda tidak pernah meninggalkan perangkat."
+    },
+    "it": {
+      "name": "Converti HEIC in JPG",
+      "short": "Foto HEIC dell'iPhone in JPG universali, direttamente nel tuo browser.",
+      "h1": "Converti HEIC in JPG Online Gratis — Convertitore Foto iPhone",
+      "metaTitle": "Converti HEIC in JPG Online — Convertitore Foto iPhone Gratis | Konvertools",
+      "metaDescription": "Converti foto HEIC/HEIF dell'iPhone in JPG con qualità regolabile. Solo nel browser tramite WebAssembly — le tue foto non lasciano mai il tuo dispositivo."
+    },
+    "ja": {
+      "name": "HEICをJPGに変換",
+      "short": "iPhoneのHEIC写真を汎用JPGに、ブラウザ上で変換します。",
+      "h1": "HEICからJPGへオンライン無料変換 — iPhone写真コンバーター",
+      "metaTitle": "HEICをJPGにオンライン変換 — 無料iPhone写真コンバーター | Konvertools",
+      "metaDescription": "iPhoneのHEIC/HEIF写真を品質調整可能なJPGに変換。WebAssemblyでブラウザのみ処理 — 写真は端末内で完結します。"
+    },
+    "ko": {
+      "name": "HEIC를 JPG로 변환",
+      "short": "아이폰 HEIC 사진을 범용 JPG로 브라우저에서 변환하세요.",
+      "h1": "HEIC를 JPG로 무료 온라인 변환 — 아이폰 사진 변환기",
+      "metaTitle": "HEIC를 JPG로 온라인 변환 — 무료 아이폰 사진 변환기 | Konvertools",
+      "metaDescription": "아이폰 HEIC/HEIF 사진을 품질 조절 가능하게 JPG로 변환하세요. 브라우저 기반 WebAssembly로 처리 — 사진이 장치 밖으로 나가지 않습니다."
+    },
+    "nl": {
+      "name": "HEIC naar JPG converteren",
+      "short": "iPhone HEIC-foto's naar universele JPG, direct in je browser.",
+      "h1": "HEIC naar JPG Online Gratis — iPhone-fotoconverter",
+      "metaTitle": "HEIC naar JPG Online — Gratis iPhone-fotoconverter | Konvertools",
+      "metaDescription": "Converteer iPhone HEIC/HEIF-foto's naar JPG met instelbare kwaliteit. Browsergebaseerd via WebAssembly — je foto's blijven op je apparaat."
+    },
+    "pl": {
+      "name": "Konwertuj HEIC do JPG",
+      "short": "Zdjęcia iPhone w formacie HEIC na uniwersalny JPG, bezpośrednio w przeglądarce.",
+      "h1": "Konwersja HEIC do JPG online — darmowy konwerter zdjęć iPhone | Konvertools",
+      "metaTitle": "Konwersja HEIC do JPG online — darmowy konwerter iPhone | Konvertools",
+      "metaDescription": "Konwertuj zdjęcia iPhone w formacie HEIC/HEIF na JPG z regulowaną jakością. Wyłącznie w przeglądarce dzięki WebAssembly — Twoje zdjęcia nigdy nie opuszczają Twojego urządzenia."
+    },
+    "pt": {
+      "name": "Converter HEIC para JPG",
+      "short": "Fotos HEIC do iPhone para JPG universal, no seu navegador.",
+      "h1": "HEIC para JPG Online Grátis — Conversor de Fotos do iPhone",
+      "metaTitle": "HEIC para JPG Online — Conversor Grátis de Fotos do iPhone | Konvertools",
+      "metaDescription": "Converta fotos HEIC/HEIF do iPhone para JPG com qualidade ajustável. Somente no navegador via WebAssembly — suas fotos nunca saem do seu dispositivo."
+    },
+    "ru": {
+      "name": "Конвертировать HEIC в JPG",
+      "short": "Фото iPhone HEIC в универсальный JPG, прямо в браузере.",
+      "h1": "HEIC в JPG онлайн бесплатно — конвертер фото iPhone",
+      "metaTitle": "HEIC в JPG онлайн — бесплатный конвертер фото iPhone | Konvertools",
+      "metaDescription": "Конвертируйте фото iPhone HEIC/HEIF в JPG с настраиваемым качеством. Только в браузере через WebAssembly — ваши фото не покидают устройство."
+    },
+    "sv": {
+      "name": "Konvertera HEIC till JPG",
+      "short": "iPhone HEIC-bilder till universell JPG direkt i webbläsaren.",
+      "h1": "HEIC till JPG Online Gratis — iPhone-bildkonverterare",
+      "metaTitle": "HEIC till JPG Online — Gratis iPhone-konverterare | Konvertools",
+      "metaDescription": "Konvertera iPhone HEIC/HEIF-bilder till JPG med justerbar kvalitet. Endast i webbläsaren via WebAssembly — dina bilder lämnar aldrig din enhet."
+    },
+    "tr": {
+      "name": "HEIC'yi JPG'ye Dönüştür",
+      "short": "iPhone HEIC fotoğraflarını tarayıcıda evrensel JPG'ye çevirin.",
+      "h1": "HEIC'yi JPG'ye Ücretsiz Çevir — iPhone Fotoğraf Dönüştürücü",
+      "metaTitle": "HEIC'yi JPG'ye Dönüştür — Ücretsiz iPhone Fotoğraf Dönüştürücü | Konvertools",
+      "metaDescription": "iPhone HEIC/HEIF fotoğraflarını kalite ayarlı olarak JPG'ye çevirin. WebAssembly ile tarayıcıda — fotoğraflarınız cihazınızda kalır."
+    },
+    "uk": {
+      "name": "Конвертувати HEIC у JPG",
+      "short": "Фото iPhone HEIC у універсальний JPG, безпосередньо у вашому браузері.",
+      "h1": "HEIC у JPG онлайн безкоштовно — конвертер фото iPhone",
+      "metaTitle": "HEIC у JPG онлайн — безкоштовний конвертер фото iPhone | Konvertools",
+      "metaDescription": "Конвертуйте фото iPhone HEIC/HEIF у JPG з налаштуванням якості. Лише у браузері за допомогою WebAssembly — ваші фото ніколи не покидають пристрій."
+    },
+    "vi": {
+      "name": "Chuyển đổi HEIC sang JPG",
+      "short": "Ảnh HEIC từ iPhone sang định dạng JPG phổ biến, ngay trong trình duyệt của bạn.",
+      "h1": "Chuyển đổi HEIC sang JPG Online Miễn phí — Công cụ chuyển đổi ảnh iPhone",
+      "metaTitle": "Chuyển đổi HEIC sang JPG Online — Miễn phí | Konvertools",
+      "metaDescription": "Chuyển đổi ảnh HEIC/HEIF từ iPhone sang JPG với chất lượng tùy chỉnh. Hoạt động hoàn toàn trong trình duyệt nhờ WebAssembly — ảnh của bạn không bao giờ rời khỏi thiết bị."
+    },
+    "zh": {
+      "name": "HEIC 转 JPG",
+      "short": "将 iPhone HEIC 照片转换为通用 JPG，直接在浏览器中完成。",
+      "h1": "HEIC 转 JPG 在线免费 — iPhone 照片转换器",
+      "metaTitle": "HEIC 转 JPG 在线 — 免费 iPhone 照片转换器 | Konvertools",
+      "metaDescription": "将 iPhone HEIC / HEIF 照片转换为 JPG，支持调整质量。纯浏览器端处理（WebAssembly），您的照片不会离开设备。"
+    }
+  },
+  "heic-to-png": {
+    "ar": {
+      "name": "تحويل HEIC إلى PNG",
+      "short": "صور iPhone HEIC إلى PNG بدون فقدان للجودة، في متصفحك.",
+      "h1": "تحويل HEIC إلى PNG أونلاين مجانًا — محول صور iPhone",
+      "metaTitle": "تحويل HEIC إلى PNG أونلاين — مجانًا وبدون فقدان للجودة | Konvertools",
+      "metaDescription": "قم بتحويل صور iPhone HEIC/HEIF إلى PNG بدون فقدان للجودة. عبر المتصفح فقط باستخدام WebAssembly — لا تغادر صورك جهازك."
+    },
+    "cs": {
+      "name": "Převést HEIC na PNG",
+      "short": "iPhone HEIC fotografie do bezztrátového PNG přímo ve vašem prohlížeči.",
+      "h1": "Převod HEIC na PNG online zdarma — převodník iPhone fotografií",
+      "metaTitle": "Převod HEIC na PNG online — zdarma, bezztrátově | Konvertools",
+      "metaDescription": "Převod iPhone fotografií z formátu HEIC/HEIF do bezztrátového PNG. Prohlížečové řešení pomocí WebAssembly — vaše fotografie nikdy neopustí vaše zařízení."
+    },
+    "de": {
+      "name": "HEIC zu PNG konvertieren",
+      "short": "iPhone-HEIC-Fotos zu verlustfreiem PNG, direkt in deinem Browser.",
+      "h1": "HEIC zu PNG online — Kostenloser iPhone-Fotokonverter",
+      "metaTitle": "HEIC zu PNG online — Kostenlos & verlustfrei | Konvertools",
+      "metaDescription": "Konvertiere iPhone-HEIC/HEIF-Fotos zu verlustfreiem PNG. Browserbasiert mit WebAssembly — deine Fotos verlassen nie dein Gerät."
+    },
+    "es": {
+      "name": "Convertir HEIC a PNG",
+      "short": "Fotos HEIC de iPhone a PNG sin pérdida, en tu navegador.",
+      "h1": "Convertir HEIC a PNG Online Gratis — Conversor de Fotos iPhone",
+      "metaTitle": "Convertir HEIC a PNG Online — Gratis, Sin Pérdida | Konvertools",
+      "metaDescription": "Convierte fotos HEIC/HEIF de iPhone a PNG sin pérdida. Solo en navegador con WebAssembly — tus fotos nunca abandonan tu dispositivo."
+    },
+    "fr": {
+      "name": "Convertir HEIC en PNG",
+      "short": "Convertissez les photos HEIC de l'iPhone en PNG sans perte, directement dans votre navigateur.",
+      "h1": "Convertisseur HEIC en PNG en ligne — Gratuit | Konvertools",
+      "metaTitle": "Convertir HEIC en PNG en ligne — Gratuit, sans perte | Konvertools",
+      "metaDescription": "Convertissez les photos HEIC/HEIF de l'iPhone en PNG sans perte. Fonctionne dans le navigateur via WebAssembly — vos photos restent sur votre appareil."
+    },
+    "hi": {
+      "name": "HEIC को PNG में बदलें",
+      "short": "iPhone HEIC फ़ोटो को बिना हानि वाले PNG में, आपके ब्राउज़र में।",
+      "h1": "HEIC से PNG ऑनलाइन मुफ़्त — iPhone फ़ोटो कन्वर्टर",
+      "metaTitle": "HEIC से PNG ऑनलाइन — मुफ़्त, बिना हानि | Konvertools",
+      "metaDescription": "iPhone HEIC / HEIF फ़ोटो को बिना हानि वाले PNG में बदलें। ब्राउज़र-केवल WebAssembly के माध्यम से — आपकी फ़ोटो आपका डिवाइस छोड़कर नहीं जाती।"
+    },
+    "id": {
+      "name": "Konversi HEIC ke PNG",
+      "short": "Ubah foto HEIC iPhone ke PNG tanpa kehilangan kualitas, langsung di peramban Anda.",
+      "h1": "Ubah HEIC ke PNG Online Gratis — Konverter Foto iPhone",
+      "metaTitle": "Ubah HEIC ke PNG Online — Gratis, Tanpa Kehilangan | Konvertools",
+      "metaDescription": "Konversi foto HEIC/HEIF iPhone ke PNG tanpa kehilangan kualitas. Hanya di peramban dengan WebAssembly — foto Anda tetap di perangkat."
+    },
+    "it": {
+      "name": "Converti HEIC in PNG",
+      "short": "Foto HEIC di iPhone in PNG senza perdita di qualità, direttamente nel tuo browser.",
+      "h1": "Converti HEIC in PNG Online Gratis — Convertitore Foto iPhone",
+      "metaTitle": "Converti HEIC in PNG Online — Gratis, Senza Perdite | Konvertools",
+      "metaDescription": "Converti foto HEIC/HEIF di iPhone in PNG senza perdita di qualità. Solo nel browser tramite WebAssembly — le tue foto non lasciano mai il tuo dispositivo."
+    },
+    "ja": {
+      "name": "HEICをPNGに変換",
+      "short": "iPhoneのHEIC写真をロスレスPNGに、ブラウザ上で変換。",
+      "h1": "HEICをPNGにオンラインで無料変換 — iPhone写真コンバーター",
+      "metaTitle": "HEICをPNGにオンラインで — 無料・ロスレス | Konvertools",
+      "metaDescription": "iPhoneのHEIC/HEIF写真をロスレスPNGに変換。WebAssemblyでブラウザのみ処理 — 写真は端末内に留まります。"
+    },
+    "ko": {
+      "name": "HEIC를 PNG로 변환",
+      "short": "아이폰 HEIC 사진을 무손실 PNG로 브라우저에서 변환하세요.",
+      "h1": "HEIC를 PNG로 무료 온라인 변환 — 아이폰 사진 변환기",
+      "metaTitle": "HEIC를 PNG로 무료 온라인 변환 | Konvertools",
+      "metaDescription": "아이폰 HEIC/HEIF 사진을 무손실 PNG로 변환하세요. 브라우저 기반 WebAssembly로 처리 — 사진이 장치 밖으로 나가지 않습니다."
+    },
+    "nl": {
+      "name": "HEIC naar PNG converteren",
+      "short": "iPhone HEIC-foto's naar verliesvrije PNG, in je browser.",
+      "h1": "HEIC naar PNG Online Gratis — iPhone-fotoconverter",
+      "metaTitle": "HEIC naar PNG Online — Gratis, verliesvrij | Konvertools",
+      "metaDescription": "Converteer iPhone HEIC/HEIF-foto's naar verliesvrije PNG. Alleen in de browser via WebAssembly — je foto's blijven op je apparaat."
+    },
+    "pl": {
+      "name": "Konwertuj HEIC na PNG",
+      "short": "Zdjęcia iPhone HEIC na stratne PNG, w przeglądarce.",
+      "h1": "HEIC na PNG Online — Darmowy Konwerter Zdjęć iPhone",
+      "metaTitle": "HEIC na PNG Online — Darmowy, Bezstratny | Konvertools",
+      "metaDescription": "Konwertuj zdjęcia iPhone w formacie HEIC/HEIF na stratne PNG. W przeglądarce, przez WebAssembly — Twoje zdjęcia nigdy nie opuszczają Twojego urządzenia."
+    },
+    "pt": {
+      "name": "Converter HEIC para PNG",
+      "short": "Fotos HEIC do iPhone para PNG sem perdas, no seu navegador.",
+      "h1": "HEIC para PNG Online Grátis — Conversor de Fotos do iPhone",
+      "metaTitle": "HEIC para PNG Online — Grátis e Sem Perdas | Konvertools",
+      "metaDescription": "Converta fotos HEIC/HEIF do iPhone para PNG sem perdas. Apenas no navegador via WebAssembly — suas fotos nunca saem do seu dispositivo."
+    },
+    "ru": {
+      "name": "Конвертировать HEIC в PNG",
+      "short": "Фото с iPhone в формате HEIC в без потерь PNG, прямо в браузере.",
+      "h1": "HEIC в PNG онлайн бесплатно — конвертер фото iPhone",
+      "metaTitle": "HEIC в PNG онлайн — бесплатно, без потерь | Konvertools",
+      "metaDescription": "Конвертируйте фото iPhone в формате HEIC/HEIF в без потерь PNG. Только в браузере через WebAssembly — ваши фото не покидают устройство."
+    },
+    "sv": {
+      "name": "Konvertera HEIC till PNG",
+      "short": "iPhone HEIC-bilder till förlustfri PNG, direkt i webbläsaren.",
+      "h1": "HEIC till PNG Online Gratis — iPhone-bildomvandlare",
+      "metaTitle": "HEIC till PNG Online — Gratis, förlustfri | Konvertools",
+      "metaDescription": "Konvertera iPhone HEIC/HEIF-bilder till förlustfri PNG. Endast webbläsare via WebAssembly — dina bilder lämnar aldrig din enhet."
+    },
+    "tr": {
+      "name": "HEIC'yi PNG'ye Dönüştür",
+      "short": "iPhone HEIC fotoğraflarını kayıpsız PNG'ye tarayıcınızda dönüştürün.",
+      "h1": "HEIC'yi PNG'ye Ücretsiz Çevir — iPhone Fotoğraf Dönüştürücü",
+      "metaTitle": "HEIC'yi PNG'ye Çevir — Ücretsiz, Kayıpsız | Konvertools",
+      "metaDescription": "iPhone HEIC/HEIF fotoğraflarını kayıpsız PNG'ye dönüştürün. WebAssembly ile tarayıcıda — fotoğraflarınız cihazınızda kalır."
+    },
+    "uk": {
+      "name": "Конвертувати HEIC у PNG",
+      "short": "Фото iPhone HEIC у безвтратний PNG безпосередньо у вашому браузері.",
+      "h1": "HEIC у PNG онлайн безкоштовно — конвертер фото iPhone",
+      "metaTitle": "HEIC у PNG онлайн — безкоштовно, без втрат | Konvertools",
+      "metaDescription": "Конвертуйте фото iPhone HEIC/HEIF у безвтратний PNG. Роботає лише у браузері через WebAssembly — ваші фото ніколи не залишають ваш пристрій."
+    },
+    "vi": {
+      "name": "Chuyển đổi HEIC sang PNG",
+      "short": "Ảnh HEIC từ iPhone sang PNG không mất dữ liệu, ngay trong trình duyệt của bạn.",
+      "h1": "Chuyển đổi HEIC sang PNG Online Miễn phí — Bộ chuyển đổi ảnh iPhone",
+      "metaTitle": "Chuyển đổi HEIC sang PNG Online — Miễn phí, không mất dữ liệu | Konvertools",
+      "metaDescription": "Chuyển đổi ảnh HEIC/HEIF từ iPhone sang PNG không mất dữ liệu. Hoạt động hoàn toàn trong trình duyệt nhờ WebAssembly — ảnh của bạn không bao giờ rời khỏi thiết bị."
+    },
+    "zh": {
+      "name": "将 HEIC 转换为 PNG",
+      "short": "在浏览器中将 iPhone HEIC 照片无损转换为 PNG。",
+      "h1": "HEIC 转 PNG 在线免费 — iPhone 照片转换器",
+      "metaTitle": "HEIC 转 PNG 在线 — 免费无损 | Konvertools",
+      "metaDescription": "将 iPhone HEIC/HEIF 照片转换为无损 PNG。浏览器端通过 WebAssembly 处理 — 照片永不离开您的设备。"
+    }
+  },
+  "html-to-image": {
+    "ar": {
+      "name": "HTML إلى صورة",
+      "short": "قم بتحويل أي كود HTML إلى صورة PNG أو JPG.",
+      "h1": "تحويل HTML إلى صورة أونلاين مجاناً — تحويل HTML إلى PNG / JPG",
+      "metaTitle": "تحويل HTML إلى صورة أونلاين — تحويل HTML إلى PNG أو JPG | Konvertools",
+      "metaDescription": "الصق أي كود HTML وقم بتحويله إلى صورة PNG أو JPG — مثالي لبطاقات السوشيال ميديا، لقطات الشاشة والمخططات السريعة. يعمل في متصفحك."
+    },
+    "cs": {
+      "name": "HTML na obrázek",
+      "short": "Vykreslete libovolný HTML kód do formátu PNG nebo JPG.",
+      "h1": "Převod HTML na obrázek online zdarma — Vykreslete HTML do PNG / JPG",
+      "metaTitle": "Převod HTML na obrázek online | Konvertools",
+      "metaDescription": "Vložte libovolný HTML kód a vykreslete jej do obrázku PNG nebo JPG — ideální pro sociální sítě, snímky obrazovky a rychlé náhledy. Probíhá přímo ve vašem prohlížeči."
+    },
+    "de": {
+      "name": "HTML zu Bild",
+      "short": "Wandle jeden HTML-Ausschnitt in PNG oder JPG um.",
+      "h1": "HTML zu Bild online kostenlos — HTML in PNG / JPG rendern",
+      "metaTitle": "HTML zu Bild online — HTML in PNG oder JPG umwandeln | Konvertools",
+      "metaDescription": "Füge beliebigen HTML-Code ein und rendere ihn als PNG- oder JPG-Bild – ideal für Social Cards, Screenshots und schnelle Mockups. Läuft in deinem Browser."
+    },
+    "es": {
+      "name": "HTML a Imagen",
+      "short": "Renderiza cualquier fragmento HTML a PNG o JPG.",
+      "h1": "Convertir HTML a Imagen Online Gratis — Renderiza HTML a PNG / JPG",
+      "metaTitle": "HTML a Imagen Online — Renderiza HTML a PNG o JPG | Konvertools",
+      "metaDescription": "Pega cualquier HTML y conviértelo en una imagen PNG o JPG, ideal para tarjetas sociales, capturas y bocetos rápidos. Funciona en tu navegador."
+    },
+    "fr": {
+      "name": "HTML vers Image",
+      "short": "Rendu de n'importe quel extrait HTML en PNG ou JPG.",
+      "h1": "Convertisseur HTML vers Image en Ligne Gratuit — Rendu HTML en PNG / JPG",
+      "metaTitle": "HTML vers Image en Ligne — Rendu HTML en PNG ou JPG | Konvertools",
+      "metaDescription": "Collez n'importe quel code HTML et générez une image PNG ou JPG — idéal pour les cartes sociales, captures d'écran et maquettes rapides. Fonctionne directement dans votre navigateur."
+    },
+    "hi": {
+      "name": "HTML से इमेज",
+      "short": "किसी भी HTML स्निपेट को PNG या JPG में बदलें।",
+      "h1": "HTML से इमेज ऑनलाइन मुफ़्त — HTML को PNG / JPG में बदलें",
+      "metaTitle": "HTML से इमेज ऑनलाइन — HTML को PNG या JPG में बदलें | Konvertools",
+      "metaDescription": "किसी भी HTML को पेस्ट करें और उसे PNG या JPG इमेज में बदलें — सोशल कार्ड, स्क्रीनशॉट और त्वरित मॉकअप के लिए उपयुक्त। ब्राउज़र में चलता है।"
+    },
+    "id": {
+      "name": "HTML ke Gambar",
+      "short": "Rendahkan cuplikan HTML apa pun ke PNG atau JPG.",
+      "h1": "Konversi HTML ke Gambar Online Gratis — Ubah HTML ke PNG/JPG",
+      "metaTitle": "Konversi HTML ke Gambar Online — Ubah HTML ke PNG/JPG | Konvertools",
+      "metaDescription": "Tempelkan HTML apa pun dan ubahnya menjadi gambar PNG atau JPG — sempurna untuk kartu media sosial, tangkapan layar, dan mockup cepat. Berjalan di peramban Anda."
+    },
+    "it": {
+      "name": "HTML in Immagine",
+      "short": "Rendi qualsiasi snippet HTML in PNG o JPG.",
+      "h1": "Converti HTML in Immagine Online Gratis — Trasforma HTML in PNG / JPG",
+      "metaTitle": "Converti HTML in Immagine Online — Trasforma HTML in PNG o JPG | Konvertools",
+      "metaDescription": "Incolla qualsiasi HTML e convertilo in un'immagine PNG o JPG — ideale per social card, screenshot e mockup rapidi. Funziona direttamente nel browser."
+    },
+    "ja": {
+      "name": "HTMLから画像",
+      "short": "任意のHTMLスニペットをPNGまたはJPGにレンダリングします。",
+      "h1": "HTMLから画像をオンラインで無料変換 — HTMLをPNG/JPGに変換",
+      "metaTitle": "HTMLから画像オンライン — HTMLをPNGまたはJPGに変換 | Konvertools",
+      "metaDescription": "任意のHTMLをPNGまたはJPG画像にレンダリング可能 — SNSカード、スクリーンショット、簡易モックアップに最適。ブラウザ上で動作します。"
+    },
+    "ko": {
+      "name": "HTML to 이미지",
+      "short": "모든 HTML 코드를 PNG 또는 JPG로 변환하세요.",
+      "h1": "무료 온라인 HTML to 이미지 — HTML을 PNG/JPG로 렌더링",
+      "metaTitle": "HTML to 이미지 온라인 — PNG/JPG 변환 | Konvertools",
+      "metaDescription": "모든 HTML을 PNG 또는 JPG 이미지로 렌더링하세요. 소셜 카드, 스크린샷, 빠른Mockup에 최적화되어 브라우저에서 바로 실행됩니다."
+    },
+    "nl": {
+      "name": "HTML naar Afbeelding",
+      "short": "Render elke HTML-code naar PNG of JPG.",
+      "h1": "HTML naar Afbeelding Online Gratis — HTML Renderen naar PNG / JPG",
+      "metaTitle": "HTML naar Afbeelding Online — Render HTML naar PNG of JPG | Konvertools",
+      "metaDescription": "Plak elke HTML en render deze naar een PNG- of JPG-afbeelding — ideaal voor sociale kaarten, schermafbeeldingen en snelle mock-ups. Werkt in je browser."
+    },
+    "pl": {
+      "name": "HTML do obrazu",
+      "short": "Wygeneruj dowolny fragment HTML do formatu PNG lub JPG.",
+      "h1": "Konwerter HTML do obrazu online — Zamień HTML na PNG / JPG za darmo",
+      "metaTitle": "HTML do obrazu online — Zamień HTML na PNG lub JPG | Konvertools",
+      "metaDescription": "Wklej dowolny kod HTML i wygeneruj go jako obraz PNG lub JPG — idealne do grafik społecznościowych, zrzutów ekranu i szybkich makiet. Działa w przeglądarce."
+    },
+    "pt": {
+      "name": "HTML para Imagem",
+      "short": "Renderize qualquer trecho de HTML em PNG ou JPG.",
+      "h1": "HTML para Imagem Online Grátis — Renderize HTML em PNG / JPG",
+      "metaTitle": "HTML para Imagem Online — Renderize HTML em PNG ou JPG | Konvertools",
+      "metaDescription": "Cole qualquer HTML e renderize-o em uma imagem PNG ou JPG — ideal para cards de redes sociais, capturas de tela e protótipos rápidos. Funciona no seu navegador."
+    },
+    "ru": {
+      "name": "HTML в изображение",
+      "short": "Преобразуйте любой HTML-код в PNG или JPG.",
+      "h1": "Конвертируйте HTML в изображение онлайн бесплатно — HTML в PNG / JPG",
+      "metaTitle": "Конвертер HTML в изображение онлайн | Konvertools",
+      "metaDescription": "Вставьте любой HTML и преобразуйте его в изображение PNG или JPG — идеально для соцсетей, скриншотов и быстрых макетов. Работает прямо в браузере."
+    },
+    "sv": {
+      "name": "HTML till bild",
+      "short": "Rendera valfri HTML-kod till PNG eller JPG.",
+      "h1": "Konvertera HTML till bild online — Skapa PNG/JPG av HTML",
+      "metaTitle": "HTML till bild online — Skapa PNG eller JPG | Konvertools",
+      "metaDescription": "Klistra in HTML och rendera det till en PNG- eller JPG-bild — perfekt för sociala kort, skärmdumpar och snabba prototyper. Körs direkt i webbläsaren."
+    },
+    "tr": {
+      "name": "HTML'den Resime",
+      "short": "Herhangi bir HTML kodunu PNG veya JPG olarak oluşturun.",
+      "h1": "Ücretsiz Çevrimiçi HTML'den Resime — HTML'yi PNG/JPG'ye Dönüştürün",
+      "metaTitle": "HTML'den Resime — PNG veya JPG'ye Dönüştür | Konvertools",
+      "metaDescription": "Herhangi bir HTML kodunu PNG veya JPG resmine dönüştürün — sosyal kartlar, ekran görüntüleri ve hızlı prototipler için ideal. Tarayıcınızda çalışır."
+    },
+    "uk": {
+      "name": "HTML у зображення",
+      "short": "Відтворіть будь-який HTML-фрагмент у форматі PNG або JPG.",
+      "h1": "Конвертація HTML у зображення онлайн безкоштовно — HTML у PNG / JPG",
+      "metaTitle": "HTML у зображення онлайн — Конвертація HTML у PNG або JPG | Konvertools",
+      "metaDescription": "Вставте будь-який HTML-код і перетворіть його на зображення PNG або JPG — ідеально для соціальних карток, скріншотів та швидких макетів. Працює безпосередньо у вашому браузері."
+    },
+    "vi": {
+      "name": "HTML sang Ảnh",
+      "short": "Hiển thị bất kỳ đoạn HTML thành PNG hoặc JPG.",
+      "h1": "Chuyển HTML sang Ảnh Online Miễn Phí — Hiển thị HTML thành PNG / JPG",
+      "metaTitle": "Chuyển HTML sang Ảnh Online — Hiển thị HTML thành PNG hoặc JPG | Konvertools",
+      "metaDescription": "Dán bất kỳ đoạn HTML và hiển thị thành ảnh PNG hoặc JPG — hoàn hảo cho thẻ mạng xã hội, ảnh chụp màn hình và bản nháp nhanh. Chạy ngay trên trình duyệt của bạn."
+    },
+    "zh": {
+      "name": "HTML 转图片",
+      "short": "将任意 HTML 代码段渲染为 PNG 或 JPG 图片。",
+      "h1": "免费在线 HTML 转图片 — 将 HTML 渲染为 PNG / JPG",
+      "metaTitle": "HTML 在线转图片 — 渲染 HTML 为 PNG 或 JPG | Konvertools",
+      "metaDescription": "粘贴任意 HTML 代码并渲染为 PNG 或 JPG 图片 — 适合社交卡片、截图和快速原型。在浏览器中运行。"
+    }
+  },
   "html-to-markdown": {
     "cs": {
       "name": "HTML do Markdownu",
@@ -6797,6 +7472,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "在线 HTML 转 PDF — 将网页转为 PDF",
       "metaTitle": "HTML 转 PDF 在线 — 免费工具 | Konvertools",
       "metaDescription": "使用真实浏览器引擎将 HTML 文件或远程网址转换为整洁的 PDF。"
+    }
+  },
+  "image-from-jpg": {
+    "ar": {
+      "name": "تحويل JPG إلى PNG",
+      "short": "تحويل من JPG إلى PNG بدون فقدان جودة، في متصفحك مباشرةً.",
+      "h1": "تحويل JPG إلى PNG أونلاين مجانًا — إعادة ترميز بدون فقدان",
+      "metaTitle": "تحويل JPG إلى PNG أونلاين — مجانًا، في المتصفح | Konvertools",
+      "metaDescription": "حول أي صورة JPG إلى PNG مع دعم الشفافية. يعمل بالكامل في متصفحك — لن يتم تحميل ملفك إلى الخادم."
+    },
+    "cs": {
+      "name": "Převést JPG na PNG",
+      "short": "Bezztrátová konverze z formátu JPG do PNG přímo ve vašem prohlížeči.",
+      "h1": "Převod JPG na PNG online zdarma — bezztrátové přenkodování",
+      "metaTitle": "Převod JPG na PNG online — zdarma, v prohlížeči | Konvertools",
+      "metaDescription": "Převádějte JPG na PNG s podporou průhlednosti. Celý proces probíhá ve vašem prohlížeči — váš soubor není nikdy nahráván."
+    },
+    "de": {
+      "name": "JPG zu PNG konvertieren",
+      "short": "Verlustfreie Konvertierung von JPG zu PNG direkt in deinem Browser.",
+      "h1": "JPG zu PNG online kostenlos konvertieren — verlustfreie Neucodierung",
+      "metaTitle": "JPG zu PNG online konvertieren — kostenlos, im Browser | Konvertools",
+      "metaDescription": "Konvertiere jedes JPG zu PNG mit transparentfreundlichem Ergebnis. Läuft komplett in deinem Browser — deine Datei wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Convertir JPG a PNG",
+      "short": "Conversión sin pérdida de JPG a PNG, en tu navegador.",
+      "h1": "Convertir JPG a PNG Online Gratis — Recodificación sin pérdida",
+      "metaTitle": "Convertir JPG a PNG Online — Gratis, en el navegador | Konvertools",
+      "metaDescription": "Convierte cualquier JPG a PNG con salida compatible con transparencias. Funciona completamente en tu navegador: tu archivo nunca se sube."
+    },
+    "fr": {
+      "name": "Convertir JPG en PNG",
+      "short": "Conversion sans perte de JPG vers PNG, directement dans votre navigateur.",
+      "h1": "Convertir JPG en PNG en ligne gratuitement — Réencodage sans perte",
+      "metaTitle": "Convertir JPG en PNG en ligne — Gratuit, dans le navigateur | Konvertools",
+      "metaDescription": "Convertissez n'importe quel JPG en PNG avec un résultat compatible avec la transparence. Fonctionne entièrement dans votre navigateur — votre fichier n'est jamais téléchargé."
+    },
+    "hi": {
+      "name": "JPG को PNG में बदलें",
+      "short": "अपने ब्राउज़र में JPG से PNG में बिना नुकसान पहुंचाए बदलें।",
+      "h1": "JPG को PNG में ऑनलाइन मुफ्त बदलें — बिना नुकसान वाला पुनः एन्कोडिंग",
+      "metaTitle": "JPG को PNG में ऑनलाइन बदलें — मुफ्त, ब्राउज़र में | Konvertools",
+      "metaDescription": "पारदर्शी-फ्रेंडली आउटपुट के साथ किसी भी JPG को PNG में बदलें। पूरी तरह से आपके ब्राउज़र में चलता है — आपकी फ़ाइल अपलोड नहीं होती।"
+    },
+    "id": {
+      "name": "Konversi JPG ke PNG",
+      "short": "Konversi tanpa kehilangan dari JPG ke PNG, langsung di peramban Anda.",
+      "h1": "Ubah JPG ke PNG Online Gratis — Enkode Ulang Tanpa Kehilangan",
+      "metaTitle": "Konversi JPG ke PNG Online — Gratis, di Peramban | Konvertools",
+      "metaDescription": "Konversi JPG apa pun ke PNG dengan output ramah transparansi. Berjalan sepenuhnya di peramban Anda — file tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Converti JPG in PNG",
+      "short": "Conversione senza perdite da JPG a PNG, direttamente nel tuo browser.",
+      "h1": "Converti JPG in PNG Online Gratis — Ricodifica senza perdite",
+      "metaTitle": "Converti JPG in PNG Online — Gratis, nel Browser | Konvertools",
+      "metaDescription": "Converti qualsiasi JPG in PNG con output che supporta la trasparenza. Funziona interamente nel tuo browser — il file non viene mai caricato."
+    },
+    "ja": {
+      "name": "JPGをPNGに変換",
+      "short": "ブラウザ上でJPGからPNGへロスレス変換。",
+      "h1": "JPGをPNGにオンラインで無料変換 — ロスレス再エンコード",
+      "metaTitle": "JPGをPNGにオンライン変換 — 無料・ブラウザ内 | Konvertools",
+      "metaDescription": "透過処理可能なPNGにJPGを変換。完全にブラウザ内で処理されるため、ファイルはアップロードされません。"
+    },
+    "ko": {
+      "name": "JPG를 PNG로 변환",
+      "short": "브라우저에서 JPG를 PNG로 무손실 변환하세요.",
+      "h1": "JPG를 PNG로 무료 온라인 변환 — 무손실 재인코딩",
+      "metaTitle": "JPG를 PNG로 온라인 변환 — 무료, 브라우저 내 | Konvertools",
+      "metaDescription": "투명한 배경이 포함된 PNG로 JPG를 변환하세요. 브라우저에서 완전히 처리되며 파일은 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Converteer JPG naar PNG",
+      "short": "Verliesvrije conversie van JPG naar PNG, in je browser.",
+      "h1": "JPG naar PNG converteren online gratis — Verlorenloze hercodering",
+      "metaTitle": "JPG naar PNG converteren online — Gratis, in browser | Konvertools",
+      "metaDescription": "Converteer elke JPG naar PNG met transparantie-vriendelijke uitvoer. Werkt volledig in je browser — je bestand wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Konwertuj JPG do PNG",
+      "short": "Bezstratna konwersja z JPG do PNG, bezpośrednio w przeglądarce.",
+      "h1": "Konwertuj JPG do PNG online za darmo — bezstratne ponowne kodowanie",
+      "metaTitle": "Konwertuj JPG do PNG online — darmowo, w przeglądarce | Konvertools",
+      "metaDescription": "Konwertuj dowolny plik JPG do formatu PNG z obsługą przezroczystości. Wszystko odbywa się w przeglądarce — plik nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Converter JPG para PNG",
+      "short": "Conversão sem perdas de JPG para PNG, diretamente no seu navegador.",
+      "h1": "Converter JPG para PNG Online Grátis — Re-encode sem perdas",
+      "metaTitle": "Converter JPG para PNG Online — Grátis, no Navegador | Konvertools",
+      "metaDescription": "Converta qualquer JPG para PNG com suporte a transparência. Funciona inteiramente no seu navegador — seu arquivo nunca é enviado."
+    },
+    "ru": {
+      "name": "Конвертировать JPG в PNG",
+      "short": "Без потерь из JPG в PNG, прямо в вашем браузере.",
+      "h1": "Конвертируйте JPG в PNG онлайн бесплатно — без потерь",
+      "metaTitle": "Конвертируйте JPG в PNG онлайн — бесплатно в браузере | Konvertools",
+      "metaDescription": "Конвертируйте любой JPG в PNG с поддержкой прозрачности. Работает полностью в браузере — ваш файл никогда не загружается."
+    },
+    "sv": {
+      "name": "Konvertera JPG till PNG",
+      "short": "Förlustfri konvertering från JPG till PNG direkt i webbläsaren.",
+      "h1": "Konvertera JPG till PNG online gratis — Förlustfri omkodning",
+      "metaTitle": "Konvertera JPG till PNG online — Gratis, i webbläsaren | Konvertools",
+      "metaDescription": "Konvertera valfri JPG till PNG med stöd för transparens. Körs helt i din webbläsare — filen laddas aldrig upp."
+    },
+    "tr": {
+      "name": "JPG'yi PNG'ye Dönüştür",
+      "short": "Tarayıcınızda JPG'den PNG'ye kayıpsız dönüşüm.",
+      "h1": "Ücretsiz Online JPG'yi PNG'ye Dönüştür — Kayıpsız Yeniden Kodlama",
+      "metaTitle": "JPG'yi PNG'ye Dönüştür — Ücretsiz, Tarayıcıda | Konvertools",
+      "metaDescription": "Herhangi bir JPG'yi saydam destekli PNG'ye dönüştürün. Tüm işlem tarayıcınızda gerçekleşir — dosyanız hiçbir zaman yüklenmez."
+    },
+    "uk": {
+      "name": "Конвертувати JPG у PNG",
+      "short": "Без втрат конвертування з JPG у PNG безпосередньо у вашому браузері.",
+      "h1": "Конвертувати JPG у PNG онлайн безкоштовно — без втрат перекодування",
+      "metaTitle": "Конвертувати JPG у PNG онлайн — безкоштовно, у браузері | Konvertools",
+      "metaDescription": "Конвертуйте будь-який JPG у PNG з підтримкою прозорості. Усе відбувається у вашому браузері — файл не завантажується на сервер."
+    },
+    "vi": {
+      "name": "Chuyển đổi JPG sang PNG",
+      "short": "Chuyển đổi không mất dữ liệu từ JPG sang PNG, ngay trong trình duyệt của bạn.",
+      "h1": "Chuyển đổi JPG sang PNG Online Miễn Phí — Mã hóa không mất dữ liệu",
+      "metaTitle": "Chuyển đổi JPG sang PNG Online — Miễn Phí, Trong Trình Duyệt | Konvertools",
+      "metaDescription": "Chuyển đổi bất kỳ tệp JPG nào sang định dạng PNG thân thiện với trong suốt. Hoạt động hoàn toàn trong trình duyệt — tệp của bạn không bao giờ bị tải lên."
+    },
+    "zh": {
+      "name": "将 JPG 转换为 PNG",
+      "short": "在浏览器中无损将 JPG 转换为 PNG。",
+      "h1": "在线免费转换 JPG 为 PNG — 无损重编码",
+      "metaTitle": "在线转换 JPG 为 PNG — 免费且在浏览器中 | Konvertools",
+      "metaDescription": "将任意 JPG 图片转换为支持透明通道的 PNG。整个过程在浏览器中完成——您的文件不会被上传。"
     }
   },
   "image-to-base64": {
@@ -7067,6 +7877,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "图片转 ICO 转换器 — 在线免费生成网站图标",
       "metaTitle": "图片转 ICO — 免费网站图标生成 | Konvertools",
       "metaDescription": "将 PNG、JPG 或 WebP 图片转换为多尺寸网站图标文件（16、32、48、64 像素），无需上传，在浏览器中运行。"
+    }
+  },
+  "image-to-jpg": {
+    "ar": {
+      "name": "تحويل الصورة إلى JPG",
+      "short": "PNG، WebP، AVIF، GIF، BMP — إلى JPG",
+      "h1": "تحويل الصورة إلى JPG أونلاين مجاناً — PNG، WebP، AVIF، BMP",
+      "metaTitle": "تحويل الصورة إلى JPG أونلاين — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "قم بتحويل صور PNG أو WebP أو AVIF أو GIF أو BMP إلى JPG مع ضبط الجودة. يعمل في متصفحك — لن يتم تحميل ملفك إلى الإنترنت."
+    },
+    "cs": {
+      "name": "Převést obrázek na JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — vše na JPG.",
+      "h1": "Převést obrázek na JPG online zdarma — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Převést obrázek na JPG online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Převod obrázků PNG, WebP, AVIF, GIF nebo BMP na JPG s nastavitelnou kvalitou. Probíhá přímo ve vašem prohlížeči — váš soubor není nikdy nahráván."
+    },
+    "de": {
+      "name": "Bild zu JPG konvertieren",
+      "short": "PNG, WebP, AVIF, GIF, BMP — alles zu JPG.",
+      "h1": "Bild zu JPG online kostenlos konvertieren — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Bild zu JPG online konvertieren — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Konvertiere PNG-, WebP-, AVIF-, GIF- oder BMP-Bilder zu JPG mit einstellbarer Qualität. Läuft in deinem Browser — deine Datei wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Convertir imagen a JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — todo a JPG.",
+      "h1": "Convertir imagen a JPG online gratis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Convertir imagen a JPG online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Convierte imágenes PNG, WebP, AVIF, GIF o BMP a JPG con calidad ajustable. Funciona en tu navegador — tu archivo nunca se sube."
+    },
+    "fr": {
+      "name": "Convertir une image en JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — tout en JPG.",
+      "h1": "Convertir une image en JPG en ligne gratuitement — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Convertir une image en JPG en ligne — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Convertissez vos images PNG, WebP, AVIF, GIF ou BMP en JPG avec une qualité ajustable. Fonctionne dans votre navigateur — vos fichiers ne sont jamais envoyés."
+    },
+    "hi": {
+      "name": "इमेज को JPG में बदलें",
+      "short": "PNG, WebP, AVIF, GIF, BMP — सबको JPG में बदलें।",
+      "h1": "ऑनलाइन मुफ़्त में इमेज को JPG में बदलें — PNG, WebP, AVIF, BMP",
+      "metaTitle": "JPG में ऑनलाइन बदलें — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "PNG, WebP, AVIF, GIF या BMP इमेज को गुणवत्ता समायोजित करके JPG में बदलें। आपके ब्राउज़र में ही काम करता है — आपकी फ़ाइल कभी अपलोड नहीं होती।"
+    },
+    "id": {
+      "name": "Ubah Gambar ke JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — semuanya ke JPG.",
+      "h1": "Ubah Gambar ke JPG Online Gratis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Ubah Gambar ke JPG Online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Ubah gambar PNG, WebP, AVIF, GIF, atau BMP ke JPG dengan kualitas yang dapat disesuaikan. Berjalan di peramban Anda — file tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Converti immagine in JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — tutti in JPG.",
+      "h1": "Converti immagine in JPG online gratis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Converti immagine in JPG online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Converti immagini PNG, WebP, AVIF, GIF o BMP in JPG con qualità regolabile. Funziona nel tuo browser — il file non viene mai caricato."
+    },
+    "ja": {
+      "name": "画像をJPGに変換",
+      "short": "PNG、WebP、AVIF、GIF、BMP — すべてJPGに。",
+      "h1": "画像をJPGに無料でオンライン変換 — PNG、WebP、AVIF、BMP",
+      "metaTitle": "画像をJPGにオンライン変換 — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "PNG、WebP、AVIF、GIF、BMP画像を品質調整可能なJPGに変換。ブラウザ上で動作し、ファイルはアップロードされません。"
+    },
+    "ko": {
+      "name": "이미지를 JPG로 변환",
+      "short": "PNG, WebP, AVIF, GIF, BMP — 모두 JPG로 변환 가능",
+      "h1": "온라인 무료 이미지 JPG 변환 — PNG, WebP, AVIF, BMP",
+      "metaTitle": "이미지를 JPG로 변환 — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "PNG, WebP, AVIF, GIF 또는 BMP 이미지를 품질 조절 가능하게 JPG로 변환합니다. 브라우저에서 바로 실행되며 파일은 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Afbeelding converteren naar JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — alles naar JPG.",
+      "h1": "Converteer afbeelding naar JPG online gratis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Afbeelding naar JPG converteren online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Converteer PNG-, WebP-, AVIF-, GIF- of BMP-afbeeldingen naar JPG met instelbare kwaliteit. Werkt in je browser — je bestand wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Konwertuj obraz do JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — wszystkie do JPG.",
+      "h1": "Konwertuj obraz do JPG online za darmo — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Konwertuj obraz do JPG online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Konwertuj obrazy PNG, WebP, AVIF, GIF lub BMP do JPG z regulowaną jakością. Działa w przeglądarce — plik nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Converter Imagem para JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — todos para JPG.",
+      "h1": "Converter Imagem para JPG Online Grátis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Converter Imagem para JPG Online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Converta imagens PNG, WebP, AVIF, GIF ou BMP para JPG com qualidade ajustável. Funciona no seu navegador — seu arquivo nunca é enviado."
+    },
+    "ru": {
+      "name": "Конвертировать изображение в JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — всё в JPG.",
+      "h1": "Конвертировать изображение в JPG онлайн бесплатно — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Конвертировать изображение в JPG онлайн — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Конвертируйте изображения PNG, WebP, AVIF, GIF или BMP в JPG с настраиваемым качеством. Работает в браузере — файл не загружается на сервер."
+    },
+    "sv": {
+      "name": "Konvertera bild till JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — alla till JPG.",
+      "h1": "Konvertera bild till JPG online gratis — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Konvertera bild till JPG online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Konvertera PNG-, WebP-, AVIF-, GIF- eller BMP-bilder till JPG med justerbar kvalitet. Körs i din webbläsare — din fil laddas aldrig upp."
+    },
+    "tr": {
+      "name": "Resmi JPG'ye Dönüştür",
+      "short": "PNG, WebP, AVIF, GIF, BMP — tümünü JPG'ye çevirin.",
+      "h1": "Ücretsiz Online Resmi JPG'ye Dönüştür — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Resmi JPG'ye Dönüştür Online — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "PNG, WebP, AVIF, GIF veya BMP resimlerini kalite ayarlı olarak JPG'ye dönüştürün. Tarayıcınızda çalışır — dosyanız hiç yüklenmez."
+    },
+    "uk": {
+      "name": "Конвертувати зображення у JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — усе у JPG.",
+      "h1": "Конвертувати зображення у JPG онлайн безкоштовно — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Конвертувати зображення у JPG онлайн — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Конвертуйте зображення PNG, WebP, AVIF, GIF чи BMP у JPG з налаштуванням якості. Працює у вашому браузері — файл ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Chuyển đổi hình ảnh sang JPG",
+      "short": "PNG, WebP, AVIF, GIF, BMP — tất cả sang JPG.",
+      "h1": "Chuyển đổi hình ảnh sang JPG trực tuyến miễn phí — PNG, WebP, AVIF, BMP",
+      "metaTitle": "Chuyển đổi hình ảnh sang JPG trực tuyến — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "Chuyển đổi hình ảnh PNG, WebP, AVIF, GIF hoặc BMP sang JPG với chất lượng tùy chỉnh. Hoạt động ngay trên trình duyệt — tệp của bạn không bao giờ bị tải lên."
+    },
+    "zh": {
+      "name": "图片转JPG",
+      "short": "PNG、WebP、AVIF、GIF、BMP — 全部转JPG",
+      "h1": "在线免费转JPG — PNG、WebP、AVIF、BMP",
+      "metaTitle": "在线转JPG — PNG / WebP / AVIF / BMP | Konvertools",
+      "metaDescription": "将PNG、WebP、AVIF、GIF或BMP图片转换为JPG，支持调整质量。在浏览器中运行——文件永不上传。"
     }
   },
   "image-to-table": {
@@ -8942,6 +9887,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "Markdown 转 Word — 在线免费将 MD 转换为 DOCX",
       "metaTitle": "在线 Markdown 转 Word — 将 MD 转换为 DOCX | Konvertools",
       "metaDescription": "将 Markdown 转换为可编辑的 Word (.docx) 文档 — 标题、列表和强调符号完整保留。免费、在浏览器中运行，您的文本不会被上传。"
+    }
+  },
+  "meme-generator": {
+    "ar": {
+      "name": "مولد الميمات",
+      "short": "نص علوي وسفلي كلاسيكي على أي صورة، فورًا.",
+      "h1": "مولد الميمات أونلاين مجانًا — اصنع ميمًا في ثوانٍ",
+      "metaTitle": "مولد الميمات أونلاين — صانع الميمات مجانًا | كونفرتولز",
+      "metaDescription": "حول أي صورة إلى ميم باستخدام نص Impact علوي وسفلي. معاينة فورية، تصدير بصيغة PNG، يعمل في متصفحك."
+    },
+    "cs": {
+      "name": "Generátor memů",
+      "short": "Klasický horní a spodní text na jakémkoli obrázku, okamžitě.",
+      "h1": "Generátor memů online zdarma — vytvořte si mem za sekundy",
+      "metaTitle": "Generátor memů online — zdarma | Konvertools",
+      "metaDescription": "Přeměňte jakýkoli obrázek na mem s horním a spodním textem v písmu Impact. Náhled v reálném čase, export jako PNG, běží ve vašem prohlížeči."
+    },
+    "de": {
+      "name": "Meme-Generator",
+      "short": "Klassischer Ober- und Untertext auf jedem Bild – sofort fertig.",
+      "h1": "Meme-Generator Online Kostenlos — Erstelle ein Meme in Sekunden",
+      "metaTitle": "Meme-Generator Online — Kostenloser Meme-Maker | Konvertools",
+      "metaDescription": "Verwandle jedes Bild mit Impact-Text oben und unten in ein Meme. Echtzeit-Vorschau, Export als PNG, läuft in deinem Browser."
+    },
+    "es": {
+      "name": "Generador de Memes",
+      "short": "Texto superior e inferior clásico en cualquier imagen, al instante.",
+      "h1": "Generador de Memes Online Gratis — Crea un Meme en Segundos",
+      "metaTitle": "Generador de Memes Online — Creador de Memes Gratis | Konvertools",
+      "metaDescription": "Convierte cualquier imagen en un meme con texto en Impact. Vista previa en vivo, exporta como PNG, funciona en tu navegador."
+    },
+    "fr": {
+      "name": "Générateur de Mèmes",
+      "short": "Texte supérieur et inférieur classique sur n'importe quelle image, instantanément.",
+      "h1": "Générateur de Mèmes en Ligne Gratuit — Créez un Mème en Quelques Seconds",
+      "metaTitle": "Générateur de Mèmes en Ligne — Créateur Gratuit | Konvertools",
+      "metaDescription": "Transformez n'importe quelle image en mème avec du texte Impact en haut et en bas. Aperçu en direct, export en PNG, fonctionne dans votre navigateur."
+    },
+    "hi": {
+      "name": "मेमे जनरेटर",
+      "short": "किसी भी चित्र पर क्लासिक ऊपर और नीचे का टेक्स्ट, तुरंत।",
+      "h1": "मेमे जनरेटर ऑनलाइन मुफ्त — सेकंडों में एक मेम बनाएं",
+      "metaTitle": "मेमे जनरेटर ऑनलाइन — मुफ्त मेम निर्माता | Konvertools",
+      "metaDescription": "किसी भी चित्र को ऊपर और नीचे इम्पैक्ट टेक्स्ट वाले मेम में बदलें। लाइव पूर्वावलोकन, पीएनजी के रूप में निर्यात, आपके ब्राउज़र में चलता है।"
+    },
+    "id": {
+      "name": "Pembuat Meme",
+      "short": "Teks atas + bawah klasik di gambar apa pun, langsung jadi.",
+      "h1": "Pembuat Meme Online Gratis — Buat Meme dalam Hitungan Detik",
+      "metaTitle": "Pembuat Meme Online — Pembuat Meme Gratis | Konvertools",
+      "metaDescription": "Ubah gambar apa pun menjadi meme dengan teks Impact di atas dan bawah. Pratinjau langsung, ekspor sebagai PNG, berjalan di peramban Anda."
+    },
+    "it": {
+      "name": "Generatore di Meme",
+      "short": "Testo superiore e inferiore classico su qualsiasi immagine, all'istante.",
+      "h1": "Generatore di Meme Online Gratis — Crea un Meme in Secondi",
+      "metaTitle": "Generatore di Meme Online — Crea Meme Gratis | Konvertools",
+      "metaDescription": "Trasforma qualsiasi immagine in un meme con testo in Impact sopra e sotto. Anteprima in tempo reale, esporta come PNG, funziona nel tuo browser."
+    },
+    "ja": {
+      "name": "ミームジェネレーター",
+      "short": "どんな画像にもクラシックな上下テキストを即座に追加。",
+      "h1": "オンライン無料ミームジェネレーター — 数秒でミームを作成",
+      "metaTitle": "オンラインミームジェネレーター — 無料ミームメーカー | Konvertools",
+      "metaDescription": "画像をミームに変換：インパクト体の上下テキスト、リアルタイムプレビュー、PNG形式で出力、ブラウザで動作。"
+    },
+    "ko": {
+      "name": "мем 생성기",
+      "short": "어떤 이미지든 클래식한 상단/하단 텍스트로 순식간에 밈 만들기",
+      "h1": "무료 온라인 밈 생성기 — 몇 초 만에 밈 만들기",
+      "metaTitle": "온라인 밈 생성기 — 무료 밈 메이커 | Konvertools",
+      "metaDescription": "상단/하단 Impact 글꼴 텍스트로 이미지를 밈으로 변환. 실시간 미리보기, PNG로 내보내기, 브라우저에서 바로 사용 가능."
+    },
+    "nl": {
+      "name": "Meme Generator",
+      "short": "Voeg klassieke boven- en ondertekst toe aan elke afbeelding, direct.",
+      "h1": "Meme Generator Online Gratis — Maak in Seconden een Meme",
+      "metaTitle": "Meme Generator Online — Gratis Meme Maker | Konvertools",
+      "metaDescription": "Zet elke afbeelding om in een meme met boven- en ondertekst in Impact. Live voorbeeld, exporteer als PNG, werkt in je browser."
+    },
+    "pl": {
+      "name": "Generator memów",
+      "short": "Klasyczny tekst górny + dolny na dowolnym obrazie, natychmiastowo.",
+      "h1": "Darmowy generator memów online — Stwórz mem w kilka sekund",
+      "metaTitle": "Generator memów online — Darmowy kreator memów | Konvertools",
+      "metaDescription": "Przekształć dowolny obraz w mem z tekstem w stylu Impact u góry i na dole. Podgląd na żywo, eksport do PNG, działa w przeglądarce."
+    },
+    "pt": {
+      "name": "Gerador de Meme",
+      "short": "Texto superior e inferior clássico em qualquer imagem, instantaneamente.",
+      "h1": "Gerador de Meme Online Grátis — Crie um Meme em Segundos",
+      "metaTitle": "Gerador de Meme Online — Criador de Memes Grátis | Konvertools",
+      "metaDescription": "Transforme qualquer imagem em um meme com texto em Impact no topo e na base. Visualização ao vivo, exporta como PNG, funciona no seu navegador."
+    },
+    "ru": {
+      "name": "Генератор мемов",
+      "short": "Классический верхний и нижний текст на любом изображении — моментально.",
+      "h1": "Генератор мемов онлайн бесплатно — создавай мемы за секунды",
+      "metaTitle": "Генератор мемов онлайн — бесплатный мем-мейкер | Konvertools",
+      "metaDescription": "Создай мем из любого изображения с текстом в стиле Impact. Живой предпросмотр, экспорт в PNG, работает прямо в браузере."
+    },
+    "sv": {
+      "name": "Meme-genererare",
+      "short": "Klassisk övre + nedre text på valfri bild, direkt.",
+      "h1": "Meme-genererare Online Gratis — Skapa en meme på sekunder",
+      "metaTitle": "Meme-genererare Online — Gratis Meme-skapa | Konvertools",
+      "metaDescription": "Gör om valfri bild till en meme med övre och nedre Impact-text. Förhandsgranskning, exporteras som PNG, körs i webbläsaren."
+    },
+    "tr": {
+      "name": "Meme Oluşturucu",
+      "short": "Herhangi bir görüntüye klasik üst ve alt metin ekleyin, anında.",
+      "h1": "Ücretsiz Online Meme Oluşturucu — Saniyeler İçinde Meme Yap",
+      "metaTitle": "Online Meme Oluşturucu — Ücretsiz Meme Yapıcı | Konvertools",
+      "metaDescription": "Herhangi bir görüntüyü üst ve alt Impact metniyle memeye dönüştürün. Canlı önizleme, PNG olarak dışa aktarılır, tarayıcınızda çalışır."
+    },
+    "uk": {
+      "name": "Генератор мемів",
+      "short": "Класичний верхній та нижній текст на будь-якому зображенні — миттєво.",
+      "h1": "Безкоштовний онлайн-генератор мемів — створюйте меми за секунди",
+      "metaTitle": "Онлайн-генератор мемів — безкоштовний конструктор мемів | Konvertools",
+      "metaDescription": "Перетворюйте будь-яке зображення на мем з текстом шрифтом Impact. Живий попередній перегляд, експорт у форматі PNG, працює у вашому браузері."
+    },
+    "vi": {
+      "name": "Tạo Meme",
+      "short": "Thêm chữ trên/dưới hình ảnh bất kỳ, ngay lập tức.",
+      "h1": "Tạo Meme Online Miễn Phí — Tạo Meme Chỉ Trong Giây Lát",
+      "metaTitle": "Tạo Meme Online — Công Cụ Làm Meme Miễn Phí | Konvertools",
+      "metaDescription": "Biến bất kỳ hình ảnh nào thành meme với chữ Impact trên/dưới. Xem trước trực tiếp, xuất ra dưới dạng PNG, chạy ngay trên trình duyệt."
+    },
+    "zh": {
+      "name": "表情包生成器",
+      "short": "为任何图片添加经典上下文字，即刻生成。",
+      "h1": "免费在线表情包生成器 — 秒速制作表情包",
+      "metaTitle": "在线表情包生成器 — 免费表情包制作 | Konvertools",
+      "metaDescription": "将任何图片转换为表情包，支持添加上下文字（Impact字体）。实时预览，导出为PNG格式，无需安装，浏览器即可运行。"
     }
   },
   "merge-audio": {
@@ -10835,6 +11915,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "百分比计算器 — 数值百分比与变化率",
       "metaTitle": "在线免费百分比计算器 — 百分比、变化率 | Konvertools",
       "metaDescription": "计算某数的百分比、一个值占另一个值的百分比，以及百分比增减。免费、即时、在浏览器中运行。"
+    }
+  },
+  "photo-editor": {
+    "ar": {
+      "name": "محرر الصور",
+      "short": "فلاتر، إعدادات مسبقة، تدوير، وقلب — مباشرة في المتصفح.",
+      "h1": "محرر صور أونلاين مجاني — فلاتر، تدوير، قلب",
+      "metaTitle": "محرر صور أونلاين — فلاتر، تدوير، قلب | Konvertools",
+      "metaDescription": "حرّر أي صورة بستة فلاتر متحركة وأربعة إعدادات مسبقة مع تدوير وقلب.Canvas داخل المتصفح — صورتك لا تُرفع أبدًا."
+    },
+    "cs": {
+      "name": "Editor fotografií",
+      "short": "Filtry, předvolby, otočení a převrácení — přímo v prohlížeči.",
+      "h1": "Online editor fotografií zdarma — filtry, otočení, převrácení",
+      "metaTitle": "Editor fotografií online — filtry, otočení, převrácení | Konvertools",
+      "metaDescription": "Upravte jakoukoli fotografii pomocí šesti posuvníků filtrů, čtyř předvoleb a otočení/převrácení. Čistě v prohlížeči pomocí canvasu — váš obrázek není nikdy nahráván."
+    },
+    "de": {
+      "name": "Foto-Editor",
+      "short": "Filter, Voreinstellungen, drehen und spiegeln — alles im Browser.",
+      "h1": "Foto-Editor Online Kostenlos — Filter, Drehen, Spiegeln",
+      "metaTitle": "Foto-Editor Online — Filter, Drehen, Spiegeln | Konvertools",
+      "metaDescription": "Bearbeite jedes Foto mit sechs Filterreglern, vier Voreinstellungen und Drehen/Spiegeln. Rein im Browser — dein Bild wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Editor de fotos",
+      "short": "Filtros, ajustes preestablecidos, rotar e invertir — todo en el navegador.",
+      "h1": "Editor de fotos online gratis — Filtros, rotar, invertir",
+      "metaTitle": "Editor de fotos online — Filtros, rotar, invertir | Konvertools",
+      "metaDescription": "Edita cualquier foto con seis deslizadores de filtro, cuatro ajustes preestablecidos y rotar/invertir. Todo en el navegador con canvas — tu imagen nunca se sube."
+    },
+    "fr": {
+      "name": "Éditeur de photos",
+      "short": "Filtres, préréglages, rotation et retournement — tout dans le navigateur.",
+      "h1": "Éditeur de photos en ligne gratuit — Filtres, Rotation, Retournement",
+      "metaTitle": "Éditeur de photos en ligne — Filtres, Rotation | Konvertools",
+      "metaDescription": "Modifiez n'importe quelle photo avec six curseurs de filtres, quatre préréglages et rotation/retournement. Tout se fait dans le navigateur — votre image n'est jamais téléchargée."
+    },
+    "hi": {
+      "name": "फोटो संपादक",
+      "short": "फ़िल्टर, प्रीसेट, घुमाएँ और पलटें — केवल ब्राउज़र में।",
+      "h1": "ऑनलाइन फोटो संपादक मुफ़्त — फ़िल्टर, घुमाएँ, पलटें",
+      "metaTitle": "ऑनलाइन फोटो संपादक — फ़िल्टर, घुमाएँ, पलटें | Konvertools",
+      "metaDescription": "छह फ़िल्टर स्लाइडर्स, चार प्रीसेट और घुमाने/पलटने से किसी भी फोटो को संपादित करें। शुद्ध इन-ब्राउज़र कैनवास — आपकी तस्वीर कभी अपलोड नहीं होती।"
+    },
+    "id": {
+      "name": "Editor Foto",
+      "short": "Filter, preset, putar, dan balik — murni di peramban.",
+      "h1": "Editor Foto Online Gratis — Filter, Putar, Balik",
+      "metaTitle": "Editor Foto Online — Filter, Putar, Balik | Konvertools",
+      "metaDescription": "Edit foto apa pun dengan enam penggeser filter, empat preset, serta putar/balik. Murni di canvas peramban — gambar Anda tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Editor di foto",
+      "short": "Filtri, preset, ruota e capovolgi — tutto nel browser.",
+      "h1": "Editor di foto online gratuito — Filtri, Ruota, Capovolgi",
+      "metaTitle": "Editor di foto online — Filtri, Ruota, Capovolgi | Konvertools",
+      "metaDescription": "Modifica qualsiasi foto con sei cursori per i filtri, quattro preset e le funzioni ruota/capovolgi. Solo canvas nel browser — la tua immagine non viene mai caricata."
+    },
+    "ja": {
+      "name": "写真編集ツール",
+      "short": "ブラウザで完結。フィルター、プリセット、回転、反転。",
+      "h1": "オンライン写真編集ツール — フィルター、回転、反転",
+      "metaTitle": "写真編集オンライン — フィルター、回転、反転 | Konvertools",
+      "metaDescription": "6つのフィルタースライダー、4つのプリセット、回転・反転で写真を編集。画像は一切アップロードされません。"
+    },
+    "ko": {
+      "name": "사진 편집기",
+      "short": "필터, 프리셋, 회전, 뒤집기 — 순수한 브라우저 편집",
+      "h1": "무료 온라인 사진 편집 — 필터, 회전, 뒤집기",
+      "metaTitle": "온라인 사진 편집 — 필터, 회전, 뒤집기 | Konvertools",
+      "metaDescription": "6개의 필터 슬라이더와 4개의 프리셋, 회전/뒤집기로 사진을 편집하세요. 브라우저 내 canvas에서 순수 처리 — 이미지는 절대 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Foto-editor",
+      "short": "Filters, vooraf ingestelde instellingen, draaien en spiegelen — puur in de browser.",
+      "h1": "Online Foto-editor Gratis — Filters, Draaien, Spiegelen",
+      "metaTitle": "Online Foto-editor — Filters, Draaien, Spiegelen | Konvertools",
+      "metaDescription": "Bewerk elke foto met zes filterschuiven, vier vooraf ingestelde instellingen en draai/spiegel. Puur in-browser canvas — je afbeelding wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Edytor zdjęć",
+      "short": "Filtry, presety, obrót i odbicie — czysty przeglądarkowy edytor.",
+      "h1": "Darmowy edytor zdjęć online — filtry, obrót, odbicie",
+      "metaTitle": "Edytor zdjęć online — filtry, obrót, odbicie | Konvertools",
+      "metaDescription": "Edytuj dowolne zdjęcie za pomocą sześciu suwaków filtrów, czterech presetów oraz obrotu/odbicia. Czysty edytor w przeglądarce — obraz nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Editor de Fotos",
+      "short": "Filtros, predefinições, girar e inverter — tudo no navegador.",
+      "h1": "Editor de Fotos Online Grátis — Filtros, Girar, Inverter",
+      "metaTitle": "Editor de Fotos Online — Filtros, Girar, Inverter | Konvertools",
+      "metaDescription": "Edite qualquer foto com seis controles deslizantes de filtro, quatro predefinições e girar/inverter. Canvas 100% no navegador — sua imagem nunca é enviada."
+    },
+    "ru": {
+      "name": "Редактор изображений",
+      "short": "Фильтры, пресеты, поворот и отражение — всё в браузере.",
+      "h1": "Онлайн-редактор изображений бесплатно — фильтры, поворот, отражение",
+      "metaTitle": "Онлайн-редактор изображений — фильтры, поворот, отражение | Konvertools",
+      "metaDescription": "Редактируйте любые фото с помощью шести ползунков фильтров, четырёх пресетов и функций поворота/отражения. Всё работает в браузере — изображение не загружается на сервер."
+    },
+    "sv": {
+      "name": "Bildredigerare",
+      "short": "Filter, förinställningar, rotera och vänd — direkt i webbläsaren.",
+      "h1": "Bildredigerare Online Gratis — Filter, Rotera, Vänd",
+      "metaTitle": "Bildredigerare Online — Filter, Rotera, Vänd | Konvertools",
+      "metaDescription": "Redigera vilken bild som helst med sex filterreglage, fyra förinställningar och rotera/vänd. Rent in-browser canvas — bilden laddas aldrig upp."
+    },
+    "tr": {
+      "name": "Foto Düzenleyici",
+      "short": "Filtreler, önayarlar, döndür ve çevir — saf tarayıcı.",
+      "h1": "Ücretsiz Çevrimiçi Foto Düzenleyici — Filtreler, Döndür, Çevir",
+      "metaTitle": "Çevrimiçi Foto Düzenleyici — Filtreler, Döndür, Çevir | Konvertools",
+      "metaDescription": "Altı filtre kaydırıcısı, dört önayar ve döndür/çevir ile her fotoğrafı düzenleyin. Görüntünüz asla yüklenmez — saf tarayıcı tabanlı canvas."
+    },
+    "uk": {
+      "name": "Редактор фото",
+      "short": "Фільтри, пресети, обертання та віддзеркалення — безпосередньо у браузері.",
+      "h1": "Онлайн-редактор фото безкоштовно — фільтри, обертання, віддзеркалення",
+      "metaTitle": "Онлайн-редактор фото — фільтри, обертання, віддзеркалення | Konvertools",
+      "metaDescription": "Редагуйте будь-яке фото за допомогою шести повзунків фільтрів, чотирьох пресетів та обертання/віддзеркалення. Виключно в браузері — ваше фото ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Chỉnh sửa Ảnh",
+      "short": "Bộ lọc, hiệu ứng sẵn, xoay và lật — hoàn toàn trên trình duyệt.",
+      "h1": "Chỉnh sửa Ảnh Online Miễn Phí — Bộ lọc, Xoay, Lật",
+      "metaTitle": "Chỉnh sửa Ảnh Online — Bộ lọc, Xoay, Lật | Konvertools",
+      "metaDescription": "Chỉnh sửa bất kỳ bức ảnh nào với 6 thanh trượt bộ lọc, 4 hiệu ứng sẵn và tính năng xoay/lật. Hoàn toàn trên canvas trình duyệt — hình ảnh của bạn không bao giờ bị tải lên."
+    },
+    "zh": {
+      "name": "图片编辑器",
+      "short": "滤镜、预设、旋转与翻转——纯浏览器处理。",
+      "h1": "免费在线图片编辑器——滤镜、旋转、翻转",
+      "metaTitle": "在线图片编辑器——滤镜、旋转、翻转 | Konvertools",
+      "metaDescription": "使用六个滤镜滑块、四个预设及旋转/翻转功能编辑图片。纯浏览器画布处理——图像不会被上传。"
     }
   },
   "png-to-jpg": {
@@ -16529,6 +17744,276 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "Chuyển đổi WAV sang MP3 Online — Nén Âm thanh",
       "metaTitle": "Chuyển WAV sang MP3 Online — Miễn phí | Konvertools",
       "metaDescription": "Chuyển đổi tệp WAV sang MP3 với tốc độ bit tùy chỉnh. Miễn phí và nhanh chóng."
+    }
+  },
+  "webp-to-jpg": {
+    "ar": {
+      "name": "ويب بي إلى جيه بي جي",
+      "short": "تحويل عكسي: ويب بي → جيه بي جي الشائع",
+      "h1": "محوّل ويب بي إلى جيه بي جي — تحويل صور ويب بي إلى جيه بي جي أونلاين",
+      "metaTitle": "محوّل ويب بي إلى جيه بي جي أونلاين — مجاني وفوري | Konvertools",
+      "metaDescription": "حوّل صور ويب بي إلى جيه بي جي فورًا في متصفحك. جودة قابلة للتعديل، والمناطق الشفافة تُحوَّل إلى أبيض. مجاني وغير محدود."
+    },
+    "cs": {
+      "name": "WebP do JPG",
+      "short": "Opačný převod: WebP → univerzální JPG.",
+      "h1": "Převodník WebP na JPG — Online převod WebP na JPEG",
+      "metaTitle": "Převodník WebP na JPG Online — Zdarma & Okamžitý | Konvertools",
+      "metaDescription": "Převádějte obrázky WebP na JPG okamžitě přímo ve svém prohlížeči. Nastavitelná kvalita, průhledná místa převedena na bílou. Zdarma a neomezeně."
+    },
+    "de": {
+      "name": "WebP zu JPG",
+      "short": "Rückumwandlung: WebP → universelles JPG.",
+      "h1": "WebP zu JPG Konverter — WebP in JPEG online umwandeln",
+      "metaTitle": "WebP zu JPG Konverter Online — Kostenlos & sofort | Konvertools",
+      "metaDescription": "Wandle WebP-Bilder sofort im Browser in JPG um. Anpassbare Qualität, transparente Bereiche werden zu Weiß. Kostenlos und unbegrenzt."
+    },
+    "es": {
+      "name": "WebP a JPG",
+      "short": "Conversión inversa: WebP → JPG universal.",
+      "h1": "Convertidor WebP a JPG — Convierte WebP a JPEG en línea",
+      "metaTitle": "Convertidor WebP a JPG Online — Gratis e Instantáneo | Konvertools",
+      "metaDescription": "Convierte imágenes WebP a JPG al instante en tu navegador. Calidad ajustable, áreas transparentes convertidas a blanco. Gratis y sin límites."
+    },
+    "fr": {
+      "name": "WebP vers JPG",
+      "short": "Conversion inverse : WebP → JPG universel.",
+      "h1": "Convertisseur WebP vers JPG — Convertir WebP en JPEG en ligne",
+      "metaTitle": "Convertisseur WebP vers JPG en ligne — Gratuit & instantané | Konvertools",
+      "metaDescription": "Convertissez vos images WebP en JPG instantanément dans votre navigateur. Qualité ajustable, zones transparentes converties en blanc. Gratuit et illimité."
+    },
+    "hi": {
+      "name": "WebP से JPG",
+      "short": "उल्टा कन्वर्ट: WebP → सार्वभौमिक JPG।",
+      "h1": "WebP से JPG कन्वर्टर — ऑनलाइन WebP को JPEG में बदलें",
+      "metaTitle": "WebP से JPG कन्वर्टर ऑनलाइन — मुफ्त और तुरंत | Konvertools",
+      "metaDescription": "अपने ब्राउज़र में WebP चित्रों को JPG में तुरंत बदलें। गुणवत्ता समायोज्य, पारदर्शी क्षेत्र सफेद रंग में समतल। मुफ्त और असीमित।"
+    },
+    "id": {
+      "name": "WebP ke JPG",
+      "short": "Konversi balik: WebP → JPG universal.",
+      "h1": "Konverter WebP ke JPG — Ubah WebP ke JPEG Online",
+      "metaTitle": "Konverter WebP ke JPG Online — Gratis & Instan | Konvertools",
+      "metaDescription": "Ubah gambar WebP ke JPG secara instan di peramban Anda. Kualitas dapat disesuaikan, area transparan diubah menjadi putih. Gratis dan tanpa batas."
+    },
+    "it": {
+      "name": "WebP in JPG",
+      "short": "Conversione inversa: WebP → JPG universale.",
+      "h1": "Convertitore WebP in JPG — Converti WebP in JPEG online",
+      "metaTitle": "Convertitore WebP in JPG Online — Gratis e istantaneo | Konvertools",
+      "metaDescription": "Converti immagini WebP in JPG direttamente nel browser. Regola la qualità e appiattisci le aree trasparenti in bianco. Gratis e senza limiti."
+    },
+    "ja": {
+      "name": "WebP から JPG へ",
+      "short": "変換: WebP → 汎用 JPG。",
+      "h1": "WebP から JPG へのコンバーター — WebP を JPEG にオンライン変換",
+      "metaTitle": "WebP から JPG へのオンラインコンバーター — 無料・即時 | Konvertools",
+      "metaDescription": "WebP 画像をブラウザ上で JPG に即時変換。品質調整可能、透過部分は白に統合。無料・無制限。"
+    },
+    "ko": {
+      "name": "WebP를 JPG로 변환",
+      "short": "역변환: WebP → 범용 JPG.",
+      "h1": "WebP to JPG 변환기 — 웹에서 WebP를 JPEG로 즉시 변환",
+      "metaTitle": "WebP to JPG 변환기 — 무료 & 즉각 변환 | Konvertools",
+      "metaDescription": "브라우저에서 WebP 이미지를 JPG로 즉시 변환하세요. 품질 조절 가능, 투명한 영역은 흰색으로 변환됩니다. 무료 및 무제한 사용."
+    },
+    "nl": {
+      "name": "WebP naar JPG",
+      "short": "Omgekeerde conversie: WebP → universele JPG.",
+      "h1": "WebP naar JPG Converter — Converteer WebP naar JPEG Online",
+      "metaTitle": "WebP naar JPG Converter Online — Gratis & Direct | Konvertools",
+      "metaDescription": "Converteer WebP-afbeeldingen direct naar JPG in je browser. Instelbare kwaliteit, transparante gebieden worden naar wit afgevlakt. Gratis en onbeperkt."
+    },
+    "pl": {
+      "name": "WebP na JPG",
+      "short": "Konwersja odwrotna: WebP → uniwersalny JPG.",
+      "h1": "Konwerter WebP na JPG — Zamień WebP na JPEG online",
+      "metaTitle": "Konwerter WebP na JPG online — Darmowy i błyskawiczny | Konvertools",
+      "metaDescription": "Zamień obrazy WebP na JPG natychmiast w przeglądarce. Możliwość regulacji jakości, przezroczyste obszary spłaszczane do białego. Darmowy i nieograniczony."
+    },
+    "pt": {
+      "name": "WebP para JPG",
+      "short": "Conversão reversa: WebP → JPG universal.",
+      "h1": "Conversor WebP para JPG — Converter WebP para JPEG Online",
+      "metaTitle": "Conversor WebP para JPG Online — Grátis e Instantâneo | Konvertools",
+      "metaDescription": "Converta imagens WebP para JPG instantaneamente no seu navegador. Qualidade ajustável, áreas transparentes convertidas para branco. Grátis e ilimitado."
+    },
+    "ru": {
+      "name": "WebP в JPG",
+      "short": "Обратное преобразование: WebP → универсальный JPG.",
+      "h1": "Конвертер WebP в JPG — Онлайн преобразование WebP в JPEG",
+      "metaTitle": "Конвертер WebP в JPG онлайн — Бесплатно и мгновенно | Konvertools",
+      "metaDescription": "Конвертируйте изображения WebP в JPG прямо в браузере. Настраиваемое качество, прозрачные области заменяются белым. Бесплатно и без ограничений."
+    },
+    "sv": {
+      "name": "WebP till JPG",
+      "short": "Omvänd konvertering: WebP → universell JPG.",
+      "h1": "WebP till JPG-omvandlare — Konvertera WebP till JPEG online",
+      "metaTitle": "WebP till JPG-omvandlare Online — Gratis & Omedelbar | Konvertools",
+      "metaDescription": "Konvertera WebP-bilder till JPG direkt i din webbläsare. Justerbar kvalitet, transparenta områden blir vita. Gratis och obegränsat."
+    },
+    "tr": {
+      "name": "WebP'den JPG'ye",
+      "short": "Ters çevirme: WebP → yaygın JPG.",
+      "h1": "WebP'den JPG'ye Dönüştürücü — WebP'yi JPEG'e Çevirin",
+      "metaTitle": "WebP'den JPG'ye Dönüştürücü — Ücretsiz & Anında | Konvertools",
+      "metaDescription": "WebP görüntülerini tarayıcınızda anında JPG'ye dönüştürün. Ayarlanabilir kalite, saydam alanlar beyaza düzleştirilir. Ücretsiz ve sınırsız."
+    },
+    "uk": {
+      "name": "WebP до JPG",
+      "short": "Зворотне перетворення: WebP → універсальний JPG.",
+      "h1": "Конвертер WebP у JPG — Перетворюйте WebP у JPEG онлайн",
+      "metaTitle": "Конвертер WebP у JPG онлайн — Безкоштовно та миттєво | Konvertools",
+      "metaDescription": "Перетворюйте зображення WebP у JPG миттєво у вашому браузері. Налаштовувана якість, прозорі області перетворюються на білий колір. Безкоштовно та без обмежень."
+    },
+    "vi": {
+      "name": "WebP sang JPG",
+      "short": "Chuyển đổi ngược: WebP → định dạng phổ biến JPG.",
+      "h1": "Công cụ Chuyển đổi WebP sang JPG — Chuyển đổi WebP sang JPEG trực tuyến",
+      "metaTitle": "Công cụ Chuyển đổi WebP sang JPG Online — Miễn phí & tức thì | Konvertools",
+      "metaDescription": "Chuyển đổi hình ảnh WebP sang JPG ngay lập tức trong trình duyệt. Chất lượng có thể điều chỉnh, vùng trong suốt được chuyển thành màu trắng. Miễn phí và không giới hạn."
+    },
+    "zh": {
+      "name": "WebP 转 JPG",
+      "short": "反向转换：WebP → 通用 JPG。",
+      "h1": "WebP 转 JPG 转换器 — 在线将 WebP 转换为 JPEG",
+      "metaTitle": "WebP 转 JPG 在线转换器 — 免费即时 | Konvertools",
+      "metaDescription": "在浏览器中即刻将 WebP 图像转换为 JPG。可调节质量，透明区域自动填充为白色。免费且无限次使用。"
+    }
+  },
+  "webp-to-png": {
+    "ar": {
+      "name": "ويب بي إلى PNG",
+      "short": "تحويل WebP إلى PNG بدون فقدان للجودة، مع الحفاظ على الشفافية.",
+      "h1": "محوّل ويب بي إلى PNG — تحويل ويب بي إلى PNG أونلاين",
+      "metaTitle": "محوّل ويب بي إلى PNG أونلاين — مجاني وفوري | Konvertools",
+      "metaDescription": "حوّل ويب بي إلى PNG فورًا في متصفحك. إخراج بدون فقدان للجودة، مع الحفاظ على الشفافية. مجاني وغير محدود."
+    },
+    "cs": {
+      "name": "WebP do PNG",
+      "short": "Bezeztrátová konverze WebP → PNG, zachována průhlednost.",
+      "h1": "Převodník WebP na PNG — Online konverze WebP do PNG",
+      "metaTitle": "Převodník WebP na PNG Online — Rychlý a zdarma | Konvertools",
+      "metaDescription": "Okamžitá konverze WebP na PNG přímo ve vašem prohlížeči. Bezeztrátový výstup, zachovaná průhlednost. Zdarma a bez omezení."
+    },
+    "de": {
+      "name": "WebP zu PNG",
+      "short": "Lossless WebP → PNG, Transparenz erhalten.",
+      "h1": "WebP zu PNG Konverter — WebP in PNG online umwandeln",
+      "metaTitle": "WebP zu PNG Konverter Online — Kostenlos & Sofort | Konvertools",
+      "metaDescription": "Wandle WebP in PNG direkt in deinem Browser um. Lossless-Ausgabe, Transparenz erhalten. Kostenlos und unbegrenzt."
+    },
+    "es": {
+      "name": "WebP a PNG",
+      "short": "WebP → PNG sin pérdida, transparencia conservada.",
+      "h1": "Convertidor WebP a PNG — Convierte WebP a PNG en línea",
+      "metaTitle": "Convertidor WebP a PNG en línea — Gratis e instantáneo | Konvertools",
+      "metaDescription": "Convierte WebP a PNG al instante en tu navegador. Salida sin pérdida, transparencia conservada. Gratis e ilimitado."
+    },
+    "fr": {
+      "name": "WebP vers PNG",
+      "short": "WebP → PNG sans perte, transparence préservée.",
+      "h1": "Convertisseur WebP vers PNG — Convertir WebP en PNG en ligne",
+      "metaTitle": "Convertisseur WebP vers PNG en ligne — Gratuit & Instantané | Konvertools",
+      "metaDescription": "Convertissez WebP en PNG instantanément dans votre navigateur. Résultat sans perte, transparence préservée. Gratuit et illimité."
+    },
+    "hi": {
+      "name": "वेबपी से पीएनजी",
+      "short": "लॉसलेस वेबपी → पीएनजी, पारदर्शिता सुरक्षित रखें।",
+      "h1": "वेबपी से पीएनजी कन्वर्टर — वेबपी को पीएनजी में ऑनलाइन बदलें",
+      "metaTitle": "वेबपी से पीएनजी कन्वर्टर ऑनलाइन — मुफ्त और तुरंत | Konvertools",
+      "metaDescription": "अपने ब्राउज़र में तुरंत वेबपी को पीएनजी में बदलें। लॉसलेस आउटपुट, पारदर्शिता सुरक्षित। मुफ्त और असीमित।"
+    },
+    "id": {
+      "name": "WebP ke PNG",
+      "short": "WebP → PNG tanpa kehilangan kualitas, transparansi tetap terjaga.",
+      "h1": "Konverter WebP ke PNG — Ubah WebP ke PNG Online",
+      "metaTitle": "Konverter WebP ke PNG Online — Gratis & Instan | Konvertools",
+      "metaDescription": "Ubah WebP ke PNG secara instan di peramban Anda. Hasil tanpa kehilangan kualitas, transparansi tetap terjaga. Gratis dan tanpa batas."
+    },
+    "it": {
+      "name": "WebP in PNG",
+      "short": "WebP → PNG senza perdite, trasparenza preservata.",
+      "h1": "Convertitore WebP in PNG — Trasforma WebP in PNG Online",
+      "metaTitle": "Convertitore WebP in PNG Online — Gratis e Istantaneo | Konvertools",
+      "metaDescription": "Converti WebP in PNG direttamente nel browser. Output senza perdite, trasparenza preservata. Gratuito e illimitato."
+    },
+    "ja": {
+      "name": "WebP から PNG へ",
+      "short": "ロスレス WebP → PNG、透過を保持。",
+      "h1": "WebP から PNG へのコンバーター — WebP を PNG にオンライン変換",
+      "metaTitle": "WebP から PNG へのオンラインコンバーター — 無料・即時 | Konvertools",
+      "metaDescription": "ブラウザで WebP を PNG に即時変換。ロスレス出力で透過を保持。無料・無制限。"
+    },
+    "ko": {
+      "name": "WebP to PNG",
+      "short": "무손실 WebP → PNG 변환, 투명도 보존.",
+      "h1": "WebP to PNG 변환기 — 온라인에서 WebP를 PNG로 변환",
+      "metaTitle": "WebP to PNG 무료 온라인 변환기 — 즉시 변환 | Konvertools",
+      "metaDescription": "브라우저에서 WebP를 PNG로 즉시 변환하세요. 무손실 출력, 투명도 보존. 무료 및 무제한 사용 가능."
+    },
+    "nl": {
+      "name": "WebP naar PNG",
+      "short": "Verliesvrij WebP → PNG, transparantie behouden.",
+      "h1": "WebP naar PNG Converter — Converteer WebP naar PNG Online",
+      "metaTitle": "WebP naar PNG Converter Online — Gratis & Direct | Konvertools",
+      "metaDescription": "Converteer WebP naar PNG direct in je browser. Verliesvrije uitvoer, transparantie behouden. Gratis en onbeperkt."
+    },
+    "pl": {
+      "name": "WebP do PNG",
+      "short": "Bezstratne WebP → PNG, zachowana przezroczystość.",
+      "h1": "Konwerter WebP do PNG — Konwertuj WebP na PNG online",
+      "metaTitle": "Konwerter WebP do PNG online — Darmowy i błyskawiczny | Konvertools",
+      "metaDescription": "Konwertuj WebP na PNG błyskawicznie w przeglądarce. Wyjście bezstratne, zachowana przezroczystość. Darmowe i nieograniczone."
+    },
+    "pt": {
+      "name": "WebP para PNG",
+      "short": "WebP → PNG sem perdas, transparência preservada.",
+      "h1": "Conversor de WebP para PNG — Converta WebP para PNG Online",
+      "metaTitle": "Conversor de WebP para PNG Online — Grátis e Instantâneo | Konvertools",
+      "metaDescription": "Converta WebP para PNG instantaneamente no seu navegador. Saída sem perdas, transparência preservada. Grátis e ilimitado."
+    },
+    "ru": {
+      "name": "WebP в PNG",
+      "short": "Без потерь WebP → PNG, с сохранением прозрачности.",
+      "h1": "Конвертер WebP в PNG — Онлайн-конвертация WebP в PNG",
+      "metaTitle": "Конвертер WebP в PNG онлайн — Бесплатно и мгновенно | Konvertools",
+      "metaDescription": "Конвертируйте WebP в PNG мгновенно прямо в браузере. Выход без потерь, прозрачность сохранена. Бесплатно и без ограничений."
+    },
+    "sv": {
+      "name": "WebP till PNG",
+      "short": "Förlustfri WebP → PNG, bevarad genomskinlighet.",
+      "h1": "WebP till PNG-omvandlare — Konvertera WebP till PNG online",
+      "metaTitle": "WebP till PNG-omvandlare online — Gratis & omedelbar | Konvertools",
+      "metaDescription": "Konvertera WebP till PNG direkt i webbläsaren. Förlustfri utdata, genomskinlighet bevarad. Gratis och obegränsat."
+    },
+    "tr": {
+      "name": "WebP'den PNG'ye",
+      "short": "Kayıpsız WebP → PNG, saydamlık korunur.",
+      "h1": "WebP'den PNG'ye Dönüştürücü — WebP'yi PNG'ye Çevirin",
+      "metaTitle": "WebP'den PNG'ye Dönüştürücü — Ücretsiz & Anında | Konvertools",
+      "metaDescription": "WebP'yi PNG'ye tarayıcınızda anında dönüştürün. Kayıpsız çıktı, saydamlık korunur. Ücretsiz ve sınırsız."
+    },
+    "uk": {
+      "name": "WebP у PNG",
+      "short": "Без втрат WebP → PNG, прозорість збережено.",
+      "h1": "Конвертер WebP у PNG — Онлайн перетворення WebP у PNG",
+      "metaTitle": "Конвертер WebP у PNG онлайн — Безкоштовно та миттєво | Konvertools",
+      "metaDescription": "Перетворюйте WebP у PNG миттєво у своєму браузері. Вихід без втрат, прозорість збережено. Безкоштовно та без обмежень."
+    },
+    "vi": {
+      "name": "WebP sang PNG",
+      "short": "Chuyển đổi WebP sang PNG không mất dữ liệu, giữ nguyên trong suốt.",
+      "h1": "Công cụ Chuyển đổi WebP sang PNG — Chuyển đổi WebP sang PNG trực tuyến",
+      "metaTitle": "Công cụ Chuyển đổi WebP sang PNG Online — Miễn phí & tức thì | Konvertools",
+      "metaDescription": "Chuyển đổi WebP sang PNG ngay lập tức trong trình duyệt. Đầu ra không mất dữ liệu, giữ nguyên trong suốt. Miễn phí và không giới hạn."
+    },
+    "zh": {
+      "name": "WebP 转 PNG",
+      "short": "无损 WebP → PNG，保留透明通道。",
+      "h1": "WebP 转 PNG 在线转换器 — 免费在线转换 WebP 为 PNG",
+      "metaTitle": "WebP 转 PNG 在线转换器 — 免费即时 | Konvertools",
+      "metaDescription": "在浏览器中即刻将 WebP 转换为 PNG。输出无损，透明通道保留。免费且无限次使用。"
     }
   },
   "word-counter": {

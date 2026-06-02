@@ -278,7 +278,7 @@ Deno.serve(async (req) => {
       credits: balance,
       credits_permanent: prof?.credits ?? 0,
       credits_monthly: monthly,
-      max_file_mb: (prof?.plan === "business") ? 2048 : (prof?.plan === "pro") ? 500 : 25,
+      max_file_mb: (prof?.plan === "business") ? 5120 : (prof?.plan === "pro") ? 1024 : 20,
     });
   }
   if (action === "job") {
@@ -345,8 +345,8 @@ Deno.serve(async (req) => {
       const f = form.get("file");
       if (!(f instanceof File)) return err("bad_request", "Attach a multipart `file`.", 400);
       // File validation: cap size at the user's plan limit (in MB) and reject
-      // dangerous executable extensions outright. Free=25, Pro=500, Business=2048.
-      const planMb = (prof?.plan === "business") ? 2048 : (prof?.plan === "pro") ? 500 : 25;
+      // dangerous executable extensions outright. Free=20, Pro=1024, Business=5120.
+      const planMb = (prof?.plan === "business") ? 5120 : (prof?.plan === "pro") ? 1024 : 20;
       if (f.size > planMb * 1024 * 1024) return err("file_too_large", `File exceeds your plan's ${planMb} MB limit.`, 413);
       const name = (f.name || "").toLowerCase();
       const bad = [".exe", ".dll", ".bat", ".cmd", ".sh", ".ps1", ".dmg", ".msi", ".scr", ".com", ".vbs", ".js", ".jar"];
@@ -434,6 +434,35 @@ Deno.serve(async (req) => {
     }).select("id").maybeSingle();
 
     return json({ job_id: job?.id ?? null, url: signedUrl, output: outText || undefined, credits_remaining: newBalance, cost });
+  }
+
+  // ===== security tools (delegate to the security-tools function) =====
+  // Per-action credit cost; matches lib/credits.ts CREDIT_COST.
+  const SEC_COST: Record<string, number> = { scan_file: 3, validate_email: 1, analyze_phishing: 3, scan_url: 1 };
+  if (action in SEC_COST) {
+    const cost = SEC_COST[action];
+    if (balance < cost) return insufficient(cost, balance);
+    let body: Record<string, unknown> = {};
+    try { body = await req.json(); } catch { return err("bad_request", "Send a JSON body.", 400); }
+    // Map the gateway's flat action name onto the security-tools envelope.
+    const innerBody = { action, ...body };
+    const internal = await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/security-tools`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", apikey: Deno.env.get("SUPABASE_ANON_KEY")!, Authorization: `Bearer ${Deno.env.get("SUPABASE_ANON_KEY")!}` },
+      body: JSON.stringify(innerBody),
+    });
+    const innerText = await internal.text();
+    if (!internal.ok) {
+      // Pass the upstream status through (502 for our server faults, 503 for missing keys).
+      return new Response(innerText, { status: internal.status, headers: { ...cors, "Content-Type": "application/json" } });
+    }
+    let result: unknown = innerText;
+    try { result = JSON.parse(innerText); } catch { /* leave raw */ }
+    // Charge only on success.
+    const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });
+    if (spendErr) return insufficient(cost, balance);
+    const { data: job } = await svc.from("jobs").insert({ user_id: userId, tool: `api-${action}`, status: "done", metadata: { via: "api" }, completed_at: new Date().toISOString() }).select("id").maybeSingle();
+    return json({ job_id: job?.id ?? null, result, credits_remaining: newBalance, cost });
   }
 
   // ===== in-browser-only ops (no server engine yet) =====

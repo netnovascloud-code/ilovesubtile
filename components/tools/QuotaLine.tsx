@@ -33,9 +33,9 @@ export function QuotaLine() {
   if (!user) {
     return (
       <p className="mt-3 text-sm text-ink-400">
-        3 free runs/day —{" "}
+        2 free AI runs/day —{" "}
         <Link href="/login" className="text-brand-600 hover:underline">
-          Sign in for 5
+          Sign in for 3
         </Link>
       </p>
     );
@@ -43,9 +43,9 @@ export function QuotaLine() {
 
   return (
     <p className="mt-3 text-sm text-ink-400">
-      Free plan: 5 runs/day —{" "}
+      Free plan: 3 AI runs/day —{" "}
       <Link href={pricing} className="text-brand-600 hover:underline">
-        Go Pro for unlimited
+        Go Pro for 500/month
       </Link>
     </p>
   );

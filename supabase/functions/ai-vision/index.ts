@@ -29,7 +29,8 @@ function corsFor(req: Request): Record<string, string> {
 
 // Quota mirrors of ai-process — free is a rolling 24h counter, Pro/Business
 // are monthly (UTC calendar month). Keep in sync with lib/ai-quotas.ts.
-const DAILY_LIMIT: Record<string, number> = { free: 2, pro: 0, business: 0 };
+// KONVER quotas: signed-in free = 3/day (anonymous is gated client-side at 2).
+const DAILY_LIMIT: Record<string, number> = { free: 3, pro: 0, business: 0 };
 const MONTHLY_LIMIT: Record<string, number> = { free: 0, pro: 500, business: 3000 };
 function utcMonth(): string {
   const d = new Date();

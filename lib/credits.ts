@@ -49,6 +49,11 @@ export const CREDIT_COST = {
   remove_background: 2,
   convert_image: 1,
   convert_pdf: 1,
+  // Security tools (KONVER Part 2).
+  scan_file: 3,
+  validate_email: 1,
+  analyze_phishing: 3,
+  scan_url: 1,
 } as const;
 
 /** A word count ≥ this is billed at the "long" tier. */
@@ -89,5 +94,9 @@ export const COST_TABLE: { op: string; credits: string }[] = [
   { op: "remove_background", credits: "2" },
   { op: "convert_image", credits: "1" },
   { op: "convert_pdf", credits: "1" },
+  { op: "scan_file", credits: "3" },
+  { op: "validate_email", credits: "1" },
+  { op: "analyze_phishing", credits: "3" },
+  { op: "scan_url", credits: "1" },
   { op: "me · job", credits: "0" },
 ];

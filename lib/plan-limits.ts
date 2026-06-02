@@ -11,11 +11,12 @@
 
 import type { Plan } from "@/lib/ai-quotas";
 
-/** Hard per-plan upload cap (MB) used by the API gateway across every tool. */
+/** Hard per-plan upload cap (MB) used by the API gateway across every tool.
+ *  KONVER pricing: Free 20 MB · Pro 1 GB · Business 5 GB. */
 export const PLAN_FILE_MB: Record<Plan, number> = {
-  free: 25,
-  pro: 500,
-  business: 2048,
+  free: 20,
+  pro: 1024,
+  business: 5120,
 };
 
 /** Per-accepted-file-type free cap (MB). The rule we apply across tools:

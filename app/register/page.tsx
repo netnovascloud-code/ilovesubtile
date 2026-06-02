@@ -29,6 +29,16 @@ export default function RegisterPage({
 
         <div className="mt-6">
           <GoogleButton />
+          {/* OAuth click-through consent: clicking the Google button takes the
+              user off-site immediately, so we can't gate it on a local
+              checkbox. The standard SaaS pattern (GitHub, Notion, Linear) is
+              an explicit in-text notice immediately above the OAuth button. */}
+          <p className="mt-2 text-center text-xs text-ink-400">
+            By continuing with Google you accept the{" "}
+            <Link href="/terms" target="_blank" className="text-brand-600 underline">Terms of Service</Link>{" "}
+            and{" "}
+            <Link href="/privacy" target="_blank" className="text-brand-600 underline">Privacy Policy</Link>.
+          </p>
           <div className="my-6 flex items-center gap-3 text-xs text-ink-400">
             <div className="h-px flex-1 bg-ink-100" />
             <span>{t.orWithEmail}</span>

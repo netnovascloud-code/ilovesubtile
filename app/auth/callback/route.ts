@@ -31,6 +31,20 @@ export async function GET(request: Request) {
       const user = data.user;
       const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
       if (user?.email && anon) {
+        // Record ToS acceptance + marketing opt-in on the profile if not yet
+        // set. For email signups the value is forwarded via user_metadata by
+        // EmailAuthForm; for OAuth (Google) signups the click-through notice
+        // above the Google button on /register constitutes acceptance, so we
+        // stamp the current time. Idempotent: a `coalesce` keeps the original
+        // timestamp on subsequent logins.
+        const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+        const tosFromMeta = typeof meta.tos_accepted_at === "string" ? meta.tos_accepted_at : new Date().toISOString();
+        const marketingFromMeta = meta.marketing_opt_in === true;
+        try {
+          await supabase.rpc("ensure_tos_acceptance", {
+            p_user: user.id, p_ts: tosFromMeta, p_marketing: marketingFromMeta,
+          });
+        } catch { /* ignore — legal stamp is best-effort, will retry on next login */ }
         const { data: profile } = await supabase
           .from("profiles")
           .select("created_at, full_name")

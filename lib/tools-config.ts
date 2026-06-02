@@ -207,7 +207,7 @@ export const TOOLS: ToolDefinition[] = [
       "Generate accurate subtitles from any video or audio file with AI. Free, fast, supports 30+ languages. Download as SRT or VTT.",
     primaryKeyword: "generate subtitles online",
     accept: ["mp4", "mov", "webm", "mkv", "avi", "mp3", "wav", "m4a", "flac", "ogg"],
-    freeMaxMb: 25,
+    freeMaxMb: 200,
     outputType: "SRT",
     steps: [
       { title: "Upload your media", body: "Drop a video or audio file. We support MP4, MOV, MP3, WAV and more." },
@@ -303,7 +303,7 @@ export const TOOLS: ToolDefinition[] = [
       "Translate SRT or VTT subtitles into 30+ languages with AI. Timestamps stay perfectly intact, cue boundaries preserved.",
     primaryKeyword: "translate srt file online",
     accept: ["srt", "vtt"],
-    freeMaxMb: 25,
+    freeMaxMb: 10,
     outputType: "SRT",
     steps: [
       { title: "Upload SRT or VTT", body: "Source language is detected automatically." },
@@ -401,7 +401,7 @@ export const TOOLS: ToolDefinition[] = [
       "Generate viral word-by-word captions for TikTok, Reels and YouTube Shorts. Big text, perfect timing, ready to burn in.",
     primaryKeyword: "tiktok subtitle generator",
     accept: ["mp4", "mov", "webm", "mp3", "m4a"],
-    freeMaxMb: 100,
+    freeMaxMb: 200,
     outputType: "MP4",
     steps: [
       { title: "Upload your short-form video", body: "Vertical or horizontal — any aspect ratio." },
@@ -499,7 +499,7 @@ export const TOOLS: ToolDefinition[] = [
       "Pro tool: translate a single SRT into up to 30 languages in one job. Perfect for global launches and creator localisation.",
     primaryKeyword: "batch translate subtitles",
     accept: ["srt", "vtt"],
-    freeMaxMb: 50,
+    freeMaxMb: 10,
     outputType: "ZIP",
     proOnly: true,
     steps: [
@@ -524,7 +524,7 @@ export const TOOLS: ToolDefinition[] = [
       "Turn any SRT into a styled ASS file. Pick font, size, color, outline and position — perfect for cinematic captions.",
     primaryKeyword: "style subtitles ass",
     accept: ["srt", "vtt"],
-    freeMaxMb: 25,
+    freeMaxMb: 10,
     outputType: "ASS",
     steps: [
       { title: "Upload your SRT or VTT", body: "Or paste cues in directly." },
@@ -2112,7 +2112,7 @@ TOOLS.push(
     metaTitle: "AI Contract Analyzer Online — Key Clauses & Red Flags | Konvertools",
     metaDescription: "Drop a contract PDF and get a clean breakdown of parties, term, payment, liability, governing law and red flags. AI-assisted, for orientation only.",
     primaryKeyword: "contract analyzer",
-    accept: ["pdf"], freeMaxMb: 5, outputType: "Analysis",
+    accept: ["pdf"], freeMaxMb: 25, outputType: "Analysis",
     steps: [
       { title: "Upload the contract PDF", body: "Text-based — scans need OCR first." },
       { title: "We extract & summarise", body: "Parties, term, payment, liability, notable clauses." },
@@ -2132,7 +2132,7 @@ TOOLS.push(
     metaTitle: "Handwriting to Text Online Free — AI Recognition | Konvertools",
     metaDescription: "Turn a photo of handwritten notes into editable text with AI vision. 12 languages, free with daily allowance, no sign-up to try.",
     primaryKeyword: "handwriting to text",
-    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "Text",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 25, outputType: "Text",
     steps: [
       { title: "Upload a clear photo", body: "Good lighting and contrast help a lot." },
       { title: "AI reads it line by line", body: "Illegible passages are tagged, not guessed." },
@@ -2148,7 +2148,7 @@ TOOLS.push(
     metaTitle: "Business Card Scanner Online — Photo to vCard | Konvertools",
     metaDescription: "Snap a business card and get a ready-to-import vCard (.vcf) with name, title, company, email, phone and website. Powered by AI vision.",
     primaryKeyword: "business card scanner",
-    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "vCard",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 25, outputType: "vCard",
     steps: [
       { title: "Upload a photo", body: "Of any business card." },
       { title: "AI extracts the fields", body: "Name, title, email, phone, website…" },
@@ -2164,7 +2164,7 @@ TOOLS.push(
     metaTitle: "Receipt Scanner Online — Photo to CSV Expense Report | Konvertools",
     metaDescription: "Snap a receipt and get a clean CSV with merchant, date, total and every line item — ready for your expense report. Powered by AI vision.",
     primaryKeyword: "receipt scanner",
-    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "CSV",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 25, outputType: "CSV",
     steps: [
       { title: "Upload a receipt photo", body: "Paper or PDF screenshot — both work." },
       { title: "AI parses the totals", body: "Merchant, date, subtotal, tax, total, line items." },
@@ -2180,7 +2180,7 @@ TOOLS.push(
     metaTitle: "Screenshot to HTML/CSS Online — UI to Code | Konvertools",
     metaDescription: "Drop a UI screenshot and get a self-contained HTML5 document with Tailwind CSS classes that recreates the layout. Live preview included.",
     primaryKeyword: "screenshot to html",
-    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "HTML",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 25, outputType: "HTML",
     steps: [
       { title: "Upload a screenshot", body: "Of a website, dashboard or mockup." },
       { title: "AI writes the markup", body: "Semantic HTML + Tailwind utilities." },
@@ -2196,7 +2196,7 @@ TOOLS.push(
     metaTitle: "Image to Excel — Photo of Table to XLSX/CSV/JSON | Konvertools",
     metaDescription: "Turn a photo or screenshot of a table into a clean spreadsheet with AI vision. Download as Excel (.xlsx), CSV or JSON. Free, no sign-up to try.",
     primaryKeyword: "image to excel",
-    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 20, outputType: "Excel",
+    accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 25, outputType: "Excel",
     steps: [
       { title: "Upload a table image", body: "A photo, scan or screenshot of any table or spreadsheet." },
       { title: "AI reads the cells", body: "Rows and columns are reconstructed into clean data." },
@@ -2216,7 +2216,7 @@ TOOLS.push(
     metaTitle: "Voice to Text — Free AI Audio/Video Transcription | Konvertools",
     metaDescription: "Transcribe any audio or video file to clean, editable text with AI. 30+ languages, paragraph breaks, copy or download .txt. Free, no sign-up to try.",
     primaryKeyword: "voice to text",
-    accept: ["mp3", "wav", "m4a", "flac", "ogg", "mp4", "mov", "webm", "mkv"], freeMaxMb: 100, outputType: "Text",
+    accept: ["mp3", "wav", "m4a", "flac", "ogg", "mp4", "mov", "webm", "mkv"], freeMaxMb: 200, outputType: "Text",
     steps: [
       { title: "Upload audio or video", body: "MP3, WAV, M4A, MP4, MOV and more — up to 100 MB free." },
       { title: "AI transcribes it", body: "Accurate transcription in 30+ languages, with paragraph breaks." },

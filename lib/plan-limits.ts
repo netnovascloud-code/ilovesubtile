@@ -18,19 +18,21 @@ export const PLAN_FILE_MB: Record<Plan, number> = {
   business: 2048,
 };
 
-/** Per-category soft hint shown in the UI for free users. Tools may still
- *  declare a tighter `freeMaxMb` — this is just the default category cap. */
-export const CATEGORY_FREE_MB: Record<string, number> = {
-  subtitles: 10,
-  images: 25,
-  documents: 25,
-  archives: 25,
-  developer: 5,
-  utilities: 5,
-  audio: 50,
-  video: 100,
-  "text-ai": 5,
-};
+/** Per-accepted-file-type free cap (MB). The rule we apply across tools:
+ *  decide by the FILE TYPE the tool actually accepts, not the category, so a
+ *  "subtitle generator" that takes video gets the video cap, not the 10 MB
+ *  text cap. Numbers are benchmarked against iLovePDF (100 MB docs / no
+ *  audio-video), iLoveIMG (~30 MB images), Online-Convert (100 MB any),
+ *  Veed (250 MB video) — sitting in the generous-but-not-CloudConvert band. */
+export const FREE_MB_BY_TYPE = {
+  video: 200,
+  audio: 100,
+  image: 25,
+  document: 25,
+  archive: 25,
+  subtitle: 10,
+  text: 5,
+} as const;
 
 /** Estimated max processing time (seconds) the UI quotes per plan. Used in
  *  pricing/feature copy so users see the same numbers everywhere. */

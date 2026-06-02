@@ -1,4 +1,4 @@
-# Konvertools smoke test — 183/183 passed
+# Konvertools smoke test — 190/190 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -131,6 +131,13 @@ _None._
 - image-to-base64
 - image-to-ico
 - watermark-image
+- enhance-image
+- meme-generator
+- photo-editor
+- image-to-jpg
+- image-from-jpg
+- html-to-image
+- blur-face
 - extract-colors
 - remove-video-background
 - qr-generator
@@ -182,7 +189,7 @@ _None._
 - favicon /icon
 - apple-icon /apple-icon
 - manifest /manifest.webmanifest
-- brand logo /logo.png
+- brand logo /Logo.png
 - AI ai-process:synonyms
 - AI ai-process:conjugate
 - AI ai-process:rephrase (no markdown)

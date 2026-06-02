@@ -7744,6 +7744,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "使用真实浏览器引擎将 HTML 文件或远程网址转换为整洁的 PDF。"
     }
   },
+  "image-collage": {
+    "ar": {
+      "name": "صانع الكولاج للصور",
+      "short": "اجمع صور متعددة في صورة كولاج واحدة.",
+      "h1": "صانع الكولاج للصور أونلاين مجاناً — صور متعددة في صورة واحدة",
+      "metaTitle": "صانع الكولاج للصور أونلاين — مجاني، سحب وإفلات | Konvertools",
+      "metaDescription": "اختر تخطيط شبكة أو شريط واجمع صور متعددة في كولاج واحد. ضبط الفجوات ولون الخلفية وحجم الإخراج. يعمل عبر المتصفح فقط، دون تحميل."
+    },
+    "cs": {
+      "name": "Tvůrce foto koláží",
+      "short": "Spojte více fotografií do jednoho koláže.",
+      "h1": "Tvůrce foto koláží online zdarma — Více fotografií v jednom",
+      "metaTitle": "Tvůrce foto koláží online — Zdarma, přetažení | Konvertools",
+      "metaDescription": "Vyberte si mřížku nebo pásový layout a spojte více fotografií do jednoho koláže. Nastavitelná mezera, barva pozadí a velikost výstupu. Pouze v prohlížeči, nikdy se neodesílá."
+    },
+    "de": {
+      "name": "Fotomontage-Ersteller",
+      "short": "Kombiniere mehrere Fotos zu einer einzigen Collage.",
+      "h1": "Fotomontage-Ersteller Online — Kostenlos, mehrere Fotos in einem",
+      "metaTitle": "Fotomontage-Ersteller Online — Kostenlos, Drag & Drop | Konvertools",
+      "metaDescription": "Wähle ein Raster- oder Streifenlayout und kombiniere mehrere Fotos zu einer Collage. Anpassbarer Abstand, Hintergrundfarbe und Ausgabgröße. Nur im Browser, wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Creador de Collage de Fotos",
+      "short": "Combina varias fotos en un solo collage.",
+      "h1": "Creador de Collage de Fotos Online Gratis — Varias Fotos en Una",
+      "metaTitle": "Creador de Collage de Fotos Online — Gratis, Arrastra y Suelta | Konvertools",
+      "metaDescription": "Elige un diseño de cuadrícula o tira y combina varias fotos en un solo collage. Ajusta el espacio, el color de fondo y el tamaño de salida. Solo en navegador, nunca se sube."
+    },
+    "fr": {
+      "name": "Créateur de collages photo",
+      "short": "Combinez plusieurs photos en un seul collage.",
+      "h1": "Créateur de collages photo en ligne gratuit — Plusieurs photos en une seule",
+      "metaTitle": "Créateur de collages photo en ligne — Gratuit, glisser-déposer | Konvertools",
+      "metaDescription": "Choisissez une disposition en grille ou en bandeau pour combiner plusieurs photos en un seul collage. Espacement, couleur de fond et taille de sortie ajustables. Fonctionne dans le navigateur, jamais téléchargé."
+    },
+    "hi": {
+      "name": "फ़ोटो कॉलेज निर्माता",
+      "short": "एकाधिक फ़ोटो को मिलाकर एक कॉलेज बनाएं।",
+      "h1": "फ़ोटो कॉलेज निर्माता ऑनलाइन मुफ़्त — एकाधिक फ़ोटो एक में",
+      "metaTitle": "फ़ोटो कॉलेज निर्माता ऑनलाइन — मुफ़्त, ड्रैग एंड ड्रॉप | Konvertools",
+      "metaDescription": "ग्रिड या स्ट्रिप लेआउट चुनें और एकाधिक फ़ोटो को एक ही कॉलेज में मिलाएं। समायोज्य गैप, पृष्ठभूमि रंग और आउटपुट आकार। ब्राउज़र-ओनली, कभी अपलोड नहीं किया जाता।"
+    },
+    "id": {
+      "name": "Pembuat Kolase Foto",
+      "short": "Gabungkan beberapa foto menjadi satu kolase.",
+      "h1": "Pembuat Kolase Foto Online Gratis — Beberapa Foto dalam Satu",
+      "metaTitle": "Pembuat Kolase Foto Online — Gratis, Seret & Lepas | Konvertools",
+      "metaDescription": "Pilih tata letak kisi atau strip dan gabungkan beberapa foto menjadi satu kolase. Jarak, warna latar, dan ukuran keluaran dapat disesuaikan. Hanya di browser, tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Crea Collage di Foto",
+      "short": "Combina più foto in un unico collage.",
+      "h1": "Crea Collage di Foto Online Gratis — Più Foto in Una",
+      "metaTitle": "Crea Collage di Foto Online — Gratis, Drag & Drop | Konvertools",
+      "metaDescription": "Scegli un layout a griglia o a striscia e combina più foto in un unico collage. Spazio regolabile, colore di sfondo e dimensione di output. Solo browser, mai caricate."
+    },
+    "ja": {
+      "name": "フォトコラージュメーカー",
+      "short": "複数の写真を1枚のコラージュにまとめます。",
+      "h1": "オンライン無料フォトコラージュメーカー — 複数写真を1枚に",
+      "metaTitle": "フォトコラージュメーカー（オンライン） — 無料、ドラッグ＆ドロップ | Konvertools",
+      "metaDescription": "グリッドやストライプのレイアウトを選択し、複数の写真を1枚のコラージュにまとめます。隙間、背景色、出力サイズを調整可能。ブラウザのみで動作し、アップロードは一切行いません。"
+    },
+    "ko": {
+      "name": "사진 콜라주 메이커",
+      "short": "여러 사진을 하나의 콜라주로 합치세요.",
+      "h1": "무료 온라인 사진 콜라주 메이커 — 여러 사진을 한 장으로",
+      "metaTitle": "사진 콜라주 메이커 — 무료, 드래그 앤 드롭 | Konvertools",
+      "metaDescription": "격자 또는 스트립 레이아웃을 선택하고 여러 사진을 하나의 콜라주로 합치세요. 간격, 배경색, 출력 크기 조정 가능. 브라우저에서만 동작하며 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Fotomontage Maker",
+      "short": "Combineer meerdere foto's tot één collage.",
+      "h1": "Fotomontage Maker Online Gratis — Meerdere Foto's in Één",
+      "metaTitle": "Fotomontage Maker Online — Gratis, Sleep & Plaats | Konvertools",
+      "metaDescription": "Kies een raster- of stripindeling en combineer meerdere foto's tot één collage. Pas de afstand, achtergrondkleur en uitvoergrootte aan. Alleen in de browser, nooit geüpload."
+    },
+    "pl": {
+      "name": "Twórca Kolaży Zdjęć",
+      "short": "Połącz wiele zdjęć w jedno kolaże.",
+      "h1": "Darmowy Twórca Kolaży Zdjęć Online — Wiele Zdjęć w Jednym",
+      "metaTitle": "Twórca Kolaży Zdjęć Online — Darmowy, Przeciągnij & Upuść | Konvertools",
+      "metaDescription": "Wybierz układ siatki lub paska i połącz wiele zdjęć w jeden kolaż. Regulowana szerokość odstępów, kolor tła i rozmiar wyjściowy. Tylko w przeglądarce, nigdy nie przesyłane."
+    },
+    "pt": {
+      "name": "Criador de Colagens de Fotos",
+      "short": "Combine várias fotos em uma única colagem.",
+      "h1": "Criador de Colagens de Fotos Online Grátis — Várias Fotos em Uma",
+      "metaTitle": "Criador de Colagens de Fotos Online — Grátis, Arrastar & Soltar | Konvertools",
+      "metaDescription": "Escolha um layout em grade ou tira e combine várias fotos em uma única colagem. Ajuste o espaçamento, cor de fundo e tamanho de saída. Somente no navegador, nunca é feito upload."
+    },
+    "ru": {
+      "name": "Создатель коллажей из фото",
+      "short": "Объедините несколько фотографий в один коллаж.",
+      "h1": "Создатель коллажей онлайн бесплатно — несколько фото в одном",
+      "metaTitle": "Создатель коллажей онлайн — бесплатно, перетаскивание | Konvertools",
+      "metaDescription": "Выберите сетку или полосовую компоновку и объедините несколько фотографий в один коллаж. Настройте отступы, цвет фона и размер выходного файла. Только в браузере, не загружается на сервер."
+    },
+    "sv": {
+      "name": "Skapa fotocollage",
+      "short": "Slå ihop flera bilder till ett collage.",
+      "h1": "Skapa fotocollage online gratis — Flera bilder i en",
+      "metaTitle": "Skapa fotocollage online — Gratis, dra & släpp | Konvertools",
+      "metaDescription": "Välj rutnät eller linjelayout och slå ihop flera bilder till ett enda collage. Justerbara mellanrum, bakgrundsfärg och storlek. Endast webbläsare, aldrig uppladdat."
+    },
+    "tr": {
+      "name": "Foto Kolaj Oluşturucu",
+      "short": "Birden fazla fotoğrafı tek bir kolajda birleştirin.",
+      "h1": "Ücretsiz Çevrimiçi Foto Kolaj Oluşturucu — Birden Fazla Fotoğrafı Birleştirin",
+      "metaTitle": "Foto Kolaj Oluşturucu — Ücretsiz, Sürükle Bırak | Konvertools",
+      "metaDescription": "Kafes ya da şerit düzeni seçin ve birden fazla fotoğrafı tek bir kolaja birleştirin. Ayarlanabilir boşluk, arka plan rengi ve çıktı boyutu. Tarayıcıda çalışır, asla yüklenmez."
+    },
+    "uk": {
+      "name": "Створювач колажів з фото",
+      "short": "Об’єднайте кілька фото в один колаж.",
+      "h1": "Онлайн-створювач колажів з фото безкоштовно — кілька фото в одному",
+      "metaTitle": "Створювач колажів з фото онлайн — безкоштовно, перетягування | Konvertools",
+      "metaDescription": "Оберіть сітку чи лінійний макет та об’єднайте кілька фото в один колаж. Налаштовуйте відступи, колір фону та розмір вихідного файлу. Лише в браузері, ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Tạo Ảnh Ghép (Collage)",
+      "short": "Kết hợp nhiều ảnh thành một ảnh ghép duy nhất.",
+      "h1": "Tạo Ảnh Ghép Online Miễn Phí — Nhiều Ảnh Trong Một",
+      "metaTitle": "Tạo Ảnh Ghép Online — Miễn Phí, Kéo Thả | Konvertools",
+      "metaDescription": "Chọn bố cục lưới hoặc dải và kết hợp nhiều ảnh thành một ảnh ghép duy nhất. Điều chỉnh khoảng cách, màu nền và kích thước đầu ra. Chỉ hoạt động trên trình duyệt, không tải lên."
+    },
+    "zh": {
+      "name": "照片拼图制作器",
+      "short": "将多张照片合并为一张拼图。",
+      "h1": "免费在线照片拼图制作器 — 多图合一",
+      "metaTitle": "在线照片拼图制作器 — 免费拖拽 | Konvertools",
+      "metaDescription": "选择网格或条带布局，将多张照片合并为一张拼图。可调整间距、背景颜色和输出尺寸。仅限浏览器使用，无需上传。"
+    }
+  },
   "image-from-jpg": {
     "ar": {
       "name": "تحويل JPG إلى PNG",
@@ -8552,6 +8687,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "图像转文本 — 免费在线 OCR，从图片提取文字",
       "metaTitle": "在线图像转文本 — 免费 OCR（12 种语言）| Konvertools",
       "metaDescription": "使用浏览器端 OCR（Tesseract.js）在 12 种语言中提取图像文本。免费使用，无需注册，图像不会上传。"
+    }
+  },
+  "images-to-gif": {
+    "ar": {
+      "name": "إنشاء GIF متحرك",
+      "short": "حول سلسلة من الصور إلى GIF متحرك.",
+      "h1": "إنشاء GIF متحرك من الصور مجانًا عبر الإنترنت",
+      "metaTitle": "صانع GIF متحرك عبر الإنترنت — صور إلى GIF مجانًا | Konvertools",
+      "metaDescription": "اصنع GIF متحرك من سلسلة صور JPG أو PNG أو WebP. اضبط تأخير الإطار والحجم والتكرار في متصفحك — دون تحميلها أبدًا."
+    },
+    "cs": {
+      "name": "Vytvořit animovaný GIF",
+      "short": "Převést sérii obrázků na animovaný GIF.",
+      "h1": "Vytvořit animovaný GIF z obrázků online zdarma",
+      "metaTitle": "Tvůrce animovaných GIF online — obrázky na GIF zdarma | Konvertools",
+      "metaDescription": "Vytvořte animovaný GIF z posloupnosti obrázků JPG, PNG nebo WebP. Nastavte zpoždění snímků, velikost a opakování přímo ve svém prohlížeči — nikdy se neukládá."
+    },
+    "de": {
+      "name": "Animiertes GIF erstellen",
+      "short": "Wandle eine Bildfolge in ein animiertes GIF um.",
+      "h1": "Animiertes GIF aus Bildern online kostenlos erstellen",
+      "metaTitle": "GIF-Ersteller online — Bilder zu GIF kostenlos | Konvertools",
+      "metaDescription": "Erstelle ein animiertes GIF aus einer Folge von JPG-, PNG- oder WebP-Bildern. Lege Bildverzögerung, Größe und Schleife im Browser fest — nie hochgeladen."
+    },
+    "es": {
+      "name": "Crear GIF animado",
+      "short": "Convierte una secuencia de imágenes en un GIF animado.",
+      "h1": "Crea GIF animado a partir de imágenes online gratis",
+      "metaTitle": "Creador de GIF animado online — Imágenes a GIF gratis | Konvertools",
+      "metaDescription": "Crea un GIF animado desde una secuencia de imágenes JPG, PNG o WebP. Ajusta el retraso, tamaño y repetición en tu navegador, sin subir archivos."
+    },
+    "fr": {
+      "name": "Créer un GIF animé",
+      "short": "Transformez une série d'images en GIF animé.",
+      "h1": "Créer un GIF animé à partir d'images en ligne gratuitement",
+      "metaTitle": "Créateur de GIF animé en ligne — Images vers GIF gratuit | Konvertools",
+      "metaDescription": "Créez un GIF animé à partir d'une série d'images JPG, PNG ou WebP. Réglez le délai entre les images, la taille et la boucle, directement dans votre navigateur — sans téléchargement."
+    },
+    "hi": {
+      "name": "एनिमेटेड जीआईएफ बनाएं",
+      "short": "छवियों के क्रम को एनिमेटेड जीआईएफ में बदलें।",
+      "h1": "छवियों से एनिमेटेड जीआईएफ ऑनलाइन मुफ्त में बनाएं",
+      "metaTitle": "एनिमेटेड जीआईएफ निर्माता ऑनलाइन — छवियों से जीआईएफ मुफ्त | Konvertools",
+      "metaDescription": "JPG, PNG या WebP छवियों के क्रम से एक एनिमेटेड जीआईएफ बनाएं। फ्रेम विलंब, आकार और लूप सेट करें, अपने ब्राउज़र में — कभी अपलोड नहीं किया गया।"
+    },
+    "id": {
+      "name": "Buat GIF Beranimasi",
+      "short": "Ubah rangkaian gambar menjadi GIF beranimasi.",
+      "h1": "Buat GIF Beranimasi dari Gambar Secara Online Gratis",
+      "metaTitle": "Pembuat GIF Beranimasi Online — Gambar ke GIF Gratis | Konvertools",
+      "metaDescription": "Buat GIF beranimasi dari rangkaian gambar JPG, PNG, atau WebP. Atur jeda bingkai, ukuran, dan putaran, langsung di peramban — tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Crea GIF Animato",
+      "short": "Trasforma una sequenza di immagini in una GIF animata.",
+      "h1": "Crea GIF Animato da Immagini Online Gratis",
+      "metaTitle": "Crea GIF Animato Online — Immagini in GIF Gratis | Konvertools",
+      "metaDescription": "Crea una GIF animata da una sequenza di immagini JPG, PNG o WebP. Imposta ritardo, dimensioni e loop nel tuo browser — senza upload."
+    },
+    "ja": {
+      "name": "アニメーションGIF作成",
+      "short": "画像のシーケンスをアニメーションGIFに変換します。",
+      "h1": "画像からアニメーションGIFをオンラインで無料作成",
+      "metaTitle": "アニメーションGIF作成ツール — 画像からGIFへ無料変換 | Konvertools",
+      "metaDescription": "JPG、PNG、WebP画像のシーケンスからアニメーションGIFを作成。フレーム遅延、サイズ、ループ回数をブラウザ上で設定可能。アップロードは一切不要です。"
+    },
+    "ko": {
+      "name": "애니메이션 GIF 만들기",
+      "short": "이미지 시퀀스를 애니메이션 GIF로 변환하세요.",
+      "h1": "온라인에서 무료로 이미지를 GIF로 변환하기",
+      "metaTitle": "GIF 제작기 — 이미지를 GIF로 무료 변환 | Konvertools",
+      "metaDescription": "JPG, PNG 또는 WebP 이미지 시퀀스로 애니메이션 GIF를 제작하세요. 프레임 딜레이, 크기, 루프를 설정하고 브라우저에서 바로 변환하세요 — 업로드 없이 가능합니다."
+    },
+    "nl": {
+      "name": "Maak geanimeerde GIF",
+      "short": "Zet een reeks afbeeldingen om in een geanimeerde GIF.",
+      "h1": "Maak gratis online een geanimeerde GIF van afbeeldingen",
+      "metaTitle": "GIF-maker online — Afbeeldingen naar GIF gratis | Konvertools",
+      "metaDescription": "Maak een geanimeerde GIF van JPG-, PNG- of WebP-afbeeldingen. Stel framevertraging, grootte en herhaling in in je browser — nooit geüpload."
+    },
+    "pl": {
+      "name": "Utwórz animowany GIF",
+      "short": "Przekształć sekwencję obrazów w animowany GIF.",
+      "h1": "Utwórz animowany GIF z obrazów online za darmo",
+      "metaTitle": "Twórca GIF online — obrazy do GIF za darmo | Konvertools",
+      "metaDescription": "Stwórz animowany GIF z sekwencji obrazów JPG, PNG lub WebP. Ustaw opóźnienie klatek, rozmiar i pętlę — bezpośrednio w przeglądarce, bez przesyłania."
+    },
+    "pt": {
+      "name": "Criar GIF Animado",
+      "short": "Transforme uma sequência de imagens em um GIF animado.",
+      "h1": "Criar GIF Animado a partir de Imagens Online Grátis",
+      "metaTitle": "Criador de GIF Animado Online — Imagens para GIF Grátis | Konvertools",
+      "metaDescription": "Crie um GIF animado a partir de uma sequência de imagens JPG, PNG ou WebP. Ajuste o atraso de quadros, tamanho e loop, diretamente no navegador — sem upload."
+    },
+    "ru": {
+      "name": "Создать анимированный GIF",
+      "short": "Преобразуйте последовательность изображений в анимированный GIF.",
+      "h1": "Создать анимированный GIF из изображений онлайн бесплатно",
+      "metaTitle": "Создатель анимированных GIF онлайн — Изображения в GIF бесплатно | Konvertools",
+      "metaDescription": "Создайте анимированный GIF из последовательности изображений JPG, PNG или WebP. Настройте задержку кадров, размер и цикл в браузере — без загрузки на сервер."
+    },
+    "sv": {
+      "name": "Skapa animerad GIF",
+      "short": "Konvertera en bildsekvens till en animerad GIF.",
+      "h1": "Skapa animerad GIF från bilder online gratis",
+      "metaTitle": "GIF-skapare online — Bilder till GIF gratis | Konvertools",
+      "metaDescription": "Skapa en animerad GIF från en sekvens av JPG-, PNG- eller WebP-bilder. Ställ in bildfördröjning, storlek och loop i din webbläsare — aldrig uppladdat."
+    },
+    "tr": {
+      "name": "Animasyonlu GIF Oluştur",
+      "short": "Bir dizi görüntüyü animasyonlu GIF'e dönüştürün.",
+      "h1": "Çevrimiçi Ücretsiz Animasyonlu GIF Oluştur",
+      "metaTitle": "Animasyonlu GIF Oluşturucu — Resimleri Ücretsiz GIF'e | Konvertools",
+      "metaDescription": "JPG, PNG veya WebP görüntülerinden animasyonlu GIF oluşturun. Çerçeve gecikmesini, boyutunu ve döngüyü tarayıcınızda ayarlayın — asla yüklenmez."
+    },
+    "uk": {
+      "name": "Створення анімованого GIF",
+      "short": "Перетворіть послідовність зображень на анімований GIF.",
+      "h1": "Створення анімованого GIF зображень онлайн безкоштовно",
+      "metaTitle": "Онлайн-створення анімованого GIF — зображення в GIF безкоштовно | Konvertools",
+      "metaDescription": "Створюйте анімований GIF з послідовності зображень JPG, PNG чи WebP. Налаштуйте затримку кадрів, розмір та цикл у браузері — нічого не завантажується."
+    },
+    "vi": {
+      "name": "Tạo GIF Động",
+      "short": "Chuyển đổi một chuỗi hình ảnh thành GIF động.",
+      "h1": "Tạo GIF Động từ Ảnh Trực tuyến Miễn phí",
+      "metaTitle": "Công cụ Tạo GIF Động Trực tuyến — Ảnh sang GIF Miễn phí | Konvertools",
+      "metaDescription": "Tạo GIF động từ chuỗi hình JPG, PNG hoặc WebP. Đặt độ trễ khung hình, kích thước và lặp lại ngay trong trình duyệt — không bao giờ tải lên."
+    },
+    "zh": {
+      "name": "创建动态 GIF",
+      "short": "将一系列图片转换为动态 GIF。",
+      "h1": "在线免费将图片转换为动态 GIF",
+      "metaTitle": "在线动态 GIF 制作工具 — 图片转 GIF 免费 | Konvertools",
+      "metaDescription": "在浏览器中将 JPG、PNG 或 WebP 图片序列制作为动态 GIF。设置帧延迟、尺寸与循环次数，无需上传文件。"
     }
   },
   "images-to-pdf": {

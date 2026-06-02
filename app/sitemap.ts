@@ -122,5 +122,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
+  // Legal pages — locale variants with proper hreflang. Native translations
+  // load when ready; until then the route serves the English source with a
+  // translation-in-progress notice.
+  for (const p of ["/privacy", "/terms"]) {
+    for (const loc of LOCALES) {
+      if (loc === "en") continue;
+      entries.push({
+        url: `${SITE_URL}${HREFLANG_PREFIX[loc]}${p}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.4,
+        alternates: altsFor(p),
+      });
+    }
+  }
+
   return entries;
 }

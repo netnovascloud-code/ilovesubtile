@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/utils";
+import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
 // Comprehensive Terms of Service — KONVER Part 5. Drafted to maximally
 // protect the editor (broad disclaimers around the security tools in
@@ -7,11 +8,15 @@ import { SITE_URL } from "@/lib/utils";
 // NOTE: this is a model — have it reviewed by a qualified lawyer before
 // commercial launch (this notice is for the editor, not the public).
 
+const langAlts: Record<string, string> = {};
+for (const l of LOCALES) langAlts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/terms`;
+langAlts["x-default"] = `${SITE_URL}/terms`;
+
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "The legal terms governing use of Konvertools — service description, limitation of liability, acceptable use, subscriptions, API, intellectual property and French jurisdiction.",
-  alternates: { canonical: "/terms" },
+  alternates: { canonical: "/terms", languages: langAlts },
 };
 
 const LAST_UPDATED = "2026-06-02";

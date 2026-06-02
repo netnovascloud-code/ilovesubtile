@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/utils";
+import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
 // Comprehensive Privacy Policy — KONVER Part 5. Drafted to maximally protect
 // the editor while remaining honest about what the service does. Reviewed
@@ -8,11 +9,15 @@ import { SITE_URL } from "@/lib/utils";
 // NOTE: this is a model — have it reviewed by a qualified lawyer before
 // commercial launch (this notice is for the editor, not the public).
 
+const langAlts: Record<string, string> = {};
+for (const l of LOCALES) langAlts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/privacy`;
+langAlts["x-default"] = `${SITE_URL}/privacy`;
+
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How Konvertools handles your data: nothing is stored, browser-only tools never upload anything, server tools delete files immediately, GDPR-compliant rights.",
-  alternates: { canonical: "/privacy" },
+  alternates: { canonical: "/privacy", languages: langAlts },
 };
 
 const LAST_UPDATED = "2026-06-02";

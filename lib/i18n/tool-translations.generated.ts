@@ -4873,6 +4873,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "用 AI 即时检测任何文本的语言，返回语言名称与 ISO 代码。每日免费使用。"
     }
   },
+  "edit-pdf-metadata": {
+    "ar": {
+      "name": "تعديل بيانات PDF الوصفية",
+      "short": "غيّر عنوان المؤلف والكلمات الدلالية لملف PDF.",
+      "h1": "عدّل بيانات PDF الوصفية مجاناً عبر الإنترنت — العنوان، المؤلف، الكلمات الدلالية",
+      "metaTitle": "عدّل بيانات PDF الوصفية عبر الإنترنت — العنوان، المؤلف، الكلمات الدلالية | Konvertools",
+      "metaDescription": "عدّل عنوان المؤلف والموضوع والكلمات الدلالية لأي ملف PDF. يعمل بالكامل في متصفحك باستخدام pdf-lib، دون تحميل الملف."
+    },
+    "cs": {
+      "name": "Upravit metadata PDF",
+      "short": "Změnit název, autora a klíčová slova PDF dokumentu.",
+      "h1": "Upravit metadata PDF online zdarma — Název, autor, klíčová slova",
+      "metaTitle": "Upravit metadata PDF online — Název, autor, klíčová slova | Konvertools",
+      "metaDescription": "Upravte název, autora, předmět a klíčová slova jakéhokoliv PDF dokumentu. Probíhá přímo ve vašem prohlížeči pomocí pdf-lib, nikdy se neukládá."
+    },
+    "de": {
+      "name": "PDF-Metadaten bearbeiten",
+      "short": "Ändere Titel, Autor und Schlüsselwörter eines PDFs.",
+      "h1": "PDF-Metadaten online kostenlos bearbeiten — Titel, Autor, Schlüsselwörter",
+      "metaTitle": "PDF-Metadaten online bearbeiten — Titel, Autor, Schlüsselwörter | Konvertools",
+      "metaDescription": "Bearbeite Titel, Autor, Thema und Schlüsselwörter eines PDF-Dokuments. Funktioniert komplett im Browser mit pdf-lib, wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Editar metadatos de PDF",
+      "short": "Cambia el título, autor y palabras clave de un PDF.",
+      "h1": "Edita metadatos de PDF online gratis — Título, Autor, Palabras clave",
+      "metaTitle": "Editar metadatos de PDF online — Título, Autor, Palabras clave | Konvertools",
+      "metaDescription": "Edita el título, autor, tema y palabras clave de cualquier documento PDF. Funciona completamente en tu navegador con pdf-lib, sin subirlo."
+    },
+    "fr": {
+      "name": "Modifier les métadonnées d'un PDF",
+      "short": "Modifiez le titre, l'auteur et les mots-clés d'un PDF.",
+      "h1": "Modifier les métadonnées d'un PDF en ligne gratuitement — Titre, Auteur, Mots-clés",
+      "metaTitle": "Modifier les métadonnées d'un PDF en ligne — Titre, Auteur | Konvertools",
+      "metaDescription": "Modifiez le titre, l'auteur, le sujet et les mots-clés de n'importe quel document PDF. Fonctionne entièrement dans votre navigateur via pdf-lib, jamais téléchargé."
+    },
+    "hi": {
+      "name": "पीडीएफ मेटाडेटा संपादित करें",
+      "short": "पीडीएफ के शीर्षक, लेखक और कीवर्ड बदलें।",
+      "h1": "पीडीएफ मेटाडेटा ऑनलाइन मुफ्त में संपादित करें — शीर्षक, लेखक, कीवर्ड",
+      "metaTitle": "पीडीएफ मेटाडेटा ऑनलाइन संपादित करें — शीर्षक, लेखक, कीवर्ड | Konvertools",
+      "metaDescription": "किसी भी पीडीएफ दस्तावेज़ के शीर्षक, लेखक, विषय और कीवर्ड संपादित करें। पूरी तरह से आपके ब्राउज़र में चलता है, कभी अपलोड नहीं किया जाता।"
+    },
+    "id": {
+      "name": "Ubah Metadata PDF",
+      "short": "Ubah judul, penulis, dan kata kunci dari sebuah PDF.",
+      "h1": "Ubah Metadata PDF Online Gratis — Judul, Penulis, Kata Kunci",
+      "metaTitle": "Ubah Metadata PDF Online — Judul, Penulis, Kata Kunci | Konvertools",
+      "metaDescription": "Ubah judul, penulis, subjek, dan kata kunci dari dokumen PDF apa pun. Berjalan sepenuhnya di peramban Anda melalui pdf-lib, tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Modifica metadati PDF",
+      "short": "Modifica il titolo, l'autore e le parole chiave di un file PDF.",
+      "h1": "Modifica metadati PDF online gratis — Titolo, Autore, Parole chiave",
+      "metaTitle": "Modifica metadati PDF online — Titolo, Autore, Parole chiave | Konvertools",
+      "metaDescription": "Modifica il titolo, l'autore, l'oggetto e le parole chiave di qualsiasi documento PDF. Funziona interamente nel tuo browser tramite pdf-lib, senza upload."
+    },
+    "ja": {
+      "name": "PDFメタデータ編集",
+      "short": "PDFのタイトル、作成者、キーワードを変更します。",
+      "h1": "PDFメタデータを無料でオンライン編集 — タイトル、作成者、キーワード",
+      "metaTitle": "PDFメタデータをオンライン編集 — タイトル、作成者、キーワード | Konvertools",
+      "metaDescription": "任意のPDF文書のタイトル、作成者、サブタイトル、キーワードを編集します。pdf-libによりブラウザ内で動作し、アップロードされることはありません。"
+    },
+    "ko": {
+      "name": "PDF 메타데이터 편집",
+      "short": "PDF의 제목, 작성자, 키워드를 변경하세요.",
+      "h1": "PDF 메타데이터 무료 온라인 편집 — 제목, 작성자, 키워드",
+      "metaTitle": "PDF 메타데이터 온라인 편집 — 제목, 작성자, 키워드 | Konvertools",
+      "metaDescription": "PDF 문서의 제목, 작성자, 주제 및 키워드를 편집하세요. pdf-lib를 통해 브라우저에서 완전히 실행되며 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Bewerk PDF-metadata",
+      "short": "Wijzig de titel, auteur en trefwoorden van een PDF.",
+      "h1": "Bewerk PDF-metadata online gratis — Titel, auteur, trefwoorden",
+      "metaTitle": "Bewerk PDF-metadata online — Titel, auteur, trefwoorden | Konvertools",
+      "metaDescription": "Wijzig de titel, auteur, onderwerp en trefwoorden van elk PDF-document. Werkt volledig in je browser via pdf-lib, wordt nooit geüpload."
+    },
+    "pl": {
+      "name": "Edytuj metadane PDF",
+      "short": "Zmień tytuł, autora i słowa kluczowe pliku PDF.",
+      "h1": "Edytuj metadane PDF online za darmo — tytuł, autor, słowa kluczowe",
+      "metaTitle": "Edytuj metadane PDF online — tytuł, autor, słowa kluczowe | Konvertools",
+      "metaDescription": "Edytuj tytuł, autora, temat i słowa kluczowe dowolnego dokumentu PDF. Działa wyłącznie w przeglądarce dzięki pdf-lib, nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Editar Metadados do PDF",
+      "short": "Altere o título, autor e palavras-chave de um PDF.",
+      "h1": "Edite Metadados do PDF Online Grátis — Título, Autor, Palavras-chave",
+      "metaTitle": "Editar Metadados do PDF Online — Título, Autor, Palavras-chave | Konvertools",
+      "metaDescription": "Edite o título, autor, assunto e palavras-chave de qualquer documento PDF. Funciona diretamente no seu navegador via pdf-lib, sem upload."
+    },
+    "ru": {
+      "name": "Редактировать метаданные PDF",
+      "short": "Изменить название, автора и ключевые слова PDF-документа.",
+      "h1": "Редактируйте метаданные PDF онлайн бесплатно — название, автор, ключевые слова",
+      "metaTitle": "Редактировать метаданные PDF онлайн — название, автор, ключевые слова | Konvertools",
+      "metaDescription": "Измените название, автора, тему и ключевые слова любого PDF-документа. Работает полностью в браузере через pdf-lib, не загружается на сервер."
+    },
+    "sv": {
+      "name": "Redigera PDF-metadata",
+      "short": "Ändra titel, författare och nyckelord i en PDF.",
+      "h1": "Redigera PDF-metadata online gratis — Titel, författare, nyckelord",
+      "metaTitle": "Redigera PDF-metadata online — Titel, författare, nyckelord | Konvertools",
+      "metaDescription": "Redigera titel, författare, ämne och nyckelord i alla PDF-dokument. Körs helt i din webbläsare via pdf-lib, ingen uppladdning sker."
+    },
+    "tr": {
+      "name": "PDF Meta Verisini Düzenle",
+      "short": "Bir PDF'in başlığını, yazarını ve anahtar kelimelerini değiştirin.",
+      "h1": "PDF Meta Verisini Ücretsiz Olarak Çevrimiçi Düzenleyin — Başlık, Yazar, Anahtar Kelimeler",
+      "metaTitle": "PDF Meta Verisini Çevrimiçi Düzenle — Başlık, Yazar | Konvertools",
+      "metaDescription": "Herhangi bir PDF belgesinin başlığını, yazarını, konusunu ve anahtar kelimelerini düzenleyin. Tamamen tarayıcınızda pdf-lib üzerinden çalışır, asla yüklenmez."
+    },
+    "uk": {
+      "name": "Редагувати метадані PDF",
+      "short": "Змініть назву, автора та ключові слова PDF-файлу.",
+      "h1": "Редагуйте метадані PDF онлайн безкоштовно — Назва, Автор, Ключові слова",
+      "metaTitle": "Редагувати метадані PDF онлайн — Назва, Автор, Ключові слова | Konvertools",
+      "metaDescription": "Редагуйте назву, автора, тему та ключові слова будь-якого PDF-документа. Працює безпосередньо у вашому браузері за допомогою pdf-lib, ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Chỉnh sửa siêu dữ liệu PDF",
+      "short": "Thay đổi tiêu đề, tác giả và từ khóa của tệp PDF.",
+      "h1": "Chỉnh sửa siêu dữ liệu PDF trực tuyến miễn phí — Tiêu đề, Tác giả, Từ khóa",
+      "metaTitle": "Chỉnh sửa siêu dữ liệu PDF trực tuyến — Tiêu đề, Tác giả, Từ khóa | Konvertools",
+      "metaDescription": "Chỉnh sửa tiêu đề, tác giả, chủ đề và từ khóa của bất kỳ tài liệu PDF nào. Hoạt động hoàn toàn trong trình duyệt nhờ pdf-lib, không bao giờ tải lên."
+    },
+    "zh": {
+      "name": "编辑 PDF 元数据",
+      "short": "修改 PDF 的标题、作者和关键词。",
+      "h1": "在线免费编辑 PDF 元数据 — 标题、作者、关键词",
+      "metaTitle": "在线编辑 PDF 元数据 — 标题、作者、关键词 | Konvertools",
+      "metaDescription": "编辑任意 PDF 文档的标题、作者、主题和关键词。完全在浏览器中运行（使用 pdf-lib），无需上传。"
+    }
+  },
   "email-signature-generator": {
     "ar": {
       "name": "مُنشئ توقيع البريد الإلكتروني",
@@ -5681,6 +5816,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "从图片提取配色方案 — 在线取色器",
       "metaTitle": "提取图片配色方案 — 免费在线工具 | Konvertools",
       "metaDescription": "将任意图片的 5 种主导色提取为 HEX、RGB 和 HSL。完全在浏览器中运行 — 图片不会上传到服务器。"
+    }
+  },
+  "extract-pdf-pages": {
+    "ar": {
+      "name": "استخراج صفحات من PDF",
+      "short": "استخرج مجموعة فرعية من الصفحات إلى ملف PDF جديد.",
+      "h1": "استخراج صفحات PDF أونلاين مجانًا — احفظ الصفحات المحددة",
+      "metaTitle": "استخراج صفحات PDF أونلاين — مجاني وداخل المتصفح | Konvertools",
+      "metaDescription": "اختر مجموعة من الصفحات (مثل 1، 3-5، 9) من ملف PDF واحفظها كملف جديد. يعمل داخل المتصفح، ولا يتم رفع الملفات إلى الإنترنت."
+    },
+    "cs": {
+      "name": "Extrahovat stránky z PDF",
+      "short": "Vytáhněte vybrané stránky do nového PDF souboru.",
+      "h1": "Extrahovat stránky z PDF online zdarma — Uložit vybrané stránky",
+      "metaTitle": "Extrahovat stránky z PDF online — Zdarma & v prohlížeči | Konvertools",
+      "metaDescription": "Vyberte si sadu stránek (např. 1, 3-5, 9) z PDF a uložte je jako nový dokument. Funguje přímo ve vašem prohlížeči, nikdy se neodesílá."
+    },
+    "de": {
+      "name": "PDF-Seiten extrahieren",
+      "short": "Wähle Seiten aus und erstelle ein neues PDF daraus.",
+      "h1": "PDF-Seiten online kostenlos extrahieren — Ausgewählte Seiten speichern",
+      "metaTitle": "PDF-Seiten online extrahieren — Kostenlos & im Browser | Konvertools",
+      "metaDescription": "Wähle bestimmte Seiten (z. B. 1, 3-5, 9) aus einer PDF-Datei aus und speichere sie als neues Dokument. Funktioniert im Browser, wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Extraer páginas de PDF",
+      "short": "Extrae un subconjunto de páginas en un nuevo PDF.",
+      "h1": "Extraer páginas de PDF en línea gratis — Guarda las páginas seleccionadas",
+      "metaTitle": "Extraer páginas de PDF en línea — Gratis y en el navegador | Konvertools",
+      "metaDescription": "Selecciona un conjunto de páginas (ej. 1, 3-5, 9) de un PDF y guárdalas como un nuevo documento. Funciona en tu navegador, nunca se sube."
+    },
+    "fr": {
+      "name": "Extraire des pages PDF",
+      "short": "Extraire un sous-ensemble de pages dans un nouveau PDF.",
+      "h1": "Extraire des pages PDF en ligne gratuitement — Enregistrer les pages sélectionnées",
+      "metaTitle": "Extraire des pages PDF en ligne — Gratuit & dans le navigateur | Konvertools",
+      "metaDescription": "Sélectionnez un ensemble de pages (ex. 1, 3-5, 9) dans un PDF et enregistrez-les dans un nouveau document. Fonctionne dans votre navigateur, jamais téléchargé."
+    },
+    "hi": {
+      "name": "पीडीएफ पृष्ठ निकालें",
+      "short": "पीडीएफ से पृष्ठों का एक उपसमूह नए पीडीएफ में निकालें।",
+      "h1": "पीडीएफ पृष्ठ ऑनलाइन मुफ्त निकालें — चयनित पृष्ठ सहेजें",
+      "metaTitle": "पीडीएफ पृष्ठ ऑनलाइन निकालें — मुफ्त और ब्राउज़र में | Konvertools",
+      "metaDescription": "पीडीएफ से पृष्ठों का एक सेट चुनें (जैसे 1, 3-5, 9) और उन्हें एक नए दस्तावेज़ के रूप में सहेजें। आपके ब्राउज़र में चलता है, कभी अपलोड नहीं होता।"
+    },
+    "id": {
+      "name": "Ekstrak Halaman PDF",
+      "short": "Ambil subset halaman menjadi PDF baru.",
+      "h1": "Ekstrak Halaman PDF Online Gratis — Simpan Halaman Terpilih",
+      "metaTitle": "Ekstrak Halaman PDF Online — Gratis & Di-browser | Konvertools",
+      "metaDescription": "Pilih kumpulan halaman (misal: 1, 3-5, 9) dari PDF dan simpan sebagai dokumen baru. Berjalan di peramban Anda, tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Estrai pagine PDF",
+      "short": "Estrai un sottoinsieme di pagine in un nuovo PDF.",
+      "h1": "Estrai pagine PDF online gratis — Salva le pagine selezionate",
+      "metaTitle": "Estrai pagine PDF online — Gratis e nel browser | Konvertools",
+      "metaDescription": "Seleziona un insieme di pagine (es. 1, 3-5, 9) da un PDF e salvale come nuovo documento. Funziona nel tuo browser, non viene mai caricato."
+    },
+    "ja": {
+      "name": "PDFページ抽出",
+      "short": "PDFから任意のページを抽出して新しいPDFを作成します。",
+      "h1": "PDFページ抽出 — 無料でオンライン、選択したページを保存",
+      "metaTitle": "PDFページ抽出オンライン — 無料・ブラウザ内 | Konvertools",
+      "metaDescription": "PDFから任意のページ（例：1、3-5、9）を選択して新しいファイルとして保存。ブラウザ内で動作し、アップロードされることはありません。"
+    },
+    "ko": {
+      "name": "PDF 페이지 추출",
+      "short": "PDF에서 특정 페이지만 추출하여 새 파일로 저장합니다.",
+      "h1": "PDF 페이지 추출 — 무료 온라인 도구로 선택한 페이지 저장",
+      "metaTitle": "PDF 페이지 추출 — 무료 인브라우저 변환 | Konvertools",
+      "metaDescription": "PDF에서 원하는 페이지(예: 1, 3-5, 9)를 선택하여 새 문서로 저장하세요. 브라우저에서 실행되며 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "Pagina's uit PDF halen",
+      "short": "Selecteer een subset pagina's om naar een nieuw PDF-bestand te exporteren.",
+      "h1": "Pagina's uit PDF halen online — Gratis & Snel | Konvertools",
+      "metaTitle": "Pagina's uit PDF halen online — Gratis & In-browser | Konvertools",
+      "metaDescription": "Kies een set pagina's (bijv. 1, 3-5, 9) uit een PDF en sla ze op als een nieuw document. Werkt in je browser, nooit geüpload."
+    },
+    "pl": {
+      "name": "Wyodrębnij strony z PDF",
+      "short": "Wyciągnij wybrane strony do nowego pliku PDF.",
+      "h1": "Wyodrębnij strony z PDF online — za darmo, zapisz wybrane strony",
+      "metaTitle": "Wyodrębnij strony z PDF online — darmowe & w przeglądarce | Konvertools",
+      "metaDescription": "Wybierz zestaw stron (np. 1, 3-5, 9) z pliku PDF i zapisz je jako nowy dokument. Działa w przeglądarce, nigdy nie jest przesyłany."
+    },
+    "pt": {
+      "name": "Extrair Páginas de PDF",
+      "short": "Extraia um subconjunto de páginas para um novo PDF.",
+      "h1": "Extrair Páginas de PDF Online Grátis — Salve as Páginas Selecionadas",
+      "metaTitle": "Extrair Páginas de PDF Online — Grátis & No Navegador | Konvertools",
+      "metaDescription": "Selecione um conjunto de páginas (ex. 1, 3-5, 9) de um PDF e salve-as como um novo documento. Funciona no seu navegador, sem upload."
+    },
+    "ru": {
+      "name": "Извлечение страниц из PDF",
+      "short": "Извлеките подборку страниц в новый PDF-файл.",
+      "h1": "Извлечение страниц из PDF онлайн бесплатно — Сохраните выбранные страницы",
+      "metaTitle": "Извлечение страниц из PDF онлайн — Бесплатно и в браузере | Konvertools",
+      "metaDescription": "Выберите набор страниц (например, 1, 3-5, 9) из PDF и сохраните их в новый документ. Работает в вашем браузере, не загружается на серверы."
+    },
+    "sv": {
+      "name": "Extrahera PDF-sidor",
+      "short": "Plocka ut ett urval av sidor till en ny PDF.",
+      "h1": "Extrahera PDF-sidor online gratis — Spara valda sidor",
+      "metaTitle": "Extrahera PDF-sidor online — Gratis & i webbläsaren | Konvertools",
+      "metaDescription": "Välj ut en uppsättning sidor (t.ex. 1, 3-5, 9) från en PDF och spara dem som ett nytt dokument. Körs i din webbläsare, aldrig uppladdat."
+    },
+    "tr": {
+      "name": "PDF Sayfalarını Çıkar",
+      "short": "PDF'den bir dizi sayfayı yeni bir PDF'e aktar.",
+      "h1": "PDF Sayfalarını Ücretsiz Çevrimiçi Çıkar — Seçilen Sayfaları Kaydet",
+      "metaTitle": "PDF Sayfalarını Çevrimiçi Çıkar — Ücretsiz & Tarayıcıda | Konvertools",
+      "metaDescription": "PDF'den bir sayfa kümesi seçin (örn. 1, 3-5, 9) ve yeni bir belge olarak kaydedin. Tarayıcınızda çalışır, asla yüklenmez."
+    },
+    "uk": {
+      "name": "Видобути сторінки з PDF",
+      "short": "Витягніть підмножину сторінок у новий PDF-файл.",
+      "h1": "Видобути сторінки з PDF онлайн безкоштовно — збережіть вибрані сторінки",
+      "metaTitle": "Видобути сторінки з PDF онлайн — безкоштовно та у браузері | Konvertools",
+      "metaDescription": "Оберіть набір сторінок (напр. 1, 3-5, 9) із PDF та збережіть їх як новий документ. Працює у вашому браузері, ніколи не завантажується на сервер."
+    },
+    "vi": {
+      "name": "Trích xuất trang PDF",
+      "short": "Trích xuất một tập con các trang thành một tệp PDF mới.",
+      "h1": "Trích xuất trang PDF trực tuyến miễn phí — Lưu các trang đã chọn",
+      "metaTitle": "Trích xuất trang PDF trực tuyến — Miễn phí & trong trình duyệt | Konvertools",
+      "metaDescription": "Chọn một tập hợp các trang (ví dụ: 1, 3-5, 9) từ tệp PDF và lưu chúng dưới dạng tài liệu mới. Hoạt động trong trình duyệt, không bao giờ tải lên."
+    },
+    "zh": {
+      "name": "提取 PDF 页面",
+      "short": "从 PDF 中提取指定页面组成新文档。",
+      "h1": "在线免费提取 PDF 页面 — 保存选定页面",
+      "metaTitle": "在线提取 PDF 页面 — 免费且无需上传 | Konvertools",
+      "metaDescription": "从 PDF 中选取指定页面（如 1、3-5、9）并另存为新文档。在浏览器中运行，无需上传文件。"
     }
   },
   "extract-subtitles": {
@@ -10868,6 +11138,141 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "h1": "免费在线 GIF 优化器 — 压缩动图",
       "metaTitle": "在线 GIF 优化器 — 免费、无需上传 | Konvertools",
       "metaDescription": "通过智能调色板生成压缩动图文件大小。完全免费，在浏览器中运行（FFmpeg.wasm）—您的文件不会被上传。"
+    }
+  },
+  "organize-pdf": {
+    "ar": {
+      "name": "تنظيم ملفات PDF",
+      "short": "اسحب الصفحات لإعادة ترتيبها أو تدويرها أو حذفها.",
+      "h1": "نظم ملفات PDF أونلاين مجاناً — أعد ترتيب الصفحات وتدويرها وحذفها",
+      "metaTitle": "نظم ملفات PDF أونلاين — أعد الترتيب والحذف | Konvertools",
+      "metaDescription": "نظم ملف PDF عن طريق إعادة ترتيب الصفحات وتدويرها أو حذفها، ثم احفظه. يعمل بالكامل داخل المتصفح دون تحميل الملف إلى الخادم."
+    },
+    "cs": {
+      "name": "Uspořádat PDF",
+      "short": "Přetáhněte stránky pro změnu pořadí, otočení nebo odstranění.",
+      "h1": "Uspořádat PDF online zdarma — změna pořadí, otočení & mazání stránek",
+      "metaTitle": "Uspořádat PDF online — změna pořadí & mazání | Konvertools",
+      "metaDescription": "Vizuálně změňte pořadí, otočte nebo odstraňte stránky v PDF a exportujte upravený dokument. Veškerá práce probíhá přímo ve vašem prohlížeči, nikdy se neodesílá."
+    },
+    "de": {
+      "name": "PDF organisieren",
+      "short": "Ziehen Sie Seiten, um sie neu anzuordnen, zu drehen oder zu löschen.",
+      "h1": "PDF online kostenlos organisieren — Seiten neu anordnen, drehen & löschen",
+      "metaTitle": "PDF online organisieren — Neu anordnen & löschen | Konvertools",
+      "metaDescription": "Seiten in einem PDF visuell neu anordnen, drehen oder löschen und das bereinigte Dokument exportieren. Funktioniert vollständig im Browser, wird nie hochgeladen."
+    },
+    "es": {
+      "name": "Organizar PDF",
+      "short": "Arrastra las páginas para reordenarlas, rotarlas o eliminarlas.",
+      "h1": "Organiza PDF en Línea Gratis — Reordenar, Rotar y Eliminar Páginas",
+      "metaTitle": "Organiza PDF en Línea — Reordenar y Eliminar Páginas | Konvertools",
+      "metaDescription": "Reordena, rota o elimina páginas de un PDF de forma visual y exporta el documento limpio. Funciona completamente en tu navegador, sin subir archivos."
+    },
+    "fr": {
+      "name": "Organiser un PDF",
+      "short": "Glissez-déposez les pages pour les réorganiser, faire pivoter ou supprimer.",
+      "h1": "Organiser un PDF en ligne gratuitement — Réorganiser, faire pivoter et supprimer des pages",
+      "metaTitle": "Organiser un PDF en ligne — Réorganiser & supprimer des pages | Konvertools",
+      "metaDescription": "Réorganisez, faites pivoter ou supprimez des pages dans un PDF visuellement, puis exportez le document nettoyé. Fonctionne entièrement dans votre navigateur, jamais téléchargé."
+    },
+    "hi": {
+      "name": "पीडीएफ व्यवस्थित करें",
+      "short": "पृष्ठों को खींचकर पुनः क्रमित करें, घुमाएं या हटाएं।",
+      "h1": "पीडीएफ ऑनलाइन मुफ्त व्यवस्थित करें — पृष्ठ पुनः क्रमित करें, घुमाएं और हटाएं",
+      "metaTitle": "पीडीएफ ऑनलाइन व्यवस्थित करें — पुनः क्रमित करें एवं हटाएं | Konvertools",
+      "metaDescription": "पीडीएफ में पृष्ठों को दृश्यात्मक रूप से पुनः क्रमित करें, घुमाएं या हटाएं, फिर साफ़ किए गए दस्तावेज़ को निर्यात करें। पूरी तरह ब्राउज़र में चलता है, कभी अपलोड नहीं होता।"
+    },
+    "id": {
+      "name": "Atur PDF",
+      "short": "Seret halaman untuk mengurut ulang, memutar, atau menghapusnya.",
+      "h1": "Atur PDF Secara Online Gratis — Urut Ulang, Putar & Hapus Halaman",
+      "metaTitle": "Atur PDF Online — Urut Ulang & Hapus Halaman | Konvertools",
+      "metaDescription": "Urut ulang, putar, atau hapus halaman PDF secara visual, lalu ekspor dokumen yang sudah bersih. Berjalan sepenuhnya di peramban Anda, tidak pernah diunggah."
+    },
+    "it": {
+      "name": "Organizza PDF",
+      "short": "Trascina le pagine per riordinarle, ruotarle o eliminarle.",
+      "h1": "Organizza PDF Online Gratis — Riordina, Ruota & Elimina Pagine",
+      "metaTitle": "Organizza PDF Online — Riordina & Elimina Pagine | Konvertools",
+      "metaDescription": "Riordina, ruota o elimina pagine in un PDF visivamente, poi esporta il documento pulito. Funziona interamente nel tuo browser, senza upload."
+    },
+    "ja": {
+      "name": "PDF整理",
+      "short": "ページをドラッグして並べ替え、回転、削除できます。",
+      "h1": "PDFをオンラインで無料整理 — ページの並べ替え・回転・削除",
+      "metaTitle": "PDFをオンラインで整理 — 並べ替え・削除 | Konvertools",
+      "metaDescription": "PDFのページを視覚的に並べ替え、回転、削除して整理し、クリーンな文書としてエクスポートします。完全にブラウザ内で動作し、アップロードされることはありません。"
+    },
+    "ko": {
+      "name": "PDF 정리하기",
+      "short": "페이지를 드래그하여 순서 변경, 회전 또는 삭제하세요.",
+      "h1": "PDF 온라인 무료 정리 — 페이지 순서 변경, 회전 및 삭제",
+      "metaTitle": "PDF 온라인 정리 — 순서 변경 및 삭제 | Konvertools",
+      "metaDescription": "PDF 페이지를 시각적으로 재정렬하고 회전하거나 삭제한 후 정리된 문서를 내보내세요. 브라우저에서 완전히 실행되며 업로드되지 않습니다."
+    },
+    "nl": {
+      "name": "PDF ordenen",
+      "short": "Sleep pagina's om ze te herordenen, te draaien of te verwijderen.",
+      "h1": "PDF Online Gratis Ordenen — Pagina's Herordenen, Draaien & Verwijderen",
+      "metaTitle": "PDF Online Ordenen — Herorden & Verwijder Pagina's | Konvertools",
+      "metaDescription": "Herorden, draai of verwijder pagina's in een PDF visueel en exporteer het opgeschoonde bestand. Werkt volledig in je browser, nooit geüpload."
+    },
+    "pl": {
+      "name": "Organizuj PDF",
+      "short": "Przeciągnij strony, aby zmienić ich kolejność, obrócić lub usunąć.",
+      "h1": "Organizuj PDF online za darmo — zmień kolejność, obróć i usuń strony",
+      "metaTitle": "Organizuj PDF online — zmień kolejność i usuń strony | Konvertools",
+      "metaDescription": "Wizualnie zmień kolejność, obróć lub usuń strony w pliku PDF, a następnie wyeksportuj uporządkowany dokument. Działa wyłącznie w przeglądarce, bez przesyłania na serwer."
+    },
+    "pt": {
+      "name": "Organizar PDF",
+      "short": "Arraste as páginas para reorganizar, girar ou excluí-las.",
+      "h1": "Organize PDF Online Grátis — Reordenar, Girar & Excluir Páginas",
+      "metaTitle": "Organize PDF Online — Reordenar & Excluir Páginas | Konvertools",
+      "metaDescription": "Reordene, gire ou exclua páginas de um PDF visualmente e exporte o documento limpo. Funciona inteiramente no navegador, sem upload."
+    },
+    "ru": {
+      "name": "Организовать PDF",
+      "short": "Перетаскивайте страницы, чтобы изменить порядок, повернуть или удалить их.",
+      "h1": "Организуйте PDF онлайн бесплатно — измените порядок, поверните и удалите страницы",
+      "metaTitle": "Организовать PDF онлайн — измените порядок и удалите страницы | Konvertools",
+      "metaDescription": "Визуально измените порядок, поверните или удалите страницы в PDF, затем экспортируйте очищенный документ. Работает полностью в вашем браузере, никогда не загружается на сервер."
+    },
+    "sv": {
+      "name": "Organisera PDF",
+      "short": "Dra sidor för att ändra ordning, rotera eller ta bort dem.",
+      "h1": "Organisera PDF Online Gratis — Ändra ordning, rotera & ta bort sidor",
+      "metaTitle": "Organisera PDF Online — Ändra ordning & ta bort sidor | Konvertools",
+      "metaDescription": "Ändra ordning, rotera eller ta bort sidor i en PDF visuellt och exportera det rensade dokumentet. Körs helt i din webbläsare, aldrig uppladdat."
+    },
+    "tr": {
+      "name": "PDF Düzenle",
+      "short": "Sayfaları sürükleyerek yeniden sıralayın, döndürün veya silin.",
+      "h1": "PDF'yi Ücretsiz Online Düzenleyin — Sayfaları Yeniden Sıralayın, Döndürün & Silin",
+      "metaTitle": "PDF'yi Online Düzenleyin — Sayfaları Yeniden Sıralayın | Konvertools",
+      "metaDescription": "PDF sayfalarını görsel olarak yeniden sıralayın, döndürün veya silin, ardından temizlenmiş belgeyi dışa aktarın. Tüm işlem tarayıcınızda gerçekleşir, hiçbir şey yüklenmez."
+    },
+    "uk": {
+      "name": "Організувати PDF",
+      "short": "Перетягуйте сторінки, щоб змінити порядок, обертати або видаляти їх.",
+      "h1": "Організуйте PDF онлайн безкоштовно — зміна порядку, обертання та видалення сторінок",
+      "metaTitle": "Організуйте PDF онлайн — зміна порядку та видалення | Konvertools",
+      "metaDescription": "Візуально змініть порядок, оберіть або видаліть сторінки у PDF, а потім експортуйте очищений документ. Працює безпосередньо у вашому браузері, ніколи не завантажується."
+    },
+    "vi": {
+      "name": "Sắp xếp PDF",
+      "short": "Kéo các trang để sắp xếp lại, xoay hoặc xóa chúng.",
+      "h1": "Sắp xếp PDF Trực tuyến Miễn phí — Sắp xếp lại, Xoay & Xóa Trang",
+      "metaTitle": "Sắp xếp PDF Trực tuyến — Sắp xếp lại & Xóa Trang | Konvertools",
+      "metaDescription": "Sắp xếp lại, xoay hoặc xóa các trang trong PDF một cách trực quan, sau đó xuất tài liệu đã chỉnh sửa. Hoạt động hoàn toàn trong trình duyệt, không bao giờ tải lên."
+    },
+    "zh": {
+      "name": "整理 PDF",
+      "short": "拖拽页面重新排序、旋转或删除。",
+      "h1": "在线免费整理 PDF — 重排、旋转与删除页面",
+      "metaTitle": "在线整理 PDF — 重排与删除页面 | Konvertools",
+      "metaDescription": "在浏览器中可视化重排、旋转或删除 PDF 页面，并导出整理后的文档。完全在本地运行，无需上传。"
     }
   },
   "password-generator": {

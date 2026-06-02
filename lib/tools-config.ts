@@ -76,6 +76,7 @@ import {
   Landmark,
   Coins,
   Scale,
+  EyeOff,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1733,6 +1734,129 @@ TOOLS.push({
     { title: "Download the result", body: "Watermark burned in." },
   ],
   faqs: codeFaqs("Image Watermark"),
+});
+
+// ── Images — Konvertools "iLoveIMG-style" essentials ─────────────────────────
+// Seven tools added in one pass to cover the gaps vs iLoveIMG/iLovePDF. All
+// pure-client (no upload), simple single-purpose UIs.
+
+TOOLS.push({
+  slug: "enhance-image", phase: 3, kind: "client", category: "images", icon: Sparkles, tone: "amber",
+  name: "Enhance Image",
+  short: "Brighten, sharpen and pop colours in one click.",
+  h1: "Enhance Image Online Free — Brighten & Sharpen Photos",
+  metaTitle: "Enhance Image Online — Brighten, Sharpen, Pop Colours | Konvertools",
+  metaDescription: "Improve any photo with one-click brightness, contrast, saturation and sharpening. Runs in your browser — your image is never uploaded.",
+  primaryKeyword: "enhance image online",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Drop your image", body: "JPG, PNG or WebP — stays on your device." },
+    { title: "Auto-tuned defaults", body: "Brightness, contrast and saturation pre-set for a clean lift." },
+    { title: "Download", body: "Get the enhanced image instantly." },
+  ],
+  faqs: codeFaqs("Image Enhancer"),
+});
+
+TOOLS.push({
+  slug: "meme-generator", phase: 3, kind: "client", category: "images", icon: Smile, tone: "amber",
+  name: "Meme Generator",
+  short: "Classic top + bottom text on any image, instantly.",
+  h1: "Meme Generator Online Free — Make a Meme in Seconds",
+  metaTitle: "Meme Generator Online — Free Meme Maker | Konvertools",
+  metaDescription: "Turn any image into a meme with top and bottom Impact text. Live preview, exports as PNG, runs in your browser.",
+  primaryKeyword: "meme generator",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Meme",
+  steps: [
+    { title: "Upload an image", body: "Any photo, screenshot or template." },
+    { title: "Type your captions", body: "Top and bottom text — live preview." },
+    { title: "Download as PNG", body: "Ready to share." },
+  ],
+  faqs: codeFaqs("Meme Generator"),
+});
+
+TOOLS.push({
+  slug: "photo-editor", phase: 3, kind: "client", category: "images", icon: ImageIcon, tone: "amber",
+  name: "Photo Editor",
+  short: "Filters, presets, rotate and flip — pure browser.",
+  h1: "Photo Editor Online Free — Filters, Rotate, Flip",
+  metaTitle: "Photo Editor Online — Filters, Rotate, Flip | Konvertools",
+  metaDescription: "Edit any photo with six filter sliders, four presets and rotate/flip. Pure in-browser canvas — your image is never uploaded.",
+  primaryKeyword: "photo editor online",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Drop a photo", body: "JPG, PNG or WebP." },
+    { title: "Tune or pick a preset", body: "Brightness, contrast, saturation, hue, blur, grayscale." },
+    { title: "Export", body: "Saved in the source format." },
+  ],
+  faqs: codeFaqs("Photo Editor"),
+});
+
+TOOLS.push({
+  slug: "image-to-jpg", phase: 3, kind: "client", category: "images", icon: ImageIcon, tone: "amber",
+  name: "Convert Image to JPG",
+  short: "PNG, WebP, AVIF, GIF, BMP — all to JPG.",
+  h1: "Convert Image to JPG Online Free — PNG, WebP, AVIF, BMP",
+  metaTitle: "Convert Image to JPG Online — PNG / WebP / AVIF / BMP | Konvertools",
+  metaDescription: "Convert PNG, WebP, AVIF, GIF or BMP images to JPG with adjustable quality. Runs in your browser — your file is never uploaded.",
+  primaryKeyword: "convert image to jpg",
+  accept: ["png", "webp", "avif", "gif", "bmp"], freeMaxMb: 0, outputType: "JPG",
+  steps: [
+    { title: "Drop your image", body: "Any common format." },
+    { title: "Pick a quality", body: "Default 92 keeps photos crisp." },
+    { title: "Download JPG", body: "Browser-rendered, no upload." },
+  ],
+  faqs: codeFaqs("Image to JPG"),
+});
+
+TOOLS.push({
+  slug: "image-from-jpg", phase: 3, kind: "client", category: "images", icon: ImageIcon, tone: "amber",
+  name: "Convert JPG to PNG",
+  short: "Lossless conversion from JPG to PNG, in your browser.",
+  h1: "Convert JPG to PNG Online Free — Lossless Re-encode",
+  metaTitle: "Convert JPG to PNG Online — Free, In-Browser | Konvertools",
+  metaDescription: "Convert any JPG to PNG with transparent-friendly output. Runs entirely in your browser — your file is never uploaded.",
+  primaryKeyword: "jpg to png converter",
+  accept: ["jpg", "jpeg"], freeMaxMb: 0, outputType: "PNG",
+  steps: [
+    { title: "Drop your JPG", body: "Stays on your device." },
+    { title: "Click convert", body: "Re-encoded as PNG." },
+    { title: "Download", body: "Ready for designs or transparency." },
+  ],
+  faqs: codeFaqs("JPG to PNG"),
+});
+
+TOOLS.push({
+  slug: "html-to-image", phase: 3, kind: "client", category: "images", icon: FileCode, tone: "amber",
+  name: "HTML to Image",
+  short: "Render any HTML snippet to PNG or JPG.",
+  h1: "HTML to Image Online Free — Render HTML to PNG / JPG",
+  metaTitle: "HTML to Image Online — Render HTML to PNG or JPG | Konvertools",
+  metaDescription: "Paste any HTML and render it to a PNG or JPG image — perfect for social cards, screenshots and quick mockups. Runs in your browser.",
+  primaryKeyword: "html to image",
+  accept: [], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Paste your HTML", body: "Inline styles work best." },
+    { title: "Set size & format", body: "Width, height and PNG / JPG." },
+    { title: "Render & download", body: "Done in your browser." },
+  ],
+  faqs: codeFaqs("HTML to Image"),
+});
+
+TOOLS.push({
+  slug: "blur-face", phase: 3, kind: "client", category: "images", icon: EyeOff, tone: "green",
+  name: "Blur Face in Image",
+  short: "Drag a box over faces to anonymise them.",
+  h1: "Blur Face in Image Online Free — Anonymise Photos",
+  metaTitle: "Blur Face in Image Online — Privacy Photo Editor | Konvertools",
+  metaDescription: "Click and drag rectangles over faces or any sensitive area — the underlying pixels get blurred. Runs in your browser, no uploads, no face data leaves.",
+  primaryKeyword: "blur face in image",
+  accept: ["jpg", "jpeg", "png", "webp"], freeMaxMb: 0, outputType: "Image",
+  steps: [
+    { title: "Drop your image", body: "JPG, PNG or WebP." },
+    { title: "Drag rectangles", body: "Cover each face or sensitive zone." },
+    { title: "Export blurred image", body: "Pixels in the boxes are permanently blurred." },
+  ],
+  faqs: codeFaqs("Face Blur"),
 });
 
 // ── Images — Extract colour palette (Canvas pixel sampling) ─────────────────

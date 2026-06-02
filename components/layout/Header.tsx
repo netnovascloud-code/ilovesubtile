@@ -71,7 +71,7 @@ export function Header() {
           {/* Brand wordmark — 647x122 source, rendered at 32px tall.
               `priority` because it's above the fold on every page. */}
           <Image
-            src="/logo.png"
+            src="/Logo.png"
             alt="Konvertools"
             width={170}
             height={32}

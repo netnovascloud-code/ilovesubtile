@@ -1,4 +1,4 @@
-// Konvertools smoke test (v22) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v23) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -211,7 +211,7 @@ for (const [label, path, want] of [
   ["favicon /icon", "/icon", /image\/(png|x-icon)/],
   ["apple-icon /apple-icon", "/apple-icon", /image\/(png|x-icon)/],
   ["manifest /manifest.webmanifest", "/manifest.webmanifest", /manifest\+json|application\/json/],
-  ["brand logo /logo.png", "/logo.png", /image\/png/],
+  ["brand logo /Logo.png", "/Logo.png", /image\/png/],
 ]) {
   try {
     const r = await fetch(`${BASE}${path}`, { signal: AbortSignal.timeout(20_000) });

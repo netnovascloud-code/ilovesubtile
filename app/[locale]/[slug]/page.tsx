@@ -35,6 +35,11 @@ const PercentageCalculatorClient = dynamic(() => import("@/components/tools/clie
 const LoanCalculatorClient = dynamic(() => import("@/components/tools/clients/LoanCalculatorClient").then((m) => ({ default: m.LoanCalculatorClient })));
 const TipCalculatorClient = dynamic(() => import("@/components/tools/clients/TipCalculatorClient").then((m) => ({ default: m.TipCalculatorClient })));
 const BmiCalculatorClient = dynamic(() => import("@/components/tools/clients/BmiCalculatorClient").then((m) => ({ default: m.BmiCalculatorClient })));
+const EnhanceImageClient = dynamic(() => import("@/components/tools/clients/EnhanceImageClient").then((m) => ({ default: m.EnhanceImageClient })));
+const MemeGeneratorClient = dynamic(() => import("@/components/tools/clients/MemeGeneratorClient").then((m) => ({ default: m.MemeGeneratorClient })));
+const PhotoEditorClient = dynamic(() => import("@/components/tools/clients/PhotoEditorClient").then((m) => ({ default: m.PhotoEditorClient })));
+const HtmlToImageClient = dynamic(() => import("@/components/tools/clients/HtmlToImageClient").then((m) => ({ default: m.HtmlToImageClient })));
+const BlurFaceClient = dynamic(() => import("@/components/tools/clients/BlurFaceClient").then((m) => ({ default: m.BlurFaceClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -449,6 +454,21 @@ export default function LocalisedToolPage({
       break;
     case "bmi-calculator":
       body = <BmiCalculatorClient />;
+      break;
+    case "enhance-image":
+      body = <EnhanceImageClient />;
+      break;
+    case "meme-generator":
+      body = <MemeGeneratorClient />;
+      break;
+    case "photo-editor":
+      body = <PhotoEditorClient />;
+      break;
+    case "html-to-image":
+      body = <HtmlToImageClient />;
+      break;
+    case "blur-face":
+      body = <BlurFaceClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

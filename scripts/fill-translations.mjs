@@ -2,8 +2,8 @@
 // function (which holds the Mistral API key server-side). The caller only
 // needs the public anon key — no MISTRAL_API_KEY required locally.
 //
-// v4 — bumped to re-trigger after the 2 new visual tools (animated GIF
-// maker, photo collage) were added EN-only.
+// v5 — bumped to re-trigger after the 4 security tools (virus scanner,
+// email verifier, phishing detector, URL scanner) were added EN-only.
 //
 // Reads NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
 // (or your shell env). Tasks supported: i18n-tool, i18n-category.

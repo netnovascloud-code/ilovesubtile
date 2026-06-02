@@ -162,6 +162,7 @@ export function categoryMetadata(category: ToolCategory): Metadata {
     "text-ai": "AI Text Tools — Translate, Rephrase, Summarize Free",
     utilities: "Online Utilities — QR, Colors, Units, Currencies & More",
     archives: "Archive Tools — Create & Extract ZIP Online Free",
+    security: "Security Tools — Virus Scanner, Email & Phishing Checker",
   };
   // Group-level keyword seeds — the broad terms people type for a whole
   // category, complementing the per-tool keywords on each tool page.
@@ -175,6 +176,7 @@ export function categoryMetadata(category: ToolCategory): Metadata {
     "text-ai": ["ai text tools", "ai translator", "paraphrasing tool", "summarize text", "ai humanizer", "free ai writer"],
     utilities: ["online utilities", "qr code generator", "color picker", "unit converter", "currency converter"],
     archives: ["archive tools", "create zip online", "extract zip", "unzip online free", "zip files"],
+    security: ["online virus scanner", "scan file for malware", "email verifier", "check email valid", "phishing email checker", "url scanner", "is this link safe"],
   };
   const title = titles[category];
   const description = `${def.blurb} Free, fast, browser-first — no sign-up needed.`;

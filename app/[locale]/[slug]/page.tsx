@@ -46,6 +46,10 @@ const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/E
 const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
 const ImagesToGifClient = dynamic(() => import("@/components/tools/clients/ImagesToGifClient").then((m) => ({ default: m.ImagesToGifClient })));
 const ImageCollageClient = dynamic(() => import("@/components/tools/clients/ImageCollageClient").then((m) => ({ default: m.ImageCollageClient })));
+const ScanFileClient = dynamic(() => import("@/components/tools/clients/ScanFileClient").then((m) => ({ default: m.ScanFileClient })));
+const EmailCheckerClient = dynamic(() => import("@/components/tools/clients/EmailCheckerClient").then((m) => ({ default: m.EmailCheckerClient })));
+const PhishingDetectorClient = dynamic(() => import("@/components/tools/clients/PhishingDetectorClient").then((m) => ({ default: m.PhishingDetectorClient })));
+const UrlScannerClient = dynamic(() => import("@/components/tools/clients/UrlScannerClient").then((m) => ({ default: m.UrlScannerClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -496,6 +500,18 @@ export default function LocalisedToolPage({
       break;
     case "image-collage":
       body = <ImageCollageClient />;
+      break;
+    case "scan-file":
+      body = <ScanFileClient />;
+      break;
+    case "email-checker":
+      body = <EmailCheckerClient />;
+      break;
+    case "phishing-detector":
+      body = <PhishingDetectorClient />;
+      break;
+    case "url-scanner":
+      body = <UrlScannerClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

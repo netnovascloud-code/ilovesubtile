@@ -40,6 +40,11 @@ const FN_MAP: Record<string, string> = {
   "receipt-scanner": "ai-vision",
   "screenshot-to-code": "ai-vision",
   "image-to-table": "ai-vision",
+  // Security tools — all handled by the security-tools function via `action`.
+  "scan-file": "security-tools",
+  "email-checker": "security-tools",
+  "phishing-detector": "security-tools",
+  "url-scanner": "security-tools",
 };
 
 export function toolFunction(slug: string): string | null {

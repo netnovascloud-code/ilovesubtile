@@ -1,4 +1,4 @@
-// Konvertools smoke test (v30) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v31) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -295,6 +295,34 @@ const AI = [
     if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
     const out = String(r.json?.output ?? "");
     if (!/Dawkins/.test(out) || !/1976/.test(out)) throw new Error(`missing Dawkins/1976 in: "${out.slice(0, 160)}"`);
+  }},
+  // ── security-tools (Part 1) ──────────────────────────────────────────────
+  { name: "security:validate_email (gmail valid)", run: async () => {
+    const r = await aiCall("security-tools", { action: "validate_email", email: "test@gmail.com" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    if (r.json?.verdict !== "valid" || !r.json?.checks?.mx) throw new Error(`expected valid+MX, got ${JSON.stringify(r.json).slice(0, 160)}`);
+  }},
+  { name: "security:validate_email (no domain)", run: async () => {
+    const r = await aiCall("security-tools", { action: "validate_email", email: "x@nope-konvertools-not-a-real-domain-xyz.test" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 120)}`);
+    if (r.json?.checks?.mx) throw new Error(`expected no MX for fake domain, got ${JSON.stringify(r.json).slice(0, 160)}`);
+  }},
+  { name: "security:scan_url (safe)", run: async () => {
+    const r = await aiCall("security-tools", { action: "scan_url", url: "https://www.google.com" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
+    if (r.json?.verdict !== "safe") throw new Error(`expected safe, got ${JSON.stringify(r.json).slice(0, 160)}`);
+  }},
+  { name: "security:scan_file EICAR (dangerous)", run: async () => {
+    // The EICAR antivirus test file — universally flagged, deterministic.
+    const r = await aiCall("security-tools", { action: "scan_file", sha256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
+    if (r.json?.verdict !== "dangerous" || (r.json?.malicious ?? 0) < 1) throw new Error(`expected dangerous, got ${JSON.stringify(r.json).slice(0, 160)}`);
+  }},
+  { name: "security:analyze_phishing (scam → flagged)", run: async () => {
+    const r = await aiCall("security-tools", { action: "analyze_phishing", text: "URGENT: Your account will be suspended! Verify your password and bank details NOW at http://secure-paypaI-login.com or lose access permanently. Click immediately!" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
+    if (typeof r.json?.score !== "number" || !["safe", "suspicious", "dangerous"].includes(r.json?.verdict)) throw new Error(`bad shape: ${JSON.stringify(r.json).slice(0, 160)}`);
+    if (r.json.score < 30) throw new Error(`scam scored too low: ${r.json.score}`);
   }},
 ];
 

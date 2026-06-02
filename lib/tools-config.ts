@@ -81,6 +81,7 @@ import {
   FilePen,
   PlayCircle,
   Frame,
+  ShieldAlert,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -92,7 +93,8 @@ export type ToolCategory =
   | "developer"
   | "text-ai"
   | "utilities"
-  | "archives";
+  | "archives"
+  | "security";
 
 export type ToolFaq = { q: string; a: string };
 
@@ -153,6 +155,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: "text-ai", label: "Text & AI", iconName: "Sparkles", tone: "green", blurb: "Translate, rephrase, summarise and fix text." },
   { id: "utilities", label: "Utilities", iconName: "Wrench", tone: "slate", blurb: "Colours, hashes, units, passwords and more — all in-browser." },
   { id: "archives", label: "Archives", iconName: "Archive", tone: "amber", blurb: "Create and extract ZIP archives directly in your browser." },
+  { id: "security", label: "Security", iconName: "ShieldCheck", tone: "rose", blurb: "Scan files for viruses, verify emails, and detect phishing & unsafe links." },
 ];
 
 export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntries(
@@ -1273,6 +1276,75 @@ TOOLS.push(
     "Calculate your Body Mass Index from height and weight in metric or imperial units, with the healthy-range category. Free, instant, in-browser.",
     "bmi calculator", "BMI",
     [{ title: "Choose units", body: "Metric (cm / kg) or imperial (ft / lb)." }, { title: "Enter height & weight", body: "BMI updates as you type." }, { title: "Read your category", body: "Underweight, healthy, overweight or obese." }]),
+);
+
+// ── Konvertools — Security (VirusTotal / Safe Browsing / Mistral) ──────────────
+// Server-metered (kind "ai"): free accounts get a small daily allowance per
+// tool, paying plans pass through. Files never leave the browser — the virus
+// scanner sends only the file's SHA-256 hash.
+const secTool = (
+  slug: string, icon: LucideIcon, name: string, short: string, h1: string,
+  metaTitle: string, metaDescription: string, primaryKeyword: string,
+  steps: { title: string; body: string }[], faqs: ToolFaq[],
+): ToolDefinition => ({
+  slug, phase: 1, kind: "ai", category: "security", icon, tone: "rose",
+  name, short, h1, metaTitle, metaDescription, primaryKeyword,
+  accept: [], freeMaxMb: 20, outputType: "Report", steps, faqs,
+});
+
+TOOLS.push(
+  secTool("scan-file", ShieldCheck, "Virus Scanner", "Scan any file for malware against 70+ antivirus engines.",
+    "Free Online Virus Scanner — Scan Files for Malware",
+    "Free Online Virus Scanner — Scan a File for Malware | Konvertools",
+    "Scan any file for viruses and malware against 70+ antivirus engines via VirusTotal. We check the file's SHA-256 fingerprint — the file itself is never uploaded. Free, no sign-up.",
+    "virus scanner online free",
+    [{ title: "Drop your file", body: "Its SHA-256 fingerprint is computed in your browser." }, { title: "We query VirusTotal", body: "70+ antivirus engines checked by hash." }, { title: "Read the verdict", body: "Clean, suspicious or dangerous — with detections." }],
+    [
+      { q: "Is the virus scanner free?", a: "Yes. Free accounts get 3 scans per day; Pro and Business raise the limit. Browser-side fingerprinting means the file never leaves your device." },
+      { q: "Is my file uploaded anywhere?", a: "No. We compute the file's SHA-256 hash locally in your browser and only send that hash to VirusTotal. The file's contents never leave your computer." },
+      { q: "How many antivirus engines are used?", a: "VirusTotal aggregates 70+ commercial antivirus engines and scanners, so you get a broad consensus rather than a single vendor's opinion." },
+      { q: "What does an 'unknown' result mean?", a: "It means no engine has analysed that exact file before — its hash isn't in VirusTotal's database yet. It's neither a clean nor a malicious verdict." },
+      { q: "Is a clean result a guarantee of safety?", a: "No. This is an indicative result from VirusTotal and does not constitute an absolute guarantee. Brand-new malware can evade detection until engines are updated." },
+    ]),
+  secTool("email-checker", Mail, "Email Verifier", "Check if an email address is valid, real and deliverable.",
+    "Free Email Verifier — Check if an Email Address Is Valid",
+    "Free Email Verifier — Check if an Email Is Valid & Real | Konvertools",
+    "Verify any email address: syntax, domain existence, MX (mail) records and disposable-provider detection. Get a 0-100 reliability score instantly. Free, no sign-up.",
+    "email verifier free",
+    [{ title: "Enter the address", body: "Any email you want to verify." }, { title: "We run live checks", body: "Syntax, DNS, MX records and disposable lists." }, { title: "Get a score", body: "0-100 reliability with a clear verdict." }],
+    [
+      { q: "Is the email verifier free?", a: "Yes. Free accounts get 5 checks per day; Pro gets 500/month and Business effectively unlimited for fair use — ideal for bulk B2B list cleaning." },
+      { q: "How do you check if an email is valid?", a: "We validate the syntax, confirm the domain resolves in DNS, check it has mail (MX) records so it can receive email, and compare it against a public list of disposable providers." },
+      { q: "Do you send an email to verify it?", a: "No. The checks are passive (DNS/MX lookups) — no message is ever sent to the address, so the owner is never notified." },
+      { q: "What does 'risky' mean?", a: "The domain exists but has no MX records, so it likely cannot receive email — or the format is unusual. The address may bounce." },
+      { q: "Can you detect disposable emails?", a: "Yes. We match the domain against a continuously-updated public blocklist of throwaway/temporary email providers." },
+    ]),
+  secTool("phishing-detector", ShieldAlert, "Phishing Email Detector", "Check if an email is a scam or phishing attempt.",
+    "Phishing Email Detector — Check if an Email Is a Scam",
+    "Phishing Email Detector — Is This Email a Scam? | Konvertools",
+    "Paste a suspicious email and get an AI-assisted risk score with the exact warning signs — urgency, brand impersonation, data requests — plus a Google Safe Browsing check of every link. Free.",
+    "phishing email checker",
+    [{ title: "Paste the email", body: "Sender, subject and full body." }, { title: "AI + link analysis", body: "Scam signals plus a Safe Browsing check of links." }, { title: "Get a risk score", body: "0-100 with the warning signs explained." }],
+    [
+      { q: "Is the phishing detector free?", a: "Yes. Free accounts get 3 analyses per day; Pro and Business get much higher monthly quotas." },
+      { q: "How does it detect phishing?", a: "An AI model analyses the text for scam patterns — urgency, threats, requests for personal or banking details, brand impersonation, unrealistic promises — and every link is checked against Google Safe Browsing." },
+      { q: "Is my email content stored?", a: "No. The text is analysed in real time and never stored or used for training. No job record is kept." },
+      { q: "Is the result a guarantee?", a: "No. It's an AI-assisted indication only. Always treat unexpected requests for credentials or payment with caution, regardless of the score." },
+      { q: "What should I do with a dangerous result?", a: "Don't click any links, don't reply, and don't share information. Report it to your email provider and delete it." },
+    ]),
+  secTool("url-scanner", Link2, "URL Scanner", "Check if a link is safe or leads to malware/phishing.",
+    "Free URL Scanner — Check if a Link Is Safe or Malicious",
+    "Free URL Scanner — Is This Link Safe? | Konvertools",
+    "Paste any URL and check it against Google Safe Browsing for malware, phishing and unwanted software. Get an instant safe/dangerous verdict. Free, no sign-up.",
+    "check if link is safe",
+    [{ title: "Paste the URL", body: "Any link you're unsure about." }, { title: "We check Safe Browsing", body: "Google's database of known unsafe sites." }, { title: "Get a verdict", body: "Safe or dangerous, with the threat type." }],
+    [
+      { q: "Is the URL scanner free?", a: "Yes. Free accounts get 20 scans per day; paying plans pass through within fair use." },
+      { q: "How does it work?", a: "We check the URL against Google Safe Browsing — a constantly-updated database of sites known to host malware, phishing or unwanted software." },
+      { q: "Does a 'safe' result mean the site is trustworthy?", a: "No. It means the link isn't in the known-threats database. Brand-new phishing pages can appear before they're catalogued, so stay cautious." },
+      { q: "Do you visit the link?", a: "We don't render or download the page for you — we only query the reputation database with the URL." },
+      { q: "What threats can it detect?", a: "Malware, social engineering / phishing, unwanted software and potentially harmful applications." },
+    ]),
 );
 
 // ── Konvertools — Documents (PDF tools, client-side via pdf-lib + pending) ──────

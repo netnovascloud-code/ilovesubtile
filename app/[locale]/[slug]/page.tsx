@@ -41,6 +41,9 @@ const PhotoEditorClient = dynamic(() => import("@/components/tools/clients/Photo
 const HtmlToImageClient = dynamic(() => import("@/components/tools/clients/HtmlToImageClient").then((m) => ({ default: m.HtmlToImageClient })));
 const BlurFaceClient = dynamic(() => import("@/components/tools/clients/BlurFaceClient").then((m) => ({ default: m.BlurFaceClient })));
 const HeicConvertClient = dynamic(() => import("@/components/tools/clients/HeicConvertClient").then((m) => ({ default: m.HeicConvertClient })));
+const OrganizePdfClient = dynamic(() => import("@/components/tools/clients/OrganizePdfClient").then((m) => ({ default: m.OrganizePdfClient })));
+const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/ExtractPdfPagesClient").then((m) => ({ default: m.ExtractPdfPagesClient })));
+const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
 const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
 const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
 const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
@@ -476,6 +479,15 @@ export default function LocalisedToolPage({
       break;
     case "heic-to-png":
       body = <HeicConvertClient target="png" />;
+      break;
+    case "organize-pdf":
+      body = <OrganizePdfClient />;
+      break;
+    case "extract-pdf-pages":
+      body = <ExtractPdfPagesClient />;
+      break;
+    case "edit-pdf-metadata":
+      body = <EditPdfMetadataClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

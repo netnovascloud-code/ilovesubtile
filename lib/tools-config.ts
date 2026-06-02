@@ -77,6 +77,8 @@ import {
   Coins,
   Scale,
   EyeOff,
+  LayoutGrid,
+  FilePen,
 } from "lucide-react";
 
 export type ToolCategory =
@@ -1380,6 +1382,24 @@ TOOLS.push(
     "Compare two PDF files and see added and removed text highlighted line by line. Runs entirely in your browser — neither file is uploaded.",
     "compare pdf", ["pdf"], "Diff",
     [{ title: "Upload both PDFs", body: "Original and changed." }, { title: "We diff the text", body: "Line-by-line, in your browser." }, { title: "Read the changes", body: "Green added, red removed." }], false),
+  docTool("organize-pdf", LayoutGrid, "Organize PDF", "Drag pages to reorder, rotate or delete them.",
+    "Organize PDF Online Free — Reorder, Rotate & Delete Pages",
+    "Organize PDF Online — Reorder & Delete Pages | Konvertools",
+    "Visually reorder, rotate or delete pages in a PDF, then export the cleaned-up document. Runs entirely in your browser, never uploaded.",
+    "organize pdf", ["pdf"], "PDF",
+    [{ title: "Drop your PDF", body: "Every page renders as a thumbnail." }, { title: "Drag to reorder", body: "Rotate or delete any page individually." }, { title: "Export", body: "A fresh PDF with your chosen order." }], false),
+  docTool("extract-pdf-pages", Scissors, "Extract PDF Pages", "Pull a subset of pages into a new PDF.",
+    "Extract PDF Pages Online Free — Save Selected Pages",
+    "Extract PDF Pages Online — Free & In-browser | Konvertools",
+    "Pick a set of pages (e.g. 1, 3-5, 9) from a PDF and save them as a fresh document. Runs in your browser, never uploaded.",
+    "extract pdf pages", ["pdf"], "PDF",
+    [{ title: "Drop your PDF", body: "Any size, any number of pages." }, { title: "Type the pages you want", body: "Mix singles and ranges: 1, 3-5, 9." }, { title: "Download", body: "Only the pages you picked." }], false),
+  docTool("edit-pdf-metadata", FilePen, "Edit PDF Metadata", "Change the title, author and keywords of a PDF.",
+    "Edit PDF Metadata Online Free — Title, Author, Keywords",
+    "Edit PDF Metadata Online — Title, Author, Keywords | Konvertools",
+    "Edit the title, author, subject and keywords of any PDF document. Runs entirely in your browser via pdf-lib, never uploaded.",
+    "edit pdf metadata", ["pdf"], "PDF",
+    [{ title: "Drop your PDF", body: "Current metadata is read instantly." }, { title: "Edit the fields", body: "Title, author, subject, keywords, creator, producer." }, { title: "Save", body: "Download the PDF with the updated info dictionary." }], false),
 );
 
 // ── Audio (server-side via FFmpeg — pending until the engine is wired) ────

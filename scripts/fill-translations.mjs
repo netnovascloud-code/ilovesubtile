@@ -2,8 +2,8 @@
 // function (which holds the Mistral API key server-side). The caller only
 // needs the public anon key — no MISTRAL_API_KEY required locally.
 //
-// v2 — bumped to re-trigger after the 15 new tools (7 image essentials,
-// 4 calculators, 4 HEIC/WebP-reverse) were added EN-only.
+// v3 — bumped to re-trigger after the 3 PDF essentials (organize-pdf,
+// extract-pdf-pages, edit-pdf-metadata) were added EN-only.
 //
 // Reads NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
 // (or your shell env). Tasks supported: i18n-tool, i18n-category.

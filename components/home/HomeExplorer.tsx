@@ -6,7 +6,6 @@ import { Search, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
-import { SmartDropZone } from "@/components/home/SmartDropZone";
 import { categoryTheme, categoryAccent } from "@/lib/category-theme";
 import type { ToolCardSpec, ToolCategory } from "@/lib/tools-config";
 
@@ -115,7 +114,6 @@ export function HomeExplorer({
       {/* Search hero — pure white */}
       <section className="bg-white">
         <div className="container py-14 md:py-20">
-          <div className="mb-8"><SmartDropZone tools={tools} /></div>
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-3xl font-bold tracking-tight text-ink-900 md:text-[2.75rem] md:leading-tight">{strings.title}</h1>
             <p className="mx-auto mt-3 max-w-xl text-ink-500">{strings.subtitle}</p>

@@ -68,15 +68,15 @@ export function Header() {
           className="flex items-center"
           aria-label="Konvertools — Home"
         >
-          {/* Brand wordmark — 647x122 source, rendered at 32px tall.
+          {/* Brand wordmark — 647x122 source, rendered at 28px tall.
               `priority` because it's above the fold on every page. */}
           <Image
             src="/Logo.png"
             alt="Konvertools"
-            width={170}
-            height={32}
+            width={149}
+            height={28}
             priority
-            className="h-8 w-auto"
+            className="h-7 w-auto"
           />
         </Link>
 

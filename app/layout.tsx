@@ -50,7 +50,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    // suppressHydrationWarning: HtmlLang mutates documentElement.lang/dir
+    // post-mount based on the konver_locale cookie (a French visitor on a
+    // non-prefixed route like /dashboard sees French chrome). That out-of-tree
+    // DOM mutation triggers React's hydration recovery flow (#418/#423/#425)
+    // on the next re-render, which paints both labels (e.g. "Tools + Outils")
+    // briefly before settling. Suppressing the warning here is the canonical
+    // Next.js pattern for cookie-driven theme/locale switching — it does NOT
+    // hide real mismatches in children, only the html attributes we mutate
+    // intentionally.
+    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
       <head>
         {/* Ezoic — display ads. Loaded only for Free users when ADS_ENABLED is
             on (see EzoicLoader); never injected for Pro/Business or while ads

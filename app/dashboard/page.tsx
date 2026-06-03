@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,32 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+type JobRow = { id: string; tool: string; status: string; created_at: string; output_file_url: string | null };
+
+/** Supabase signed URLs carry a JWT in `?token=`; its `exp` claim is the exact
+ *  expiry. Returns the expiry in ms, or null if it can't be read. */
+function signedUrlExpiryMs(url: string): number | null {
+  try {
+    const token = new URL(url).searchParams.get("token");
+    if (!token) return null;
+    const payload = JSON.parse(Buffer.from(token.split(".")[1], "base64url").toString("utf8"));
+    return typeof payload.exp === "number" ? payload.exp * 1000 : null;
+  } catch {
+    return null;
+  }
+}
+
+/** A Download link is live only if the job succeeded and its signed URL hasn't
+ *  expired. We decode the token expiry when possible; otherwise we fall back to
+ *  the documented 1-hour TTL measured from creation. This stops the dashboard
+ *  from showing dead Download buttons days after the link expired. */
+function isDownloadLive(j: JobRow): boolean {
+  if (!j.output_file_url || j.status !== "done") return false;
+  const exp = signedUrlExpiryMs(j.output_file_url);
+  if (exp != null) return exp > Date.now();
+  return Date.now() - new Date(j.created_at).getTime() < 60 * 60 * 1000;
+}
+
 export default async function DashboardPage() {
   let email: string | null = null;
   let plan: PlanKey = "free";
@@ -23,13 +50,22 @@ export default async function DashboardPage() {
   let usageResetAt: string | null = null;
   let monthlyAiUsage = 0;
   let monthlyAiMonth: string | null = null;
-  let jobs: { id: string; tool: string; status: string; created_at: string; output_file_url: string | null }[] = [];
+  let jobs: JobRow[] = [];
+  // When Supabase is configured but the visitor has no valid session (e.g. a
+  // stale `sb-*-auth-token` cookie that satisfied the presence-only middleware
+  // gate but no longer resolves to a user), send them to login instead of
+  // rendering the confusing "Configure Supabase" empty shell. redirect() must
+  // run outside the try/catch — it throws a control-flow signal the catch
+  // would otherwise swallow.
+  let needsLogin = false;
 
   try {
     const supabase = getSupabaseServer();
     const { data: userData } = await supabase.auth.getUser();
     email = userData.user?.email ?? null;
-    if (userData.user) {
+    if (!userData.user) {
+      needsLogin = true;
+    } else {
       const { data: profile } = await supabase
         .from("profiles")
         .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month")
@@ -54,8 +90,12 @@ export default async function DashboardPage() {
       jobs = jobsData ?? [];
     }
   } catch {
-    // Supabase env not configured — render an empty shell so the page still works.
+    // Supabase env not configured (local dev without keys) — render an empty
+    // shell so the page still works. In production env is always present, so
+    // this branch never strands a real visitor.
   }
+
+  if (needsLogin) redirect("/login?redirect=/dashboard");
 
   // AI quota: free is a rolling 24h counter, Pro/Business are monthly (UTC).
   const { kind, limit } = planLimit(plan as Plan);
@@ -114,11 +154,13 @@ export default async function DashboardPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Total jobs</CardTitle>
-            <CardDescription>Last 20 shown</CardDescription>
+            <CardTitle>Recent jobs</CardTitle>
+            <CardDescription>Up to 20 shown</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-semibold text-ink-900">{jobs.length}</div>
+            <div className="text-3xl font-semibold text-ink-900">
+              {jobs.length}{jobs.length === 20 ? "+" : ""}
+            </div>
           </CardContent>
         </Card>
         <Card>
@@ -162,14 +204,18 @@ export default async function DashboardPage() {
                   >
                     {j.status}
                   </Badge>
-                  {j.output_file_url && j.status === "done" && (
+                  {isDownloadLive(j) ? (
                     <a
-                      href={j.output_file_url}
+                      href={j.output_file_url!}
                       className="text-xs font-medium text-brand-600 hover:underline"
                     >
                       Download
                     </a>
-                  )}
+                  ) : j.output_file_url && j.status === "done" ? (
+                    <span className="text-xs text-ink-400" title="Download links expire after 1 hour">
+                      Link expired
+                    </span>
+                  ) : null}
                 </li>
               ))}
             </ul>

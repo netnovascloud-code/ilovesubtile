@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
+import { EzoicLoader } from "@/components/ads/EzoicLoader";
 import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
@@ -52,8 +52,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={jakarta.variable}>
       <head>
-        {/* Ezoic — display ads. No-op until the domain is verified in Ezoic. */}
-        <Script id="ezoic-sa" src="//www.ezojs.com/ezoic/sa.min.js" strategy="afterInteractive" async />
+        {/* Ezoic — display ads. Loaded only for Free users when ADS_ENABLED is
+            on (see EzoicLoader); never injected for Pro/Business or while ads
+            are globally disabled. */}
+        <EzoicLoader />
         {/* Site-level structured data: WebSite (with sitelink-search action),
             Organization, and a SiteNavigationElement listing every category
             hub. Helps Google understand the catalogue and surface category

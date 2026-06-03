@@ -556,6 +556,9 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
     inputLabel: "Your text",
     inputPlaceholder: "Paste or type your text here…",
     outputLabel: "Statistics",
+    // Monospace so the space-padded "Label: value" columns line up — in a
+    // proportional font the stats collapse into an unreadable ragged block.
+    mono: true,
     run: (input) => {
       const words = (input.trim().match(/\S+/g) ?? []).length;
       const chars = input.length;

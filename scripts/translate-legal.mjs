@@ -16,6 +16,9 @@
 // v2 — switched from block-by-block translate (~25 large calls per
 // locale-doc, instantly rate-limited) to single batched JSON-array call
 // per locale-doc using Mistral small.
+// v2.1 — re-trigger to backfill the single doc missed in the previous run
+// (Turkish Terms; rate-limit blip). Script is resumable — completed docs
+// are skipped automatically.
 
 import { writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";

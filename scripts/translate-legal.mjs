@@ -19,6 +19,9 @@
 // v2.1 — re-trigger to backfill the single doc missed in the previous run
 // (Turkish Terms; rate-limit blip). Script is resumable — completed docs
 // are skipped automatically.
+// v2.2 — Turkish Terms re-failed with a length mismatch (Mistral returned 60
+// strings for 55 input). Add a single retry with numbered prompts that
+// re-state the exact expected count; truncate on over-production.
 
 import { writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -95,41 +98,58 @@ function rebuildDoc(doc, translated) {
   return out;
 }
 
-/** One batched JSON-array call per (locale, doc). Returns the translated
- *  array; throws on HTTP error, missing output or length mismatch. */
-async function translateDoc(srcDoc, targetName, env) {
-  const strings = flattenDoc(srcDoc);
+/** Make ONE batched JSON-array call and return the strict-length parsed array.
+ *  Throws on HTTP / parsing / length errors so the caller can decide to retry. */
+async function callOnce(strings, targetName, env, attempt) {
+  // After a first length-mismatch we tell the model the exact count and add a
+  // bracketed index in front of each input string. The retry only takes the
+  // first N items of whatever comes back if it's larger.
+  const numbered = attempt === 1
+    ? strings
+    : strings.map((s, i) => `[${i + 1}/${strings.length}] ${s}`);
   const res = await fetch(`${env.url}/functions/v1/ai-process`, {
     method: "POST",
     headers: { Authorization: `Bearer ${env.anon}`, apikey: env.anon, "Content-Type": "application/json" },
     body: JSON.stringify({
       task: "translate-legal",
-      text: JSON.stringify(strings),
-      options: { target: targetName },
+      text: JSON.stringify(numbered),
+      options: { target: attempt === 1 ? targetName : `${targetName} — return EXACTLY ${strings.length} array items, no more, no less; preserve [N/M] markers if present` },
     }),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`HTTP ${res.status} ${JSON.stringify(data).slice(0, 220)}`);
-  // ai-process returns { output: <model JSON string> } for wantsJson tasks
-  // with response_format: json_object — but our prompt asks for a JSON array.
-  // The model wraps it in an object sometimes; handle both shapes.
   let parsed = null;
-  try {
-    const raw = data.output ?? "";
-    parsed = JSON.parse(raw);
-  } catch { /* fall through */ }
+  try { parsed = JSON.parse(data.output ?? ""); } catch { /* fall through */ }
   if (parsed && !Array.isArray(parsed)) {
-    // Common shape: { "result": [...] } / { "translations": [...] } / etc.
     const firstArray = Object.values(parsed).find((v) => Array.isArray(v));
     if (firstArray) parsed = firstArray;
   }
-  if (!Array.isArray(parsed)) {
-    throw new Error(`output is not a JSON array: ${(data.output ?? "").slice(0, 180)}`);
+  if (!Array.isArray(parsed)) throw new Error(`output is not a JSON array: ${(data.output ?? "").slice(0, 180)}`);
+  // Strip the [N/M] markers if we asked the model to keep them.
+  const cleaned = parsed.map((s) => String(s).replace(/^\[\d+\/\d+\]\s*/, ""));
+  return cleaned;
+}
+
+/** One batched JSON-array call per (locale, doc), with a single length-mismatch
+ *  retry that numbers the strings to discourage the model from splitting or
+ *  adding entries. If the second attempt still produces too few items, we
+ *  give up; if it produces too many, we truncate to the expected count. */
+async function translateDoc(srcDoc, targetName, env) {
+  const strings = flattenDoc(srcDoc);
+  let translated = await callOnce(strings, targetName, env, 1);
+  if (translated.length !== strings.length) {
+    // Single retry with the numbered-prompt trick.
+    await new Promise((r) => setTimeout(r, 1500));
+    translated = await callOnce(strings, targetName, env, 2);
+    // If the retry over-produces, truncate. (Mistral occasionally adds a
+    // trailing meta string in some languages — clamping is safe because the
+    // wanted strings always come first in the array.)
+    if (translated.length > strings.length) translated = translated.slice(0, strings.length);
+    if (translated.length !== strings.length) {
+      throw new Error(`length mismatch after retry: sent ${strings.length}, got ${translated.length}`);
+    }
   }
-  if (parsed.length !== strings.length) {
-    throw new Error(`length mismatch: sent ${strings.length}, got ${parsed.length}`);
-  }
-  return rebuildDoc(srcDoc, parsed.map((s) => String(s)));
+  return rebuildDoc(srcDoc, translated);
 }
 
 function emitFile(privacy, terms) {

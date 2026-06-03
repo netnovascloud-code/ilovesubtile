@@ -8363,5 +8363,200 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
         ]
       }
     ]
+  },
+  "tr": {
+    "h1": "Hizmet Şartları",
+    "lastUpdated": "2026-06-02",
+    "lastUpdatedLabel": "Son güncelleme: %DATE% · Konvertools'u kullanarak bu şartları kabul etmiş olursunuz.",
+    "sections": [
+      {
+        "id": "acceptance",
+        "title": "1. Kabul",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Bu Hizmet Şartları (\"Şartlar\"), sizin (\"Kullanıcı\") ile Konvertools'un yayıncısı (\"Yayımcı\", \"biz\", \"bizim\") arasında, Konvertools web sitesinin ve tüm ilgili araçların, API'lerin ve hizmetlerin (topluca \"Hizmet\") kullanımınızla ilgili olarak bağlayıcı bir anlaşma oluşturur. Bir hesap oluşturmak, kayıt sırasında kabul onay kutusunu işaretlemek veya Hizmet'teki herhangi bir aracı basitçe kullanmak suretiyle, bu Şartları tamamen okuduğunuzu, anladığınızı ve kabul ettiğinizi teyit etmiş olursunuz; ayrıca Gizlilik Politikamızla birlikte bu Şartları da kabul etmiş sayılırsınız."
+          }
+        ]
+      },
+      {
+        "id": "service",
+        "title": "2. Hizmet",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Konvertools, dosya dönüştürme yardımcı programları, belge ve görüntü işleme araçları, AI destekli metin yardımcı programları, gösterge niteliğinde güvenlik araçları (e-posta doğrulayıcı, phishing tespit aracı, URL tarayıcı, SSL sertifika denetleyicisi, parola ihlali denetleyicisi) ve geliştirici yardımcı programları olmak üzere bir katalog sunmaktadır. Araçların çoğu tamamen tarayıcınızda çalışırken, bazıları sunucu işlemesi gerektirmektedir. Hizmet, **\"olduğu gibi\"** ve **\"mevcut olduğu şekilde\"** herhangi bir türde açık veya zımni garanti olmaksızın sunulmaktadır; bu garantiler ticari uygunluk, belirli bir amaca uygunluk veya ihlal etmeme hakkını da kapsar."
+          }
+        ]
+      },
+      {
+        "id": "liability",
+        "title": "3. Sorumluluk sınırlaması — dikkatlice okuyun",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**Yasal olarak izin verilen maksimum ölçüde, Yayımcı, Hizmet'in kullanımından veya kullanamamanızdan kaynaklanan herhangi bir zarar için herhangi bir sorumluluk kabul etmez.** Özellikle, aşağıdakilerden kaynaklanan zararlar için Yayımcı'nın sorumlu olmayacağını kabul ve taahhüt edersiniz:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "veri kaybı, bozulmuş veya yanlış dosyalar veya başarısız dönüştürmeler;",
+              "araç çıktısına dayanarak aldığınız kararlar, finansal, ticari veya diğer herhangi bir türden kararlar;",
+              "downtime, gecikme veya herhangi bir özelliğin geçici olarak kullanılamaması;",
+              "üçüncü taraf hizmet arızaları (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, barındırma sağlayıcıları);",
+              "dolaylı, rastlantısal, özel, sonuçsal veya cezai nitelikteki herhangi bir zarar;",
+              "iddia doğuran olaydan önceki on iki (12) aylık dönemde bize ödediğiniz ücretleri aşan herhangi bir toplam miktar, ücretsiz katman kullanıcıları için yüz (100) avro ile sınırlıdır."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "**Güvenlik araçları**: URL Tarayıcı, Phishing Tespit Aracı, E-posta Doğrulayıcı, SSL Sertifika Denetleyicisi ve Parola İhlali Denetleyicisi yalnızca **bilgilendirici ve gösterge niteliğinde amaçlarla** sunulmaktadır. Bu araçlar üçüncü taraf sinyallerini (Google Safe Browsing, genel DNS, HaveIBeenPwned, canlı TLS el sıkışmaları) ve büyük dil modeli sezgilerini bir araya getirir. **Güvenlik, geçerlilik veya riskin olmadığına dair bir garanti teşkil etmezler**. Yeni phishing sayfaları, itibar veritabanlarının kataloglayabileceğinden daha hızlı ortaya çıkar; aracımızden geçen bir e-posta yine de aktif olmayan veya sahte olabilir; geçerli bir SSL sertifikası bir sitenin içeriğini doğrulamaz. Yayımcı, hizmetin güvenli olarak işaretlediği bir phishing e-postasından, hizmetin tanımlayamadığı güvensiz bir bağlantıdan, hizmetin geçerli olarak işaretlediği bir adrese gönderilen bir işlem e-postasından veya bu araçlara dayanarak alınan herhangi bir güvenlik kararından kaynaklanan herhangi bir zarar için açıkça sorumluluk reddeder. Kullanıcı, bu tür kararların tek sorumluluğunu üstlenir."
+          }
+        ]
+      },
+      {
+        "id": "acceptable-use",
+        "title": "4. Kabul edilebilir kullanım",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Hizmet'i aşağıdakiler için kullanmama konusunda anlaşırsınız:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "bulunduğunuz yargı alanında veya Fransa'da yasa dışı olan içeriği yüklemek, işlemek veya dağıtmak;",
+              "gerekli haklara sahip olmadığınız dosyaları işlemek (yetkisiz olarak telif hakkıyla korunan eserler, işleme hakkına sahip olmadığınız kişisel veriler, gizli bilgiler);",
+              "dolandırıcılık, kara para aklama, terörizmin finansmanı veya herhangi bir suç faaliyeti gerçekleştirmek veya kolaylaştırmak;",
+              "AI insanileştiriciyi, AI metin araçlarını veya diğer herhangi bir özelliği intihal yapmak, üçüncü bir tarafı aldatmak, akademik, işe alım, reklam ağları gibi değerlendirme sistemlerini onların kurallarına aykırı şekilde manipüle etmek veya uygulanabilir yasayı ihlal edecek şekilde yanıltmak için kullanmak;",
+              "Hizmet'in çalışmasını veya kullanılabilirliğini engellemek, tersine mühendislik uygulamak, kazımak, hız sınırlarını kötüye kullanmak veya müdahale etmek amacıyla girişimde bulunmak;",
+              "kotaları, ödeme gerekliliklerini veya mevcut herhangi bir kısıtlamayı aşmaya çalışmak;",
+              "ücretsiz katman kotalarını çoğaltmak için birden fazla hesap oluşturmak veya hesabınızı planınızın izin verdiğinden daha fazla kişi arasında paylaşmak."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Bu bölümün ihlal edildiğine dair makul gerekçelerimiz olması durumunda hesabınızı hemen ve bildirimde bulunmaksızın askıya alabilir veya sonlandırabiliriz; herhangi bir türde geri ödeme hakkına sahip olmazsınız."
+          }
+        ]
+      },
+      {
+        "id": "content",
+        "title": "5. İçeriğiniz",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Hizmet'e gönderdiğiniz dosya ve metinlerin tüm haklarına, unvanına ve çıkarına sahip olursunuz. Size yalnızca talep ettiğiniz aracı sunmak amacıyla işlemek üzere, sınırlı, ücretsiz, dünya çapında bir lisans verirsiniz. Bu lisans, sonucun size iade edildiği anda sona erer (sunucu yardımlı araçlar) veya hiç oluşmaz (tarayıcıda yalnızca çalışan araçlar, çünkü dosyanız bize ulaşmaz). İçeriğinizin sahibi olmadığımız gibi, AI modellerini eğitmek için kullanmayacağız ve kullanmayacağız."
+          }
+        ]
+      },
+      {
+        "id": "accounts",
+        "title": "6. Hesaplar",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Hesap oluşturmak için en az on altı (16) yaşında olmalısınız. Kimlik bilgilerinizi gizli tutmaktan ve hesabınız altında gerçekleşen herhangi bir faaliyetten siz sorumlusunuz. Herhangi bir yetkisiz erişim şüphesi durumunda derhal [support@konvertools.com](mailto:support@konvertools.com) adresinden bizi bilgilendirin."
+          }
+        ]
+      },
+      {
+        "id": "subscriptions",
+        "title": "7. Abonelikler, faturalandırma ve iadeler",
+        "blocks": [
+          {
+            "kind": "ul",
+            "items": [
+              "**Planlar**: Ücretsiz (€0), Pro (€12/ay veya €99/yıl), İş (€39/ay veya €349/yıl). Plan özellikleri ve kotaları, satın alma sırasında [Fiyatlandırma sayfamızda](/pricing) açıklandığı şekildedir. Plan özelliklerinde 30 günlük bildirimle değişiklik yapma hakkımız saklıdır.",
+              "**Otomatik yenileme**: Aylık ve yıllık abonelikler, iptal edilene kadar aynı sıklıkta otomatik olarak yenilenir. Aboneliğinizi kontrol panelinizden herhangi bir zamanda iptal edebilirsiniz; iptal, cari faturalandırma döneminin sonunda geçerli olur. O tarihe kadar erişiminizi korursunuz.",
+              "**Cayma hakkı (AB)**: Fransız Tüketici Kanunu'nun L. 221-28 maddesi uyarınca, ilk 14 günlük cayma süresi içinde Hizmet'i aktif olarak kullanmanız durumunda sözleşmenin hemen icrasına açıkça rıza gösterir ve cayma hakkından feragat etmiş sayılırsınız. Ücretli herhangi bir özelliği kullanmamışsanız, [support@konvertools.com](mailto:support@konvertools.com) adresine e-posta göndererek 14 gün içinde cayabilir ve size 14 gün içinde tam iade yaparız.",
+              "**Kısmi iadeler yoktur**: yukarıdaki cayma senaryosu dışında, cari faturalandırma dönemine ait ücretler iade edilemez.",
+              "**Krediler**: Tek seferlik paketler (\"Starter\", \"Growth\", \"Scale\", \"Studio\") olarak satın alınan API kredileri **süresiz olarak geçerlidir**. İş planı abonelerine her ay otomatik olarak verilen 300 kredi, takvim ayının sonunda sona erer ve **iade edilemez**.",
+              "**Fiyat değişiklikleri**: fiyatları 30 günlük bildirimle değiştirebiliriz. Mevcut aboneler, bir sonraki yenileme tarihlerine kadar mevcut fiyatlarını korurlar.",
+              "**Vergi**: fiyatlar, ilgili yerlerde KDV hariç gösterilir. Stripe, bulunduğunuz yargı alanındaki herhangi bir vergiyi toplar ve öder."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "api",
+        "title": "8. Genel REST API",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "İş planı, kontrol panelinizden oluşturduğunuz API anahtarlarıyla kimlik doğrulanan genel bir REST API sunar. API kullanımı ayrıca aşağıdakilerle de düzenlenir:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Hız sınırları**: Dakikada 60 istek (Pro ek ücretleri) veya dakikada 120 istek (İş). Sürdürülebilir kötüye kullanım, geçici olarak sınırlama veya kalıcı anahtar iptaline yol açabilir.",
+              "**Kredi tüketimi**: her API çağrısı, [API dokümantasyonumuzda](/api) yayınlanan oranlarda kredileri düşürür. Başarısız çağrılar (5xx yanıtları) kredileri düşürmez.",
+              "**Anahtar güvenliği**: API anahtarlarınızı güvenli bir şekilde saklamaktan ve şüpheli durumlarda değiştirmekten siz sorumlusunuz. Suistimal şüphesi durumunda herhangi bir anahtarı herhangi bir zamanda iptal edebiliriz.",
+              "**Yukarı akış kullanımı kabul edilebilirliği**: API'miz üzerine kurulu uygulamaların, bu Şartlara, özellikle kabul edilebilir kullanım bölümüne uyması gerekir. API anahtarlarınızı son kullanıcılara maruz bırakmamalısınız (hizmetinizi alt lisanslamak yerine)."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ip",
+        "title": "9. Fikri mülkiyet",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Hizmet'in adı, logosu, kodu, tasarımı, dokümantasyonu, veritabanı yapısı ve toplanmış içeriği, Yayımcı'nın münhasır mülkiyetindedir ve Fransız ve uluslararası fikri mülkiyet hukuku tarafından korunmaktadır. Size, Hizmet'in amaçlanan şekilde kullanılmasını sağlamak için kesinlikle gerekli olanın dışında herhangi bir lisans verilmemektedir. Uygulanabilir yasanın açıkça izin verdiği durumlar hariç, Hizmet'in veya herhangi bir bölümünün kopyasını çıkarmayacak, değiştirmeyecek, tersine mühendislik uygulamayacak veya türev eserler oluşturmayacaksınız."
+          }
+        ]
+      },
+      {
+        "id": "indemnity",
+        "title": "10. Tazminat",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Bu Şartların ihlali (a), herhangi bir yasanın veya üçüncü taraf hakkının ihlali (b) veya Hizmet'e gönderdiğiniz herhangi bir içeriğinizden kaynaklanan (c) herhangi bir talep, kayıp, zarar, sorumluluk, maliyet veya masraftan (makul avukatlık ücretleri dahil) Yayımcı'yı tazmin edeceğinizi ve zararsız kılacağınızı kabul edersiniz."
+          }
+        ]
+      },
+      {
+        "id": "changes",
+        "title": "11. Şartlardaki değişiklikler",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Şartlarımızı zaman zaman değiştirebiliriz. Önemli değişiklikler, etkili olmalarından en az otuz (30) gün önce hesap sahiplerine e-posta yoluyla bildirilecektir. Bu süre geçtikten sonra Hizmet'i kullanmaya devam etmeniz, değiştirilmiş Şartları kabul etmiş sayılırsınız. En son versiyon her zaman [https://konvertools.com/terms](https://konvertools.com/terms) adresinde mevcuttur."
+          }
+        ]
+      },
+      {
+        "id": "termination",
+        "title": "12. Sonlandırma",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Hesabınızı herhangi bir zamanda kontrol panelinizden sonlandırabilirsiniz. Şartları ihlal etmeniz, Hizmet'i kötüye kullanmanız veya yinelenen aboneliği ödememeniz durumunda hesabınızı hemen ve bildirimde bulunmaksızın sonlandırabilir veya askıya alabiliriz. Sonlandırma sonrasında verileriniz, Gizlilik Politikamızda açıklanan şekilde fatura kayıtları ve rıza kayıtları hariç, otuz (30) gün içinde silinir."
+          }
+        ]
+      },
+      {
+        "id": "law",
+        "title": "13. Yetkili hukuk ve yargı yeri",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Bu Şartlar, Fransa hukukuna tabidir. Bu Şartlardan veya Hizmet'ten kaynaklanan veya bağlantılı olan herhangi bir anlaşmazlık, Avrupa Birliği veya uygulanabilir ulusal hukuk uyarınca tüketicinin ikametgah ülkesindeki zorunlu dava hakkı geçerli olmadığı sürece, Paris mahkemelerinin münhasır yargı yetkisine tabi olacaktır. Hukuki işlem başlatmadan önce, anlaşmazlığı [support@konvertools.com](mailto:support@konvertools.com) adresine yazarak dostane şekilde çözmeyi kabul edersiniz. AB tüketicileri ayrıca anlaşmazlıklarını [ec.europa.eu/consumers/odr](https://ec.europa.eu/consumers/odr) adresindeki Avrupa Komisyonu'nun Çevrimiçi Anlaşmazlık Çözüm platformunu da kullanabilir."
+          }
+        ]
+      },
+      {
+        "id": "misc",
+        "title": "14. Çeşitli hükümler",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Bu Şartların herhangi bir hükmü geçersiz veya uygulanamaz bulunursa, kalan hükümler tamamen yürürlükte kalır. Herhangi bir hakkın veya hükmün uygulanmaması, o hakkın feragat edildiği anlamına gelmez. Bu Şartlar (Gizlilik Politikası ve satın alma sırasında referans verilen plan spesifik hükümleriyle birlikte), sizin ve Yayımcı arasındaki Hizmet'e ilişkin tüm anlaşmayı oluşturur."
+          }
+        ]
+      }
+    ]
   }
 };

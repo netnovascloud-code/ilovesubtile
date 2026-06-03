@@ -23,6 +23,7 @@ import {
   Binary,
   Link2,
   KeyRound,
+  Lock,
   Hash,
   Code,
   Minimize2,
@@ -1373,6 +1374,60 @@ TOOLS.push({
     { q: "How does it know if a password is compromised?", a: "HaveIBeenPwned aggregates billions of credentials exposed in real data breaches. We match your hash suffix against that list locally to count how many times it appeared." },
     { q: "Should I stop using a leaked password?", a: "Yes. If a password appears in any breach, attackers have it on credential-stuffing lists. Change it everywhere you used it and pick a unique one." },
     { q: "Is this GDPR-friendly?", a: "Yes. No password, email or personal data is transmitted or stored — only an anonymous 5-character hash prefix is queried." },
+  ],
+});
+
+// SSH key generator — RSA (WebCrypto) and Ed25519 (@noble/curves), both
+// produced in standard OpenSSH formats so the output is drop-in usable for
+// GitHub / authorized_keys / cloud servers. 100% client-side: the private
+// key never leaves the browser.
+TOOLS.push({
+  slug: "ssh-key-generator", phase: 1, kind: "client", category: "security", icon: KeyRound, tone: "rose",
+  name: "SSH Key Generator",
+  short: "Generate an RSA or Ed25519 SSH key pair in your browser.",
+  h1: "Free SSH Key Generator — RSA & Ed25519 (OpenSSH format)",
+  metaTitle: "SSH Key Generator — Free RSA & Ed25519 in OpenSSH Format | Konvertools",
+  metaDescription: "Generate an Ed25519 or RSA SSH key pair (2048 / 3072 / 4096 bits) directly in your browser. Output in OpenSSH format, ready for GitHub, AWS or authorized_keys. The private key never leaves your device.",
+  primaryKeyword: "ssh key generator",
+  accept: [], freeMaxMb: 0, outputType: "Key pair",
+  steps: [
+    { title: "Pick an algorithm", body: "Ed25519 (recommended) or RSA 2048/3072/4096." },
+    { title: "Generate locally", body: "Your browser does the math — nothing is sent." },
+    { title: "Copy or download", body: "Public key in OpenSSH format, private key as -----BEGIN OPENSSH PRIVATE KEY-----." },
+  ],
+  faqs: [
+    { q: "Is the SSH key generator free?", a: "Yes — completely free and unlimited. The key pair is generated 100% in your browser using WebCrypto for RSA and the audited @noble/curves library for Ed25519." },
+    { q: "Does the private key ever leave my browser?", a: "No. Generation happens locally; nothing is uploaded, logged or stored. You can verify by inspecting your network tab during generation — zero outbound requests." },
+    { q: "Ed25519 or RSA — which should I pick?", a: "Ed25519 if your targets support it (GitHub, modern OpenSSH ≥ 6.5, recent cloud providers): faster, smaller and considered more secure at equivalent work. Pick RSA 4096 for legacy systems that don't accept Ed25519 yet." },
+    { q: "What format is the output?", a: "Both keys are emitted in the standard OpenSSH format: the public key is a single ssh-ed25519 / ssh-rsa line you can paste into ~/.ssh/authorized_keys or a GitHub SSH key, and the private key is a -----BEGIN OPENSSH PRIVATE KEY----- block accepted by ssh, git and every modern SSH agent." },
+    { q: "Can I add a passphrase?", a: "Not in this generator — the key is emitted unencrypted. Encrypt it after the fact with `ssh-keygen -p -f <key>` if you want a passphrase, or use an SSH agent / a hardware token (YubiKey) for stronger protection." },
+  ],
+});
+
+// Text encryptor — AES-256-GCM with a PBKDF2-derived key (SHA-256, 600 000
+// iterations, OWASP 2023 recommendation). Same tool covers encrypt and
+// decrypt via a mode toggle so users carry one URL between both ends of the
+// conversation. 100% client-side.
+TOOLS.push({
+  slug: "text-encryptor", phase: 1, kind: "client", category: "security", icon: Lock, tone: "rose",
+  name: "Text Encryptor (AES-256)",
+  short: "Encrypt and decrypt any text with a password — AES-256-GCM.",
+  h1: "Free AES-256 Text Encryptor — Password-protected Messages",
+  metaTitle: "AES-256 Text Encryptor — Free Password Encryption | Konvertools",
+  metaDescription: "Encrypt or decrypt any text with a password using AES-256-GCM. PBKDF2 with 600 000 iterations (OWASP 2023). 100% in your browser — your message and your password never leave the device.",
+  primaryKeyword: "encrypt text online",
+  accept: [], freeMaxMb: 0, outputType: "Ciphertext",
+  steps: [
+    { title: "Pick a mode", body: "Encrypt to lock a message, or Decrypt to read one." },
+    { title: "Enter a strong password", body: "Used to derive the AES key locally via PBKDF2." },
+    { title: "Copy the result", body: "A self-contained base64 blob you can send anywhere." },
+  ],
+  faqs: [
+    { q: "What encryption does it use?", a: "AES-256-GCM (authenticated encryption) with the key derived from your password via PBKDF2-HMAC-SHA-256 over 600 000 iterations — the OWASP 2023 recommendation. A fresh 16-byte salt and 12-byte IV are generated for every encryption, so the same message with the same password never produces the same ciphertext twice." },
+    { q: "Is my password sent to a server?", a: "No. Everything happens in your browser via the WebCrypto API. Neither the password, the plaintext, nor the ciphertext is sent or logged." },
+    { q: "What if I lose the password?", a: "The message is unrecoverable. There is no backdoor, no reset link and no master key — that's the whole point of strong encryption. Store the password in a password manager." },
+    { q: "What's the output format?", a: "A single base64 string that contains the salt, the IV and the authenticated ciphertext, in that order. Decryption reads them back automatically — you only need to paste the blob and re-enter the password." },
+    { q: "Can I encrypt files this way?", a: "This tool is text-only. For files, use the dedicated file-encryption flow when it ships, or copy the file's base64 representation in and treat it as text (works for small files but doesn't scale)." },
   ],
 });
 

@@ -27,7 +27,7 @@ export const PRIVACY_EN: LegalDoc = {
       id: "controller",
       title: "2. Data controller",
       blocks: [
-        { kind: "p", text: "For the purposes of the EU General Data Protection Regulation (Regulation (EU) 2016/679, \"GDPR\"), the data controller is the publisher of the Service. Contact for any privacy enquiry: [privacy@konvertools.com](mailto:privacy@konvertools.com)." },
+        { kind: "p", text: "For the purposes of the EU General Data Protection Regulation (Regulation (EU) 2016/679, \"GDPR\"), the data controller is the publisher of the Service. Contact for any privacy enquiry: [support@konvertools.com](mailto:support@konvertools.com)." },
       ],
     },
     {
@@ -73,9 +73,21 @@ export const PRIVACY_EN: LegalDoc = {
     },
     {
       id: "rights",
-      title: "6. Your rights",
+      title: "6. Your rights under the GDPR",
       blocks: [
-        { kind: "p", text: "You have the rights of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), portability (Art. 20), objection (Art. 21) and to withdraw consent at any time without affecting the lawfulness of prior processing. You also have the right to lodge a complaint with the CNIL (France) or your local supervisory authority. To exercise any right, email [privacy@konvertools.com](mailto:privacy@konvertools.com) from the address registered on your account. We will respond within thirty (30) days, as required by GDPR Art. 12(3)." },
+        { kind: "p", text: "As a data subject under Regulation (EU) 2016/679 of 27 April 2016 (the \"GDPR\"), you enjoy the following rights, exercisable at any time and free of charge from the email address registered on your account:" },
+        { kind: "ul", items: [
+          "**Right of access** (GDPR Art. 15) — obtain confirmation that we process your data and a copy of it.",
+          "**Right of rectification** (GDPR Art. 16) — have inaccurate or incomplete data corrected.",
+          "**Right of erasure / right to be forgotten** (GDPR Art. 17) — have your data deleted when the legal grounds for processing no longer apply.",
+          "**Right to restriction of processing** (GDPR Art. 18) — temporarily freeze processing while a dispute is resolved.",
+          "**Right to data portability** (GDPR Art. 20) — receive your data in a structured, machine-readable format.",
+          "**Right to object** (GDPR Art. 21) — object at any time, on grounds relating to your particular situation, to processing based on our legitimate interests.",
+          "**Right to withdraw consent** (GDPR Art. 7(3)) — for processing based on consent, withdraw it at any time without affecting the lawfulness of prior processing.",
+          "**Right not to be subject to automated decision-making** (GDPR Art. 22) — none of our processing involves solely-automated decisions producing legal effects on you.",
+        ] },
+        { kind: "p", text: "To exercise any of these rights, write to [support@konvertools.com](mailto:support@konvertools.com) from the address registered on your account. We will respond within one (1) month, as required by GDPR Art. 12(3); the period may be extended by two further months for particularly complex requests, in which case we will inform you within the first month." },
+        { kind: "p", text: "You also have the **right to lodge a complaint with a supervisory authority** (GDPR Art. 77). For users in France, this is the **Commission Nationale de l'Informatique et des Libertés (CNIL)** — 3 Place de Fontenoy, TSA 80715, 75334 PARIS CEDEX 07, France — telephone +33 (0)1 53 73 22 22 — online complaints at [www.cnil.fr/en/plaintes](https://www.cnil.fr/en/plaintes). For users in other EU/EEA Member States, you may lodge a complaint with your **national supervisory authority** (the list is maintained by the European Data Protection Board at [edpb.europa.eu](https://edpb.europa.eu/about-edpb/about-edpb/members_en)). You may also seek a judicial remedy under GDPR Art. 79." },
       ],
     },
     {
@@ -109,14 +121,32 @@ export const PRIVACY_EN: LegalDoc = {
     },
     {
       id: "security",
-      title: "9. Security",
+      title: "9. Security of processing (GDPR Art. 32)",
       blocks: [
-        { kind: "p", text: "All traffic to and from the Service is encrypted with TLS 1.2 or higher. Passwords are stored as Argon2 hashes by Supabase Auth. We check new passwords against the public HaveIBeenPwned k-anonymity API client-side, so a known-breached password cannot be used. API keys are stored only as SHA-256 hashes. Database rows are protected by row-level security policies that ensure one user cannot read another user's data. Despite these measures, no system is perfectly secure; you accept the residual risk inherent to any online service." },
+        { kind: "p", text: "In accordance with GDPR Art. 32, we implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk:" },
+        { kind: "ul", items: [
+          "**Encryption in transit** — all traffic to and from the Service is protected by TLS 1.2 or higher.",
+          "**Encryption at rest** — Supabase encrypts the underlying database (including your account data) with AES-256.",
+          "**Password handling** — your password is hashed by Supabase Auth and never stored in plaintext. We additionally check new passwords against the HaveIBeenPwned k-anonymity API client-side to refuse known-breached passwords.",
+          "**API keys** — stored only as SHA-256 hashes with a 12-character display prefix. The raw key is shown to you exactly once at creation and is irrecoverable thereafter.",
+          "**Payment data** — never seen or stored by us; the card payment flow is fully delegated to Stripe (PCI-DSS Level 1 certified).",
+          "**Access control** — row-level security policies prevent one user from reading another user's data; service-role keys are restricted to Edge Functions.",
+          "**File hygiene** — no uploaded file is ever retained: browser-only tools never transmit anything, and server-assisted tools delete temporary buffers within 30 minutes.",
+          "**Vulnerability response** — security issues can be reported in confidence to [support@konvertools.com](mailto:support@konvertools.com).",
+        ] },
+        { kind: "p", text: "Despite these measures, no system is perfectly secure; you accept the residual risk inherent to any online service." },
+      ],
+    },
+    {
+      id: "minimisation",
+      title: "10. Data minimisation and purpose limitation (GDPR Art. 5)",
+      blocks: [
+        { kind: "p", text: "In accordance with GDPR Art. 5(1)(c), we collect only the data strictly necessary for the purposes set out in this Policy. Concretely: we do not collect your IP address beyond ephemeral routing logs, we do not fingerprint your browser, we do not run behavioural analytics, and we never use any file you process to train AI models. We do not collect special-category data (Art. 9) or data relating to criminal offences (Art. 10). Data are kept accurate and up to date (Art. 5(1)(d)); you can correct any inaccuracy at any time via your dashboard or by contacting [support@konvertools.com](mailto:support@konvertools.com)." },
       ],
     },
     {
       id: "retention",
-      title: "10. Retention",
+      title: "11. Retention",
       blocks: [
         { kind: "ul", items: [
           "Profile data: kept while your account exists, deleted within thirty (30) days of account closure.",
@@ -129,23 +159,23 @@ export const PRIVACY_EN: LegalDoc = {
     },
     {
       id: "minors",
-      title: "11. Minors",
+      title: "12. Minors",
       blocks: [
         { kind: "p", text: "The Service is **not directed at children under sixteen (16)**. If you are under that age you must not create an account. We do not knowingly collect data from minors; if we become aware that we have, we will delete it." },
       ],
     },
     {
       id: "changes",
-      title: "12. Changes to this policy",
+      title: "13. Changes to this policy",
       blocks: [
         { kind: "p", text: "We may amend this Privacy Policy from time to time. Substantive changes will be announced by email to account holders at least thirty (30) days before they take effect. The latest version is always available at [https://konvertools.com/privacy](https://konvertools.com/privacy)." },
       ],
     },
     {
       id: "contact",
-      title: "13. Contact",
+      title: "14. Contact",
       blocks: [
-        { kind: "p", text: "For any question about this policy or your data, write to [privacy@konvertools.com](mailto:privacy@konvertools.com). You may also lodge a complaint with the French data-protection authority (CNIL, [cnil.fr](https://www.cnil.fr/)) or with the supervisory authority of your country of residence." },
+        { kind: "p", text: "For any question about this policy or your data — including the exercise of any of your GDPR rights (see section 6) — write to [support@konvertools.com](mailto:support@konvertools.com). This single mailbox is our point of contact for privacy, security, billing and general support enquiries. You may also lodge a complaint with the French data-protection authority CNIL (3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — [www.cnil.fr](https://www.cnil.fr)) or with the supervisory authority of your country of residence." },
       ],
     },
   ],

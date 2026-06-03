@@ -69,7 +69,7 @@ export const TERMS_EN: LegalDoc = {
       id: "accounts",
       title: "6. Accounts",
       blocks: [
-        { kind: "p", text: "You must be at least sixteen (16) years old to create an account. You are responsible for keeping your credentials confidential and for any activity that occurs under your account. Notify us immediately at [security@konvertools.com](mailto:security@konvertools.com) of any suspected unauthorised access." },
+        { kind: "p", text: "You must be at least sixteen (16) years old to create an account. You are responsible for keeping your credentials confidential and for any activity that occurs under your account. Notify us immediately at [support@konvertools.com](mailto:support@konvertools.com) of any suspected unauthorised access." },
       ],
     },
     {
@@ -79,7 +79,7 @@ export const TERMS_EN: LegalDoc = {
         { kind: "ul", items: [
           "**Plans**: Free (€0), Pro (€12/month or €99/year), Business (€39/month or €349/year). Plan features and quotas are as described on our [Pricing page](/pricing) at the time of purchase. We reserve the right to amend plan features with 30 days' notice.",
           "**Auto-renewal**: monthly and annual subscriptions renew automatically at the same cadence until cancelled. You can cancel at any time from your dashboard; cancellation takes effect at the end of the current billing period. You retain access until that date.",
-          "**Right of withdrawal (EU)**: under Article L. 221-28 of the French Consumer Code, when you actively use the Service during the initial 14-day withdrawal period you expressly consent to the immediate performance of the contract and waive your right of withdrawal. If you have not used any paid feature, you may withdraw within 14 days by emailing [billing@konvertools.com](mailto:billing@konvertools.com) and we will issue a full refund within 14 days.",
+          "**Right of withdrawal (EU)**: under Article L. 221-28 of the French Consumer Code, when you actively use the Service during the initial 14-day withdrawal period you expressly consent to the immediate performance of the contract and waive your right of withdrawal. If you have not used any paid feature, you may withdraw within 14 days by emailing [support@konvertools.com](mailto:support@konvertools.com) and we will issue a full refund within 14 days.",
           "**No partial refunds**: outside the withdrawal scenario above, fees already paid for the current billing period are non-refundable.",
           "**Credits**: API credits purchased as one-time packs (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **never expire**. The 300 credits automatically granted each month to Business subscribers expire at the end of the calendar month and are **not refundable**.",
           "**Price changes**: we may amend prices with 30 days' notice. Existing subscribers retain their current price until their next renewal date.",
@@ -132,7 +132,7 @@ export const TERMS_EN: LegalDoc = {
       id: "law",
       title: "13. Governing law and jurisdiction",
       blocks: [
-        { kind: "p", text: "These Terms are governed by the laws of France. Any dispute arising out of or in connection with these Terms or the Service shall be submitted to the exclusive jurisdiction of the courts of Paris, France, except where a consumer's mandatory right of action in their country of residence prevails under European Union or applicable national law. Before commencing legal action, you agree to attempt to resolve the dispute amicably by writing to [legal@konvertools.com](mailto:legal@konvertools.com). EU consumers may also use the European Commission's Online Dispute Resolution platform at [ec.europa.eu/consumers/odr](https://ec.europa.eu/consumers/odr)." },
+        { kind: "p", text: "These Terms are governed by the laws of France. Any dispute arising out of or in connection with these Terms or the Service shall be submitted to the exclusive jurisdiction of the courts of Paris, France, except where a consumer's mandatory right of action in their country of residence prevails under European Union or applicable national law. Before commencing legal action, you agree to attempt to resolve the dispute amicably by writing to [support@konvertools.com](mailto:support@konvertools.com). EU consumers may also use the European Commission's Online Dispute Resolution platform at [ec.europa.eu/consumers/odr](https://ec.europa.eu/consumers/odr)." },
       ],
     },
     {

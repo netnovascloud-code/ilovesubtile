@@ -1,4 +1,4 @@
-// Konvertools smoke test (v38) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v39) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200

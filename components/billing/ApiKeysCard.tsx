@@ -189,9 +189,10 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
         open={pendingRevoke !== null}
         busy={revoking}
         options={{
-          title: "Revoke this API key?",
-          body: `"${pendingRevoke?.name || "API key"}" (${pendingRevoke?.key_prefix ?? ""}…) will stop working immediately and any app using it will get 401 errors. This can't be undone.`,
-          confirmLabel: "Revoke key",
+          title: "Revoke this API key permanently?",
+          body: `"${pendingRevoke?.name || "API key"}" (${pendingRevoke?.key_prefix ?? ""}…) — this action is irreversible. Every application currently using this key will stop working immediately and start receiving 401 errors. The key cannot be reactivated; you'll have to create a new one and update your integrations.`,
+          confirmLabel: "Yes, revoke permanently",
+          cancelLabel: "Cancel",
           danger: true,
         }}
         onConfirm={confirmRevoke}

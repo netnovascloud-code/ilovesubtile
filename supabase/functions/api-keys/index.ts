@@ -84,7 +84,9 @@ Deno.serve(async (req) => {
   if (action === "revoke") {
     const id = body.id as string;
     if (!id) return json({ error: "missing_id" }, { status: 400 });
-    await svc.from("api_keys").update({ revoked: true }).eq("id", id).eq("user_id", user.id);
+    // Soft-delete: keep the row (and its hash) for audit. revoked_at stamps
+    // the moment of revocation so the dashboard can show history.
+    await svc.from("api_keys").update({ revoked: true, revoked_at: new Date().toISOString() }).eq("id", id).eq("user_id", user.id);
     return json({ ok: true });
   }
 

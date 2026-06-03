@@ -35,7 +35,12 @@ function corsFor(req: Request): Record<string, string> {
 
 // Per-bucket FREE daily caps (signed-in free accounts). Pro/Business unlimited
 // within fair use. Anonymous users are gated client-side.
-const FREE_DAILY: Record<string, number> = { email: 5, url: 20, phishing: 3, ssl: 20, password: 20 };
+// KONVERTOOLS classification (Part 2): only tasks that genuinely USE AI to
+// understand meaning consume the AI quota. Email/URL/SSL/password are pure
+// code (DNS, Safe Browsing lookup, TLS handshake, hash lookup) — they're
+// unmetered for everyone. Only the phishing detector (Mistral interprets the
+// email's intent) is rate-limited.
+const FREE_DAILY: Record<string, number> = { phishing: 3 };
 
 // ── disposable-email blocklist (cached in module memory for the isolate) ──
 let DISPOSABLE: Set<string> | null = null;
@@ -400,8 +405,6 @@ Deno.serve(async (req) => {
   if (action === "validate_email") {
     const email = (body.email ?? "").trim().toLowerCase();
     if (!email) return json({ error: "bad_request", message: "Missing email." }, { status: 400 });
-    const gate = await enforceBucket(svc, userId, "email");
-    if (gate.blocked) return json(gate.body, { status: 429 });
 
     const SYNTAX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const syntaxOk = SYNTAX.test(email);
@@ -434,8 +437,6 @@ Deno.serve(async (req) => {
     let target = raw;
     if (!/^https?:\/\//i.test(target)) target = "http://" + target;
     try { new URL(target); } catch { return json({ error: "bad_request", message: "Invalid URL." }, { status: 400 }); }
-    const gate = await enforceBucket(svc, userId, "url");
-    if (gate.blocked) return json(gate.body, { status: 429 });
 
     const sbKey = Deno.env.get("GOOGLE_SAFE_BROWSING_KEY");
     if (!sbKey) return json({ error: "service_unavailable", message: "URL scanning is temporarily unavailable." }, { status: 503 });
@@ -449,8 +450,6 @@ Deno.serve(async (req) => {
   if (action === "password_check") {
     const sha1 = (body.sha1 ?? "").trim().toUpperCase();
     if (!/^[A-F0-9]{40}$/.test(sha1)) return json({ error: "bad_request", message: "Provide a full SHA-1 hash (40 hex chars). The password itself is never sent." }, { status: 400 });
-    const gate = await enforceBucket(svc, userId, "password");
-    if (gate.blocked) return json(gate.body, { status: 429 });
     const prefix = sha1.slice(0, 5), suffix = sha1.slice(5);
     try {
       const r = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`, { headers: { "Add-Padding": "true" }, signal: AbortSignal.timeout(10_000) });
@@ -471,8 +470,6 @@ Deno.serve(async (req) => {
     let host = raw;
     try { host = new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`).hostname; } catch { return json({ error: "bad_request", message: "Invalid URL." }, { status: 400 }); }
     if (!host || isPrivateHost(host)) return json({ error: "bad_request", message: "Only public hostnames can be checked." }, { status: 400 });
-    const gate = await enforceBucket(svc, userId, "ssl");
-    if (gate.blocked) return json(gate.body, { status: 429 });
     try {
       const der = await fetchLeafCert(host);
       const c = parseLeaf(der);

@@ -1279,15 +1279,18 @@ TOOLS.push(
 );
 
 // ── Konvertools — Security (Google Safe Browsing / Mistral / live TLS) ────────
-// All commercial-safe, GDPR-friendly. Server-metered ones (kind "ai") give
-// free accounts a small daily allowance; paying plans pass through. The
-// password breach checker is fully client-side (HaveIBeenPwned k-anonymity).
+// Classification rule: a tool is "ai" ONLY when understanding the MEANING of
+// the content is required. Email/URL/SSL checks are mechanical/technical
+// (DNS, reputation lookup, certificate parsing) → kind "client" so they don't
+// burn the user's AI quota or carry the AI badge. The phishing detector IS
+// AI because it interprets the email's intent.
 const secTool = (
   slug: string, icon: LucideIcon, name: string, short: string, h1: string,
   metaTitle: string, metaDescription: string, primaryKeyword: string,
   steps: { title: string; body: string }[], faqs: ToolFaq[],
+  kind: "ai" | "client" = "client",
 ): ToolDefinition => ({
-  slug, phase: 1, kind: "ai", category: "security", icon, tone: "rose",
+  slug, phase: 1, kind, category: "security", icon, tone: "rose",
   name, short, h1, metaTitle, metaDescription, primaryKeyword,
   accept: [], freeMaxMb: 20, outputType: "Report", steps, faqs,
 });
@@ -1300,7 +1303,7 @@ TOOLS.push(
     "ssl checker",
     [{ title: "Enter the website URL", body: "Any https site you want to check." }, { title: "We read the certificate", body: "A live TLS handshake fetches the cert." }, { title: "See validity & expiry", body: "Issuer, domains, days remaining and key strength." }],
     [
-      { q: "Is the SSL checker free?", a: "Yes. Free accounts get 20 checks per day; paying plans pass through within fair use. No API key is required." },
+      { q: "Is the SSL checker free?", a: "Yes — free and unlimited, even without an account. No AI quota is consumed because reading a certificate is a technical operation, not AI." },
       { q: "What does it report?", a: "Whether the certificate is currently valid, its expiry date and days remaining, the issuing certificate authority, the domain names it covers, and the public-key strength (e.g. RSA 2048 or EC P-256)." },
       { q: "Does it store my query?", a: "No. We open a live TLS connection to read the certificate and return the result in real time. Nothing is stored." },
       { q: "Why does a check sometimes fail?", a: "A few hosts are TLS 1.3-only or block direct connections; in that case the certificate can't be read this way. The vast majority of sites work." },
@@ -1313,7 +1316,7 @@ TOOLS.push(
     "email verifier free",
     [{ title: "Enter the address", body: "Any email you want to verify." }, { title: "We run live checks", body: "Syntax, DNS, MX records and disposable lists." }, { title: "Get a score", body: "0-100 reliability with a clear verdict." }],
     [
-      { q: "Is the email verifier free?", a: "Yes. Free accounts get 5 checks per day; Pro gets 500/month and Business effectively unlimited for fair use — ideal for bulk B2B list cleaning." },
+      { q: "Is the email verifier free?", a: "Yes — free and unlimited, even without an account. No AI quota is consumed: syntax / DNS / MX / disposable-list checks are mechanical, not AI. Bulk B2B list cleaning is fine within fair use." },
       { q: "How do you check if an email is valid?", a: "We validate the syntax, confirm the domain resolves in DNS, check it has mail (MX) records so it can receive email, and compare it against a public list of disposable providers." },
       { q: "Do you send an email to verify it?", a: "No. The checks are passive (DNS/MX lookups) — no message is ever sent to the address, so the owner is never notified." },
       { q: "What does 'risky' mean?", a: "The domain exists but has no MX records, so it likely cannot receive email — or the format is unusual. The address may bounce." },
@@ -1331,7 +1334,7 @@ TOOLS.push(
       { q: "Is my email content stored?", a: "No. The text is analysed in real time and never stored or used for training. No job record is kept." },
       { q: "Is the result a guarantee?", a: "No. It's an AI-assisted indication only. Always treat unexpected requests for credentials or payment with caution, regardless of the score." },
       { q: "What should I do with a dangerous result?", a: "Don't click any links, don't reply, and don't share information. Report it to your email provider and delete it." },
-    ]),
+    ], "ai"),
   secTool("url-scanner", Link2, "URL Scanner", "Check if a link is safe or leads to malware/phishing.",
     "Free URL Scanner — Check if a Link Is Safe or Malicious",
     "Free URL Scanner — Is This Link Safe? | Konvertools",
@@ -1339,7 +1342,7 @@ TOOLS.push(
     "check if link is safe",
     [{ title: "Paste the URL", body: "Any link you're unsure about." }, { title: "We check Safe Browsing", body: "Google's database of known unsafe sites." }, { title: "Get a verdict", body: "Safe or dangerous, with the threat type." }],
     [
-      { q: "Is the URL scanner free?", a: "Yes. Free accounts get 20 scans per day; paying plans pass through within fair use." },
+      { q: "Is the URL scanner free?", a: "Yes — free and unlimited, even without an account. No AI quota is consumed: querying a reputation database is a simple lookup, not AI." },
       { q: "How does it work?", a: "We check the URL against Google Safe Browsing — a constantly-updated database of sites known to host malware, phishing or unwanted software." },
       { q: "Does a 'safe' result mean the site is trustworthy?", a: "No. It means the link isn't in the known-threats database. Brand-new phishing pages can appear before they're catalogued, so stay cautious." },
       { q: "Do you visit the link?", a: "We don't render or download the page for you — we only query the reputation database with the URL." },

@@ -1,4 +1,4 @@
-# Konvertools smoke test — 208/208 passed
+# Konvertools smoke test — 210/210 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -83,10 +83,11 @@ _None._
 - loan-calculator
 - tip-calculator
 - bmi-calculator
-- scan-file
+- ssl-checker
 - email-checker
 - phishing-detector
 - url-scanner
+- password-checker
 - merge-pdf
 - split-pdf
 - rotate-pdf
@@ -212,5 +213,6 @@ _None._
 - AI security:validate_email (gmail valid)
 - AI security:validate_email (no domain)
 - AI security:scan_url (safe)
-- AI security:scan_file EICAR (dangerous)
+- AI security:ssl_check (valid cert)
+- AI security:password_check (known-pwned)
 - AI security:analyze_phishing (scam → flagged)

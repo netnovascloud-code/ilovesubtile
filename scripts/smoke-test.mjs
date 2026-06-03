@@ -1,4 +1,4 @@
-// Konvertools smoke test (v37) — runs in GitHub Actions against a freshly-built
+// Konvertools smoke test (v38) — runs in GitHub Actions against a freshly-built
 // prod Next server on localhost:3000. For each tool slug:
 //   1) navigate to /<slug>
 //   2) assert HTTP 200
@@ -315,13 +315,17 @@ const AI = [
     if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
     if (r.json?.verdict !== "safe") throw new Error(`expected safe, got ${JSON.stringify(r.json).slice(0, 160)}`);
   }},
-  { name: "security:scan_file EICAR (dangerous)", run: async () => {
-    // The EICAR antivirus test file — universally flagged, deterministic.
-    const r = await aiCall("security-tools", { action: "scan_file", sha256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" });
-    // 503 = VIRUSTOTAL_API_KEY not yet set in Supabase secrets (pending).
-    if (r.status === 503 && r.json?.error === "service_unavailable") { process.stdout.write("NOTE security:scan_file — VIRUSTOTAL_API_KEY not configured (pending)\n"); return; }
+  { name: "security:ssl_check (valid cert)", run: async () => {
+    const r = await aiCall("security-tools", { action: "ssl_check", url: "https://www.google.com" }, 30_000);
     if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
-    if (r.json?.verdict !== "dangerous" || (r.json?.malicious ?? 0) < 1) throw new Error(`expected dangerous, got ${JSON.stringify(r.json).slice(0, 160)}`);
+    if (r.json?.valid !== true || typeof r.json?.daysRemaining !== "number") throw new Error(`expected valid cert, got ${JSON.stringify(r.json).slice(0, 200)}`);
+    if (!String(r.json?.issuer || "").length) throw new Error("missing issuer");
+  }},
+  { name: "security:password_check (known-pwned)", run: async () => {
+    // SHA-1 of "password" = 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8 — billions of hits.
+    const r = await aiCall("security-tools", { action: "password_check", sha1: "5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8" });
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.text.slice(0, 140)}`);
+    if (r.json?.compromised !== true || (r.json?.count ?? 0) < 1000) throw new Error(`expected pwned, got ${JSON.stringify(r.json).slice(0, 160)}`);
   }},
   { name: "security:analyze_phishing (scam → flagged)", run: async () => {
     const r = await aiCall("security-tools", { action: "analyze_phishing", text: "URGENT: Your account will be suspended! Verify your password and bank details NOW at http://secure-paypaI-login.com or lose access permanently. Click immediately!" });

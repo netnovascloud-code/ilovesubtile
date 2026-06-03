@@ -22,7 +22,7 @@ export const TERMS_EN: LegalDoc = {
       id: "service",
       title: "2. The Service",
       blocks: [
-        { kind: "p", text: "Konvertools provides a catalogue of file-conversion utilities, document and image processing tools, AI-assisted text utilities, indicative security tools (virus scanner, email verifier, phishing detector, URL scanner) and developer utilities. Most tools execute entirely in your browser; some require server processing. The Service is offered **\"as is\" and \"as available\"** without any warranty of any kind, express or implied, including merchantability, fitness for a particular purpose, or non-infringement." },
+        { kind: "p", text: "Konvertools provides a catalogue of file-conversion utilities, document and image processing tools, AI-assisted text utilities, indicative security tools (email verifier, phishing detector, URL scanner, SSL certificate checker, password breach checker) and developer utilities. Most tools execute entirely in your browser; some require server processing. The Service is offered **\"as is\" and \"as available\"** without any warranty of any kind, express or implied, including merchantability, fitness for a particular purpose, or non-infringement." },
       ],
     },
     {
@@ -34,11 +34,11 @@ export const TERMS_EN: LegalDoc = {
           "loss of data, corrupted or incorrect files, or failed conversions;",
           "decisions, financial, business or otherwise, that you take based on the output of any tool;",
           "downtime, latency, or temporary unavailability of any feature;",
-          "third-party service failures (Supabase, Mistral, VirusTotal, Google, Stripe, Resend, hosting providers);",
+          "third-party service failures (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, hosting providers);",
           "indirect, incidental, special, consequential or punitive damages of any kind;",
           "any aggregate amount in excess of the fees you actually paid to us in the twelve (12) months preceding the event giving rise to the claim, capped at one hundred (100) euros for free-tier users.",
         ] },
-        { kind: "p", text: "**Security tools**: the Virus Scanner, the URL Scanner, the Phishing Detector and the Email Verifier are provided **for informational and indicative purposes only**. They aggregate third-party signals (VirusTotal's 70+ antivirus engines, Google Safe Browsing, public DNS) and large-language-model heuristics. They **do not constitute a guarantee of safety, validity or absence of risk**. New malware can evade detection until antivirus engines are updated; new phishing pages appear faster than reputation databases can catalogue them; an email that passes our checks may still be inactive or fraudulent. The Publisher expressly declines all liability for any harm resulting from a malicious file the Service did not flag, a phishing email the Service deemed safe, an unsafe link the Service failed to identify, or a transactional email sent to an address the Service marked as valid. The User assumes sole responsibility for security decisions taken on the basis of these tools." },
+        { kind: "p", text: "**Security tools**: the URL Scanner, the Phishing Detector, the Email Verifier, the SSL Certificate Checker and the Password Breach Checker are provided **for informational and indicative purposes only**. They aggregate third-party signals (Google Safe Browsing, public DNS, HaveIBeenPwned, live TLS handshakes) and large-language-model heuristics. They **do not constitute a guarantee of safety, validity or absence of risk**. New phishing pages appear faster than reputation databases can catalogue them; an email that passes our checks may still be inactive or fraudulent; an SSL certificate being valid does not certify a site's content. The Publisher expressly declines all liability for any harm resulting from a phishing email the Service deemed safe, an unsafe link the Service failed to identify, a transactional email sent to an address the Service marked as valid, or any security decision taken on the basis of these tools. The User assumes sole responsibility for such decisions." },
       ],
     },
     {
@@ -51,7 +51,6 @@ export const TERMS_EN: LegalDoc = {
           "process files for which you do not hold the necessary rights (copyrighted works without authorisation, personal data you are not entitled to process, classified information);",
           "commit or facilitate fraud, money laundering, the financing of terrorism or any criminal activity;",
           "use the AI humaniser, the AI text tools or any other feature to plagiarise, to deceive a third party, to manipulate evaluation systems (academic, recruitment, ad networks) in a manner that contravenes their rules, or to mislead in any way that breaches applicable law;",
-          "upload malware to test our scanner if doing so would breach the law in your jurisdiction (use the EICAR test file instead);",
           "attempt to overload, reverse-engineer, scrape, abuse rate limits, or otherwise interfere with the operation or availability of the Service;",
           "circumvent quotas, payment requirements or any other restriction in place;",
           "create multiple accounts to multiply free-tier quotas, or share an account across more individuals than your plan allows.",

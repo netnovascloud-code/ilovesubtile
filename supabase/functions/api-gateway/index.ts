@@ -438,7 +438,7 @@ Deno.serve(async (req) => {
 
   // ===== security tools (delegate to the security-tools function) =====
   // Per-action credit cost; matches lib/credits.ts CREDIT_COST.
-  const SEC_COST: Record<string, number> = { scan_file: 3, validate_email: 1, analyze_phishing: 3, scan_url: 1 };
+  const SEC_COST: Record<string, number> = { validate_email: 1, analyze_phishing: 3, scan_url: 1, password_check: 1, ssl_check: 1 };
   if (action in SEC_COST) {
     const cost = SEC_COST[action];
     if (balance < cost) return insufficient(cost, balance);

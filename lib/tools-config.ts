@@ -155,7 +155,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: "text-ai", label: "Text & AI", iconName: "Sparkles", tone: "green", blurb: "Translate, rephrase, summarise and fix text." },
   { id: "utilities", label: "Utilities", iconName: "Wrench", tone: "slate", blurb: "Colours, hashes, units, passwords and more — all in-browser." },
   { id: "archives", label: "Archives", iconName: "Archive", tone: "amber", blurb: "Create and extract ZIP archives directly in your browser." },
-  { id: "security", label: "Security", iconName: "ShieldCheck", tone: "rose", blurb: "Scan files for viruses, verify emails, and detect phishing & unsafe links." },
+  { id: "security", label: "Security", iconName: "ShieldCheck", tone: "rose", blurb: "Verify emails, check SSL certificates, test passwords, and detect phishing & unsafe links." },
 ];
 
 export const CATEGORY_BY_ID: Record<ToolCategory, CategoryDef> = Object.fromEntries(
@@ -1278,10 +1278,10 @@ TOOLS.push(
     [{ title: "Choose units", body: "Metric (cm / kg) or imperial (ft / lb)." }, { title: "Enter height & weight", body: "BMI updates as you type." }, { title: "Read your category", body: "Underweight, healthy, overweight or obese." }]),
 );
 
-// ── Konvertools — Security (VirusTotal / Safe Browsing / Mistral) ──────────────
-// Server-metered (kind "ai"): free accounts get a small daily allowance per
-// tool, paying plans pass through. Files never leave the browser — the virus
-// scanner sends only the file's SHA-256 hash.
+// ── Konvertools — Security (Google Safe Browsing / Mistral / live TLS) ────────
+// All commercial-safe, GDPR-friendly. Server-metered ones (kind "ai") give
+// free accounts a small daily allowance; paying plans pass through. The
+// password breach checker is fully client-side (HaveIBeenPwned k-anonymity).
 const secTool = (
   slug: string, icon: LucideIcon, name: string, short: string, h1: string,
   metaTitle: string, metaDescription: string, primaryKeyword: string,
@@ -1293,18 +1293,18 @@ const secTool = (
 });
 
 TOOLS.push(
-  secTool("scan-file", ShieldCheck, "Virus Scanner", "Scan any file for malware against 70+ antivirus engines.",
-    "Free Online Virus Scanner — Scan Files for Malware",
-    "Free Online Virus Scanner — Scan a File for Malware | Konvertools",
-    "Scan any file for viruses and malware against 70+ antivirus engines via VirusTotal. We check the file's SHA-256 fingerprint — the file itself is never uploaded. Free, no sign-up.",
-    "virus scanner online free",
-    [{ title: "Drop your file", body: "Its SHA-256 fingerprint is computed in your browser." }, { title: "We query VirusTotal", body: "70+ antivirus engines checked by hash." }, { title: "Read the verdict", body: "Clean, suspicious or dangerous — with detections." }],
+  secTool("ssl-checker", ShieldCheck, "SSL Certificate Checker", "Check any website's SSL certificate, expiry and issuer.",
+    "Free SSL Certificate Checker — Verify Any Website's SSL",
+    "Free SSL Certificate Checker — Verify Any Website's SSL | Konvertools",
+    "Check any website's SSL/TLS certificate: validity, expiry date and days remaining, issuer, covered domains and key strength. Free, no sign-up, no API key.",
+    "ssl checker",
+    [{ title: "Enter the website URL", body: "Any https site you want to check." }, { title: "We read the certificate", body: "A live TLS handshake fetches the cert." }, { title: "See validity & expiry", body: "Issuer, domains, days remaining and key strength." }],
     [
-      { q: "Is the virus scanner free?", a: "Yes. Free accounts get 3 scans per day; Pro and Business raise the limit. Browser-side fingerprinting means the file never leaves your device." },
-      { q: "Is my file uploaded anywhere?", a: "No. We compute the file's SHA-256 hash locally in your browser and only send that hash to VirusTotal. The file's contents never leave your computer." },
-      { q: "How many antivirus engines are used?", a: "VirusTotal aggregates 70+ commercial antivirus engines and scanners, so you get a broad consensus rather than a single vendor's opinion." },
-      { q: "What does an 'unknown' result mean?", a: "It means no engine has analysed that exact file before — its hash isn't in VirusTotal's database yet. It's neither a clean nor a malicious verdict." },
-      { q: "Is a clean result a guarantee of safety?", a: "No. This is an indicative result from VirusTotal and does not constitute an absolute guarantee. Brand-new malware can evade detection until engines are updated." },
+      { q: "Is the SSL checker free?", a: "Yes. Free accounts get 20 checks per day; paying plans pass through within fair use. No API key is required." },
+      { q: "What does it report?", a: "Whether the certificate is currently valid, its expiry date and days remaining, the issuing certificate authority, the domain names it covers, and the public-key strength (e.g. RSA 2048 or EC P-256)." },
+      { q: "Does it store my query?", a: "No. We open a live TLS connection to read the certificate and return the result in real time. Nothing is stored." },
+      { q: "Why does a check sometimes fail?", a: "A few hosts are TLS 1.3-only or block direct connections; in that case the certificate can't be read this way. The vast majority of sites work." },
+      { q: "Is a valid certificate a guarantee of trust?", a: "No. A valid certificate means the connection is encrypted and the domain is verified by a CA — it doesn't certify the site's content or intentions." },
     ]),
   secTool("email-checker", Mail, "Email Verifier", "Check if an email address is valid, real and deliverable.",
     "Free Email Verifier — Check if an Email Address Is Valid",
@@ -1346,6 +1346,32 @@ TOOLS.push(
       { q: "What threats can it detect?", a: "Malware, social engineering / phishing, unwanted software and potentially harmful applications." },
     ]),
 );
+
+// Password breach checker — 100% client-side via HaveIBeenPwned k-anonymity.
+// kind "client": no server quota, no upload, the password never leaves the
+// browser (only the first 5 chars of its SHA-1 hash are queried).
+TOOLS.push({
+  slug: "password-checker", phase: 1, kind: "client", category: "security", icon: ShieldCheck, tone: "rose",
+  name: "Password Breach Checker",
+  short: "Check if your password has appeared in a data breach.",
+  h1: "Check if Your Password Has Been Compromised — Free Breach Checker",
+  metaTitle: "Password Breach Checker — Has Your Password Leaked? | Konvertools",
+  metaDescription: "Check if your password has appeared in a known data breach via HaveIBeenPwned k-anonymity. Your password never leaves your browser — only 5 characters of its hash are queried. Free.",
+  primaryKeyword: "password breach checker",
+  accept: [], freeMaxMb: 0, outputType: "Report",
+  steps: [
+    { title: "Type a password", body: "It's hashed locally in your browser." },
+    { title: "Only 5 hash chars sent", body: "k-anonymity means the password itself never leaves." },
+    { title: "See the verdict", body: "Safe, or how many breaches it appeared in." },
+  ],
+  faqs: [
+    { q: "Is the password checker free?", a: "Yes, completely free and unlimited — it runs entirely in your browser using the public HaveIBeenPwned k-anonymity API." },
+    { q: "Does my password get sent anywhere?", a: "No. We compute the SHA-1 hash of your password locally and send only the first 5 characters of that hash. The full password and full hash never leave your device." },
+    { q: "How does it know if a password is compromised?", a: "HaveIBeenPwned aggregates billions of credentials exposed in real data breaches. We match your hash suffix against that list locally to count how many times it appeared." },
+    { q: "Should I stop using a leaked password?", a: "Yes. If a password appears in any breach, attackers have it on credential-stuffing lists. Change it everywhere you used it and pick a unique one." },
+    { q: "Is this GDPR-friendly?", a: "Yes. No password, email or personal data is transmitted or stored — only an anonymous 5-character hash prefix is queried." },
+  ],
+});
 
 // ── Konvertools — Documents (PDF tools, client-side via pdf-lib + pending) ──────
 const docFaqs = (name: string): ToolFaq[] => [

@@ -27,7 +27,7 @@ const TEMPLATES = {
   welcome: (data: { name?: string }) => ({
     subject: "Welcome to Konvertools 👋",
     html: `<p>Hi ${data.name ?? "there"}, welcome to Konvertools.</p>
-<p>You're on the Free plan: 5 runs per day, files up to 25&nbsp;MB. Try the
+<p>You're on the Free plan: a few AI runs per day, files up to 20&nbsp;MB. Try the
 <a href="https://konvertools.com/subtitle-generator">subtitle generator</a> to get started.</p>`,
   }),
   "job-done": (data: { url?: string; tool?: string }) => ({
@@ -125,7 +125,7 @@ Deno.serve(async (req) => {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "Konvertools <hello@konvertools.com>",
+      from: "Konvertools <no-reply@konvertools.com>",
       to: body.to,
       subject: tpl.subject,
       html: tpl.html,

@@ -46,7 +46,8 @@ const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/E
 const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
 const ImagesToGifClient = dynamic(() => import("@/components/tools/clients/ImagesToGifClient").then((m) => ({ default: m.ImagesToGifClient })));
 const ImageCollageClient = dynamic(() => import("@/components/tools/clients/ImageCollageClient").then((m) => ({ default: m.ImageCollageClient })));
-const ScanFileClient = dynamic(() => import("@/components/tools/clients/ScanFileClient").then((m) => ({ default: m.ScanFileClient })));
+const PasswordCheckerClient = dynamic(() => import("@/components/tools/clients/PasswordCheckerClient").then((m) => ({ default: m.PasswordCheckerClient })));
+const SslCheckerClient = dynamic(() => import("@/components/tools/clients/SslCheckerClient").then((m) => ({ default: m.SslCheckerClient })));
 const EmailCheckerClient = dynamic(() => import("@/components/tools/clients/EmailCheckerClient").then((m) => ({ default: m.EmailCheckerClient })));
 const PhishingDetectorClient = dynamic(() => import("@/components/tools/clients/PhishingDetectorClient").then((m) => ({ default: m.PhishingDetectorClient })));
 const UrlScannerClient = dynamic(() => import("@/components/tools/clients/UrlScannerClient").then((m) => ({ default: m.UrlScannerClient })));
@@ -501,8 +502,11 @@ export default function LocalisedToolPage({
     case "image-collage":
       body = <ImageCollageClient />;
       break;
-    case "scan-file":
-      body = <ScanFileClient />;
+    case "password-checker":
+      body = <PasswordCheckerClient />;
+      break;
+    case "ssl-checker":
+      body = <SslCheckerClient />;
       break;
     case "email-checker":
       body = <EmailCheckerClient />;

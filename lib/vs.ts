@@ -306,31 +306,6 @@ export const VS: Record<string, Vs> = {
     whenThem: "Remove.bg's model is still a touch sharper on tricky edges like fine hair and fur, and its API is battle-tested at scale. For the highest-fidelity cut-outs or heavy API volume, it's the specialist.",
     ctaSlugs: ["remove-background", "remove-video-background", "extract-colors"],
   },
-  virustotal: {
-    id: "virustotal",
-    competitor: "VirusTotal",
-    hero: "Konvertools vs VirusTotal — Same 70+ Engines, Friendlier UI",
-    metaTitle: "Konvertools vs VirusTotal — Free Virus Scanner Compared | Konvertools",
-    metaDescription: "Konvertools Virus Scanner uses the same 70+ engines as VirusTotal but keeps your file in your browser (only the SHA-256 hash is sent) and adds an email phishing & URL scanner in one place.",
-    intro: "Konvertools' Virus Scanner is powered by VirusTotal — we query the same 70+ antivirus engines, so the detection coverage is identical. The differences are in privacy and product: we compute the file's SHA-256 fingerprint in your browser and only send the hash, and we bundle three other security tools (URL scanner, phishing detector, email verifier) under one roof.",
-    rows: [
-      { feature: "Antivirus engines", konver: "70+ via VirusTotal", them: "70+ (the source)", win: false },
-      { feature: "File leaves your device?", konver: "No — only SHA-256 hash", them: "Yes — full file uploaded", win: true },
-      { feature: "Free daily limit", konver: "3 scans/day signed in", them: "4/min · 500/day", win: false },
-      { feature: "URL scanner included", konver: "Yes — Safe Browsing", them: "Yes", win: false },
-      { feature: "Phishing email analysis", konver: "Yes — AI + Safe Browsing", them: "No", win: true },
-      { feature: "Email reliability check", konver: "Yes — MX + disposable", them: "No", win: true },
-      { feature: "Other tools", konver: "165+ converters & utilities", them: "Security only", win: true },
-      { feature: "Ads on free tier", konver: "Light, optional", them: "Yes (community)", win: true },
-    ],
-    better: [
-      "The SHA-256 fingerprint is computed in your browser — your file is never uploaded.",
-      "Same detection consensus (70+ engines) as VirusTotal, since we use VirusTotal under the hood.",
-      "Bundled with URL scanning, phishing-email detection and email verification in one workspace.",
-    ],
-    whenThem: "VirusTotal is the source of truth for deep malware research — it exposes signatures, behaviour reports, community comments and a powerful intelligence search you can pivot on. Security teams doing incident response should go straight to virustotal.com.",
-    ctaSlugs: ["scan-file", "url-scanner", "phishing-detector"],
-  },
   "mailgun-validator": {
     id: "mailgun-validator",
     competitor: "Mailgun Email Validation",
@@ -366,7 +341,7 @@ export const VS: Record<string, Vs> = {
     rows: [
       { feature: "Reputation source", konver: "Google Safe Browsing", them: "~30 RBLs aggregated", win: false },
       { feature: "Phishing email analysis", konver: "Yes — AI + link check", them: "No", win: true },
-      { feature: "File virus scanner included", konver: "Yes — VirusTotal hash", them: "No", win: true },
+      { feature: "SSL certificate checker", konver: "Yes", them: "No", win: true },
       { feature: "Email verifier included", konver: "Yes", them: "No", win: true },
       { feature: "Ad-supported", konver: "Light, optional", them: "Heavy ad blocks", win: true },
       { feature: "Free daily limit", konver: "20 URLs/day", them: "Few/IP/day soft cap", win: false },
@@ -374,10 +349,10 @@ export const VS: Record<string, Vs> = {
     better: [
       "Google Safe Browsing is the broadest single threat dataset — used by Chrome itself.",
       "Bundled with a phishing-email detector that reads the message context, not just the link.",
-      "Cleaner, ad-light interface and same-page virus & email tools.",
+      "Cleaner, ad-light interface plus SSL, email and password security tools on the same site.",
     ],
     whenThem: "URLVoid's aggregate score across many RBLs surfaces consensus on borderline domains better than any single source. For threat-intel research where you want to see which lists are flagging a site, it's the right tool.",
-    ctaSlugs: ["url-scanner", "phishing-detector", "scan-file"],
+    ctaSlugs: ["url-scanner", "phishing-detector", "ssl-checker"],
   },
 };
 

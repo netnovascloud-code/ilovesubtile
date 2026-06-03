@@ -47,9 +47,15 @@ function converterParts(slug: string): [string, string] | null {
  *  "X to Y" converter pattern. Keep in sync with the security-category tools
  *  and any future addition that has distinct search-intent variants. */
 const SECURITY_VARIANTS: Record<string, string[]> = {
-  "scan-file": [
-    "virus scanner online free", "scan file for virus", "check file for malware",
-    "online malware scanner", "virustotal alternative", "free antivirus scan online",
+  "ssl-checker": [
+    "ssl checker", "ssl certificate checker", "check ssl certificate",
+    "ssl expiry checker", "verify ssl certificate", "tls certificate checker",
+    "is my ssl valid", "certificate expiration check",
+  ],
+  "password-checker": [
+    "password breach checker", "check if password compromised", "has my password been leaked",
+    "pwned password checker", "is my password safe", "password leak checker",
+    "have i been pwned password",
   ],
   "email-checker": [
     "email verifier free", "check email valid", "verify email address",

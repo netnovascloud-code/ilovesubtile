@@ -17,8 +17,8 @@ export const PRIVACY_EN: LegalDoc = {
       blocks: [
         { kind: "p", text: "Konvertools (the \"Service\") is operated as a privacy-first toolkit. The single most important commitment we make is this:" },
         { kind: "ul", items: [
-          "**Browser-only tools** (image converters, PDF tools that use pdf-lib, audio and video conversions powered by FFmpeg.wasm, code tools, calculators, QR generators, most utilities) execute **entirely inside your web browser via WebAssembly**. Your file is never transmitted to our servers. We have no technical means to read it.",
-          "**Server-assisted tools** (AI transcription, AI translation, AI text tasks, burn-in video subtitles, the virus scanner, the URL scanner, the phishing detector and a small number of others) need to send something to a backend. In every case the file or text is processed in real time and either (a) deleted from temporary storage within thirty (30) minutes, or (b) — for the virus scanner — never transmitted at all (only the file's SHA-256 hash leaves your device).",
+          "**Browser-only tools** (image converters, PDF tools that use pdf-lib, audio and video conversions powered by FFmpeg.wasm, code tools, calculators, QR generators, the password breach checker, most utilities) execute **entirely inside your web browser via WebAssembly**. Your file or input is never transmitted to our servers. We have no technical means to read it.",
+          "**Server-assisted tools** (AI transcription, AI translation, AI text tasks, burn-in video subtitles, the URL scanner, the phishing detector, the SSL certificate checker and a small number of others) need to send something to a backend. In every case the file or text is processed in real time and deleted from temporary storage within thirty (30) minutes.",
           "We never store the content of any uploaded file in any persistent location, we never use your uploads to train AI models, and we never sell, rent or share them with third parties for any purpose other than delivering the result you requested.",
         ] },
       ],
@@ -54,8 +54,8 @@ export const PRIVACY_EN: LegalDoc = {
         { kind: "ul", items: [
           "**Browser-only tools**: zero transmission. The file is read into memory by your browser, the result is produced locally, and you download it directly. We log nothing about the file itself.",
           "**AI transcription / translation / OCR / phishing analysis**: the file or text is streamed to our Supabase Edge Function, which immediately forwards it to the relevant AI provider (see section 7) for inference. The result is returned to you and the temporary upload buffer is discarded. Result files written to our private storage bucket are signed-URL accessible to you for sixty (60) minutes and physically purged within thirty (30) minutes of generation.",
-          "**Virus scanner**: your file never leaves your browser. We compute its SHA-256 fingerprint locally and only send the resulting 64-character hash to VirusTotal. VirusTotal cannot reconstruct your file from its hash.",
-          "**URL scanner**: only the URL string you type is transmitted to Google Safe Browsing. No surrounding page contents.",
+          "**Password breach checker**: your password never leaves your browser. We hash it locally with SHA-1 and query HaveIBeenPwned using k-anonymity — only the first 5 characters of the hash are sent. The password and full hash are never transmitted.",
+          "**URL scanner / SSL checker**: only the URL or hostname you type is transmitted (to Google Safe Browsing for the URL scanner, or used to open a live TLS connection for the SSL checker). No surrounding page contents.",
         ] },
       ],
     },
@@ -86,8 +86,8 @@ export const PRIVACY_EN: LegalDoc = {
         { kind: "ul", items: [
           "**Supabase** (Singapore-incorporated, hosted in the EU for our project) — authentication, database, file storage, and Edge Functions. Receives your account credentials, profile data and (transiently) any file you upload for a server-assisted tool. Acts as our sub-processor.",
           "**Mistral AI** (France) — large-language-model inference for translation, rephrasing, summarisation, the AI humaniser, phishing-pattern analysis, and other text tasks; audio transcription (Voxtral); image OCR and Vision tasks (Pixtral). The text or image you submit is sent to Mistral for inference. Mistral has contractually committed to **not** using API inputs to train its models.",
-          "**VirusTotal** (Google LLC, USA) — only when you use the Virus Scanner. Only the SHA-256 hash of your file is transmitted, never the file itself.",
-          "**Google Safe Browsing** (Google LLC, USA) — only when you use the URL Scanner or the Phishing Detector. Only the URLs you submit (or links extracted from the email you paste) are transmitted.",
+          "**Google Safe Browsing** (Google LLC, USA) — only when you use the URL Scanner or the Phishing Detector. Only the URLs you submit (or links extracted from the email you paste) are transmitted. This is the only third-party security service we use.",
+          "**HaveIBeenPwned** (Have I Been Pwned LLC) — only when you use the Password Breach Checker, and only ever the first 5 characters of your password's SHA-1 hash (k-anonymity). Queried directly from your browser, not through our servers.",
           "**Stripe** (USA / Ireland) — payment processing and subscription management. We **never see or store** your card details. Stripe receives your email, payment method, and the plan/credit-pack you bought.",
           "**Resend** (USA) — transactional email delivery (account confirmation, payment receipts, password reset). Receives your email address and the email body we send.",
           "**Vercel** (USA) — content delivery network for static pages. Receives standard web-traffic metadata (IP, user-agent, requested URL) for routing and abuse prevention. Kept in line with Vercel's log retention policy.",

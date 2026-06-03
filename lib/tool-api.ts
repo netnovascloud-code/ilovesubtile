@@ -41,10 +41,11 @@ const FN_MAP: Record<string, string> = {
   "screenshot-to-code": "ai-vision",
   "image-to-table": "ai-vision",
   // Security tools — all handled by the security-tools function via `action`.
-  "scan-file": "security-tools",
+  // (password-checker is pure client-side via HaveIBeenPwned — no backend.)
   "email-checker": "security-tools",
   "phishing-detector": "security-tools",
   "url-scanner": "security-tools",
+  "ssl-checker": "security-tools",
 };
 
 export function toolFunction(slug: string): string | null {

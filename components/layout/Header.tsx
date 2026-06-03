@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
-import { localePath } from "@/lib/i18n/locales";
+import { localePath, DEFAULT_LOCALE } from "@/lib/i18n/locales";
 import { UserMenu } from "@/components/layout/UserMenu";
 import { ToolsMenu } from "@/components/layout/ToolsMenu";
 import { AiQuotaPill } from "@/components/billing/AiQuotaPill";
@@ -30,6 +30,13 @@ export function Header() {
 
   const toolsHref = `${localePath(locale)}#tools`;
   const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label }));
+
+  // /login and /register have no /<locale> route — they localise via ?lang.
+  // Carry the active locale so a French visitor lands on a French auth form
+  // instead of the English default.
+  const langQuery = locale !== DEFAULT_LOCALE ? `?lang=${locale}` : "";
+  const loginHref = `/login${langQuery}`;
+  const registerHref = `/register${langQuery}`;
 
   // Flat list used only for the mobile drawer.
   const MOBILE_NAV = [
@@ -91,6 +98,8 @@ export function Header() {
         <div className="hidden md:flex md:items-center md:gap-3">
           <AiQuotaPill />
           <UserMenu
+            loginHref={loginHref}
+            registerHref={registerHref}
             labels={{
               login: t.login,
               start: t.start,
@@ -124,12 +133,12 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-2 flex gap-2 px-3">
-              <Link href="/login" className="flex-1">
+              <Link href={loginHref} className="flex-1">
                 <Button variant="outline" size="sm" className="w-full">
                   {t.login}
                 </Button>
               </Link>
-              <Link href="/register" className="flex-1">
+              <Link href={registerHref} className="flex-1">
                 <Button size="sm" className="w-full">
                   {t.start}
                 </Button>

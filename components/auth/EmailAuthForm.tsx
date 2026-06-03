@@ -8,7 +8,24 @@ import { Input } from "@/components/ui/input";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { isPasswordPwned } from "@/lib/leaked-password";
 
-export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login" | "register"; redirect?: string }) {
+type AuthLabels = {
+  email: string; password: string; loginCta: string; registerCta: string;
+  loading: string; checkInbox: string;
+};
+const DEFAULT_LABELS: AuthLabels = {
+  email: "Email", password: "Password", loginCta: "Log in", registerCta: "Create account",
+  loading: "Please wait…", checkInbox: "Check your inbox to confirm your email.",
+};
+
+export function EmailAuthForm({
+  mode,
+  redirect = "/dashboard",
+  labels = DEFAULT_LABELS,
+}: {
+  mode: "login" | "register";
+  redirect?: string;
+  labels?: AuthLabels;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tosAccepted, setTosAccepted] = useState(false);
@@ -59,7 +76,7 @@ export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login"
             .update({ tos_accepted_at: new Date().toISOString(), marketing_opt_in: marketing })
             .eq("id", data.session.user.id);
         }
-        setInfo("Check your inbox to confirm your email.");
+        setInfo(labels.checkInbox);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -77,7 +94,7 @@ export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login"
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
         <label className="text-sm font-medium text-ink-700" htmlFor="email">
-          Email
+          {labels.email}
         </label>
         <Input
           id="email"
@@ -91,7 +108,7 @@ export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login"
       </div>
       <div>
         <label className="text-sm font-medium text-ink-700" htmlFor="password">
-          Password
+          {labels.password}
         </label>
         <Input
           id="password"
@@ -148,7 +165,7 @@ export function EmailAuthForm({ mode, redirect = "/dashboard" }: { mode: "login"
         </p>
       )}
       <Button type="submit" className="w-full" disabled={loading || (mode === "register" && !tosAccepted)}>
-        {loading ? "Please wait…" : mode === "login" ? "Log in" : "Create account"}
+        {loading ? labels.loading : mode === "login" ? labels.loginCta : labels.registerCta}
       </Button>
     </form>
   );

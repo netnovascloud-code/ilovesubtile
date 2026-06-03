@@ -34,7 +34,13 @@ export default function LoginPage({
             <span>{t.orWithEmail}</span>
             <div className="h-px flex-1 bg-ink-100" />
           </div>
-          <EmailAuthForm mode="login" />
+          <EmailAuthForm
+            mode="login"
+            labels={{
+              email: t.email, password: t.password, loginCta: t.loginCta,
+              registerCta: t.registerCta, loading: t.loading, checkInbox: t.checkInbox,
+            }}
+          />
         </div>
 
         <p className="mt-6 text-center text-sm text-ink-500">

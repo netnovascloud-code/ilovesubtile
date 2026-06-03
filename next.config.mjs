@@ -5,6 +5,10 @@
 //   • 'wasm-unsafe-eval'   : FFmpeg.wasm, pdf-lib, @imgly background removal
 //   • esm.sh + unpkg.com   : ESM-CDN-loaded libs (jsQR, JsBarcode, zxing,
 //                            pdfjs, @imgly, mammoth) via webpackIgnore
+//   • staticimgly.com      : @imgly/background-removal fetches its ONNX model
+//                            + WASM assets from this CDN at runtime (default
+//                            publicPath). Without it the model fetch is blocked
+//                            and remove-background fails with "Failed to fetch".
 //   • blob: + worker-src   : FFmpeg.wasm Web Workers
 //   • *.supabase.co        : auth, storage, edge functions, storage CDN
 //   • checkout/billing.stripe.com / m.stripe.network : Stripe Checkout iframe
@@ -24,7 +28,7 @@ const csp = [
   "img-src 'self' data: blob: https: *.supabase.co",
   "media-src 'self' blob:",
   "worker-src 'self' blob:",
-  "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://checkout.stripe.com https://*.ezoic.net https://*.ezojs.com",
+  "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://checkout.stripe.com https://*.ezoic.net https://*.ezojs.com",
   "frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://billing.stripe.com https://*.ezoic.net",
   "frame-ancestors 'none'",
   "base-uri 'self'",

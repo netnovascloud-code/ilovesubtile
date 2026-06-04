@@ -6,7 +6,11 @@
 //   POST /functions/v1/lemonsqueezy-checkout?plan=pro|business&interval=monthly|annual
 // Credit packs (one-time, never expire):
 //   POST /functions/v1/lemonsqueezy-checkout?pack=starter|growth|scale|studio
-// Returns: { url: "https://<store>.lemonsqueezy.com/checkout/..." }  (embed-ready)
+// Returns: { url: "https://<store>.lemonsqueezy.com/checkout/..." }
+//
+// The buyer is sent to that URL with a full-page redirect — same model as
+// Stripe Checkout: dedicated payment page on the LS-hosted domain, returns
+// to /dashboard via redirect_url once the order is settled.
 //
 // Store id + variant ids are read from public.billing_config (service_role).
 // That keeps onboarding dashboard-only — no Edge Function redeploys to rotate
@@ -110,7 +114,9 @@ Deno.serve(async (req) => {
     data: {
       type: "checkouts",
       attributes: {
-        checkout_options: { embed: true, dark: false },
+        // embed:false → URL is a full-page hosted checkout (Stripe-style),
+        // not an iframe overlay. Buyer is redirected with window.location.
+        checkout_options: { embed: false, dark: false },
         checkout_data: {
           email: caller.email ?? undefined,
           custom,

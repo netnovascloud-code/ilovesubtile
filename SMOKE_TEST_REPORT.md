@@ -1,4 +1,4 @@
-# Konvertools smoke test — 210/210 passed
+# Konvertools smoke test — 213/213 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -88,6 +88,9 @@ _None._
 - phishing-detector
 - url-scanner
 - password-checker
+- ssh-key-generator
+- text-encryptor
+- file-encryptor
 - merge-pdf
 - split-pdf
 - rotate-pdf

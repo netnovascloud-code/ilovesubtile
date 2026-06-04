@@ -8,15 +8,12 @@
 //   POST /functions/v1/lemonsqueezy-checkout?pack=starter|growth|scale|studio
 // Returns: { url: "https://<store>.lemonsqueezy.com/checkout/..." }  (embed-ready)
 //
-// The returned URL is opened in the Lemon Squeezy overlay client-side (lemon.js),
-// so the buyer never leaves konvertools.com.
+// Store id + variant ids are read from public.billing_config (service_role).
+// That keeps onboarding dashboard-only — no Edge Function redeploys to rotate
+// a variant, and the user never touches supabase secrets for those values.
 //
 // Deploy:  supabase functions deploy lemonsqueezy-checkout
 // Secrets: LEMONSQUEEZY_API_KEY
-//          LEMONSQUEEZY_STORE_ID            (optional — auto-discovered if unset)
-//          LS_VARIANT_PRO_MONTHLY / LS_VARIANT_PRO_ANNUAL
-//          LS_VARIANT_BIZ_MONTHLY / LS_VARIANT_BIZ_ANNUAL
-//          LS_VARIANT_PACK_STARTER / _GROWTH / _SCALE / _STUDIO
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -49,28 +46,20 @@ async function getCaller(req: Request) {
   return data.user;
 }
 
-function lsHeaders(key: string) {
-  return {
-    "Authorization": `Bearer ${key}`,
-    "Accept": "application/vnd.api+json",
-    "Content-Type": "application/vnd.api+json",
-  };
+function getServiceClient() {
+  return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 }
 
-// Resolve the store ID once per cold start: explicit env wins, otherwise we
-// auto-discover it by listing the API key's stores (the user asked for the
-// Store ID to be fetched automatically).
-let cachedStoreId: string | null = null;
-async function resolveStoreId(key: string): Promise<string | null> {
-  const fromEnv = Deno.env.get("LEMONSQUEEZY_STORE_ID");
-  if (fromEnv) return fromEnv;
-  if (cachedStoreId) return cachedStoreId;
-  const res = await fetch(`${LS_API}/stores`, { headers: lsHeaders(key) });
-  if (!res.ok) return null;
-  const body = await res.json();
-  const first = body?.data?.[0]?.id;
-  cachedStoreId = first ? String(first) : null;
-  return cachedStoreId;
+// Single round-trip: pull every billing_config key we might need into a map.
+let cachedConfig: Map<string, string> | null = null;
+async function loadConfig(): Promise<Map<string, string>> {
+  if (cachedConfig) return cachedConfig;
+  const supabase = getServiceClient();
+  const { data } = await supabase.from("billing_config").select("key,value");
+  const m = new Map<string, string>();
+  for (const row of (data ?? [])) m.set(row.key as string, row.value as string);
+  cachedConfig = m;
+  return m;
 }
 
 Deno.serve(async (req) => {
@@ -86,13 +75,13 @@ Deno.serve(async (req) => {
   const caller = await getCaller(req);
   if (!caller) return json({ error: "unauthorized" }, { status: 401 });
 
-  const storeId = await resolveStoreId(key);
+  const cfg = await loadConfig();
+  const storeId = cfg.get("store_id");
   if (!storeId) return json({ error: "no_store" }, { status: 500 });
 
   const url = new URL(req.url);
   const origin = req.headers.get("origin") ?? "https://konvertools.com";
 
-  // Decide variant + the custom data the webhook will read back.
   let variantId: string | undefined;
   let custom: Record<string, string>;
   let redirectPath: string;
@@ -102,17 +91,17 @@ Deno.serve(async (req) => {
     const PACK_CREDITS: Record<string, number> = { starter: 100, growth: 500, scale: 2000, studio: 6000 };
     const credits = PACK_CREDITS[pack];
     if (!credits) return json({ error: "invalid_pack" }, { status: 400 });
-    variantId = Deno.env.get(`LS_VARIANT_PACK_${pack.toUpperCase()}`);
-    if (!variantId) return json({ error: "no_variant_configured", env: `LS_VARIANT_PACK_${pack.toUpperCase()}` }, { status: 400 });
+    variantId = cfg.get(`variant_pack_${pack}`);
+    if (!variantId) return json({ error: "no_variant_configured", key: `variant_pack_${pack}` }, { status: 400 });
     custom = { user_id: caller.id, kind: "pack", pack, credits: String(credits) };
     redirectPath = url.searchParams.get("success_path") ?? "/dashboard?credits=1";
   } else {
     const plan = (url.searchParams.get("plan") ?? "pro").toLowerCase();
     const interval = url.searchParams.get("interval") === "annual" ? "annual" : "monthly";
     if (plan !== "pro" && plan !== "business") return json({ error: "invalid_plan" }, { status: 400 });
-    const envKey = `LS_VARIANT_${plan === "business" ? "BIZ" : "PRO"}_${interval.toUpperCase()}`;
-    variantId = Deno.env.get(envKey);
-    if (!variantId) return json({ error: "no_variant_configured", env: envKey }, { status: 400 });
+    const cfgKey = `variant_${plan === "business" ? "biz" : "pro"}_${interval}`;
+    variantId = cfg.get(cfgKey);
+    if (!variantId) return json({ error: "no_variant_configured", key: cfgKey }, { status: 400 });
     custom = { user_id: caller.id, kind: "subscription", plan };
     redirectPath = url.searchParams.get("success_path") ?? "/dashboard?upgraded=1";
   }
@@ -121,11 +110,9 @@ Deno.serve(async (req) => {
     data: {
       type: "checkouts",
       attributes: {
-        // embed:true → URL works inside the lemon.js overlay.
         checkout_options: { embed: true, dark: false },
         checkout_data: {
           email: caller.email ?? undefined,
-          // custom values must be strings; surfaced as meta.custom_data in webhooks.
           custom,
         },
         product_options: {
@@ -143,7 +130,11 @@ Deno.serve(async (req) => {
   try {
     const res = await fetch(`${LS_API}/checkouts`, {
       method: "POST",
-      headers: lsHeaders(key),
+      headers: {
+        "Authorization": `Bearer ${key}`,
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+      },
       body: JSON.stringify(payload),
     });
     const body = await res.json();

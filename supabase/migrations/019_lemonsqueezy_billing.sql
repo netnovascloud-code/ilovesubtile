@@ -1,18 +1,14 @@
 -- =====================================================================
--- Konvertools — migrate billing from Stripe to Lemon Squeezy
+-- Konvertools — migrate billing from Stripe to Lemon Squeezy.
 --
--- Lemon Squeezy is now our Merchant of Record. This migration removes every
--- Stripe reference from the schema:
---   • profiles.stripe_customer_id      → profiles.ls_customer_id
---   • profiles.stripe_subscription_id  → profiles.ls_subscription_id
---   • + profiles.ls_subscription_status, profiles.ls_renews_at  (new)
---   • subscriptions.stripe_subscription_id → subscriptions.ls_subscription_id
---   • credit_transactions.stripe_payment_intent → credit_transactions.payment_ref
---
--- Column renames automatically carry their indexes (incl. the partial UNIQUE
--- predicate) along, but the SECURITY DEFINER functions reference column names
--- in their bodies, so grant_credits() and protect_profile_columns() are
--- recreated against the new names.
+-- Lemon Squeezy is our Merchant of Record (collects + remits VAT worldwide,
+-- handles dunning + chargebacks). This migration:
+--   1. Renames every stripe_* column to ls_*
+--   2. Adds ls_subscription_status + ls_renews_at on profiles
+--   3. Creates billing_config — a key/value table the Edge Functions read at
+--      runtime for store_id + variant_ids, so onboarding is dashboard-only
+--      and rotating a variant doesn't require redeploying functions.
+--   4. Recreates the SECURITY DEFINER functions that referenced the old names.
 -- =====================================================================
 
 -- ── profiles ─────────────────────────────────────────────────────────
@@ -28,9 +24,7 @@ alter table public.subscriptions rename column stripe_subscription_id to ls_subs
 -- ── credit ledger ────────────────────────────────────────────────────
 alter table public.credit_transactions rename column stripe_payment_intent to payment_ref;
 
--- Rename internal constraint/index identifiers that still carry "stripe"
--- (cosmetic — these are not referenced by the app, but the brand should be
--- gone from the DB entirely). Guarded so the migration is safe on any history.
+-- Rename internal constraint identifiers that still carry "stripe".
 do $$
 begin
   if exists (select 1 from pg_constraint where conname = 'profiles_stripe_customer_id_key') then
@@ -44,7 +38,27 @@ begin
   end if;
 end $$;
 
--- ── protect_profile_columns: server-managed columns end-users cannot set ──
+-- ── billing_config ───────────────────────────────────────────────────
+-- Store ID + variant IDs live here. The Edge Functions (service_role) read
+-- them on every checkout. RLS denies anon/authenticated entirely.
+create table if not exists public.billing_config (
+  key        text primary key,
+  value      text not null,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.billing_config enable row level security;
+-- No policies → only service_role bypasses RLS. anon + authenticated get 0 rows.
+
+revoke all on public.billing_config from public, anon, authenticated;
+grant  select, insert, update, delete on public.billing_config to service_role;
+
+-- Pre-seed the store_id we already discovered from the LS API. Variant IDs
+-- get inserted after the user creates the 6 products in the LS dashboard.
+insert into public.billing_config (key, value) values ('store_id', '397168')
+  on conflict (key) do update set value = excluded.value, updated_at = now();
+
+-- ── protect_profile_columns ──────────────────────────────────────────
 create or replace function public.protect_profile_columns()
 returns trigger
 language plpgsql
@@ -71,7 +85,6 @@ begin
 end;
 $$;
 
--- Trigger definition is unchanged (same function name); recreate for safety.
 drop trigger if exists profiles_protect_sensitive on public.profiles;
 create trigger profiles_protect_sensitive
   before update on public.profiles
@@ -87,7 +100,6 @@ as $$
 declare
   new_balance integer;
 begin
-  -- Short-circuit if this payment is already recorded.
   if p_pi is not null and exists (
     select 1 from public.credit_transactions where payment_ref = p_pi
   ) then
@@ -101,8 +113,6 @@ begin
   values (p_user, p_amount, p_reason, new_balance, p_pi);
   return new_balance;
 
--- Concurrent webhook delivery won the race on the partial UNIQUE index.
--- Roll back our own credit bump and return the current balance.
 exception when unique_violation then
   update public.profiles set credits = credits - p_amount where id = p_user
     returning credits into new_balance;

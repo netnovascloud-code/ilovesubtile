@@ -6,7 +6,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
 import { EzoicLoader } from "@/components/ads/EzoicLoader";
-import { LemonSqueezyLoader } from "@/components/billing/LemonSqueezyLoader";
 import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
@@ -72,9 +71,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             on (see EzoicLoader); never injected for Pro/Business or while ads
             are globally disabled. */}
         <EzoicLoader nonce={nonce} />
-        {/* Lemon Squeezy checkout overlay (lemon.js) — used by the pricing page
-            and the credits store so buyers never leave the site. */}
-        <LemonSqueezyLoader nonce={nonce} />
         {/* Site-level structured data: WebSite (with sitelink-search action),
             Organization, and a SiteNavigationElement listing every category
             hub. Helps Google understand the catalogue and surface category

@@ -1,52 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getSupabaseBrowser } from "@/lib/supabase/client";
-import { edgeFnUrl } from "@/lib/utils";
-import { openCheckoutOverlay } from "@/lib/lemonsqueezy";
 import { CREDIT_PACKS } from "@/lib/credits";
 
 /**
  * Credit-pack store. One-time Lemon Squeezy payments; purchased credits never
- * expire. Mirrors the subscription flow in UpgradeButton (auth → checkout
- * overlay → webhook grants the credits).
+ * expire. Each Buy button routes to /billing/checkout?pack=<id>, where the
+ * embedded LS iframe and order summary are rendered.
  */
 export function BuyCreditsCard() {
-  const [loading, setLoading] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-
-  async function buy(packId: string) {
-    setLoading(packId);
-    setError(null);
-    try {
-      const supabase = getSupabaseBrowser();
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push("/login?redirect=/dashboard");
-        return;
-      }
-      const res = await fetch(edgeFnUrl("lemonsqueezy-checkout", { pack: packId }), {
-        method: "POST",
-        headers: { Authorization: `Bearer ${session.access_token}` },
-      });
-      const body = await res.json().catch(() => ({}));
-      if (!res.ok || !body.url) {
-        setError(body.error === "no_variant_configured" ? "Credit packs aren't on sale yet — check back soon." : (body.error ?? `Checkout error (${res.status}).`));
-        return;
-      }
-      // Hosted overlay — stay on the dashboard; refresh once the purchase
-      // succeeds so the new balance shows after the webhook grants it.
-      await openCheckoutOverlay(body.url as string, () => router.refresh());
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Network error.");
-    } finally {
-      setLoading(null);
-    }
-  }
 
   return (
     <div className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">
@@ -76,16 +41,14 @@ export function BuyCreditsCard() {
               size="sm"
               variant={p.badge ? "primary" : "outline"}
               className="mt-3 w-full"
-              disabled={loading !== null}
-              onClick={() => buy(p.id)}
+              onClick={() => router.push(`/billing/checkout?pack=${p.id}`)}
             >
-              {loading === p.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "Buy"}
+              Buy
             </Button>
           </div>
         ))}
       </div>
 
-      {error && <p className="mt-3 text-xs text-red-600">{error}</p>}
       <p className="mt-3 text-[11px] text-ink-400">
         Business plans also include 300 credits every month (these reset monthly; purchased packs don't).
       </p>

@@ -27,8 +27,13 @@ function buildCsp(nonce: string): string {
     "img-src 'self' data: blob: https: *.supabase.co",
     "media-src 'self' blob:",
     "worker-src 'self' blob:",
-    "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com",
-    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net",
+    // wss://*.supabase.co is REQUIRED — @supabase/ssr opens a Realtime
+    // WebSocket on session resolution (incl. the OAuth callback at /?code=…).
+    // CSP treats wss:// and https:// as distinct schemes, so listing the https
+    // origin alone blocks the socket and crashes the browser client.
+    // https://vercel.live: feedback widget on *.vercel.app preview deploys.
+    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
+    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self' https://*.lemonsqueezy.com",

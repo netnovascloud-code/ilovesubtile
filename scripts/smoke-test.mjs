@@ -27,7 +27,7 @@ const { TOOLS } = await import(resolve(ROOT, "lib/tools-config.ts"));
 
 // Slugs whose pages talk to a server we can't or shouldn't hit in CI. We still
 // visit them, but skip the strict-console-error rule for known external 4xx/5xx
-// resources (Ezoic, Mistral, Stripe) and FFmpeg.wasm warm-up logs.
+// resources (Ezoic, Mistral, Lemon Squeezy) and FFmpeg.wasm warm-up logs.
 const NOISE_RE = /(favicon|chrome-extension|sandbox iframe|web-vitals|Failed to load resource: net::ERR_|the resource was preloaded|ezoic|google-analytics|Manifest|Download the React|Preflight|Service Worker|Request timed out|wasm streaming compile|tracking)/i;
 
 const results = [];

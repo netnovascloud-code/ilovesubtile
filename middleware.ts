@@ -9,7 +9,7 @@ const LOCALES = new Set([
 /** Build the per-request Content-Security-Policy with a fresh nonce. The
  *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
  *  scripts loaded by a nonced script are then trusted by propagation, so
- *  esm.sh / unpkg / Ezoic / Stripe loaders still work without explicit
+ *  esm.sh / unpkg / Ezoic / Lemon Squeezy loaders still work without explicit
  *  origin allowlists on script-src (CSP3 ignores URL allowlists when
  *  'strict-dynamic' is set).
  *
@@ -27,11 +27,11 @@ function buildCsp(nonce: string): string {
     "img-src 'self' data: blob: https: *.supabase.co",
     "media-src 'self' blob:",
     "worker-src 'self' blob:",
-    "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://checkout.stripe.com https://*.ezoic.net https://*.ezojs.com",
-    "frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://billing.stripe.com https://*.ezoic.net",
+    "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com",
+    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net",
     "frame-ancestors 'none'",
     "base-uri 'self'",
-    "form-action 'self' https://checkout.stripe.com",
+    "form-action 'self' https://*.lemonsqueezy.com",
     "object-src 'none'",
     "upgrade-insecure-requests",
   ].join("; ");

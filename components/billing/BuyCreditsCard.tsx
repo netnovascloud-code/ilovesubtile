@@ -6,11 +6,13 @@ import { Loader2, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { edgeFnUrl } from "@/lib/utils";
+import { openCheckoutOverlay } from "@/lib/lemonsqueezy";
 import { CREDIT_PACKS } from "@/lib/credits";
 
 /**
- * Credit-pack store. One-time Stripe payments; purchased credits never expire.
- * Mirrors the subscription flow in UpgradeButton (auth → checkout → redirect).
+ * Credit-pack store. One-time Lemon Squeezy payments; purchased credits never
+ * expire. Mirrors the subscription flow in UpgradeButton (auth → checkout
+ * overlay → webhook grants the credits).
  */
 export function BuyCreditsCard() {
   const [loading, setLoading] = useState<string | null>(null);
@@ -27,16 +29,18 @@ export function BuyCreditsCard() {
         router.push("/login?redirect=/dashboard");
         return;
       }
-      const res = await fetch(edgeFnUrl("stripe-checkout", { pack: packId }), {
+      const res = await fetch(edgeFnUrl("lemonsqueezy-checkout", { pack: packId }), {
         method: "POST",
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok || !body.url) {
-        setError(body.error === "no_price_configured" ? "Credit packs aren't on sale yet — check back soon." : (body.error ?? `Stripe error (${res.status}).`));
+        setError(body.error === "no_variant_configured" ? "Credit packs aren't on sale yet — check back soon." : (body.error ?? `Checkout error (${res.status}).`));
         return;
       }
-      window.location.href = body.url as string;
+      // Hosted overlay — stay on the dashboard; refresh once the purchase
+      // succeeds so the new balance shows after the webhook grants it.
+      await openCheckoutOverlay(body.url as string, () => router.refresh());
     } catch (err) {
       setError(err instanceof Error ? err.message : "Network error.");
     } finally {

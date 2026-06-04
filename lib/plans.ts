@@ -1,9 +1,12 @@
 /**
- * Plan definitions — pure data, no Stripe SDK.
+ * Plan definitions — pure data, no payment SDK.
  *
- * All Stripe API calls live in Supabase Edge Functions (`stripe-checkout`,
- * `stripe-portal`, `stripe-webhook`). The Stripe price IDs live in those
- * functions' secrets, not in the frontend.
+ * All payment API calls live in Supabase Edge Functions (`lemonsqueezy-checkout`,
+ * `lemonsqueezy-portal`, `lemonsqueezy-webhook`). The Lemon Squeezy store and
+ * variant IDs live in those functions' secrets, not in the frontend.
+ *
+ * Lemon Squeezy is our Merchant of Record — it collects and remits VAT/sales
+ * tax worldwide, so we never handle tax ourselves.
  */
 
 export const PLANS = {

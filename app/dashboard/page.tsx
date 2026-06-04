@@ -50,6 +50,8 @@ export default async function DashboardPage() {
   let usageResetAt: string | null = null;
   let monthlyAiUsage = 0;
   let monthlyAiMonth: string | null = null;
+  let subStatus: string | null = null;
+  let renewsAt: string | null = null;
   let jobs: JobRow[] = [];
   // When Supabase is configured but the visitor has no valid session (e.g. a
   // stale `sb-*-auth-token` cookie that satisfied the presence-only middleware
@@ -68,7 +70,7 @@ export default async function DashboardPage() {
     } else {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month")
+        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
@@ -76,6 +78,8 @@ export default async function DashboardPage() {
       usageResetAt = profile?.usage_reset_at ?? null;
       monthlyAiUsage = profile?.monthly_ai_usage ?? 0;
       monthlyAiMonth = profile?.monthly_ai_month ?? null;
+      subStatus = (profile?.ls_subscription_status as string | null) ?? null;
+      renewsAt = (profile?.ls_renews_at as string | null) ?? null;
       // Effective balance = permanent credits + this month's Business grant.
       const thisMonth = new Date().toISOString().slice(0, 7);
       const monthly = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
@@ -111,6 +115,19 @@ export default async function DashboardPage() {
   const limitLabel = String(limit);
   const periodLabel = kind === "daily" ? "Runs in the last 24 hours" : "AI conversions this month";
   const atLimit = displayedUsage >= limit;
+
+  // Subscription line for the Plan card. Lemon Squeezy keeps a cancelled
+  // subscription active until the paid period ends (ls_renews_at holds that
+  // date), so we surface "Cancels on" vs "Renews on" accordingly.
+  const renewLabel = renewsAt
+    ? new Date(renewsAt).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })
+    : null;
+  let planSubtitle: string | null = null;
+  if (plan !== "free" && renewLabel) {
+    if (subStatus === "cancelled") planSubtitle = `Cancels on ${renewLabel} — access until then`;
+    else if (subStatus === "past_due" || subStatus === "unpaid") planSubtitle = `Payment overdue — please update billing`;
+    else planSubtitle = `Renews on ${renewLabel}`;
+  }
 
   return (
     <div className="container py-10">
@@ -169,7 +186,15 @@ export default async function DashboardPage() {
             <CardDescription>Manage your subscription</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm capitalize text-ink-700">{plan}</p>
+            <p className="text-2xl font-semibold capitalize text-ink-900">{plan}</p>
+            {planSubtitle ? (
+              <p className="mt-1 text-xs text-ink-500">{planSubtitle}</p>
+            ) : plan === "free" ? (
+              <p className="mt-1 text-xs text-ink-400">No active subscription</p>
+            ) : null}
+            <p className="mt-2 text-xs text-ink-500">
+              Credit balance: <span className="font-medium text-ink-900">{credits.toLocaleString()}</span>
+            </p>
             <div className="mt-3">
               <BillingPortalButton disabled={plan === "free"} />
             </div>

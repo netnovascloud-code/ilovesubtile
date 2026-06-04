@@ -52,7 +52,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Identifiants de compte** : votre adresse e-mail ; une copie salée et hachée de votre mot de passe (gérée par Supabase Auth — nous ne voyons ni ne stockons le mot de passe en clair) ; un nom d'affichage et une URL d'avatar optionnels si vous vous connectez avec Google.",
-              "**État de l'abonnement** : plan actuel (gratuit / Pro / Business), identifiant client Stripe, solde de crédits actuel, ainsi que les dates de vos renouvellements les plus récents.",
+              "**État de l'abonnement** : plan actuel (gratuit / Pro / Business), identifiant client Lemon Squeezy, solde de crédits actuel, ainsi que les dates de vos renouvellements les plus récents.",
               "**Compteurs d'utilisation** : compteurs de quota agrégés (par exemple, « 3 exécutions d'IA utilisées aujourd'hui », « 420 exécutions d'IA mensuelles utilisées ») mis à jour sur votre profil. Nous ne **consignons pas** d'enregistrements par exécution.",
               "**Métadonnées des tâches (transitoires)** : lorsqu'un outil assisté par serveur produit un résultat (par exemple, un fichier .srt issu d'une transcription), nous enregistrons le nom de l'outil, l'URL de téléchargement du résultat, la langue source et un horodatage de fin. Ces lignes sont purgées automatiquement après **deux (2) heures**. Elles ne contiennent jamais le contenu de vos fichiers.",
               "**Enregistrements de consentement** : la date et l'heure auxquelles vous avez accepté ces Conditions générales et notre Politique de confidentialité, ainsi que votre choix d'accepter ou non les e-mails marketing. Conservés pendant la durée de votre compte plus une période probatoire légale de cinq (5) ans après la suppression.",
@@ -145,7 +145,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (France) — inférence de modèles de langage pour la traduction, la reformulation, la synthèse, l'humanisation de texte par IA, l'analyse de motifs de phishing et autres tâches textuelles ; transcription audio (Voxtral) ; OCR et tâches de vision par IA (Pixtral). Le texte ou l'image que vous soumettez est envoyé à Mistral pour inférence. Mistral s'est engagé contractuellement à **ne pas** utiliser les entrées de l'API pour entraîner ses modèles.",
               "**Google Safe Browsing** (Google LLC, États-Unis) — uniquement lorsque vous utilisez le Scanner d'URL ou le Détecteur de phishing. Seules les URL que vous soumettez (ou les liens extraits de l'e-mail que vous collez) sont transmises. Il s'agit du seul service de sécurité tiers que nous utilisons.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — uniquement lorsque vous utilisez le Vérificateur de fuites de mots de passe, et uniquement les cinq premiers caractères du hachage SHA-1 de votre mot de passe (k-anonymat). Interrogé directement depuis votre navigateur, sans passer par nos serveurs.",
-              "**Stripe** (États-Unis / Irlande) — traitement des paiements et gestion des abonnements. Nous **ne voyons ni ne stockons** les détails de votre carte. Stripe reçoit votre adresse e-mail, votre méthode de paiement et le plan/pack de crédits que vous avez acheté.",
+              "**Lemon Squeezy** (États-Unis / Irlande) — traitement des paiements et gestion des abonnements. Nous **ne voyons ni ne stockons** les détails de votre carte. Lemon Squeezy reçoit votre adresse e-mail, votre méthode de paiement et le plan/pack de crédits que vous avez acheté.",
               "**Resend** (États-Unis) — envoi d'e-mails transactionnels (confirmation de compte, reçus de paiement, réinitialisation de mot de passe). Reçoit votre adresse e-mail et le corps de l'e-mail que nous envoyons.",
               "**Vercel** (États-Unis) — réseau de diffusion de contenu pour les pages statiques. Reçoit les métadonnées standard du trafic web (IP, user-agent, URL demandée) pour le routage et la prévention des abus. Conservées conformément à la politique de rétention des logs de Vercel."
             ]
@@ -192,7 +192,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Chiffrement au repos** — Supabase chiffre la base de données sous-jacente (y compris vos données de compte) avec AES-256.",
               "**Gestion des mots de passe** — votre mot de passe est haché par Supabase Auth et n'est jamais stocké en clair. Nous vérifions en outre les nouveaux mots de passe côté client contre l'API k-anonymat de HaveIBeenPwned pour refuser les mots de passe connus pour avoir fuité.",
               "**Clés API** — stockées uniquement sous forme de hachages SHA-256 avec un préfixe d'affichage de 12 caractères. La clé brute vous est présentée une seule fois lors de sa création et devient irrévocable par la suite.",
-              "**Données de paiement** — jamais vues ni stockées par nos soins ; le flux de paiement par carte est entièrement délégué à Stripe (certifié PCI-DSS Niveau 1).",
+              "**Données de paiement** — jamais vues ni stockées par nos soins ; le flux de paiement par carte est entièrement délégué à Lemon Squeezy (certifié PCI-DSS Niveau 1).",
               "**Contrôle d'accès** — les politiques de sécurité au niveau des lignes empêchent un utilisateur de lire les données d'un autre utilisateur ; les clés de rôle de service sont restreintes aux fonctions Edge.",
               "**Hygiène des fichiers** — aucun fichier téléchargé n'est conservé : les outils fonctionnant uniquement dans le navigateur ne transmettent rien, et les outils assistés par serveur suppriment les tampons temporaires dans les 30 minutes.",
               "**Réponse aux vulnérabilités** — les problèmes de sécurité peuvent être signalés de manière confidentielle à [support@konvertools.com](mailto:support@konvertools.com)."
@@ -307,7 +307,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Credenciales de cuenta**: tu dirección de correo electrónico; una copia salada y cifrada de tu contraseña (gestionada por Supabase Auth — nunca vemos ni almacenamos el texto en claro); nombre de visualización opcional y URL del avatar si inicias sesión con Google.",
-              "**Estado de suscripción**: plan actual (gratis / Pro / Business), identificador de cliente de Stripe, saldo de créditos actual y las fechas de tus renovaciones más recientes.",
+              "**Estado de suscripción**: plan actual (gratis / Pro / Business), identificador de cliente de Lemon Squeezy, saldo de créditos actual y las fechas de tus renovaciones más recientes.",
               "**Contadores de uso**: contadores agregados de cuotas (por ejemplo, \"3 ejecuciones de IA usadas hoy\", \"420 ejecuciones de IA mensuales usadas\") actualizados en tu perfil. **No registramos registros por ejecución**.",
               "**Metadatos de trabajos (transitorios)**: cuando una herramienta con asistencia de servidor genera un resultado (por ejemplo, un archivo .srt de transcripción), registramos el nombre de la herramienta, la URL de descarga del resultado, el idioma de origen y una marca de tiempo de finalización. Estas filas se purgarán automáticamente después de **dos (2) horas**. Nunca contienen el contenido de tu archivo.",
               "**Registros de consentimiento**: la fecha y hora en que aceptaste estos Términos y nuestra Política de Privacidad, y si optaste por recibir correos electrónicos de marketing. Se conservan durante la duración de tu cuenta más un período de prueba legal de cinco (5) años tras la eliminación.",
@@ -400,7 +400,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Francia) — inferencia con modelos de lenguaje para traducción, reformulación, resumen, humanización de texto con IA, análisis de patrones de phishing y otras tareas de texto; transcripción de audio (Voxtral); tareas de OCR e imágenes con visión por computadora (Pixtral). El texto o imagen que envíes se envía a Mistral para inferencia. Mistral se ha comprometido contractualmente a **no utilizar las entradas de la API para entrenar sus modelos**.",
               "**Google Safe Browsing** (Google LLC, EE.UU.) — solo cuando usas el Escáner de URL o el Detector de Phishing. Solo se transmiten las URL que envíes (o los enlaces extraídos del correo electrónico que pegues). Este es el único servicio de seguridad de terceros que utilizamos.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — solo cuando usas el Verificador de Filtraciones de Contraseñas, y solo los cinco primeros caracteres del hash SHA-1 de tu contraseña (k-anonimato). Se consulta directamente desde tu navegador, no a través de nuestros servidores.",
-              "**Stripe** (EE.UU./Irlanda) — procesamiento de pagos y gestión de suscripciones. **Nunca vemos ni almacenamos** los detalles de tu tarjeta. Stripe recibe tu correo electrónico, método de pago y el plan/paquete de créditos que compraste.",
+              "**Lemon Squeezy** (EE.UU./Irlanda) — procesamiento de pagos y gestión de suscripciones. **Nunca vemos ni almacenamos** los detalles de tu tarjeta. Lemon Squeezy recibe tu correo electrónico, método de pago y el plan/paquete de créditos que compraste.",
               "**Resend** (EE.UU.) — envío de correos electrónicos transaccionales (confirmación de cuenta, recibos de pago, restablecimiento de contraseña). Recibe tu dirección de correo electrónico y el cuerpo del correo que enviamos.",
               "**Vercel** (EE.UU.) — red de distribución de contenido para páginas estáticas. Recibe metadatos estándar de tráfico web (IP, agente de usuario, URL solicitada) para enrutamiento y prevención de abusos. Se conserva según la política de retención de registros de Vercel."
             ]
@@ -447,7 +447,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Cifrado en reposo** — Supabase cifra la base de datos subyacente (incluyendo tus datos de cuenta) con AES-256.",
               "**Manejo de contraseñas** — tu contraseña se cifra mediante Supabase Auth y nunca se almacena en texto claro. Además, verificamos nuevas contraseñas contra la API de k-anonimato de HaveIBeenPwned en el lado del cliente para rechazar contraseñas conocidas comprometidas.",
               "**Claves de API** — almacenadas solo como hashes SHA-256 con un prefijo de visualización de 12 caracteres. La clave en texto claro se muestra exactamente una vez en el momento de la creación y no puede recuperarse posteriormente.",
-              "**Datos de pago** — nunca vistos ni almacenados por nosotros; el flujo de pago con tarjeta está completamente delegado a Stripe (certificado PCI-DSS Nivel 1).",
+              "**Datos de pago** — nunca vistos ni almacenados por nosotros; el flujo de pago con tarjeta está completamente delegado a Lemon Squeezy (certificado PCI-DSS Nivel 1).",
               "**Control de acceso** — políticas de seguridad a nivel de filas impiden que un usuario lea los datos de otro; las claves de rol de servicio están restringidas a las funciones Edge.",
               "**Higiene de archivos** — ningún archivo subido se retiene nunca: las herramientas solo en el navegador nunca transmiten nada, y las herramientas con asistencia de servidor eliminan búferes temporales en un plazo de 30 minutos.",
               "**Respuesta a vulnerabilidades** — los problemas de seguridad pueden reportarse confidencialmente a [support@konvertools.com](mailto:support@konvertools.com)."
@@ -562,7 +562,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Credenciais de conta**: seu endereço de e-mail; uma cópia com hash e salgada de sua senha (gerenciada pelo Supabase Auth — nunca vemos ou armazenamos a senha em texto simples); nome de exibição e URL do avatar opcionais, caso você faça login com o Google.",
-              "**Estado da assinatura**: plano atual (gratuito / Pro / Business), identificador do cliente no Stripe, saldo de créditos atual e as datas de suas renovações mais recentes.",
+              "**Estado da assinatura**: plano atual (gratuito / Pro / Business), identificador do cliente no Lemon Squeezy, saldo de créditos atual e as datas de suas renovações mais recentes.",
               "**Contadores de uso**: contadores agregados de cota (por exemplo, \"3 execuções de IA usadas hoje\", \"420 execuções de IA mensais usadas\") atualizados no local em sua linha de perfil. **Não registramos** registros por execução.",
               "**Metadados de tarefas (transitórios)**: quando uma ferramenta assistida por servidor produz um resultado (por exemplo, um arquivo .srt de transcrição), registramos o nome da ferramenta, a URL de download do resultado, o idioma de origem e um carimbo de data/hora de conclusão. Essas linhas são removidas automaticamente após **duas (2) horas**. Elas nunca contêm o conteúdo de seus arquivos.",
               "**Registros de consentimento**: a data e hora em que você aceitou estes Termos e nossa Política de Privacidade, e se optou por receber e-mails de marketing. Mantidos durante a duração de sua conta mais um período de cinco (5) anos após a exclusão como prova legal.",
@@ -655,7 +655,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (França) — inferência de modelos de linguagem de grande porte para tradução, reformulação, sumarização, humanização de IA, análise de padrões de phishing e outras tarefas de texto; transcrição de áudio (Voxtral); tarefas de OCR e Visão por imagem (Pixtral). O texto ou imagem que você enviar é enviado à Mistral para inferência. A Mistral comprometeu-se contratualmente a **não** usar as entradas da API para treinar seus modelos.",
               "**Google Safe Browsing** (Google LLC, EUA) — apenas quando você usa o Scanner de URLs ou o Detector de Phishing. Apenas as URLs que você enviar (ou links extraídos do e-mail que você colar) são transmitidas. Este é o único serviço de segurança de terceiros que utilizamos.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — apenas quando você usa o Verificador de Violações de Senha e apenas os cinco primeiros caracteres do hash SHA-1 de sua senha (k-anonimato). Consultado diretamente do seu navegador, não por meio de nossos servidores.",
-              "**Stripe** (EUA / Irlanda) — processamento de pagamentos e gerenciamento de assinaturas. **Nunca vemos ou armazenamos** os detalhes do seu cartão. O Stripe recebe seu e-mail, método de pagamento e o plano/pacote de créditos que você comprou.",
+              "**Lemon Squeezy** (EUA / Irlanda) — processamento de pagamentos e gerenciamento de assinaturas. **Nunca vemos ou armazenamos** os detalhes do seu cartão. O Lemon Squeezy recebe seu e-mail, método de pagamento e o plano/pacote de créditos que você comprou.",
               "**Resend** (EUA) — entrega de e-mails transacionais (confirmação de conta, recibos de pagamento, redefinição de senha). Recebe seu endereço de e-mail e o corpo do e-mail que enviamos.",
               "**Vercel** (EUA) — rede de distribuição de conteúdo para páginas estáticas. Recebe metadados padrão de tráfego web (IP, user-agent, URL solicitada) para roteamento e prevenção de abusos. Mantidos de acordo com a política de retenção de logs da Vercel."
             ]
@@ -702,7 +702,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Criptografia em repouso** — o Supabase criptografa o banco de dados subjacente (incluindo seus dados de conta) com AES-256.",
               "**Manuseio de senhas** — sua senha é criptografada pelo Supabase Auth e nunca armazenada em texto simples. Além disso, verificamos novas senhas contra a API de k-anonimato do HaveIBeenPwned no lado do cliente para recusar senhas conhecidas como comprometidas.",
               "**Chaves de API** — armazenadas apenas como hashes SHA-256 com um prefixo de exibição de 12 caracteres. A chave bruta é exibida a você exatamente uma vez no momento da criação e é irrecuperável posteriormente.",
-              "**Dados de pagamento** — nunca vistos ou armazenados por nós; o fluxo de pagamento com cartão é totalmente delegado ao Stripe (certificado PCI-DSS Nível 1).",
+              "**Dados de pagamento** — nunca vistos ou armazenados por nós; o fluxo de pagamento com cartão é totalmente delegado ao Lemon Squeezy (certificado PCI-DSS Nível 1).",
               "**Controle de acesso** — políticas de segurança em nível de linha impedem que um usuário leia os dados de outro usuário; chaves de função de serviço são restritas a funções de borda.",
               "**Higiene de arquivos** — nenhum arquivo carregado é retido: ferramentas executadas apenas no navegador nunca transmitem nada, e ferramentas assistidas por servidor excluem buffers temporários em até 30 minutos.",
               "**Resposta a vulnerabilidades** — problemas de segurança podem ser relatados confidencialmente para [support@konvertools.com](mailto:support@konvertools.com)."
@@ -817,7 +817,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Kontoanmeldedaten**: Ihre E-Mail-Adresse; eine gesalzene, gehashte Kopie Ihres Passworts (verwaltet durch Supabase Auth — wir sehen oder speichern niemals das Klartextpasswort); optional ein Anzeigename und eine Avatar-URL, falls Sie sich mit Google anmelden.",
-              "**Abonnementstatus**: aktueller Plan (kostenlos / Pro / Business), Stripe-Kundenkennung, aktueller Guthabenstand und die Daten Ihrer letzten Verlängerungen.",
+              "**Abonnementstatus**: aktueller Plan (kostenlos / Pro / Business), Lemon Squeezy-Kundenkennung, aktueller Guthabenstand und die Daten Ihrer letzten Verlängerungen.",
               "**Nutzungskontingente**: aggregierte Kontingentzähler (z. B. „3 KI-Läufe heute genutzt“, „420 monatliche KI-Läufe genutzt“), die an Ihrem Profil aktualisiert werden. Wir führen **keine pro-Lauf-Protokolle**.",
               "**Job-Metadaten (vorübergehend)**: Wenn ein servergestütztes Tool ein Ergebnis erzeugt (z. B. eine .srt-Datei aus einer Transkription), speichern wir den Tool-Namen, die Download-URL des Ergebnisses, die Quellsprache und einen Zeitstempel der Fertigstellung. Diese Zeilen werden automatisch nach **zwei (2) Stunden** gelöscht. Sie enthalten niemals den Inhalt Ihrer Datei.",
               "**Einwilligungsprotokolle**: Datum und Uhrzeit, zu der Sie diese Nutzungsbedingungen und unsere Datenschutzrichtlinie akzeptiert haben, sowie ob Sie in Marketing-E-Mails eingewilligt haben. Werden für die Dauer Ihres Kontos plus einen rechtlichen Nachweiszeitraum von fünf (5) Jahren nach Löschung gespeichert.",
@@ -910,7 +910,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Frankreich) — Inferenz mit großen Sprachmodellen für Übersetzung, Umformulierung, Zusammenfassung, den KI-Humanizer, Phishing-Musteranalyse und andere Textaufgaben; Audio-Transkription (Voxtral); Bild-OCR und Vision-Aufgaben (Pixtral). Der von Ihnen übermittelte Text oder das Bild wird an Mistral zur Inferenz gesendet. Mistral hat vertraglich zugesichert, **keine API-Eingaben** zum Trainieren seiner Modelle zu verwenden.",
               "**Google Safe Browsing** (Google LLC, USA) — nur bei Verwendung des URL-Scanners oder des Phishing-Detektors. Es werden nur die von Ihnen übermittelten URLs (oder aus der von Ihnen eingefügten E-Mail extrahierten Links) übertragen. Dies ist der einzige von uns genutzte Drittanbieter-Sicherheitsdienst.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — nur bei Verwendung des Passwort-Breach-Checkers und nur die ersten 5 Zeichen des SHA-1-Hashs Ihres Passworts (k-Anonymität). Abgefragt direkt aus Ihrem Browser, nicht über unsere Server.",
-              "**Stripe** (USA / Irland) — Zahlungsabwicklung und Abonnementverwaltung. Wir **sehen oder speichern niemals** Ihre Kartendaten. Stripe erhält Ihre E-Mail-Adresse, Zahlungsmethode und den von Ihnen gekauften Plan/Guthaben.",
+              "**Lemon Squeezy** (USA / Irland) — Zahlungsabwicklung und Abonnementverwaltung. Wir **sehen oder speichern niemals** Ihre Kartendaten. Lemon Squeezy erhält Ihre E-Mail-Adresse, Zahlungsmethode und den von Ihnen gekauften Plan/Guthaben.",
               "**Resend** (USA) — Zustellung transaktionaler E-Mails (Kontobestätigung, Zahlungsbeleg, Passwortzurücksetzung). Erhält Ihre E-Mail-Adresse und den E-Mail-Text, den wir senden.",
               "**Vercel** (USA) — Content Delivery Network für statische Seiten. Erhält Standard-Web-Traffic-Metadaten (IP, User-Agent, angeforderte URL) für Routing und Missbrauchsprävention. Wird gemäß der Protokollierungsrichtlinie von Vercel aufbewahrt."
             ]
@@ -957,7 +957,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Verschlüsselung im Ruhezustand** — Supabase verschlüsselt die zugrundeliegende Datenbank (einschließlich Ihrer Kontodaten) mit AES-256.",
               "**Passworthandhabung** — Ihr Passwort wird von Supabase Auth gehasht und niemals im Klartext gespeichert. Zusätzlich prüfen wir neue Passwörter clientseitig gegen die HaveIBeenPwned-k-Anonymität-API, um bekannte kompromittierte Passwörter abzulehnen.",
               "**API-Schlüssel** — Werden nur als SHA-256-Hashes mit einem 12-stelligen Anzeigepräfix gespeichert. Der Rohschlüssel wird Ihnen genau einmal bei der Erstellung angezeigt und ist danach nicht mehr wiederherstellbar.",
-              "**Zahlungsdaten** — Werden von uns niemals gesehen oder gespeichert; der Kartenzahlungsvorgang wird vollständig an Stripe delegiert (PCI-DSS Level 1 zertifiziert).",
+              "**Zahlungsdaten** — Werden von uns niemals gesehen oder gespeichert; der Kartenzahlungsvorgang wird vollständig an Lemon Squeezy delegiert (PCI-DSS Level 1 zertifiziert).",
               "**Zugangskontrolle** — Row-Level-Sicherheitspolitiken verhindern, dass ein Nutzer die Daten eines anderen Nutzers lesen kann; Service-Rollen-Schlüssel sind auf Edge Functions beschränkt.",
               "**Dateihygiene** — Keine hochgeladene Datei wird jemals gespeichert: Browser-basierte Tools übertragen nichts, und servergestützte Tools löschen temporäre Puffer innerhalb von 30 Minuten.",
               "**Verwundbarkeitsreaktion** — Sicherheitsprobleme können vertraulich an [support@konvertools.com](mailto:support@konvertools.com) gemeldet werden."
@@ -1072,7 +1072,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Credenziali di accesso**: il tuo indirizzo email; una copia salata e hashata della tua password (gestita da Supabase Auth — non vediamo né conserviamo mai la password in chiaro); nome visualizzato e URL dell'avatar opzionali se ti registri con Google.",
-              "**Stato dell'abbonamento**: piano attuale (gratuito / Pro / Business), identificatore cliente Stripe, saldo crediti attuale e le date dei tuoi rinnovi più recenti.",
+              "**Stato dell'abbonamento**: piano attuale (gratuito / Pro / Business), identificatore cliente Lemon Squeezy, saldo crediti attuale e le date dei tuoi rinnovi più recenti.",
               "**Contatori di utilizzo**: contatori aggregati di quota (ad esempio, \"3 esecuzioni AI utilizzate oggi\", \"420 esecuzioni AI mensili utilizzate\") aggiornati direttamente sulla tua riga del profilo. **Non registriamo** record per ogni esecuzione.",
               "**Metadati delle attività (transitori)**: quando uno strumento assistito da server produce un output (ad esempio, un file .srt dalla trascrizione), registriamo il nome dello strumento, l'URL di download del risultato, la lingua di origine e un timestamp di completamento. Queste righe vengono eliminate automaticamente dopo **due (2) ore**. Non contengono mai il contenuto del tuo file.",
               "**Registrazioni del consenso**: la data e l'ora in cui hai accettato questi Termini e la nostra Informativa sulla Privacy, e se hai scelto di ricevere email di marketing. Conservate per la durata del tuo account più un periodo di cinque (5) anni dopo la cancellazione come prova legale.",
@@ -1165,7 +1165,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Francia) — inferenza tramite modelli linguistici di grandi dimensioni per traduzione, riformulazione, sintesi, l'umanizzazione AI, analisi di pattern di phishing e altre attività testuali; trascrizione audio (Voxtral); OCR e attività di visione delle immagini (Pixtral). Il testo o l'immagine che invii vengono inviati a Mistral per l'inferenza. Mistral si è impegnata contrattualmente a **non utilizzare gli input API per addestrare i propri modelli**.",
               "**Google Safe Browsing** (Google LLC, USA) — solo quando utilizzi lo Scanner di URL o il Rilevatore di Phishing. Vengono trasmessi solo gli URL che inserisci (o i link estratti dall'email che incolli). Questo è l'unico servizio di sicurezza di terze parti che utilizziamo.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — solo quando utilizzi il Controllo delle Violazioni delle Password e solo i primi 5 caratteri dell'hash SHA-1 della tua password (k-anonimità). Interrogato direttamente dal tuo browser, non tramite i nostri server.",
-              "**Stripe** (USA / Irlanda) — gestione dei pagamenti e degli abbonamenti. **Non vediamo né conserviamo** i dettagli della tua carta. Stripe riceve il tuo indirizzo email, il metodo di pagamento e il piano/pacchetto di crediti che hai acquistato.",
+              "**Lemon Squeezy** (USA / Irlanda) — gestione dei pagamenti e degli abbonamenti. **Non vediamo né conserviamo** i dettagli della tua carta. Lemon Squeezy riceve il tuo indirizzo email, il metodo di pagamento e il piano/pacchetto di crediti che hai acquistato.",
               "**Resend** (USA) — recapito di email transazionali (conferma dell'account, ricevute di pagamento, reset della password). Riceve il tuo indirizzo email e il corpo dell'email che inviamo.",
               "**Vercel** (USA) — content delivery network per le pagine statiche. Riceve metadati standard del traffico web (IP, user-agent, URL richiesto) per l'instradamento e la prevenzione degli abusi. Conservati in conformità con la politica di conservazione dei log di Vercel."
             ]
@@ -1212,7 +1212,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Cifratura a riposo** — Supabase cifra il database sottostante (inclusi i tuoi dati di account) con AES-256.",
               "**Gestione delle password** — la tua password viene hashata da Supabase Auth e non viene mai conservata in chiaro. Controlliamo inoltre le nuove password tramite l'API client-side di HaveIBeenPwned con k-anonimità per rifiutare password note per essere state violate.",
               "**Chiavi API** — conservate solo come hash SHA-256 con un prefisso di visualizzazione di 12 caratteri. La chiave grezza ti viene mostrata esattamente una volta al momento della creazione ed è irrecuperabile in seguito.",
-              "**Dati di pagamento** — non vengono mai visti né conservati da noi; il flusso di pagamento della carta è completamente delegato a Stripe (certificato PCI-DSS Livello 1).",
+              "**Dati di pagamento** — non vengono mai visti né conservati da noi; il flusso di pagamento della carta è completamente delegato a Lemon Squeezy (certificato PCI-DSS Livello 1).",
               "**Controllo degli accessi** — le politiche di sicurezza a livello di riga impediscono a un utente di leggere i dati di un altro utente; le chiavi di ruolo del servizio sono limitate alle Edge Functions.",
               "**Igiene dei file** — nessun file caricato viene mai conservato: gli strumenti esclusivamente lato browser non trasmettono nulla e gli strumenti assistiti da server eliminano i buffer temporanei entro 30 minuti.",
               "**Risposta alle vulnerabilità** — le problematiche di sicurezza possono essere segnalate in via riservata a [support@konvertools.com](mailto:support@konvertools.com)."
@@ -1327,7 +1327,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Accountgegevens**: uw e-mailadres; een gezouten, gehashte kopie van uw wachtwoord (beheerd door Supabase Auth — we zien of slaan het plaintext nooit op); optionele weergavenaam en avatar-URL als u inlogt met Google.",
-              "**Abonnementsstatus**: huidig abonnement (gratis / Pro / Business), Stripe-klantidentificatie, huidige tegoedstand en de data van uw meest recente verlengingen.",
+              "**Abonnementsstatus**: huidig abonnement (gratis / Pro / Business), Lemon Squeezy-klantidentificatie, huidige tegoedstand en de data van uw meest recente verlengingen.",
               "**Gebruikscounters**: geaggregeerde quotacounters (bijv. \"3 AI-runs gebruikt vandaag\", \"420 AI-runs gebruikt deze maand\") die op uw profielrij worden bijgewerkt. We loggen **geen** per-runrecords.",
               "**Jobmetadata (tijdelijk)**: wanneer een server-assisted tool een uitvoer produceert (bijv. een .srt-bestand van transcriptie), registreren we de naam van de tool, de download-URL van het resultaat, de brontaal en een voltooiingstijdstempel. Deze rijen worden automatisch gewist na **twee (2) uur**. Ze bevatten nooit de inhoud van uw bestand.",
               "**Toestemmingsrecords**: de datum en tijd waarop u deze voorwaarden en ons Privacybeleid heeft geaccepteerd, en of u heeft ingestemd met marketing-e-mails. Blijven behouden voor de duur van uw account plus een wettelijk bewijsperiode van vijf (5) jaar na verwijdering.",
@@ -1420,7 +1420,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Frankrijk) — inferentie met grote taalmodellen voor vertaling, herformulering, samenvatting, de AI-humanizer, phishingpatroonanalyse en andere teksttaken; audio-transcriptie (Voxtral); beeld-OCR en Vision-taken (Pixtral). De tekst of afbeelding die u indient, wordt naar Mistral verzonden voor inferentie. Mistral heeft contractueel toegezegd **geen** API-invoer te gebruiken voor het trainen van hun modellen.",
               "**Google Safe Browsing** (Google LLC, VS) — alleen wanneer u de URL-scanner of de phishingdetector gebruikt. Alleen de URL's die u indient (of links die uit de e-mail worden geëxtraheerd die u plakt) worden verzonden. Dit is de enige derde-partij-beveiligingsservice die we gebruiken.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — alleen wanneer u de wachtwoordbreukcontrole gebruikt, en alleen de eerste 5 tekens van de SHA-1-hash van uw wachtwoord (k-anonimiteit). Rechtstreeks vanuit uw browser opgevraagd, niet via onze servers.",
-              "**Stripe** (VS / Ierland) — betalingsverwerking en abonnementbeheer. We **zien of slaan uw kaartgegevens nooit op**. Stripe ontvangt uw e-mailadres, betaalmethode en het abonnement/tegoed dat u heeft gekocht.",
+              "**Lemon Squeezy** (VS / Ierland) — betalingsverwerking en abonnementbeheer. We **zien of slaan uw kaartgegevens nooit op**. Lemon Squeezy ontvangt uw e-mailadres, betaalmethode en het abonnement/tegoed dat u heeft gekocht.",
               "**Resend** (VS) — transactie-e-mails (accountbevestiging, betalingsbewijs, wachtwoordherstel). Ontvangt uw e-mailadres en de e-mailinhoud die we verzenden.",
               "**Vercel** (VS) — content delivery network voor statische pagina's. Ontvangt standaard webverkeersmetadata (IP, user-agent, aangevraagde URL) voor routering en misbruikpreventie. Blijft binnen de logretentiebeleid van Vercel."
             ]
@@ -1467,7 +1467,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Versleuteling in rust** — Supabase versleutelt de onderliggende database (inclusief uw accountgegevens) met AES-256.",
               "**Wachtwoordafhandeling** — uw wachtwoord wordt gehash door Supabase Auth en nooit in plaintext opgeslagen. We controleren nieuwe wachtwoorden bovendien client-side met de HaveIBeenPwned k-anonimiteit API om bekende gelekte wachtwoorden te weigeren.",
               "**API-sleutels** — alleen opgeslagen als SHA-256-hashes met een 12-tekens weergavevoorvoegsel. De ruwe sleutel wordt u precies één keer getoond bij aanmaak en is daarna niet meer terug te halen.",
-              "**Betaalgegevens** — nooit door ons gezien of opgeslagen; de betaalstroom voor kaarten is volledig gedelegeerd aan Stripe (PCI-DSS Level 1 gecertificeerd).",
+              "**Betaalgegevens** — nooit door ons gezien of opgeslagen; de betaalstroom voor kaarten is volledig gedelegeerd aan Lemon Squeezy (PCI-DSS Level 1 gecertificeerd).",
               "**Toegangscontrole** — row-level security policies voorkomen dat één gebruiker gegevens van een andere gebruiker kan lezen; service-role keys zijn beperkt tot Edge Functions.",
               "**Bestandshygiëne** — geen geüpload bestand wordt ooit behouden: browser-only tools verzenden nooit iets, en server-assisted tools verwijderen tijdelijke buffers binnen 30 minuten.",
               "**Vulnerabiliteitsrespons** — beveiligingsproblemen kunnen vertrouwelijk worden gemeld op [support@konvertools.com](mailto:support@konvertools.com)."
@@ -1582,7 +1582,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**アカウント資格情報**：メールアドレス。パスワードはSupabase Authによりソルト化・ハッシュ化されたコピー（当社は平文を確認または保存することはありません）。Googleでサインインした場合は、任意の表示名とアバターURL。",
-              "**サブスクリプション状態**：現在のプラン（無料 / Pro / Business）、Stripeの顧客識別子、現在のクレジット残高、直近の更新日。",
+              "**サブスクリプション状態**：現在のプラン（無料 / Pro / Business）、Lemon Squeezyの顧客識別子、現在のクレジット残高、直近の更新日。",
               "**使用カウンター**：集約された割当カウンター（例：「本日のAI実行回数：3回」、「月間AI実行回数：420回」）はプロファイル行で更新されます。当社は**実行ごとの記録はログに残しません**。",
               "**ジョブメタデータ（一時的）**：サーバー支援型ツールで出力（例：文字起こしによる.srtファイル）が生成された場合、ツール名、結果ダウンロードURL、ソース言語、完了時刻を記録します。これらの行は**2時間**後に自動的に消去されます。ファイルの内容は含まれません。",
               "**同意記録**：これらの利用規約およびプライバシーポリシーを受諾した日時、マーケティングメールのオプトインの有無。アカウント削除後5年間、法的証拠保存期間として保持されます。",
@@ -1675,7 +1675,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI**（フランス）—翻訳、言い換え、要約、AIヒューマナイザー、フィッシングパターン分析、その他テキスト処理、音声文字起こし（Voxtral）、画像OCR・Visionタスク（Pixtral）のための大規模言語モデル推論。送信されたテキストまたは画像はMistralに送られ推論が行われます。Mistralは契約上、API入力をモデルの学習に使用しないことを約束しています。",
               "**Google Safe Browsing**（Google LLC、米国）—URLスキャナーまたはフィッシング検出器を使用する場合のみ。送信されるのは入力されたURL（またはメールに貼り付けられたリンク）のみです。当社が使用する唯一の第三者セキュリティサービスです。",
               "**HaveIBeenPwned**（Have I Been Pwned LLC）—パスワード漏洩チェッカーを使用する場合のみ、パスワードのSHA-1ハッシュの先頭5文字（k-匿名性）のみが照会されます。ブラウザから直接照会され、当社のサーバーを経由しません。",
-              "**Stripe**（米国 / アイルランド）—決済処理およびサブスクリプション管理。当社は**カード情報を確認または保存することはありません**。Stripeはメールアドレス、支払い方法、購入したプラン/クレジットパックを受領します。",
+              "**Lemon Squeezy**（米国 / アイルランド）—決済処理およびサブスクリプション管理。当社は**カード情報を確認または保存することはありません**。Lemon Squeezyはメールアドレス、支払い方法、購入したプラン/クレジットパックを受領します。",
               "**Resend**（米国）—トランザクションメール配信（アカウント確認、支払い領収書、パスワードリセット）。メールアドレスと当社が送信するメール本文を受領。",
               "**Vercel**（米国）—静的ページのコンテンツデリバリネットワーク。ルーティングおよび悪用防止のための標準的なウェブトラフィックメタデータ（IP、ユーザーエージェント、リクエストURL）を受領。Vercelのログ保持ポリシーに従って保持されます。"
             ]
@@ -1722,7 +1722,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**保存時の暗号化**—Supabaseはデータベース（アカウントデータを含む）をAES-256で暗号化。",
               "**パスワード処理**—パスワードはSupabase Authによりハッシュ化され、平文で保存されることはありません。また、新しいパスワードはクライアントサイドでHaveIBeenPwned k-匿名性APIを照会し、既知の漏洩パスワードを拒否します。",
               "**APIキー**—SHA-256ハッシュと12文字の表示プレフィックスのみ保存。生のキーは作成時に一度だけ表示され、その後回復不能です。",
-              "**支払いデータ**—当社は確認または保存することはありません。カード決済フローは完全にStripe（PCI-DSS Level 1認証）に委任されています。",
+              "**支払いデータ**—当社は確認または保存することはありません。カード決済フローは完全にLemon Squeezy（PCI-DSS Level 1認証）に委任されています。",
               "**アクセス制御**—行レベルのセキュリティポリシーにより、ユーザーは他のユーザーのデータを読み取ることができません。サービスロールキーはEdge Functionsに制限されています。",
               "**ファイル衛生**—アップロードされたファイルは保持されません。ブラウザ内ツールは一切送信せず、サーバー支援型ツールは一時バッファを30分以内に削除。",
               "**脆弱性対応**—セキュリティ上の問題は[support@konvertools.com](mailto:support@konvertools.com)に機密で報告できます。"
@@ -1837,7 +1837,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**账户凭据**：您的电子邮件地址；加盐哈希后的密码副本（由 Supabase Auth 管理——我们永远不会看到或存储明文密码）；如您使用 Google 登录，则可选显示名称和头像 URL。",
-              "**订阅状态**：当前套餐（免费/专业版/商业版）、Stripe 客户标识符、当前信用额度以及您最近续费的日期。",
+              "**订阅状态**：当前套餐（免费/专业版/商业版）、Lemon Squeezy 客户标识符、当前信用额度以及您最近续费的日期。",
               "**使用计数器**：聚合配额计数器（例如“今日已使用 3 次 AI 运行”、“本月已使用 420 次 AI 运行”）在您的个人资料行中就地更新。我们**不会**记录每次运行的详细记录。",
               "**作业元数据（临时）**：当服务器辅助工具生成输出时（例如转录生成的 .srt 文件），我们会记录工具名称、结果下载 URL、源语言和完成时间戳。这些记录会在**两（2）小时**后自动清除。它们永远不会包含您文件的内容。",
               "**同意记录**：您接受本条款及隐私政策的日期和时间，以及是否选择接收营销邮件。这些记录会在您的账户存在期间及删除后五（5）年内保留，作为法律证据。",
@@ -1930,7 +1930,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI**（法国）——大语言模型推理，用于翻译、改写、摘要、AI 人性化、钓鱼模式分析及其他文本任务；音频转录（Voxtral）；图像 OCR 和视觉任务（Pixtral）。您提交的文本或图像会发送至 Mistral 进行推理。Mistral 已合同承诺**不会**将 API 输入用于训练其模型。",
               "**Google Safe Browsing**（Google LLC，美国）——仅在您使用 URL 扫描器或钓鱼检测器时。仅传输您提交的 URL（或从您粘贴的邮件中提取的链接）。这是我们唯一使用的第三方安全服务。",
               "**HaveIBeenPwned**（Have I Been Pwned LLC）——仅在您使用密码泄露检查器时，且仅发送密码 SHA-1 哈希的前 5 个字符（k-匿名）。直接从您的浏览器查询，不通过我们的服务器。",
-              "**Stripe**（美国/爱尔兰）——支付处理和订阅管理。我们**永远不会**看到或存储您的卡片详情。Stripe 接收您的电子邮件、支付方式及您购买的套餐/信用包。",
+              "**Lemon Squeezy**（美国/爱尔兰）——支付处理和订阅管理。我们**永远不会**看到或存储您的卡片详情。Lemon Squeezy 接收您的电子邮件、支付方式及您购买的套餐/信用包。",
               "**Resend**（美国）——交易邮件发送（账户确认、支付收据、密码重置）。接收您的电子邮件地址及我们发送的邮件正文。",
               "**Vercel**（美国）——静态页面的内容分发网络。接收标准网络流量元数据（IP、用户代理、请求 URL）用于路由和滥用预防。遵循 Vercel 的日志保留政策。"
             ]
@@ -1977,7 +1977,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**静态加密**——Supabase 用 AES-256 加密底层数据库（包括您的账户数据）。",
               "**密码处理**——您的密码由 Supabase Auth 哈希，且永远不会以明文形式存储。我们还会在客户端通过 HaveIBeenPwned k-匿名 API 检查新密码，拒绝已知泄露的密码。",
               "**API 密钥**——仅以 SHA-256 哈希形式存储，并带有 12 位显示前缀。原始密钥仅在创建时向您显示一次，此后无法恢复。",
-              "**支付数据**——我们永远不会看到或存储；卡支付流程完全委托给 Stripe（PCI-DSS Level 1 认证）。",
+              "**支付数据**——我们永远不会看到或存储；卡支付流程完全委托给 Lemon Squeezy（PCI-DSS Level 1 认证）。",
               "**访问控制**——行级安全策略可防止一个用户读取另一个用户的数据；服务角色密钥仅限 Edge Functions 使用。",
               "**文件卫生**——上传的任何文件永远不会被保留：仅浏览器中运行的工具不会传输任何内容，服务器辅助工具会在 30 分钟内删除临时缓冲区。",
               "**漏洞响应**——安全问题可通过 [support@konvertools.com](mailto:support@konvertools.com) 机密报告。"
@@ -2092,7 +2092,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**계정 인증 정보**: 이메일 주소; 암호화된 비밀번호 복사본(소금 처리 및 해시 처리됨, Supabase Auth에서 관리 — 평문은 결코 볼 수 없으며 저장하지 않음); Google 로그인으로 로그인할 경우 선택적 표시 이름 및 아바타 URL.",
-              "**구독 상태**: 현재 플랜(무료 / Pro / Business), Stripe 고객 식별자, 현재 잔액, 가장 최근 갱신 일자.",
+              "**구독 상태**: 현재 플랜(무료 / Pro / Business), Lemon Squeezy 고객 식별자, 현재 잔액, 가장 최근 갱신 일자.",
               "**사용량 카운터**: 집계된 할당량 카운터(예: \"오늘 AI 사용 3회\", \"월간 AI 사용 420회\")가 프로필 행에서 실시간으로 업데이트됩니다. **실행별 기록은 로그하지 않습니다**.",
               "**작업 메타데이터(일시적)**: 서버 지원 도구가 결과를 생성할 때(예: 전사 결과 .srt 파일), 도구 이름, 결과 다운로드 URL, 소스 언어, 완료 타임스탬프를 기록합니다. 이 행은 **두(2)시간 후 자동 삭제**됩니다. 파일 내용은 포함되지 않습니다.",
               "**동의 기록**: 본 약관과 개인정보 보호정책을 수락한 일시 및 마케팅 이메일 수신 여부. 계정 삭제 후 5년간 법적 증거 보존 기간을 포함하여 계정 기간 동안 보관됩니다.",
@@ -2185,7 +2185,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI**(프랑스) — 번역, 재구성, 요약, AI 인간화, 피싱 패턴 분석 등 텍스트 작업용 대형 언어 모델 추론; 오디오 전사(Voxtral); 이미지 OCR 및 Vision 작업(Pixtral). 제출한 텍스트나 이미지가 추론용으로 Mistral로 전송됩니다. Mistral은 API 입력을 모델 학습에 **사용하지 않겠다는 계약을 체결**했습니다.",
               "**Google Safe Browsing**(Google LLC, 미국) — URL 스캐너 또는 피싱 감지기를 사용할 때만 해당됩니다. 제출한 URL(또는 이메일에 포함된 링크)만 전송됩니다. 저희가 사용하는 유일한 제3자 보안 서비스입니다.",
               "**HaveIBeenPwned**(Have I Been Pwned LLC) — 비밀번호 유출 확인기를 사용할 때만 해당되며, k-익명성을 사용하여 SHA-1 해시의 처음 5자만 전송됩니다. 브라우저에서 직접 쿼리되며 저희 서버를 거치지 않습니다.",
-              "**Stripe**(미국 / 아일랜드) — 결제 처리 및 구독 관리. **카드 세부 정보는 결코 볼 수 없으며 저장하지 않습니다**. Stripe는 이메일, 결제 방법, 구매한 플랜/크레딧 팩을 수신합니다.",
+              "**Lemon Squeezy**(미국 / 아일랜드) — 결제 처리 및 구독 관리. **카드 세부 정보는 결코 볼 수 없으며 저장하지 않습니다**. Lemon Squeezy는 이메일, 결제 방법, 구매한 플랜/크레딧 팩을 수신합니다.",
               "**Resend**(미국) — 트랜잭션 이메일 전달(계정 확인, 결제 영수증, 비밀번호 재설정). 이메일 주소와 저희가 보낸 이메일 본문을 수신합니다.",
               "**Vercel**(미국) — 정적 페이지용 콘텐츠 전달 네트워크. 라우팅 및 남용 방지를 위한 표준 웹 트래픽 메타데이터(IP, 사용자 에이전트, 요청 URL)를 수신합니다. Vercel의 로그 보관 정책에 따라 보관됩니다."
             ]
@@ -2232,7 +2232,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**저장 시 암호화** — Supabase는 데이터베이스(계정 데이터 포함)를 AES-256으로 암호화합니다.",
               "**비밀번호 처리** — 비밀번호는 Supabase Auth에서 해시 처리되며 평문으로 저장되지 않습니다. 또한 클라이언트 측에서 HaveIBeenPwned k-익명성 API를 사용하여 알려진 유출 비밀번호를 거부합니다.",
               "**API 키** — SHA-256 해시와 12자 접두사로만 저장됩니다. 원본 키는 생성 시 한 번만 표시되며 이후에는 복구할 수 없습니다.",
-              "**결제 데이터** — 저희가 볼 수 없거나 저장하지 않음; 카드 결제 흐름은 PCI-DSS Level 1 인증된 Stripe에 완전히 위임됩니다.",
+              "**결제 데이터** — 저희가 볼 수 없거나 저장하지 않음; 카드 결제 흐름은 PCI-DSS Level 1 인증된 Lemon Squeezy에 완전히 위임됩니다.",
               "**접근 제어** — 행 수준 보안 정책으로 한 사용자가 다른 사용자의 데이터를 읽지 못하도록 방지; 서비스 역할 키는 Edge Functions에만 제한됩니다.",
               "**파일 위생** — 업로드된 파일은 보관되지 않음: 브라우저 내 도구는 아무것도 전송하지 않으며 서버 지원 도구는 서른(30)분 이내 임시 버퍼를 삭제합니다.",
               "**취약성 대응** — 보안 문제는 [support@konvertools.com](mailto:support@konvertools.com)으로 비밀리에 보고할 수 있습니다."
@@ -2347,7 +2347,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**بيانات اعتماد الحساب**: عنوان بريدك الإلكتروني؛ نسخة مشفرة ومملحة من كلمة المرور (تدار بواسطة Supabase Auth — لم نتمكن مطلقاً من رؤية كلمة المرور الأصلية أو تخزينها)؛ الاسم الظاهري وعنوان صورة الرمزية إذا قمت بتسجيل الدخول باستخدام Google.",
-              "**حالة الاشتراك**: الخطة الحالية (مجاني / Pro / Business)، معرّف عميل Stripe، الرصيد الحالي، وتواريخ أحدث تجديداتك.",
+              "**حالة الاشتراك**: الخطة الحالية (مجاني / Pro / Business)، معرّف عميل Lemon Squeezy، الرصيد الحالي، وتواريخ أحدث تجديداتك.",
               "**عدادات الاستخدام**: عدادات الحصص المجمعة (مثل \"تم استخدام 3 عمليات ذكاء اصطناعي اليوم\"، \"تم استخدام 420 عملية ذكاء اصطناعي شهرياً\") يتم تحديثها في مكانها على صفك الشخصي. **لا نقوم بتسجيل سجلات لكل عملية**.",
               "**بيانات تعريف الوظيفة (عابرة)**: عند إنتاج أداة بمساعدة الخادم مخرجاً (مثل ملف .srt من النسخ التلقائي)، نقوم بتسجيل اسم الأداة، رابط تنزيل النتيجة، لغة المصدر، وتوقيت الإكمال. يتم حذف هذه الصفوف تلقائياً بعد **ساعتين (2)**. لا تحتوي مطلقاً على محتوى ملفك.",
               "**سجلات الموافقة**: التاريخ والوقت اللذان قبلت فيهما هذه الشروط وسياسة الخصوصية لدينا، وما إذا كنت قد اخترت الاشتراك في رسائل البريد الإلكتروني التسويقية. يتم الاحتفاظ بها طوال مدة حسابك بالإضافة إلى فترة أدلة قانونية مدتها خمس (5) سنوات بعد الحذف.",
@@ -2440,7 +2440,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (فرنسا) — استدلال نماذج اللغة الكبيرة للترجمة، إعادة الصياغة، التلخيص، التحويل البشري بواسطة الذكاء الاصطناعي، تحليل أنماط التصيد، وغيرها من مهام النصوص؛ النسخ التلقائي للصوت (Voxtral)؛ مهام التعرف الضوئي على الحروف والرؤية (Pixtral). يتم إرسال النص أو الصورة التي تقدمها إلى Mistral للاستدلال. تعهد Mistral بموجب عقد بعدم استخدام مدخلات API لتدريب نماذجه.",
               "**Google Safe Browsing** (Google LLC، الولايات المتحدة) — عند استخدامك لماسح الروابط أو كاشف التصيد. يتم إرسال الروابط التي تقدمها (أو الروابط المستخرجة من البريد الإلكتروني الذي تلصقه) فقط. هذه هي الخدمة الأمنية الخارجية الوحيدة التي نستخدمها.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — عند استخدامك لفاحص اختراقات كلمات المرور، ولا يتم إرسال سوى الأحرف الخمسة الأولى من تجزئة SHA-1 لكلمة المرور (k-anonymity). يتم الاستعلام مباشرة من متصفحك، وليس عبر خوادمنا.",
-              "**Stripe** (الولايات المتحدة / أيرلندا) — معالجة الدفع وإدارة الاشتراكات. **لم نتمكن مطلقاً من رؤية أو تخزين** تفاصيل بطاقتك. يستقبل Stripe بريدك الإلكتروني وطريقة الدفع والخطة/الحزمة الائتمانية التي اشتريتها.",
+              "**Lemon Squeezy** (الولايات المتحدة / أيرلندا) — معالجة الدفع وإدارة الاشتراكات. **لم نتمكن مطلقاً من رؤية أو تخزين** تفاصيل بطاقتك. يستقبل Lemon Squeezy بريدك الإلكتروني وطريقة الدفع والخطة/الحزمة الائتمانية التي اشتريتها.",
               "**Resend** (الولايات المتحدة) — تسليم البريد الإلكتروني المعاملاتي (تأكيد الحساب، إيصالات الدفع، إعادة تعيين كلمة المرور). يستقبل عنوان بريدك الإلكتروني وجسم البريد الإلكتروني الذي نرسله.",
               "**Vercel** (الولايات المتحدة) — شبكة توصيل محتوى للصفحات الثابتة. يستقبل بيانات تعريف حركة المرور على الويب القياسية (IP، وكيل المستخدم، والرابط المطلوب) للتوجيه ومنع سوء الاستخدام. يتم الاحتفاظ بها وفقاً لسياسة الاحتفاظ بسجلات Vercel."
             ]
@@ -2487,7 +2487,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**التشفير أثناء التخزين** — تقوم Supabase بتشفير قاعدة البيانات الأساسية (بما في ذلك بيانات حسابك) باستخدام AES-256.",
               "**معالجة كلمات المرور** — يتم تجزئة كلمة المرور الخاصة بك بواسطة Supabase Auth ولا يتم تخزينها كنص عادي مطلقاً. نتحقق أيضاً من كلمات المرور الجديدة ضد API HaveIBeenPwned باستخدام k-anonymity من جانب العميل لرفض كلمات المرور المعروفة التي تم اختراقها.",
               "**مفاتيح API** — يتم تخزينها فقط كتجزئة SHA-256 مع بادئة عرض مكونة من 12 حرفاً. يتم عرض المفتاح الخام لك مرة واحدة بالضبط عند الإنشاء ولا يمكن استرداده لاحقاً.",
-              "**بيانات الدفع** — لم نتمكن مطلقاً من رؤيتها أو تخزينها؛ يتم تفويض مسار الدفع بالكامل إلى Stripe (معتمد PCI-DSS المستوى 1).",
+              "**بيانات الدفع** — لم نتمكن مطلقاً من رؤيتها أو تخزينها؛ يتم تفويض مسار الدفع بالكامل إلى Lemon Squeezy (معتمد PCI-DSS المستوى 1).",
               "**تحكم الوصول** — تمنع سياسات أمان الصفوف مستوى المستخدم من قراءة بيانات مستخدم آخر؛ يتم تقييد مفاتيح دور الخدمة بوظائف Edge.",
               "**نظافة الملفات** — لم يتم الاحتفاظ بأي ملف تم تحميله مطلقاً: لا تقوم أدوات المتصفح فقط بإرسال أي شيء، وتقوم أدوات الخادم بمساعدة الخادم بحذف المخازن المؤقتة المؤقتة خلال 30 دقيقة.",
               "**الاستجابة للثغرات** — يمكن الإبلاغ عن مشكلات الأمان بسرية إلى [support@konvertools.com](mailto:support@konvertools.com)."
@@ -2602,7 +2602,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Учётные данные**: ваш адрес электронной почты; соль и хеш-копия вашего пароля (управляется Supabase Auth — мы никогда не видим и не храним пароль в открытом виде); необязательные отображаемое имя и URL аватара, если вы авторизуетесь через Google.",
-              "**Статус подписки**: текущий тарифный план (бесплатный / Pro / Business), идентификатор клиента Stripe, текущий кредитный баланс и даты ваших последних продлений.",
+              "**Статус подписки**: текущий тарифный план (бесплатный / Pro / Business), идентификатор клиента Lemon Squeezy, текущий кредитный баланс и даты ваших последних продлений.",
               "**Счётчики использования**: агрегированные квоты (например, «3 запуска ИИ сегодня», «420 ежемесячных запусков ИИ использовано») обновляются на вашей учётной записи. Мы **не ведём запись отдельных запусков**.",
               "**Метаданные задач (временные)**: при генерации результата серверным инструментом (например, файл .srt из транскрибирования) мы записываем название инструмента, URL для скачивания результата, исходный язык и время завершения. Эти строки автоматически удаляются через **два (2) часа**. Они никогда не содержат содержимое вашего файла.",
               "**Записи согласий**: дата и время, когда вы приняли настоящие Условия и нашу Политику конфиденциальности, а также согласие на получение маркетинговых писем. Хранятся в течение срока существования вашей учётной записи плюс пять (5) лет после её удаления в качестве юридических доказательств.",
@@ -2695,7 +2695,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Франция) — инференс больших языковых моделей для перевода, перефразирования, суммаризации, «человезации» текста, анализа шаблонов фишинга и других текстовых задач; аудиотранскрибирование (Voxtral); OCR и Vision для изображений (Pixtral). Текст или изображение, которые вы отправляете, передаются Mistral для инференса. Mistral взял на себя контрактное обязательство **не использовать входные данные API для обучения своих моделей**.",
               "**Google Safe Browsing** (Google LLC, США) — только при использовании сканера URL или детектора фишинга. Передаются только URL, которые вы отправляете (или ссылки, извлечённые из письма, которое вы вставляете). Это единственная сторонняя служба безопасности, которую мы используем.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — только при использовании проверки утечек паролей, и только первые 5 символов SHA-1-хеша вашего пароля (k-анонимность). Запрос выполняется напрямую из вашего браузера, а не через наши серверы.",
-              "**Stripe** (США / Ирландия) — обработка платежей и управление подписками. Мы **никогда не видим и не храним** данные вашей карты. Stripe получает ваш адрес электронной почты, платёжный метод и купленный вами тарифный план/пакет кредитов.",
+              "**Lemon Squeezy** (США / Ирландия) — обработка платежей и управление подписками. Мы **никогда не видим и не храним** данные вашей карты. Lemon Squeezy получает ваш адрес электронной почты, платёжный метод и купленный вами тарифный план/пакет кредитов.",
               "**Resend** (США) — доставка транзакционных писем (подтверждение учётной записи, квитанции об оплате, сброс пароля). Получает ваш адрес электронной почты и тело письма, которое мы отправляем.",
               "**Vercel** (США) — сеть доставки контента для статичных страниц. Получает стандартные метаданные веб-трафика (IP, user-agent, запрашиваемый URL) для маршрутизации и предотвращения злоупотреблений. Хранится в соответствии с политикой хранения логов Vercel."
             ]
@@ -2742,7 +2742,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Шифрование при хранении** — Supabase шифрует базу данных (включая ваши учётные данные) с помощью AES-256.",
               "**Обработка паролей** — ваш пароль хешируется Supabase Auth и никогда не хранится в открытом виде. Мы дополнительно проверяем новые пароли с помощью клиентского API HaveIBeenPwned k-анонимности, чтобы отклонять известные скомпрометированные пароли.",
               "**API-ключи** — хранятся только в виде SHA-256-хешей с 12-символьным префиксом для отображения. Сырой ключ показывается вам единожды при создании и впоследствии не подлежит восстановлению.",
-              "**Платёжные данные** — никогда не видны и не хранятся нами; платёжный процесс полностью делегирован Stripe (сертифицирован по PCI-DSS Level 1).",
+              "**Платёжные данные** — никогда не видны и не хранятся нами; платёжный процесс полностью делегирован Lemon Squeezy (сертифицирован по PCI-DSS Level 1).",
               "**Контроль доступа** — политики безопасности на уровне строк предотвращают чтение одним пользователем данных другого; служебные ключи ограничены Edge Functions.",
               "**Гигиена файлов** — ни один загруженный файл не сохраняется: инструменты, работающие только в браузере, никогда ничего не передают, а серверные инструменты удаляют временные буферы в течение 30 минут.",
               "**Реагирование на уязвимости** — о проблемах безопасности можно сообщить конфиденциально на [support@konvertools.com](mailto:support@konvertools.com)."
@@ -2857,7 +2857,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**खाता क्रेडेंशियल्स**: आपका ईमेल पता; आपके पासवर्ड की नमकयुक्त, हैश्ड प्रति (Supabase Auth द्वारा प्रबंधित — हम कभी भी सादे पाठ को नहीं देखते या संग्रहीत नहीं करते); Google के साथ साइन इन करने पर वैकल्पिक प्रदर्शन नाम और अवतार URL।",
-              "**सदस्यता स्थिति**: वर्तमान योजना (निःशुल्क / Pro / Business), Stripe ग्राहक पहचानकर्ता, वर्तमान क्रेडिट शेष, और आपके नवीनतम नवीकरण की तिथियाँ।",
+              "**सदस्यता स्थिति**: वर्तमान योजना (निःशुल्क / Pro / Business), Lemon Squeezy ग्राहक पहचानकर्ता, वर्तमान क्रेडिट शेष, और आपके नवीनतम नवीकरण की तिथियाँ।",
               "**उपयोग काउंटर्स**: एकत्रित कोटा काउंटर्स (उदाहरण के लिए, \"आज 3 AI रन उपयोग किए गए\", \"420 मासिक AI रन उपयोग किए गए\") आपके प्रोफ़ाइल पंक्ति पर सीधे अपडेट किए जाते हैं। हम **प्रति-रन रिकॉर्ड लॉग नहीं करते**।",
               "**कार्य मेटाडेटा (अस्थायी)**: जब कोई सर्वर-सहायता प्राप्त उपकरण आउटपुट उत्पन्न करता है (उदाहरण के लिए, प्रतिलेखन से .srt फ़ाइल), हम उपकरण का नाम, परिणाम डाउनलोड URL, स्रोत भाषा, और पूर्णता टाइमस्टैम्प रिकॉर्ड करते हैं। ये पंक्तियाँ स्वचालित रूप से **दो (2) घंटे बाद** हटा दी जाती हैं। इनमें कभी भी आपकी फ़ाइल की सामग्री शामिल नहीं होती।",
               "**सहमति रिकॉर्ड्स**: वह तिथि और समय जब आपने इन नियमों और हमारी गोपनीयता नीति को स्वीकार किया, और क्या आपने विपणन ईमेल के लिए ऑप्ट-इन किया। इसे आपके खाते के विलोपन के बाद पाँच (5) वर्षों तक कानूनी साक्ष्य अवधि सहित रखा जाता है।",
@@ -2950,7 +2950,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (फ्रांस) — बड़े भाषा मॉडल अनुमान अनुवाद, पुनर्कथन, सारांश, AI मानवीकरण, फ़िशिंग-पैटर्न विश्लेषण, और अन्य पाठ कार्य; ऑडियो प्रतिलेखन (Voxtral); छवि OCR और Vision कार्य (Pixtral)। आप द्वारा सबमिट किया गया पाठ या छवि अनुमान के लिए Mistral को भेजा जाता है। Mistral ने **API इनपुट्स का उपयोग अपने मॉडलों को प्रशिक्षित करने के लिए नहीं करने** का अनुबंधात्मक रूप से वचन दिया है।",
               "**Google Safe Browsing** (Google LLC, USA) — केवल जब आप URL स्कैनर या फ़िशिंग डिटेक्टर का उपयोग करते हैं। केवल वही URL सबमिट किए जाते हैं (या आपके द्वारा पेस्ट किए गए ईमेल से निकाले गए लिंक)। यह एकमात्र तृतीय-पक्ष सुरक्षा सेवा है जिसका हम उपयोग करते हैं।",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — केवल जब आप पासवर्ड उल्लंघन चेकर का उपयोग करते हैं, और केवल आपके पासवर्ड के SHA-1 हैश के पहले 5 वर्ण (k-अज्ञातता)। सीधे आपके ब्राउज़र से क्वेरी की जाती है, हमारे सर्वरों के माध्यम से नहीं।",
-              "**Stripe** (USA / आयरलैंड) — भुगतान प्रसंस्करण और सदस्यता प्रबंधन। हम **आपके कार्ड विवरण कभी नहीं देखते या संग्रहीत नहीं करते**। Stripe को आपका ईमेल, भुगतान विधि, और आपके द्वारा खरीदी गई योजना/क्रेडिट-पैक प्राप्त होता है।",
+              "**Lemon Squeezy** (USA / आयरलैंड) — भुगतान प्रसंस्करण और सदस्यता प्रबंधन। हम **आपके कार्ड विवरण कभी नहीं देखते या संग्रहीत नहीं करते**। Lemon Squeezy को आपका ईमेल, भुगतान विधि, और आपके द्वारा खरीदी गई योजना/क्रेडिट-पैक प्राप्त होता है।",
               "**Resend** (USA) — लेन-देन संबंधी ईमेल वितरण (खाता पुष्टि, भुगतान रसीदें, पासवर्ड रीसेट)। आपके ईमेल पते और ईमेल बॉडी जिसे हम भेजते हैं, प्राप्त करता है।",
               "**Vercel** (USA) — स्थैतिक पृष्ठों के लिए कंटेंट डिलीवरी नेटवर्क। रूटिंग और दुरुपयोग रोकथाम के लिए मानक वेब-ट्रैफिक मेटाडेटा (IP, user-agent, अनुरोधित URL) प्राप्त करता है। Vercel की लॉग प्रतिधारण नीति के अनुसार रखा जाता है।"
             ]
@@ -2997,7 +2997,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**स्थिर अवस्था में एन्क्रिप्शन** — Supabase आपके खाता डेटा सहित अंतर्निहित डेटाबेस को AES-256 के साथ एन्क्रिप्ट करता है।",
               "**पासवर्ड हैंडलिंग** — आपका पासवर्ड Supabase Auth द्वारा हैश किया जाता है और कभी भी सादे पाठ में संग्रहीत नहीं किया जाता। हम अतिरिक्त रूप से नए पासवर्ड की HaveIBeenPwned k-अज्ञातता API के माध्यम से क्लाइंट-साइड जाँच करते हैं ताकि ज्ञात उल्लंघन वाले पासवर्डों को अस्वीकार किया जा सके।",
               "**API कुंजियाँ** — केवल SHA-256 हैश और 12-वर्ण प्रदर्शन उपसर्ग के रूप में संग्रहीत। कच्ची कुंजी आपको निर्माण के समय ठीक एक बार दिखाई जाती है और उसके बाद अप्राप्य हो जाती है।",
-              "**भुगतान डेटा** — कभी भी हमारे द्वारा नहीं देखा या संग्रहीत नहीं किया जाता; कार्ड भुगतान प्रवाह पूरी तरह से Stripe (PCI-DSS Level 1 प्रमाणित) को सौंपा गया है।",
+              "**भुगतान डेटा** — कभी भी हमारे द्वारा नहीं देखा या संग्रहीत नहीं किया जाता; कार्ड भुगतान प्रवाह पूरी तरह से Lemon Squeezy (PCI-DSS Level 1 प्रमाणित) को सौंपा गया है।",
               "**पहुँच नियंत्रण** — पंक्ति-स्तरीय सुरक्षा नीतियाँ एक उपयोगकर्ता को दूसरे उपयोगकर्ता के डेटा को पढ़ने से रोकती हैं; सेवा-रोल कुंजियाँ केवल Edge Functions तक सीमित हैं।",
               "**फ़ाइल स्वच्छता** — कोई अपलोड की गई फ़ाइल कभी भी बनाए नहीं रखी जाती: ब्राउज़र-केवल उपकरण कुछ भी प्रसारित नहीं करते, और सर्वर-सहायता प्राप्त उपकरण अस्थायी बफर्स को तीस (30) मिनट के भीतर हटा देते हैं।",
               "**कमज़ोरी प्रतिक्रिया** — सुरक्षा मुद्दों की गोपनीय रूप से [support@konvertools.com](mailto:support@konvertools.com) पर रिपोर्ट की जा सकती है।"
@@ -3112,7 +3112,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Hesap kimlik bilgileri**: e-posta adresiniz; Supabase Auth tarafından yönetilen, tuzlanmış, özetlenmiş bir parola kopyası (aslına hiçbir zaman erişemeyiz veya saklamayız); Google ile giriş yaparsanız isteğe bağlı olarak görüntü adı ve avatar URL’si.",
-              "**Abonelik durumu**: mevcut plan (ücretsiz / Pro / İş), Stripe müşteri tanımlayıcısı, mevcut kredi bakiyesi ve en son yenileme tarihleriniz.",
+              "**Abonelik durumu**: mevcut plan (ücretsiz / Pro / İş), Lemon Squeezy müşteri tanımlayıcısı, mevcut kredi bakiyesi ve en son yenileme tarihleriniz.",
               "**Kullanım sayaçları**: profildeki yerinde güncellenen özet kota sayaçları (ör. \"bugün 3 AI çalıştırma kullanıldı\", \"aylık 420 AI çalıştırma kullanıldı\"). **Çalıştırma başına kayıtlar** tutmayız.",
               "**İş metaveri (geçici)**: bir sunucu destekli araç çıktı ürettiğinde (ör. transkripsiyondan oluşan bir .srt dosyası), araç adı, sonuç indirme URL’si, kaynak dil ve tamamlanma zaman damgasını kaydederiz. Bu satırlar otomatik olarak **iki (2) saat** sonra silinir. Hiçbir zaman dosyanızın içeriğini içermezler.",
               "**Onay kayıtları**: bu Şartları ve Gizlilik Politikamızı kabul ettiğiniz tarih ve saat ve pazarlama e-postalarına katılmayı seçip seçmediğiniz. Hesabınızın silinmesinden sonraki beş (5) yıl boyunca yasal kanıt süresi olarak saklanır.",
@@ -3205,7 +3205,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Fransa) — çeviri, yeniden ifade etme, özetleme, AI insanlaştırma, phishing kalıbı analizi ve diğer metin görevleri için büyük dil modeli çıkarımı; ses transkripsiyonu (Voxtral); görüntü OCR ve Vision görevleri (Pixtral). Gönderdiğiniz metin veya görüntü çıkarım için Mistral’e gönderilir. Mistral, API girdilerini modellerinin eğitilmesi için **kullanmayacağına** dair sözleşmesel olarak taahhüt vermiştir.",
               "**Google Safe Browsing** (Google LLC, ABD) — yalnızca URL Tarayıcısını veya Phishing Algılayıcısını kullanırken. Yalnızca gönderdiğiniz URL’ler (veya yapıştırdığınız e-postadan çıkarılan bağlantılar) iletilir. Kullandığımız tek üçüncü taraf güvenlik hizmeti budur.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — yalnızca Parola İhlali Denetleyicisini kullanırken ve yalnızca parolanızın SHA-1 özetinin ilk 5 karakteri (k-anonimlik). Tarayıcınızdan doğrudan sorgulanır, sunucularımızdan geçmez.",
-              "**Stripe** (ABD / İrlanda) — ödeme işleme ve abonelik yönetimi. **Kart detaylarınızı asla görmeyiz veya saklamayız**. Stripe, e-postanızı, ödeme yönteminizi ve satın aldığınız planı/kredi paketini alır.",
+              "**Lemon Squeezy** (ABD / İrlanda) — ödeme işleme ve abonelik yönetimi. **Kart detaylarınızı asla görmeyiz veya saklamayız**. Lemon Squeezy, e-postanızı, ödeme yönteminizi ve satın aldığınız planı/kredi paketini alır.",
               "**Resend** (ABD) — işlemsel e-posta teslimi (hesap onayı, ödeme makbuzu, parola sıfırlama). E-posta adresinizi ve gönderdiğimiz e-posta içeriğini alır.",
               "**Vercel** (ABD) — statik sayfalar için içerik dağıtım ağı. Yönlendirme ve kötüye kullanım önleme için standart web trafiği meta verilerini (IP, kullanıcı aracısı, istenen URL) alır. Vercel’in günlük saklama politikasına uygun olarak saklanır."
             ]
@@ -3252,7 +3252,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Dinlenmede şifreleme** — Supabase, veritabanınızı (hesap verilerinizi de dahil) AES-256 ile şifreler.",
               "**Parola işleme** — parolanız Supabase Auth tarafından özetlenir ve aslı hiçbir zaman saklanmaz. Ayrıca yeni parolaları müşteri tarafında HaveIBeenPwned k-anonimlik API’sine karşı kontrol ederek bilinen ihlal edilmiş parolaları reddederiz.",
               "**API anahtarları** — yalnızca SHA-256 özeti ve 12 karakterlik bir görüntüleme öneki olarak saklanır. Ham anahtar size yalnızca oluşturulduğunda bir kez gösterilir ve daha sonra kurtarılamaz.",
-              "**Ödeme verileri** — asla görmeyiz veya saklamayız; kart ödeme akışı tamamen Stripe’a (PCI-DSS Seviye 1 sertifikalı) devredilir.",
+              "**Ödeme verileri** — asla görmeyiz veya saklamayız; kart ödeme akışı tamamen Lemon Squeezy’a (PCI-DSS Seviye 1 sertifikalı) devredilir.",
               "**Erişim kontrolü** — satır düzeyinde güvenlik politikaları bir kullanıcının diğer bir kullanıcının verilerini okumasını engeller; hizmet rolündeki anahtarlar yalnızca Edge Functions’a sınırlıdır.",
               "**Dosya hijyeni** — yüklenen hiçbir dosya asla saklanmaz: tarayıcı içi araçlar hiçbir şey iletmez ve sunucu destekli araçlar geçici arabellekleri otuz dakika içinde siler.",
               "**Zafiyet yanıtı** — güvenlik sorunları [support@konvertools.com](mailto:support@konvertools.com) adresine gizlilik içinde bildirilebilir."
@@ -3367,7 +3367,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Kredensial akun**: alamat email Anda; salinan kata sandi Anda yang diberi garam dan di-hash (dikelola oleh Supabase Auth — kami tidak pernah melihat atau menyimpan teks aslinya); nama tampilan dan URL avatar opsional jika Anda masuk menggunakan Google.",
-              "**Status langganan**: rencana saat ini (gratis / Pro / Bisnis), pengenal pelanggan Stripe, saldo kredit saat ini, serta tanggal pembaruan langganan terakhir Anda.",
+              "**Status langganan**: rencana saat ini (gratis / Pro / Bisnis), pengenal pelanggan Lemon Squeezy, saldo kredit saat ini, serta tanggal pembaruan langganan terakhir Anda.",
               "**Penghitung penggunaan**: penghitung kuota agregat (mis. \"3 penggunaan AI hari ini\", \"420 penggunaan AI bulanan\") yang diperbarui di baris profil Anda. Kami **tidak** mencatat catatan per penggunaan.",
               "**Metadata pekerjaan (sementara)**: ketika alat berbantuan server menghasilkan keluaran (mis. file .srt dari transkripsi), kami mencatat nama alat, URL unduhan hasil, bahasa sumber, serta cap waktu penyelesaian. Baris ini secara otomatis dibersihkan setelah **dua (2) jam**. Baris ini tidak pernah berisi konten file Anda.",
               "**Catatan persetujuan**: tanggal dan waktu saat Anda menerima Ketentuan dan Kebijakan Privasi kami, serta apakah Anda memilih untuk menerima email pemasaran. Disimpan selama masa akun Anda ditambah periode bukti hukum selama lima (5) tahun setelah penghapusan.",
@@ -3460,7 +3460,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Prancis) — inferensi model bahasa besar untuk terjemahan, pengubahan gaya, ringkasan, humanisasi AI, analisis pola phishing, serta tugas teks lainnya; transkripsi audio (Voxtral); tugas OCR dan Vision gambar (Pixtral). Teks atau gambar yang Anda kirimkan dikirimkan ke Mistral untuk inferensi. Mistral telah berkomitmen secara kontraktual untuk **tidak** menggunakan masukan API untuk melatih modelnya.",
               "**Google Safe Browsing** (Google LLC, AS) — hanya ketika Anda menggunakan Pemindai URL atau Detektor Phishing. Hanya URL yang Anda kirim (atau tautan yang diekstrak dari email yang Anda tempel) yang ditransmisikan. Ini adalah satu-satunya layanan keamanan pihak ketiga yang kami gunakan.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — hanya ketika Anda menggunakan Pemeriksa Kebocoran Kata Sandi, dan hanya lima karakter pertama dari hash SHA-1 kata sandi Anda (k-anonimitas). Dikueri langsung dari peramban Anda, tidak melalui server kami.",
-              "**Stripe** (AS / Irlandia) — pemrosesan pembayaran dan manajemen langganan. Kami **tidak pernah melihat atau menyimpan** detail kartu Anda. Stripe menerima alamat email, metode pembayaran, serta rencana/paket kredit yang Anda beli.",
+              "**Lemon Squeezy** (AS / Irlandia) — pemrosesan pembayaran dan manajemen langganan. Kami **tidak pernah melihat atau menyimpan** detail kartu Anda. Lemon Squeezy menerima alamat email, metode pembayaran, serta rencana/paket kredit yang Anda beli.",
               "**Resend** (AS) — pengiriman email transaksional (konfirmasi akun, tanda terima pembayaran, reset kata sandi). Menerima alamat email dan badan email yang kami kirim.",
               "**Vercel** (AS) — jaringan pengiriman konten untuk halaman statis. Menerima metadata lalu lintas web standar (IP, agen pengguna, URL yang diminta) untuk perutean dan pencegahan penyalahgunaan. Disimpan sesuai dengan kebijakan retensi log Vercel."
             ]
@@ -3507,7 +3507,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Enkripsi saat istirahat** — Supabase mengenkripsi basis data yang mendasarinya (termasuk data akun Anda) dengan AES-256.",
               "**Penanganan kata sandi** — kata sandi Anda di-hash oleh Supabase Auth dan tidak pernah disimpan dalam teks asli. Kami juga memeriksa kata sandi baru secara klien terhadap API k-anonimitas HaveIBeenPwned untuk menolak kata sandi yang diketahui bocor.",
               "**Kunci API** — disimpan hanya sebagai hash SHA-256 dengan awalan tampilan 12 karakter. Kunci mentah ditampilkan kepada Anda tepat satu kali saat pembuatan dan tidak dapat dipulihkan lagi setelahnya.",
-              "**Data pembayaran** — tidak pernah dilihat atau disimpan oleh kami; alur pembayaran kartu sepenuhnya didelegasikan ke Stripe (bersertifikasi PCI-DSS Level 1).",
+              "**Data pembayaran** — tidak pernah dilihat atau disimpan oleh kami; alur pembayaran kartu sepenuhnya didelegasikan ke Lemon Squeezy (bersertifikasi PCI-DSS Level 1).",
               "**Kontrol akses** — kebijakan keamanan tingkat baris mencegah satu pengguna membaca data pengguna lain; kunci peran layanan dibatasi untuk Edge Functions.",
               "**Kebersihan file** — tidak ada file yang diunggah yang pernah disimpan: alat berbasis peramban tidak pernah mentransmisikan apa pun, dan alat berbantuan server menghapus buffer sementara dalam 30 menit.",
               "**Respons kerentanan** — masalah keamanan dapat dilaporkan secara rahasia ke [support@konvertools.com](mailto:support@konvertools.com)."
@@ -3622,7 +3622,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Thông tin đăng nhập tài khoản**: địa chỉ email của bạn; bản sao băm có muối của mật khẩu (được quản lý bởi Supabase Auth — chúng tôi không bao giờ nhìn thấy hoặc lưu trữ mật khẩu ở dạng văn bản thuần túy); tên hiển thị tùy chọn và URL hình đại diện nếu bạn đăng nhập bằng Google.",
-              "**Trạng thái đăng ký**: gói hiện tại (miễn phí / Pro / Doanh nghiệp), mã định danh khách hàng Stripe, số dư tín dụng hiện tại và ngày gia hạn gần nhất của bạn.",
+              "**Trạng thái đăng ký**: gói hiện tại (miễn phí / Pro / Doanh nghiệp), mã định danh khách hàng Lemon Squeezy, số dư tín dụng hiện tại và ngày gia hạn gần nhất của bạn.",
               "**Bộ đếm sử dụng**: bộ đếm hạn ngạch được tổng hợp (ví dụ: \"3 lượt chạy AI hôm nay\", \"420 lượt chạy AI hàng tháng đã sử dụng\") được cập nhật tại chỗ trên hàng hồ sơ của bạn. Chúng tôi **không** ghi lại các bản ghi theo lượt chạy.",
               "**Siêu dữ liệu công việc (tạm thời)**: khi một công cụ hỗ trợ bởi máy chủ tạo ra đầu ra (ví dụ: tệp .srt từ chuyển ngữ), chúng tôi ghi lại tên công cụ, URL tải xuống kết quả, ngôn ngữ nguồn và dấu thời gian hoàn thành. Các hàng này được tự động xóa sau **hai (2) giờ**. Chúng không bao giờ chứa nội dung tệp của bạn.",
               "**Bản ghi sự đồng thuận**: ngày và giờ bạn chấp nhận Điều khoản và Chính sách Bảo mật của chúng tôi, cũng như liệu bạn có chọn tham gia email tiếp thị hay không. Được lưu giữ trong suốt thời gian tồn tại tài khoản của bạn cộng với khoảng thời gian bằng chứng pháp lý là năm (5) năm sau khi xóa.",
@@ -3715,7 +3715,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Pháp) — suy luận mô hình ngôn ngữ lớn cho dịch thuật, diễn đạt lại, tóm tắt, công cụ nhân hóa AI, phân tích mẫu lừa đảo và các tác vụ văn bản khác; chuyển ngữ âm thanh (Voxtral); tác vụ OCR và Vision hình ảnh (Pixtral). Văn bản hoặc hình ảnh bạn gửi được gửi đến Mistral để suy luận. Mistral đã cam kết theo hợp đồng **không** sử dụng đầu vào API để đào tạo mô hình của mình.",
               "**Google Safe Browsing** (Google LLC, Hoa Kỳ) — chỉ khi bạn sử dụng Trình quét URL hoặc Trình phát hiện lừa đảo. Chỉ các URL bạn gửi (hoặc liên kết trích xuất từ email bạn dán) được truyền tải. Đây là dịch vụ bảo mật của bên thứ ba duy nhất mà chúng tôi sử dụng.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — chỉ khi bạn sử dụng Công cụ kiểm tra vi phạm mật khẩu, và chỉ năm (5) ký tự đầu tiên của băm SHA-1 mật khẩu của bạn (phương pháp k-anonymity). Truy vấn trực tiếp từ trình duyệt của bạn, không thông qua máy chủ của chúng tôi.",
-              "**Stripe** (Hoa Kỳ / Ireland) — xử lý thanh toán và quản lý đăng ký. Chúng tôi **không bao giờ nhìn thấy hoặc lưu trữ** chi tiết thẻ của bạn. Stripe nhận địa chỉ email, phương thức thanh toán và gói/tín dụng bạn đã mua.",
+              "**Lemon Squeezy** (Hoa Kỳ / Ireland) — xử lý thanh toán và quản lý đăng ký. Chúng tôi **không bao giờ nhìn thấy hoặc lưu trữ** chi tiết thẻ của bạn. Lemon Squeezy nhận địa chỉ email, phương thức thanh toán và gói/tín dụng bạn đã mua.",
               "**Resend** (Hoa Kỳ) — gửi email giao dịch (xác nhận tài khoản, biên lai thanh toán, đặt lại mật khẩu). Nhận địa chỉ email của bạn và nội dung email chúng tôi gửi.",
               "**Vercel** (Hoa Kỳ) — mạng phân phối nội dung cho các trang tĩnh. Nhận siêu dữ liệu lưu lượng web tiêu chuẩn (IP, user-agent, URL được yêu cầu) để định tuyến và ngăn chặn lạm dụng. Được lưu giữ theo chính sách lưu giữ nhật ký của Vercel."
             ]
@@ -3762,7 +3762,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mã hóa khi lưu trữ** — Supabase mã hóa cơ sở dữ liệu cơ bản (bao gồm cả dữ liệu tài khoản của bạn) bằng AES-256.",
               "**Xử lý mật khẩu** — mật khẩu của bạn được băm bởi Supabase Auth và không bao giờ được lưu trữ ở dạng văn bản thuần túy. Chúng tôi bổ sung kiểm tra mật khẩu mới chống lại API k-anonymity của HaveIBeenPwned phía máy khách để từ chối mật khẩu đã bị xâm phạm.",
               "**Khóa API** — chỉ được lưu trữ dưới dạng băm SHA-256 với tiền tố hiển thị 12 ký tự. Khóa thô được hiển thị cho bạn chính xác một lần khi tạo và không thể khôi phục sau đó.",
-              "**Dữ liệu thanh toán** — không bao giờ được chúng tôi nhìn thấy hoặc lưu trữ; quy trình thanh toán thẻ được ủy quyền hoàn toàn cho Stripe (được chứng nhận PCI-DSS Cấp 1).",
+              "**Dữ liệu thanh toán** — không bao giờ được chúng tôi nhìn thấy hoặc lưu trữ; quy trình thanh toán thẻ được ủy quyền hoàn toàn cho Lemon Squeezy (được chứng nhận PCI-DSS Cấp 1).",
               "**Kiểm soát truy cập** — chính sách bảo mật cấp hàng ngăn người dùng này đọc dữ liệu của người dùng khác; khóa vai trò dịch vụ bị hạn chế đối với Edge Functions.",
               "**Vệ sinh tệp** — không có tệp tải lên nào được giữ lại: công cụ chỉ chạy trên trình duyệt không bao giờ truyền bất cứ thứ gì, và công cụ hỗ trợ bởi máy chủ xóa bộ đệm tạm trong vòng 30 phút.",
               "**Phản hồi lỗ hổng bảo mật** — các vấn đề bảo mật có thể được báo cáo bí mật đến [support@konvertools.com](mailto:support@konvertools.com)."
@@ -3877,7 +3877,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Kontouppgifter**: din e-postadress; en saltad, hashad kopia av ditt lösenord (hanteras av Supabase Auth — vi ser eller lagrar aldrig det okrypterade lösenordet); valfritt visningsnamn och avatar-URL om du loggar in med Google.",
-              "**Abonnemangsstatus**: aktuell plan (gratis / Pro / Business), Stripe-kundidentifierare, aktuell kreditbalans samt datum för dina senaste förnyelser.",
+              "**Abonnemangsstatus**: aktuell plan (gratis / Pro / Business), Lemon Squeezy-kundidentifierare, aktuell kreditbalans samt datum för dina senaste förnyelser.",
               "**Användningsräknare**: aggregerade kvoträknare (t.ex. \"3 AI-körningar använda idag\", \"420 AI-körningar använda denna månad\") som uppdateras direkt i din profilrad. Vi **loggar inte** per-körningsposter.",
               "**Jobbmetadata (tillfällig)**: när ett serverassisterat verktyg producerar ett resultat (t.ex. en .srt-fil från transkribering) lagrar vi verktygets namn, nedladdnings-URL för resultatet, källspråk och en slutförningstidpunkt. Dessa rader raderas automatiskt efter **två (2) timmar**. De innehåller aldrig innehållet i din fil.",
               "**Samtyckesposter**: datum och tidpunkt för när du accepterade dessa villkor och vår Integritetspolicy, samt om du valt att ta emot marknadsföringsmejl. Lagras under hela ditt konto plus en laglig bevisperiod på fem (5) år efter radering.",
@@ -3970,7 +3970,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Frankrike) — inferens med stora språkmodeller för översättning, omformulering, sammanfattning, den AI-mänskliggöraren, phishingmönsteranalys och andra textuppgifter; ljudtranskribering (Voxtral); bild-OCR och bildanalys (Pixtral). Den text eller bild du skickar vidarebefordras till Mistral för inferens. Mistral har kontraktuellt åtagit sig att **inte** använda API-inmatningar för att träna sina modeller.",
               "**Google Safe Browsing** (Google LLC, USA) — endast när du använder URL-skannern eller Phishingdetektorn. Endast de URL:er du anger (eller länkar som extraheras från den e-post du klistrar in) överförs. Detta är den enda tredje parts säkerhetstjänst vi använder.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — endast när du använder Lösenordsskyddscheckern, och endast de första 5 tecknen av SHA-1-hashen av ditt lösenord (k-anonymitet). Frågas direkt från din webbläsare, inte via våra servrar.",
-              "**Stripe** (USA / Irland) — betalningsförmedling och abonnemangsadministration. Vi **ser eller lagrar aldrig** dina kortuppgifter. Stripe tar emot din e-post, betalningsmetod och den plan/kreditpaket du köpt.",
+              "**Lemon Squeezy** (USA / Irland) — betalningsförmedling och abonnemangsadministration. Vi **ser eller lagrar aldrig** dina kortuppgifter. Lemon Squeezy tar emot din e-post, betalningsmetod och den plan/kreditpaket du köpt.",
               "**Resend** (USA) — leverans av transaktionsmejl (kontbekräftelse, betalningskvittenser, lösenordsåterställning). Tar emot din e-postadress och mejlkroppen vi skickar.",
               "**Vercel** (USA) — innehållsleveransnätverk för statiska sidor. Tar emot standard webbtrafikmetadata (IP, user-agent, begärd URL) för routing och missbruksförebyggande. Lagras i enlighet med Vercels loggningspolicy."
             ]
@@ -4017,7 +4017,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Kryptering vid lagring** — Supabase krypterar den underliggande databasen (inklusive dina kontouppgifter) med AES-256.",
               "**Lösenordshantering** — ditt lösenord hashas av Supabase Auth och lagras aldrig okrypterat. Vi kontrollerar dessutom nya lösenord mot HaveIBeenPwned:s k-anonymitets-API på klientsidan för att neka kända läckta lösenord.",
               "**API-nycklar** — lagras endast som SHA-256-hashar med ett 12-teckens visningsprefix. Den råa nyckeln visas för dig exakt en gång vid skapandet och kan därefter inte återställas.",
-              "**Betalningsdata** — aldrig sedda eller lagrade av oss; kortbetalningsflödet är helt delegerat till Stripe (PCI-DSS nivå 1-certifierad).",
+              "**Betalningsdata** — aldrig sedda eller lagrade av oss; kortbetalningsflödet är helt delegerat till Lemon Squeezy (PCI-DSS nivå 1-certifierad).",
               "**Åtkomstkontroll** — radnivå säkerhetspolicys förhindrar att en användare läser en annan användares data; tjänsterollnycklar är begränsade till Edge Functions.",
               "**Filhygien** — ingen uppladdad fil lagras någonsin: webbläsarbaserade verktyg överför aldrig något, och serverassisterade verktyg raderar tillfälliga buffertar inom 30 minuter.",
               "**Sårbarhetsrespons** — säkerhetsproblem kan rapporteras konfidentiellt till [support@konvertools.com](mailto:support@konvertools.com)."
@@ -4132,7 +4132,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Dane uwierzytelniające konta**: Twój adres e-mail; zasolona, zahaszowana kopia Twojego hasła (zarządzana przez Supabase Auth — nigdy nie widzimy ani nie przechowujemy hasła w postaci jawnej); opcjonalna nazwa wyświetlana i adres URL awatara, jeśli zalogujesz się przez Google.",
-              "**Stan subskrypcji**: aktualny plan (darmowy / Pro / Business), identyfikator klienta Stripe, aktualny stan środków oraz daty ostatnich odnowień.",
+              "**Stan subskrypcji**: aktualny plan (darmowy / Pro / Business), identyfikator klienta Lemon Squeezy, aktualny stan środków oraz daty ostatnich odnowień.",
               "**Liczniki użycia**: zagregowane liczniki kwot (np. „3 użycia AI dzisiaj”, „420 użyć AI w tym miesiącu”) aktualizowane na Twoim profilu. **Nie rejestrujemy** rekordów dla poszczególnych użyć.",
               "**Metadane zadań (przejściowe)**: gdy narzędzie wspomagane przez serwer generuje wynik (np. plik .srt z transkrypcji), zapisujemy nazwę narzędzia, adres URL do pobrania wyniku, język źródłowy oraz znacznik czasu zakończenia. Rekordy te są automatycznie usuwane po **dwóch (2) godzinach**. Nigdy nie zawierają treści Twojego pliku.",
               "**Rekordy zgody**: data i godzina, w której zaakceptowałeś niniejsze Warunki oraz naszą Politykę Prywatności, a także czy wyraziłeś zgodę na otrzymywanie e-maili marketingowych. Przechowywane są przez okres istnienia Twojego konta oraz dodatkowe pięć (5) lat po jego usunięciu jako dowód prawny.",
@@ -4225,7 +4225,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Francja) — wnioskowanie przy użyciu dużego modelu językowego w przypadku tłumaczenia, parafrazowania, streszczania, humanizacji tekstu AI, analizy wzorców phishingu oraz innych zadań tekstowych; transkrypcja audio (Voxtral); OCR i zadania wizyjne (Pixtral). Przesyłany przez Ciebie tekst lub obraz jest wysyłany do Mistral w celu wnioskowania. Mistral zobowiązał się umownie **nie używać** danych wejściowych API do trenowania swoich modeli.",
               "**Google Safe Browsing** (Google LLC, USA) — jedynie podczas korzystania ze skanera adresów URL lub wykrywacza phishingu. Przesyłane są jedynie adresy URL, które wprowadzasz (lub linki wyodrębnione z wiadomości e-mail, którą wklejasz). Jest to jedyna usługa bezpieczeństwa stron trzecich, której używamy.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — jedynie podczas korzystania ze sprawdzacza naruszeń haseł, i jedynie pierwsze 5 znaków skrótu SHA-1 Twojego hasła (k-anonimowość). Zapytanie jest wykonywane bezpośrednio z przeglądarki, nie przez nasze serwery.",
-              "**Stripe** (USA / Irlandia) — przetwarzanie płatności i zarządzanie subskrypcjami. **Nigdy nie widzimy ani nie przechowujemy** szczegółów Twojej karty. Stripe otrzymuje Twój adres e-mail, metodę płatności oraz plan/pakiet kredytów, który zakupiłeś.",
+              "**Lemon Squeezy** (USA / Irlandia) — przetwarzanie płatności i zarządzanie subskrypcjami. **Nigdy nie widzimy ani nie przechowujemy** szczegółów Twojej karty. Lemon Squeezy otrzymuje Twój adres e-mail, metodę płatności oraz plan/pakiet kredytów, który zakupiłeś.",
               "**Resend** (USA) — dostarczanie wiadomości e-mail transakcyjnych (potwierdzenia konta, potwierdzenia płatności, reset hasła). Otrzymuje Twój adres e-mail oraz treść wiadomości, którą wysyłamy.",
               "**Vercel** (USA) — sieć dostarczania treści dla statycznych stron. Otrzymuje standardowe metadane ruchu sieciowego (IP, user-agent, żądany adres URL) w celach routingu i zapobiegania nadużyciom. Przechowywane zgodnie z polityką retencji logów Vercel."
             ]
@@ -4272,7 +4272,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Szyfrowanie w spoczynku** — Supabase szyfruje podstawową bazę danych (w tym dane Twojego konta) algorytmem AES-256.",
               "**Obsługa haseł** — Twoje hasło jest haszowane przez Supabase Auth i nigdy nie jest przechowywane w postaci jawnej. Dodatkowo sprawdzamy nowe hasła po stronie klienta przy użyciu API k-anonimowości HaveIBeenPwned, aby odrzucić znane naruszone hasła.",
               "**Klucze API** — przechowywane jedynie jako skróty SHA-256 z 12-znakowym prefiksem wyświetlanym. Surowy klucz jest pokazywany Tobie dokładnie raz podczas tworzenia i nie może być odzyskany później.",
-              "**Dane płatności** — nigdy nie są widziane ani przechowywane przez nas; proces płatności kartą jest w pełni delegowany do Stripe (certyfikowanego zgodnie z PCI-DSS Level 1).",
+              "**Dane płatności** — nigdy nie są widziane ani przechowywane przez nas; proces płatności kartą jest w pełni delegowany do Lemon Squeezy (certyfikowanego zgodnie z PCI-DSS Level 1).",
               "**Kontrola dostępu** — polityki bezpieczeństwa na poziomie wierszy uniemożliwiają jednemu użytkownikowi odczytanie danych innego użytkownika; klucze dla ról usług są ograniczone do funkcji Edge.",
               "**Higiena plików** — żaden przesłany plik nie jest nigdy przechowywany: narzędzia działające wyłącznie w przeglądarce nigdy niczego nie transmitują, a narzędzia wspomagane przez serwer usuwają bufory tymczasowe w ciągu 30 minut.",
               "**Reagowanie na podatności** — problemy związane z bezpieczeństwem można zgłaszać poufnie na [support@konvertools.com](mailto:support@konvertools.com)."
@@ -4387,7 +4387,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Облікові дані** — ваша електронна адреса; сольований та хешований варіант вашого пароля (керований Supabase Auth — ми ніколи не бачимо та не зберігаємо пароль у відкритому вигляді); за бажанням — ім’я для відображення та URL аватара, якщо ви входите через Google.",
-              "**Стан підписки** — поточний тарифний план (безкоштовний / Pro / Business), ідентифікатор клієнта Stripe, поточний кредитний баланс та дати останніх поновлень.",
+              "**Стан підписки** — поточний тарифний план (безкоштовний / Pro / Business), ідентифікатор клієнта Lemon Squeezy, поточний кредитний баланс та дати останніх поновлень.",
               "**Лічильники використання** — агреговані лічильники квот (наприклад, «3 AI-запуски сьогодні», «420 AI-запусків на місяць використано») оновлюються безпосередньо у вашому профілі. Ми **не ведемо записів за кожним запуском**.",
               "**Метадані завдань (тимчасові)** — коли інструмент з підтримкою сервера генерує результат (наприклад, файл .srt після транскрибування), ми записуємо назву інструменту, URL для завантаження результату, вихідну мову та час завершення. Ці рядки автоматично видаляються через **дві (2) години**. Вони ніколи не містять змісту вашого файлу.",
               "**Записи згоди** — дата та час, коли ви прийняли ці Умови та нашу Політику конфіденційності, а також чи ви дали згоду на отримання маркетингових листів. Зберігаються протягом існування вашого облікового запису та протягом п’яти (5) років після видалення як юридичний доказ.",
@@ -4480,7 +4480,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Франція) — виконання великомовних моделей для перекладу, перефразування, резюмування, AI-гуманізації, аналізу шаблонів фішингу та інших текстових завдань; аудіотранскрибування (Voxtral); OCR та візуальні завдання (Pixtral). Текст або зображення, які ви надсилаєте, передаються Mistral для виконання. Mistral взяла на себе договірне зобов’язання **не використовувати вхідні дані API для навчання своїх моделей**.",
               "**Google Safe Browsing** (Google LLC, США) — лише під час використання сканера URL або детектора фішингу. Передаються лише ті URL, які ви надсилаєте (або посилання, вилучені з електронного листа, який ви вставили). Це єдиний сторонній сервіс безпеки, який ми використовуємо.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — лише під час використання перевірки паролів на витік, і лише перші 5 символів SHA-1 хешу вашого пароля (k-анонімність). Запит здійснюється безпосередньо з вашого браузера, а не через наші сервери.",
-              "**Stripe** (США / Ірландія) — обробка платежів та управління підпискою. Ми **ніколи не бачимо та не зберігаємо** деталі вашої карти. Stripe отримує вашу електронну адресу, спосіб оплати та тарифний план/кредитний пакет, який ви придбали.",
+              "**Lemon Squeezy** (США / Ірландія) — обробка платежів та управління підпискою. Ми **ніколи не бачимо та не зберігаємо** деталі вашої карти. Lemon Squeezy отримує вашу електронну адресу, спосіб оплати та тарифний план/кредитний пакет, який ви придбали.",
               "**Resend** (США) — доставка транзакційних листів (підтвердження облікового запису, квитанції про оплату, скидання пароля). Отримує вашу електронну адресу та тіло листа, який ми надсилаємо.",
               "**Vercel** (США) — мережа доставки контенту для статичних сторінок. Отримує стандартні метадані веб-трафіку (IP, user-agent, запитаний URL) для маршрутизації та запобігання зловживанням. Зберігаються відповідно до політики логування Vercel."
             ]
@@ -4527,7 +4527,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Шифрування на носії** — Supabase шифрує базу даних (включаючи ваші облікові дані) за допомогою AES-256.",
               "**Обробка паролів** — ваш пароль хешується Supabase Auth та ніколи не зберігається у відкритому вигляді. Ми додатково перевіряємо нові паролі за допомогою клієнтського API HaveIBeenPwned за допомогою k-анонімності, щоб відмовити у використанні відомих зламаних паролів.",
               "**API-ключі** — зберігаються лише у вигляді SHA-256-хешів з 12-символьним префіксом для відображення. Сирий ключ показується вам лише один раз під час створення та після цього не відновлюється.",
-              "**Платіжні дані** — ніколи не бачаться та не зберігаються нами; обробка платежів повністю делегована Stripe (сертифікований за PCI-DSS Level 1).",
+              "**Платіжні дані** — ніколи не бачаться та не зберігаються нами; обробка платежів повністю делегована Lemon Squeezy (сертифікований за PCI-DSS Level 1).",
               "**Контроль доступу** — політики безпеки на рівні рядків запобігають читанню даних одного користувача іншим; ключі для службових ролей обмежені Edge Functions.",
               "**Гігієна файлів** — жоден завантажений файл ніколи не зберігається: інструменти, що працюють лише у браузері, нічого не передають, а інструменти з підтримкою сервера видаляють тимчасові буфери протягом 30 хвилин.",
               "**Реагування на вразливості** — про проблеми безпеки можна повідомляти конфіденційно на [support@konvertools.com](mailto:support@konvertools.com)."
@@ -4642,7 +4642,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
             "kind": "ul",
             "items": [
               "**Přihlašovací údaje**: vaše e-mailová adresa; solený a hašovaný kopie vašeho hesla (spravovaný službou Supabase Auth — my nevidíme ani neukládáme prostý text hesla); volitelný zobrazovaný název a URL k vašemu avataru, pokud se přihlásíte pomocí Google.",
-              "**Stav předplatného**: aktuální plán (zdarma / Pro / Business), identifikátor zákazníka společnosti Stripe, aktuální zůstatek kreditů a data vašich posledních obnov.",
+              "**Stav předplatného**: aktuální plán (zdarma / Pro / Business), identifikátor zákazníka společnosti Lemon Squeezy, aktuální zůstatek kreditů a data vašich posledních obnov.",
               "**Počítadla využití**: agregovaná kvóta počítadel (např. „3 AI spuštění dnes“, „420 AI spuštění měsíčně“) aktualizovaná na vašem profilu. **Neukládáme** záznamy o jednotlivých spuštěních.",
               "**Metadata úloh (přechodná)**: když nástroj využívající server vyprodukuje výstup (např. soubor .srt z transkripce), zaznamenáme název nástroje, URL pro stažení výsledku, zdrojový jazyk a čas dokončení. Tyto řádky jsou automaticky odstraněny po **dvou (2) hodinách**. Nikdy neobsahují obsah vašeho souboru.",
               "**Záznamy o souhlasu**: datum a čas, kdy jste přijali tyto Podmínky a naše Zásady ochrany osobních údajů, a zda jste se přihlásili k odběru marketingových e-mailů. Uchovávány po dobu existence vašeho účtu plus pět (5) let po jeho smazání jako právní důkaz.",
@@ -4735,7 +4735,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Mistral AI** (Francie) — inference velkých jazykových modelů pro překlad, parafrázování, shrnování, AI humanizaci, analýzu vzorů phishingu a další textové úlohy; transkripci zvuku (Voxtral); OCR a úlohy zpracování obrazu (Pixtral). Text nebo obrázek, který odešlete, je odeslán Mistralovi pro inferenci. Mistral se smluvně zavázal **nepoužívat vstupy z API k trénování svých modelů**.",
               "**Google Safe Browsing** (Google LLC, USA) — pouze při používání Skeneru URL nebo Detektoru phishingu. Přenášen je pouze URL, které zadáte (nebo odkazy extrahované z e-mailu, který vložíte). Jedná se o jediný třetí stranu bezpečnostní službu, kterou používáme.",
               "**HaveIBeenPwned** (Have I Been Pwned LLC) — pouze při používání Kontroly prolomení hesel a pouze prvních 5 znaků haše vašeho hesla SHA-1 (k-anonymita). Dotazováno přímo z vašeho prohlížeče, nikoli prostřednictvím našich serverů.",
-              "**Stripe** (USA / Irsko) — zpracování plateb a správa předplatného. **Nikdy nevidíme ani neukládáme** vaše platební údaje. Stripe přijímá vaši e-mailovou adresu, platební metodu a plán/kredit, který jste zakoupili.",
+              "**Lemon Squeezy** (USA / Irsko) — zpracování plateb a správa předplatného. **Nikdy nevidíme ani neukládáme** vaše platební údaje. Lemon Squeezy přijímá vaši e-mailovou adresu, platební metodu a plán/kredit, který jste zakoupili.",
               "**Resend** (USA) — doručování transakčních e-mailů (ověření účtu, potvrzení platby, reset hesla). Přijímá vaši e-mailovou adresu a tělo e-mailu, který odesíláme.",
               "**Vercel** (USA) — síť pro doručování obsahu pro statické stránky. Přijímá standardní metadata webového provozu (IP, user-agent, požadovaná URL) pro směrování a prevenci zneužívání. Uchováváno v souladu s zásadami uchovávání protokolů společnosti Vercel."
             ]
@@ -4782,7 +4782,7 @@ export const PRIVACY_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Šifrování v klidu** — Supabase šifruje základní databázi (včetně vašich účtových údajů) pomocí AES-256.",
               "**Zpracování hesel** — vaše heslo je hašováno službou Supabase Auth a nikdy není uloženo v prostém textu. Dále kontrolujeme nová hesla proti API klientovi HaveIBeenPwned pomocí k-anonymity, abychom odmítli známá prolomená hesla.",
               "**API klíče** — uloženy pouze jako haše SHA-256 s 12místným zobrazovaným prefixem. Prostý text klíče je zobrazen pouze jednou při vytvoření a následně je nezotavitelný.",
-              "**Platební údaje** — nikdy je nevidíme ani neukládáme; průběh platby kartou je plně delegován na Stripe (certifikováno dle PCI-DSS Level 1).",
+              "**Platební údaje** — nikdy je nevidíme ani neukládáme; průběh platby kartou je plně delegován na Lemon Squeezy (certifikováno dle PCI-DSS Level 1).",
               "**Oprávnění přístupu** — bezpečnostní politiky na úrovni řádků zabraňují tomu, aby jeden uživatel četl data jiného uživatele; klíče pro služební role jsou omezeny na Edge Funkce.",
               "**Hygiena souborů** — žádný nahraný soubor není nikdy uchováván: nástroje běžící pouze v prohlížeči nic nepřenesou, nástroje využívající server odstraní dočasné vyrovnávací paměti do 30 minut.",
               "**Reakce na zranitelnosti** — bezpečnostní problémy lze nahlásit důvěrně na [support@konvertools.com](mailto:support@konvertools.com)."
@@ -4893,7 +4893,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "la perte de données, les fichiers corrompus ou incorrects, ou les conversions échouées ;",
               "les décisions, financières, commerciales ou autres, que vous prenez en fonction des résultats de tout outil ;",
               "les temps d'arrêt, la latence ou l'indisponibilité temporaire de toute fonctionnalité ;",
-              "les défaillances de services tiers (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, hébergeurs) ;",
+              "les défaillances de services tiers (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, hébergeurs) ;",
               "les dommages indirects, accessoires, spéciaux, consécutifs ou punitifs de quelque nature que ce soit ;",
               "tout montant global excédant les frais que vous avez effectivement payés à notre égard au cours des douze (12) mois précédant l'événement donnant lieu à la réclamation, plafonné à cent (100) euros pour les utilisateurs de la formule gratuite."
             ]
@@ -4963,7 +4963,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Aucun remboursement partiel** : en dehors du scénario de rétractation ci-dessus, les frais déjà payés pour la période de facturation en cours ne sont pas remboursables.",
               "**Crédits** : les crédits API achetés sous forme de packs ponctuels (« Starter », « Growth », « Scale », « Studio ») **ne périment jamais**. Les 300 crédits attribués automatiquement chaque mois aux abonnés Business expirent à la fin du mois civil et **ne sont pas remboursables**.",
               "**Modifications des prix** : nous pouvons modifier les prix avec un préavis de 30 jours. Les abonnés existants conservent leur tarif actuel jusqu'à leur prochaine date de renouvellement.",
-              "**Taxes** : les prix s'affichent hors TVA le cas échéant. Stripe collecte et reverse toute taxe due dans votre juridiction."
+              "**Taxes** : les prix s'affichent hors TVA le cas échéant. Lemon Squeezy collecte et reverse toute taxe due dans votre juridiction."
             ]
           }
         ]
@@ -5088,7 +5088,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "pérdida de datos, archivos corruptos o incorrectos, o conversiones fallidas;",
               "decisiones, financieras, comerciales u otras, que tome basándose en los resultados de cualquier herramienta;",
               "tiempos de inactividad, latencia o indisponibilidad temporal de cualquier función;",
-              "fallos de servicios de terceros (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, proveedores de alojamiento);",
+              "fallos de servicios de terceros (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, proveedores de alojamiento);",
               "daños indirectos, incidentales, especiales, consecuentes o punitivos de cualquier tipo;",
               "cualquier importe agregado que supere las tarifas que usted haya pagado efectivamente a nosotros en los doce (12) meses anteriores al evento que origine la reclamación, con un límite de cien (100) euros para usuarios de nivel gratuito."
             ]
@@ -5158,7 +5158,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Sin reembolsos parciales**: fuera del escenario de desistimiento anterior, las tarifas ya pagadas por el período de facturación actual no son reembolsables.",
               "**Créditos**: los créditos de API comprados como paquetes de un solo uso (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **no caducan**. Los 300 créditos otorgados automáticamente cada mes a los suscriptores Business caducan al final del mes calendario y **no son reembolsables**.",
               "**Cambios de precio**: podemos modificar los precios con 30 días de antelación. Los suscriptores existentes mantienen su precio actual hasta su próxima fecha de renovación.",
-              "**Impuestos**: los precios se muestran sin IVA cuando corresponda. Stripe recauda e ingresa cualquier impuesto debido en su jurisdicción."
+              "**Impuestos**: los precios se muestran sin IVA cuando corresponda. Lemon Squeezy recauda e ingresa cualquier impuesto debido en su jurisdicción."
             ]
           }
         ]
@@ -5283,7 +5283,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "perda de dados, arquivos corrompidos ou incorretos, ou conversões malsucedidas;",
               "decisões, financeiras, comerciais ou de outra natureza, que você tomar com base nos resultados de qualquer ferramenta;",
               "tempo de inatividade, latência ou indisponibilidade temporária de qualquer recurso;",
-              "falhas em serviços de terceiros (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, provedores de hospedagem);",
+              "falhas em serviços de terceiros (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, provedores de hospedagem);",
               "danos indiretos, incidentais, especiais, consequenciais ou punitivos de qualquer natureza;",
               "qualquer montante agregado superior às taxas efetivamente pagas a nós nos doze (12) meses anteriores ao evento que deu origem à reclamação, limitado a cem (100) euros para usuários da camada gratuita."
             ]
@@ -5353,7 +5353,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Sem reembolsos parciais**: fora do cenário de arrependimento acima, taxas já pagas pelo período de faturamento atual não são reembolsáveis.",
               "**Créditos**: créditos de API adquiridos como pacotes únicos (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **nunca expiram**. Os 300 créditos concedidos automaticamente a cada mês aos assinantes Business expiram no final do mês civil e **não são reembolsáveis**.",
               "**Alterações de preço**: podemos alterar os preços com 30 dias de antecedência. Assinantes existentes mantêm o preço atual até a próxima data de renovação.",
-              "**Imposto**: os preços são exibidos sem IVA, quando aplicável. O Stripe coleta e repassa qualquer imposto devido na sua jurisdição."
+              "**Imposto**: os preços são exibidos sem IVA, quando aplicável. O Lemon Squeezy coleta e repassa qualquer imposto devido na sua jurisdição."
             ]
           }
         ]
@@ -5478,7 +5478,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "Datenverlust, beschädigte oder falsche Dateien oder fehlgeschlagene Konvertierungen;",
               "Entscheidungen, finanzieller, geschäftlicher oder sonstiger Art, die Sie auf Grundlage der Ausgabe eines Tools treffen;",
               "Ausfallzeiten, Latenz oder vorübergehende Nichtverfügbarkeit einer Funktion;",
-              "Ausfälle von Drittanbietern (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, Hosting-Anbieter);",
+              "Ausfälle von Drittanbietern (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, Hosting-Anbieter);",
               "mittelbare, zufällige, besondere, Folgeschäden oder Strafschäden jedweder Art;",
               "einen Gesamtbetrag, der den von Ihnen in den zwölf (12) Monaten vor dem haftungsbegründenden Ereignis tatsächlich an uns gezahlten Gebühren übersteigt, begrenzt auf einhundert (100) Euro für Nutzer des kostenlosen Tarifs."
             ]
@@ -5548,7 +5548,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Keine Teilrückerstattungen**: Außerhalb des oben genannten Rücktrittsszenarios sind bereits gezahlte Gebühren für die aktuelle Abrechnungsperiode nicht erstattungsfähig.",
               "**Guthaben**: Als Einmalpakete gekaufte API-Guthaben („Starter“, „Growth“, „Scale“, „Studio“) **verfallen nie**. Die jedem Business-Abonnenten monatlich automatisch gutgeschriebenen 300 Guthaben verfallen am Ende des Kalendermonats und sind **nicht erstattungsfähig**.",
               "**Preisanpassungen**: Wir können die Preise mit 30-tägiger Vorankündigung anpassen. Bestehende Abonnenten behalten ihren aktuellen Preis bis zum nächsten Verlängerungstermin.",
-              "**Steuer**: Die Preise werden, soweit zutreffend, ohne MwSt. angezeigt. Stripe erhebt und überweist die fällige Steuer in Ihrer Rechtsordnung."
+              "**Steuer**: Die Preise werden, soweit zutreffend, ohne MwSt. angezeigt. Lemon Squeezy erhebt und überweist die fällige Steuer in Ihrer Rechtsordnung."
             ]
           }
         ]
@@ -5673,7 +5673,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "perdita di dati, file corrotti o errati, o conversioni non riuscite;",
               "decisioni, finanziarie, commerciali o di altro tipo, che si prendono in base ai risultati di qualsiasi strumento;",
               "tempi di inattività, latenza o indisponibilità temporanea di qualsiasi funzionalità;",
-              "guasti di servizi di terze parti (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, provider di hosting);",
+              "guasti di servizi di terze parti (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, provider di hosting);",
               "danni indiretti, incidentali, speciali, consequenziali o punitivi di qualsiasi tipo;",
               "qualsiasi importo complessivo superiore alle tariffe effettivamente pagate a noi nei dodici (12) mesi precedenti l'evento che dà origine alla richiesta, con un tetto massimo di cento (100) euro per gli utenti del piano gratuito."
             ]
@@ -5743,7 +5743,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Nessun rimborso parziale**: al di fuori dello scenario di recesso sopra descritto, le tariffe già pagate per il periodo di fatturazione corrente non sono rimborsabili.",
               "**Crediti**: i crediti API acquistati come pacchetti una tantum (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **non scadono mai**. I 300 crediti concessi automaticamente ogni mese agli abbonati Business scadono alla fine del mese solare e **non sono rimborsabili**.",
               "**Modifiche dei prezzi**: possiamo modificare i prezzi con un preavviso di 30 giorni. Gli abbonati esistenti mantengono il prezzo attuale fino alla data di rinnovo successiva.",
-              "**Tasse**: i prezzi sono indicati al netto dell'IVA ove applicabile. Stripe raccoglie e versa qualsiasi imposta dovuta nella tua giurisdizione."
+              "**Tasse**: i prezzi sono indicati al netto dell'IVA ove applicabile. Lemon Squeezy raccoglie e versa qualsiasi imposta dovuta nella tua giurisdizione."
             ]
           }
         ]
@@ -5868,7 +5868,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "verlies van gegevens, beschadigde of onjuiste bestanden of mislukte conversies;",
               "beslissingen, financieel, zakelijk of anderszins, die u neemt op basis van de uitkomst van een tool;",
               "uitvaltijd, latentie of tijdelijke onbeschikbaarheid van een functie;",
-              "storingen bij externe dienstverleners (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, hostingproviders);",
+              "storingen bij externe dienstverleners (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, hostingproviders);",
               "indirecte, incidentele, speciale, gevolg- of punitieve schade van welke aard dan ook;",
               "een totaalbedrag dat hoger is dan de kosten die u in de twaalf (12) maanden voorafgaand aan het voorval dat aan de claim ten grondslag ligt, aan ons heeft betaald, met een maximum van honderd (100) euro voor gebruikers van het gratis niveau."
             ]
@@ -5938,7 +5938,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Geen gedeeltelijke restituties**: buiten bovenstaand herroepingscenario zijn reeds betaalde kosten voor de huidige factureringsperiode niet restitueerbaar.",
               "**Credits**: API-credits die als eenmalige pakketten zijn aangeschaft (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **vervallen nooit**. De 300 credits die elke maand automatisch aan Business-abonnees worden toegekend, vervallen aan het einde van de kalendermaand en zijn **niet restitueerbaar**.",
               "**Prijswijzigingen**: wij kunnen prijzen wijzigen met 30 dagen voorafgaande kennisgeving. Bestaande abonnees behouden hun huidige prijs tot de volgende verlengingsdatum.",
-              "**Belasting**: prijzen worden getoond exclusief BTW waar van toepassing. Stripe int en betaalt eventuele belasting die in uw rechtsgebied verschuldigd is."
+              "**Belasting**: prijzen worden getoond exclusief BTW waar van toepassing. Lemon Squeezy int en betaalt eventuele belasting die in uw rechtsgebied verschuldigd is."
             ]
           }
         ]
@@ -6063,7 +6063,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "データの損失、ファイルの破損または不正確な変換結果；",
               "ツールの出力に基づく意思決定（財務、ビジネスその他を問わず）；",
               "ダウンタイム、レイテンシー、または機能の一時的な利用不可；",
-              "第三者サービスの障害（Supabase、Mistral、Google Safe Browsing、HaveIBeenPwned、Stripe、Resend、ホスティングプロバイダー）；",
+              "第三者サービスの障害（Supabase、Mistral、Google Safe Browsing、HaveIBeenPwned、Lemon Squeezy、Resend、ホスティングプロバイダー）；",
               "間接的、付随的、特別、結果的、または懲罰的損害賠償を含むいかなる損害；",
               "当該損害が発生した日から遡る12か月以内にユーザーが弊社に実際に支払った料金を上限とし、無料プラン利用者については100ユーロを上限とする集計額。"
             ]
@@ -6133,7 +6133,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**部分返金不可**：上記撤回シナリオを除き、現在の請求期間に支払われた料金は返金されません。",
               "**クレジット**：APIクレジットを1回限りのパック（「Starter」「Growth」「Scale」「Studio」）で購入した場合、これらは**有効期限がありません**。Businessプラン利用者に毎月自動付与される300クレジットは、カレンダー月の末日に有効期限が切れ、**返金されません**。",
               "**価格改定**：発行者は30日間の通知をもって価格を改定することができます。既存のサブスクライバーは、次回の更新日まで現在の価格が適用されます。",
-              "**税金**：価格は、該当する場合を除き、消費税抜きで表示されます。Stripeが管轄地の税金を徴収・納付します。"
+              "**税金**：価格は、該当する場合を除き、消費税抜きで表示されます。Lemon Squeezyが管轄地の税金を徴収・納付します。"
             ]
           }
         ]
@@ -6258,7 +6258,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "数据丢失、文件损坏或转换失败；",
               "基于任何工具输出所做出的决定（包括财务、商业或其他决策）；",
               "服务的停机、延迟或功能临时不可用；",
-              "第三方服务故障（Supabase、Mistral、Google Safe Browsing、HaveIBeenPwned、Stripe、Resend、托管服务提供商）；",
+              "第三方服务故障（Supabase、Mistral、Google Safe Browsing、HaveIBeenPwned、Lemon Squeezy、Resend、托管服务提供商）；",
               "间接、附带、特殊、后果性或惩罚性损害赔偿；",
               "任何超过您在引发索赔事件前十二（12）个月内实际向我们支付的费用的累计金额，免费套餐用户上限为一百（100）欧元。"
             ]
@@ -6328,7 +6328,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**不予部分退款**：除上述撤回情形外，当前计费周期内已支付的费用概不退款。",
               "**积分**：购买一次性积分包（\"入门\"、\"成长\"、\"扩展\"、\"工作室\"）的 API 积分**永不过期**。商业版订阅用户每月自动赠送的 300 积分将在日历月结束时到期，**且不予退款**。",
               "**价格变更**：我们可在提前 30 天通知的情况下调整价格。现有订阅用户在下次续费前将维持当前价格。",
-              "**税费**：价格显示为不含增值税（如适用）。Stripe 将在您所在司法管辖区收取并缴纳任何应付税费。"
+              "**税费**：价格显示为不含增值税（如适用）。Lemon Squeezy 将在您所在司法管辖区收取并缴纳任何应付税费。"
             ]
           }
         ]
@@ -6453,7 +6453,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "데이터 손실, 손상되거나 잘못된 파일, 또는 변환 실패;",
               "도구의 출력물을 기반으로 한 결정(재정, 비즈니스 등 모든 결정);",
               "서비스의 가동 중단, 지연 또는 일시적 사용 불가;",
-              "서드파티 서비스 장애(Supsabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, 호스팅 제공업체 등);",
+              "서드파티 서비스 장애(Supsabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, 호스팅 제공업체 등);",
               "간접적, 우발적, 특별, 결과적 또는 징벌적 손해배상금;",
               "사건 발생 12개월 전 귀하가 저희에게 실제로 지급한 수수료를 초과하는 금액(무료 등급 사용자의 경우 100유로로 상한)."
             ]
@@ -6523,7 +6523,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**부분 환불 불가**: 위의 철회 시나리오 외에는 현재 결제 기간에 대해 이미 지급된 수수료는 환불되지 않습니다.",
               "**크레딧**: API 크레딧(일회성 패키지 \"Starter\", \"Growth\", \"Scale\", \"Studio\")은 **절대 만료되지 않습니다**. Business 구독자에게 매월 자동으로 제공되는 300크레딧은 해당 달의 말일에 만료되며 **환불되지 않습니다**.",
               "**가격 변경**: 30일 전에 통보하여 가격을 변경할 수 있습니다. 기존 구독자는 다음 갱신일까지 현재 가격을 유지합니다.",
-              "**세금**: 가격은 적용 가능한 경우 부가가치세를 제외하고 표시됩니다. Stripe가 귀하의 관할권에서 발생하는 세금을 징수 및 납부합니다."
+              "**세금**: 가격은 적용 가능한 경우 부가가치세를 제외하고 표시됩니다. Lemon Squeezy가 귀하의 관할권에서 발생하는 세금을 징수 및 납부합니다."
             ]
           }
         ]
@@ -6648,7 +6648,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "فقدان البيانات، أو تلف الملفات أو عدم دقة التحويلات؛",
               "القرارات، المالية أو التجارية أو غيرها، التي تتخذها بناءً على مخرجات أي أداة؛",
               "فترات التوقف، أو التأخير، أو عدم توفر أي ميزة مؤقتاً؛",
-              "فشل الخدمات التابعة لجهات خارجية (Supabase، Mistral، Google Safe Browsing، HaveIBeenPwned، Stripe، Resend، مقدمي الاستضافة)؛",
+              "فشل الخدمات التابعة لجهات خارجية (Supabase، Mistral، Google Safe Browsing، HaveIBeenPwned، Lemon Squeezy، Resend، مقدمي الاستضافة)؛",
               "الأضرار غير المباشرة أو العرضية أو الخاصة أو اللاحقة أو العقابية من أي نوع؛",
               "أي مبلغ إجمالي يتجاوز الرسوم التي دفعتها إلينا خلال الاثني عشر (12) شهراً السابقة للحدث الذي أدى إلى المطالبة، مع سقف قدره مائة (100) يورو للمستخدمين من الطبقة المجانية."
             ]
@@ -6718,7 +6718,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**عدم استرداد المبالغ الجزئية**: خارج سيناريو الانسحاب أعلاه، فإن الرسوم المدفوعة بالفعل لفترة الفوترة الحالية غير قابلة للاسترداد.",
               "**الاعتمادات**: الاعتمادات API التي تم شراؤها كحزم لمرة واحدة (\"مبتدئ\"، \"نمو\"، \"توسع\"، \"استوديو\") **لا تنتهي صلاحيتها أبداً**. الاعتمادات الـ 300 التي تمنح تلقائياً كل شهر لمشتركي خطة الأعمال تنتهي صلاحيتها في نهاية الشهر التقويمي و**غير قابلة للاسترداد**.",
               "**تغييرات الأسعار**: يجوز لنا تعديل الأسعار مع إشعار مدته 30 يوماً. يحتفظ المشتركون الحاليون بسعرهم الحالي حتى تاريخ تجديدهم التالي.",
-              "**الضريبة**: تُعرض الأسعار بدون ضريبة القيمة المضافة حيثما ينطبق ذلك. يتولى Stripe تحصيل الضريبة المترتبة في بلدك ودفعها."
+              "**الضريبة**: تُعرض الأسعار بدون ضريبة القيمة المضافة حيثما ينطبق ذلك. يتولى Lemon Squeezy تحصيل الضريبة المترتبة في بلدك ودفعها."
             ]
           }
         ]
@@ -6843,7 +6843,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "потерю данных, повреждённые или некорректные файлы, а также неудачные конвертации;",
               "решения, финансового, делового или иного характера, принятые вами на основе результатов работы любого инструмента;",
               "простои, задержки или временную недоступность любых функций;",
-              "сбои сторонних сервисов (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, хостинг-провайдеры);",
+              "сбои сторонних сервисов (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, хостинг-провайдеры);",
               "косвенные, случайные, особые, косвенные или штрафные убытки любого рода;",
               "любую совокупную сумму, превышающую плату, фактически уплаченную вами нам в течение двенадцати (12) месяцев, предшествующих событию, повлёкшему претензию, с лимитом в сто (100) евро для пользователей бесплатного тарифа."
             ]
@@ -6913,7 +6913,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Возврат средств не производится**: за пределами описанного выше сценария отказа, уплаченные за текущий расчётный период средства не подлежат возврату.",
               "**Кредиты**: API-кредиты, купленные в качестве разовых пакетов («Starter», «Growth», «Scale», «Studio»), **не имеют срока действия**. 300 кредитов, ежемесячно предоставляемые подписчикам тарифа Business, истекают в конце календарного месяца и **не подлежат возврату**.",
               "**Изменение цен**: мы можем изменять цены с уведомлением за 30 дней. Существующие подписчики сохраняют текущую цену до следующей даты продления.",
-              "**Налоги**: цены указаны без учёта НДС, где это применимо. Stripe взимает и перечисляет налоги в вашей юрисдикции."
+              "**Налоги**: цены указаны без учёта НДС, где это применимо. Lemon Squeezy взимает и перечисляет налоги в вашей юрисдикции."
             ]
           }
         ]
@@ -7038,7 +7038,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "डेटा हानि, दूषित या गलत फ़ाइलें, या असफल रूपांतरणों के लिए;",
               "उपकरण के आउटपुट के आधार पर आप द्वारा लिए गए निर्णयों, वित्तीय, व्यावसायिक या अन्यथा, के लिए;",
               "सेवा के किसी भी सुविधा के डाउनटाइम, विलंबता, या अस्थायी अनुपलब्धता के लिए;",
-              "तृतीय-पक्ष सेवा विफलताओं (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, होस्टिंग प्रदाता) के लिए;",
+              "तृतीय-पक्ष सेवा विफलताओं (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, होस्टिंग प्रदाता) के लिए;",
               "अप्रत्यक्ष, आकस्मिक, विशेष, परिणामी या दंडात्मक नुकसानों सहित किसी भी प्रकार के नुकसानों के लिए;",
               "घटना उत्पन्न करने वाले दावे के लिए पिछले बारह (12) महीनों में आप द्वारा वास्तव में भुगतान किए गए शुल्क से अधिक कुल राशि, मुफ्त-स्तरीय उपयोगकर्ताओं के लिए एक सौ (100) यूरो तक सीमित।"
             ]
@@ -7108,7 +7108,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**आंशिक धनवापसी नहीं**: ऊपर वर्णित वापसी परिदृश्य के अलावा, वर्तमान बिलिंग अवधि के लिए पहले से भुगतान किए गए शुल्क गैर-वापसी योग्य हैं।",
               "**क्रेडिट**: एक बार के पैक (\"स्टार्टर\", \"ग्रोथ\", \"स्केल\", \"स्टूडियो\") के रूप में खरीदे गए API क्रेडिट **कभी समाप्त नहीं होते**। बिजनेस सदस्यता वाले उपयोगकर्ताओं को प्रत्येक माह स्वचालित रूप से प्रदान किए जाने वाले 300 क्रेडिट कैलेंडर माह के अंत में समाप्त हो जाते हैं और **गैर-वापसी योग्य** हैं।",
               "**मूल्य परिवर्तन**: हम 30 दिनों के नोटिस के साथ मूल्यों में संशोधन कर सकते हैं। मौजूदा सदस्य अपनी अगली नवीनीकरण तिथि तक अपनी वर्तमान कीमत बरकरार रखते हैं।",
-              "**कर**: मूल्य लागू VAT को छोड़कर प्रदर्शित किए जाते हैं। Stripe आपके अधिकार क्षेत्र में देय किसी भी कर को एकत्र और प्रेषित करता है।"
+              "**कर**: मूल्य लागू VAT को छोड़कर प्रदर्शित किए जाते हैं। Lemon Squeezy आपके अधिकार क्षेत्र में देय किसी भी कर को एकत्र और प्रेषित करता है।"
             ]
           }
         ]
@@ -7233,7 +7233,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "kehilangan data, berkas yang rusak atau tidak benar, atau konversi yang gagal;",
               "keputusan, keuangan, bisnis, atau lainnya yang Anda ambil berdasarkan keluaran dari alat apa pun;",
               "waktu henti, latensi, atau ketidaktersediaan sementara fitur apa pun;",
-              "kegagalan layanan pihak ketiga (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, penyedia hosting);",
+              "kegagalan layanan pihak ketiga (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, penyedia hosting);",
               "kerugian tidak langsung, insidental, khusus, konsekuensial, ataupun hukuman apa pun;",
               "jumlah agregat yang melebihi biaya yang benar-benar Anda bayarkan kepada kami dalam dua belas (12) bulan sebelum kejadian yang menimbulkan klaim, dengan batas seratus (100) euro untuk pengguna tingkat gratis."
             ]
@@ -7303,7 +7303,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Tidak ada pengembalian sebagian**: di luar skenario penarikan di atas, biaya yang telah dibayarkan untuk periode penagihan saat ini tidak dapat dikembalikan.",
               "**Kredit**: kredit API yang dibeli sebagai paket sekali pakai (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **tidak pernah kedaluwarsa**. 300 kredit yang secara otomatis diberikan setiap bulan kepada pelanggan Bisnis kedaluwarsa pada akhir bulan kalender dan **tidak dapat dikembalikan**.",
               "**Perubahan harga**: kami dapat mengubah harga dengan pemberitahuan 30 hari sebelumnya. Pelanggan yang sudah ada mempertahankan harga saat ini hingga tanggal pembaruan berikutnya.",
-              "**Pajak**: harga yang ditampilkan tidak termasuk PPN jika berlaku. Stripe akan memungut dan menyetorkan pajak yang terutang di yurisdiksi Anda."
+              "**Pajak**: harga yang ditampilkan tidak termasuk PPN jika berlaku. Lemon Squeezy akan memungut dan menyetorkan pajak yang terutang di yurisdiksi Anda."
             ]
           }
         ]
@@ -7428,7 +7428,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "mất dữ liệu, tệp bị hỏng hoặc không chính xác, hoặc chuyển đổi thất bại;",
               "các quyết định, tài chính, kinh doanh hoặc các quyết định khác mà bạn đưa ra dựa trên kết quả của bất kỳ công cụ nào;",
               "thời gian chết, độ trễ hoặc tình trạng tạm thời không khả dụng của bất kỳ tính năng nào;",
-              "lỗi dịch vụ của bên thứ ba (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, nhà cung cấp dịch vụ lưu trữ);",
+              "lỗi dịch vụ của bên thứ ba (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, nhà cung cấp dịch vụ lưu trữ);",
               "thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, hậu quả hoặc thiệt hại trừng phạt dưới mọi hình thức;",
               "bất kỳ khoản tiền tổng hợp nào vượt quá khoản phí bạn đã thanh toán cho chúng tôi trong mười hai (12) tháng trước sự kiện dẫn đến khiếu nại, giới hạn ở một trăm (100) euro đối với người dùng tầng miễn phí."
             ]
@@ -7498,7 +7498,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Không hoàn tiền một phần**: ngoài trường hợp rút lui nêu trên, phí đã thanh toán cho kỳ thanh toán hiện tại không được hoàn lại.",
               "**Tín dụng**: tín dụng API mua dưới dạng gói một lần (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **không bao giờ hết hạn**. 300 tín dụng được cấp tự động mỗi tháng cho người đăng ký Business hết hạn vào cuối tháng lịch và **không được hoàn lại**.",
               "**Thay đổi giá**: chúng tôi có thể sửa đổi giá với thông báo trước 30 ngày. Người đăng ký hiện tại giữ nguyên mức giá cho đến ngày gia hạn tiếp theo.",
-              "**Thuế**: giá được hiển thị chưa bao gồm VAT (nếu có). Stripe thu và chuyển bất kỳ khoản thuế nào phải nộp tại nơi cư trú của bạn."
+              "**Thuế**: giá được hiển thị chưa bao gồm VAT (nếu có). Lemon Squeezy thu và chuyển bất kỳ khoản thuế nào phải nộp tại nơi cư trú của bạn."
             ]
           }
         ]
@@ -7623,7 +7623,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "förlust av data, korrupta eller felaktiga filer eller misslyckade konverteringar;",
               "beslut, finansiella, affärsmässiga eller andra, som du fattar baserat på resultatet från något verktyg;",
               "nedtid, fördröjning eller tillfällig otillgänglighet av någon funktion;",
-              "fel på tredje parts tjänster (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, värdtjänster);",
+              "fel på tredje parts tjänster (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, värdtjänster);",
               "indirekta, tillfälliga, särskilda, följd- eller straffskador av något slag;",
               "någon sammanlagd ersättning som överstiger de avgifter du faktiskt har betalat till oss under de tolv (12) månader som föregår händelsen som ger upphov till kravet, med ett tak på ett hundra (100) euro för användare med gratisversion."
             ]
@@ -7693,7 +7693,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Inga partiella återbetalningar**: utanför ovanstående ångerfrist är redan betalda avgifter för den aktuella faktureringsperioden icke-återbetalningsbara.",
               "**Krediter**: API-krediter som köpts som engångspaket (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **löper aldrig ut**. De 300 krediter som Business-abonnenter automatiskt erhåller varje månad löper ut vid slutet av kalendermånaden och är **icke-återbetalningsbara**.",
               "**Prisförändringar**: vi kan ändra priser med 30 dagars varsel. Befintliga abonnenter behåller sitt nuvarande pris tills nästa förnyelsedatum.",
-              "**Moms**: priser visas exklusive moms där så är tillämpligt. Stripe samlar in och redovisar eventuell moms som ska betalas i din jurisdiktion."
+              "**Moms**: priser visas exklusive moms där så är tillämpligt. Lemon Squeezy samlar in och redovisar eventuell moms som ska betalas i din jurisdiktion."
             ]
           }
         ]
@@ -7818,7 +7818,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "utratę danych, uszkodzone lub nieprawidłowe pliki, nieudane konwersje;",
               "podejmowane decyzje, finansowe, biznesowe lub inne, oparte na wynikach dowolnego narzędzia;",
               "przestoje, opóźnienia lub tymczasową niedostępność jakiejkolwiek funkcji;",
-              "awarie usług stron trzecich (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, dostawcy hostingu);",
+              "awarie usług stron trzecich (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, dostawcy hostingu);",
               "szkody pośrednie, incydentalne, specjalne, następcze lub karne jakiegokolwiek rodzaju;",
               "jakąkolwiek łączną kwotę przewyższającą opłaty faktycznie przez Ciebie uiszczone w ciągu dwunastu (12) miesięcy poprzedzających zdarzenie stanowiące podstawę roszczenia, ograniczoną do stu (100) euro w przypadku użytkowników darmowego poziomu."
             ]
@@ -7888,7 +7888,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Brak częściowych zwrotów**: poza powyższym scenariuszem odstąpienia, opłaty już uiszczone za bieżący okres rozliczeniowy nie podlegają zwrotowi.",
               "**Punkty**: zakupione pakiety punktów API (,,Starter”, „Growth”, „Scale”, „Studio”) **nie tracą ważności**. Trzysta punktów przyznawanych automatycznie każdego miesiąca subskrybentom planu Business tracą ważność z końcem miesiąca kalendarzowego i **nie podlegają zwrotowi**.",
               "**Zmiany cen**: możemy zmieniać ceny z 30-dniowym wyprzedzeniem. Istniejący subskrybenci zachowują obowiązującą cenę do następnego terminu odnowienia.",
-              "**Podatek**: ceny są wyświetlane bez podatku VAT, jeśli ma to zastosowanie. Stripe pobiera i przekazuje należny podatek w Twojej jurysdykcji."
+              "**Podatek**: ceny są wyświetlane bez podatku VAT, jeśli ma to zastosowanie. Lemon Squeezy pobiera i przekazuje należny podatek w Twojej jurysdykcji."
             ]
           }
         ]
@@ -8013,7 +8013,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "втрату даних, пошкоджені або неправильні файли чи невдалі конвертації;",
               "рішення, фінансові, бізнесові чи інші, які ви приймаєте на основі результатів роботи будь-якого інструменту;",
               "простої, затримки чи тимчасову недоступність будь-якої функції;",
-              "збої сторонніх сервісів (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, хостинг-провайдери);",
+              "збої сторонніх сервісів (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, хостинг-провайдери);",
               "непрямі, випадкові, спеціальні, наслідкові чи штрафні збитки будь-якого роду;",
               "будь-яку сукупну суму, що перевищує плату, яку ви фактично сплатили нам протягом дванадцяти (12) місяців, що передували події, яка спричинила претензію, з обмеженням у сто (100) євро для користувачів безкоштовного рівня."
             ]
@@ -8083,7 +8083,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Без часткового повернення коштів**: за межами вищезазначеного сценарію відмови, вже сплачені за поточний період оплати кошти не підлягають поверненню.",
               "**Кредити**: API-кредити, придбані як одноразові пакети («Starter», «Growth», «Scale», «Studio»), **ніколи не закінчуються**. 300 кредитів, які автоматично надаються кожного місяця користувачам тарифного плану Business, закінчуються наприкінці календарного місяця та **не підлягають поверненню**.",
               "**Зміна цін**: ми можемо змінювати ціни з попередженням за 30 днів. Існуючі підписники зберігають свою поточну ціну до наступної дати поновлення.",
-              "**Податок**: ціни вказано без урахування ПДВ, де це застосовно. Stripe збирає та перераховує будь-який податок, що підлягає сплаті у вашій країні."
+              "**Податок**: ціни вказано без урахування ПДВ, де це застосовно. Lemon Squeezy збирає та перераховує будь-який податок, що підлягає сплаті у вашій країні."
             ]
           }
         ]
@@ -8208,7 +8208,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "ztrátu dat, poškozené či nesprávné soubory nebo neúspěšné převody;",
               "rozhodnutí, finanční, obchodní či jiná, která učiníte na základě výstupu z jakéhokoli nástroje;",
               "dobytrvání, latenci nebo dočasnou nedostupnost jakékoli funkce;",
-              "selhání služeb třetích stran (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, poskytovatelé hostingu);",
+              "selhání služeb třetích stran (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, poskytovatelé hostingu);",
               "nepřímé, vedlejší, zvláštní, následné či trestné škody jakéhokoli druhu;",
               "jakékoli celkové částky převyšující poplatky, které jste nám skutečně zaplatili během dvanácti (12) měsíců předcházejících události, která dala vzniknout nároku, přičemž pro uživatele bez placeného tarifu je tato částka omezena na sto (100) eur."
             ]
@@ -8278,7 +8278,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Žádné částečné refundace**: mimo výše uvedený scénář odstoupení nejsou již zaplacené poplatky za aktuální fakturační období refundovatelné.",
               "**Kredity**: API kredity zakoupené jako jednorázové balíčky („Starter“, „Growth“, „Scale“, „Studio“) **nikdy nevyprší**. Třista kreditů automaticky přidělovaných každý měsíc uživatelům tarifu Business vyprší na konci kalendářního měsíce a **nejsou refundovatelné**.",
               "**Změny cen**: můžeme ceny změnit s třicetidenním předstihem. Stávající předplatitelé si ponechávají svou aktuální cenu až do dalšího obnovovacího data.",
-              "**Daň**: ceny jsou uváděny bez DPH, kde je to relevantní. Stripe vybírá a odvádí jakoukoli daň, která je ve vaší jurisdikci povinná."
+              "**Daň**: ceny jsou uváděny bez DPH, kde je to relevantní. Lemon Squeezy vybírá a odvádí jakoukoli daň, která je ve vaší jurisdikci povinná."
             ]
           }
         ]
@@ -8403,7 +8403,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "veri kaybı, bozulmuş veya yanlış dosyalar veya başarısız dönüştürmeler;",
               "araç çıktısına dayanarak aldığınız kararlar, finansal, ticari veya diğer herhangi bir türden kararlar;",
               "downtime, gecikme veya herhangi bir özelliğin geçici olarak kullanılamaması;",
-              "üçüncü taraf hizmet arızaları (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Stripe, Resend, barındırma sağlayıcıları);",
+              "üçüncü taraf hizmet arızaları (Supabase, Mistral, Google Safe Browsing, HaveIBeenPwned, Lemon Squeezy, Resend, barındırma sağlayıcıları);",
               "dolaylı, rastlantısal, özel, sonuçsal veya cezai nitelikteki herhangi bir zarar;",
               "iddia doğuran olaydan önceki on iki (12) aylık dönemde bize ödediğiniz ücretleri aşan herhangi bir toplam miktar, ücretsiz katman kullanıcıları için yüz (100) avro ile sınırlıdır."
             ]
@@ -8473,7 +8473,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
               "**Kısmi iadeler yoktur**: yukarıdaki cayma senaryosu dışında, cari faturalandırma dönemine ait ücretler iade edilemez.",
               "**Krediler**: Tek seferlik paketler (\"Starter\", \"Growth\", \"Scale\", \"Studio\") olarak satın alınan API kredileri **süresiz olarak geçerlidir**. İş planı abonelerine her ay otomatik olarak verilen 300 kredi, takvim ayının sonunda sona erer ve **iade edilemez**.",
               "**Fiyat değişiklikleri**: fiyatları 30 günlük bildirimle değiştirebiliriz. Mevcut aboneler, bir sonraki yenileme tarihlerine kadar mevcut fiyatlarını korurlar.",
-              "**Vergi**: fiyatlar, ilgili yerlerde KDV hariç gösterilir. Stripe, bulunduğunuz yargı alanındaki herhangi bir vergiyi toplar ve öder."
+              "**Vergi**: fiyatlar, ilgili yerlerde KDV hariç gösterilir. Lemon Squeezy, bulunduğunuz yargı alanındaki herhangi bir vergiyi toplar ve öder."
             ]
           }
         ]

@@ -25,5 +25,11 @@ file_size_limit = "500MiB"
 
 # Functions configured per-folder; deploy with `supabase functions deploy <name>`.
 
-[functions.stripe-webhook]
+# Lemon Squeezy posts webhooks without a Supabase JWT; the function verifies
+# the X-Signature HMAC itself, so JWT verification is disabled here.
+[functions.lemonsqueezy-webhook]
 verify_jwt = false
+
+# Setup helper auto-discovers the store + variant IDs (read-only).
+[functions.lemonsqueezy-setup]
+verify_jwt = true

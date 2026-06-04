@@ -19,13 +19,13 @@ export function BillingPortalButton({ disabled }: { disabled?: boolean }) {
         setError("Sign in first.");
         return;
       }
-      const res = await fetch(edgeFnUrl("stripe-portal"), {
+      const res = await fetch(edgeFnUrl("lemonsqueezy-portal"), {
         method: "POST",
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
       const body = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !body.url) {
-        setError(body.error === "no_stripe_customer" ? "No active subscription." : body.error ?? "Stripe error.");
+        setError(body.error === "no_subscription" ? "No active subscription." : body.error ?? "Billing portal error.");
         return;
       }
       window.location.href = body.url;

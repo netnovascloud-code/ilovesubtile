@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IntervalToggle, type Interval } from "@/components/billing/IntervalToggle";
 import { UpgradeButton } from "@/components/billing/UpgradeButton";
-import { PLANS, FREE_PLAN } from "@/lib/stripe";
+import { PLANS, FREE_PLAN } from "@/lib/plans";
 import type { ToolUiStrings } from "@/lib/i18n/tool-ui";
 import type { PlanFeatures } from "@/lib/i18n/plan-features";
 

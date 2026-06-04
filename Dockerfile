@@ -10,7 +10,7 @@
 #           -e NEXT_PUBLIC_SITE_URL=https://konvertools.com \
 #           konvertools
 #
-# All KONVERTOOLS_* server secrets (Stripe, Mistral, …) live on the
+# All KONVERTOOLS_* server secrets (Lemon Squeezy, Mistral, …) live on the
 # Supabase Edge Functions, NOT in this Next image — so this container holds
 # no production secrets.
 

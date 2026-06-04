@@ -1,13 +1,17 @@
-// Konvertools — open the Stripe Customer Portal for the authenticated user.
+// Konvertools — open the Lemon Squeezy customer portal for the authenticated
+// user. Lemon Squeezy issues a signed, time-limited portal URL per subscription
+// (urls.customer_portal); the customer can update payment method, switch plan,
+// view invoices and cancel there.
 //
-// POST /functions/v1/stripe-portal
-// Returns: { url: "https://billing.stripe.com/..." }
+// POST /functions/v1/lemonsqueezy-portal
+// Returns: { url: "https://<store>.lemonsqueezy.com/billing?..." }
 //
-// Deploy:  supabase functions deploy stripe-portal
-// Secrets: supabase secrets set STRIPE_SECRET_KEY=sk_live_...
+// Deploy:  supabase functions deploy lemonsqueezy-portal
+// Secrets: LEMONSQUEEZY_API_KEY
 
-import Stripe from "https://esm.sh/stripe@17.2.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const LS_API = "https://api.lemonsqueezy.com/v1";
 
 const STATIC_ORIGINS = new Set<string>([
   "https://konvertools.com", "https://www.konvertools.com",
@@ -40,38 +44,32 @@ function getServiceClient() {
 
 Deno.serve(async (req) => {
   const cors = corsFor(req);
-  const handleOptions = () => new Response("ok", { headers: cors });
   const json = (body: unknown, init: ResponseInit = {}) =>
     new Response(JSON.stringify(body), { ...init, headers: { ...cors, "Content-Type": "application/json", ...(init.headers ?? {}) } });
-  if (req.method === "OPTIONS") return handleOptions();
+  if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, { status: 405 });
 
-  const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-  if (!stripeKey) return json({ error: "missing_stripe_key" }, { status: 500 });
+  const key = Deno.env.get("LEMONSQUEEZY_API_KEY");
+  if (!key) return json({ error: "missing_lemonsqueezy_key" }, { status: 500 });
 
   const caller = await getCaller(req);
   if (!caller) return json({ error: "unauthorized" }, { status: 401 });
 
   const supabase = getServiceClient();
-  const { data: profile } = await supabase.from("profiles").select("stripe_customer_id").eq("id", caller.id).maybeSingle();
-  if (!profile?.stripe_customer_id) return json({ error: "no_stripe_customer" }, { status: 400 });
-
-  const origin = req.headers.get("origin") ?? "https://konvertools.com";
-  const url = new URL(req.url);
-  const returnPath = url.searchParams.get("return_path") ?? "/dashboard";
-
-  const stripe = new Stripe(stripeKey, {
-    apiVersion: "2024-09-30.acacia",
-    httpClient: Stripe.createFetchHttpClient(),
-  });
+  const { data: profile } = await supabase
+    .from("profiles").select("ls_subscription_id").eq("id", caller.id).maybeSingle();
+  if (!profile?.ls_subscription_id) return json({ error: "no_subscription" }, { status: 400 });
 
   try {
-    const session = await stripe.billingPortal.sessions.create({
-      customer: profile.stripe_customer_id,
-      return_url: `${origin}${returnPath}`,
+    const res = await fetch(`${LS_API}/subscriptions/${profile.ls_subscription_id}`, {
+      headers: { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" },
     });
-    return json({ url: session.url });
+    const body = await res.json();
+    if (!res.ok) return json({ error: "lemonsqueezy_failed", detail: body?.errors ?? body }, { status: 502 });
+    const portal = body?.data?.attributes?.urls?.customer_portal;
+    if (!portal) return json({ error: "no_portal_url" }, { status: 502 });
+    return json({ url: portal });
   } catch (err) {
-    return json({ error: "stripe_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
+    return json({ error: "lemonsqueezy_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
   }
 });

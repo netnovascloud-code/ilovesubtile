@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/i18n/locales";
 
 // Localized pricing-tile feature bullets (Part 7/10). The English set mirrors
-// lib/stripe.ts; non-translatable tokens (Workflow Builder, REST API, GB/MB,
+// lib/plans.ts; non-translatable tokens (Workflow Builder, REST API, GB/MB,
 // Pro) are kept verbatim. Missing locales fall back to English via getPlanFeatures.
 export type PlanFeatures = { free: string[]; pro: string[]; business: string[] };
 

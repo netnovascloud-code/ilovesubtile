@@ -1427,7 +1427,35 @@ TOOLS.push({
     { q: "Is my password sent to a server?", a: "No. Everything happens in your browser via the WebCrypto API. Neither the password, the plaintext, nor the ciphertext is sent or logged." },
     { q: "What if I lose the password?", a: "The message is unrecoverable. There is no backdoor, no reset link and no master key — that's the whole point of strong encryption. Store the password in a password manager." },
     { q: "What's the output format?", a: "A single base64 string that contains the salt, the IV and the authenticated ciphertext, in that order. Decryption reads them back automatically — you only need to paste the blob and re-enter the password." },
-    { q: "Can I encrypt files this way?", a: "This tool is text-only. For files, use the dedicated file-encryption flow when it ships, or copy the file's base64 representation in and treat it as text (works for small files but doesn't scale)." },
+    { q: "Can I encrypt files this way?", a: "This tool is text-only. For files of any type and size, use the dedicated File Encryptor — same primitive, binary output, original filename embedded automatically." },
+  ],
+});
+
+// File encryptor — same AES-256-GCM + PBKDF2(600 000) primitive as
+// text-encryptor, packaged for arbitrary binary files. Container format
+// "KEC1" (Konver Encrypted Container v1) embeds the original filename
+// inside the encrypted blob so recipients recover it automatically.
+TOOLS.push({
+  slug: "file-encryptor", phase: 1, kind: "client", category: "security", icon: Lock, tone: "rose",
+  name: "File Encryptor (AES-256)",
+  short: "Encrypt and decrypt any file with a password — AES-256-GCM.",
+  h1: "Free AES-256 File Encryptor — Password-protect Any File",
+  metaTitle: "AES-256 File Encryptor — Free Password Encryption for Any File | Konvertools",
+  metaDescription: "Encrypt or decrypt any file (PDF, ZIP, image, archive…) with a password using AES-256-GCM. PBKDF2 with 600 000 iterations (OWASP 2023). The original filename is embedded inside the encrypted blob. 100% in your browser.",
+  primaryKeyword: "encrypt file online",
+  accept: [], freeMaxMb: 0, outputType: "Encrypted file",
+  steps: [
+    { title: "Pick a mode", body: "Encrypt to protect a file, or Decrypt to recover one." },
+    { title: "Drop the file + password", body: "Key derived locally via PBKDF2-SHA-256 (600 000 iterations)." },
+    { title: "Download", body: "Encrypted output as filename.enc; decryption restores the original name." },
+  ],
+  faqs: [
+    { q: "What encryption does it use?", a: "AES-256-GCM (authenticated encryption) with the key derived from your password via PBKDF2-HMAC-SHA-256 over 600 000 iterations — OWASP's 2023 recommendation. A fresh 16-byte salt and 12-byte IV are generated per file, so encrypting the same file twice with the same password never produces the same output." },
+    { q: "Does the file leave my computer?", a: "No. The file is encrypted directly in your browser via WebCrypto. Nothing is uploaded, logged or stored. You can verify by inspecting your network tab during encryption — zero outbound requests." },
+    { q: "What's stored in the .enc container?", a: "A 4-byte 'KEC1' magic header, the 16-byte salt, the 12-byte IV, then the AES-GCM ciphertext (which itself includes the original filename and the file body). The whole thing is binary; the recipient just downloads the .enc and runs the decrypt flow with the password." },
+    { q: "Is the original filename visible?", a: "No. The filename is encrypted along with the file content, so anyone looking at the .enc blob sees only random bytes. On decryption the filename is restored automatically." },
+    { q: "What if I lose the password?", a: "The file is unrecoverable. There is no backdoor, no reset, no master key — that's the whole point of strong encryption. Store the password in a password manager." },
+    { q: "What's the size limit?", a: "Limited by your browser's available memory (typically a few gigabytes on desktop). Very large files may take several seconds to process; the page does not freeze." },
   ],
 });
 

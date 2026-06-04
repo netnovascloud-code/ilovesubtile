@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -49,6 +50,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Per-request CSP nonce, set by middleware. Stamped on every inline
+  // <script>/<Script> so it executes under the nonce-based CSP. Reading the
+  // header opts this layout into dynamic rendering — accepted trade-off for
+  // dropping 'unsafe-inline' on script-src.
+  const nonce = headers().get("x-nonce") ?? undefined;
   return (
     // suppressHydrationWarning: HtmlLang mutates documentElement.lang/dir
     // post-mount based on the konver_locale cookie (a French visitor on a
@@ -64,13 +70,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Ezoic — display ads. Loaded only for Free users when ADS_ENABLED is
             on (see EzoicLoader); never injected for Pro/Business or while ads
             are globally disabled. */}
-        <EzoicLoader />
+        <EzoicLoader nonce={nonce} />
         {/* Site-level structured data: WebSite (with sitelink-search action),
             Organization, and a SiteNavigationElement listing every category
             hub. Helps Google understand the catalogue and surface category
             sitelinks. */}
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Home, ChevronRight, ArrowRight, Check, X } from "lucide-react";
 import { TOOLS_BY_SLUG } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import type { Vs } from "@/lib/vs";
@@ -89,17 +90,14 @@ export function VsPage({ vs }: { vs: Vs }) {
         </section>
       </main>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
-              { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://konvertools.com/vs/${vs.id}` },
-            ],
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+            { "@type": "ListItem", position: 2, name: `vs ${vs.competitor}`, item: `https://konvertools.com/vs/${vs.id}` },
+          ],
         }}
       />
     </div>

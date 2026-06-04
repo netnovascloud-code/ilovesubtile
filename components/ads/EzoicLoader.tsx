@@ -14,8 +14,16 @@ import { useShowAds } from "@/hooks/useShowAds";
  * Keeping the gate here means: no ad/tracking script is injected at all for
  * paying users or when ads are globally disabled.
  */
-export function EzoicLoader() {
+export function EzoicLoader({ nonce }: { nonce?: string }) {
   const show = useShowAds();
   if (!show) return null;
-  return <Script id="ezoic-sa" src="//www.ezojs.com/ezoic/sa.min.js" strategy="afterInteractive" async />;
+  return (
+    <Script
+      id="ezoic-sa"
+      src="//www.ezojs.com/ezoic/sa.min.js"
+      strategy="afterInteractive"
+      async
+      nonce={nonce}
+    />
+  );
 }

@@ -3,6 +3,7 @@ import { Check, ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { TOOLS, type AlternativeDef } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export function CompetitorPage({ alt }: { alt: AlternativeDef }) {
   const featured = TOOLS.filter((t) => t.phase === 1).slice(0, 6);
@@ -125,18 +126,15 @@ export function CompetitorPage({ alt }: { alt: AlternativeDef }) {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: alt.faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: alt.faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
         }}
       />
     </>

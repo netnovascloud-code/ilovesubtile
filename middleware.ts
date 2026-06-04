@@ -5,6 +5,43 @@ const LOCALES = new Set([
   "fr", "es", "pt", "de", "it", "nl", "ja", "zh", "ko", "ar", "ru", "hi",
   "tr", "id", "vi", "sv", "pl", "uk", "cs",
 ]);
+
+/** Build the per-request Content-Security-Policy with a fresh nonce. The
+ *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
+ *  scripts loaded by a nonced script are then trusted by propagation, so
+ *  esm.sh / unpkg / Ezoic / Stripe loaders still work without explicit
+ *  origin allowlists on script-src (CSP3 ignores URL allowlists when
+ *  'strict-dynamic' is set).
+ *
+ *  'unsafe-eval' is retained because FFmpeg.wasm, pdf-lib, mammoth and the
+ *  ESM-CDN-loaded libs rely on Function()/eval at runtime.
+ *  'unsafe-inline' on style-src is retained — CSS injection is a much lower
+ *  XSS risk and removing it would require nonces on every Tailwind utility,
+ *  CSS-in-JS block and `style={{}}` prop. */
+function buildCsp(nonce: string): string {
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' 'wasm-unsafe-eval' blob:`,
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' data: https://fonts.gstatic.com",
+    "img-src 'self' data: blob: https: *.supabase.co",
+    "media-src 'self' blob:",
+    "worker-src 'self' blob:",
+    "connect-src 'self' blob: https://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://checkout.stripe.com https://*.ezoic.net https://*.ezojs.com",
+    "frame-src 'self' https://checkout.stripe.com https://js.stripe.com https://hooks.stripe.com https://billing.stripe.com https://*.ezoic.net",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self' https://checkout.stripe.com",
+    "object-src 'none'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+}
+
+function generateNonce(): string {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return btoa(String.fromCharCode(...bytes));
+}
 // Named per Next.js convention so it lines up with the standard ecosystem.
 // We also read the legacy "wyrlo_locale" cookie so users who picked a language
 // before the Konvertools rename don't lose their preference on next visit.
@@ -29,7 +66,17 @@ function preferredLocale(request: NextRequest): string | null {
 }
 
 export async function middleware(request: NextRequest) {
-  const response = await updateSupabaseSession(request);
+  // Per-request CSP nonce. Threaded into the request headers as `x-nonce` so
+  // the root layout can read it via next/headers and stamp every inline
+  // <script> / <Script> with the matching nonce attribute. Set on the
+  // response as Content-Security-Policy so the browser enforces it.
+  const nonce = generateNonce();
+  const extra = new Headers();
+  extra.set("x-nonce", nonce);
+
+  const response = await updateSupabaseSession(request, extra);
+  const csp = buildCsp(nonce);
+  response.headers.set("Content-Security-Policy", csp);
   const { pathname } = request.nextUrl;
 
   // Locale auto-redirect: only on the English root. Once the user is on a

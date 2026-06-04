@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, ChevronRight, ArrowRight } from "lucide-react";
 import { TOOLS, CATEGORY_BY_ID, type ToolCategory } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { ogImageUrl } from "@/lib/seo";
@@ -91,58 +92,49 @@ export function CategoryPage({ category }: { category: ToolCategory }) {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQ.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
-              { "@type": "ListItem", position: 2, name: def.label, item: `https://konvertools.com/${category}` },
-            ],
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+            { "@type": "ListItem", position: 2, name: def.label, item: `https://konvertools.com/${category}` },
+          ],
         }}
       />
       {/* CollectionPage + ItemList — lets Google enumerate every tool in this
           category as a single hub (improves sitelinks / category indexing). */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: `All ${def.label} Tools — Konvertools`,
-            description: def.blurb,
-            url: `https://konvertools.com/${category}`,
-            inLanguage: "en",
-            isPartOf: { "@type": "WebSite", name: "Konvertools", url: "https://konvertools.com/" },
-            mainEntity: {
-              "@type": "ItemList",
-              numberOfItems: tools.length,
-              itemListElement: tools.map((t, i) => ({
-                "@type": "ListItem",
-                position: i + 1,
-                url: `https://konvertools.com/${t.slug}`,
-                name: t.name,
-                description: t.short,
-              })),
-            },
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `All ${def.label} Tools — Konvertools`,
+          description: def.blurb,
+          url: `https://konvertools.com/${category}`,
+          inLanguage: "en",
+          isPartOf: { "@type": "WebSite", name: "Konvertools", url: "https://konvertools.com/" },
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: tools.length,
+            itemListElement: tools.map((t, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://konvertools.com/${t.slug}`,
+              name: t.name,
+              description: t.short,
+            })),
+          },
         }}
       />
     </div>

@@ -1,5 +1,6 @@
 import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
 import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { cn } from "@/lib/utils";
@@ -83,22 +84,9 @@ export function ToolPageShell({
 
   return (
     <div dir={rtl ? "rtl" : undefined}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareApplicationSchema(tool, locale, { name, metaDescription: description })),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localisedFaqSchema(faqs)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema(tool, locale, { name, homeLabel: ui.tool.breadcrumbHome })),
-        }}
-      />
+      <JsonLd data={softwareApplicationSchema(tool, locale, { name, metaDescription: description })} />
+      <JsonLd data={localisedFaqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(tool, locale, { name, homeLabel: ui.tool.breadcrumbHome })} />
 
       <section className="border-b border-ink-100 bg-surface">
         <div className="container py-10">

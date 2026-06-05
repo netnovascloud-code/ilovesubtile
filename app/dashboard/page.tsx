@@ -5,7 +5,6 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { type PlanKey } from "@/lib/quotas";
@@ -52,7 +51,6 @@ export default async function DashboardPage() {
   let monthlyAiMonth: string | null = null;
   let subStatus: string | null = null;
   let renewsAt: string | null = null;
-  let lsSubscriptionId: string | null = null;
   let jobs: JobRow[] = [];
   // When Supabase is configured but the visitor has no valid session (e.g. a
   // stale `sb-*-auth-token` cookie that satisfied the presence-only middleware
@@ -71,7 +69,7 @@ export default async function DashboardPage() {
     } else {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at, ls_subscription_id")
+        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
@@ -81,7 +79,6 @@ export default async function DashboardPage() {
       monthlyAiMonth = profile?.monthly_ai_month ?? null;
       subStatus = (profile?.ls_subscription_status as string | null) ?? null;
       renewsAt = (profile?.ls_renews_at as string | null) ?? null;
-      lsSubscriptionId = (profile?.ls_subscription_id as string | null) ?? null;
       // Effective balance = permanent credits + this month's Business grant.
       const thisMonth = new Date().toISOString().slice(0, 7);
       const monthly = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
@@ -198,15 +195,9 @@ export default async function DashboardPage() {
               Credit balance: <span className="font-medium text-ink-900">{credits.toLocaleString()}</span>
             </p>
             <div className="mt-3">
-              {/* Only enable the portal when there's an actual LS subscription
-                  to manage — a plan inherited from pre-LS data wouldn't have
-                  one and would otherwise hit a silent 400 from the portal fn. */}
-              <BillingPortalButton disabled={!lsSubscriptionId} />
-              {plan !== "free" && !lsSubscriptionId && (
-                <p className="mt-2 text-xs text-ink-400">
-                  No Lemon Squeezy subscription on file — subscribe again from <Link href="/pricing" className="underline">Pricing</Link> to manage billing here.
-                </p>
-              )}
+              {/* Full billing management (cancel, change card, invoices) lives
+                  on /billing, which opens the Lemon Squeezy portal. */}
+              <Link href="/billing"><Button variant="outline" size="sm">Manage billing</Button></Link>
             </div>
           </CardContent>
         </Card>

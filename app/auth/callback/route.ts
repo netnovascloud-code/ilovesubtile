@@ -19,9 +19,26 @@ export async function GET(request: Request) {
   const code = url.searchParams.get("code");
   const redirect = safeRedirectPath(url.searchParams.get("redirect"));
 
-  if (code) {
+  // No code → nothing to exchange. Never fall through to the success redirect
+  // (that would silently leave any pre-existing session in place and look like
+  // you logged into the "wrong" account). Send back to login.
+  if (!code) {
+    const back = new URL("/login", url.origin);
+    back.searchParams.set("error", "oauth");
+    return NextResponse.redirect(back);
+  }
+
+  {
     const supabase = getSupabaseServer();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+    // If the exchange fails (expired/replayed code, PKCE verifier mismatch),
+    // do NOT continue — otherwise the user keeps whatever session the browser
+    // already had, which presents as being signed into the previous account.
+    if (exchangeError) {
+      const back = new URL("/login", url.origin);
+      back.searchParams.set("error", "oauth");
+      return NextResponse.redirect(back);
+    }
 
     // Best-effort welcome email for brand-new accounts. Gated on a fresh
     // profile (created < 2 min ago) so it only fires right after signup,

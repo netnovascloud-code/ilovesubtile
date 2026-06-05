@@ -17,6 +17,13 @@ export function GoogleButton({ redirect = "/dashboard" }: { redirect?: string })
         provider: "google",
         options: {
           redirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect)}`,
+          // Force Google's account chooser on EVERY sign-in. Without this,
+          // Google silently re-authenticates the browser's active/last-used
+          // account, so a person with several Google accounts can never switch
+          // — they always land back in the previously-used one (this is what
+          // made every Google login resolve to the same account). prompt=
+          // select_account makes the account choice explicit each time.
+          queryParams: { prompt: "select_account" },
         },
       });
       if (error) {

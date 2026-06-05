@@ -21,13 +21,14 @@ function safeRedirect(raw: string | undefined): string {
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams?: { lang?: string; redirect?: string };
+  searchParams?: { lang?: string; redirect?: string; error?: string };
 }) {
   const langParam = searchParams?.lang ?? "";
   const locale: Locale = isLocale(langParam) ? langParam : DEFAULT_LOCALE;
   const t = getChrome(locale).auth;
   const rtl = isRtl(locale);
   const redirect = safeRedirect(searchParams?.redirect);
+  const oauthError = searchParams?.error === "oauth";
   // Preserve the post-auth destination when bouncing to /register too.
   const registerHref = `/register?${new URLSearchParams({
     ...(locale !== DEFAULT_LOCALE ? { lang: locale } : {}),
@@ -39,6 +40,12 @@ export default function LoginPage({
       <div className="rounded-lg border border-ink-100 bg-white p-8 shadow-card">
         <h1 className="text-2xl font-semibold text-ink-900">{t.loginTitle}</h1>
         <p className="mt-1 text-sm text-ink-500">{t.loginLead}</p>
+
+        {oauthError && (
+          <p className="mt-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            Sign-in could not be completed. Please try again.
+          </p>
+        )}
 
         <div className="mt-6">
           <GoogleButton redirect={redirect} />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TOOLS, TOOLS_BY_SLUG, toClientSpec } from "@/lib/tools-config";
+import { TOOLS, TOOLS_BY_SLUG, toClientSpec, CATEGORY_BY_ID, CATEGORIES, type ToolCategory } from "@/lib/tools-config";
+import { CategoryPage, categoryMetadata } from "@/components/tools/CategoryPage";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import dynamic from "next/dynamic";
 const ServerJobClient = dynamic(() => import("@/components/tools/clients/ServerJobClient").then((m) => ({ default: m.ServerJobClient })));
@@ -134,6 +135,10 @@ export function generateStaticParams() {
     for (const tool of TOOLS) {
       params.push({ locale, slug: tool.slug });
     }
+    // Localized category hubs (/<locale>/documents, …) share this route.
+    for (const c of CATEGORIES) {
+      params.push({ locale, slug: c.id });
+    }
   }
   return params;
 }
@@ -145,9 +150,15 @@ export function generateMetadata({
 }): Metadata {
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const tool = TOOLS_BY_SLUG[params.slug];
-  if (!tool) return {};
-  const i18n = resolveToolI18n(params.slug, params.locale);
-  return buildToolMetadata(tool, params.locale, i18n ?? undefined);
+  if (tool) {
+    const i18n = resolveToolI18n(params.slug, params.locale);
+    return buildToolMetadata(tool, params.locale, i18n ?? undefined);
+  }
+  // Category hub?
+  if (params.slug in CATEGORY_BY_ID) {
+    return categoryMetadata(params.slug as ToolCategory, params.locale);
+  }
+  return {};
 }
 
 export default function LocalisedToolPage({
@@ -157,7 +168,13 @@ export default function LocalisedToolPage({
 }) {
   if (!isLocale(params.locale) || params.locale === "en") notFound();
   const tool = TOOLS_BY_SLUG[params.slug];
-  if (!tool) notFound();
+  // Category hub: same route, render the localized CategoryPage.
+  if (!tool) {
+    if (params.slug in CATEGORY_BY_ID) {
+      return <CategoryPage category={params.slug as ToolCategory} locale={params.locale} />;
+    }
+    notFound();
+  }
   const locale = params.locale;
   const i18n = resolveToolI18n(params.slug, locale);
   const override = i18n ? { name: i18n.name, h1: i18n.h1, metaDescription: i18n.metaDescription } : undefined;

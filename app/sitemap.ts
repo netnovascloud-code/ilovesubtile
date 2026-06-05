@@ -41,14 +41,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Category landing pages — English only (one entry per category).
+  // Category landing pages — now localised: one entry per locale × category,
+  // each with full hreflang alternates.
   for (const c of CATEGORIES) {
-    entries.push({
-      url: `${SITE_URL}/${c.id}`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    });
+    for (const loc of LOCALES) {
+      entries.push({
+        url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/${c.id}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.7,
+        alternates: altsFor(`/${c.id}`),
+      });
+    }
   }
 
   // Sector landing pages — English only.

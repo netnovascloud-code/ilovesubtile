@@ -13,6 +13,7 @@ import { UserMenu } from "@/components/layout/UserMenu";
 import { ToolsMenu } from "@/components/layout/ToolsMenu";
 import { AiQuotaPill } from "@/components/billing/AiQuotaPill";
 import { CATEGORIES } from "@/lib/tools-config";
+import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +30,11 @@ export function Header() {
   }, []);
 
   const toolsHref = `${localePath(locale)}#tools`;
-  const categories = CATEGORIES.map((c) => ({ id: c.id, label: c.label }));
+  const categories = CATEGORIES.map((c) => ({
+    id: c.id,
+    label: categoryLabel(c.id, locale),
+    href: localePath(locale, c.id),
+  }));
 
   // /login and /register have no /<locale> route — they localise via ?lang.
   // Carry the active locale so a French visitor lands on a French auth form

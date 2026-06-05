@@ -7,6 +7,7 @@ import { localePath } from "@/lib/i18n/locales";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome } from "@/lib/i18n/chrome";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
+import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
 export function Footer() {
@@ -26,15 +27,14 @@ export function Footer() {
         </div>
 
         <div>
-          {/* Crawlable links to every category hub — the only internal <a> path
-              to them (homepage chips are client-side filters). Routes are
-              English-only, so they're linked un-prefixed. */}
+          {/* Crawlable links to every category hub. Locale-aware: a French
+              visitor gets /fr/<category> which now renders a localized hub. */}
           <div className="text-sm font-semibold text-ink-900">{t.categories ?? "Categories"}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             {CATEGORIES.map((c) => (
               <li key={c.id}>
-                <Link href={`/${c.id}`} className="hover:text-ink-900">
-                  {c.label}
+                <Link href={localePath(locale, c.id)} className="hover:text-ink-900">
+                  {categoryLabel(c.id, locale)}
                 </Link>
               </li>
             ))}

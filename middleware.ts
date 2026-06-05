@@ -6,16 +6,12 @@ const LOCALES = new Set([
   "tr", "id", "vi", "sv", "pl", "uk", "cs",
 ]);
 
-/** Slugs that exist only in English (no localised route under app/[locale]/…).
- *  10 category index pages + 13 SEO landing/competitor-alternative pages.
- *  A French/Spanish/… visitor hitting /fr/documents or /es/veed-alternative
- *  directly (bookmark, external link, search engine result) would 404 because
- *  the [locale] route group doesn't include these slugs. Redirect to the
- *  English root so the page actually renders instead of returning 404. */
+/** Slugs that exist ONLY in English (no localised route under app/[locale]/…).
+ *  Category hubs now HAVE localised routes (/<locale>/documents …) so they are
+ *  intentionally NOT in this list. These remaining SEO landing + competitor
+ *  pages stay English-only; a /fr/<slug> hit (bookmark, external link, SERP)
+ *  308-redirects to the English canonical instead of 404ing. */
 const EN_ONLY_SLUGS = new Set([
-  // Category index pages
-  "documents", "audio", "video", "images", "subtitles",
-  "developer", "text-ai", "utilities", "archives", "security",
   // SEO landing pages
   "rephraser", "translator", "ai-humanizer",
   // Competitor alternative pages

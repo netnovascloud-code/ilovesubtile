@@ -29,7 +29,7 @@ export function ToolsMenu({
   categories,
   toolsHref,
 }: {
-  categories: { id: string; label: string }[];
+  categories: { id: string; label: string; href: string }[];
   toolsHref: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -78,10 +78,13 @@ export function ToolsMenu({
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">Categories</p>
               <div className="flex flex-wrap gap-1">
                 {categories.map((c) => (
-                  <Link key={c.id} href={toolsHref} onClick={() => setOpen(false)} className="rounded-full bg-ink-50 px-2.5 py-1 text-xs font-medium text-ink-600 hover:bg-ink-100 hover:text-ink-900">
+                  <Link key={c.id} href={c.href} onClick={() => setOpen(false)} className="rounded-full bg-ink-50 px-2.5 py-1 text-xs font-medium text-ink-600 hover:bg-ink-100 hover:text-ink-900">
                     {c.label}
                   </Link>
                 ))}
+                <Link href={toolsHref} onClick={() => setOpen(false)} className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700 hover:bg-brand-100">
+                  All →
+                </Link>
               </div>
               <p className="mb-2 mt-4 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-600">New</p>
               <ul className="space-y-0.5">

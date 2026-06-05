@@ -6,6 +6,25 @@ const LOCALES = new Set([
   "tr", "id", "vi", "sv", "pl", "uk", "cs",
 ]);
 
+/** Slugs that exist only in English (no localised route under app/[locale]/…).
+ *  10 category index pages + 13 SEO landing/competitor-alternative pages.
+ *  A French/Spanish/… visitor hitting /fr/documents or /es/veed-alternative
+ *  directly (bookmark, external link, search engine result) would 404 because
+ *  the [locale] route group doesn't include these slugs. Redirect to the
+ *  English root so the page actually renders instead of returning 404. */
+const EN_ONLY_SLUGS = new Set([
+  // Category index pages
+  "documents", "audio", "video", "images", "subtitles",
+  "developer", "text-ai", "utilities", "archives", "security",
+  // SEO landing pages
+  "rephraser", "translator", "ai-humanizer",
+  // Competitor alternative pages
+  "adobe-acrobat-alternative", "clideo-alternative", "convertio-alternative",
+  "deepl-alternative", "grammarly-alternative", "happyscribe-alternative",
+  "ilovepdf-alternative", "kapwing-alternative", "remove-bg-alternative",
+  "veed-alternative",
+]);
+
 /** Build the per-request Content-Security-Policy with a fresh nonce. The
  *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
  *  scripts loaded by a nonced script are then trusted by propagation, so
@@ -102,6 +121,19 @@ export async function middleware(request: NextRequest) {
   const seg = pathname.split("/").filter(Boolean)[0];
   if (seg && LOCALES.has(seg) && request.cookies.get(LOCALE_COOKIE)?.value !== seg) {
     response.cookies.set(LOCALE_COOKIE, seg, { maxAge: 60 * 60 * 24 * 365, path: "/" });
+  }
+
+  // /<locale>/<en-only-slug> → 308 to /<en-only-slug>. Keeps SEO juice on the
+  // English canonical and removes the 404 hole identified in the i18n audit.
+  // Doesn't touch /<locale>/<tool-slug> because tools all have localised
+  // routes under app/[locale]/[slug].
+  {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts.length === 2 && LOCALES.has(parts[0]) && EN_ONLY_SLUGS.has(parts[1])) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${parts[1]}`;
+      return NextResponse.redirect(url, 308);
+    }
   }
 
   if (pathname.startsWith("/dashboard")) {

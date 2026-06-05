@@ -11,15 +11,28 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/** Only follow same-origin, root-relative redirects (no open-redirect). */
+function safeRedirect(raw: string | undefined): string {
+  if (!raw) return "/dashboard";
+  if (!raw.startsWith("/") || raw.startsWith("//")) return "/dashboard";
+  return raw;
+}
+
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams?: { lang?: string };
+  searchParams?: { lang?: string; redirect?: string };
 }) {
   const langParam = searchParams?.lang ?? "";
   const locale: Locale = isLocale(langParam) ? langParam : DEFAULT_LOCALE;
   const t = getChrome(locale).auth;
   const rtl = isRtl(locale);
+  const redirect = safeRedirect(searchParams?.redirect);
+  // Preserve the post-auth destination when bouncing to /register too.
+  const registerHref = `/register?${new URLSearchParams({
+    ...(locale !== DEFAULT_LOCALE ? { lang: locale } : {}),
+    ...(redirect !== "/dashboard" ? { redirect } : {}),
+  }).toString()}`;
 
   return (
     <div dir={rtl ? "rtl" : undefined} className="container max-w-md py-16">
@@ -28,7 +41,7 @@ export default function LoginPage({
         <p className="mt-1 text-sm text-ink-500">{t.loginLead}</p>
 
         <div className="mt-6">
-          <GoogleButton />
+          <GoogleButton redirect={redirect} />
           <div className="my-6 flex items-center gap-3 text-xs text-ink-400">
             <div className="h-px flex-1 bg-ink-100" />
             <span>{t.orWithEmail}</span>
@@ -36,6 +49,7 @@ export default function LoginPage({
           </div>
           <EmailAuthForm
             mode="login"
+            redirect={redirect}
             labels={{
               email: t.email, password: t.password, loginCta: t.loginCta,
               registerCta: t.registerCta, loading: t.loading, checkInbox: t.checkInbox,
@@ -46,7 +60,7 @@ export default function LoginPage({
         <p className="mt-6 text-center text-sm text-ink-500">
           {t.noAccount}{" "}
           <Link
-            href={`/register${locale !== DEFAULT_LOCALE ? `?lang=${locale}` : ""}`}
+            href={registerHref}
             className="font-medium text-brand-600 hover:underline"
           >
             {t.createOne}

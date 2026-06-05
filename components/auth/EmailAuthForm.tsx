@@ -68,15 +68,25 @@ export function EmailAuthForm({
           },
         });
         if (error) throw error;
-        // Best-effort write: when email-confirmation is disabled, the signUp
-        // call already returned a session, so we can update profiles directly.
+        // Two cases:
+        //  • Email-confirmation ON  → no session yet; tell them to check inbox.
+        //    The confirmation link carries emailRedirectTo → /auth/callback
+        //    ?redirect=<dest>, so they land on checkout/dashboard after.
+        //  • Email-confirmation OFF → signUp already returned a session. Write
+        //    the consent flags, then push to `redirect` and refresh() so the
+        //    server components (Header, dashboard) pick up the new session
+        //    immediately — without the refresh the user looks logged-out and
+        //    has to sign in a second time.
         if (data.session?.user?.id) {
           await supabase
             .from("profiles")
             .update({ tos_accepted_at: new Date().toISOString(), marketing_opt_in: marketing })
             .eq("id", data.session.user.id);
+          router.push(redirect);
+          router.refresh();
+        } else {
+          setInfo(labels.checkInbox);
         }
-        setInfo(labels.checkInbox);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;

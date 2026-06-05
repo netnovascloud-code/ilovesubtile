@@ -11,15 +11,39 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/** Only follow same-origin, root-relative redirects (no open-redirect). */
+function safeRedirect(raw: string | undefined): string {
+  if (!raw) return "/dashboard";
+  if (!raw.startsWith("/") || raw.startsWith("//")) return "/dashboard";
+  return raw;
+}
+
 export default function RegisterPage({
   searchParams,
 }: {
-  searchParams?: { lang?: string };
+  searchParams?: { lang?: string; redirect?: string; plan?: string; interval?: string; pack?: string };
 }) {
   const langParam = searchParams?.lang ?? "";
   const locale: Locale = isLocale(langParam) ? langParam : DEFAULT_LOCALE;
   const t = getChrome(locale).auth;
   const rtl = isRtl(locale);
+
+  // Post-signup destination. An explicit ?redirect wins; otherwise, if the
+  // visitor arrived here from a pricing CTA (?plan / ?pack), send them straight
+  // to checkout once the account exists. Falls back to the dashboard.
+  let redirect = safeRedirect(searchParams?.redirect);
+  if (!searchParams?.redirect) {
+    if (searchParams?.pack) {
+      redirect = `/billing/checkout?pack=${encodeURIComponent(searchParams.pack)}`;
+    } else if (searchParams?.plan) {
+      const interval = searchParams.interval === "annual" ? "annual" : "monthly";
+      redirect = `/billing/checkout?plan=${encodeURIComponent(searchParams.plan)}&interval=${interval}`;
+    }
+  }
+  const loginHref = `/login?${new URLSearchParams({
+    ...(locale !== DEFAULT_LOCALE ? { lang: locale } : {}),
+    ...(redirect !== "/dashboard" ? { redirect } : {}),
+  }).toString()}`;
 
   return (
     <div dir={rtl ? "rtl" : undefined} className="container max-w-md py-16">
@@ -28,7 +52,7 @@ export default function RegisterPage({
         <p className="mt-1 text-sm text-ink-500">{t.registerLead}</p>
 
         <div className="mt-6">
-          <GoogleButton />
+          <GoogleButton redirect={redirect} />
           {/* OAuth click-through consent: clicking the Google button takes the
               user off-site immediately, so we can't gate it on a local
               checkbox. The standard SaaS pattern (GitHub, Notion, Linear) is
@@ -46,6 +70,7 @@ export default function RegisterPage({
           </div>
           <EmailAuthForm
             mode="register"
+            redirect={redirect}
             labels={{
               email: t.email, password: t.password, loginCta: t.loginCta,
               registerCta: t.registerCta, loading: t.loading, checkInbox: t.checkInbox,
@@ -56,7 +81,7 @@ export default function RegisterPage({
         <p className="mt-6 text-center text-sm text-ink-500">
           {t.hasAccount}{" "}
           <Link
-            href={`/login${locale !== DEFAULT_LOCALE ? `?lang=${locale}` : ""}`}
+            href={loginHref}
             className="font-medium text-brand-600 hover:underline"
           >
             {t.logIn}

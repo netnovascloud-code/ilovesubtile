@@ -161,6 +161,9 @@ export default async function DashboardPage() {
             <div className="text-3xl font-semibold text-ink-900">
               {displayedUsage} / {limitLabel}
             </div>
+            <p className="mt-1 text-xs text-ink-400">
+              used · {Math.max(0, limit - displayedUsage).toLocaleString()} left
+            </p>
             {atLimit && (
               <p className="mt-2 text-xs text-amber-700">
                 {kind === "daily" ? "Daily limit reached. Resets every 24h." : "Monthly quota reached. Resets on the 1st."}

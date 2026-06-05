@@ -28,6 +28,10 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
   const [revoking, setRevoking] = useState(false);
 
   const isBusiness = plan === "business";
+  const activeKeys = keys.filter((k) => !k.revoked);
+  const MAX_KEYS = 10;
+  const atKeyLimit = activeKeys.length >= MAX_KEYS;
+  const nameValid = name.trim().length > 0;
 
   async function authedFetch(body: object) {
     const supabase = getSupabaseBrowser();
@@ -59,11 +63,13 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
   }, []);
 
   async function create() {
+    if (!nameValid) { setError("Give the key a name first."); return; }
+    if (atKeyLimit) { setError(`You can have up to ${MAX_KEYS} active keys. Revoke one first.`); return; }
     setCreating(true);
     setError(null);
     setFreshKey(null);
     try {
-      const res = await authedFetch({ action: "create", name: name.trim() || "API key" });
+      const res = await authedFetch({ action: "create", name: name.trim().slice(0, 60) });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error === "business_plan_required" ? "API access requires the Business plan." : data.error);
@@ -84,6 +90,9 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
     setRevoking(true);
     try {
       await authedFetch({ action: "revoke", id: pendingRevoke.id });
+      // Clear the one-time "copy your key" banner so a revoked key never lingers.
+      setFreshKey(null);
+      setCopied(false);
       await load();
       setPendingRevoke(null);
     } catch (err) {
@@ -101,7 +110,7 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
           <h3 className="font-semibold text-ink-900">API keys</h3>
         </div>
         <div className="text-sm text-ink-500">
-          Credits: <span className="font-semibold text-ink-900">{credits}</span>
+          Credits: <span className="font-semibold text-ink-900">{credits.toLocaleString()}</span>
         </div>
       </div>
 
@@ -172,18 +181,21 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={60}
-          disabled={!isBusiness || creating}
-          placeholder="Key name (e.g. Production)"
+          disabled={!isBusiness || creating || atKeyLimit}
+          placeholder="Key name (required, e.g. Production)"
           onKeyDown={(e) => {
-            if (e.key === "Enter" && isBusiness && !creating) create();
+            if (e.key === "Enter" && isBusiness && !creating && nameValid && !atKeyLimit) create();
           }}
           className="flex-1 rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100 disabled:cursor-not-allowed disabled:bg-ink-50"
         />
-        <Button size="sm" onClick={create} disabled={!isBusiness || creating}>
+        <Button size="sm" onClick={create} disabled={!isBusiness || creating || !nameValid || atKeyLimit}>
           <Plus className="h-3.5 w-3.5" />
           {creating ? "Generating…" : "Generate API key"}
         </Button>
       </div>
+      {isBusiness && atKeyLimit && (
+        <p className="mt-2 text-xs text-amber-700">You&apos;ve reached the maximum of {MAX_KEYS} active keys. Revoke one to create another.</p>
+      )}
 
       <ConfirmDialog
         open={pendingRevoke !== null}

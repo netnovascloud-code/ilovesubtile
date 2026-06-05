@@ -9,6 +9,7 @@ import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { PLANS, type PlanKey } from "@/lib/plans";
+import { BUSINESS_MONTHLY_CREDITS } from "@/lib/credits";
 
 type AccountPlan = "free" | PlanKey;
 
@@ -170,9 +171,10 @@ export default async function BillingPage() {
                 </li>
               ))}
             </ul>
-            {monthlyGrant > 0 && (
+            {plan === "business" && (
               <p className="mt-3 text-xs text-ink-400">
-                Includes {monthlyGrant.toLocaleString()} monthly API credits (reset on the 1st).
+                Business includes {BUSINESS_MONTHLY_CREDITS.toLocaleString()} API credits every month
+                (reset on the 1st), on top of any credit packs you buy.
               </p>
             )}
           </CardContent>

@@ -57,11 +57,18 @@ function CheckoutLauncher() {
         });
         const body = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
         if (!res.ok || !body.url) {
-          setError(
-            body.error === "no_variant_configured"
-              ? "This plan isn't on sale yet — please try again shortly."
-              : body.error ?? `Checkout error (${res.status}).`,
-          );
+          // Map known error codes to short human messages. Unknown codes fall
+          // back to a generic line — never leak raw status codes into the UI.
+          const known: Record<string, string> = {
+            no_variant_configured: "This plan isn't on sale yet — please try again shortly.",
+            invalid_plan: "That plan doesn't exist anymore. Pick one from Pricing.",
+            invalid_pack: "That credit pack doesn't exist anymore. Pick one from your dashboard.",
+            unauthorized: "Your session expired. Please sign in again.",
+            no_store: "Checkout isn't configured yet — please contact support.",
+            missing_lemonsqueezy_key: "Checkout is temporarily unavailable. Please try again in a few minutes.",
+            lemonsqueezy_failed: "Our payment provider is having trouble. Please try again in a moment.",
+          };
+          setError(known[body.error ?? ""] ?? "We couldn't start the checkout. Please try again.");
           return;
         }
         // Full-page redirect to the LS-hosted checkout (Stripe-style).

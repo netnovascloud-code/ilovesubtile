@@ -4,19 +4,13 @@ import { EmailAuthForm } from "@/components/auth/EmailAuthForm";
 import { GoogleButton } from "@/components/auth/GoogleButton";
 import { getChrome } from "@/lib/i18n/chrome";
 import { isLocale, type Locale, DEFAULT_LOCALE, isRtl } from "@/lib/i18n/locales";
+import { safeInternalPath } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Log in",
   description: "Log in to Konvertools to manage your jobs and subscription.",
   robots: { index: false, follow: false },
 };
-
-/** Only follow same-origin, root-relative redirects (no open-redirect). */
-function safeRedirect(raw: string | undefined): string {
-  if (!raw) return "/dashboard";
-  if (!raw.startsWith("/") || raw.startsWith("//")) return "/dashboard";
-  return raw;
-}
 
 export default function LoginPage({
   searchParams,
@@ -27,7 +21,7 @@ export default function LoginPage({
   const locale: Locale = isLocale(langParam) ? langParam : DEFAULT_LOCALE;
   const t = getChrome(locale).auth;
   const rtl = isRtl(locale);
-  const redirect = safeRedirect(searchParams?.redirect);
+  const redirect = safeInternalPath(searchParams?.redirect);
   const oauthError = searchParams?.error === "oauth";
   // Preserve the post-auth destination when bouncing to /register too.
   const registerHref = `/register?${new URLSearchParams({

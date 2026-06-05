@@ -1,23 +1,12 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServer } from "@/lib/supabase/server";
-import { edgeFnUrl } from "@/lib/utils";
-
-/** Only allow same-origin redirects expressed as a root-relative path.
- *  Anything that looks like a scheme, host or "//" prefix is rejected to
- *  prevent open-redirect phishing via /auth/callback?redirect=https://evil.com. */
-function safeRedirectPath(raw: string | null): string {
-  const fallback = "/dashboard";
-  if (!raw) return fallback;
-  if (!raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/\\")) return fallback;
-  if (/^[a-z][a-z0-9+.-]*:/i.test(raw)) return fallback;
-  if (raw.length > 512) return fallback;
-  return raw;
-}
+import { edgeFnUrl, safeInternalPath } from "@/lib/utils";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
-  const redirect = safeRedirectPath(url.searchParams.get("redirect"));
+  // Shared strict validation — blocks open-redirect via scheme, //host or /\host.
+  const redirect = safeInternalPath(url.searchParams.get("redirect"));
 
   // No code → nothing to exchange. Never fall through to the success redirect
   // (that would silently leave any pre-existing session in place and look like

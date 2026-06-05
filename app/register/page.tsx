@@ -4,19 +4,13 @@ import { EmailAuthForm } from "@/components/auth/EmailAuthForm";
 import { GoogleButton } from "@/components/auth/GoogleButton";
 import { getChrome } from "@/lib/i18n/chrome";
 import { isLocale, type Locale, DEFAULT_LOCALE, isRtl } from "@/lib/i18n/locales";
+import { safeInternalPath } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Create an account",
   description: "Sign up for Konvertools — free tier with a few daily runs.",
   robots: { index: false, follow: false },
 };
-
-/** Only follow same-origin, root-relative redirects (no open-redirect). */
-function safeRedirect(raw: string | undefined): string {
-  if (!raw) return "/dashboard";
-  if (!raw.startsWith("/") || raw.startsWith("//")) return "/dashboard";
-  return raw;
-}
 
 export default function RegisterPage({
   searchParams,
@@ -31,7 +25,7 @@ export default function RegisterPage({
   // Post-signup destination. An explicit ?redirect wins; otherwise, if the
   // visitor arrived here from a pricing CTA (?plan / ?pack), send them straight
   // to checkout once the account exists. Falls back to the dashboard.
-  let redirect = safeRedirect(searchParams?.redirect);
+  let redirect = safeInternalPath(searchParams?.redirect);
   if (!searchParams?.redirect) {
     if (searchParams?.pack) {
       redirect = `/billing/checkout?pack=${encodeURIComponent(searchParams.pack)}`;

@@ -11,6 +11,7 @@ import { DEFAULT_LOCALE, localePath, type Locale } from "@/lib/i18n/locales";
 import { categoryLabel, categoryBlurb } from "@/lib/i18n/resolve-category-i18n";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
+import { CATEGORY_FAQ } from "@/lib/i18n/category-faq";
 
 const SITE = "https://konvertools.com";
 
@@ -53,7 +54,9 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
     ? `${blurb} Every tool below is free, runs in your browser when it can, and is built around a single conversion — no editor, no sign-up, no nonsense.`
     : blurb;
 
-  // English-only marketing FAQ (kept on the canonical page for SEO).
+  // English keeps a richer, category-specific FAQ for SEO; localized variants
+  // use the fully-translated generic FAQ so the page reads entirely in-language.
+  const faqHeading = isEn ? "Frequently asked questions" : (CATEGORY_FAQ[locale]?.heading ?? CATEGORY_FAQ.en.heading);
   const FAQ: { q: string; a: string }[] = isEn ? [
     {
       q: `Are these ${def.label.toLowerCase()} tools free?`,
@@ -67,7 +70,7 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
       q: `Do I need to sign up?`,
       a: `No. Every tool works without an account. Sign up only if you want a higher daily quota, larger files, saved templates and the workflow builder.`,
     },
-  ] : [];
+  ] : (CATEGORY_FAQ[locale]?.items ?? CATEGORY_FAQ.en.items);
 
   return (
     <div>
@@ -119,7 +122,7 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
       {FAQ.length > 0 && (
         <section className="border-t border-ink-100 bg-surface">
           <div className="container py-16">
-            <h2 className="text-2xl font-semibold text-ink-900">Frequently asked questions</h2>
+            <h2 className="text-2xl font-semibold text-ink-900">{faqHeading}</h2>
             <dl className="mt-8 grid gap-4 md:grid-cols-2">
               {FAQ.map((f) => (
                 <div key={f.q} className="rounded-lg border border-ink-100 bg-white p-6 shadow-card">

@@ -82,6 +82,11 @@ Deno.serve(async (req) => {
   const image = (body.image ?? "").trim();
   if (!task || !SYSTEMS[task]) return json({ error: "bad_task" }, { status: 400 });
   if (!image) return json({ error: "missing_image" }, { status: 400 });
+  // System prompt + JSON-mode flag for the requested task. These were used
+  // below (sys / wantsJson) without ever being destructured, so every request
+  // threw `ReferenceError: sys is not defined` and 500'd — the function failed
+  // 100% of the time. Pull them off the validated SYSTEMS entry here.
+  const { sys, json: wantsJson } = SYSTEMS[task];
   // 12 MB base64 is roughly a 9 MB JPEG — plenty for any single photo and
   // keeps the worker from holding multi-GB payloads in memory.
   if (image.length > 12 * 1024 * 1024) return json({ error: "image_too_large" }, { status: 413 });

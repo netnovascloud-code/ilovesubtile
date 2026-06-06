@@ -39,6 +39,53 @@ function getServiceClient() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 }
 
+// Server-side AI quota, mirroring ai-process / ai-vision. Free = rolling 24h on
+// profiles.daily_usage; Pro/Business = monthly (UTC). Without this a direct
+// authenticated POST bypasses the client-side cap and can drive unbounded paid
+// transcription cost. Fail-open on any DB error so a counter glitch never
+// blocks a real (paying) user.
+const QUOTA_DAILY: Record<string, number> = { free: 3 };
+const QUOTA_MONTHLY: Record<string, number> = { pro: 500, business: 3000 };
+async function enforceAiQuota(
+  svc: ReturnType<typeof getServiceClient>,
+  userId: string,
+): Promise<{ ok: true } | { ok: false; status: number; body: Record<string, unknown> }> {
+  try {
+    const { data: prof } = await svc.from("profiles")
+      .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
+      .eq("id", userId).maybeSingle();
+    const plan = (prof?.plan as string) ?? "free";
+    if (plan === "free") {
+      const limit = QUOTA_DAILY.free;
+      const now = Date.now();
+      const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;
+      const overdue = now - resetAt > 24 * 3600 * 1000;
+      const current = overdue ? 0 : (prof?.daily_usage ?? 0);
+      if (current >= limit) {
+        return { ok: false, status: 429, body: { error: "daily_limit", plan, limit, used: current, remaining: 0, resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() } };
+      }
+      await svc.from("profiles").update({
+        daily_usage: current + 1,
+        usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
+      }).eq("id", userId);
+    } else {
+      const limit = QUOTA_MONTHLY[plan] ?? QUOTA_MONTHLY.pro;
+      const d = new Date();
+      const month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+      const used = prof?.monthly_ai_month === month ? (prof?.monthly_ai_usage ?? 0) : 0;
+      if (used >= limit) {
+        const next = new Date();
+        next.setUTCDate(1); next.setUTCHours(0, 0, 0, 0); next.setUTCMonth(next.getUTCMonth() + 1);
+        return { ok: false, status: 429, body: { error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() } };
+      }
+      await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+    }
+    return { ok: true };
+  } catch {
+    return { ok: true }; // fail-open — never block on a counter glitch
+  }
+}
+
 type Segment = { start: number; end: number; text: string };
 
 function srtFromSegments(segments: Segment[]): string {
@@ -103,6 +150,10 @@ Deno.serve(async (req) => {
   const fname = (file.name || "").toLowerCase();
   const bad = [".exe", ".dll", ".bat", ".cmd", ".sh", ".ps1", ".dmg", ".msi", ".scr", ".com", ".vbs", ".js", ".jar"];
   if (bad.some((ext) => fname.endsWith(ext))) return json({ error: "bad_request", message: "Executable file types are not accepted." }, { status: 400 });
+
+  // Enforce the AI quota server-side BEFORE the expensive Voxtral call.
+  const quota = await enforceAiQuota(supabase, caller.id);
+  if (!quota.ok) return json(quota.body, { status: quota.status });
 
   const voxtralForm = new FormData();
   voxtralForm.append("file", file);

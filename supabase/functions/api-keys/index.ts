@@ -84,9 +84,17 @@ Deno.serve(async (req) => {
   if (action === "revoke") {
     const id = body.id as string;
     if (!id) return json({ error: "missing_id" }, { status: 400 });
-    // Soft-delete: keep the row (and its hash) for audit. revoked_at stamps
-    // the moment of revocation so the dashboard can show history.
-    await svc.from("api_keys").update({ revoked: true, revoked_at: new Date().toISOString() }).eq("id", id).eq("user_id", user.id);
+    // Soft-delete: keep the row (and its hash) for audit, just flip `revoked`.
+    // There is NO `revoked_at` column (see migration 002) — including it made
+    // PostgREST reject the whole UPDATE, so revocation silently no-op'd and the
+    // key stayed usable. Write only the column that exists, and surface errors
+    // instead of always returning ok.
+    const { error: revErr } = await svc
+      .from("api_keys")
+      .update({ revoked: true })
+      .eq("id", id)
+      .eq("user_id", user.id);
+    if (revErr) return json({ error: "revoke_failed", message: revErr.message }, { status: 500 });
     return json({ ok: true });
   }
 

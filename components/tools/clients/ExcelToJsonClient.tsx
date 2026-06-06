@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Upload, X, Copy, Check, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
+import { safeReadWorkbook, loadXlsx, sanitizeParsed } from "@/lib/safe-xlsx";
 
 type Mode = "rows" | "matrix";
 
@@ -22,9 +23,8 @@ export function ExcelToJsonClient() {
     if (!f) return;
     setFile(f); setError(null); setOutput(""); setBusy(true);
     try {
-      const xlsx = await import("xlsx");
       const data = new Uint8Array(await f.arrayBuffer());
-      const wb = xlsx.read(data, { type: "array" });
+      const { wb } = await safeReadWorkbook(data);
       setSheets(wb.SheetNames);
       const first = wb.SheetNames[0];
       setSheet(first);
@@ -38,14 +38,14 @@ export function ExcelToJsonClient() {
 
   async function convert(wb: { Sheets: Record<string, unknown> }, sheetName: string, m: Mode, p: boolean) {
     try {
-      const xlsx = await import("xlsx");
+      const xlsx = await loadXlsx();
       const ws = wb.Sheets[sheetName];
       if (!ws) { setOutput(""); return; }
       let json: unknown;
       if (m === "matrix") {
-        json = xlsx.utils.sheet_to_json(ws as never, { header: 1, defval: null, blankrows: false });
+        json = sanitizeParsed(xlsx.utils.sheet_to_json(ws as never, { header: 1, defval: null, blankrows: false }));
       } else {
-        json = xlsx.utils.sheet_to_json(ws as never, { defval: null, blankrows: false });
+        json = sanitizeParsed(xlsx.utils.sheet_to_json(ws as never, { defval: null, blankrows: false }));
       }
       setOutput(p ? JSON.stringify(json, null, 2) : JSON.stringify(json));
     } catch (e) {
@@ -60,9 +60,8 @@ export function ExcelToJsonClient() {
     if (!file) return;
     setBusy(true); setError(null);
     try {
-      const xlsx = await import("xlsx");
       const data = new Uint8Array(await file.arrayBuffer());
-      const wb = xlsx.read(data, { type: "array" });
+      const { wb } = await safeReadWorkbook(data);
       await convert(wb, over?.sheet ?? sheet, over?.mode ?? mode, over?.pretty ?? pretty);
     } finally {
       setBusy(false);

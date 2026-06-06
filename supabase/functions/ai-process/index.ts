@@ -251,6 +251,20 @@ Deno.serve(async (req) => {
         }).eq("id", userId);
       }
     } catch { /* fail-open: never block on a quota bookkeeping error */ }
+  } else {
+    // Anonymous: cap per client IP so the public anon key can't drive unlimited
+    // Mistral calls from outside the browser (CORS + client gating don't stop a
+    // direct POST). Generous; fail-open on any bookkeeping error.
+    try {
+      const xff = req.headers.get("x-forwarded-for") ?? "";
+      const ip = xff.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
+      const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "ai-process", p_limit: 30, p_window_secs: 3600 });
+      const row = Array.isArray(rl) ? rl[0] : rl;
+      if (row && row.allowed === false) {
+        const retry = Number(row.retry_after ?? 3600);
+        return json({ error: "rate_limited", message: `Too many requests from your network. Sign in for higher limits, or retry in ${retry}s.`, retry_after: retry }, { status: 429, headers: { "Retry-After": String(retry) } });
+      }
+    } catch { /* fail-open */ }
   }
 
   const model = LARGE.has(task) ? "mistral-large-latest" : "mistral-small-latest";

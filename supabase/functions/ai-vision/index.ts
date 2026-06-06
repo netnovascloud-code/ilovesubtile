@@ -128,9 +128,20 @@ Deno.serve(async (req) => {
         await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
       }
     } catch { /* fail-open */ }
+  } else {
+    // Anonymous: cap per client IP so the public anon key can't drive unlimited
+    // Pixtral calls from outside the browser. Generous; fail-open on error.
+    try {
+      const xff = req.headers.get("x-forwarded-for") ?? "";
+      const ip = xff.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
+      const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "ai-vision", p_limit: 30, p_window_secs: 3600 });
+      const row = Array.isArray(rl) ? rl[0] : rl;
+      if (row && row.allowed === false) {
+        const retry = Number(row.retry_after ?? 3600);
+        return json({ error: "rate_limited", message: `Too many requests from your network. Sign in for higher limits, or retry in ${retry}s.`, retry_after: retry }, { status: 429, headers: { "Retry-After": String(retry) } });
+      }
+    } catch { /* fail-open */ }
   }
-
-  const { sys, json: wantsJson } = SYSTEMS[task];
   const userText = (body.prompt ?? "Process this image per the instructions.").slice(0, 800);
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",

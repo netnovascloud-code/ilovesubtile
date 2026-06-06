@@ -33,15 +33,33 @@ function cors(): Record<string, string> {
     "Access-Control-Allow-Methods": "GET, OPTIONS",
   };
 }
-async function requireAuth(req: Request): Promise<boolean> {
+// This is a one-time onboarding helper (it rediscovers store/variant IDs and
+// writes billing_config). It must NOT be callable by any signed-in user — gate
+// it to an explicit admin allowlist set via the SETUP_ADMIN_EMAILS secret
+// (comma-separated). Deny by default when the allowlist is unset, since by then
+// billing_config is already seeded and the function should stay locked.
+async function requireAdmin(req: Request): Promise<{ ok: true } | { ok: false; status: number; reason: string; message: string }> {
   const auth = req.headers.get("Authorization");
-  if (!auth) return false;
   const url = Deno.env.get("SUPABASE_URL");
   const anon = Deno.env.get("SUPABASE_ANON_KEY");
-  if (!url || !anon) return false;
+  if (!auth || !url || !anon) {
+    return { ok: false, status: 401, reason: "unauthorized", message: "Sign in as an admin to run setup." };
+  }
   const c = createClient(url, anon, { global: { headers: { Authorization: auth } } });
   const { data } = await c.auth.getUser();
-  return !!data.user;
+  const email = data.user?.email?.toLowerCase();
+  if (!email) {
+    return { ok: false, status: 401, reason: "unauthorized", message: "Sign in as an admin to run setup." };
+  }
+  const allow = (Deno.env.get("SETUP_ADMIN_EMAILS") ?? "")
+    .split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+  if (allow.length === 0) {
+    return { ok: false, status: 403, reason: "setup_locked", message: "Setup is locked. Set the SETUP_ADMIN_EMAILS edge-function secret (comma-separated admin emails) to your account email, then retry." };
+  }
+  if (!allow.includes(email)) {
+    return { ok: false, status: 403, reason: "forbidden", message: "Your account is not on the setup admin allowlist (SETUP_ADMIN_EMAILS)." };
+  }
+  return { ok: true };
 }
 function lsHeaders(key: string) {
   return { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" };
@@ -74,7 +92,8 @@ Deno.serve(async (req) => {
 
   const key = Deno.env.get("LEMONSQUEEZY_API_KEY");
   if (!key) return json({ error: "missing_lemonsqueezy_key" }, { status: 500 });
-  if (!(await requireAuth(req))) return json({ error: "unauthorized" }, { status: 401 });
+  const gate = await requireAdmin(req);
+  if (!gate.ok) return json({ error: gate.reason, message: gate.message }, { status: gate.status });
 
   // 1) Store
   const storesRes = await fetch(`${LS_API}/stores`, { headers: lsHeaders(key) });

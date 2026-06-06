@@ -61,7 +61,7 @@ export default async function DashboardPage() {
   let needsLogin = false;
 
   try {
-    const supabase = getSupabaseServer();
+    const supabase = await getSupabaseServer();
     const { data: userData } = await supabase.auth.getUser();
     email = userData.user?.email ?? null;
     if (!userData.user) {

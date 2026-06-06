@@ -12,11 +12,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function LoginPage({
-  searchParams,
-}: {
-  searchParams?: { lang?: string; redirect?: string; error?: string };
-}) {
+export default async function LoginPage(
+  props: {
+    searchParams?: Promise<{ lang?: string; redirect?: string; error?: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const langParam = searchParams?.lang ?? "";
   const locale: Locale = isLocale(langParam) ? langParam : DEFAULT_LOCALE;
   const t = getChrome(locale).auth;

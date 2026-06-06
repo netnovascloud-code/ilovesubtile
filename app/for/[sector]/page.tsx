@@ -8,7 +8,8 @@ export function generateStaticParams() {
   return SECTOR_IDS.map((sector) => ({ sector }));
 }
 
-export function generateMetadata({ params }: { params: { sector: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ sector: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const sector = SECTORS[params.sector];
   if (!sector) return {};
   return {
@@ -27,7 +28,8 @@ export function generateMetadata({ params }: { params: { sector: string } }): Me
   };
 }
 
-export default function Page({ params }: { params: { sector: string } }) {
+export default async function Page(props: { params: Promise<{ sector: string }> }) {
+  const params = await props.params;
   const sector = SECTORS[params.sector];
   if (!sector) notFound();
   return <SectorPage sector={sector} />;

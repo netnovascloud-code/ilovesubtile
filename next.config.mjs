@@ -17,6 +17,8 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+  // typedRoutes graduated from `experimental` to top-level in Next 16.
+  typedRoutes: false,
   // Standalone output produces a minimal Node server in .next/standalone/
   // (~50 MB instead of ~500 MB with full node_modules). Required for the
   // Docker build and any non-Vercel host (Coolify, Railway, Render, Fly,

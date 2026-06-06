@@ -21,7 +21,8 @@ const LOCALE_NAMES: Record<Locale, string> = {
   vi: "Tiếng Việt", sv: "Svenska", pl: "Polski", uk: "Українська", cs: "Čeština",
 };
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) return {};
   const alts: Record<string, string> = {};
@@ -34,7 +35,8 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   };
 }
 
-export default function Page({ params }: { params: { locale: string } }) {
+export default async function Page(props: { params: Promise<{ locale: string }> }) {
+  const params = await props.params;
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
   const translated = PRIVACY_TRANSLATIONS[locale];

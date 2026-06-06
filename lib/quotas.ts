@@ -25,7 +25,7 @@ export type QuotaCheck =
 export async function checkAndReserveQuota(): Promise<QuotaCheck> {
   let supabase;
   try {
-    supabase = getSupabaseServer();
+    supabase = await getSupabaseServer();
   } catch {
     // Supabase not configured locally → don't gate.
     return { ok: true, plan: "anonymous", remaining: Infinity };

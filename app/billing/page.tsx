@@ -42,7 +42,7 @@ export default async function BillingPage() {
   let needsLogin = false;
 
   try {
-    const supabase = getSupabaseServer();
+    const supabase = await getSupabaseServer();
     const { data: userData } = await supabase.auth.getUser();
     if (!userData.user) {
       needsLogin = true;

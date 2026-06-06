@@ -17,7 +17,8 @@ export function generateStaticParams() {
   return NON_DEFAULT_LOCALES.map((locale) => ({ locale }));
 }
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const params = await props.params;
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const locale = params.locale;
   const ui = getStrings(locale);
@@ -41,7 +42,8 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   };
 }
 
-export default function LocaleHome({ params }: { params: { locale: string } }) {
+export default async function LocaleHome(props: { params: Promise<{ locale: string }> }) {
+  const params = await props.params;
   if (!isLocale(params.locale) || params.locale === "en") notFound();
   const locale = params.locale;
   const ui = getStrings(locale);

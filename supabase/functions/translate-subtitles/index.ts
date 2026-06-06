@@ -112,7 +112,13 @@ Deno.serve(async (req) => {
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");
   if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
 
+  // Reject anonymous callers BEFORE any expensive work. translate-subtitles
+  // requires a signed-in user (results live under a UID-namespaced storage
+  // folder). Checking here — rather than after the per-chunk Mistral calls —
+  // also stops anonymous holders of the public anon key from burning paid
+  // Mistral translation cost only to receive a 401 at the end.
   const caller = await getCaller(req);
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const supabase = getServiceClient();
 
   const form = await req.formData();
@@ -143,10 +149,8 @@ Deno.serve(async (req) => {
   const translated = cues.map((c, i) => ({ ...c, lines: translatedAll[i].split("\n") }));
   const srt = toSrt(translated);
 
-  // Reject anonymous uploads (would otherwise share an "anonymous/" prefix)
-  // and sanitize the source filename to prevent storage-key injection like
+  // Sanitize the source filename to prevent storage-key injection like
   // `../../<victim-uuid>/file.srt`. See process-subtitles for rationale.
-  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const rawBase = (file.name ?? "translated").replace(/\.[^.]+$/, "");
   const safeBase = rawBase
     .toLowerCase()
@@ -159,12 +163,10 @@ Deno.serve(async (req) => {
   await supabase.storage.from("results").upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);
 
-  if (caller) {
-    await supabase.from("jobs").insert({
-      user_id: caller.id, tool: "translate-subtitles", status: "done",
-      output_file_url: signed?.signedUrl ?? null, language_target: targetLang,
-      completed_at: new Date().toISOString(),
-    });
-  }
+  await supabase.from("jobs").insert({
+    user_id: caller.id, tool: "translate-subtitles", status: "done",
+    output_file_url: signed?.signedUrl ?? null, language_target: targetLang,
+    completed_at: new Date().toISOString(),
+  });
   return json({ url: signed?.signedUrl, filename });
 });

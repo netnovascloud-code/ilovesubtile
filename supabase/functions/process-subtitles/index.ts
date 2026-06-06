@@ -81,7 +81,13 @@ Deno.serve(async (req) => {
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");
   if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
 
+  // Reject anonymous callers BEFORE any expensive work. process-subtitles
+  // requires a signed-in user (results live under a UID-namespaced storage
+  // folder). Checking here — rather than after the Voxtral transcription —
+  // also stops anonymous holders of the public anon key from burning paid
+  // Mistral transcription cost only to receive a 401 at the end.
   const caller = await getCaller(req);
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const supabase = getServiceClient();
 
   const form = await req.formData();
@@ -121,11 +127,6 @@ Deno.serve(async (req) => {
 
   const srt = srtFromSegments(segments);
 
-  // Reject anonymous uploads — they otherwise share an "anonymous/" prefix and
-  // can be abused to host attacker-controlled filenames on the supabase.co
-  // domain. Authenticated users keep their own UID-namespaced folder.
-  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
-
   // Sanitize the source filename: strip everything but [a-z0-9._-], drop
   // leading dots, and cap length. This prevents storage-key injection like
   // `../../<victim-uuid>/file.srt` even if the storage backend ever decided
@@ -145,16 +146,14 @@ Deno.serve(async (req) => {
 
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);
 
-  if (caller) {
-    await supabase.from("jobs").insert({
-      user_id: caller.id,
-      tool: "subtitle-generator",
-      status: "done",
-      output_file_url: signed?.signedUrl ?? null,
-      language_source: verbose?.language ?? null,
-      completed_at: new Date().toISOString(),
-    });
-  }
+  await supabase.from("jobs").insert({
+    user_id: caller.id,
+    tool: "subtitle-generator",
+    status: "done",
+    output_file_url: signed?.signedUrl ?? null,
+    language_source: verbose?.language ?? null,
+    completed_at: new Date().toISOString(),
+  });
 
   return json({ url: signed?.signedUrl, filename });
 });

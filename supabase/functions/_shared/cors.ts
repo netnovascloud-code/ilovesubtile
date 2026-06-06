@@ -34,9 +34,12 @@ export function buildCors(req: Request): Record<string, string> {
 }
 
 // Legacy export retained for the rare static use; new code should use buildCors(req).
+// NOTE: an HTTP Access-Control-Allow-Origin header may carry only ONE origin
+// value, so this static fallback echoes the canonical production origin only.
+// Cross-origin callers (konver.app, preview deploys, localhost) must go through
+// buildCors(req), which reflects the validated request Origin.
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "https://konvertools.com",
-  "https://konver.app", "https://www.konver.app",
   "Vary": "Origin",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",

@@ -8,7 +8,8 @@ export function generateStaticParams() {
   return VS_IDS.map((competitor) => ({ competitor }));
 }
 
-export function generateMetadata({ params }: { params: { competitor: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ competitor: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const vs = VS[params.competitor];
   if (!vs) return {};
   return {
@@ -20,7 +21,8 @@ export function generateMetadata({ params }: { params: { competitor: string } })
   };
 }
 
-export default function Page({ params }: { params: { competitor: string } }) {
+export default async function Page(props: { params: Promise<{ competitor: string }> }) {
+  const params = await props.params;
   const vs = VS[params.competitor];
   if (!vs) notFound();
   return <VsPage vs={vs} />;

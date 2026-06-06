@@ -8,7 +8,8 @@ export function generateStaticParams() {
   return HOWTO_IDS.map((guide) => ({ guide }));
 }
 
-export function generateMetadata({ params }: { params: { guide: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ guide: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const howto = HOWTOS[params.guide];
   if (!howto) return {};
   return {
@@ -20,7 +21,8 @@ export function generateMetadata({ params }: { params: { guide: string } }): Met
   };
 }
 
-export default function Page({ params }: { params: { guide: string } }) {
+export default async function Page(props: { params: Promise<{ guide: string }> }) {
+  const params = await props.params;
   const howto = HOWTOS[params.guide];
   if (!howto) notFound();
   return <HowToPage howto={howto} />;

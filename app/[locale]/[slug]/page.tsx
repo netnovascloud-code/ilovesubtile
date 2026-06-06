@@ -143,11 +143,12 @@ export function generateStaticParams() {
   return params;
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}): Metadata {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ locale: string; slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const tool = TOOLS_BY_SLUG[params.slug];
   if (tool) {
@@ -161,11 +162,12 @@ export function generateMetadata({
   return {};
 }
 
-export default function LocalisedToolPage({
-  params,
-}: {
-  params: { locale: string; slug: string };
-}) {
+export default async function LocalisedToolPage(
+  props: {
+    params: Promise<{ locale: string; slug: string }>;
+  }
+) {
+  const params = await props.params;
   if (!isLocale(params.locale) || params.locale === "en") notFound();
   const tool = TOOLS_BY_SLUG[params.slug];
   // Category hub: same route, render the localized CategoryPage.

@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   }
 
   {
-    const supabase = getSupabaseServer();
+    const supabase = await getSupabaseServer();
     const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
     // If the exchange fails (expired/replayed code, PKCE verifier mismatch),
     // do NOT continue — otherwise the user keeps whatever session the browser

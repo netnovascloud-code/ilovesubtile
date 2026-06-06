@@ -49,12 +49,12 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Per-request CSP nonce, set by middleware. Stamped on every inline
   // <script>/<Script> so it executes under the nonce-based CSP. Reading the
   // header opts this layout into dynamic rendering — accepted trade-off for
   // dropping 'unsafe-inline' on script-src.
-  const nonce = headers().get("x-nonce") ?? undefined;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     // suppressHydrationWarning: HtmlLang mutates documentElement.lang/dir
     // post-mount based on the konver_locale cookie (a French visitor on a

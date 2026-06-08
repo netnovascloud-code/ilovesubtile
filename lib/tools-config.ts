@@ -544,6 +544,10 @@ export const TOOLS: ToolDefinition[] = [
   {
     slug: "auto-sync",
     phase: 3,
+    // No forced-alignment backend exists yet (ai-process has no alignment task
+    // and only parses JSON, not the video+SRT FormData this tool posted), so the
+    // tool always 400'd. Mark it "coming soon" until a real aligner is wired.
+    pending: true,
     kind: "ai",
     category: "subtitles",
     icon: RefreshCw,

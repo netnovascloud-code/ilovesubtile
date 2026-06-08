@@ -5,40 +5,42 @@ import { Upload, X, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
 
-let ffmpegPromise: Promise<unknown> | null = null;
-type FfmpegLike = { exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<unknown>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<unknown>; on: (e: string, h: (ev: { progress: number }) => void) => void };
-
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ff;
-    })();
-  }
-  return (await ffmpegPromise) as FfmpegLike;
-}
-
+// Overlay-filter coordinates (W,H = main video; w,h = the watermark overlay).
 const POSITIONS = [
-  { id: "BR", label: "Bottom right", x: "w-tw-20", y: "h-th-20" },
-  { id: "BL", label: "Bottom left", x: "20", y: "h-th-20" },
-  { id: "TR", label: "Top right", x: "w-tw-20", y: "20" },
+  { id: "BR", label: "Bottom right", x: "W-w-20", y: "H-h-20" },
+  { id: "BL", label: "Bottom left", x: "20", y: "H-h-20" },
+  { id: "TR", label: "Top right", x: "W-w-20", y: "20" },
   { id: "TL", label: "Top left", x: "20", y: "20" },
-  { id: "C", label: "Centre", x: "(w-tw)/2", y: "(h-th)/2" },
+  { id: "C", label: "Centre", x: "(W-w)/2", y: "(H-h)/2" },
 ] as const;
 
-const FONT_URL = "https://cdn.jsdelivr.net/gh/google/fonts@main/apache/roboto/static/Roboto-Bold.ttf";
-
-// FFmpeg drawtext requires escaping : ' \ and other shell-ish chars.
-function escapeText(t: string) {
-  return t.replace(/\\/g, "\\\\").replace(/:/g, "\\:").replace(/'/g, "\\'").replace(/%/g, "\\%");
+// Render the watermark text to a transparent PNG with the Canvas API. The wasm
+// core has no libfreetype, so FFmpeg's `drawtext` filter is unavailable — we
+// composite this PNG with the `overlay` filter instead (and avoid the
+// CSP-blocked jsdelivr font fetch the old drawtext path relied on).
+function renderWatermarkPng(text: string, size: number, color: string, alpha: number): Uint8Array {
+  const measure = document.createElement("canvas").getContext("2d")!;
+  measure.font = `bold ${size}px sans-serif`;
+  const tw = Math.ceil(measure.measureText(text).width);
+  const pad = Math.round(size * 0.35);
+  const canvas = document.createElement("canvas");
+  canvas.width = tw + pad * 2;
+  canvas.height = Math.ceil(size * 1.3) + pad * 2;
+  const ctx = canvas.getContext("2d")!;
+  ctx.fillStyle = "rgba(0,0,0,0.2)"; // semi-transparent box, like the old boxcolor
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = `bold ${size}px sans-serif`;
+  ctx.textBaseline = "middle";
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.fillText(text, pad, canvas.height / 2);
+  const b64 = canvas.toDataURL("image/png").split(",")[1];
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return arr;
 }
 
 export function WatermarkVideoClient() {
@@ -62,23 +64,19 @@ export function WatermarkVideoClient() {
     setError(null); setOutUrl(null); setProgress(0);
     setPhase("loading");
     try {
-      const ff = await getFfmpeg();
-      ff.on("progress", (e: { progress: number }) => setProgress(Math.max(1, Math.min(99, Math.round(e.progress * 100)))));
+      const ff = await getFfmpeg((pr) => setProgress(pr));
       setPhase("running");
       const { fetchFile } = await import("@ffmpeg/util");
-
-      // Lazy-load the font once. fetchFile reads any URL into a Uint8Array.
-      const fontBytes = await fetchFile(FONT_URL);
-      await ff.writeFile("font.ttf", fontBytes);
 
       const ext = (file.name.split(".").pop() || "mp4").toLowerCase();
       const inName = `input.${ext}`;
       const outNameInternal = "output.mp4";
       await ff.writeFile(inName, await fetchFile(file));
+      await ff.writeFile("wm.png", renderWatermarkPng(text, size, color, opacity / 100));
 
       const p = POSITIONS.find((q) => q.id === pos)!;
-      const filter = `drawtext=fontfile=font.ttf:text='${escapeText(text)}':fontcolor=${color}@${(opacity / 100).toFixed(2)}:fontsize=${size}:x=${p.x}:y=${p.y}:box=1:boxcolor=black@0.2:boxborderw=8`;
-      const code = await ff.exec(["-i", inName, "-vf", filter, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "copy", outNameInternal]);
+      const filter = `overlay=${p.x}:${p.y}`;
+      const code = await ff.exec(["-i", inName, "-i", "wm.png", "-filter_complex", filter, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "copy", outNameInternal]);
       if (code !== 0) throw new Error("FFmpeg exited with a non-zero status.");
       const data = await ff.readFile(outNameInternal);
       const blob = new Blob([data as BlobPart], { type: "video/mp4" });
@@ -88,7 +86,7 @@ export function WatermarkVideoClient() {
       cleanup.current = url;
       setOutUrl(url);
       setOutName(`${file.name.replace(/\.[^.]+$/, "")}-watermarked.mp4`);
-      try { await ff.deleteFile(inName); await ff.deleteFile(outNameInternal); } catch {}
+      try { await ff.deleteFile(inName); await ff.deleteFile("wm.png"); await ff.deleteFile(outNameInternal); } catch {}
       setProgress(100); setPhase("done");
     } catch (e) {
       setError(`Watermarking failed: ${(e as Error).message}`);

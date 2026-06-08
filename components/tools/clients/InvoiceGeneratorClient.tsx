@@ -33,6 +33,7 @@ export function InvoiceGeneratorClient() {
   ]);
   const [busy, setBusy] = useState(false);
   const [outUrl, setOutUrl] = useState<string | null>(null);
+  const [warn, setWarn] = useState<string | null>(null);
   const cleanup = useRef<string | null>(null);
 
   useEffect(() => () => { if (cleanup.current) URL.revokeObjectURL(cleanup.current); }, []);
@@ -49,75 +50,97 @@ export function InvoiceGeneratorClient() {
   function add() { setLines((s) => [...s, { id: crypto.randomUUID(), desc: "", qty: 1, unitPrice: 0 }]); }
   function del(id: string) { setLines((s) => s.filter((l) => l.id !== id)); }
 
+  // pdf-lib's StandardFont (Helvetica) is WinAnsi-only and THROWS on any glyph
+  // outside CP1252 (CJK, ł, İ, the ₹/₩ currency symbols, emoji…). Fallback used
+  // only when a raw render fails: decompose accents, drop the rest, so we still
+  // produce a PDF instead of crashing with no feedback.
+  function toWinAnsi(s: string): string {
+    return s.normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^\x00-\xFF]/g, "?");
+  }
+
+  async function render(strip: boolean) {
+    const T = strip ? toWinAnsi : (s: string) => s;
+    const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib");
+    const doc = await PDFDocument.create();
+    const page = doc.addPage([595, 842]); // A4
+    const helv = await doc.embedFont(StandardFonts.Helvetica);
+    const bold = await doc.embedFont(StandardFonts.HelveticaBold);
+    const ink = rgb(0.1, 0.12, 0.16);
+    const muted = rgb(0.45, 0.5, 0.58);
+
+    page.drawText("INVOICE", { x: 40, y: 790, size: 26, font: bold, color: ink });
+    page.drawText(T(invoiceNo), { x: 40, y: 768, size: 11, font: helv, color: muted });
+
+    // From / To
+    const fromY = 720;
+    page.drawText("FROM", { x: 40, y: fromY, size: 9, font: bold, color: muted });
+    page.drawText("BILL TO", { x: 320, y: fromY, size: 9, font: bold, color: muted });
+    seller.split("\n").forEach((l, i) => page.drawText(T(l), { x: 40, y: fromY - 16 - i * 13, size: 10, font: helv, color: ink }));
+    buyer.split("\n").forEach((l, i) => page.drawText(T(l), { x: 320, y: fromY - 16 - i * 13, size: 10, font: helv, color: ink }));
+
+    // Meta
+    const metaY = 620;
+    page.drawText("INVOICE DATE", { x: 40, y: metaY, size: 9, font: bold, color: muted });
+    page.drawText(T(date), { x: 40, y: metaY - 14, size: 11, font: helv, color: ink });
+    page.drawText("DUE DATE", { x: 200, y: metaY, size: 9, font: bold, color: muted });
+    page.drawText(T(due), { x: 200, y: metaY - 14, size: 11, font: helv, color: ink });
+
+    // Table header
+    const tableY = 560;
+    page.drawRectangle({ x: 40, y: tableY - 6, width: 515, height: 22, color: rgb(0.94, 0.96, 0.99) });
+    page.drawText("DESCRIPTION", { x: 48, y: tableY, size: 9, font: bold, color: muted });
+    page.drawText("QTY", { x: 360, y: tableY, size: 9, font: bold, color: muted });
+    page.drawText("UNIT", { x: 410, y: tableY, size: 9, font: bold, color: muted });
+    page.drawText("AMOUNT", { x: 490, y: tableY, size: 9, font: bold, color: muted });
+
+    let y = tableY - 28;
+    for (const l of lines) {
+      const amt = (l.qty || 0) * (l.unitPrice || 0);
+      page.drawText(T(l.desc.slice(0, 60)), { x: 48, y, size: 10, font: helv, color: ink });
+      page.drawText(String(l.qty || 0), { x: 360, y, size: 10, font: helv, color: ink });
+      page.drawText(T(fmt(l.unitPrice || 0, currency)), { x: 410, y, size: 10, font: helv, color: ink });
+      page.drawText(T(fmt(amt, currency)), { x: 490, y, size: 10, font: helv, color: ink });
+      y -= 18;
+    }
+
+    // Totals box
+    const totalsY = y - 12;
+    page.drawLine({ start: { x: 350, y: totalsY + 12 }, end: { x: 555, y: totalsY + 12 }, color: rgb(0.85, 0.87, 0.9), thickness: 0.5 });
+    page.drawText("Subtotal", { x: 360, y: totalsY - 4, size: 10, font: helv, color: muted });
+    page.drawText(T(fmt(totals.subtotal, currency)), { x: 490, y: totalsY - 4, size: 10, font: helv, color: ink });
+    page.drawText(`VAT (${taxRate}%)`, { x: 360, y: totalsY - 22, size: 10, font: helv, color: muted });
+    page.drawText(T(fmt(totals.tax, currency)), { x: 490, y: totalsY - 22, size: 10, font: helv, color: ink });
+    page.drawRectangle({ x: 350, y: totalsY - 50, width: 205, height: 22, color: rgb(0.1, 0.12, 0.16) });
+    page.drawText("TOTAL", { x: 360, y: totalsY - 44, size: 11, font: bold, color: rgb(1, 1, 1) });
+    page.drawText(T(fmt(totals.total, currency)), { x: 490, y: totalsY - 44, size: 11, font: bold, color: rgb(1, 1, 1) });
+
+    // Notes
+    if (notes.trim()) {
+      page.drawText("NOTES", { x: 40, y: totalsY - 80, size: 9, font: bold, color: muted });
+      notes.split("\n").forEach((l, i) => page.drawText(T(l), { x: 40, y: totalsY - 96 - i * 13, size: 10, font: helv, color: ink }));
+    }
+
+    const bytes = await doc.save();
+    const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
+    if (cleanup.current) URL.revokeObjectURL(cleanup.current);
+    const url = URL.createObjectURL(blob);
+    cleanup.current = url;
+    setOutUrl(url);
+  }
+
   async function build() {
-    setBusy(true);
+    setBusy(true); setWarn(null);
     try {
-      const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib");
-      const doc = await PDFDocument.create();
-      const page = doc.addPage([595, 842]); // A4
-      const helv = await doc.embedFont(StandardFonts.Helvetica);
-      const bold = await doc.embedFont(StandardFonts.HelveticaBold);
-      const ink = rgb(0.1, 0.12, 0.16);
-      const muted = rgb(0.45, 0.5, 0.58);
-
-      page.drawText("INVOICE", { x: 40, y: 790, size: 26, font: bold, color: ink });
-      page.drawText(invoiceNo, { x: 40, y: 768, size: 11, font: helv, color: muted });
-
-      // From / To
-      const fromY = 720;
-      page.drawText("FROM", { x: 40, y: fromY, size: 9, font: bold, color: muted });
-      page.drawText("BILL TO", { x: 320, y: fromY, size: 9, font: bold, color: muted });
-      seller.split("\n").forEach((l, i) => page.drawText(l, { x: 40, y: fromY - 16 - i * 13, size: 10, font: helv, color: ink }));
-      buyer.split("\n").forEach((l, i) => page.drawText(l, { x: 320, y: fromY - 16 - i * 13, size: 10, font: helv, color: ink }));
-
-      // Meta
-      const metaY = 620;
-      page.drawText("INVOICE DATE", { x: 40, y: metaY, size: 9, font: bold, color: muted });
-      page.drawText(date, { x: 40, y: metaY - 14, size: 11, font: helv, color: ink });
-      page.drawText("DUE DATE", { x: 200, y: metaY, size: 9, font: bold, color: muted });
-      page.drawText(due, { x: 200, y: metaY - 14, size: 11, font: helv, color: ink });
-
-      // Table header
-      const tableY = 560;
-      page.drawRectangle({ x: 40, y: tableY - 6, width: 515, height: 22, color: rgb(0.94, 0.96, 0.99) });
-      page.drawText("DESCRIPTION", { x: 48, y: tableY, size: 9, font: bold, color: muted });
-      page.drawText("QTY", { x: 360, y: tableY, size: 9, font: bold, color: muted });
-      page.drawText("UNIT", { x: 410, y: tableY, size: 9, font: bold, color: muted });
-      page.drawText("AMOUNT", { x: 490, y: tableY, size: 9, font: bold, color: muted });
-
-      let y = tableY - 28;
-      for (const l of lines) {
-        const amt = (l.qty || 0) * (l.unitPrice || 0);
-        page.drawText(l.desc.slice(0, 60), { x: 48, y, size: 10, font: helv, color: ink });
-        page.drawText(String(l.qty || 0), { x: 360, y, size: 10, font: helv, color: ink });
-        page.drawText(fmt(l.unitPrice || 0, currency), { x: 410, y, size: 10, font: helv, color: ink });
-        page.drawText(fmt(amt, currency), { x: 490, y, size: 10, font: helv, color: ink });
-        y -= 18;
+      try {
+        await render(false);
+      } catch {
+        // A glyph wasn't WinAnsi-encodable — retry with the sanitised text so
+        // the user still gets a PDF, and tell them what happened.
+        await render(true);
+        setWarn("Some characters aren't supported by the built-in PDF font and were simplified. Use Latin characters (or a EUR/USD/GBP-style currency) for best results.");
       }
-
-      // Totals box
-      const totalsY = y - 12;
-      page.drawLine({ start: { x: 350, y: totalsY + 12 }, end: { x: 555, y: totalsY + 12 }, color: rgb(0.85, 0.87, 0.9), thickness: 0.5 });
-      page.drawText("Subtotal", { x: 360, y: totalsY - 4, size: 10, font: helv, color: muted });
-      page.drawText(fmt(totals.subtotal, currency), { x: 490, y: totalsY - 4, size: 10, font: helv, color: ink });
-      page.drawText(`VAT (${taxRate}%)`, { x: 360, y: totalsY - 22, size: 10, font: helv, color: muted });
-      page.drawText(fmt(totals.tax, currency), { x: 490, y: totalsY - 22, size: 10, font: helv, color: ink });
-      page.drawRectangle({ x: 350, y: totalsY - 50, width: 205, height: 22, color: rgb(0.1, 0.12, 0.16) });
-      page.drawText("TOTAL", { x: 360, y: totalsY - 44, size: 11, font: bold, color: rgb(1, 1, 1) });
-      page.drawText(fmt(totals.total, currency), { x: 490, y: totalsY - 44, size: 11, font: bold, color: rgb(1, 1, 1) });
-
-      // Notes
-      if (notes.trim()) {
-        page.drawText("NOTES", { x: 40, y: totalsY - 80, size: 9, font: bold, color: muted });
-        notes.split("\n").forEach((l, i) => page.drawText(l, { x: 40, y: totalsY - 96 - i * 13, size: 10, font: helv, color: ink }));
-      }
-
-      const bytes = await doc.save();
-      const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
-      if (cleanup.current) URL.revokeObjectURL(cleanup.current);
-      const url = URL.createObjectURL(blob);
-      cleanup.current = url;
-      setOutUrl(url);
+    } catch {
+      setWarn("Could not generate the PDF. Please remove unusual characters and try again.");
     } finally {
       setBusy(false);
     }
@@ -188,6 +211,7 @@ export function InvoiceGeneratorClient() {
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
             {busy ? "Building PDF…" : "Generate PDF"}
           </Button>
+          {warn && <p className="mt-2 text-xs text-amber-700">{warn}</p>}
           {outUrl && (
             <a href={outUrl} download={`${invoiceNo || "invoice"}.pdf`} className="mt-2 block">
               <Button size="sm" variant="outline" className="w-full"><Download className="h-3.5 w-3.5" /> Download invoice</Button>

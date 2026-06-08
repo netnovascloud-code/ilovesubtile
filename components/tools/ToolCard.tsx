@@ -6,7 +6,7 @@ import { DEFAULT_LOCALE, type Locale, localePath } from "@/lib/i18n/locales";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
 
-// Soft, tasteful per-tool tint (pastel on white, Stripe/Linear-like).
+// Soft, tasteful per-tool tint (pastel on white, Linear-like).
 const TONE_BG: Record<ToolDefinition["tone"], string> = {
   blue: "bg-brand-50 text-brand-600",
   indigo: "bg-indigo-50 text-indigo-600",

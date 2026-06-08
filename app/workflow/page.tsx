@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { WorkflowBuilderClient } from "@/components/tools/clients/WorkflowBuilderClient";
+import { ProGate } from "@/components/billing/ProGate";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
 
@@ -23,8 +24,12 @@ export default function Page() {
             Everything happens in your browser.
           </p>
         </div>
-        <div className="mx-auto mt-8 max-w-5xl rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
-          <WorkflowBuilderClient />
+        <div className="mx-auto mt-8 max-w-5xl">
+          <ProGate>
+            <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
+              <WorkflowBuilderClient />
+            </div>
+          </ProGate>
         </div>
       </div>
     </section>

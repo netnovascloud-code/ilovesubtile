@@ -5,6 +5,11 @@ import { SUPABASE_URL } from "@/lib/utils";
 const FN_MAP: Record<string, string> = {
   "subtitle-generator": "process-subtitles",
   "tiktok-subtitles": "process-subtitles",
+  "voice-to-text": "process-subtitles",
+  "citation-generator": "ai-process",
+  "ai-detector": "ai-process",
+  "context-examples": "ai-process",
+  "translate-document-with-layout": "ai-process",
   "translate-subtitles": "translate-subtitles",
   "batch-translate": "translate-subtitles",
   "youtube-chapters": "ai-process",
@@ -34,6 +39,13 @@ const FN_MAP: Record<string, string> = {
   "business-card-scanner": "ai-vision",
   "receipt-scanner": "ai-vision",
   "screenshot-to-code": "ai-vision",
+  "image-to-table": "ai-vision",
+  // Security tools — all handled by the security-tools function via `action`.
+  // (password-checker is pure client-side via HaveIBeenPwned — no backend.)
+  "email-checker": "security-tools",
+  "phishing-detector": "security-tools",
+  "url-scanner": "security-tools",
+  "ssl-checker": "security-tools",
 };
 
 export function toolFunction(slug: string): string | null {

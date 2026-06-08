@@ -9,6 +9,9 @@ import { AdProcessing } from "@/components/ads/AdProcessing";
 import { AI_TEXT_TOOLS, REPHRASE_STYLES, SUMMARY_FORMATS } from "@/lib/ai-text-tools";
 import { LANGUAGES } from "@/lib/languages";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { CharMeter } from "@/components/tools/CharMeter";
+import { useCharLimit } from "@/hooks/useCharLimit";
+import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
@@ -17,15 +20,17 @@ export function AiTextClient({ slug }: { slug: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [quotaReason, setQuotaReason] = useState<QuotaReason | null>(null);
 
   const [language, setLanguage] = useState("French");
   const [style, setStyle] = useState<string>(REPHRASE_STYLES[0]);
   const [format, setFormat] = useState<string>(SUMMARY_FORMATS[1].id);
+  const meter = useCharLimit(input);
 
   if (!def) return null;
 
   async function run() {
-    if (!input.trim() || loading) return;
+    if (!input.trim() || loading || meter.over) return;
     setLoading(true);
     setError(null);
     setOutput("");
@@ -38,10 +43,15 @@ export function AiTextClient({ slug }: { slug: string }) {
       const res = await callTool(slug, { task: def.task, text: input, options });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        if (data.error === "daily_limit" || data.error === "monthly_limit") {
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
         setError(
-          data.error === "daily_limit"
-            ? "You've hit today's free limit. Sign in or upgrade to Pro for unlimited use."
-            : data.error === "text_too_long"
+          data.error === "text_too_long"
             ? "That text is too long — please shorten it and try again."
             : "Something went wrong. Please try again in a moment.",
         );
@@ -116,8 +126,12 @@ export function AiTextClient({ slug }: { slug: string }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={def.inputPlaceholder}
-            className="h-64 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100"
+            className={cn(
+              "h-64 w-full resize-y rounded-lg border bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2",
+              meter.over ? "border-red-300 focus:border-red-400 focus:ring-red-100" : "border-ink-200 focus:border-brand-400 focus:ring-brand-100",
+            )}
           />
+          <CharMeter state={meter} />
         </div>
         <div>
           <div className="mb-1.5 flex items-center justify-between">
@@ -133,7 +147,7 @@ export function AiTextClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <Button onClick={run} disabled={!input.trim() || loading} size="lg">
+      <Button onClick={run} disabled={!input.trim() || loading || meter.over} size="lg">
         <Sparkles className="h-4 w-4" />
         {loading ? "Processing…" : def.cta}
       </Button>
@@ -145,6 +159,7 @@ export function AiTextClient({ slug }: { slug: string }) {
       )}
 
       {loading && <AdProcessing />}
+      <QuotaReachedModal reason={quotaReason} onClose={() => setQuotaReason(null)} />
     </div>
   );
 }

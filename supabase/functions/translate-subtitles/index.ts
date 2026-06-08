@@ -1,4 +1,4 @@
-// Konver — translate SRT/VTT via Mistral chat (JSON mode).
+// Konvertools — translate SRT/VTT via Mistral chat (JSON mode).
 //
 // Deploy: supabase functions deploy translate-subtitles
 // Secret:  supabase secrets set MISTRAL_API_KEY=...
@@ -11,12 +11,13 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konvertools.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -36,6 +37,53 @@ async function getCaller(req: Request) {
 }
 function getServiceClient() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+}
+
+// Server-side AI quota, mirroring ai-process / ai-vision. Free = rolling 24h on
+// profiles.daily_usage; Pro/Business = monthly (UTC). Without this a direct
+// authenticated POST bypasses the client-side cap and can drive unbounded paid
+// translation cost. Fail-open on any DB error so a counter glitch never blocks
+// a real (paying) user.
+const QUOTA_DAILY: Record<string, number> = { free: 3 };
+const QUOTA_MONTHLY: Record<string, number> = { pro: 500, business: 3000 };
+async function enforceAiQuota(
+  svc: ReturnType<typeof getServiceClient>,
+  userId: string,
+): Promise<{ ok: true } | { ok: false; status: number; body: Record<string, unknown> }> {
+  try {
+    const { data: prof } = await svc.from("profiles")
+      .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
+      .eq("id", userId).maybeSingle();
+    const plan = (prof?.plan as string) ?? "free";
+    if (plan === "free") {
+      const limit = QUOTA_DAILY.free;
+      const now = Date.now();
+      const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;
+      const overdue = now - resetAt > 24 * 3600 * 1000;
+      const current = overdue ? 0 : (prof?.daily_usage ?? 0);
+      if (current >= limit) {
+        return { ok: false, status: 429, body: { error: "daily_limit", plan, limit, used: current, remaining: 0, resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() } };
+      }
+      await svc.from("profiles").update({
+        daily_usage: current + 1,
+        usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
+      }).eq("id", userId);
+    } else {
+      const limit = QUOTA_MONTHLY[plan] ?? QUOTA_MONTHLY.pro;
+      const d = new Date();
+      const month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+      const used = prof?.monthly_ai_month === month ? (prof?.monthly_ai_usage ?? 0) : 0;
+      if (used >= limit) {
+        const next = new Date();
+        next.setUTCDate(1); next.setUTCHours(0, 0, 0, 0); next.setUTCMonth(next.getUTCMonth() + 1);
+        return { ok: false, status: 429, body: { error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() } };
+      }
+      await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+    }
+    return { ok: true };
+  } catch {
+    return { ok: true }; // fail-open — never block on a counter glitch
+  }
 }
 
 type Cue = { start: string; end: string; lines: string[] };
@@ -111,7 +159,13 @@ Deno.serve(async (req) => {
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");
   if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
 
+  // Reject anonymous callers BEFORE any expensive work. translate-subtitles
+  // requires a signed-in user (results live under a UID-namespaced storage
+  // folder). Checking here — rather than after the per-chunk Mistral calls —
+  // also stops anonymous holders of the public anon key from burning paid
+  // Mistral translation cost only to receive a 401 at the end.
   const caller = await getCaller(req);
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const supabase = getServiceClient();
 
   const form = await req.formData();
@@ -119,12 +173,19 @@ Deno.serve(async (req) => {
   const targetLang = String(form.get("target_lang") ?? "EN").toUpperCase();
   const sourceLang = form.get("source_lang") ? String(form.get("source_lang")).toUpperCase() : undefined;
   if (!(file instanceof File)) return json({ error: "no_file" }, { status: 400 });
+  // Subtitle files are text; cap at 10 MB so a malicious upload can't OOM the
+  // worker via the unbounded file.text() read below.
+  if (file.size > 10 * 1024 * 1024) return json({ error: "file_too_large", message: "Subtitle files are capped at 10 MB." }, { status: 413 });
   const targetLangName = LANG_NAMES[targetLang] ?? targetLang;
   const sourceLangName = sourceLang ? LANG_NAMES[sourceLang] ?? sourceLang : undefined;
 
   const raw = await file.text();
   const cues = parseSrt(raw);
   if (!cues.length) return json({ error: "empty_subtitle" }, { status: 400 });
+
+  // Enforce the AI quota server-side BEFORE the per-chunk Mistral calls.
+  const quota = await enforceAiQuota(supabase, caller.id);
+  if (!quota.ok) return json(quota.body, { status: quota.status });
 
   const CHUNK = 60;
   const cueTexts = cues.map((c) => c.lines.join("\n"));
@@ -142,10 +203,8 @@ Deno.serve(async (req) => {
   const translated = cues.map((c, i) => ({ ...c, lines: translatedAll[i].split("\n") }));
   const srt = toSrt(translated);
 
-  // Reject anonymous uploads (would otherwise share an "anonymous/" prefix)
-  // and sanitize the source filename to prevent storage-key injection like
+  // Sanitize the source filename to prevent storage-key injection like
   // `../../<victim-uuid>/file.srt`. See process-subtitles for rationale.
-  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const rawBase = (file.name ?? "translated").replace(/\.[^.]+$/, "");
   const safeBase = rawBase
     .toLowerCase()
@@ -155,15 +214,14 @@ Deno.serve(async (req) => {
   const filename = `${safeBase}.${targetLang.toLowerCase()}.srt`;
   const path = `${caller.id}/${crypto.randomUUID()}/${filename}`;
 
-  await supabase.storage.from("results").upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
+  const { error: upErr } = await supabase.storage.from("results").upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
+  if (upErr) return json({ error: "storage_failed", message: upErr.message }, { status: 502 });
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);
 
-  if (caller) {
-    await supabase.from("jobs").insert({
-      user_id: caller.id, tool: "translate-subtitles", status: "done",
-      output_file_url: signed?.signedUrl ?? null, language_target: targetLang,
-      completed_at: new Date().toISOString(),
-    });
-  }
+  await supabase.from("jobs").insert({
+    user_id: caller.id, tool: "translate-subtitles", status: "done",
+    output_file_url: signed?.signedUrl ?? null, language_target: targetLang,
+    completed_at: new Date().toISOString(),
+  });
   return json({ url: signed?.signedUrl, filename });
 });

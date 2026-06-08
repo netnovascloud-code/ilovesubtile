@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { Upload, X, Download, Loader2 } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
-import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 
@@ -35,6 +33,7 @@ export function PdfSplitClient() {
   async function loadFile(f: File) {
     setError(null); setResultUrl(null);
     try {
+      const { PDFDocument } = await import("pdf-lib");
       const src = await PDFDocument.load(await f.arrayBuffer(), { ignoreEncryption: true });
       setFile(f);
       setPageCount(src.getPageCount());
@@ -46,6 +45,7 @@ export function PdfSplitClient() {
     if (!file || busy) return;
     setBusy(true); setError(null); setResultUrl(null);
     try {
+      const [{ PDFDocument }, { default: JSZip }] = await Promise.all([import("pdf-lib"), import("jszip")]);
       const groups = parseRanges(ranges, pageCount);
       const src = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: true });
       const outs: { name: string; bytes: Uint8Array }[] = [];

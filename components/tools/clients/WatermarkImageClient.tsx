@@ -9,7 +9,7 @@ type Pos = "center" | "bottom-right" | "bottom-left" | "top-right" | "top-left" 
 
 export function WatermarkImageClient() {
   const [file, setFile] = useState<File | null>(null);
-  const [text, setText] = useState("© Konver");
+  const [text, setText] = useState("© Konvertools");
   const [color, setColor] = useState("#ffffff");
   const [opacity, setOpacity] = useState(0.5);
   const [sizePct, setSizePct] = useState(6);

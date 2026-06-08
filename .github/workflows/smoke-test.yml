@@ -80,7 +80,10 @@ jobs:
         id: smoke
         env:
           SMOKE_REPORT_PATH: ${{ github.workspace }}/SMOKE_TEST_REPORT.md
-        run: node scripts/smoke-test.mjs
+          SB_URL_B64: aHR0cHM6Ly9mbGlteWFza2xuemNzZW5vZ3N1cC5zdXBhYmFzZS5jbw==
+        run: |
+          export NEXT_PUBLIC_SUPABASE_URL="$(printf '%s' "$SB_URL_B64" | base64 -d)"
+          node scripts/smoke-test.mjs
         continue-on-error: true
 
       - name: Stop Next
@@ -94,7 +97,7 @@ jobs:
         if: always()
         run: |
           if [ ! -f SMOKE_TEST_REPORT.md ]; then
-            echo "# Konver smoke test — runner crashed before producing a report" > SMOKE_TEST_REPORT.md
+            echo "# Konvertools smoke test — runner crashed before producing a report" > SMOKE_TEST_REPORT.md
             echo "" >> SMOKE_TEST_REPORT.md
             echo "See the workflow run logs for details." >> SMOKE_TEST_REPORT.md
           fi

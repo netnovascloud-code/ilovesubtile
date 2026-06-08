@@ -49,7 +49,7 @@ const en: UiStrings = {
   home: {
     toolsTitle: "All subtitle tools",
     toolsLead: "Pick the tool you need. Drop your file. Get your result.",
-    whyTitle: "Why Konver?",
+    whyTitle: "Why Konvertools?",
     reasons: [
       { title: "Built for one thing", body: "Each tool does exactly one job. No bloated video editor, no learning curve." },
       { title: "Powered by AI", body: "State-of-the-art AI for transcription and translation — accurate in 30+ languages." },
@@ -57,11 +57,11 @@ const en: UiStrings = {
       { title: "Files auto-deleted", body: "We process and forget. Your media is gone within an hour." },
     ],
     upgradeTitle: "Need more? Go Pro for €12/month.",
-    upgradeBody: "Unlimited AI, Workflow Builder, batch up to 20 files, saved templates, files up to 1 GB, no ads, no watermark. Cancel anytime.",
+    upgradeBody: "500 AI conversions/month, Workflow Builder, batch up to 20 files, saved templates, files up to 1 GB, no ads, no watermark. Cancel anytime.",
     upgradeCtaPrimary: "See pricing",
     upgradeCtaSecondary: "Create free account",
     upgradeFeatures: [
-      "Unlimited AI",
+      "500 AI conversions/month",
       "Workflow Builder",
       "Batch up to 20 files",
       "Templates",
@@ -76,8 +76,8 @@ const en: UiStrings = {
     forever: "forever",
     footnote: "All prices in EUR, VAT excluded. Annual plans available at checkout (save ~30%).",
     free: { desc: "All browser tools, free & unlimited.", cta: "Get started" },
-    pro: { desc: "Unlimited AI · Workflow Builder · Batch 20 files.", cta: "Upgrade to Pro" },
-    business: { desc: "200 API credits/month · Unlimited batch · REST API.", cta: "Choose Business" },
+    pro: { desc: "500 AI conversions/month · Workflow Builder · Batch 20 files.", cta: "Upgrade to Pro" },
+    business: { desc: "3,000 AI conversions/month · REST API · 300 API credits.", cta: "Choose Business" },
   },
   tool: { howItWorks: "How it works", faq: "Frequently asked questions", breadcrumbHome: "Home", proBadge: "Pro feature" },
 };
@@ -93,7 +93,7 @@ const fr: UiStrings = {
   home: {
     toolsTitle: "Tous les outils de sous-titrage",
     toolsLead: "Choisissez votre outil. Déposez votre fichier. Récupérez le résultat.",
-    whyTitle: "Pourquoi Konver ?",
+    whyTitle: "Pourquoi Konvertools ?",
     reasons: [
       { title: "Une seule mission par outil", body: "Chaque outil fait exactement une chose. Pas d'éditeur vidéo lourd, pas de courbe d'apprentissage." },
       { title: "Propulsé par l'IA", body: "Une IA de pointe pour la transcription et la traduction — précise dans 30+ langues." },
@@ -101,11 +101,11 @@ const fr: UiStrings = {
       { title: "Fichiers auto-supprimés", body: "On traite et on oublie. Vos médias disparaissent en moins d'une heure." },
     ],
     upgradeTitle: "Besoin de plus ? Passez Pro pour 12 €/mois.",
-    upgradeBody: "IA illimitée, Workflow Builder, batch jusqu'à 20 fichiers, templates sauvegardés, fichiers jusqu’à 1 Go, sans pub, sans filigrane. Annulable à tout moment.",
+    upgradeBody: "500 conversions IA/mois, Workflow Builder, batch jusqu'à 20 fichiers, templates sauvegardés, fichiers jusqu’à 1 Go, sans pub, sans filigrane. Annulable à tout moment.",
     upgradeCtaPrimary: "Voir les tarifs",
     upgradeCtaSecondary: "Créer un compte gratuit",
     upgradeFeatures: [
-      "IA illimitée",
+      "500 conversions IA/mois",
       "Workflow Builder",
       "Batch jusqu'à 20 fichiers",
       "Templates",
@@ -120,8 +120,8 @@ const fr: UiStrings = {
     forever: "pour toujours",
     footnote: "Tous les prix en EUR, hors TVA. Plans annuels disponibles au paiement (économisez ~30 %).",
     free: { desc: "Tous les outils navigateur, gratuits et illimités.", cta: "Commencer" },
-    pro: { desc: "IA illimitée · Workflow Builder · Batch 20 fichiers.", cta: "Passer à Pro" },
-    business: { desc: "200 crédits API/mois · Batch illimité · API REST.", cta: "Choisir Business" },
+    pro: { desc: "500 conversions IA/mois · Workflow Builder · Batch 20 fichiers.", cta: "Passer à Pro" },
+    business: { desc: "3 000 conversions IA/mois · API REST · 300 crédits API.", cta: "Choisir Business" },
   },
   tool: { howItWorks: "Comment ça marche", faq: "Questions fréquentes", breadcrumbHome: "Accueil", proBadge: "Fonction Pro" },
 };
@@ -137,7 +137,7 @@ const es: UiStrings = {
   home: {
     toolsTitle: "Todas las herramientas de subtítulos",
     toolsLead: "Elige la herramienta. Suelta tu archivo. Descarga el resultado.",
-    whyTitle: "¿Por qué Konver?",
+    whyTitle: "¿Por qué Konvertools?",
     reasons: [
       { title: "Una sola misión por herramienta", body: "Cada herramienta hace exactamente una cosa. Sin editor de vídeo pesado, sin curva de aprendizaje." },
       { title: "Impulsado por AI", body: "AI transcribe, AI traduce — preciso en más de 30 idiomas." },
@@ -145,11 +145,11 @@ const es: UiStrings = {
       { title: "Archivos auto-eliminados", body: "Procesamos y olvidamos. Tu material desaparece en menos de una hora." },
     ],
     upgradeTitle: "¿Necesitas más? Pasa a Pro por 12 €/mes.",
-    upgradeBody: "Usos ilimitados, archivos hasta 1 GB, sin anuncios, sin marca de agua, todos los idiomas. Cancela cuando quieras.",
+    upgradeBody: "500 conversiones IA/mes, archivos hasta 1 GB, sin anuncios, sin marca de agua, todos los idiomas. Cancela cuando quieras.",
     upgradeCtaPrimary: "Ver precios",
     upgradeCtaSecondary: "Crear cuenta gratis",
     upgradeFeatures: [
-      "Usos ilimitados",
+      "500 conversiones IA/mes",
       "Archivos hasta 1 GB",
       "Sin anuncios, sin marca de agua",
       "Todos los idiomas de traducción",
@@ -164,8 +164,8 @@ const es: UiStrings = {
     forever: "para siempre",
     footnote: "Todos los precios en EUR, IVA no incluido. Planes anuales disponibles en pago (ahorra ~30 %).",
     free: { desc: "Perfecto para usos puntuales.", cta: "Empezar" },
-    pro: { desc: "Herramientas ilimitadas, sin anuncios, sin marca de agua.", cta: "Pasar a Pro" },
-    business: { desc: "Acceso API y plazas de equipo.", cta: "Elegir Business" },
+    pro: { desc: "500 conversiones IA/mes · Workflow Builder · Lote 20 archivos.", cta: "Pasar a Pro" },
+    business: { desc: "3.000 conversiones IA/mes · API REST · 300 créditos API.", cta: "Elegir Business" },
   },
   tool: { howItWorks: "Cómo funciona", faq: "Preguntas frecuentes", breadcrumbHome: "Inicio", proBadge: "Función Pro" },
 };
@@ -181,7 +181,7 @@ const pt: UiStrings = {
   home: {
     toolsTitle: "Todas as ferramentas de legendas",
     toolsLead: "Escolha a ferramenta. Solte seu arquivo. Baixe o resultado.",
-    whyTitle: "Por que Konver?",
+    whyTitle: "Por que Konvertools?",
     reasons: [
       { title: "Uma só missão por ferramenta", body: "Cada ferramenta faz exatamente uma coisa. Sem editor de vídeo pesado, sem curva de aprendizado." },
       { title: "Powered by AI", body: "AI transcreve, AI traduz — preciso em mais de 30 idiomas." },
@@ -189,11 +189,11 @@ const pt: UiStrings = {
       { title: "Arquivos auto-deletados", body: "Processamos e esquecemos. Sua mídia some em menos de uma hora." },
     ],
     upgradeTitle: "Precisa de mais? Vá Pro por €12/mês.",
-    upgradeBody: "Usos ilimitados, arquivos até 1 GB, sem anúncios, sem marca d'água, todos os idiomas. Cancele quando quiser.",
+    upgradeBody: "500 conversões IA/mês, arquivos até 1 GB, sem anúncios, sem marca d'água, todos os idiomas. Cancele quando quiser.",
     upgradeCtaPrimary: "Ver preços",
     upgradeCtaSecondary: "Criar conta grátis",
     upgradeFeatures: [
-      "Usos ilimitados",
+      "500 conversiones IA/mes",
       "Arquivos até 1 GB",
       "Sem anúncios, sem marca d'água",
       "Todos os idiomas de tradução",
@@ -208,8 +208,8 @@ const pt: UiStrings = {
     forever: "para sempre",
     footnote: "Todos os preços em EUR, IVA não incluído. Planos anuais disponíveis no checkout (economize ~30 %).",
     free: { desc: "Ideal para usos pontuais.", cta: "Começar" },
-    pro: { desc: "Ferramentas ilimitadas, sem anúncios, sem marca d'água.", cta: "Ir para Pro" },
-    business: { desc: "Acesso à API e assentos em equipe.", cta: "Escolher Business" },
+    pro: { desc: "500 conversões IA/mês · Workflow Builder · Lote 20 arquivos.", cta: "Ir para Pro" },
+    business: { desc: "3.000 conversões IA/mês · API REST · 300 créditos API.", cta: "Escolher Business" },
   },
   tool: { howItWorks: "Como funciona", faq: "Perguntas frequentes", breadcrumbHome: "Início", proBadge: "Recurso Pro" },
 };
@@ -225,7 +225,7 @@ const de: UiStrings = {
   home: {
     toolsTitle: "Alle Untertitel-Tools",
     toolsLead: "Tool wählen. Datei hochladen. Ergebnis herunterladen.",
-    whyTitle: "Warum Konver?",
+    whyTitle: "Warum Konvertools?",
     reasons: [
       { title: "Eine Aufgabe pro Tool", body: "Jedes Tool macht genau eine Sache. Kein überladener Video-Editor, keine Lernkurve." },
       { title: "Powered by AI", body: "AI transkribiert, AI übersetzt — präzise in 30+ Sprachen." },
@@ -233,11 +233,11 @@ const de: UiStrings = {
       { title: "Dateien werden gelöscht", body: "Wir verarbeiten und vergessen. Deine Medien sind binnen einer Stunde weg." },
     ],
     upgradeTitle: "Mehr nötig? Pro für 12 €/Monat.",
-    upgradeBody: "Unbegrenzte Nutzung, Dateien bis 1 GB, keine Werbung, kein Wasserzeichen, alle Sprachen. Jederzeit kündbar.",
+    upgradeBody: "500 KI-Konvertierungen/Monat, Dateien bis 1 GB, keine Werbung, kein Wasserzeichen, alle Sprachen. Jederzeit kündbar.",
     upgradeCtaPrimary: "Preise ansehen",
     upgradeCtaSecondary: "Kostenloses Konto erstellen",
     upgradeFeatures: [
-      "Unbegrenzte Nutzung",
+      "500 KI-Konvertierungen/Monat",
       "Dateien bis 1 GB",
       "Keine Werbung, kein Wasserzeichen",
       "Alle Übersetzungssprachen",
@@ -252,8 +252,8 @@ const de: UiStrings = {
     forever: "für immer",
     footnote: "Alle Preise in EUR, ohne MwSt. Jahrespläne im Checkout verfügbar (spare ~30 %).",
     free: { desc: "Ideal für gelegentliche Nutzung.", cta: "Loslegen" },
-    pro: { desc: "Unbegrenzte Tools, keine Werbung, kein Wasserzeichen.", cta: "Auf Pro upgraden" },
-    business: { desc: "API-Zugang und Team-Sitze.", cta: "Business wählen" },
+    pro: { desc: "500 KI-Konvertierungen/Monat · Workflow Builder · Batch 20 Dateien.", cta: "Auf Pro upgraden" },
+    business: { desc: "3.000 KI-Konvertierungen/Monat · REST-API · 300 API-Credits.", cta: "Business wählen" },
   },
   tool: { howItWorks: "So funktioniert's", faq: "Häufige Fragen", breadcrumbHome: "Startseite", proBadge: "Pro-Funktion" },
 };
@@ -269,7 +269,7 @@ const it: UiStrings = {
   home: {
     toolsTitle: "Tutti gli strumenti per sottotitoli",
     toolsLead: "Scegli lo strumento. Carica il file. Scarica il risultato.",
-    whyTitle: "Perché Konver?",
+    whyTitle: "Perché Konvertools?",
     reasons: [
       { title: "Una missione per strumento", body: "Ogni strumento fa esattamente una cosa. Niente editor video pesante, nessuna curva di apprendimento." },
       { title: "Powered by AI", body: "AI per la trascrizione, AI per la traduzione — preciso in 30+ lingue." },
@@ -277,11 +277,11 @@ const it: UiStrings = {
       { title: "File auto-eliminati", body: "Elaboriamo e dimentichiamo. I tuoi file spariscono entro un'ora." },
     ],
     upgradeTitle: "Vuoi di più? Passa a Pro per 12 €/mese.",
-    upgradeBody: "Utilizzi illimitati, file fino a 1 GB, niente pubblicità, niente filigrana, tutte le lingue. Disdetta in qualsiasi momento.",
+    upgradeBody: "500 conversioni IA/mese, file fino a 1 GB, niente pubblicità, niente filigrana, tutte le lingue. Disdetta in qualsiasi momento.",
     upgradeCtaPrimary: "Vedi i prezzi",
     upgradeCtaSecondary: "Crea un account gratuito",
     upgradeFeatures: [
-      "Utilizzi illimitati",
+      "500 conversioni IA/mese",
       "File fino a 1 GB",
       "Niente pubblicità, niente filigrana",
       "Tutte le lingue di traduzione",
@@ -296,8 +296,8 @@ const it: UiStrings = {
     forever: "per sempre",
     footnote: "Tutti i prezzi in EUR, IVA esclusa. Piani annuali al checkout (risparmia ~30 %).",
     free: { desc: "Perfetto per usi sporadici.", cta: "Inizia" },
-    pro: { desc: "Strumenti illimitati, niente pubblicità, niente filigrana.", cta: "Passa a Pro" },
-    business: { desc: "Accesso API e posti per team.", cta: "Scegli Business" },
+    pro: { desc: "500 conversioni IA/mese · Workflow Builder · Batch 20 file.", cta: "Passa a Pro" },
+    business: { desc: "3.000 conversioni IA/mese · API REST · 300 crediti API.", cta: "Scegli Business" },
   },
   tool: { howItWorks: "Come funziona", faq: "Domande frequenti", breadcrumbHome: "Home", proBadge: "Funzione Pro" },
 };
@@ -313,7 +313,7 @@ const nl: UiStrings = {
   home: {
     toolsTitle: "Alle ondertitel-tools",
     toolsLead: "Kies je tool. Upload je bestand. Download het resultaat.",
-    whyTitle: "Waarom Konver?",
+    whyTitle: "Waarom Konvertools?",
     reasons: [
       { title: "Eén taak per tool", body: "Elke tool doet precies één ding. Geen overladen video-editor, geen leercurve." },
       { title: "Powered by AI", body: "AI transcribeert, AI vertaalt — nauwkeurig in 30+ talen." },
@@ -321,11 +321,11 @@ const nl: UiStrings = {
       { title: "Bestanden automatisch verwijderd", body: "We verwerken en vergeten. Je media is binnen een uur weg." },
     ],
     upgradeTitle: "Meer nodig? Ga Pro voor €12/maand.",
-    upgradeBody: "Onbeperkt gebruik, bestanden tot 1 GB, geen advertenties, geen watermerk, alle talen. Altijd opzegbaar.",
+    upgradeBody: "500 AI-conversies/maand, bestanden tot 1 GB, geen advertenties, geen watermerk, alle talen. Altijd opzegbaar.",
     upgradeCtaPrimary: "Bekijk prijzen",
     upgradeCtaSecondary: "Maak een gratis account",
     upgradeFeatures: [
-      "Onbeperkt gebruik",
+      "500 AI-conversies/maand",
       "Bestanden tot 1 GB",
       "Geen advertenties, geen watermerk",
       "Alle vertaaltalen",
@@ -340,8 +340,8 @@ const nl: UiStrings = {
     forever: "voor altijd",
     footnote: "Alle prijzen in EUR, exclusief btw. Jaarplannen beschikbaar bij afrekenen (bespaar ~30 %).",
     free: { desc: "Ideaal voor losse klussen.", cta: "Aan de slag" },
-    pro: { desc: "Onbeperkte tools, geen advertenties, geen watermerk.", cta: "Upgrade naar Pro" },
-    business: { desc: "API-toegang en teamzitplaatsen.", cta: "Kies Business" },
+    pro: { desc: "500 AI-conversies/maand · Workflow Builder · Batch 20 bestanden.", cta: "Upgrade naar Pro" },
+    business: { desc: "3.000 AI-conversies/maand · REST API · 300 API-credits.", cta: "Kies Business" },
   },
   tool: { howItWorks: "Zo werkt het", faq: "Veelgestelde vragen", breadcrumbHome: "Home", proBadge: "Pro-functie" },
 };
@@ -357,7 +357,7 @@ const ja: UiStrings = {
   home: {
     toolsTitle: "すべての字幕ツール",
     toolsLead: "ツールを選んで、ファイルをドロップして、結果を受け取る。",
-    whyTitle: "Konverを選ぶ理由",
+    whyTitle: "Konvertoolsを選ぶ理由",
     reasons: [
       { title: "1ツール1機能", body: "各ツールはひとつの仕事だけをこなします。重い動画エディタも学習コストも不要。" },
       { title: "AI搭載", body: "AIが文字起こし、AIが翻訳を担当 — 30以上の言語で高精度。" },
@@ -365,11 +365,11 @@ const ja: UiStrings = {
       { title: "ファイルは自動削除", body: "処理したら忘れます。1時間以内にメディアは消えます。" },
     ],
     upgradeTitle: "もっと必要？月12ユーロでPro。",
-    upgradeBody: "無制限の利用、1 GBまでのファイル、広告なし、透かしなし、すべての言語。いつでも解約可。",
+    upgradeBody: "月 500 回の AI 変換、1 GBまでのファイル、広告なし、透かしなし、すべての言語。いつでも解約可。",
     upgradeCtaPrimary: "料金を見る",
     upgradeCtaSecondary: "無料アカウントを作成",
     upgradeFeatures: [
-      "無制限の利用",
+      "月 500 回の AI 変換",
       "ファイル最大1 GB",
       "広告なし・透かしなし",
       "すべての翻訳言語",
@@ -384,8 +384,8 @@ const ja: UiStrings = {
     forever: "永久",
     footnote: "価格はすべてEUR、税抜き。年間プランはチェックアウトで利用可（約30%お得）。",
     free: { desc: "単発の用途に最適。", cta: "始める" },
-    pro: { desc: "無制限のツール、広告なし、透かしなし。", cta: "Proにアップグレード" },
-    business: { desc: "APIアクセスとチームシート。", cta: "Businessを選ぶ" },
+    pro: { desc: "月 500 回の AI 変換 · Workflow Builder · 20 ファイル一括", cta: "Proにアップグレード" },
+    business: { desc: "月 3,000 回の AI 変換 · REST API · 300 API クレジット", cta: "Businessを選ぶ" },
   },
   tool: { howItWorks: "使い方", faq: "よくある質問", breadcrumbHome: "ホーム", proBadge: "Pro機能" },
 };
@@ -401,7 +401,7 @@ const zh: UiStrings = {
   home: {
     toolsTitle: "所有字幕工具",
     toolsLead: "选择工具，上传文件，下载结果。",
-    whyTitle: "为什么选择 Konver？",
+    whyTitle: "为什么选择 Konvertools？",
     reasons: [
       { title: "每个工具只做一件事", body: "每个工具只完成一项任务。没有臃肿的视频编辑器，没有学习曲线。" },
       { title: "由 AI 驱动", body: "AI 负责转录,AI 负责翻译 — 在 30 多种语言中保持准确。" },
@@ -409,11 +409,11 @@ const zh: UiStrings = {
       { title: "文件自动删除", body: "处理完即遗忘。您的媒体将在一小时内消失。" },
     ],
     upgradeTitle: "需要更多？每月 12 欧元升级 Pro。",
-    upgradeBody: "无限使用、最高 1 GB 文件、无广告、无水印、所有语言。随时取消。",
+    upgradeBody: "每月 500 次 AI 转换、最高 1 GB 文件、无广告、无水印、所有语言。随时取消。",
     upgradeCtaPrimary: "查看价格",
     upgradeCtaSecondary: "创建免费帐户",
     upgradeFeatures: [
-      "无限工具使用",
+      "每月 500 次 AI 转换",
       "最大 1 GB 文件",
       "无广告、无水印",
       "所有翻译语言",
@@ -428,8 +428,8 @@ const zh: UiStrings = {
     forever: "永久",
     footnote: "所有价格以欧元计,不含增值税。年付方案在结账时可选(节省约 30%)。",
     free: { desc: "适合一次性使用。", cta: "开始使用" },
-    pro: { desc: "无限工具、无广告、无水印。", cta: "升级到 Pro" },
-    business: { desc: "API 访问与团队席位。", cta: "选择 Business" },
+    pro: { desc: "每月 500 次 AI 转换 · Workflow Builder · 批量 20 个文件", cta: "升级到 Pro" },
+    business: { desc: "每月 3,000 次 AI 转换 · REST API · 300 API 额度", cta: "选择 Business" },
   },
   tool: { howItWorks: "工作原理", faq: "常见问题", breadcrumbHome: "首页", proBadge: "Pro 功能" },
 };
@@ -445,7 +445,7 @@ const ko: UiStrings = {
   home: {
     toolsTitle: "모든 자막 도구",
     toolsLead: "도구를 선택하고, 파일을 올리고, 결과를 받으세요.",
-    whyTitle: "왜 Konver인가요?",
+    whyTitle: "왜 Konvertools인가요?",
     reasons: [
       { title: "도구당 한 가지 작업", body: "각 도구는 정확히 한 가지 일만 합니다. 무거운 영상 편집기도, 학습 곡선도 없습니다." },
       { title: "AI 기반", body: "AI가 전사, AI가 번역 — 30개 이상의 언어에서 정확합니다." },
@@ -453,11 +453,11 @@ const ko: UiStrings = {
       { title: "파일 자동 삭제", body: "처리 후 잊어버립니다. 미디어는 1시간 안에 사라집니다." },
     ],
     upgradeTitle: "더 필요하신가요? 월 12유로로 Pro.",
-    upgradeBody: "무제한 사용, 1 GB까지의 파일, 광고 없음, 워터마크 없음, 모든 언어. 언제든 해지 가능.",
+    upgradeBody: "월 500회 AI 변환, 1 GB까지의 파일, 광고 없음, 워터마크 없음, 모든 언어. 언제든 해지 가능.",
     upgradeCtaPrimary: "가격 보기",
     upgradeCtaSecondary: "무료 계정 만들기",
     upgradeFeatures: [
-      "무제한 사용",
+      "월 500회 AI 변환",
       "최대 1 GB 파일",
       "광고 없음, 워터마크 없음",
       "모든 번역 언어",
@@ -472,8 +472,8 @@ const ko: UiStrings = {
     forever: "영구",
     footnote: "모든 가격은 EUR이며 부가세 별도. 결제 시 연간 요금제 선택 가능(약 30% 절약).",
     free: { desc: "일회성 사용에 적합.", cta: "시작하기" },
-    pro: { desc: "무제한 도구, 광고 없음, 워터마크 없음.", cta: "Pro로 업그레이드" },
-    business: { desc: "API 액세스 및 팀 좌석.", cta: "Business 선택" },
+    pro: { desc: "월 500회 AI 변환 · Workflow Builder · 20개 일괄 처리", cta: "Pro로 업그레이드" },
+    business: { desc: "월 3,000회 AI 변환 · REST API · 300 API 크레딧", cta: "Business 선택" },
   },
   tool: { howItWorks: "작동 방식", faq: "자주 묻는 질문", breadcrumbHome: "홈", proBadge: "Pro 기능" },
 };
@@ -489,7 +489,7 @@ const ar: UiStrings = {
   home: {
     toolsTitle: "كل أدوات الترجمة",
     toolsLead: "اختر الأداة. ارفع الملف. حمّل النتيجة.",
-    whyTitle: "لماذا Konver؟",
+    whyTitle: "لماذا Konvertools؟",
     reasons: [
       { title: "مهمة واحدة لكل أداة", body: "كل أداة تقوم بمهمة واحدة بالضبط. لا محرر فيديو ثقيل، لا منحنى تعلم." },
       { title: "مدعوم بـ AI", body: "AI للتفريغ، AI للترجمة — دقيق في أكثر من 30 لغة." },
@@ -497,11 +497,11 @@ const ar: UiStrings = {
       { title: "حذف تلقائي للملفات", body: "نعالج ثم ننسى. تختفي وسائطك خلال ساعة." },
     ],
     upgradeTitle: "تحتاج أكثر؟ Pro بـ 12 يورو/شهر.",
-    upgradeBody: "استخدام غير محدود، ملفات حتى 1 جيجا، بدون إعلانات، بدون علامة مائية، كل اللغات. إلغاء في أي وقت.",
+    upgradeBody: "500 تحويل ذكاء اصطناعي/شهر، ملفات حتى 1 جيجا، بدون إعلانات، بدون علامة مائية، كل اللغات. إلغاء في أي وقت.",
     upgradeCtaPrimary: "اعرض الأسعار",
     upgradeCtaSecondary: "إنشاء حساب مجاني",
     upgradeFeatures: [
-      "استخدام غير محدود",
+      "500 تحويل ذكاء اصطناعي/شهر",
       "ملفات حتى 1 جيجا",
       "بدون إعلانات، بدون علامة مائية",
       "كل لغات الترجمة",
@@ -516,8 +516,8 @@ const ar: UiStrings = {
     forever: "للأبد",
     footnote: "كل الأسعار باليورو، بدون ضريبة القيمة المضافة. خطط سنوية متاحة عند الدفع (وفّر ~30%).",
     free: { desc: "مثالي للاستخدام العرضي.", cta: "ابدأ" },
-    pro: { desc: "أدوات بلا حدود، بدون إعلانات، بدون علامة مائية.", cta: "الترقية إلى Pro" },
-    business: { desc: "وصول إلى الـ API ومقاعد للفريق.", cta: "اختر Business" },
+    pro: { desc: "500 تحويل ذكاء اصطناعي/شهر · Workflow Builder · 20 ملفًا دفعة", cta: "الترقية إلى Pro" },
+    business: { desc: "3000 تحويل/شهر · REST API · 300 رصيد API", cta: "اختر Business" },
   },
   tool: { howItWorks: "كيف يعمل", faq: "الأسئلة الشائعة", breadcrumbHome: "الرئيسية", proBadge: "ميزة Pro" },
 };
@@ -533,7 +533,7 @@ const ru: UiStrings = {
   home: {
     toolsTitle: "Все инструменты для субтитров",
     toolsLead: "Выберите инструмент. Загрузите файл. Скачайте результат.",
-    whyTitle: "Почему Konver?",
+    whyTitle: "Почему Konvertools?",
     reasons: [
       { title: "Один инструмент — одна задача", body: "Каждый инструмент делает ровно одно дело. Никаких громоздких редакторов, никакого обучения." },
       { title: "На базе AI", body: "AI транскрибирует, AI переводит — точно в 30+ языках." },
@@ -541,11 +541,11 @@ const ru: UiStrings = {
       { title: "Файлы удаляются автоматически", body: "Обработали и забыли. Медиа исчезает в течение часа." },
     ],
     upgradeTitle: "Нужно больше? Pro за 12 €/мес.",
-    upgradeBody: "Безлимитный запуск, файлы до 1 ГБ, без рекламы, без вотермарки, все языки. Отмена в любой момент.",
+    upgradeBody: "500 ИИ-конвертаций/мес, файлы до 1 ГБ, без рекламы, без вотермарки, все языки. Отмена в любой момент.",
     upgradeCtaPrimary: "Посмотреть тарифы",
     upgradeCtaSecondary: "Создать бесплатный аккаунт",
     upgradeFeatures: [
-      "Безлимитный запуск",
+      "500 ИИ-конвертаций/мес",
       "Файлы до 1 ГБ",
       "Без рекламы, без вотермарки",
       "Все языки перевода",
@@ -560,8 +560,8 @@ const ru: UiStrings = {
     forever: "навсегда",
     footnote: "Все цены в EUR, без НДС. Годовые тарифы при оплате (экономия ~30%).",
     free: { desc: "Подходит для разовых задач.", cta: "Начать" },
-    pro: { desc: "Безлимит инструментов, без рекламы и вотермарок.", cta: "Перейти на Pro" },
-    business: { desc: "Доступ к API и места для команды.", cta: "Выбрать Business" },
+    pro: { desc: "500 ИИ-конвертаций/мес · Workflow Builder · Пакет 20 файлов.", cta: "Перейти на Pro" },
+    business: { desc: "3000 ИИ-конвертаций/мес · REST API · 300 API-кредитов.", cta: "Выбрать Business" },
   },
   tool: { howItWorks: "Как это работает", faq: "Частые вопросы", breadcrumbHome: "Главная", proBadge: "Pro-функция" },
 };
@@ -577,7 +577,7 @@ const hi: UiStrings = {
   home: {
     toolsTitle: "सभी सबटाइटल टूल",
     toolsLead: "टूल चुनें। फ़ाइल अपलोड करें। परिणाम डाउनलोड करें।",
-    whyTitle: "Konver क्यों?",
+    whyTitle: "Konvertools क्यों?",
     reasons: [
       { title: "एक टूल, एक काम", body: "हर टूल ठीक एक काम करता है। न भारी वीडियो एडिटर, न सीखने की ज़रूरत।" },
       { title: "AI द्वारा संचालित", body: "AI ट्रांसक्रिप्शन करता है, AI अनुवाद करता है — 30+ भाषाओं में सटीक।" },
@@ -585,11 +585,11 @@ const hi: UiStrings = {
       { title: "फ़ाइलें स्वतः हटा दी जाती हैं", body: "हम प्रोसेस करते हैं और भूल जाते हैं। आपका मीडिया एक घंटे में हट जाता है।" },
     ],
     upgradeTitle: "और चाहिए? €12/माह में Pro लें।",
-    upgradeBody: "असीमित उपयोग, 1 GB तक की फ़ाइलें, कोई विज्ञापन नहीं, कोई वॉटरमार्क नहीं, हर भाषा। कभी भी रद्द करें।",
+    upgradeBody: "500 AI रूपांतरण/माह, 1 GB तक की फ़ाइलें, कोई विज्ञापन नहीं, कोई वॉटरमार्क नहीं, हर भाषा। कभी भी रद्द करें।",
     upgradeCtaPrimary: "क़ीमतें देखें",
     upgradeCtaSecondary: "मुफ़्त खाता बनाएँ",
     upgradeFeatures: [
-      "असीमित उपयोग",
+      "500 AI रूपांतरण/माह",
       "1 GB तक की फ़ाइलें",
       "कोई विज्ञापन नहीं, कोई वॉटरमार्क नहीं",
       "सभी अनुवाद भाषाएँ",
@@ -604,16 +604,281 @@ const hi: UiStrings = {
     forever: "हमेशा के लिए",
     footnote: "सभी क़ीमतें EUR में, VAT शामिल नहीं। चेकआउट पर वार्षिक प्लान (~30% बचत)।",
     free: { desc: "एकल उपयोग के लिए बढ़िया।", cta: "शुरू करें" },
-    pro: { desc: "असीमित टूल, कोई विज्ञापन नहीं, कोई वॉटरमार्क नहीं।", cta: "Pro में अपग्रेड करें" },
-    business: { desc: "API एक्सेस और टीम सीटें।", cta: "Business चुनें" },
+    pro: { desc: "500 AI रूपांतरण/माह · Workflow Builder · 20 फ़ाइलें बैच", cta: "Pro में अपग्रेड करें" },
+    business: { desc: "3,000 AI रूपांतरण/माह · REST API · 300 API क्रेडिट", cta: "Business चुनें" },
   },
   tool: { howItWorks: "यह कैसे काम करता है", faq: "अक्सर पूछे जाने वाले प्रश्न", breadcrumbHome: "होम", proBadge: "Pro सुविधा" },
 };
 
-// Partial<>: new locales added to the type don't need an entry here yet —
-// they fall back to English via getStrings() until someone localises them.
+const tr: UiStrings = {
+  hero: {
+    badge: "Ücretsiz · Kayıt gerekmez",
+    title: "Dosya, görüntü, ses, video ve metni çevrimiçi dönüştürün",
+    subtitle: "Belgeler, görüntüler, ses, video, kod ve metin için 80+ ücretsiz ve hızlı çevrimiçi araç — çoğu doğrudan tarayıcınızda çalışır. Kayıt yok.",
+    ctaPrimary: "Üreticiyle başla",
+    ctaSecondary: "Tüm araçları gör",
+  },
+  home: {
+    toolsTitle: "Tüm araçlar",
+    toolsLead: "İhtiyacınız olan aracı seçin. Dosyanızı bırakın. Sonucu alın.",
+    whyTitle: "Neden Konvertools?",
+    reasons: [
+      { title: "Tek bir iş için tasarlandı", body: "Her araç tam olarak bir işi yapar. Şişkin video düzenleyici yok, öğrenme eğrisi yok." },
+      { title: "AI destekli", body: "Transkripsiyon ve çeviri için son teknoloji AI — 30+ dilde doğru." },
+      { title: "30+ dil", body: "Altyazıları satır satır çevirin — zaman damgaları korunur." },
+      { title: "Dosyalar otomatik silinir", body: "İşler ve unuturuz. Medyanız bir saat içinde silinir." },
+    ],
+    upgradeTitle: "Daha fazlası mı lazım? Ayda 12 €'ya Pro'ya geçin.",
+    upgradeBody: "Aylık 500 AI dönüşümü, Workflow Builder, 20 dosyaya kadar toplu işlem, kayıtlı şablonlar, 1 GB'a kadar dosya, reklamsız, filigransız. İstediğiniz zaman iptal edin.",
+    upgradeCtaPrimary: "Fiyatları gör",
+    upgradeCtaSecondary: "Ücretsiz hesap oluştur",
+    upgradeFeatures: ["Aylık 500 AI dönüşümü", "Workflow Builder", "20 dosyaya kadar toplu işlem", "Şablonlar", "Reklamsız, filigransız"],
+  },
+  pricing: {
+    title: "Basit, dürüst fiyatlandırma",
+    lead: "Herkes için ücretsiz. Daha fazlasına ihtiyaç duyduğunuzda Pro'ya geçin. İstediğiniz zaman iptal edin.",
+    mostPopular: "En popüler",
+    perMonth: "aylık",
+    forever: "sonsuza dek",
+    footnote: "Tüm fiyatlar EUR cinsinden, KDV hariç. Yıllık planlar ödemede mevcut (~%30 tasarruf).",
+    free: { desc: "Tüm tarayıcı araçları, ücretsiz ve sınırsız.", cta: "Başla" },
+    pro: { desc: "Aylık 500 AI dönüşümü · Workflow Builder · 20 dosya toplu işlem.", cta: "Pro'ya yükselt" },
+    business: { desc: "Aylık 3.000 AI dönüşümü · REST API · 300 API kredisi.", cta: "Business'ı seç" },
+  },
+  tool: { howItWorks: "Nasıl çalışır", faq: "Sık sorulan sorular", breadcrumbHome: "Ana sayfa", proBadge: "Pro özelliği" },
+};
+
+const id: UiStrings = {
+  hero: {
+    badge: "Gratis · Tanpa pendaftaran",
+    title: "Konversi file, gambar, audio, video & teks online",
+    subtitle: "80+ alat online gratis dan cepat untuk dokumen, gambar, audio, video, kode, dan teks — kebanyakan berjalan langsung di browser Anda. Tanpa pendaftaran.",
+    ctaPrimary: "Mulai dengan generator",
+    ctaSecondary: "Lihat semua alat",
+  },
+  home: {
+    toolsTitle: "Semua alat",
+    toolsLead: "Pilih alat yang Anda butuhkan. Letakkan file Anda. Dapatkan hasilnya.",
+    whyTitle: "Mengapa Konvertools?",
+    reasons: [
+      { title: "Dibuat untuk satu hal", body: "Setiap alat melakukan tepat satu pekerjaan. Tanpa editor video yang berat, tanpa kurva belajar." },
+      { title: "Didukung AI", body: "AI canggih untuk transkripsi dan terjemahan — akurat dalam 30+ bahasa." },
+      { title: "30+ bahasa", body: "Terjemahkan subtitle baris demi baris — stempel waktu tetap utuh." },
+      { title: "File terhapus otomatis", body: "Kami memproses lalu melupakan. Media Anda hilang dalam satu jam." },
+    ],
+    upgradeTitle: "Butuh lebih? Pro seharga €12/bulan.",
+    upgradeBody: "500 konversi AI/bulan, Workflow Builder, batch hingga 20 file, template tersimpan, file hingga 1 GB, tanpa iklan, tanpa watermark. Batalkan kapan saja.",
+    upgradeCtaPrimary: "Lihat harga",
+    upgradeCtaSecondary: "Buat akun gratis",
+    upgradeFeatures: ["500 konversi AI/bulan", "Workflow Builder", "Batch hingga 20 file", "Template", "Tanpa iklan, tanpa watermark"],
+  },
+  pricing: {
+    title: "Harga sederhana dan jujur",
+    lead: "Gratis untuk semua. Pro saat Anda butuh lebih. Batalkan kapan saja.",
+    mostPopular: "Paling populer",
+    perMonth: "per bulan",
+    forever: "selamanya",
+    footnote: "Semua harga dalam EUR, belum termasuk PPN. Paket tahunan tersedia saat checkout (hemat ~30%).",
+    free: { desc: "Semua alat browser, gratis & tanpa batas.", cta: "Mulai" },
+    pro: { desc: "500 konversi AI/bulan · Workflow Builder · Batch 20 file.", cta: "Tingkatkan ke Pro" },
+    business: { desc: "3.000 konversi AI/bulan · REST API · 300 kredit API.", cta: "Pilih Business" },
+  },
+  tool: { howItWorks: "Cara kerja", faq: "Pertanyaan umum", breadcrumbHome: "Beranda", proBadge: "Fitur Pro" },
+};
+
+const vi: UiStrings = {
+  hero: {
+    badge: "Miễn phí · Không cần đăng ký",
+    title: "Chuyển đổi tệp, hình ảnh, âm thanh, video & văn bản trực tuyến",
+    subtitle: "Hơn 80 công cụ trực tuyến miễn phí, nhanh chóng cho tài liệu, hình ảnh, âm thanh, video, mã và văn bản — hầu hết chạy ngay trong trình duyệt. Không cần đăng ký.",
+    ctaPrimary: "Bắt đầu với trình tạo",
+    ctaSecondary: "Xem tất cả công cụ",
+  },
+  home: {
+    toolsTitle: "Tất cả công cụ",
+    toolsLead: "Chọn công cụ bạn cần. Thả tệp của bạn. Nhận kết quả.",
+    whyTitle: "Tại sao chọn Konvertools?",
+    reasons: [
+      { title: "Được tạo cho một việc", body: "Mỗi công cụ làm đúng một việc. Không có trình chỉnh sửa video cồng kềnh, không cần học." },
+      { title: "Hỗ trợ bởi AI", body: "AI tiên tiến cho phiên âm và dịch — chính xác trong hơn 30 ngôn ngữ." },
+      { title: "Hơn 30 ngôn ngữ", body: "Dịch phụ đề từng dòng — dấu thời gian được giữ nguyên." },
+      { title: "Tệp tự động xóa", body: "Chúng tôi xử lý rồi quên. Phương tiện của bạn biến mất trong vòng một giờ." },
+    ],
+    upgradeTitle: "Cần thêm? Lên Pro với giá 12 €/tháng.",
+    upgradeBody: "500 lượt AI/tháng, Workflow Builder, xử lý hàng loạt đến 20 tệp, mẫu đã lưu, tệp đến 1 GB, không quảng cáo, không hình mờ. Hủy bất cứ lúc nào.",
+    upgradeCtaPrimary: "Xem giá",
+    upgradeCtaSecondary: "Tạo tài khoản miễn phí",
+    upgradeFeatures: ["500 lượt AI/tháng", "Workflow Builder", "Xử lý hàng loạt đến 20 tệp", "Mẫu", "Không quảng cáo, không hình mờ"],
+  },
+  pricing: {
+    title: "Giá đơn giản, minh bạch",
+    lead: "Miễn phí cho mọi người. Lên Pro khi cần thêm. Hủy bất cứ lúc nào.",
+    mostPopular: "Phổ biến nhất",
+    perMonth: "mỗi tháng",
+    forever: "vĩnh viễn",
+    footnote: "Tất cả giá tính bằng EUR, chưa gồm VAT. Gói năm có sẵn khi thanh toán (tiết kiệm ~30%).",
+    free: { desc: "Tất cả công cụ trình duyệt, miễn phí & không giới hạn.", cta: "Bắt đầu" },
+    pro: { desc: "500 lượt AI/tháng · Workflow Builder · Hàng loạt 20 tệp.", cta: "Nâng cấp lên Pro" },
+    business: { desc: "3.000 lượt AI/tháng · REST API · 300 tín dụng API.", cta: "Chọn Business" },
+  },
+  tool: { howItWorks: "Cách hoạt động", faq: "Câu hỏi thường gặp", breadcrumbHome: "Trang chủ", proBadge: "Tính năng Pro" },
+};
+
+const sv: UiStrings = {
+  hero: {
+    badge: "Gratis · Ingen registrering",
+    title: "Konvertera filer, bilder, ljud, video och text online",
+    subtitle: "80+ gratis, snabba onlineverktyg för dokument, bilder, ljud, video, kod och text — de flesta körs direkt i din webbläsare. Ingen registrering.",
+    ctaPrimary: "Börja med generatorn",
+    ctaSecondary: "Se alla verktyg",
+  },
+  home: {
+    toolsTitle: "Alla verktyg",
+    toolsLead: "Välj verktyget du behöver. Släpp din fil. Få ditt resultat.",
+    whyTitle: "Varför Konvertools?",
+    reasons: [
+      { title: "Byggt för en sak", body: "Varje verktyg gör exakt en sak. Ingen uppsvälld videoredigerare, ingen inlärningskurva." },
+      { title: "Drivs av AI", body: "Toppmodern AI för transkribering och översättning — exakt på 30+ språk." },
+      { title: "30+ språk", body: "Översätt undertexter rad för rad — tidsstämplar förblir intakta." },
+      { title: "Filer raderas automatiskt", body: "Vi bearbetar och glömmer. Dina media är borta inom en timme." },
+    ],
+    upgradeTitle: "Behöver du mer? Gå Pro för 12 €/månad.",
+    upgradeBody: "500 AI-konverteringar/månad, Workflow Builder, batch upp till 20 filer, sparade mallar, filer upp till 1 GB, inga annonser, ingen vattenstämpel. Avsluta när som helst.",
+    upgradeCtaPrimary: "Se priser",
+    upgradeCtaSecondary: "Skapa gratis konto",
+    upgradeFeatures: ["500 AI-konverteringar/månad", "Workflow Builder", "Batch upp till 20 filer", "Mallar", "Inga annonser, ingen vattenstämpel"],
+  },
+  pricing: {
+    title: "Enkel, ärlig prissättning",
+    lead: "Gratis för alla. Gå Pro när du behöver mer. Avsluta när som helst.",
+    mostPopular: "Mest populär",
+    perMonth: "per månad",
+    forever: "för alltid",
+    footnote: "Alla priser i EUR, exkl. moms. Årsplaner tillgängliga i kassan (spara ~30 %).",
+    free: { desc: "Alla webbläsarverktyg, gratis & obegränsat.", cta: "Kom igång" },
+    pro: { desc: "500 AI-konverteringar/månad · Workflow Builder · Batch 20 filer.", cta: "Uppgradera till Pro" },
+    business: { desc: "3 000 AI-konverteringar/månad · REST API · 300 API-krediter.", cta: "Välj Business" },
+  },
+  tool: { howItWorks: "Så fungerar det", faq: "Vanliga frågor", breadcrumbHome: "Hem", proBadge: "Pro-funktion" },
+};
+
+const pl: UiStrings = {
+  hero: {
+    badge: "Za darmo · Bez rejestracji",
+    title: "Konwertuj pliki, obrazy, audio, wideo i tekst online",
+    subtitle: "Ponad 80 darmowych, szybkich narzędzi online do dokumentów, obrazów, audio, wideo, kodu i tekstu — większość działa bezpośrednio w przeglądarce. Bez rejestracji.",
+    ctaPrimary: "Zacznij od generatora",
+    ctaSecondary: "Zobacz wszystkie narzędzia",
+  },
+  home: {
+    toolsTitle: "Wszystkie narzędzia",
+    toolsLead: "Wybierz potrzebne narzędzie. Upuść plik. Pobierz wynik.",
+    whyTitle: "Dlaczego Konvertools?",
+    reasons: [
+      { title: "Stworzone do jednego zadania", body: "Każde narzędzie robi dokładnie jedną rzecz. Bez rozdętego edytora wideo, bez nauki." },
+      { title: "Napędzane przez AI", body: "Najnowocześniejsze AI do transkrypcji i tłumaczenia — dokładne w ponad 30 językach." },
+      { title: "30+ języków", body: "Tłumacz napisy wiersz po wierszu — znaczniki czasu pozostają nienaruszone." },
+      { title: "Pliki usuwane automatycznie", body: "Przetwarzamy i zapominamy. Twoje media znikają w ciągu godziny." },
+    ],
+    upgradeTitle: "Potrzebujesz więcej? Pro za 12 €/mies.",
+    upgradeBody: "500 konwersji AI/mies., Workflow Builder, wsadowo do 20 plików, zapisane szablony, pliki do 1 GB, bez reklam, bez znaku wodnego. Anuluj w każdej chwili.",
+    upgradeCtaPrimary: "Zobacz cennik",
+    upgradeCtaSecondary: "Utwórz darmowe konto",
+    upgradeFeatures: ["500 konwersji AI/mies.", "Workflow Builder", "Wsadowo do 20 plików", "Szablony", "Bez reklam, bez znaku wodnego"],
+  },
+  pricing: {
+    title: "Proste, uczciwe ceny",
+    lead: "Za darmo dla wszystkich. Pro, gdy potrzebujesz więcej. Anuluj w każdej chwili.",
+    mostPopular: "Najpopularniejszy",
+    perMonth: "miesięcznie",
+    forever: "na zawsze",
+    footnote: "Wszystkie ceny w EUR, bez VAT. Plany roczne dostępne przy płatności (oszczędność ~30%).",
+    free: { desc: "Wszystkie narzędzia w przeglądarce, za darmo i bez limitu.", cta: "Zacznij" },
+    pro: { desc: "500 konwersji AI/mies. · Workflow Builder · Wsad 20 plików.", cta: "Przejdź na Pro" },
+    business: { desc: "3000 konwersji AI/mies. · REST API · 300 kredytów API.", cta: "Wybierz Business" },
+  },
+  tool: { howItWorks: "Jak to działa", faq: "Najczęstsze pytania", breadcrumbHome: "Strona główna", proBadge: "Funkcja Pro" },
+};
+
+const uk: UiStrings = {
+  hero: {
+    badge: "Безкоштовно · Без реєстрації",
+    title: "Конвертуйте файли, зображення, аудіо, відео та текст онлайн",
+    subtitle: "Понад 80 безкоштовних швидких онлайн-інструментів для документів, зображень, аудіо, відео, коду та тексту — більшість працює прямо у браузері. Без реєстрації.",
+    ctaPrimary: "Почати з генератора",
+    ctaSecondary: "Усі інструменти",
+  },
+  home: {
+    toolsTitle: "Усі інструменти",
+    toolsLead: "Виберіть потрібний інструмент. Перетягніть файл. Отримайте результат.",
+    whyTitle: "Чому Konvertools?",
+    reasons: [
+      { title: "Створено для однієї задачі", body: "Кожен інструмент робить рівно одну справу. Жодного громіздкого відеоредактора, жодного навчання." },
+      { title: "На базі AI", body: "Найсучасніший AI для транскрипції та перекладу — точно понад 30 мовами." },
+      { title: "30+ мов", body: "Перекладайте субтитри рядок за рядком — часові мітки залишаються незмінними." },
+      { title: "Файли видаляються автоматично", body: "Обробляємо й забуваємо. Ваші медіа зникають упродовж години." },
+    ],
+    upgradeTitle: "Потрібно більше? Pro за 12 €/міс.",
+    upgradeBody: "500 AI-конвертацій/міс, Workflow Builder, пакетна обробка до 20 файлів, збережені шаблони, файли до 1 ГБ, без реклами, без водяного знака. Скасування будь-коли.",
+    upgradeCtaPrimary: "Переглянути ціни",
+    upgradeCtaSecondary: "Створити безкоштовний акаунт",
+    upgradeFeatures: ["500 AI-конвертацій/міс", "Workflow Builder", "Пакетна обробка до 20 файлів", "Шаблони", "Без реклами, без водяного знака"],
+  },
+  pricing: {
+    title: "Прості, чесні ціни",
+    lead: "Безкоштовно для всіх. Pro, коли потрібно більше. Скасування будь-коли.",
+    mostPopular: "Найпопулярніший",
+    perMonth: "на місяць",
+    forever: "назавжди",
+    footnote: "Усі ціни в EUR, без ПДВ. Річні плани доступні під час оплати (економія ~30%).",
+    free: { desc: "Усі браузерні інструменти, безкоштовно й без обмежень.", cta: "Почати" },
+    pro: { desc: "500 AI-конвертацій/міс · Workflow Builder · Пакет 20 файлів.", cta: "Перейти на Pro" },
+    business: { desc: "3000 AI-конвертацій/міс · REST API · 300 API-кредитів.", cta: "Обрати Business" },
+  },
+  tool: { howItWorks: "Як це працює", faq: "Поширені запитання", breadcrumbHome: "Головна", proBadge: "Функція Pro" },
+};
+
+const cs: UiStrings = {
+  hero: {
+    badge: "Zdarma · Bez registrace",
+    title: "Převádějte soubory, obrázky, zvuk, video a text online",
+    subtitle: "80+ bezplatných rychlých online nástrojů pro dokumenty, obrázky, zvuk, video, kód a text — většina běží přímo ve vašem prohlížeči. Bez registrace.",
+    ctaPrimary: "Začít s generátorem",
+    ctaSecondary: "Zobrazit všechny nástroje",
+  },
+  home: {
+    toolsTitle: "Všechny nástroje",
+    toolsLead: "Vyberte nástroj, který potřebujete. Přetáhněte soubor. Získejte výsledek.",
+    whyTitle: "Proč Konvertools?",
+    reasons: [
+      { title: "Vytvořeno pro jednu věc", body: "Každý nástroj dělá přesně jednu věc. Žádný nabubřelý videoeditor, žádná křivka učení." },
+      { title: "Poháněno AI", body: "Špičková AI pro přepis a překlad — přesné ve více než 30 jazycích." },
+      { title: "30+ jazyků", body: "Překládejte titulky řádek po řádku — časové značky zůstávají nedotčené." },
+      { title: "Soubory se mažou automaticky", body: "Zpracujeme a zapomeneme. Vaše média zmizí do hodiny." },
+    ],
+    upgradeTitle: "Potřebujete více? Pro za 12 €/měsíc.",
+    upgradeBody: "500 AI konverzí/měsíc, Workflow Builder, dávka až 20 souborů, uložené šablony, soubory až 1 GB, bez reklam, bez vodoznaku. Zrušení kdykoli.",
+    upgradeCtaPrimary: "Zobrazit ceny",
+    upgradeCtaSecondary: "Vytvořit bezplatný účet",
+    upgradeFeatures: ["500 AI konverzí/měsíc", "Workflow Builder", "Dávka až 20 souborů", "Šablony", "Bez reklam, bez vodoznaku"],
+  },
+  pricing: {
+    title: "Jednoduché, poctivé ceny",
+    lead: "Zdarma pro všechny. Pro, když potřebujete více. Zrušení kdykoli.",
+    mostPopular: "Nejoblíbenější",
+    perMonth: "měsíčně",
+    forever: "navždy",
+    footnote: "Všechny ceny v EUR, bez DPH. Roční plány dostupné při platbě (úspora ~30 %).",
+    free: { desc: "Všechny nástroje v prohlížeči, zdarma a bez omezení.", cta: "Začít" },
+    pro: { desc: "500 AI konverzí/měsíc · Workflow Builder · Dávka 20 souborů.", cta: "Přejít na Pro" },
+    business: { desc: "3 000 AI konverzí/měsíc · REST API · 300 API kreditů.", cta: "Vybrat Business" },
+  },
+  tool: { howItWorks: "Jak to funguje", faq: "Časté dotazy", breadcrumbHome: "Domů", proBadge: "Funkce Pro" },
+};
+
+// Partial<>: any locale not listed falls back to English via getStrings().
 export const UI_STRINGS: Partial<Record<Locale, UiStrings>> = {
-  en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi,
+  en, fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi, tr, id, vi, sv, pl, uk, cs,
 };
 
 export function getStrings(locale: Locale): UiStrings {

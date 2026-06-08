@@ -50,7 +50,7 @@ export default function Home() {
 
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-16">
-          <h2 className="text-center text-2xl font-bold tracking-tight text-ink-900 md:text-3xl">Why Konver</h2>
+          <h2 className="text-center text-2xl font-bold tracking-tight text-ink-900 md:text-3xl">Why Konvertools</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {WHY.map(({ icon: Icon, title, body }) => (
               <div key={title} className="rounded-xl border border-ink-100 bg-white p-5 shadow-card">

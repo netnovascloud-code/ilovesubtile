@@ -40,9 +40,9 @@ These tools require a backend; the UI exists and posts to `/api/process/<slug>`,
 | `/add-subtitles-to-video` | `process-ffmpeg` → your FFmpeg worker (you provide the host)  |
 | `/extract-subtitles`      | `process-ffmpeg` → your FFmpeg worker                          |
 | `/style-subtitles`        | `process-ffmpeg` → your FFmpeg worker                          |
-| Billing (checkout)        | `stripe-checkout` Edge Function                                |
-| Billing (portal)          | `stripe-portal` Edge Function                                  |
-| Stripe events             | `stripe-webhook` Edge Function                                 |
+| Billing (checkout)        | `lemonsqueezy-checkout` Edge Function                          |
+| Billing (portal)          | `lemonsqueezy-portal` Edge Function                            |
+| Lemon Squeezy events      | `lemonsqueezy-webhook` Edge Function                          |
 | Emails                    | `send-email` Edge Function → Resend                            |
 
 All AI processing goes through a **single provider** (AI) with a
@@ -74,9 +74,11 @@ exclusively in Supabase Edge Function secrets (set via the Supabase dashboard
 or `supabase secrets set`). The full list:
 
 - `MISTRAL_API_KEY` — used by `process-subtitles`, `translate-subtitles`, `ai-process`
-- `STRIPE_SECRET_KEY` — used by `stripe-checkout`, `stripe-portal`, `stripe-webhook`
-- `STRIPE_WEBHOOK_SECRET` — used by `stripe-webhook`
-- `STRIPE_PRICE_PRO_MONTHLY`, `STRIPE_PRICE_PRO_ANNUAL`, `STRIPE_PRICE_BIZ_MONTHLY`, `STRIPE_PRICE_BIZ_ANNUAL` — Stripe price IDs read by `stripe-checkout`
+- `LEMONSQUEEZY_API_KEY` — used by `lemonsqueezy-checkout`, `lemonsqueezy-portal`, `lemonsqueezy-setup`
+- `LEMONSQUEEZY_WEBHOOK_SECRET` — used by `lemonsqueezy-webhook` (X-Signature HMAC verification)
+- `LEMONSQUEEZY_STORE_ID` — optional; auto-discovered from the API key if unset
+- `LS_VARIANT_PRO_MONTHLY`, `LS_VARIANT_PRO_ANNUAL`, `LS_VARIANT_BIZ_MONTHLY`, `LS_VARIANT_BIZ_ANNUAL` — subscription variant IDs read by `lemonsqueezy-checkout`
+- `LS_VARIANT_PACK_STARTER`, `LS_VARIANT_PACK_GROWTH`, `LS_VARIANT_PACK_SCALE`, `LS_VARIANT_PACK_STUDIO` — credit-pack variant IDs
 - `RESEND_API_KEY` — used by `send-email`
 - `VPS_API_URL`, `VPS_API_KEY` — used by `process-ffmpeg` (only when you wire your FFmpeg worker)
 
@@ -120,8 +122,6 @@ app/
   pricing/, privacy/, terms/, dashboard/, login/, register/
 
   api/process/[slug]/route.ts    # Forwarder to Supabase Edge Functions
-  api/billing/checkout/route.ts  # Stripe Checkout session
-  api/billing/portal/route.ts    # Stripe Customer Portal
   auth/callback/route.ts         # Supabase OAuth callback handler
 
 components/
@@ -137,7 +137,8 @@ lib/
   tools-config.ts     ★ source of truth — 16 tools + 4 competitors
   srt-utils.ts        Real parser, emitter, shift, clean, plaintext
   seo.ts              buildToolMetadata, JSON-LD helpers, hreflang
-  stripe.ts           PLANS + Stripe client
+  plans.ts            PLANS + FREE_PLAN (pure data)
+  lemonsqueezy.ts     Browser checkout-overlay helper
   utils.ts            cn(), formatBytes(), SITE_URL
   supabase/
     client.ts         Browser client
@@ -158,9 +159,10 @@ supabase/
     translate-subtitles/    AI  (translate, batch-translate)
     ai-process/             AI  (youtube-chapters, ai cleanup, summary)
     process-ffmpeg/         Forwarder to your FFmpeg worker (burn-in, extract, style)
-    stripe-checkout/        Creates Stripe Checkout sessions
-    stripe-portal/          Opens the Stripe Customer Portal
-    stripe-webhook/         Mirrors subscription state into profiles
+    lemonsqueezy-checkout/  Creates Lemon Squeezy hosted checkouts (overlay)
+    lemonsqueezy-portal/    Opens the Lemon Squeezy customer portal
+    lemonsqueezy-webhook/   Verifies X-Signature, mirrors state into profiles
+    lemonsqueezy-setup/     One-time: auto-discovers store + variant IDs
     send-email/             Resend transactional emails
 ```
 
@@ -185,12 +187,12 @@ supabase db push                  # applies migrations/001_initial_schema.sql
 # Edge function secrets (server-only API keys live HERE, never in Vercel)
 supabase secrets set MISTRAL_API_KEY=...
 supabase secrets set RESEND_API_KEY=re_...
-supabase secrets set STRIPE_SECRET_KEY=sk_live_...
-supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
-supabase secrets set STRIPE_PRICE_PRO_MONTHLY=price_...
-supabase secrets set STRIPE_PRICE_PRO_ANNUAL=price_...
-supabase secrets set STRIPE_PRICE_BIZ_MONTHLY=price_...
-supabase secrets set STRIPE_PRICE_BIZ_ANNUAL=price_...
+supabase secrets set LEMONSQUEEZY_API_KEY=...
+supabase secrets set LEMONSQUEEZY_WEBHOOK_SECRET=...
+# Variant IDs — discover them with the lemonsqueezy-setup function (below):
+supabase secrets set LS_VARIANT_PRO_MONTHLY=... LS_VARIANT_PRO_ANNUAL=...
+supabase secrets set LS_VARIANT_BIZ_MONTHLY=... LS_VARIANT_BIZ_ANNUAL=...
+supabase secrets set LS_VARIANT_PACK_STARTER=... LS_VARIANT_PACK_GROWTH=... LS_VARIANT_PACK_SCALE=... LS_VARIANT_PACK_STUDIO=...
 # Only when you have your own FFmpeg worker:
 supabase secrets set VPS_API_URL=https://your-ffmpeg-host/api
 supabase secrets set VPS_API_KEY=...
@@ -199,23 +201,36 @@ supabase functions deploy process-subtitles
 supabase functions deploy translate-subtitles
 supabase functions deploy ai-process
 supabase functions deploy process-ffmpeg
-supabase functions deploy stripe-checkout
-supabase functions deploy stripe-portal
-supabase functions deploy stripe-webhook --no-verify-jwt
+supabase functions deploy lemonsqueezy-checkout
+supabase functions deploy lemonsqueezy-portal
+supabase functions deploy lemonsqueezy-setup
+supabase functions deploy lemonsqueezy-webhook --no-verify-jwt
 supabase functions deploy send-email
 ```
 
-### Stripe
+### Lemon Squeezy (Merchant of Record)
 
-In the Stripe dashboard create four products. The price IDs go into Supabase
-Edge Function secrets (used server-side by `stripe-webhook` and the checkout
-route), not into `.env`:
-- `STRIPE_PRICE_PRO_MONTHLY`
-- `STRIPE_PRICE_PRO_ANNUAL`
-- `STRIPE_PRICE_BIZ_MONTHLY`
-- `STRIPE_PRICE_BIZ_ANNUAL`
+The Lemon Squeezy API is read-only for products, so create the 6 products
+once in the dashboard (Store → Products):
 
-Then point a webhook at `https://<project>.supabase.co/functions/v1/stripe-webhook` subscribed to `checkout.session.completed` and `customer.subscription.*`.
+- **Pro** — €12/month and €99/year (two variants on one product)
+- **Business** — €39/month and €349/year
+- **Credit packs** (single-payment): Starter 100/€12, Growth 500/€39, Scale 2000/€99, Studio 6000/€249
+
+Then run the setup helper once to auto-discover your Store ID and every variant ID:
+
+```bash
+curl -H "Authorization: Bearer <your-supabase-session-jwt>" \
+  https://<project>.supabase.co/functions/v1/lemonsqueezy-setup
+```
+
+Map the returned variant IDs to the `LS_VARIANT_*` secrets above. Finally, in
+Lemon Squeezy → Settings → Webhooks add a callback to
+`https://<project>.supabase.co/functions/v1/lemonsqueezy-webhook`, paste the
+**signing secret** into `LEMONSQUEEZY_WEBHOOK_SECRET`, and subscribe to:
+`subscription_created`, `subscription_updated`, `subscription_cancelled`,
+`subscription_expired`, `subscription_payment_success`,
+`subscription_payment_refunded`, `order_created`, `order_refunded`.
 
 ### Google OAuth
 
@@ -243,7 +258,7 @@ Enable Google in Supabase → Authentication → Providers and add `http://local
 - ✅ Auth pages, dashboard, pricing, API docs
 - ✅ Supabase migrations + 6 Edge Function stubs
 - ✅ Sitemap, robots, 404
-- ⏳ Backend secrets (AI / Stripe / Resend) — Edge Functions deployed and live, just need keys set
+- ⏳ Backend secrets (AI / Lemon Squeezy / Resend) — Edge Functions deployed and live, just need keys set
 - ⏳ FFmpeg worker — `process-ffmpeg` deployed and returns a clean error until you set `VPS_API_URL` + `VPS_API_KEY`
 - ⏳ Full i18n for tool pages (only homepage is localised today)
 - ⏳ Ad network integration (Ezoic / Media.net)

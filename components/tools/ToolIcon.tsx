@@ -29,6 +29,7 @@ import {
   Binary,
   Link2,
   KeyRound,
+  Lock,
   Regex,
   Hash,
   Minimize2,
@@ -59,6 +60,10 @@ import {
   QrCode,
   Archive,
   FileArchive,
+  PenLine,
+  BookOpen,
+  ScanSearch,
+  FileSignature,
   type LucideIcon,
 } from "lucide-react";
 
@@ -91,6 +96,7 @@ const ICONS: Record<string, LucideIcon> = {
   Binary,
   Link2,
   KeyRound,
+  Lock,
   Regex,
   Hash,
   Minimize2,
@@ -121,6 +127,10 @@ const ICONS: Record<string, LucideIcon> = {
   QrCode,
   Archive,
   FileArchive,
+  PenLine,
+  BookOpen,
+  ScanSearch,
+  FileSignature,
 };
 
 export function ToolIcon({

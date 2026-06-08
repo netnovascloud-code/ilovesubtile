@@ -6,11 +6,12 @@ import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
+import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getStrings } from "@/lib/i18n/strings";
 import { getHomeExplorer } from "@/lib/i18n/home-explorer";
 import { isLocale, NON_DEFAULT_LOCALES, isRtl, localePath } from "@/lib/i18n/locales";
 import { SITE_URL } from "@/lib/utils";
-import { HREFLANG_PREFIX, LOCALES } from "@/lib/seo";
+import { HREFLANG_PREFIX, LOCALES, ogImageUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
   return NON_DEFAULT_LOCALES.map((locale) => ({ locale }));
@@ -25,16 +26,18 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/`;
   alts["x-default"] = `${SITE_URL}/`;
   return {
-    title: { absolute: `Konver — ${ui.hero.title}` },
+    title: { absolute: `Konvertools — ${ui.hero.title}` },
     description: ui.hero.subtitle,
     alternates: { canonical: canonicalPath, languages: alts },
     openGraph: {
-      title: `Konver — ${ui.hero.title}`,
+      title: `Konvertools — ${ui.hero.title}`,
       description: ui.hero.subtitle,
       url: `${SITE_URL}${canonicalPath}`,
-      siteName: "Konver",
+      siteName: "Konvertools",
       locale,
+      images: [ogImageUrl(`Konvertools — ${ui.hero.title}`, ui.hero.subtitle)],
     },
+    twitter: { card: "summary_large_image", images: [ogImageUrl(`Konvertools — ${ui.hero.title}`, ui.hero.subtitle)] },
   };
 }
 
@@ -43,8 +46,20 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
   const locale = params.locale;
   const ui = getStrings(locale);
   const rtl = isRtl(locale);
-  // Enrich the search haystack with locale-aware keyword variants.
-  const tools = TOOLS.map((t) => ({ ...toCardSpec(t), keywords: toolKeywords(t, locale).join(" ") }));
+  // Localize each card's name + short blurb (Bug A: these were hardcoded
+  // English on /<locale>), and enrich the search haystack with locale-aware
+  // keyword variants. resolveToolI18n falls back to English when a tool has no
+  // translation for this locale.
+  const tools = TOOLS.map((t) => {
+    const base = toCardSpec(t);
+    const i18n = resolveToolI18n(t.slug, locale);
+    return {
+      ...base,
+      name: i18n?.name ?? base.name,
+      short: i18n?.short ?? base.short,
+      keywords: toolKeywords(t, locale).join(" "),
+    };
+  });
   const categories = CATEGORIES.map((c) => ({ id: c.id, label: categoryLabel(c.id, locale), iconName: c.iconName, tone: c.tone }));
   const categoryLabels = Object.fromEntries(CATEGORIES.map((c) => [c.id, categoryLabel(c.id, locale)]));
   const hx = getHomeExplorer(locale);

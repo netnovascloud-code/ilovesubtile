@@ -1,5 +1,6 @@
 import type { ToolDefinition, ToolFaq } from "@/lib/tools-config";
 import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import { cn } from "@/lib/utils";
@@ -47,10 +48,15 @@ export function ToolPageShell({
   const rtl = isRtl(locale);
 
   // Localised FAQs (template-generated) + steps (per tool × locale).
+  // In-browser tools (kind: "client") get the "client" FAQ variant — no
+  // formats / watermark / quota questions — so utility pages like the Password
+  // Generator no longer render the file/subtitle template (which produced
+  // "accepte the supported formats" + SRT references in non-English locales).
+  const faqVariant = tool.kind === "client" ? "client" : tool.kind === "ai" ? "ai" : "file";
   const formats = tool.accept.length
     ? tool.accept.map((a) => a.toUpperCase()).join(", ")
-    : "the supported formats";
-  const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats);
+    : "plain text";
+  const faqs = locale === "en" ? tool.faqs : getLocalisedFaqs(locale, name, formats, faqVariant);
   const steps = (locale === "en" ? null : getLocalisedSteps(tool.slug, locale)) ?? tool.steps;
 
   // Related tools for the "What to do next" cross-sell. Explicit mapping first,
@@ -78,22 +84,9 @@ export function ToolPageShell({
 
   return (
     <div dir={rtl ? "rtl" : undefined}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareApplicationSchema(tool, locale, { name, metaDescription: description })),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localisedFaqSchema(faqs)) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema(tool, locale, { name, homeLabel: ui.tool.breadcrumbHome })),
-        }}
-      />
+      <JsonLd data={softwareApplicationSchema(tool, locale, { name, metaDescription: description })} />
+      <JsonLd data={localisedFaqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(tool, locale, { name, homeLabel: ui.tool.breadcrumbHome })} />
 
       <section className="border-b border-ink-100 bg-surface">
         <div className="container py-10">

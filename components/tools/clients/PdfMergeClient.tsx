@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, GripVertical } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 
@@ -45,6 +44,7 @@ export function PdfMergeClient() {
     if (items.length < 2 || busy) return;
     setBusy(true); setError(null); setResultUrl(null);
     try {
+      const { PDFDocument } = await import("pdf-lib");
       const out = await PDFDocument.create();
       for (const { file } of items) {
         const bytes = await file.arrayBuffer();

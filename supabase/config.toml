@@ -25,5 +25,25 @@ file_size_limit = "500MiB"
 
 # Functions configured per-folder; deploy with `supabase functions deploy <name>`.
 
-[functions.stripe-webhook]
+# Lemon Squeezy posts webhooks without a Supabase JWT; the function verifies
+# the X-Signature HMAC itself, so JWT verification is disabled here.
+[functions.lemonsqueezy-webhook]
+verify_jwt = false
+
+# Setup helper auto-discovers the store + variant IDs (read-only).
+[functions.lemonsqueezy-setup]
+verify_jwt = true
+
+# Public REST gateway: authenticated by a Konvertools API key (knv_live_…),
+# NOT a Supabase JWT, so the platform JWT gate MUST be off — otherwise every
+# server-to-server API call is 401'd before the function can validate the key.
+# The function validates the key (and rate-limits + meters credits) itself.
+[functions.api-gateway]
+verify_jwt = false
+
+# Security tools accept anonymous (client-gated) traffic and do their own
+# per-user bucket enforcement, so the platform JWT gate is off here too.
+# (The public anon key would satisfy verify_jwt anyway; keeping it off matches
+# the documented `--no-verify-jwt` deploy and the function's own auth logic.)
+[functions.security-tools]
 verify_jwt = false

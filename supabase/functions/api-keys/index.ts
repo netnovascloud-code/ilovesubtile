@@ -1,4 +1,4 @@
-// Konver — manage REST API keys (Business plan).
+// Konvertools — manage REST API keys (Business plan).
 // POST /functions/v1/api-keys  body { action: 'list' | 'create' | 'revoke', name?, id? }
 // Auth: the user's Supabase JWT. Only Business plan may create keys.
 //
@@ -6,12 +6,13 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konvertools.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -83,7 +84,17 @@ Deno.serve(async (req) => {
   if (action === "revoke") {
     const id = body.id as string;
     if (!id) return json({ error: "missing_id" }, { status: 400 });
-    await svc.from("api_keys").update({ revoked: true }).eq("id", id).eq("user_id", user.id);
+    // Soft-delete: keep the row (and its hash) for audit, just flip `revoked`.
+    // There is NO `revoked_at` column (see migration 002) — including it made
+    // PostgREST reject the whole UPDATE, so revocation silently no-op'd and the
+    // key stayed usable. Write only the column that exists, and surface errors
+    // instead of always returning ok.
+    const { error: revErr } = await svc
+      .from("api_keys")
+      .update({ revoked: true })
+      .eq("id", id)
+      .eq("user_id", user.id);
+    if (revErr) return json({ error: "revoke_failed", message: revErr.message }, { status: 500 });
     return json({ ok: true });
   }
 

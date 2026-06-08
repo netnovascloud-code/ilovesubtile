@@ -1,98 +1,127 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TOOLS, TOOLS_BY_SLUG, toClientSpec } from "@/lib/tools-config";
+import { TOOLS, TOOLS_BY_SLUG, toClientSpec, CATEGORY_BY_ID, CATEGORIES, type ToolCategory } from "@/lib/tools-config";
+import { CategoryPage, categoryMetadata } from "@/components/tools/CategoryPage";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
-import { ServerJobClient } from "@/components/tools/clients/ServerJobClient";
-import { SrtVttConvertClient } from "@/components/tools/clients/SrtVttConvertClient";
-import { SyncClient } from "@/components/tools/clients/SyncClient";
-import { SrtToTextClient } from "@/components/tools/clients/SrtToTextClient";
-import { CleanClient } from "@/components/tools/clients/CleanClient";
-import { EditorClient } from "@/components/tools/clients/EditorClient";
-import { TranslateClient } from "@/components/tools/clients/TranslateClient";
-import { BatchTranslateClient } from "@/components/tools/clients/BatchTranslateClient";
-import { YouTubeChaptersClient } from "@/components/tools/clients/YouTubeChaptersClient";
-import { AutoSyncClient } from "@/components/tools/clients/AutoSyncClient";
-import { SubtitleGeneratorClient } from "@/components/tools/clients/SubtitleGeneratorClient";
-import { AddSubtitlesToVideoClient } from "@/components/tools/clients/AddSubtitlesToVideoClient";
-import { StyleSubtitlesClient } from "@/components/tools/clients/StyleSubtitlesClient";
-import { ExtractSubtitlesClient } from "@/components/tools/clients/ExtractSubtitlesClient";
-import { TikTokSubtitlesClient } from "@/components/tools/clients/TikTokSubtitlesClient";
-import { TextToolClient } from "@/components/tools/clients/TextToolClient";
-import { RegexClient } from "@/components/tools/clients/RegexClient";
-import { ColorConverterClient } from "@/components/tools/clients/ColorConverterClient";
-import { NumberBaseClient } from "@/components/tools/clients/NumberBaseClient";
-import { HashClient } from "@/components/tools/clients/HashClient";
-import { UnitConverterClient } from "@/components/tools/clients/UnitConverterClient";
-import { PasswordGenClient } from "@/components/tools/clients/PasswordGenClient";
-import { CaseConverterClient } from "@/components/tools/clients/CaseConverterClient";
-import { LoremIpsumClient } from "@/components/tools/clients/LoremIpsumClient";
-import { UuidGeneratorClient } from "@/components/tools/clients/UuidGeneratorClient";
-import { UnixTimestampClient } from "@/components/tools/clients/UnixTimestampClient";
-import { TextDiffClient } from "@/components/tools/clients/TextDiffClient";
-import { VatCalculatorClient } from "@/components/tools/clients/VatCalculatorClient";
-import { ImageToBase64Client } from "@/components/tools/clients/ImageToBase64Client";
-import { FlipImageClient } from "@/components/tools/clients/FlipImageClient";
-import { CurrencyConverterClient } from "@/components/tools/clients/CurrencyConverterClient";
-import { WatermarkPdfClient } from "@/components/tools/clients/WatermarkPdfClient";
-import { PdfPageNumbersClient } from "@/components/tools/clients/PdfPageNumbersClient";
-import { ComparePdfClient } from "@/components/tools/clients/ComparePdfClient";
-import { ImageToIcoClient } from "@/components/tools/clients/ImageToIcoClient";
-import { WatermarkImageClient } from "@/components/tools/clients/WatermarkImageClient";
-import { ExtractColorsClient } from "@/components/tools/clients/ExtractColorsClient";
-import { PdfToExcelClient } from "@/components/tools/clients/PdfToExcelClient";
-import { InvoiceGeneratorClient } from "@/components/tools/clients/InvoiceGeneratorClient";
-import { QrCodeReaderClient } from "@/components/tools/clients/QrCodeReaderClient";
-import { BarcodeGeneratorClient } from "@/components/tools/clients/BarcodeGeneratorClient";
-import { BarcodeReaderClient } from "@/components/tools/clients/BarcodeReaderClient";
-import { PdfMergeClient } from "@/components/tools/clients/PdfMergeClient";
-import { PdfSplitClient } from "@/components/tools/clients/PdfSplitClient";
-import { PdfRotateClient } from "@/components/tools/clients/PdfRotateClient";
-import { ImagesToPdfClient } from "@/components/tools/clients/ImagesToPdfClient";
-import { ZipCreateClient } from "@/components/tools/clients/ZipCreateClient";
-import { ZipExtractClient } from "@/components/tools/clients/ZipExtractClient";
-import { QrGeneratorClient } from "@/components/tools/clients/QrGeneratorClient";
-import { PendingClient } from "@/components/tools/clients/PendingClient";
-import { FfmpegToolClient } from "@/components/tools/clients/FfmpegToolClient";
-import { RemoveBackgroundClient } from "@/components/tools/clients/RemoveBackgroundClient";
-import { RemoveVideoBackgroundClient } from "@/components/tools/clients/RemoveVideoBackgroundClient";
-import { PdfToTextClient } from "@/components/tools/clients/PdfToTextClient";
-import { PdfToWordClient } from "@/components/tools/clients/PdfToWordClient";
-import { MergeAudioClient } from "@/components/tools/clients/MergeAudioClient";
-import { PdfToJpgClient } from "@/components/tools/clients/PdfToJpgClient";
-import { WordToPdfClient } from "@/components/tools/clients/WordToPdfClient";
-import { HtmlToPdfClient } from "@/components/tools/clients/HtmlToPdfClient";
-import { ExcelToPdfClient } from "@/components/tools/clients/ExcelToPdfClient";
-import { CompressPdfClient } from "@/components/tools/clients/CompressPdfClient";
-import { WatermarkVideoClient } from "@/components/tools/clients/WatermarkVideoClient";
-import { AudioToVideoClient } from "@/components/tools/clients/AudioToVideoClient";
-import { AdjustImageClient } from "@/components/tools/clients/AdjustImageClient";
-import { ExcelToJsonClient } from "@/components/tools/clients/ExcelToJsonClient";
-import { MergeCsvClient } from "@/components/tools/clients/MergeCsvClient";
-import { SqlJsonClient } from "@/components/tools/clients/SqlJsonClient";
-import { CronBuilderClient } from "@/components/tools/clients/CronBuilderClient";
-import { TimezoneConverterClient } from "@/components/tools/clients/TimezoneConverterClient";
-import { AgeCalculatorClient } from "@/components/tools/clients/AgeCalculatorClient";
-import { RomanNumeralClient } from "@/components/tools/clients/RomanNumeralClient";
-import { ColorPaletteClient } from "@/components/tools/clients/ColorPaletteClient";
-import { EmailSignatureClient } from "@/components/tools/clients/EmailSignatureClient";
-import { SocialMediaCropClient } from "@/components/tools/clients/SocialMediaCropClient";
-import { ExifViewerClient } from "@/components/tools/clients/ExifViewerClient";
-import { MarkdownToWordClient } from "@/components/tools/clients/MarkdownToWordClient";
-import { PdfRedactionClient } from "@/components/tools/clients/PdfRedactionClient";
-import { ImageToTextClient } from "@/components/tools/clients/ImageToTextClient";
-import { PdfOcrClient } from "@/components/tools/clients/PdfOcrClient";
-import { HandwritingToTextClient } from "@/components/tools/clients/HandwritingToTextClient";
-import { BusinessCardScannerClient } from "@/components/tools/clients/BusinessCardScannerClient";
-import { ReceiptScannerClient } from "@/components/tools/clients/ReceiptScannerClient";
-import { ScreenshotToCodeClient } from "@/components/tools/clients/ScreenshotToCodeClient";
-import { ChangeBackgroundClient } from "@/components/tools/clients/ChangeBackgroundClient";
-import { ResumeBuilderClient } from "@/components/tools/clients/ResumeBuilderClient";
-import { CoverLetterClient } from "@/components/tools/clients/CoverLetterClient";
-import { ContractAnalyzerClient } from "@/components/tools/clients/ContractAnalyzerClient";
-import { VideoThumbnailClient } from "@/components/tools/clients/VideoThumbnailClient";
+import dynamic from "next/dynamic";
+const ServerJobClient = dynamic(() => import("@/components/tools/clients/ServerJobClient").then((m) => ({ default: m.ServerJobClient })));
+const SrtVttConvertClient = dynamic(() => import("@/components/tools/clients/SrtVttConvertClient").then((m) => ({ default: m.SrtVttConvertClient })));
+const SyncClient = dynamic(() => import("@/components/tools/clients/SyncClient").then((m) => ({ default: m.SyncClient })));
+const SrtToTextClient = dynamic(() => import("@/components/tools/clients/SrtToTextClient").then((m) => ({ default: m.SrtToTextClient })));
+const CleanClient = dynamic(() => import("@/components/tools/clients/CleanClient").then((m) => ({ default: m.CleanClient })));
+const EditorClient = dynamic(() => import("@/components/tools/clients/EditorClient").then((m) => ({ default: m.EditorClient })));
+const TranslateClient = dynamic(() => import("@/components/tools/clients/TranslateClient").then((m) => ({ default: m.TranslateClient })));
+const BatchTranslateClient = dynamic(() => import("@/components/tools/clients/BatchTranslateClient").then((m) => ({ default: m.BatchTranslateClient })));
+const YouTubeChaptersClient = dynamic(() => import("@/components/tools/clients/YouTubeChaptersClient").then((m) => ({ default: m.YouTubeChaptersClient })));
+const AutoSyncClient = dynamic(() => import("@/components/tools/clients/AutoSyncClient").then((m) => ({ default: m.AutoSyncClient })));
+const SubtitleGeneratorClient = dynamic(() => import("@/components/tools/clients/SubtitleGeneratorClient").then((m) => ({ default: m.SubtitleGeneratorClient })));
+const AddSubtitlesToVideoClient = dynamic(() => import("@/components/tools/clients/AddSubtitlesToVideoClient").then((m) => ({ default: m.AddSubtitlesToVideoClient })));
+const StyleSubtitlesClient = dynamic(() => import("@/components/tools/clients/StyleSubtitlesClient").then((m) => ({ default: m.StyleSubtitlesClient })));
+const ExtractSubtitlesClient = dynamic(() => import("@/components/tools/clients/ExtractSubtitlesClient").then((m) => ({ default: m.ExtractSubtitlesClient })));
+const TikTokSubtitlesClient = dynamic(() => import("@/components/tools/clients/TikTokSubtitlesClient").then((m) => ({ default: m.TikTokSubtitlesClient })));
+const TextToolClient = dynamic(() => import("@/components/tools/clients/TextToolClient").then((m) => ({ default: m.TextToolClient })));
+const RegexClient = dynamic(() => import("@/components/tools/clients/RegexClient").then((m) => ({ default: m.RegexClient })));
+const ColorConverterClient = dynamic(() => import("@/components/tools/clients/ColorConverterClient").then((m) => ({ default: m.ColorConverterClient })));
+const NumberBaseClient = dynamic(() => import("@/components/tools/clients/NumberBaseClient").then((m) => ({ default: m.NumberBaseClient })));
+const HashClient = dynamic(() => import("@/components/tools/clients/HashClient").then((m) => ({ default: m.HashClient })));
+const UnitConverterClient = dynamic(() => import("@/components/tools/clients/UnitConverterClient").then((m) => ({ default: m.UnitConverterClient })));
+const PasswordGenClient = dynamic(() => import("@/components/tools/clients/PasswordGenClient").then((m) => ({ default: m.PasswordGenClient })));
+const CaseConverterClient = dynamic(() => import("@/components/tools/clients/CaseConverterClient").then((m) => ({ default: m.CaseConverterClient })));
+const LoremIpsumClient = dynamic(() => import("@/components/tools/clients/LoremIpsumClient").then((m) => ({ default: m.LoremIpsumClient })));
+const UuidGeneratorClient = dynamic(() => import("@/components/tools/clients/UuidGeneratorClient").then((m) => ({ default: m.UuidGeneratorClient })));
+const UnixTimestampClient = dynamic(() => import("@/components/tools/clients/UnixTimestampClient").then((m) => ({ default: m.UnixTimestampClient })));
+const TextDiffClient = dynamic(() => import("@/components/tools/clients/TextDiffClient").then((m) => ({ default: m.TextDiffClient })));
+const VatCalculatorClient = dynamic(() => import("@/components/tools/clients/VatCalculatorClient").then((m) => ({ default: m.VatCalculatorClient })));
+const PercentageCalculatorClient = dynamic(() => import("@/components/tools/clients/PercentageCalculatorClient").then((m) => ({ default: m.PercentageCalculatorClient })));
+const LoanCalculatorClient = dynamic(() => import("@/components/tools/clients/LoanCalculatorClient").then((m) => ({ default: m.LoanCalculatorClient })));
+const TipCalculatorClient = dynamic(() => import("@/components/tools/clients/TipCalculatorClient").then((m) => ({ default: m.TipCalculatorClient })));
+const BmiCalculatorClient = dynamic(() => import("@/components/tools/clients/BmiCalculatorClient").then((m) => ({ default: m.BmiCalculatorClient })));
+const EnhanceImageClient = dynamic(() => import("@/components/tools/clients/EnhanceImageClient").then((m) => ({ default: m.EnhanceImageClient })));
+const MemeGeneratorClient = dynamic(() => import("@/components/tools/clients/MemeGeneratorClient").then((m) => ({ default: m.MemeGeneratorClient })));
+const PhotoEditorClient = dynamic(() => import("@/components/tools/clients/PhotoEditorClient").then((m) => ({ default: m.PhotoEditorClient })));
+const HtmlToImageClient = dynamic(() => import("@/components/tools/clients/HtmlToImageClient").then((m) => ({ default: m.HtmlToImageClient })));
+const BlurFaceClient = dynamic(() => import("@/components/tools/clients/BlurFaceClient").then((m) => ({ default: m.BlurFaceClient })));
+const HeicConvertClient = dynamic(() => import("@/components/tools/clients/HeicConvertClient").then((m) => ({ default: m.HeicConvertClient })));
+const OrganizePdfClient = dynamic(() => import("@/components/tools/clients/OrganizePdfClient").then((m) => ({ default: m.OrganizePdfClient })));
+const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/ExtractPdfPagesClient").then((m) => ({ default: m.ExtractPdfPagesClient })));
+const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
+const ImagesToGifClient = dynamic(() => import("@/components/tools/clients/ImagesToGifClient").then((m) => ({ default: m.ImagesToGifClient })));
+const ImageCollageClient = dynamic(() => import("@/components/tools/clients/ImageCollageClient").then((m) => ({ default: m.ImageCollageClient })));
+const PasswordCheckerClient = dynamic(() => import("@/components/tools/clients/PasswordCheckerClient").then((m) => ({ default: m.PasswordCheckerClient })));
+const SslCheckerClient = dynamic(() => import("@/components/tools/clients/SslCheckerClient").then((m) => ({ default: m.SslCheckerClient })));
+const EmailCheckerClient = dynamic(() => import("@/components/tools/clients/EmailCheckerClient").then((m) => ({ default: m.EmailCheckerClient })));
+const PhishingDetectorClient = dynamic(() => import("@/components/tools/clients/PhishingDetectorClient").then((m) => ({ default: m.PhishingDetectorClient })));
+const UrlScannerClient = dynamic(() => import("@/components/tools/clients/UrlScannerClient").then((m) => ({ default: m.UrlScannerClient })));
+const ImageToBase64Client = dynamic(() => import("@/components/tools/clients/ImageToBase64Client").then((m) => ({ default: m.ImageToBase64Client })));
+const FlipImageClient = dynamic(() => import("@/components/tools/clients/FlipImageClient").then((m) => ({ default: m.FlipImageClient })));
+const CurrencyConverterClient = dynamic(() => import("@/components/tools/clients/CurrencyConverterClient").then((m) => ({ default: m.CurrencyConverterClient })));
+const WatermarkPdfClient = dynamic(() => import("@/components/tools/clients/WatermarkPdfClient").then((m) => ({ default: m.WatermarkPdfClient })));
+const PdfPageNumbersClient = dynamic(() => import("@/components/tools/clients/PdfPageNumbersClient").then((m) => ({ default: m.PdfPageNumbersClient })));
+const ComparePdfClient = dynamic(() => import("@/components/tools/clients/ComparePdfClient").then((m) => ({ default: m.ComparePdfClient })));
+const ImageToIcoClient = dynamic(() => import("@/components/tools/clients/ImageToIcoClient").then((m) => ({ default: m.ImageToIcoClient })));
+const WatermarkImageClient = dynamic(() => import("@/components/tools/clients/WatermarkImageClient").then((m) => ({ default: m.WatermarkImageClient })));
+const ExtractColorsClient = dynamic(() => import("@/components/tools/clients/ExtractColorsClient").then((m) => ({ default: m.ExtractColorsClient })));
+const PdfToExcelClient = dynamic(() => import("@/components/tools/clients/PdfToExcelClient").then((m) => ({ default: m.PdfToExcelClient })));
+const InvoiceGeneratorClient = dynamic(() => import("@/components/tools/clients/InvoiceGeneratorClient").then((m) => ({ default: m.InvoiceGeneratorClient })));
+const QrCodeReaderClient = dynamic(() => import("@/components/tools/clients/QrCodeReaderClient").then((m) => ({ default: m.QrCodeReaderClient })));
+const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/clients/BarcodeGeneratorClient").then((m) => ({ default: m.BarcodeGeneratorClient })));
+const BarcodeReaderClient = dynamic(() => import("@/components/tools/clients/BarcodeReaderClient").then((m) => ({ default: m.BarcodeReaderClient })));
+const PdfMergeClient = dynamic(() => import("@/components/tools/clients/PdfMergeClient").then((m) => ({ default: m.PdfMergeClient })));
+const PdfSplitClient = dynamic(() => import("@/components/tools/clients/PdfSplitClient").then((m) => ({ default: m.PdfSplitClient })));
+const PdfRotateClient = dynamic(() => import("@/components/tools/clients/PdfRotateClient").then((m) => ({ default: m.PdfRotateClient })));
+const ImagesToPdfClient = dynamic(() => import("@/components/tools/clients/ImagesToPdfClient").then((m) => ({ default: m.ImagesToPdfClient })));
+const ZipCreateClient = dynamic(() => import("@/components/tools/clients/ZipCreateClient").then((m) => ({ default: m.ZipCreateClient })));
+const ZipExtractClient = dynamic(() => import("@/components/tools/clients/ZipExtractClient").then((m) => ({ default: m.ZipExtractClient })));
+const QrGeneratorClient = dynamic(() => import("@/components/tools/clients/QrGeneratorClient").then((m) => ({ default: m.QrGeneratorClient })));
+const PendingClient = dynamic(() => import("@/components/tools/clients/PendingClient").then((m) => ({ default: m.PendingClient })));
+const FfmpegToolClient = dynamic(() => import("@/components/tools/clients/FfmpegToolClient").then((m) => ({ default: m.FfmpegToolClient })));
+const RemoveBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveBackgroundClient").then((m) => ({ default: m.RemoveBackgroundClient })));
+const RemoveVideoBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveVideoBackgroundClient").then((m) => ({ default: m.RemoveVideoBackgroundClient })));
+const PdfToTextClient = dynamic(() => import("@/components/tools/clients/PdfToTextClient").then((m) => ({ default: m.PdfToTextClient })));
+const PdfToWordClient = dynamic(() => import("@/components/tools/clients/PdfToWordClient").then((m) => ({ default: m.PdfToWordClient })));
+const MergeAudioClient = dynamic(() => import("@/components/tools/clients/MergeAudioClient").then((m) => ({ default: m.MergeAudioClient })));
+const PdfToJpgClient = dynamic(() => import("@/components/tools/clients/PdfToJpgClient").then((m) => ({ default: m.PdfToJpgClient })));
+const WordToPdfClient = dynamic(() => import("@/components/tools/clients/WordToPdfClient").then((m) => ({ default: m.WordToPdfClient })));
+const HtmlToPdfClient = dynamic(() => import("@/components/tools/clients/HtmlToPdfClient").then((m) => ({ default: m.HtmlToPdfClient })));
+const ExcelToPdfClient = dynamic(() => import("@/components/tools/clients/ExcelToPdfClient").then((m) => ({ default: m.ExcelToPdfClient })));
+const CompressPdfClient = dynamic(() => import("@/components/tools/clients/CompressPdfClient").then((m) => ({ default: m.CompressPdfClient })));
+const WatermarkVideoClient = dynamic(() => import("@/components/tools/clients/WatermarkVideoClient").then((m) => ({ default: m.WatermarkVideoClient })));
+const AudioToVideoClient = dynamic(() => import("@/components/tools/clients/AudioToVideoClient").then((m) => ({ default: m.AudioToVideoClient })));
+const AdjustImageClient = dynamic(() => import("@/components/tools/clients/AdjustImageClient").then((m) => ({ default: m.AdjustImageClient })));
+const ExcelToJsonClient = dynamic(() => import("@/components/tools/clients/ExcelToJsonClient").then((m) => ({ default: m.ExcelToJsonClient })));
+const MergeCsvClient = dynamic(() => import("@/components/tools/clients/MergeCsvClient").then((m) => ({ default: m.MergeCsvClient })));
+const SqlJsonClient = dynamic(() => import("@/components/tools/clients/SqlJsonClient").then((m) => ({ default: m.SqlJsonClient })));
+const CronBuilderClient = dynamic(() => import("@/components/tools/clients/CronBuilderClient").then((m) => ({ default: m.CronBuilderClient })));
+const TimezoneConverterClient = dynamic(() => import("@/components/tools/clients/TimezoneConverterClient").then((m) => ({ default: m.TimezoneConverterClient })));
+const AgeCalculatorClient = dynamic(() => import("@/components/tools/clients/AgeCalculatorClient").then((m) => ({ default: m.AgeCalculatorClient })));
+const RomanNumeralClient = dynamic(() => import("@/components/tools/clients/RomanNumeralClient").then((m) => ({ default: m.RomanNumeralClient })));
+const ColorPaletteClient = dynamic(() => import("@/components/tools/clients/ColorPaletteClient").then((m) => ({ default: m.ColorPaletteClient })));
+const EmailSignatureClient = dynamic(() => import("@/components/tools/clients/EmailSignatureClient").then((m) => ({ default: m.EmailSignatureClient })));
+const SocialMediaCropClient = dynamic(() => import("@/components/tools/clients/SocialMediaCropClient").then((m) => ({ default: m.SocialMediaCropClient })));
+const ExifViewerClient = dynamic(() => import("@/components/tools/clients/ExifViewerClient").then((m) => ({ default: m.ExifViewerClient })));
+const MarkdownToWordClient = dynamic(() => import("@/components/tools/clients/MarkdownToWordClient").then((m) => ({ default: m.MarkdownToWordClient })));
+const PdfRedactionClient = dynamic(() => import("@/components/tools/clients/PdfRedactionClient").then((m) => ({ default: m.PdfRedactionClient })));
+const ImageToTextClient = dynamic(() => import("@/components/tools/clients/ImageToTextClient").then((m) => ({ default: m.ImageToTextClient })));
+const PdfOcrClient = dynamic(() => import("@/components/tools/clients/PdfOcrClient").then((m) => ({ default: m.PdfOcrClient })));
+const HandwritingToTextClient = dynamic(() => import("@/components/tools/clients/HandwritingToTextClient").then((m) => ({ default: m.HandwritingToTextClient })));
+const BusinessCardScannerClient = dynamic(() => import("@/components/tools/clients/BusinessCardScannerClient").then((m) => ({ default: m.BusinessCardScannerClient })));
+const ReceiptScannerClient = dynamic(() => import("@/components/tools/clients/ReceiptScannerClient").then((m) => ({ default: m.ReceiptScannerClient })));
+const ScreenshotToCodeClient = dynamic(() => import("@/components/tools/clients/ScreenshotToCodeClient").then((m) => ({ default: m.ScreenshotToCodeClient })));
+const ImageToTableClient = dynamic(() => import("@/components/tools/clients/ImageToTableClient").then((m) => ({ default: m.ImageToTableClient })));
+const VoiceToTextClient = dynamic(() => import("@/components/tools/clients/VoiceToTextClient").then((m) => ({ default: m.VoiceToTextClient })));
+const CitationGeneratorClient = dynamic(() => import("@/components/tools/clients/CitationGeneratorClient").then((m) => ({ default: m.CitationGeneratorClient })));
+const AiDetectorClient = dynamic(() => import("@/components/tools/clients/AiDetectorClient").then((m) => ({ default: m.AiDetectorClient })));
+const SignPdfClient = dynamic(() => import("@/components/tools/clients/SignPdfClient").then((m) => ({ default: m.SignPdfClient })));
+const FillPdfFormClient = dynamic(() => import("@/components/tools/clients/FillPdfFormClient").then((m) => ({ default: m.FillPdfFormClient })));
+const TranslateDocumentClient = dynamic(() => import("@/components/tools/clients/TranslateDocumentClient").then((m) => ({ default: m.TranslateDocumentClient })));
+const ChangeBackgroundClient = dynamic(() => import("@/components/tools/clients/ChangeBackgroundClient").then((m) => ({ default: m.ChangeBackgroundClient })));
+const ResumeBuilderClient = dynamic(() => import("@/components/tools/clients/ResumeBuilderClient").then((m) => ({ default: m.ResumeBuilderClient })));
+const CoverLetterClient = dynamic(() => import("@/components/tools/clients/CoverLetterClient").then((m) => ({ default: m.CoverLetterClient })));
+const ContractAnalyzerClient = dynamic(() => import("@/components/tools/clients/ContractAnalyzerClient").then((m) => ({ default: m.ContractAnalyzerClient })));
+const VideoThumbnailClient = dynamic(() => import("@/components/tools/clients/VideoThumbnailClient").then((m) => ({ default: m.VideoThumbnailClient })));
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
-import { ImageToolClient } from "@/components/tools/clients/ImageToolClient";
-import { AiTextClient } from "@/components/tools/clients/AiTextClient";
+const ImageToolClient = dynamic(() => import("@/components/tools/clients/ImageToolClient").then((m) => ({ default: m.ImageToolClient })));
+const AiTextClient = dynamic(() => import("@/components/tools/clients/AiTextClient").then((m) => ({ default: m.AiTextClient })));
 import { TEXT_TOOLS } from "@/lib/text-tools";
 import { IMAGE_TOOLS } from "@/lib/image-tools";
 import { AI_TEXT_TOOLS } from "@/lib/ai-text-tools";
@@ -106,6 +135,10 @@ export function generateStaticParams() {
     for (const tool of TOOLS) {
       params.push({ locale, slug: tool.slug });
     }
+    // Localized category hubs (/<locale>/documents, …) share this route.
+    for (const c of CATEGORIES) {
+      params.push({ locale, slug: c.id });
+    }
   }
   return params;
 }
@@ -117,9 +150,15 @@ export function generateMetadata({
 }): Metadata {
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const tool = TOOLS_BY_SLUG[params.slug];
-  if (!tool) return {};
-  const i18n = resolveToolI18n(params.slug, params.locale);
-  return buildToolMetadata(tool, params.locale, i18n ?? undefined);
+  if (tool) {
+    const i18n = resolveToolI18n(params.slug, params.locale);
+    return buildToolMetadata(tool, params.locale, i18n ?? undefined);
+  }
+  // Category hub?
+  if (params.slug in CATEGORY_BY_ID) {
+    return categoryMetadata(params.slug as ToolCategory, params.locale);
+  }
+  return {};
 }
 
 export default function LocalisedToolPage({
@@ -129,7 +168,13 @@ export default function LocalisedToolPage({
 }) {
   if (!isLocale(params.locale) || params.locale === "en") notFound();
   const tool = TOOLS_BY_SLUG[params.slug];
-  if (!tool) notFound();
+  // Category hub: same route, render the localized CategoryPage.
+  if (!tool) {
+    if (params.slug in CATEGORY_BY_ID) {
+      return <CategoryPage category={params.slug as ToolCategory} locale={params.locale} />;
+    }
+    notFound();
+  }
   const locale = params.locale;
   const i18n = resolveToolI18n(params.slug, locale);
   const override = i18n ? { name: i18n.name, h1: i18n.h1, metaDescription: i18n.metaDescription } : undefined;
@@ -426,6 +471,69 @@ export default function LocalisedToolPage({
     case "vat-calculator":
       body = <VatCalculatorClient />;
       break;
+    case "percentage-calculator":
+      body = <PercentageCalculatorClient />;
+      break;
+    case "loan-calculator":
+      body = <LoanCalculatorClient />;
+      break;
+    case "tip-calculator":
+      body = <TipCalculatorClient />;
+      break;
+    case "bmi-calculator":
+      body = <BmiCalculatorClient />;
+      break;
+    case "enhance-image":
+      body = <EnhanceImageClient />;
+      break;
+    case "meme-generator":
+      body = <MemeGeneratorClient />;
+      break;
+    case "photo-editor":
+      body = <PhotoEditorClient />;
+      break;
+    case "html-to-image":
+      body = <HtmlToImageClient />;
+      break;
+    case "blur-face":
+      body = <BlurFaceClient />;
+      break;
+    case "heic-to-jpg":
+      body = <HeicConvertClient target="jpeg" />;
+      break;
+    case "heic-to-png":
+      body = <HeicConvertClient target="png" />;
+      break;
+    case "organize-pdf":
+      body = <OrganizePdfClient />;
+      break;
+    case "extract-pdf-pages":
+      body = <ExtractPdfPagesClient />;
+      break;
+    case "edit-pdf-metadata":
+      body = <EditPdfMetadataClient />;
+      break;
+    case "images-to-gif":
+      body = <ImagesToGifClient />;
+      break;
+    case "image-collage":
+      body = <ImageCollageClient />;
+      break;
+    case "password-checker":
+      body = <PasswordCheckerClient />;
+      break;
+    case "ssl-checker":
+      body = <SslCheckerClient />;
+      break;
+    case "email-checker":
+      body = <EmailCheckerClient />;
+      break;
+    case "phishing-detector":
+      body = <PhishingDetectorClient />;
+      break;
+    case "url-scanner":
+      body = <UrlScannerClient />;
+      break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;
       break;
@@ -470,6 +578,27 @@ export default function LocalisedToolPage({
       break;
     case "screenshot-to-code":
       body = <ScreenshotToCodeClient />;
+      break;
+    case "image-to-table":
+      body = <ImageToTableClient />;
+      break;
+    case "voice-to-text":
+      body = <VoiceToTextClient maxMb={tool.freeMaxMb} />;
+      break;
+    case "citation-generator":
+      body = <CitationGeneratorClient />;
+      break;
+    case "ai-detector":
+      body = <AiDetectorClient />;
+      break;
+    case "sign-pdf":
+      body = <SignPdfClient />;
+      break;
+    case "fill-pdf-form":
+      body = <FillPdfFormClient />;
+      break;
+    case "translate-document-with-layout":
+      body = <TranslateDocumentClient />;
       break;
     case "change-background":
       body = <ChangeBackgroundClient />;

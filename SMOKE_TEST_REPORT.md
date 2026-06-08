@@ -1,4 +1,4 @@
-# Konver smoke test — 156/156 passed
+# Konvertools smoke test — 213/213 passed
 
 ✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
 
@@ -30,6 +30,8 @@ _None._
 - url-encode
 - jwt-decoder
 - word-counter
+- clean-ai-export
+- anonymize-text
 - xml-to-json
 - json-to-yaml
 - yaml-to-json
@@ -42,6 +44,8 @@ _None._
 - png-to-jpg
 - jpg-to-webp
 - png-to-webp
+- webp-to-jpg
+- webp-to-png
 - svg-to-png
 - compress-image
 - resize-image
@@ -75,6 +79,18 @@ _None._
 - cron-builder
 - invoice-generator
 - vat-calculator
+- percentage-calculator
+- loan-calculator
+- tip-calculator
+- bmi-calculator
+- ssl-checker
+- email-checker
+- phishing-detector
+- url-scanner
+- password-checker
+- ssh-key-generator
+- text-encryptor
+- file-encryptor
 - merge-pdf
 - split-pdf
 - rotate-pdf
@@ -90,6 +106,9 @@ _None._
 - watermark-pdf
 - pdf-page-numbers
 - compare-pdf
+- organize-pdf
+- extract-pdf-pages
+- edit-pdf-metadata
 - mp3-to-wav
 - wav-to-mp3
 - compress-audio
@@ -125,6 +144,17 @@ _None._
 - image-to-base64
 - image-to-ico
 - watermark-image
+- enhance-image
+- meme-generator
+- photo-editor
+- image-to-jpg
+- image-from-jpg
+- html-to-image
+- heic-to-jpg
+- heic-to-png
+- images-to-gif
+- image-collage
+- blur-face
 - extract-colors
 - remove-video-background
 - qr-generator
@@ -149,6 +179,16 @@ _None._
 - business-card-scanner
 - receipt-scanner
 - screenshot-to-code
+- image-to-table
+- voice-to-text
+- synonyms-finder
+- conjugation
+- context-examples
+- citation-generator
+- ai-detector
+- translate-document-with-layout
+- fill-pdf-form
+- sign-pdf
 - image-to-text
 - pdf-ocr
 - age-calculator [interactive]
@@ -162,3 +202,20 @@ _None._
 - case-converter [interactive]
 - qr-generator [interactive]
 - wav-to-mp3 [interactive]
+- og-image /og/i
+- favicon /icon
+- apple-icon /apple-icon
+- manifest /manifest.webmanifest
+- brand logo /Logo.png
+- AI ai-process:synonyms
+- AI ai-process:conjugate
+- AI ai-process:rephrase (no markdown)
+- AI ai-process:translate (target lang)
+- AI ai-process:ai-detect (JSON shape)
+- AI ai-process:citation (APA)
+- AI security:validate_email (gmail valid)
+- AI security:validate_email (no domain)
+- AI security:scan_url (safe)
+- AI security:ssl_check (valid cert)
+- AI security:password_check (known-pwned)
+- AI security:analyze_phishing (scam → flagged)

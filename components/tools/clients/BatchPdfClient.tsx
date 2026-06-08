@@ -2,8 +2,6 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Files } from "lucide-react";
-import JSZip from "jszip";
-import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 
@@ -30,6 +28,7 @@ const PRESETS = [
 const MAX_FILES = 50;
 
 async function compressOne(file: File, scale: number, quality: number, pdfjs: PdfJs): Promise<Blob> {
+  const { PDFDocument } = await import("pdf-lib");
   const src = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
   const out = await PDFDocument.create();
   for (let i = 1; i <= src.numPages; i++) {
@@ -96,6 +95,7 @@ export function BatchPdfClient() {
     const finished = await new Promise<Job[]>((res) => setJobs((s) => { res(s); return s; }));
     const ok = finished.filter((j) => j.blob && j.outName);
     if (ok.length > 0) {
+      const { default: JSZip } = await import("jszip");
       const zip = new JSZip();
       ok.forEach((j) => zip.file(j.outName!, j.blob!));
       const zipBlob = await zip.generateAsync({ type: "blob" });

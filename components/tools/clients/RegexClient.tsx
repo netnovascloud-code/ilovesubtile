@@ -15,7 +15,7 @@ const FLAGS = [
 export function RegexClient() {
   const [pattern, setPattern] = useState("\\b\\w+@\\w+\\.\\w+\\b");
   const [flags, setFlags] = useState<Record<string, boolean>>({ g: true, i: false, m: false, s: false, u: false });
-  const [text, setText] = useState("Contact ada@konver.app or sales@konver.app for details.");
+  const [text, setText] = useState("Contact ada@konvertools.com or sales@konvertools.com for details.");
 
   const flagStr = Object.entries(flags).filter(([, on]) => on).map(([f]) => f).join("");
 

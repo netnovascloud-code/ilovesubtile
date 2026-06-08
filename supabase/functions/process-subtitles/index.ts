@@ -1,4 +1,4 @@
-// Konver — audio/video → SRT via Mistral.
+// Konvertools — audio/video → SRT via Mistral.
 //
 // Deploy: supabase functions deploy process-subtitles
 // Secret:  supabase secrets set MISTRAL_API_KEY=...
@@ -11,12 +11,13 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konvertools.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -36,6 +37,53 @@ async function getCaller(req: Request) {
 }
 function getServiceClient() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+}
+
+// Server-side AI quota, mirroring ai-process / ai-vision. Free = rolling 24h on
+// profiles.daily_usage; Pro/Business = monthly (UTC). Without this a direct
+// authenticated POST bypasses the client-side cap and can drive unbounded paid
+// transcription cost. Fail-open on any DB error so a counter glitch never
+// blocks a real (paying) user.
+const QUOTA_DAILY: Record<string, number> = { free: 3 };
+const QUOTA_MONTHLY: Record<string, number> = { pro: 500, business: 3000 };
+async function enforceAiQuota(
+  svc: ReturnType<typeof getServiceClient>,
+  userId: string,
+): Promise<{ ok: true } | { ok: false; status: number; body: Record<string, unknown> }> {
+  try {
+    const { data: prof } = await svc.from("profiles")
+      .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
+      .eq("id", userId).maybeSingle();
+    const plan = (prof?.plan as string) ?? "free";
+    if (plan === "free") {
+      const limit = QUOTA_DAILY.free;
+      const now = Date.now();
+      const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;
+      const overdue = now - resetAt > 24 * 3600 * 1000;
+      const current = overdue ? 0 : (prof?.daily_usage ?? 0);
+      if (current >= limit) {
+        return { ok: false, status: 429, body: { error: "daily_limit", plan, limit, used: current, remaining: 0, resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() } };
+      }
+      await svc.from("profiles").update({
+        daily_usage: current + 1,
+        usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
+      }).eq("id", userId);
+    } else {
+      const limit = QUOTA_MONTHLY[plan] ?? QUOTA_MONTHLY.pro;
+      const d = new Date();
+      const month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+      const used = prof?.monthly_ai_month === month ? (prof?.monthly_ai_usage ?? 0) : 0;
+      if (used >= limit) {
+        const next = new Date();
+        next.setUTCDate(1); next.setUTCHours(0, 0, 0, 0); next.setUTCMonth(next.getUTCMonth() + 1);
+        return { ok: false, status: 429, body: { error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() } };
+      }
+      await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+    }
+    return { ok: true };
+  } catch {
+    return { ok: true }; // fail-open — never block on a counter glitch
+  }
 }
 
 type Segment = { start: number; end: number; text: string };
@@ -80,7 +128,13 @@ Deno.serve(async (req) => {
   const mistralKey = Deno.env.get("MISTRAL_API_KEY");
   if (!mistralKey) return json({ error: "missing_mistral_key" }, { status: 500 });
 
+  // Reject anonymous callers BEFORE any expensive work. process-subtitles
+  // requires a signed-in user (results live under a UID-namespaced storage
+  // folder). Checking here — rather than after the Voxtral transcription —
+  // also stops anonymous holders of the public anon key from burning paid
+  // Mistral transcription cost only to receive a 401 at the end.
   const caller = await getCaller(req);
+  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
   const supabase = getServiceClient();
 
   const form = await req.formData();
@@ -96,6 +150,10 @@ Deno.serve(async (req) => {
   const fname = (file.name || "").toLowerCase();
   const bad = [".exe", ".dll", ".bat", ".cmd", ".sh", ".ps1", ".dmg", ".msi", ".scr", ".com", ".vbs", ".js", ".jar"];
   if (bad.some((ext) => fname.endsWith(ext))) return json({ error: "bad_request", message: "Executable file types are not accepted." }, { status: 400 });
+
+  // Enforce the AI quota server-side BEFORE the expensive Voxtral call.
+  const quota = await enforceAiQuota(supabase, caller.id);
+  if (!quota.ok) return json(quota.body, { status: quota.status });
 
   const voxtralForm = new FormData();
   voxtralForm.append("file", file);
@@ -120,11 +178,6 @@ Deno.serve(async (req) => {
 
   const srt = srtFromSegments(segments);
 
-  // Reject anonymous uploads — they otherwise share an "anonymous/" prefix and
-  // can be abused to host attacker-controlled filenames on the supabase.co
-  // domain. Authenticated users keep their own UID-namespaced folder.
-  if (!caller) return json({ error: "unauthorized" }, { status: 401 });
-
   // Sanitize the source filename: strip everything but [a-z0-9._-], drop
   // leading dots, and cap length. This prevents storage-key injection like
   // `../../<victim-uuid>/file.srt` even if the storage backend ever decided
@@ -144,16 +197,14 @@ Deno.serve(async (req) => {
 
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);
 
-  if (caller) {
-    await supabase.from("jobs").insert({
-      user_id: caller.id,
-      tool: "subtitle-generator",
-      status: "done",
-      output_file_url: signed?.signedUrl ?? null,
-      language_source: verbose?.language ?? null,
-      completed_at: new Date().toISOString(),
-    });
-  }
+  await supabase.from("jobs").insert({
+    user_id: caller.id,
+    tool: "subtitle-generator",
+    status: "done",
+    output_file_url: signed?.signedUrl ?? null,
+    language_source: verbose?.language ?? null,
+    completed_at: new Date().toISOString(),
+  });
 
   return json({ url: signed?.signedUrl, filename });
 });

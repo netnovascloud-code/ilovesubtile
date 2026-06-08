@@ -15,7 +15,15 @@ function initials(email: string | null | undefined): string {
   return (a + b).toUpperCase();
 }
 
-export function UserMenu({ labels }: { labels: { login: string; start: string; dashboard: string; billing: string; logout: string } }) {
+export function UserMenu({
+  labels,
+  loginHref = "/login",
+  registerHref = "/register",
+}: {
+  labels: { login: string; start: string; dashboard: string; billing: string; logout: string };
+  loginHref?: string;
+  registerHref?: string;
+}) {
   const { user, plan, loading } = useUser();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,13 +51,13 @@ export function UserMenu({ labels }: { labels: { login: string; start: string; d
     return (
       <div className="flex items-center gap-2">
         <Link
-          href="/login"
+          href={loginHref}
           className="inline-flex h-8 items-center rounded px-3 text-sm font-medium text-ink-700 hover:bg-ink-50"
         >
           {labels.login}
         </Link>
         <Link
-          href="/register"
+          href={registerHref}
           className="inline-flex h-8 items-center rounded bg-brand-500 px-3 text-sm font-medium text-white hover:bg-brand-600"
         >
           {labels.start}

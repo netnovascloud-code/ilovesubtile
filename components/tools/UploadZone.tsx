@@ -7,6 +7,7 @@ import { cn, formatBytes } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
 import { getChrome, t as tt } from "@/lib/i18n/chrome";
+import { FileTooLargeModal, type FileTooLargeReason } from "@/components/billing/FileTooLargeModal";
 
 export type UploadZoneProps = {
   accept: string[];
@@ -20,6 +21,7 @@ export type UploadZoneProps = {
 
 export function UploadZone({ accept, maxMb, onFile, cta, multiple = false, note }: UploadZoneProps) {
   const [error, setError] = useState<string | null>(null);
+  const [tooLarge, setTooLarge] = useState<FileTooLargeReason | null>(null);
   const locale = useLocale();
   const chrome = getChrome(locale);
   const t = chrome.upload;
@@ -29,6 +31,9 @@ export function UploadZone({ accept, maxMb, onFile, cta, multiple = false, note 
       if (!accepted.length) return;
       const file = accepted[0];
       if (file.size > maxMb * 1024 * 1024) {
+        // Part 6 — clear blocking modal (with upgrade CTA) instead of a silent
+        // inline error. Keep the inline line too as a non-blocking fallback.
+        setTooLarge({ size: formatBytes(file.size), limitMb: maxMb });
         setError(tt(t.fileTooLarge, { size: formatBytes(file.size), mb: maxMb }));
         return;
       }
@@ -81,6 +86,7 @@ export function UploadZone({ accept, maxMb, onFile, cta, multiple = false, note 
       {error && (
         <p className="mt-3 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>
       )}
+      <FileTooLargeModal reason={tooLarge} onClose={() => setTooLarge(null)} />
     </div>
   );
 }

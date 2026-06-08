@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { callTool } from "@/lib/tool-api";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { CharMeter } from "@/components/tools/CharMeter";
+import { useCharLimit } from "@/hooks/useCharLimit";
+import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
 
 const STYLES = [
   "Professional", "Casual", "Academic", "Creative",
@@ -76,16 +79,28 @@ export function RephraserClient() {
   const [style, setStyle] = useState<string>(STYLES[0]);
   const [reformulated, setReformulated] = useState<string>("");
   const [copied, setCopied] = useState(false);
+  const [quotaReason, setQuotaReason] = useState<QuotaReason | null>(null);
   const reqId = useRef(0);
+  const meter = useCharLimit(input);
 
   async function runCorrect() {
     const text = input.trim();
-    if (!text) return;
+    if (!text || meter.over) return;
     setLoading(true); setError(null); setCorrected(""); setDecisions({});
     try {
       const res = await callTool("fix-grammar", { task: "grammar", text });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) { setError(data.error === "daily_limit" ? "Daily free limit reached." : "Could not run the correction."); return; }
+      if (!res.ok) {
+        if (data.error === "daily_limit" || data.error === "monthly_limit") {
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
+        setError("Could not run the correction.");
+        return;
+      }
       setCorrected(data.output ?? "");
     } catch { setError("Network error — please try again."); }
     finally { setLoading(false); }
@@ -96,6 +111,7 @@ export function RephraserClient() {
     if (tab !== "reformulate") return;
     const text = input.trim();
     if (!text) { setReformulated(""); return; }
+    if (meter.over) { setReformulated(""); setLoading(false); return; }
     setLoading(true);
     const id = ++reqId.current;
     const timer = setTimeout(async () => {
@@ -103,6 +119,14 @@ export function RephraserClient() {
         const res = await callTool("rephrase-text", { task: "rephrase", text, options: { style } });
         const data = await res.json().catch(() => ({}));
         if (id !== reqId.current) return;
+        if (!res.ok && (data.error === "daily_limit" || data.error === "monthly_limit")) {
+          setReformulated("");
+          setQuotaReason({
+            kind: data.error === "monthly_limit" ? "monthly" : "daily",
+            limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
+          });
+          return;
+        }
         setReformulated(res.ok ? (data.output ?? "") : "—");
       } catch {
         if (id === reqId.current) setReformulated("—");
@@ -111,7 +135,7 @@ export function RephraserClient() {
       }
     }, 500);
     return () => clearTimeout(timer);
-  }, [tab, input, style]);
+  }, [tab, input, style, meter.over]);
 
   const { items, changes } = useMemo(() => {
     if (!corrected || !input.trim()) return { items: [], changes: [] as Change[] };
@@ -175,10 +199,12 @@ export function RephraserClient() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={tab === "correct" ? "Paste text to check spelling, grammar and style…" : "Paste text to rephrase in the selected style…"}
-            className="h-72 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100"
+            className={cn("h-72 w-full resize-y rounded-lg border bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2",
+              meter.over ? "border-red-300 focus:border-red-400 focus:ring-red-100" : "border-ink-200 focus:border-brand-400 focus:ring-brand-100")}
           />
+          <CharMeter state={meter} />
           {tab === "correct" && (
-            <Button onClick={runCorrect} disabled={!input.trim() || loading} size="sm" className="mt-2">
+            <Button onClick={runCorrect} disabled={!input.trim() || loading || meter.over} size="sm" className="mt-2">
               <Sparkles className="h-3.5 w-3.5" /> {loading ? "Checking…" : "Check text"}
             </Button>
           )}
@@ -251,6 +277,7 @@ export function RephraserClient() {
 
       {error && <p className="flex items-start gap-1.5 text-sm text-red-600"><AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {error}</p>}
       <p className="text-xs text-ink-400">Your text is never stored. Powered by advanced AI.</p>
+      <QuotaReachedModal reason={quotaReason} onClose={() => setQuotaReason(null)} />
     </div>
   );
 }

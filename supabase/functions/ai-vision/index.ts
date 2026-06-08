@@ -1,4 +1,4 @@
-// Konver — Mistral Vision tasks (Pixtral Large). POST JSON:
+// Konvertools — Mistral Vision tasks (Pixtral Large). POST JSON:
 //   { task, image, prompt? }
 // where `image` is a data URL (data:image/...;base64,...) OR a publicly
 // reachable URL. Returns either `{ output: string }` or `{ data: object }`
@@ -12,12 +12,13 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const STATIC_ORIGINS = new Set<string>([
+  "https://konvertools.com", "https://www.konvertools.com",
   "https://konver.app", "https://www.konver.app",
   "http://localhost:3000", "http://127.0.0.1:3000",
 ]);
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("origin") ?? "";
-  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konver.app";
+  const allow = STATIC_ORIGINS.has(o) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : "https://konvertools.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Vary": "Origin",
@@ -26,9 +27,17 @@ function corsFor(req: Request): Record<string, string> {
   };
 }
 
-const DAILY_LIMIT: Record<string, number> = { free: 2, pro: Infinity, business: Infinity };
+// Quota mirrors of ai-process — free is a rolling 24h counter, Pro/Business
+// are monthly (UTC calendar month). Keep in sync with lib/ai-quotas.ts.
+// KONVER quotas: signed-in free = 3/day (anonymous is gated client-side at 2).
+const DAILY_LIMIT: Record<string, number> = { free: 3, pro: 0, business: 0 };
+const MONTHLY_LIMIT: Record<string, number> = { free: 0, pro: 500, business: 3000 };
+function utcMonth(): string {
+  const d = new Date();
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+}
 
-type VisionTask = "ocr-handwriting" | "business-card" | "receipt" | "screenshot-to-code";
+type VisionTask = "ocr-handwriting" | "business-card" | "receipt" | "screenshot-to-code" | "image-to-table";
 
 const SYSTEMS: Record<VisionTask, { sys: string; json: boolean }> = {
   "ocr-handwriting": {
@@ -46,6 +55,10 @@ const SYSTEMS: Record<VisionTask, { sys: string; json: boolean }> = {
   "screenshot-to-code": {
     sys: "You receive a screenshot of a UI. Produce a single self-contained HTML5 document that recreates the visible layout as closely as possible using semantic HTML and Tailwind CSS utility classes (via the official Tailwind CDN <script src=\"https://cdn.tailwindcss.com\"></script>). Use placeholder text/images for non-essential content. Output ONLY the HTML, starting with <!doctype html>.",
     json: false,
+  },
+  "image-to-table": {
+    sys: 'You receive an image containing a table, spreadsheet, form, or columnar/tabular data. Extract it and return ONLY a JSON object of the shape {"headers": string[], "rows": string[][]}. `headers` is the column header row (use an empty array if there is no clear header). Every entry in `rows` is an array of cell strings with the SAME length as `headers` (or as the widest row when there are no headers); pad missing cells with "". Preserve cell text exactly as shown — keep numbers as plain strings, do not strip currency symbols or reformat. Merge multi-line cells onto one line. Do not add commentary.',
+    json: true,
   },
 };
 
@@ -69,6 +82,11 @@ Deno.serve(async (req) => {
   const image = (body.image ?? "").trim();
   if (!task || !SYSTEMS[task]) return json({ error: "bad_task" }, { status: 400 });
   if (!image) return json({ error: "missing_image" }, { status: 400 });
+  // System prompt + JSON-mode flag for the requested task. These were used
+  // below (sys / wantsJson) without ever being destructured, so every request
+  // threw `ReferenceError: sys is not defined` and 500'd — the function failed
+  // 100% of the time. Pull them off the validated SYSTEMS entry here.
+  const { sys, json: wantsJson } = SYSTEMS[task];
   // 12 MB base64 is roughly a 9 MB JPEG — plenty for any single photo and
   // keeps the worker from holding multi-GB payloads in memory.
   if (image.length > 12 * 1024 * 1024) return json({ error: "image_too_large" }, { status: 413 });
@@ -85,26 +103,50 @@ Deno.serve(async (req) => {
   }
   if (userId) {
     try {
-      const { data: prof } = await svc.from("profiles").select("plan, daily_usage, usage_reset_at").eq("id", userId).maybeSingle();
+      const { data: prof } = await svc.from("profiles")
+        .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
+        .eq("id", userId).maybeSingle();
       const plan = (prof?.plan as string) ?? "free";
-      const limit = DAILY_LIMIT[plan] ?? DAILY_LIMIT.free;
-      if (limit !== Infinity) {
+
+      if (plan === "free") {
+        const limit = DAILY_LIMIT.free;
         const now = Date.now();
         const resetAt = prof?.usage_reset_at ? new Date(prof.usage_reset_at).getTime() : 0;
         const overdue = now - resetAt > 24 * 3600 * 1000;
         const current = overdue ? 0 : (prof?.daily_usage ?? 0);
         if (current >= limit) {
-          return json({ error: "daily_limit", resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() }, { status: 429 });
+          return json({ error: "daily_limit", plan, limit, used: current, remaining: 0, resetAt: new Date((overdue ? now : resetAt) + 24 * 3600 * 1000).toISOString() }, { status: 429 });
         }
         await svc.from("profiles").update({
           daily_usage: current + 1,
           usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
         }).eq("id", userId);
+      } else {
+        const limit = MONTHLY_LIMIT[plan] ?? MONTHLY_LIMIT.pro;
+        const month = utcMonth();
+        const used = prof?.monthly_ai_month === month ? (prof?.monthly_ai_usage ?? 0) : 0;
+        if (used >= limit) {
+          const next = new Date();
+          next.setUTCDate(1); next.setUTCHours(0, 0, 0, 0); next.setUTCMonth(next.getUTCMonth() + 1);
+          return json({ error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() }, { status: 429 });
+        }
+        await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+      }
+    } catch { /* fail-open */ }
+  } else {
+    // Anonymous: cap per client IP so the public anon key can't drive unlimited
+    // Pixtral calls from outside the browser. Generous; fail-open on error.
+    try {
+      const xff = req.headers.get("x-forwarded-for") ?? "";
+      const ip = xff.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
+      const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "ai-vision", p_limit: 30, p_window_secs: 3600 });
+      const row = Array.isArray(rl) ? rl[0] : rl;
+      if (row && row.allowed === false) {
+        const retry = Number(row.retry_after ?? 3600);
+        return json({ error: "rate_limited", message: `Too many requests from your network. Sign in for higher limits, or retry in ${retry}s.`, retry_after: retry }, { status: 429, headers: { "Retry-After": String(retry) } });
       }
     } catch { /* fail-open */ }
   }
-
-  const { sys, json: wantsJson } = SYSTEMS[task];
   const userText = (body.prompt ?? "Process this image per the instructions.").slice(0, 800);
   const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",
@@ -126,12 +168,8 @@ Deno.serve(async (req) => {
   const out = (await res.json()) as { choices: { message: { content: string } }[] };
   const content = out.choices?.[0]?.message?.content?.trim() ?? "";
 
-  if (userId) {
-    await svc.from("jobs").insert({
-      user_id: userId, tool: `vision-${task}`, status: "done",
-      metadata: { task }, completed_at: new Date().toISOString(),
-    });
-  }
+  // Privacy + DB hygiene: vision results are returned inline and never stored,
+  // so we don't log a jobs row. Quota lives on the profiles counter above.
 
   if (wantsJson) {
     try { return json({ data: JSON.parse(content) }); }

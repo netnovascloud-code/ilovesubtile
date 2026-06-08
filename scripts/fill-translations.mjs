@@ -1,6 +1,9 @@
-// Fill missing translations by calling the deployed Konver `ai-process` edge
+// Fill missing translations by calling the deployed Konvertools `ai-process` edge
 // function (which holds the Mistral API key server-side). The caller only
 // needs the public anon key — no MISTRAL_API_KEY required locally.
+//
+// v5 — bumped to re-trigger after the 4 security tools (virus scanner,
+// email verifier, phishing detector, URL scanner) were added EN-only.
 //
 // Reads NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY from .env
 // (or your shell env). Tasks supported: i18n-tool, i18n-category.
@@ -168,7 +171,7 @@ async function translate(job, fields, apiTask, env) {
           // Node's fetch doesn't set an Origin header — Supabase's edge gateway
           // rejects requests from unknown origins. Pretend to be the production
           // app so the function's CORS allowlist accepts us.
-          Origin: "https://konver.app",
+          Origin: "https://konvertools.com",
         },
         body: JSON.stringify({ task: apiTask, text: JSON.stringify(job.en), options: { target: job.lang } }),
       });
@@ -210,7 +213,7 @@ ${cfg.typeImport}
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations served by Mistral Large via the Konver ai-process edge
+ * Machine translations served by Mistral Large via the Konvertools ai-process edge
  * function. Resolvers prefer hand-authored strings over this overlay.
  */
 export const ${exportName}: Record<string, Partial<Record<Locale, ${cfg.typeName}>>> = ${JSON.stringify(sorted, null, 2)};

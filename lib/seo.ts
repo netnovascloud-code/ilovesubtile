@@ -31,6 +31,11 @@ export const HREFLANG_PREFIX: Record<Locale, string> = {
 };
 
 /** Build the canonical and hreflang alternates for a given tool + locale. */
+/** Build the URL for the dynamic branded OG image (app/og/i/route.tsx). */
+export function ogImageUrl(title: string, sub: string): string {
+  return `${SITE_URL}/og/i?title=${encodeURIComponent(title.slice(0, 80))}&sub=${encodeURIComponent(sub.slice(0, 130))}`;
+}
+
 export function buildToolMetadata(
   tool: ToolDefinition,
   locale: Locale = "en",
@@ -51,6 +56,10 @@ export function buildToolMetadata(
   const name = override?.name ?? tool.name;
   const primaryKeyword = override?.primaryKeyword ?? tool.primaryKeyword;
 
+  // Branded OG image generated on the fly (see app/og/i/route.tsx) — the old
+  // /og/<slug>.png files never existed, so every share preview was blank.
+  const ogImage = `${SITE_URL}/og/i?title=${encodeURIComponent(name)}&sub=${encodeURIComponent(tool.short)}`;
+
   return {
     metadataBase: new URL(SITE_URL),
     title: { absolute: title },
@@ -64,15 +73,15 @@ export function buildToolMetadata(
       url: canonical,
       title,
       description,
-      siteName: "Konver",
+      siteName: "Konvertools",
       locale: locale === "en" ? "en_US" : locale.replace("-", "_"),
-      images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630, alt: name }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: name }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`/og/${tool.slug}.png`],
+      images: [ogImage],
     },
     robots: { index: true, follow: true },
   };
@@ -87,12 +96,16 @@ export function softwareApplicationSchema(
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: `${name} — Konver`,
+    name: `${name} — Konvertools`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web Browser",
     description: override?.metaDescription ?? tool.metaDescription,
     inLanguage: locale,
     url: `${SITE_URL}${HREFLANG_PREFIX[locale]}/${tool.slug}`,
+    // Surface the same keyword variants that drive the meta tag so crawlers
+    // see them in structured data too (esp. useful for Bing / Yandex / search
+    // generative engines).
+    keywords: toolKeywords(tool, locale).join(", "),
     offers: {
       "@type": "Offer",
       price: "0",

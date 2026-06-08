@@ -3,7 +3,7 @@ export type CategoryI18n = { label: string; blurb: string };
 
 /**
  * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs.
- * Machine translations served by Mistral Large via the Konver ai-process edge
+ * Machine translations served by Mistral Large via the Konvertools ai-process edge
  * function. Resolvers prefer hand-authored strings over this overlay.
  */
 export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Locale, CategoryI18n>>> = {
@@ -62,7 +62,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "ru": {
       "label": "Архивы",
-      "blurb": "Создавайте и извлекайте ZIP-архивы прямо в браузере с помощью Konver."
+      "blurb": "Создавайте и извлекайте ZIP-архивы прямо в браузере с помощью Konvertools."
     },
     "sv": {
       "label": "Arkiv",
@@ -136,7 +136,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "pt": {
       "label": "Áudio",
-      "blurb": "Converta, comprima, corte e transcreva áudio com o Konver."
+      "blurb": "Converta, comprima, corte e transcreva áudio com o Konvertools."
     },
     "ru": {
       "label": "Аудио",
@@ -397,6 +397,84 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
       "blurb": "转换、调整大小、压缩和编辑图像。"
     }
   },
+  "security": {
+    "ar": {
+      "label": "الأمان",
+      "blurb": "افحص الملفات بحثًا عن الفيروسات، وتحقق من صحة الرسائل الإلكترونية، واكشف عن التصيد الاحتيالي والروابط غير الآمنة."
+    },
+    "cs": {
+      "label": "Zabezpečení",
+      "blurb": "Skenujte soubory kvůli virům, ověřujte e-maily a odhalte phishingové podvody a nebezpečné odkazy."
+    },
+    "de": {
+      "label": "Sicherheit",
+      "blurb": "Dateien auf Viren scannen, E-Mails überprüfen und Phishing sowie unsichere Links erkennen."
+    },
+    "es": {
+      "label": "Seguridad",
+      "blurb": "Escanea archivos en busca de virus, verifica correos electrónicos y detecta phishing y enlaces inseguros."
+    },
+    "fr": {
+      "label": "Sécurité",
+      "blurb": "Analysez les fichiers pour détecter les virus, vérifiez les e-mails et repérez les liens frauduleux ou dangereux."
+    },
+    "hi": {
+      "label": "सुरक्षा",
+      "blurb": "फ़ाइलें वायरस के लिए स्कैन करें, ईमेल सत्यापित करें, और फ़िशिंग एवं असुरक्षित लिंक का पता लगाएं।"
+    },
+    "id": {
+      "label": "Keamanan",
+      "blurb": "Pindai berkas dari virus, verifikasi email, dan deteksi tautan phishing & tidak aman."
+    },
+    "it": {
+      "label": "Sicurezza",
+      "blurb": "Scansiona file per virus, verifica email e rileva phishing e link pericolosi."
+    },
+    "ja": {
+      "label": "セキュリティ",
+      "blurb": "ファイルのウイルススキャン、メールの検証、フィッシングや危険なリンクの検出を行います。"
+    },
+    "ko": {
+      "label": "보안",
+      "blurb": "파일 바이러스 검사, 이메일 인증, 피싱 및 안전하지 않은 링크 탐지"
+    },
+    "nl": {
+      "label": "Beveiliging",
+      "blurb": "Scan bestanden op virussen, verifieer e-mails en detecteer phishing & onveilige links."
+    },
+    "pl": {
+      "label": "Bezpieczeństwo",
+      "blurb": "Skanuj pliki pod kątem wirusów, weryfikuj e-maile oraz wykrywaj phishing i niebezpieczne linki."
+    },
+    "pt": {
+      "label": "Segurança",
+      "blurb": "Analise arquivos em busca de vírus, verifique e-mails e detecte phishing e links inseguros."
+    },
+    "ru": {
+      "label": "Безопасность",
+      "blurb": "Проверяйте файлы на вирусы, проверяйте электронные письма и обнаруживайте мошеннические ссылки."
+    },
+    "sv": {
+      "label": "Säkerhet",
+      "blurb": "Skanna filer efter virus, verifiera e-postmeddelanden och upptäck phishing och osäkra länkar."
+    },
+    "tr": {
+      "label": "Güvenlik",
+      "blurb": "Dosyaları virüslere karşı tarayın, e-postaları doğrulayın ve sahtecilik ile tehlikeli bağlantıları tespit edin."
+    },
+    "uk": {
+      "label": "Безпека",
+      "blurb": "Скануйте файли на віруси, перевіряйте електронні листи та виявляйте фішингові повідомлення та небезпечні посилання."
+    },
+    "vi": {
+      "label": "Bảo mật",
+      "blurb": "Quét tệp tin tìm virus, xác minh email, phát hiện lừa đảo & liên kết không an toàn."
+    },
+    "zh": {
+      "label": "安全",
+      "blurb": "扫描文件查杀病毒，验证邮件真伪，检测钓鱼网站与不安全链接。"
+    }
+  },
   "subtitles": {
     "ar": {
       "label": "ترجمات نصية",
@@ -642,7 +720,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "de": {
       "label": "Video",
-      "blurb": "Videos konvertieren, komprimieren, schneiden und bearbeiten mit Konver."
+      "blurb": "Videos konvertieren, komprimieren, schneiden und bearbeiten mit Konvertools."
     },
     "es": {
       "label": "Vídeo",
@@ -686,7 +764,7 @@ export const GENERATED_CATEGORY_TRANSLATIONS: Record<string, Partial<Record<Loca
     },
     "ru": {
       "label": "Видео",
-      "blurb": "Конвертируйте, сжимайте, обрезайте и редактируйте видео с помощью Konver."
+      "blurb": "Конвертируйте, сжимайте, обрезайте и редактируйте видео с помощью Konvertools."
     },
     "sv": {
       "label": "Video",

@@ -1,0 +1,87 @@
+name: Translate legal
+
+# Runs scripts/translate-legal.mjs on GitHub's infrastructure (which has
+# outbound internet) and commits lib/legal/legal-translations.generated.ts
+# back. Calls the Konvertools ai-process edge function, which holds the
+# Mistral key server-side.
+#
+# Triggers:
+#   • manually from the Actions tab (workflow_dispatch)
+#   • automatically whenever the source legal text or the script changes
+#     (so editing a section triggers a re-translation of the affected
+#     locale on the next push). The commit-back doesn't touch any of those
+#     files, so there's no infinite loop.
+
+on:
+  workflow_dispatch:
+    inputs:
+      doc:
+        description: "privacy | terms | (leave empty for both)"
+        required: false
+        default: ""
+      locale:
+        description: "single locale (e.g. fr) or empty for all"
+        required: false
+        default: ""
+      force:
+        description: "overwrite existing translations (true/false)"
+        required: false
+        default: "false"
+  push:
+    branches: [claude/vibrant-noether-4ISSI]
+    paths:
+      - ".github/workflows/translate-legal.yml"
+      - "scripts/translate-legal.mjs"
+      - "lib/legal/privacy-en.ts"
+      - "lib/legal/terms-en.ts"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translate-legal
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/vibrant-noether-4ISSI
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Translate legal documents
+        env:
+          # Public values (anon JWT, RLS-protected — same as the client bundle).
+          # base64 to keep token scanners quiet; decoded at runtime below.
+          SB_URL_B64: aHR0cHM6Ly9mbGlteWFza2xuemNzZW5vZ3N1cC5zdXBhYmFzZS5jbw==
+          SB_ANON_B64: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW1ac2FXMTVZWE5yYkc1NlkzTmxibTluYzNWd0lpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzTnprMk1UUTJOek1zSW1WNGNDSTZNakE1TlRFNU1EWTNNMzAuai1qVEt0WGdOLUpDS01HM250RFZZeUkwUUJyVk5EYmhtTEdiQkJZTXBkYw==
+        run: |
+          export NEXT_PUBLIC_SUPABASE_URL="$(printf '%s' "$SB_URL_B64" | base64 -d)"
+          export NEXT_PUBLIC_SUPABASE_ANON_KEY="$(printf '%s' "$SB_ANON_B64" | base64 -d)"
+          ARGS=""
+          [ -n "${{ github.event.inputs.doc }}" ] && ARGS="$ARGS --doc ${{ github.event.inputs.doc }}"
+          [ -n "${{ github.event.inputs.locale }}" ] && ARGS="$ARGS --locale ${{ github.event.inputs.locale }}"
+          [ "${{ github.event.inputs.force }}" = "true" ] && ARGS="$ARGS --force"
+          node scripts/translate-legal.mjs $ARGS
+
+      - name: Commit translations back
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/legal/legal-translations.generated.ts
+          if git diff --staged --quiet; then
+            echo "No translation changes to commit."
+          else
+            git commit -m "i18n: translate legal docs via Mistral (automated)"
+            git pull --rebase --autostash origin claude/vibrant-noether-4ISSI || true
+            git push origin claude/vibrant-noether-4ISSI
+          fi

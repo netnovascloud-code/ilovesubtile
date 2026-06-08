@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
+import { EzoicLoader } from "@/components/ads/EzoicLoader";
 import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
+import { CATEGORIES } from "@/lib/tools-config";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
@@ -19,20 +21,20 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Konver — Free Online File Converter & Tools",
-    template: "%s | Konver",
+    default: "Konvertools — Free Online File Converter & Tools",
+    template: "%s | Konvertools",
   },
   description:
     "Convert anything online for free: documents, audio, video, images, subtitles, code and text. 150+ fast, focused tools. Drop your file, get your result.",
-  applicationName: "Konver",
+  applicationName: "Konvertools",
   openGraph: {
     type: "website",
-    siteName: "Konver",
-    images: ["/og/default.png"],
+    siteName: "Konvertools",
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konvertools — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og/default.png"],
+    images: [`${SITE_URL}/og/i?title=${encodeURIComponent("Konvertools — Free Online Tools")}&sub=${encodeURIComponent("Convert files, images, audio, video, code & text — 150+ tools")}`],
   },
   alternates: {
     canonical: "/",
@@ -48,11 +50,66 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Per-request CSP nonce, set by middleware. Stamped on every inline
+  // <script>/<Script> so it executes under the nonce-based CSP. Reading the
+  // header opts this layout into dynamic rendering — accepted trade-off for
+  // dropping 'unsafe-inline' on script-src.
+  const nonce = headers().get("x-nonce") ?? undefined;
   return (
-    <html lang="en" className={jakarta.variable}>
+    // suppressHydrationWarning: HtmlLang mutates documentElement.lang/dir
+    // post-mount based on the konver_locale cookie (a French visitor on a
+    // non-prefixed route like /dashboard sees French chrome). That out-of-tree
+    // DOM mutation triggers React's hydration recovery flow (#418/#423/#425)
+    // on the next re-render, which paints both labels (e.g. "Tools + Outils")
+    // briefly before settling. Suppressing the warning here is the canonical
+    // Next.js pattern for cookie-driven theme/locale switching — it does NOT
+    // hide real mismatches in children, only the html attributes we mutate
+    // intentionally.
+    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
       <head>
-        {/* Ezoic — display ads. No-op until the domain is verified in Ezoic. */}
-        <Script id="ezoic-sa" src="//www.ezojs.com/ezoic/sa.min.js" strategy="afterInteractive" async />
+        {/* Ezoic — display ads. Loaded only for Free users when ADS_ENABLED is
+            on (see EzoicLoader); never injected for Pro/Business or while ads
+            are globally disabled. */}
+        <EzoicLoader nonce={nonce} />
+        {/* Site-level structured data: WebSite (with sitelink-search action),
+            Organization, and a SiteNavigationElement listing every category
+            hub. Helps Google understand the catalogue and surface category
+            sitelinks. */}
+        <script
+          type="application/ld+json"
+          nonce={nonce}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                name: "Konvertools",
+                url: SITE_URL,
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: `${SITE_URL}/?q={search_term_string}`,
+                  "query-input": "required name=search_term_string",
+                },
+              },
+              {
+                "@type": "Organization",
+                name: "Konvertools",
+                url: SITE_URL,
+                logo: `${SITE_URL}/og/default.png`,
+              },
+              {
+                "@type": "SiteNavigationElement",
+                name: "Tool categories",
+                hasPart: CATEGORIES.map((c) => ({
+                  "@type": "WebPage",
+                  name: `${c.label} tools`,
+                  url: `${SITE_URL}/${c.id}`,
+                  description: c.blurb,
+                })),
+              },
+            ],
+          }) }}
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         {/* Syncs <html lang>/<dir> to the URL locale without opting out of SSG. */}

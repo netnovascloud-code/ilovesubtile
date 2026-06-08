@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Upload, X, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
+import { safeReadWorkbook } from "@/lib/safe-xlsx";
 
 export function ExcelToPdfClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -16,9 +17,8 @@ export function ExcelToPdfClient() {
     if (!file || busy) return;
     setBusy(true); setError(null); setResultUrl(null);
     try {
-      const xlsx = await import("xlsx");
       const data = new Uint8Array(await file.arrayBuffer());
-      const wb = xlsx.read(data, { type: "array" });
+      const { xlsx, wb } = await safeReadWorkbook(data);
 
       let html = `<style>
         body { font-family: 'Helvetica','Arial',sans-serif; color:#111; line-height:1.4; font-size: 11pt; }

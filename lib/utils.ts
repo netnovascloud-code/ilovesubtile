@@ -19,11 +19,31 @@ export function formatBytes(bytes: number, decimals = 1) {
  * the live deployment domain.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://konver.app"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://konvertools.com"
 ).replace(/\/$/, "");
 
 /** Supabase project URL — exposed publicly via NEXT_PUBLIC_*. */
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+
+/**
+ * Returns `raw` only if it is a safe same-origin, root-relative path; otherwise
+ * `fallback`. Single source of truth for every post-auth / post-checkout
+ * redirect so the validation can't drift between login, register and the OAuth
+ * callback.
+ *
+ * Rejects:
+ *  - missing / over-long values (phishing payloads are usually long)
+ *  - anything not starting with "/" (absolute URLs, `javascript:`, `https:` …)
+ *  - protocol-relative `//host` AND the backslash trick `/\host` — browsers
+ *    normalise `\` to `/`, so `/\evil.com` navigates off-site just like
+ *    `//evil.com`. This is the gap that made the old per-page check unsafe.
+ */
+export function safeInternalPath(raw: string | null | undefined, fallback = "/dashboard"): string {
+  if (!raw || raw.length > 512) return fallback;
+  if (raw[0] !== "/") return fallback;
+  if (raw[1] === "/" || raw[1] === "\\") return fallback;
+  return raw;
+}
 
 /** Build the URL of a Supabase Edge Function. */
 export function edgeFnUrl(name: string, query?: Record<string, string>) {

@@ -36,6 +36,16 @@ export const IMAGE_TOOLS: Record<string, ImageToolConfig> = {
   // re-encoded via canvas — no extra library needed.
   "avif-to-jpg": { target: "image/jpeg", ext: "jpg", accept: "image/avif,.avif", controls: { quality: true }, defaultQuality: 92 },
   "avif-to-png": { target: "image/png", ext: "png", accept: "image/avif,.avif", controls: {} },
+  // WebP → JPG / PNG. Browsers decode WebP natively so the existing canvas
+  // pipeline just works — no extra library needed.
+  "webp-to-jpg": { target: "image/jpeg", ext: "jpg", accept: "image/webp,.webp", controls: { quality: true }, defaultQuality: 92 },
+  "webp-to-png": { target: "image/png", ext: "png", accept: "image/webp,.webp", controls: {} },
+  // Multi-format → JPG hub. Accepts anything the browser can decode (PNG,
+  // WebP, AVIF, GIF, BMP, TIFF if supported) and writes JPEG.
+  "image-to-jpg": { target: "image/jpeg", ext: "jpg", accept: "image/*", controls: { quality: true }, defaultQuality: 92 },
+  // JPG → PNG hub. (For other targets — WebP, PDF — users go via the
+  // dedicated jpg-to-webp / images-to-pdf tools, kept simple iLoveIMG-style.)
+  "image-from-jpg": { target: "image/png", ext: "png", accept: "image/jpeg,.jpg,.jpeg", controls: {} },
 };
 
 /** Resolve the effective output mime + extension given the source file type. */

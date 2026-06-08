@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Upload, Download, Loader2, X, FileText } from "lucide-react";
-import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 
@@ -17,6 +16,7 @@ export function ZipExtractClient() {
   async function load(f: File) {
     setFile(f); setError(null); setEntries([]); setBusy(true);
     try {
+      const { default: JSZip } = await import("jszip");
       const zip = await JSZip.loadAsync(await f.arrayBuffer());
       const list: Entry[] = [];
       for (const path of Object.keys(zip.files)) {

@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, GripVertical } from "lucide-react";
-import { PDFDocument } from "pdf-lib";
 import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
@@ -47,6 +46,7 @@ export function ImagesToPdfClient() {
     if (items.length === 0 || busy) return;
     setBusy(true); setError(null); setResultUrl(null);
     try {
+      const { PDFDocument } = await import("pdf-lib");
       const doc = await PDFDocument.create();
       const size = PAGE_SIZES.find((p) => p.id === pageSize)!;
       for (const { file } of items) {

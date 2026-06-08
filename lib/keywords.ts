@@ -43,6 +43,37 @@ function converterParts(slug: string): [string, string] | null {
   return m ? [m[1], m[2]] : null;
 }
 
+/** Slug → extra keyword variants for tools whose phrasing doesn't follow the
+ *  "X to Y" converter pattern. Keep in sync with the security-category tools
+ *  and any future addition that has distinct search-intent variants. */
+const SECURITY_VARIANTS: Record<string, string[]> = {
+  "ssl-checker": [
+    "ssl checker", "ssl certificate checker", "check ssl certificate",
+    "ssl expiry checker", "verify ssl certificate", "tls certificate checker",
+    "is my ssl valid", "certificate expiration check",
+  ],
+  "password-checker": [
+    "password breach checker", "check if password compromised", "has my password been leaked",
+    "pwned password checker", "is my password safe", "password leak checker",
+    "have i been pwned password",
+  ],
+  "email-checker": [
+    "email verifier free", "check email valid", "verify email address",
+    "email validation tool", "is this email real", "email reliability check",
+    "disposable email checker", "mx record check email",
+  ],
+  "phishing-detector": [
+    "phishing email checker", "is this email a scam", "check email scam",
+    "phishing detector free", "scam email check", "fraud email detector",
+    "ai phishing detection",
+  ],
+  "url-scanner": [
+    "check if link is safe", "url scanner", "is this website safe",
+    "safe link checker", "phishing url check", "malicious link scanner",
+    "google safe browsing check",
+  ],
+};
+
 /** All keyword phrasings for a tool in a given locale (deduped, lowercased). */
 export function toolKeywords(tool: ToolDefinition, locale: Locale = "en"): string[] {
   const out = new Set<string>();
@@ -64,6 +95,12 @@ export function toolKeywords(tool: ToolDefinition, locale: Locale = "en"): strin
     out.add(`${a} to ${b}`);
     out.add(`${a} to ${b} converter`);
   }
+
+  // Hand-curated long-tail variants for the security tools (no converter
+  // pattern to expand from). Always English — security terminology is the
+  // same in every major language search box.
+  for (const v of SECURITY_VARIANTS[tool.slug] ?? []) out.add(v);
+
   return [...out].filter(Boolean);
 }
 

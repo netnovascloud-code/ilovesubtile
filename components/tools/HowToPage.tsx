@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Home, ChevronRight, ArrowRight } from "lucide-react";
 import { TOOLS_BY_SLUG } from "@/lib/tools-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 import type { HowTo } from "@/lib/howto";
@@ -41,7 +42,7 @@ export function HowToPage({ howto }: { howto: HowTo }) {
               ))}
             </ol>
 
-            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Konver for this</h2>
+            <h2 className="mt-10 text-2xl font-semibold text-ink-900">Why use Konvertools for this</h2>
             <p className="mt-3 text-ink-600">{howto.why}</p>
 
             <h2 className="mt-10 text-2xl font-semibold text-ink-900">FAQ</h2>
@@ -75,39 +76,30 @@ export function HowToPage({ howto }: { howto: HowTo }) {
         </div>
       </main>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            name: howto.h1,
-            step: howto.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.body })),
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: howto.h1,
+          step: howto.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.body })),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: howto.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: howto.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://konver.app/" },
-              { "@type": "ListItem", position: 2, name: "Guides", item: "https://konver.app/how-to" },
-              { "@type": "ListItem", position: 3, name: howto.h1, item: `https://konver.app/how-to/${howto.id}` },
-            ],
-          }),
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://konvertools.com/" },
+            { "@type": "ListItem", position: 2, name: "Guides", item: "https://konvertools.com/how-to" },
+            { "@type": "ListItem", position: 3, name: howto.h1, item: `https://konvertools.com/how-to/${howto.id}` },
+          ],
         }}
       />
     </div>

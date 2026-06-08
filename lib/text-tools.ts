@@ -384,7 +384,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "json-to-xml": {
     inputLabel: "JSON input",
-    inputPlaceholder: '{"book":{"title":"Konver","pages":3}}',
+    inputPlaceholder: '{"book":{"title":"Konvertools","pages":3}}',
     outputLabel: "XML",
     download: { ext: "xml", mime: "application/xml" },
     mono: true,
@@ -416,7 +416,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "url-encode": {
     inputLabel: "Text / URL",
-    inputPlaceholder: "https://konver.app/search?q=a b&x=1",
+    inputPlaceholder: "https://konvertools.com/search?q=a b&x=1",
     outputLabel: "Result",
     mono: true,
     modes: [
@@ -450,7 +450,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "xml-to-json": {
     inputLabel: "XML input",
-    inputPlaceholder: "<book><title>Konver</title><pages>3</pages></book>",
+    inputPlaceholder: "<book><title>Konvertools</title><pages>3</pages></book>",
     outputLabel: "JSON",
     download: { ext: "json", mime: "application/json" },
     mono: true,
@@ -490,7 +490,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "json-to-yaml": {
     inputLabel: "JSON input",
-    inputPlaceholder: '{"name":"Konver","tags":["fast","free"]}',
+    inputPlaceholder: '{"name":"Konvertools","tags":["fast","free"]}',
     outputLabel: "YAML",
     download: { ext: "yaml", mime: "text/yaml" },
     mono: true,
@@ -505,7 +505,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "yaml-to-json": {
     inputLabel: "YAML input",
-    inputPlaceholder: "name: Konver\ntags:\n  - fast\n  - free",
+    inputPlaceholder: "name: Konvertools\ntags:\n  - fast\n  - free",
     outputLabel: "JSON",
     download: { ext: "json", mime: "application/json" },
     mono: true,
@@ -518,7 +518,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
 
   "markdown-to-html": {
     inputLabel: "Markdown",
-    inputPlaceholder: "# Title\n\nSome **bold** text and a [link](https://konver.app).",
+    inputPlaceholder: "# Title\n\nSome **bold** text and a [link](https://konvertools.com).",
     outputLabel: "HTML",
     download: { ext: "html", mime: "text/html" },
     mono: true,
@@ -556,6 +556,9 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
     inputLabel: "Your text",
     inputPlaceholder: "Paste or type your text here…",
     outputLabel: "Statistics",
+    // Monospace so the space-padded "Label: value" columns line up — in a
+    // proportional font the stats collapse into an unreadable ragged block.
+    mono: true,
     run: (input) => {
       const words = (input.trim().match(/\S+/g) ?? []).length;
       const chars = input.length;
@@ -573,6 +576,98 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
         `Lines:           ${lines}`,
         `Reading time:    ~${readingMin} min`,
       ].join("\n");
+    },
+  },
+
+  // Clean AI export — strip the invisible watermark characters, Markdown
+  // artefacts and "As an AI…" boilerplate that LLMs leave in copy-pasted text.
+  // 100% in-browser, no AI, no quota.
+  "clean-ai-export": {
+    inputLabel: "Paste your AI text",
+    inputPlaceholder: "Paste text from ChatGPT, Claude, Gemini…",
+    outputLabel: "Clean text",
+    modes: [
+      { id: "standard", label: "Standard" },
+      { id: "invisible", label: "Invisible chars only" },
+      { id: "markdown", label: "Strip formatting" },
+      { id: "plain", label: "Plain text" },
+    ],
+    defaultMode: "standard",
+    download: { ext: "txt", mime: "text/plain;charset=utf-8" },
+    run: (input, mode) => {
+      // Zero-width / bidi / soft-hyphen / BOM characters used as AI "watermarks".
+      const INVISIBLE = /[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF\u00AD\u180E\u061C]/g;
+      let s = input.replace(INVISIBLE, "").replace(/\r\n?/g, "\n");
+      if (mode === "invisible") {
+        return s.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+      }
+      // Strip Markdown emphasis, headings, bullets and code fences.
+      s = s
+        .replace(/\*\*(.+?)\*\*/gs, "$1")
+        .replace(/__(.+?)__/gs, "$1")
+        .replace(/(^|[^*])\*(?!\*)([^*\n]+?)\*(?!\*)/g, "$1$2")
+        .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")
+        .replace(/^[ \t]*[*+\-][ \t]+/gm, "• ")
+        .replace(/`{1,3}/g, "");
+      if (mode !== "markdown") {
+        // Drop common AI boilerplate openers.
+        s = s.replace(/^\s*(as an ai(?: language model)?|as a large language model|i'?m just an ai)\b[^.\n]*[.:]\s*/gim, "");
+      }
+      if (mode === "plain") {
+        // Straighten smart punctuation to plain ASCII.
+        s = s
+          .replace(/[‘’‚‛]/g, "'")
+          .replace(/[“”„‟]/g, '"')
+          .replace(/[–—―]/g, "-")
+          .replace(/…/g, "...")
+          .replace(/\u00A0/g, " ");
+      }
+      return s
+        .replace(/[ \t]{2,}/g, " ")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+    },
+  },
+
+  // Anonymize / Redact (RGPD) — masks personal data (email, phone, IBAN, card,
+  // SSN, IP) entirely in the browser. The text never leaves the device, which
+  // is the whole point of a privacy tool.
+  "anonymize-text": {
+    inputLabel: "Text to anonymize",
+    inputPlaceholder: "Paste text containing names, emails, phone numbers…",
+    outputLabel: "Anonymized text",
+    modes: [
+      { id: "label", label: "Typed labels" },
+      { id: "mask", label: "Mask (••••)" },
+      { id: "remove", label: "Remove" },
+    ],
+    defaultMode: "label",
+    download: { ext: "txt", mime: "text/plain;charset=utf-8" },
+    run: (input, mode) => {
+      // Order matters: consume structured numbers (IBAN/card/SSN/IP) before the
+      // looser phone pattern so it can't re-match them. Replacements never
+      // contain digits, so later passes skip already-redacted spans.
+      const PII: { type: string; re: RegExp }[] = [
+        { type: "EMAIL", re: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi },
+        { type: "IBAN", re: /\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/gi },
+        { type: "CARD", re: /\b(?:\d[ -]?){13,19}\b/g },
+        { type: "SSN", re: /\b\d{3}-\d{2}-\d{4}\b/g },
+        { type: "IP", re: /\b(?:\d{1,3}\.){3}\d{1,3}\b/g },
+        // Loose phone span (international formats); the replacer rejects it
+        // unless it holds 7+ digits, so it won't redact stray short numbers.
+        { type: "PHONE", re: /(?:\+|00)?\d[\d\s.()\-]{5,}\d/g },
+      ];
+      const replacer = (type: string) => (m: string) => {
+        const digits = m.replace(/\D/g, "").length;
+        if (type === "PHONE" && (digits < 7 || digits > 15)) return m;
+        if (mode === "remove") return "";
+        if (mode === "mask") return "•".repeat(Math.min(12, Math.max(4, m.replace(/\s/g, "").length)));
+        return `[${type}]`;
+      };
+      let s = input;
+      for (const { type, re } of PII) s = s.replace(re, replacer(type));
+      return mode === "remove" ? s.replace(/[ \t]{2,}/g, " ").replace(/[ \t]+\n/g, "\n").trim() : s;
     },
   },
 };

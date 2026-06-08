@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Music } from "lucide-react";
-import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 
@@ -90,6 +89,7 @@ export function BatchAudioClient() {
     const finished = await new Promise<Job[]>((res) => setJobs((s) => { res(s); return s; }));
     const ok = finished.filter((j) => j.blob && j.outName);
     if (ok.length > 0) {
+      const { default: JSZip } = await import("jszip");
       const zip = new JSZip();
       ok.forEach((j) => zip.file(j.outName!, j.blob!));
       const zipBlob = await zip.generateAsync({ type: "blob" });

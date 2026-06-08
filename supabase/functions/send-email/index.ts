@@ -6,7 +6,7 @@
 //   • Anonymous calls (no Authorization at all) → 401.
 //
 // This prevents the previous abuse vector where any signed-in user could send
-// arbitrary emails from hello@konver.app to any recipient.
+// arbitrary emails from hello@konvertools.com to any recipient.
 //
 // Deploy: supabase functions deploy send-email
 // Secrets: RESEND_API_KEY, SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
@@ -14,7 +14,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const cors = {
-  "Access-Control-Allow-Origin": "https://konver.app",
+  "Access-Control-Allow-Origin": "https://konvertools.com",
   "Vary": "Origin",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -25,10 +25,10 @@ function json(body: unknown, init: ResponseInit = {}) {
 
 const TEMPLATES = {
   welcome: (data: { name?: string }) => ({
-    subject: "Welcome to Konver 👋",
-    html: `<p>Hi ${data.name ?? "there"}, welcome to Konver.</p>
-<p>You're on the Free plan: 5 runs per day, files up to 25&nbsp;MB. Try the
-<a href="https://konver.app/subtitle-generator">subtitle generator</a> to get started.</p>`,
+    subject: "Welcome to Konvertools 👋",
+    html: `<p>Hi ${data.name ?? "there"}, welcome to Konvertools.</p>
+<p>You're on the Free plan: a few AI runs per day, files up to 20&nbsp;MB. Try the
+<a href="https://konvertools.com/subtitle-generator">subtitle generator</a> to get started.</p>`,
   }),
   "job-done": (data: { url?: string; tool?: string }) => ({
     subject: "Your file is ready",
@@ -41,7 +41,7 @@ const TEMPLATES = {
   }),
   "renewal-reminder": (data: { dueDate?: string }) => ({
     subject: "Your subscription renews soon",
-    html: `<p>Your Konver subscription renews on ${data.dueDate}. Manage it from your dashboard.</p>`,
+    html: `<p>Your Konvertools subscription renews on ${data.dueDate}. Manage it from your dashboard.</p>`,
   }),
 } as const;
 
@@ -125,7 +125,7 @@ Deno.serve(async (req) => {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "Konver <hello@konver.app>",
+      from: "Konvertools <no-reply@konvertools.com>",
       to: body.to,
       subject: tpl.subject,
       html: tpl.html,

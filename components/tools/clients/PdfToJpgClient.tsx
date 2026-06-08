@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Upload, X, Download, Loader2 } from "lucide-react";
-import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
 
@@ -68,6 +67,7 @@ export function PdfToJpgClient() {
 
   async function downloadAll() {
     if (pages.length === 0) return;
+    const { default: JSZip } = await import("jszip");
     const zip = new JSZip();
     for (const p of pages) {
       const blob = await (await fetch(p.url)).blob();

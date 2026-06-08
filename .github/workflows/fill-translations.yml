@@ -2,7 +2,7 @@ name: Fill translations
 
 # Runs scripts/fill-translations.mjs on GitHub's infrastructure (which has
 # outbound internet) and commits the generated overlays back. The script calls
-# the Konver `ai-process` edge function, which holds the Mistral key server-side
+# the Konvertools `ai-process` edge function, which holds the Mistral key server-side
 # — so nothing secret lives here.
 #
 # Triggers:

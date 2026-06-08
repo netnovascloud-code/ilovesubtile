@@ -41,14 +41,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Category landing pages — English only (one entry per category).
+  // Category landing pages — now localised: one entry per locale × category,
+  // each with full hreflang alternates.
   for (const c of CATEGORIES) {
-    entries.push({
-      url: `${SITE_URL}/${c.id}`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    });
+    for (const loc of LOCALES) {
+      entries.push({
+        url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/${c.id}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.7,
+        alternates: altsFor(`/${c.id}`),
+      });
+    }
   }
 
   // Sector landing pages — English only.
@@ -61,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // "Konver vs <competitor>" pages — English only, high-intent.
+  // "Konvertools vs <competitor>" pages — English only, high-intent.
   for (const v of VS_IDS) {
     entries.push({
       url: `${SITE_URL}/vs/${v}`,
@@ -120,6 +124,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     });
+  }
+
+  // Legal pages — locale variants with proper hreflang. Native translations
+  // load when ready; until then the route serves the English source with a
+  // translation-in-progress notice.
+  for (const p of ["/privacy", "/terms"]) {
+    for (const loc of LOCALES) {
+      if (loc === "en") continue;
+      entries.push({
+        url: `${SITE_URL}${HREFLANG_PREFIX[loc]}${p}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.4,
+        alternates: altsFor(p),
+      });
+    }
   }
 
   return entries;

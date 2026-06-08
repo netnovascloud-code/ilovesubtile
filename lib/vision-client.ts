@@ -4,7 +4,8 @@ export type VisionTask =
   | "ocr-handwriting"
   | "business-card"
   | "receipt"
-  | "screenshot-to-code";
+  | "screenshot-to-code"
+  | "image-to-table";
 
 /** Encode a File as a data URL (Mistral accepts these directly). */
 export async function fileToDataUrl(file: File): Promise<string> {

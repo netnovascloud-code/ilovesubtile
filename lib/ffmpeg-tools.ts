@@ -118,10 +118,20 @@ export const FFMPEG_TOOLS: Record<string, FfmpegToolDef> = {
   "resize-video": {
     label: "a video", accept: "video/*,.mp4,.mov,.mkv,.webm", inputExt: "mp4", outputExt: "mp4", outputMime: "video/mp4",
     options: [
-      { id: "w", label: "Width", type: "number", min: 32, max: 7680, step: 2, unit: "px", default: "1280" },
-      { id: "h", label: "Height", type: "number", min: 32, max: 4320, step: 2, unit: "px", default: "720" },
+      { id: "w", label: "Max width", values: [
+        { id: "480", label: "480p · 854×480" },
+        { id: "640", label: "640 px wide" },
+        { id: "1280", label: "720p · 1280×720" },
+        { id: "1920", label: "1080p · 1920×1080" },
+      ], default: "1280" },
     ],
-    command: (i, o, opt) => ["-i", i, "-vf", `scale=${opt.w || "1280"}:${opt.h || "720"}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "copy", o],
+    // scale='min(W,iw)':-2 caps the width at W but never upscales a smaller
+    // source (min against the input width iw), and keeps the original aspect
+    // ratio (height -2 = auto, even). The single quotes are ffmpeg-level
+    // quoting that protect the comma inside min() in the filtergraph. Replaces
+    // the old fixed WxH that stretched portrait clips and forced a slow,
+    // pointless upscale of small videos.
+    command: (i, o, opt) => ["-i", i, "-vf", `scale='min(${opt.w || "1280"},iw)':-2`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p", "-c:a", "copy", o],
   },
   "m4a-to-mp3": {
     label: "an M4A", accept: "audio/mp4,audio/x-m4a,audio/aac,.m4a,.aac", inputExt: "m4a", outputExt: "mp3", outputMime: "audio/mpeg",

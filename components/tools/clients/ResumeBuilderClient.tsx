@@ -123,13 +123,17 @@ export function ResumeBuilderClient() {
         // Left column cursor (white text inside the rail).
         const lx = 28, lW = SW - 56;
         let ly = A4[1] - 40;
+        // Rail page-break: if the sidebar content (contact/skills/education)
+        // overflows the page, start a new page and redraw the rail rather than
+        // drawing into negative-y (which silently dropped the overflow).
+        const ensureL = (h: number) => { if (ly - h < 40) { page = doc.addPage(A4); drawRail(); ly = A4[1] - 40; } };
         if (photo) {
           const s = 110; const px = (SW - s) / 2;
           page.drawImage(photo, { x: px, y: ly - s, width: s, height: s });
           ly -= s + 24;
         }
         const railText = (text: string, size: number, f: typeof font, gap: number, color = softWhite) => {
-          for (const line of wrap(text, size, f, lW)) { page.drawText(line, { x: lx, y: ly, size, font: f, color }); ly -= size + gap; }
+          for (const line of wrap(text, size, f, lW)) { ensureL(size + gap); page.drawText(line, { x: lx, y: ly, size, font: f, color }); ly -= size + gap; }
         };
         const railTitle = (t: string) => { ly -= 8; railText(t.toUpperCase(), 11, bold, 6, white); };
         railTitle("Contact");

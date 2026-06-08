@@ -80,6 +80,15 @@ export function WatermarkImageClient() {
   function pick(f: File | null) { if (!f) return; setFile(f); run(f); }
   function rerun() { if (file) run(file); }
 
+  // Live preview: re-render shortly after any setting changes, debounced so
+  // typing the watermark text doesn't re-encode the image on every keystroke.
+  useEffect(() => {
+    if (!file) return;
+    const id = setTimeout(() => run(file), 250);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, color, opacity, sizePct, pos]);
+
   return (
     <div className="space-y-4">
       {!file ? (

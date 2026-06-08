@@ -54,15 +54,15 @@ function getServiceClient() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 }
 
-// Single round-trip: pull every billing_config key we might need into a map.
-let cachedConfig: Map<string, string> | null = null;
+// Pull every billing_config key into a map. Deliberately NOT cached in a module
+// global: an admin re-running lemonsqueezy-setup to rotate a variant id must
+// take effect immediately, not whenever the warm Deno isolate happens to be
+// recycled. It's a single small query per checkout request.
 async function loadConfig(): Promise<Map<string, string>> {
-  if (cachedConfig) return cachedConfig;
   const supabase = getServiceClient();
   const { data } = await supabase.from("billing_config").select("key,value");
   const m = new Map<string, string>();
   for (const row of (data ?? [])) m.set(row.key as string, row.value as string);
-  cachedConfig = m;
   return m;
 }
 

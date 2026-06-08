@@ -106,16 +106,19 @@ Deno.serve(async (req) => {
   switch (name) {
     // ── Subscriptions ────────────────────────────────────────────────────
     case "subscription_created":
-    case "subscription_updated":
-    case "subscription_payment_success": {
+    case "subscription_updated": {
       const uid = await findUserId();
       if (!uid) break;
       const status = String(attr["status"] ?? "");
       const plan = (custom.plan === "business" ? "business" : custom.plan === "pro" ? "pro" : null);
       // active / on_trial / paid → plan on. cancelled keeps access until ends_at
-      // (we keep the plan and store the end date). expired/unpaid → free.
-      const isActive = ["active", "on_trial", "paid"].includes(status) || name === "subscription_payment_success";
+      // (handled in its own case). expired/unpaid → free.
+      const isActive = ["active", "on_trial", "paid"].includes(status);
       const isDead = ["expired", "unpaid"].includes(status);
+      // Read the current plan first so we only email on a genuine upgrade —
+      // LemonSqueezy replays subscription_created, which otherwise re-sends the
+      // "welcome" email every time.
+      const { data: before } = await supabase.from("profiles").select("plan, email").eq("id", uid).maybeSingle();
       const update: Record<string, unknown> = {
         ls_customer_id: customerId,
         ls_subscription_id: subId,
@@ -126,10 +129,27 @@ Deno.serve(async (req) => {
       if (isDead) update.plan = "free";
       else if (isActive && plan) update.plan = plan;
       await supabase.from("profiles").update(update).eq("id", uid);
-      if (name === "subscription_created" && isActive && plan) {
-        const { data: prof } = await supabase.from("profiles").select("email").eq("id", uid).maybeSingle();
-        await sendUpgradeEmail(prof?.email ?? (attr["user_email"] as string | undefined) ?? null, plan);
+      // Business includes a monthly API-credit bucket — grant it immediately
+      // rather than withholding it until the 1st-of-month cron. The RPC is
+      // idempotent per calendar month, so replays never double-grant.
+      if (isActive && plan === "business") await supabase.rpc("grant_business_monthly");
+      if (isActive && plan && before?.plan !== plan) {
+        await sendUpgradeEmail(before?.email ?? (attr["user_email"] as string | undefined) ?? null, plan);
       }
+      break;
+    }
+    case "subscription_payment_success": {
+      // The payload here is a subscription-INVOICE, not a subscription: its
+      // id/status/renews_at belong to the invoice, so writing them would
+      // overwrite ls_subscription_id with an invoice id and break the customer
+      // portal. Renewals are reflected by subscription_updated; here we only
+      // refresh the customer link. (The real subscription id is
+      // attr.subscription_id if ever needed.)
+      const uid = await findUserId();
+      if (!uid) break;
+      const upd: Record<string, unknown> = { updated_at: new Date().toISOString() };
+      if (customerId) upd.ls_customer_id = customerId;
+      await supabase.from("profiles").update(upd).eq("id", uid);
       break;
     }
     case "subscription_cancelled": {
@@ -181,11 +201,19 @@ Deno.serve(async (req) => {
         const credits = Number(custom.credits ?? 0);
         const orderRef = subId ? `ls_refund:${subId}` : `ls_refund:${attr["identifier"] ?? crypto.randomUUID()}`;
         if (credits > 0) {
-          // Negative grant, idempotent on the refund ref.
+          // Negative grant, idempotent on the refund ref. grant_credits floors
+          // the balance at 0 so a refund can't push it negative.
           await supabase.rpc("grant_credits", {
             p_user: uid, p_amount: -credits, p_reason: `refund:${custom.pack ?? "credits"}`, p_pi: orderRef,
           });
         }
+      } else {
+        // Refund of a subscription's order → revoke paid access. Some stores
+        // emit order_refunded instead of subscription_payment_refunded, so
+        // handle it here too rather than leaving the user on a paid plan.
+        await supabase.from("profiles").update({
+          plan: "free", ls_subscription_status: "refunded", ls_renews_at: null, updated_at: new Date().toISOString(),
+        }).eq("id", uid);
       }
       break;
     }
@@ -197,6 +225,35 @@ Deno.serve(async (req) => {
         ls_subscription_status: "refunded",
         ls_renews_at: null,
         updated_at: new Date().toISOString(),
+      }).eq("id", uid);
+      break;
+    }
+    // ── Pause / dunning ──────────────────────────────────────────────────
+    case "subscription_paused": {
+      const uid = await findUserId();
+      if (!uid) break;
+      await supabase.from("profiles").update({
+        plan: "free", ls_subscription_status: "paused", updated_at: new Date().toISOString(),
+      }).eq("id", uid);
+      break;
+    }
+    case "subscription_unpaused": {
+      const uid = await findUserId();
+      if (!uid) break;
+      const plan = (custom.plan === "business" ? "business" : custom.plan === "pro" ? "pro" : null);
+      const update: Record<string, unknown> = { ls_subscription_status: "active", updated_at: new Date().toISOString() };
+      if (plan) update.plan = plan;
+      await supabase.from("profiles").update(update).eq("id", uid);
+      if (plan === "business") await supabase.rpc("grant_business_monthly");
+      break;
+    }
+    case "subscription_payment_failed": {
+      // Dunning — flag the account so the billing page can surface "payment
+      // overdue". Access isn't revoked until subscription_expired.
+      const uid = await findUserId();
+      if (!uid) break;
+      await supabase.from("profiles").update({
+        ls_subscription_status: "past_due", updated_at: new Date().toISOString(),
       }).eq("id", uid);
       break;
     }

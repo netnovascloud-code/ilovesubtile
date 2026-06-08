@@ -25,11 +25,11 @@ export function OrganizePdfClient() {
     setError(null); setOut(null); setFile(f); setPages([]);
     setBusy(true);
     try {
-      const url = "https://esm.sh/pdfjs-dist@4.0.379/build/pdf.mjs";
+      const url = "https://esm.sh/pdfjs-dist@4.7.76/build/pdf.mjs";
       const pdfjs = await import(/* webpackIgnore: true */ url) as typeof import("pdfjs-dist");
       // Workers are heavy and tend to break under bundlers — disable them and
       // run the small worker payload on the main thread (fine for thumbnails).
-      pdfjs.GlobalWorkerOptions.workerSrc = "https://esm.sh/pdfjs-dist@4.0.379/build/pdf.worker.mjs";
+      pdfjs.GlobalWorkerOptions.workerSrc = "https://esm.sh/pdfjs-dist@4.7.76/build/pdf.worker.mjs";
       const data = new Uint8Array(await f.arrayBuffer());
       const doc = await pdfjs.getDocument({ data }).promise;
       const out: Page[] = [];

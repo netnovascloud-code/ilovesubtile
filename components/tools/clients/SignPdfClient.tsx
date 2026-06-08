@@ -125,7 +125,9 @@ export function SignPdfClient() {
     const px = trimCtx.getImageData(0, 0, ow, oh);
     for (let i = 0; i < px.data.length; i += 4) {
       const lum = (px.data[i] + px.data[i + 1] + px.data[i + 2]) / 3;
-      if (lum > 235) px.data[i + 3] = 0;
+      // 225 (was 235) so the very light baseline guide line (#e2e8f0 ≈ 233) is
+      // dropped to transparent too; real pen ink is far darker (<150).
+      if (lum > 225) px.data[i + 3] = 0;
     }
     trimCtx.putImageData(px, 0, 0);
     return await new Promise<Blob | null>((res) => out.toBlob(res, "image/png"));

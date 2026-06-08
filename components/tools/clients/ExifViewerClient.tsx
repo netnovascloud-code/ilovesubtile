@@ -98,7 +98,9 @@ export function ExifViewerClient() {
     if (!file) return;
     setBusy(true);
     try {
-      const bmp = await createImageBitmap(file);
+      // Bake in EXIF orientation before we strip metadata, otherwise a phone
+      // photo (Orientation 6/8) loses its tag and renders sideways.
+      const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
       const canvas = document.createElement("canvas");
       canvas.width = bmp.width; canvas.height = bmp.height;
       canvas.getContext("2d")!.drawImage(bmp, 0, 0);

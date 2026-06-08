@@ -45,7 +45,7 @@ export function CoverLetterClient() {
     const doc = await PDFDocument.create();
     const helv = await doc.embedFont(StandardFonts.Helvetica);
     const bold = await doc.embedFont(StandardFonts.HelveticaBold);
-    const page = doc.addPage([595, 842]); // A4 in points
+    let page = doc.addPage([595, 842]); // A4 in points
     const margin = 56, lineHeight = 15, size = 11;
     let y = 800;
 
@@ -66,12 +66,12 @@ export function CoverLetterClient() {
         if (helv.widthOfTextAtSize(candidate, size) > maxWidth) {
           page.drawText(line, { x: margin, y, size, font: helv, color: rgb(0.1, 0.1, 0.12) });
           y -= lineHeight; line = w;
-          if (y < margin) { y = 800; doc.addPage([595, 842]); }
+          if (y < margin) { y = 800; page = doc.addPage([595, 842]); }
         } else line = candidate;
       }
       if (line) { page.drawText(line, { x: margin, y, size, font: helv, color: rgb(0.1, 0.1, 0.12) }); y -= lineHeight; }
       y -= 6;
-      if (y < margin) { y = 800; doc.addPage([595, 842]); }
+      if (y < margin) { y = 800; page = doc.addPage([595, 842]); }
     }
 
     const bytes = await doc.save();

@@ -11,9 +11,12 @@ import { Button } from "@/components/ui/button";
  * sessionStorage to avoid hammering the API while the user plays.
  */
 
+// ECB (Frankfurter) reference set only. RUB and AED were previously listed but
+// the ECB feed does not publish them → they silently returned "—". Replaced
+// with ISK and THB, which the feed does provide, keeping the count at 28.
 const CURRENCIES = [
   "EUR", "USD", "GBP", "JPY", "CNY", "CAD", "AUD", "CHF", "SEK", "NOK", "DKK", "PLN", "CZK", "HUF",
-  "RON", "BGN", "TRY", "RUB", "INR", "BRL", "MXN", "ZAR", "SGD", "HKD", "KRW", "NZD", "ILS", "AED",
+  "RON", "BGN", "TRY", "THB", "INR", "BRL", "MXN", "ZAR", "SGD", "HKD", "KRW", "NZD", "ILS", "ISK",
 ];
 
 const CACHE_KEY = "konver_fx_rates_v1";

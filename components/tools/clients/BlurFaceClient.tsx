@@ -19,7 +19,7 @@ export function BlurFaceClient() {
   const [scale, setScale] = useState(1);                       // display → source px
   const [regions, setRegions] = useState<Region[]>([]);
   const [strength, setStrength] = useState(20);                 // blur radius in px
-  const [out, setOut] = useState<{ url: string; size: number } | null>(null);
+  const [out, setOut] = useState<{ url: string; size: number; name: string } | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const drag = useRef<{ x: number; y: number } | null>(null);
 
@@ -85,7 +85,12 @@ export function BlurFaceClient() {
     const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
     const blob: Blob = await new Promise((res) => c.toBlob((b) => res(b!), mime, 0.94));
     if (out) URL.revokeObjectURL(out.url);
-    setOut({ url: URL.createObjectURL(blob), size: blob.size });
+    // Name the download with the actual output extension (a .webp input is
+    // re-encoded to JPEG, so keeping the original name produced an unopenable
+    // "blurred-x.webp" that was really JPEG bytes).
+    const base = file.name.replace(/\.[^.]+$/, "") || "image";
+    const ext = mime === "image/png" ? "png" : "jpg";
+    setOut({ url: URL.createObjectURL(blob), size: blob.size, name: `blurred-${base}.${ext}` });
   }, [img, file, regions, strength, out]);
 
   const reset = () => {
@@ -140,7 +145,7 @@ export function BlurFaceClient() {
       <div className="flex flex-wrap gap-2">
         <Button onClick={exportImg} disabled={!regions.length}>Export blurred image</Button>
         {out && (
-          <a href={out.url} download={`blurred-${file.name}`}
+          <a href={out.url} download={out.name}
             className="inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-100">
             <Download className="h-4 w-4" /> Download ({formatBytes(out.size)})
           </a>

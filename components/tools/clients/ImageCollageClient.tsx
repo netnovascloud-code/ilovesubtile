@@ -29,10 +29,14 @@ export function ImageCollageClient() {
   const dragIdx = useRef<number | null>(null);
   const previewRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Revoke object URLs only on unmount (see ImagesToGifClient): keying on
+  // [photos, out] revoked live thumbnails on every add/remove/reorder.
+  const cleanupRef = useRef({ photos, out });
+  cleanupRef.current = { photos, out };
   useEffect(() => () => {
-    photos.forEach((p) => URL.revokeObjectURL(p.url));
-    if (out) URL.revokeObjectURL(out.url);
-  }, [photos, out]);
+    cleanupRef.current.photos.forEach((p) => URL.revokeObjectURL(p.url));
+    if (cleanupRef.current.out) URL.revokeObjectURL(cleanupRef.current.out.url);
+  }, []);
 
   // Decode every newly added photo so the preview can draw it immediately.
   const onFiles = useCallback(async (files: FileList | null) => {

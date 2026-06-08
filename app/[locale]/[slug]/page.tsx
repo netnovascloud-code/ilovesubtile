@@ -119,6 +119,9 @@ const ResumeBuilderClient = dynamic(() => import("@/components/tools/clients/Res
 const CoverLetterClient = dynamic(() => import("@/components/tools/clients/CoverLetterClient").then((m) => ({ default: m.CoverLetterClient })));
 const ContractAnalyzerClient = dynamic(() => import("@/components/tools/clients/ContractAnalyzerClient").then((m) => ({ default: m.ContractAnalyzerClient })));
 const VideoThumbnailClient = dynamic(() => import("@/components/tools/clients/VideoThumbnailClient").then((m) => ({ default: m.VideoThumbnailClient })));
+const SshKeyGeneratorClient = dynamic(() => import("@/components/tools/clients/SshKeyGeneratorClient").then((m) => ({ default: m.SshKeyGeneratorClient })));
+const TextEncryptorClient = dynamic(() => import("@/components/tools/clients/TextEncryptorClient").then((m) => ({ default: m.TextEncryptorClient })));
+const FileEncryptorClient = dynamic(() => import("@/components/tools/clients/FileEncryptorClient").then((m) => ({ default: m.FileEncryptorClient })));
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 const ImageToolClient = dynamic(() => import("@/components/tools/clients/ImageToolClient").then((m) => ({ default: m.ImageToolClient })));
 const AiTextClient = dynamic(() => import("@/components/tools/clients/AiTextClient").then((m) => ({ default: m.AiTextClient })));
@@ -533,6 +536,15 @@ export default function LocalisedToolPage({
       break;
     case "url-scanner":
       body = <UrlScannerClient />;
+      break;
+    case "ssh-key-generator":
+      body = <SshKeyGeneratorClient />;
+      break;
+    case "text-encryptor":
+      body = <TextEncryptorClient />;
+      break;
+    case "file-encryptor":
+      body = <FileEncryptorClient />;
       break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;

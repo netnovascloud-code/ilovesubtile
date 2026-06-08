@@ -34,11 +34,20 @@ export function ImageToolClient({ slug }: { slug: string }) {
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      setSrc({ file, img, url, w: img.naturalWidth, h: img.naturalHeight });
-      setWidth(img.naturalWidth);
-      setHeight(img.naturalHeight);
+      // SVGs often lack intrinsic dimensions (naturalWidth/Height = 0, or a
+      // 150px UA default), which previously produced a 1px/150px raster. Fall
+      // back to a usable default; the resize controls still let the user pick.
+      const isSvg = file.type === "image/svg+xml" || /\.svg$/i.test(file.name);
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (isSvg && (w <= 1 || h <= 1 || (w === 150 && h === 150))) {
+        const ratio = w > 1 && h > 1 ? h / w : 1;
+        w = 1024; h = Math.round(1024 * ratio);
+      }
+      setSrc({ file, img, url, w, h });
+      setWidth(w);
+      setHeight(h);
       setAngle(0);
-      setCrop({ x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight });
+      setCrop({ x: 0, y: 0, w, h });
     };
     img.onerror = () => { setError("Could not read this image. Try a different file."); URL.revokeObjectURL(url); };
     img.src = url;

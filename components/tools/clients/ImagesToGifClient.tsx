@@ -33,10 +33,15 @@ export function ImagesToGifClient() {
   const [out, setOut] = useState<{ url: string; size: number } | null>(null);
   const dragIdx = useRef<number | null>(null);
 
+  // Revoke object URLs only on unmount. Keying this on [frames, out] previously
+  // revoked every frame's URL on each add/remove/reorder, breaking the surviving
+  // thumbnails. A ref holds the latest set so we revoke exactly once at the end.
+  const cleanupRef = useRef({ frames, out });
+  cleanupRef.current = { frames, out };
   useEffect(() => () => {
-    frames.forEach((f) => URL.revokeObjectURL(f.url));
-    if (out) URL.revokeObjectURL(out.url);
-  }, [frames, out]);
+    cleanupRef.current.frames.forEach((f) => URL.revokeObjectURL(f.url));
+    if (cleanupRef.current.out) URL.revokeObjectURL(cleanupRef.current.out.url);
+  }, []);
 
   const onFiles = (files: FileList | null) => {
     if (!files) return;

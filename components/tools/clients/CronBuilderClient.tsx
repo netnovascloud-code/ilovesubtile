@@ -50,19 +50,30 @@ function humanize(parts: Record<Field, string>): string {
 // `min`/`max` are the field bounds: a bare star-step ("* / step") is anchored at
 // the field minimum per cron semantics, so day-of-month step-2 fires on 1,3,5…
 // not 2,4,6.
-function fieldMatches(value: number, expr: string, min: number, max: number): boolean {
+const MONTH_NAMES: Record<string, number> = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 };
+const DOW_NAMES: Record<string, number> = { SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6 };
+
+// Resolve one cron token to a number, accepting the named months/days
+// (JAN, MON, …) that the field hints advertise. Garbage → NaN, which simply
+// never matches below.
+function tok(s: string, names?: Record<string, number>): number {
+  const named = names?.[s.trim().toUpperCase()];
+  return named !== undefined ? named : Number(s);
+}
+
+function fieldMatches(value: number, expr: string, min: number, max: number, names?: Record<string, number>): boolean {
   if (expr === "*") return true;
   for (const part of expr.split(",")) {
     if (part.includes("/")) {
       const [range, stepStr] = part.split("/");
       const step = Number(stepStr) || 1;
-      const [a, b] = range === "*" ? [min, max] : range.split("-").map(Number);
+      const [a, b] = range === "*" ? [min, max] : range.split("-").map((x) => tok(x, names));
       const lo = a, hi = (b === undefined ? max : b);
       if (value >= lo && value <= hi && (value - lo) % step === 0) return true;
     } else if (part.includes("-")) {
-      const [a, b] = part.split("-").map(Number);
+      const [a, b] = part.split("-").map((x) => tok(x, names));
       if (value >= a && value <= b) return true;
-    } else if (Number(part) === value) return true;
+    } else if (tok(part, names) === value) return true;
   }
   return false;
 }
@@ -71,8 +82,8 @@ function fieldMatches(value: number, expr: string, min: number, max: number): bo
  *  only returns 0 for Sunday — so test the raw value, then retry with any `7`
  *  rewritten to `0` when the current day is Sunday. */
 function dowMatches(jsDay: number, expr: string): boolean {
-  if (fieldMatches(jsDay, expr, 0, 7)) return true;
-  if (jsDay === 0 && /7/.test(expr)) return fieldMatches(0, expr.replace(/7/g, "0"), 0, 6);
+  if (fieldMatches(jsDay, expr, 0, 7, DOW_NAMES)) return true;
+  if (jsDay === 0 && /7/.test(expr)) return fieldMatches(0, expr.replace(/7/g, "0"), 0, 6, DOW_NAMES);
   return false;
 }
 
@@ -88,7 +99,7 @@ function nextFires(parts: Record<Field, string>, count = 5): Date[] {
       fieldMatches(d.getMinutes(), parts.minute, 0, 59) &&
       fieldMatches(d.getHours(), parts.hour, 0, 23) &&
       fieldMatches(d.getDate(), parts.dom, 1, 31) &&
-      fieldMatches(d.getMonth() + 1, parts.month, 1, 12) &&
+      fieldMatches(d.getMonth() + 1, parts.month, 1, 12, MONTH_NAMES) &&
       dowMatches(d.getDay(), parts.dow)
     ) out.push(new Date(d));
   }

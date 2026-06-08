@@ -13,6 +13,10 @@ const MIMES: { id: string; label: string }[] = [
   { id: "image/svg+xml", label: "SVG" },
 ];
 
+const EXT_BY_MIME: Record<string, string> = {
+  "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp", "image/svg+xml": "svg",
+};
+
 export function ImageToBase64Client() {
   // ─── Encode mode ────────────────────────────────────────────────────────
   const [file, setFile] = useState<File | null>(null);
@@ -23,6 +27,7 @@ export function ImageToBase64Client() {
   const [decodeInput, setDecodeInput] = useState("");
   const [decodeMime, setDecodeMime] = useState("image/png");
   const [decodeUrl, setDecodeUrl] = useState<string | null>(null);
+  const [decodeName, setDecodeName] = useState("decoded.png");
   const decodeRef = useRef<string | null>(null);
 
   useEffect(() => () => { if (decodeRef.current) URL.revokeObjectURL(decodeRef.current); }, []);
@@ -55,6 +60,7 @@ export function ImageToBase64Client() {
     const m = raw.match(/^data:(image\/[a-z0-9+\-.]+);base64,(.+)$/i);
     const data = m ? m[2] : raw.replace(/\s+/g, "");
     const mime = m ? m[1] : decodeMime;
+    setDecodeName(`decoded.${EXT_BY_MIME[mime.toLowerCase()] ?? "bin"}`);
     try {
       const bin = atob(data);
       const arr = new Uint8Array(bin.length);
@@ -125,7 +131,7 @@ export function ImageToBase64Client() {
           <div className="mt-4 flex flex-wrap items-center gap-4 rounded-lg border border-ink-100 bg-white p-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={decodeUrl} alt="Decoded" className="max-h-56 max-w-full rounded" />
-            <a href={decodeUrl} download="decoded.png">
+            <a href={decodeUrl} download={decodeName}>
               <Button size="sm" variant="outline"><Download className="h-3.5 w-3.5" /> Download</Button>
             </a>
           </div>

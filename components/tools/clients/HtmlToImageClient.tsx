@@ -48,7 +48,10 @@ export function HtmlToImageClient() {
       host.innerHTML = html;
       document.body.appendChild(host);
 
-      const html2canvas = (await import(/* webpackIgnore: true */ "https://esm.sh/html2canvas@1.4.1")).default as (el: HTMLElement, opts?: Record<string, unknown>) => Promise<HTMLCanvasElement>;
+      // NB: import a URL stored in a variable (not a string literal) so TS
+      // doesn't try to resolve it as a local module and fail the build.
+      const h2cUrl = "https://esm.sh/html2canvas@1.4.1";
+      const html2canvas = ((await import(/* webpackIgnore: true */ h2cUrl)) as { default: (el: HTMLElement, opts?: Record<string, unknown>) => Promise<HTMLCanvasElement> }).default;
       const canvas = await html2canvas(host, {
         width, height, scale: 1, useCORS: true, logging: false,
         backgroundColor: format === "jpg" ? "#ffffff" : null,

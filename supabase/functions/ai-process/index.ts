@@ -48,7 +48,7 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "clean":
       return `You receive subtitle text. Fix obvious transcription errors, normalise punctuation, and remove [music] / (sigh) style annotations. Preserve every line break.`;
     case "summary":
-      return `You receive a transcript. Return a 4-point summary, one point per line, each line starting with "• ". Plain text only.`;
+      return `You receive a transcript. Return a 4-point summary, written in the SAME language as the transcript, one point per line, each line starting with "• ". Plain text only.`;
     case "translate": {
       const reg = opts.register === "formal" ? " Use a polite, formal register (e.g. vouvoiement in French, Sie in German)."
         : opts.register === "informal" ? " Use a casual, informal register (e.g. tutoiement in French, du in German)."
@@ -64,9 +64,9 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "rephrase":
       return `Rewrite the user's text in a ${opts.style || "clear, neutral"} style/tone. Keep the original meaning and language. Output ONLY the rewritten text.`;
     case "summarize":
-      if (opts.format === "sentence") return `Summarise the user's text in a single concise sentence. Output only that sentence.`;
-      if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs. Output only the summary.`;
-      return `Summarise the user's text as 3-6 key points, one per line, each line starting with "• ". Output only the points, plain text.`;
+      if (opts.format === "sentence") return `Summarise the user's text in a single concise sentence, written in the SAME language as the text. Output only that sentence.`;
+      if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs, written in the SAME language as the text. Output only the summary.`;
+      return `Summarise the user's text as 3-6 key points, written in the SAME language as the text, one per line, each line starting with "• ". Output only the points, plain text.`;
     case "grammar":
       return `Correct spelling, grammar and punctuation in the user's text. Keep the same language, meaning and formatting. Output ONLY the corrected text.`;
     case "simplify":

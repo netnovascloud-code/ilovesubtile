@@ -41,13 +41,16 @@ function buildCsp(nonce: string): string {
     "font-src 'self' data: https://fonts.gstatic.com",
     "img-src 'self' data: blob: https: *.supabase.co",
     "media-src 'self' blob:",
-    "worker-src 'self' blob:",
+    "worker-src 'self' blob: https://cdn.jsdelivr.net",
     // wss://*.supabase.co is REQUIRED — @supabase/ssr opens a Realtime
     // WebSocket on session resolution (incl. the OAuth callback at /?code=…).
     // CSP treats wss:// and https:// as distinct schemes, so listing the https
     // origin alone blocks the socket and crashes the browser client.
     // https://vercel.live: feedback widget on *.vercel.app preview deploys.
-    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
+    // cdn.jsdelivr.net + tessdata.projectnaptha.com: Tesseract.js (PDF OCR /
+    // image-to-text) fetches its WASM core + worker from jsDelivr and the
+    // language model (eng.traineddata.gz) from projectnaptha by default.
+    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
     "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",

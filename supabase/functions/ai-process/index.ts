@@ -185,8 +185,10 @@ Deno.serve(async (req) => {
   let system = baseSystem;
   // Part 4 — force clean plain text on every prose task.
   if (!wantsJson) system += ` Write your answer in plain text only — no Markdown, no asterisks (*), no bold or italic markers, no headings, no code fences.`;
-  // Part 3 — make the model answer in the SAME language as the input.
-  if (!TARGET_OR_STRUCTURED.has(task)) system += ` IMPORTANT: Reply in the SAME language as the user's text — detect that language and write your entire answer in it. Never switch to English unless the user's text is itself in English.`;
+  // Part 3 — make the model answer in the SAME language as the input. The old
+  // wording only forbade switching *to English*, so the model freely drifted to
+  // French/German on English input (rephrase/humanize). Forbid any switch.
+  if (!TARGET_OR_STRUCTURED.has(task)) system += ` CRITICAL: First detect the language of the user's text, then write your ENTIRE response in that exact same language. Do not translate and do not switch to any other language — if the input is English, answer in English; if it is French, answer in French; and so on for every language.`;
   // Contracts can run long — bump the cap to 120 KB only for that task to
   // keep memory predictable on the smaller default tasks.
   const maxLen = task === "contract-analyze" ? 120_000 : 40_000;

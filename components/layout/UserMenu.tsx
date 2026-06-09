@@ -88,7 +88,7 @@ export function UserMenu({
           <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
             <LayoutDashboard className="h-4 w-4" /> {labels.dashboard}
           </Link>
-          <Link href="/dashboard#billing" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
+          <Link href="/billing" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
             <CreditCard className="h-4 w-4" /> {labels.billing}
           </Link>
           <div className="my-1 h-px bg-ink-100" />

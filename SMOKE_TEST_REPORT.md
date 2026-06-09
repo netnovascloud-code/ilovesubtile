@@ -1,9 +1,10 @@
-# Konvertools smoke test — 213/213 passed
+# Konvertools smoke test — 212/213 passed
 
-✅ All routes load with no console errors, h1 renders, and all 10 interactive checks pass.
+❌ 1 failures — see below.
 
 ## Failures
-_None._
+
+- **currency-converter** — console: Access to fetch at 'https://api.frankfurter.dev/v1/latest?base=EUR' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on 
 
 ## Passes
 - subtitle-generator
@@ -75,7 +76,6 @@ _None._
 - uuid-generator
 - unix-timestamp
 - text-diff
-- currency-converter
 - cron-builder
 - invoice-generator
 - vat-calculator

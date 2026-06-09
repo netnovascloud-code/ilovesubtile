@@ -61,7 +61,6 @@ const ComparePdfClient = dynamic(() => import("@/components/tools/clients/Compar
 const ImageToIcoClient = dynamic(() => import("@/components/tools/clients/ImageToIcoClient").then((m) => ({ default: m.ImageToIcoClient })));
 const WatermarkImageClient = dynamic(() => import("@/components/tools/clients/WatermarkImageClient").then((m) => ({ default: m.WatermarkImageClient })));
 const ExtractColorsClient = dynamic(() => import("@/components/tools/clients/ExtractColorsClient").then((m) => ({ default: m.ExtractColorsClient })));
-const PdfToExcelClient = dynamic(() => import("@/components/tools/clients/PdfToExcelClient").then((m) => ({ default: m.PdfToExcelClient })));
 const InvoiceGeneratorClient = dynamic(() => import("@/components/tools/clients/InvoiceGeneratorClient").then((m) => ({ default: m.InvoiceGeneratorClient })));
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/clients/QrCodeReaderClient").then((m) => ({ default: m.QrCodeReaderClient })));
 const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/clients/BarcodeGeneratorClient").then((m) => ({ default: m.BarcodeGeneratorClient })));
@@ -78,13 +77,8 @@ const FfmpegToolClient = dynamic(() => import("@/components/tools/clients/Ffmpeg
 const RemoveBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveBackgroundClient").then((m) => ({ default: m.RemoveBackgroundClient })));
 const RemoveVideoBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveVideoBackgroundClient").then((m) => ({ default: m.RemoveVideoBackgroundClient })));
 const PdfToTextClient = dynamic(() => import("@/components/tools/clients/PdfToTextClient").then((m) => ({ default: m.PdfToTextClient })));
-const PdfToWordClient = dynamic(() => import("@/components/tools/clients/PdfToWordClient").then((m) => ({ default: m.PdfToWordClient })));
 const MergeAudioClient = dynamic(() => import("@/components/tools/clients/MergeAudioClient").then((m) => ({ default: m.MergeAudioClient })));
 const PdfToJpgClient = dynamic(() => import("@/components/tools/clients/PdfToJpgClient").then((m) => ({ default: m.PdfToJpgClient })));
-const WordToPdfClient = dynamic(() => import("@/components/tools/clients/WordToPdfClient").then((m) => ({ default: m.WordToPdfClient })));
-const HtmlToPdfClient = dynamic(() => import("@/components/tools/clients/HtmlToPdfClient").then((m) => ({ default: m.HtmlToPdfClient })));
-const ExcelToPdfClient = dynamic(() => import("@/components/tools/clients/ExcelToPdfClient").then((m) => ({ default: m.ExcelToPdfClient })));
-const CompressPdfClient = dynamic(() => import("@/components/tools/clients/CompressPdfClient").then((m) => ({ default: m.CompressPdfClient })));
 const WatermarkVideoClient = dynamic(() => import("@/components/tools/clients/WatermarkVideoClient").then((m) => ({ default: m.WatermarkVideoClient })));
 const AudioToVideoClient = dynamic(() => import("@/components/tools/clients/AudioToVideoClient").then((m) => ({ default: m.AudioToVideoClient })));
 const AdjustImageClient = dynamic(() => import("@/components/tools/clients/AdjustImageClient").then((m) => ({ default: m.AdjustImageClient })));
@@ -285,13 +279,6 @@ export default function LocalisedToolPage({
       </ToolPageShell>
     );
   }
-  if (tool.slug === "pdf-to-word") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <PdfToWordClient />
-      </ToolPageShell>
-    );
-  }
   if (tool.slug === "merge-audio") {
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
@@ -299,38 +286,10 @@ export default function LocalisedToolPage({
       </ToolPageShell>
     );
   }
-  if (tool.slug === "word-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <WordToPdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "html-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <HtmlToPdfClient />
-      </ToolPageShell>
-    );
-  }
   if (tool.slug === "add-watermark") {
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <WatermarkVideoClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "excel-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <ExcelToPdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "compress-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <CompressPdfClient />
       </ToolPageShell>
     );
   }
@@ -352,13 +311,6 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <ComparePdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "pdf-to-excel") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <PdfToExcelClient />
       </ToolPageShell>
     );
   }

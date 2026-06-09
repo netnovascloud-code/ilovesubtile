@@ -15,48 +15,6 @@ export type HowTo = {
 };
 
 export const HOWTOS: Record<string, HowTo> = {
-  "compress-pdf-without-losing-quality": {
-    id: "compress-pdf-without-losing-quality",
-    h1: "How to Compress a PDF Without Losing Quality — Step-by-Step",
-    metaTitle: "How to Compress a PDF Without Losing Quality | Konvertools",
-    metaDescription: "Shrink a PDF for email or upload while keeping it sharp and readable — free, in your browser, no sign-up. A simple step-by-step guide.",
-    intro: "Big PDFs bounce off email limits and crawl when uploaded. The trick is to reduce file size without visibly degrading text or images. You don't need desktop software or an account — a good in-browser compressor re-optimises the file's images and structure while keeping everything legible, and never uploads your document to a server.",
-    toolSlug: "compress-pdf",
-    toolCta: "Compress a PDF now",
-    steps: [
-      { title: "Open the PDF compressor", body: "Head to the Compress PDF tool — it runs entirely in your browser." },
-      { title: "Drop in your PDF", body: "Your file stays on your device; nothing is uploaded." },
-      { title: "Let it re-optimise", body: "Images and structure are recompressed while text stays crisp." },
-      { title: "Download the smaller file", body: "Compare the size — usually a fraction of the original, still readable." },
-    ],
-    why: "Konvertools compresses PDFs locally in your browser, so your document is never uploaded and the result is instant. It's free and unlimited, with no watermark on the output.",
-    faq: [
-      { q: "Will the text get blurry?", a: "No — text stays vector-sharp. Only embedded images are recompressed, which is where the size savings come from." },
-      { q: "Is there a file-size limit?", a: "Free users can compress generously; Pro raises the limit to 500 MB." },
-      { q: "Are my files uploaded?", a: "No. Compression happens entirely in your browser — the PDF never leaves your device." },
-    ],
-  },
-  "convert-pdf-to-word-free-online": {
-    id: "convert-pdf-to-word-free-online",
-    h1: "How to Convert a PDF to Word Free Online — Step-by-Step",
-    metaTitle: "How to Convert a PDF to Word Free Online | Konvertools",
-    metaDescription: "Turn a PDF into an editable Word (.docx) document for free, in your browser, with no sign-up. Follow four simple steps.",
-    intro: "PDFs are great for sharing but painful to edit. Converting one back to an editable Word document lets you fix typos, update figures or reuse the text. You can do it free online without installing Office — the tool extracts the text layer into a clean .docx you can open in Word, Google Docs or Pages.",
-    toolSlug: "pdf-to-word",
-    toolCta: "Convert PDF to Word now",
-    steps: [
-      { title: "Open the PDF to Word tool", body: "It extracts text in your browser into an editable .docx." },
-      { title: "Upload your PDF", body: "The file stays on your device — no server upload." },
-      { title: "Wait a moment", body: "Each page's text is pulled out and written into a Word document." },
-      { title: "Download the .docx", body: "Open it in Word, Google Docs or Pages and start editing." },
-    ],
-    why: "Konvertools converts in your browser, so your document is private and the result is instant — free and unlimited, no account required.",
-    faq: [
-      { q: "Will the layout be perfect?", a: "Text and basic structure are preserved. Very complex multi-column layouts and images may need touch-ups — it's an editable starting point." },
-      { q: "Does it work on scanned PDFs?", a: "Scanned PDFs have no text layer, so run them through OCR first. Digital PDFs convert directly." },
-      { q: "Is it really free?", a: "Yes — free and unlimited, with no sign-up." },
-    ],
-  },
   "remove-background-from-photo-free": {
     id: "remove-background-from-photo-free",
     h1: "How to Remove the Background from a Photo Free — Step-by-Step",

@@ -97,7 +97,7 @@ export const SECTORS: Record<string, Sector> = {
       { title: "Summarize and translate", body: "Long readings → bullet points; foreign articles → your language." },
       { title: "Transcribe lectures", body: "Drop the audio, get timestamped notes you can search." },
     ],
-    toolSlugs: ["merge-pdf", "split-pdf", "compress-pdf", "pdf-to-word", "word-to-pdf", "pdf-to-jpg", "summarize-text", "translate-text", "subtitle-generator", "srt-to-text", "word-counter"],
+    toolSlugs: ["merge-pdf", "split-pdf", "pdf-to-jpg", "pdf-to-text", "summarize-text", "translate-text", "subtitle-generator", "srt-to-text", "word-counter"],
     faq: [
       { q: "Is it really free?", a: "Yes — all browser-side tools are free and unlimited. AI tools have a generous free daily allowance." },
       { q: "Will my files be deleted?", a: "Browser tools never upload anything. AI-powered tools delete files within 30 minutes." },
@@ -115,7 +115,7 @@ export const SECTORS: Record<string, Sector> = {
       { title: "Translation that preserves structure", body: "Cue-by-cue translation keeps timestamps, layout and numbering intact." },
       { title: "Transcribe depositions", body: "AI transcription with timestamps, ready to export to a document." },
     ],
-    toolSlugs: ["merge-pdf", "split-pdf", "compress-pdf", "pdf-to-word", "word-to-pdf", "pdf-to-jpg", "translate-text", "subtitle-generator", "srt-to-text"],
+    toolSlugs: ["merge-pdf", "split-pdf", "pdf-to-jpg", "pdf-to-text", "translate-text", "subtitle-generator", "srt-to-text"],
     faq: [
       { q: "Is this suitable for confidential documents?", a: "Yes for browser-side tools — they never upload your file. For AI tools, files are processed in an EU-hosted Supabase project and deleted within 30 minutes." },
       { q: "Do you store transcripts?", a: "No — they're returned to you and the temporary copy is purged within 30 minutes." },
@@ -133,7 +133,7 @@ export const SECTORS: Record<string, Sector> = {
       { title: "Cross-language hiring", body: "AI translation in 30+ languages so you can read every CV." },
       { title: "Summarize at a glance", body: "Cover letters → 3 bullets so you can triage faster." },
     ],
-    toolSlugs: ["pdf-to-word", "word-to-pdf", "compress-pdf", "merge-pdf", "translate-text", "summarize-text", "rephrase-text", "word-counter", "fix-grammar"],
+    toolSlugs: ["merge-pdf", "pdf-to-text", "translate-text", "summarize-text", "rephrase-text", "word-counter", "fix-grammar"],
     faq: [
       { q: "Can I batch-translate multiple CVs?", a: "Yes — the Pro plan unlocks batch translation of up to 20 files at a time." },
       { q: "Are candidate files private?", a: "Browser tools never upload anything. AI tools delete every file within 30 minutes." },

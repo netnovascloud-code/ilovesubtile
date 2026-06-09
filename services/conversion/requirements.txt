@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-pdf2docx
-pdfplumber
-openpyxl
-python-magic
-httpx

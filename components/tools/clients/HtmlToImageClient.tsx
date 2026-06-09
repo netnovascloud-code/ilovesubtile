@@ -36,32 +36,31 @@ export function HtmlToImageClient() {
 
   const run = useCallback(async () => {
     setBusy(true); setError(null);
+    let host: HTMLDivElement | null = null;
     try {
-      // Wrap the user's HTML in an SVG with foreignObject. The xmlns on the
-      // inner div is required — without it, Chrome refuses to render the HTML.
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml">${html}</div></foreignObject></svg>`;
-      const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      await new Promise<void>((res, rej) => {
-        img.onload = () => res();
-        img.onerror = () => rej(new Error("Could not render that HTML — check for typos or unsupported tags."));
-        img.src = url;
+      // Render the HTML in a real off-screen DOM node and rasterise it with
+      // html2canvas. The previous SVG <foreignObject> → <img> → canvas trick
+      // TAINTS the canvas in Chrome ("Tainted canvases may not be exported"),
+      // so toBlob always failed. html2canvas walks the DOM and draws primitives,
+      // so the resulting canvas stays exportable.
+      host = document.createElement("div");
+      host.style.cssText = `position:fixed;left:-99999px;top:0;width:${width}px;height:${height}px;overflow:hidden;`;
+      host.innerHTML = html;
+      document.body.appendChild(host);
+
+      const html2canvas = (await import(/* webpackIgnore: true */ "https://esm.sh/html2canvas@1.4.1")).default as (el: HTMLElement, opts?: Record<string, unknown>) => Promise<HTMLCanvasElement>;
+      const canvas = await html2canvas(host, {
+        width, height, scale: 1, useCORS: true, logging: false,
+        backgroundColor: format === "jpg" ? "#ffffff" : null,
       });
-      const c = document.createElement("canvas");
-      c.width = width; c.height = height;
-      const ctx = c.getContext("2d")!;
-      if (format === "jpg") { ctx.fillStyle = "white"; ctx.fillRect(0, 0, width, height); }
-      ctx.drawImage(img, 0, 0, width, height);
-      URL.revokeObjectURL(url);
       const mime = format === "png" ? "image/png" : "image/jpeg";
-      const outBlob: Blob = await new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("Encoding failed."))), mime, 0.94));
+      const outBlob: Blob = await new Promise((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error("Encoding failed."))), mime, 0.94));
       if (out) URL.revokeObjectURL(out.url);
       setOut({ url: URL.createObjectURL(outBlob), size: outBlob.size });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not render HTML.");
     } finally {
+      if (host) host.remove();
       setBusy(false);
     }
   }, [html, width, height, format, out]);
@@ -114,8 +113,8 @@ export function HtmlToImageClient() {
       </div>
 
       <p className="text-xs text-ink-400">
-        HTML is rendered inside an SVG <code>foreignObject</code> — fonts and external images
-        must be CORS-accessible. Inline styles work best.
+        Rendered in your browser with html2canvas — inline styles work best, and any
+        external images must be CORS-accessible to appear.
       </p>
     </div>
   );

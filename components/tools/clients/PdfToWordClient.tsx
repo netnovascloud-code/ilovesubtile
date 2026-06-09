@@ -31,23 +31,48 @@ export function PdfToWordClient() {
     try {
       const pdfjs = await loadPdfjs();
       const doc = await pdfjs.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise;
-      const lines: string[] = [];
-      const headings = new Set<number>();
+
+      // Collect each page's lines. We no longer inject a "Page N" heading — that
+      // synthetic text was itself polluting the body the user reads.
+      const pages: string[][] = [];
       for (let i = 1; i <= doc.numPages; i++) {
-        if (i > 1) { lines.push(""); }
-        headings.add(lines.length);
-        lines.push(`Page ${i}`);
         const page = await doc.getPage(i);
         const content = await page.getTextContent();
+        const pageLines: string[] = [];
         let cur = "";
         for (const it of content.items) {
           cur += it.str;
-          if (it.hasEOL) { lines.push(cur); cur = ""; } else cur += " ";
+          if (it.hasEOL) { if (cur.trim()) pageLines.push(cur.trim()); cur = ""; } else cur += " ";
         }
-        if (cur.trim()) lines.push(cur);
+        if (cur.trim()) pageLines.push(cur.trim());
+        pages.push(pageLines);
         setProgress(Math.max(2, Math.min(99, Math.round((i / doc.numPages) * 100))));
       }
-      const blob = await buildDocx(lines, headings);
+
+      // Strip running headers/footers + stray page numbers so they don't land in
+      // the body: a first/last line that repeats across most pages is boilerplate,
+      // and "Page 3", "3 / 10" or a lone number is a page marker.
+      const PAGE_NUM = /^\s*(?:page\s+\d+(?:\s+(?:of|sur|\/)\s+\d+)?|\d+\s*\/\s*\d+|[-–—]?\s*\d{1,4}\s*[-–—]?)\s*$/i;
+      const tally = (get: (p: string[]) => string | undefined) => {
+        const m = new Map<string, number>();
+        for (const p of pages) { const v = get(p); if (v) m.set(v, (m.get(v) ?? 0) + 1); }
+        return m;
+      };
+      const firstC = tally((p) => p[0]);
+      const lastC = tally((p) => p[p.length - 1]);
+      const thr = Math.max(2, Math.ceil(doc.numPages * 0.5));
+      const lines: string[] = [];
+      pages.forEach((p, idx) => {
+        if (idx > 0) lines.push("");
+        p.forEach((line, j) => {
+          if (PAGE_NUM.test(line)) return;
+          if (j === 0 && (firstC.get(line) ?? 0) >= thr) return;
+          if (j === p.length - 1 && (lastC.get(line) ?? 0) >= thr) return;
+          lines.push(line);
+        });
+      });
+
+      const blob = await buildDocx(lines, new Set<number>());
       setResultUrl(URL.createObjectURL(blob));
       setResultName(`${f.name.replace(/\.pdf$/i, "")}.docx`);
       setProgress(100);

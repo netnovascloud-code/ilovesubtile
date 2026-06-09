@@ -188,7 +188,7 @@ Deno.serve(async (req) => {
   // Part 3 — make the model answer in the SAME language as the input. The old
   // wording only forbade switching *to English*, so the model freely drifted to
   // French/German on English input (rephrase/humanize). Forbid any switch.
-  if (!TARGET_OR_STRUCTURED.has(task)) system += ` CRITICAL: First detect the language of the user's text, then write your ENTIRE response in that exact same language. Do not translate and do not switch to any other language — if the input is English, answer in English; if it is French, answer in French; and so on for every language.`;
+  if (!TARGET_OR_STRUCTURED.has(task)) system = `CRITICAL LANGUAGE RULE — read this first: detect the language of the user's text and write your ENTIRE answer in that exact same language. Never translate or switch to another language (English in → English out, French in → French out), regardless of any interface language. ` + system;
   // Contracts can run long — bump the cap to 120 KB only for that task to
   // keep memory predictable on the smaller default tasks.
   const maxLen = task === "contract-analyze" ? 120_000 : 40_000;
@@ -277,7 +277,7 @@ Deno.serve(async (req) => {
       model,
       messages: [{ role: "system", content: system }, { role: "user", content: text }],
       ...(wantsJson ? { response_format: { type: "json_object" } } : {}),
-      temperature: task === "translate" || task === "grammar" ? 0.1 : task === "humanize" ? 0.85 : wantsJson ? 0.2 : 0.4,
+      temperature: task === "translate" || task === "grammar" || task === "summarize" ? 0.1 : task === "humanize" ? 0.85 : wantsJson ? 0.2 : 0.4,
     }),
   });
 

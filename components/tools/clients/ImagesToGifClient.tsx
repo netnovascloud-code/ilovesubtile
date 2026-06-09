@@ -5,17 +5,18 @@ import { Download, X, Loader2, Upload, Trash2, GripVertical } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 
-// Build an animated GIF from a sequence of images. We use gif.js (loaded from
-// esm.sh on first export) — it runs the LZW encoding in a Web Worker so the
-// UI stays responsive even with 20+ frames. Output stays purely in the
-// browser, never uploaded.
-//
-// gif.js types from the @types package would add a dep; we narrow what we
-// actually call instead.
-type GifEncoder = {
-  addFrame(canvas: HTMLCanvasElement, opts?: { delay?: number; copy?: boolean }): void;
-  on(event: "finished" | "progress", cb: (arg: Blob | number) => void): void;
-  render(): void;
+// Build an animated GIF from a sequence of images using gifenc, loaded from
+// esm.sh on first export. gifenc encodes on the MAIN THREAD (no Web Worker),
+// which avoids the cross-origin-worker failure gif.js hit in production. Output
+// stays purely in the browser, never uploaded.
+type GifencModule = {
+  GIFEncoder: () => {
+    writeFrame: (index: Uint8Array, w: number, h: number, opts: Record<string, unknown>) => void;
+    finish: () => void;
+    bytes: () => Uint8Array;
+  };
+  quantize: (rgba: Uint8ClampedArray, maxColors: number) => number[][];
+  applyPalette: (rgba: Uint8ClampedArray, palette: number[][]) => Uint8Array;
 };
 
 type Frame = { id: string; file: File; url: string };
@@ -75,21 +76,14 @@ export function ImagesToGifClient() {
       const W = Math.round(ratio >= 1 ? targetW : targetW * ratio);
       const H = Math.round(ratio >= 1 ? targetW / ratio : targetW);
 
-      const url = "https://esm.sh/gif.js@0.2.0";
-      const workerUrl = "https://esm.sh/gif.js@0.2.0/dist/gif.worker.js";
-      // gif.js does `new Worker(workerScript)`; the browser rejects a
-      // cross-origin worker URL (esm.sh) with "cannot be accessed from origin".
-      // Fetch the worker script and hand gif.js a same-origin blob: URL.
-      const workerScript = URL.createObjectURL(await (await fetch(workerUrl)).blob());
-      // gif.js publishes a CommonJS module; the .default carries the constructor.
-      const mod = await import(/* webpackIgnore: true */ url) as { default: new (opts: object) => GifEncoder };
-      const GIFCtor = mod.default;
-      const gif = new GIFCtor({
-        workers: 2, quality: 10, repeat: loop ? 0 : -1,
-        width: W, height: H, workerScript,
-      });
-
-      for (const im of imgs) {
+      // gifenc encodes on the MAIN THREAD (no Web Worker) — this avoids the
+      // cross-origin worker that gif.js failed/hung on in production. Import via
+      // a URL variable so TS doesn't try to resolve the literal as a module.
+      const gifencUrl = "https://esm.sh/gifenc@1.0.3";
+      const { GIFEncoder, quantize, applyPalette } = (await import(/* webpackIgnore: true */ gifencUrl)) as GifencModule;
+      const enc = GIFEncoder();
+      for (let i = 0; i < imgs.length; i++) {
+        const im = imgs[i];
         const c = document.createElement("canvas");
         c.width = W; c.height = H;
         const ctx = c.getContext("2d")!;
@@ -101,20 +95,20 @@ export function ImagesToGifClient() {
         if (r2 > W / H) { dh = W / r2; dy = (H - dh) / 2; }
         else { dw = H * r2; dx = (W - dw) / 2; }
         ctx.drawImage(im, dx, dy, dw, dh);
-        gif.addFrame(c, { delay: delayMs, copy: true });
+        const { data } = ctx.getImageData(0, 0, W, H);
+        const palette = quantize(data, 256);
+        const index = applyPalette(data, palette);
+        enc.writeFrame(index, W, H, { palette, delay: delayMs, ...(i === 0 ? { repeat: loop ? 0 : -1 } : {}) });
+        setProgress(Math.round(((i + 1) / imgs.length) * 100));
+        await new Promise((r) => setTimeout(r, 0)); // let the progress bar paint
       }
-
-      gif.on("progress", (p) => setProgress(typeof p === "number" ? p : 0));
-      gif.on("finished", (blob) => {
-        const b = blob as Blob;
-        if (out) URL.revokeObjectURL(out.url);
-        setOut({ url: URL.createObjectURL(b), size: b.size });
-        URL.revokeObjectURL(workerScript);
-        setBusy(false);
-      });
-      gif.render();
+      enc.finish();
+      const blob = new Blob([enc.bytes() as BlobPart], { type: "image/gif" });
+      if (out) URL.revokeObjectURL(out.url);
+      setOut({ url: URL.createObjectURL(blob), size: blob.size });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not build GIF.");
+    } finally {
       setBusy(false);
     }
   }, [frames, delayMs, size, loop, out]);

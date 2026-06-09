@@ -39,7 +39,7 @@ function utcMonth(): string {
 // use the small model: the strings are short UI/SEO snippets where small is
 // plenty, and its far higher rate limit avoids 429 storms when the fill script
 // translates ~2000 (tool, locale) pairs in one pass.
-const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
+const LARGE = new Set(["chapters", "summary", "summarize", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
 
 function buildSystem(task: string, opts: { target?: string; style?: string; format?: string; register?: string; level?: string }): string | null {
   switch (task) {

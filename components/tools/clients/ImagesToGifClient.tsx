@@ -77,12 +77,16 @@ export function ImagesToGifClient() {
 
       const url = "https://esm.sh/gif.js@0.2.0";
       const workerUrl = "https://esm.sh/gif.js@0.2.0/dist/gif.worker.js";
+      // gif.js does `new Worker(workerScript)`; the browser rejects a
+      // cross-origin worker URL (esm.sh) with "cannot be accessed from origin".
+      // Fetch the worker script and hand gif.js a same-origin blob: URL.
+      const workerScript = URL.createObjectURL(await (await fetch(workerUrl)).blob());
       // gif.js publishes a CommonJS module; the .default carries the constructor.
       const mod = await import(/* webpackIgnore: true */ url) as { default: new (opts: object) => GifEncoder };
       const GIFCtor = mod.default;
       const gif = new GIFCtor({
         workers: 2, quality: 10, repeat: loop ? 0 : -1,
-        width: W, height: H, workerScript: workerUrl,
+        width: W, height: H, workerScript,
       });
 
       for (const im of imgs) {
@@ -105,6 +109,7 @@ export function ImagesToGifClient() {
         const b = blob as Blob;
         if (out) URL.revokeObjectURL(out.url);
         setOut({ url: URL.createObjectURL(b), size: b.size });
+        URL.revokeObjectURL(workerScript);
         setBusy(false);
       });
       gif.render();

@@ -46,6 +46,12 @@ const FN_MAP: Record<string, string> = {
   "phishing-detector": "security-tools",
   "url-scanner": "security-tools",
   "ssl-checker": "security-tools",
+  // Link tools — all create rows via the create-link function (login required,
+  // anti-phishing screened). The light builders (UTM, mailto/wifi) are pure
+  // client-side and don't map here.
+  "url-shortener": "create-link",
+  "deep-link": "create-link",
+  "magic-link": "create-link",
 };
 
 export function toolFunction(slug: string): string | null {

@@ -17,12 +17,12 @@ const FEATURED: { icon: typeof Sparkles; href: string; label: string; desc: stri
 ];
 
 const NEW: Item[] = [
+  { href: "/url-shortener", label: "URL Shortener" },
+  { href: "/deep-link", label: "Smart / Deep Link" },
+  { href: "/magic-link", label: "Magic Link" },
+  { href: "/utm-builder", label: "UTM Builder" },
   { href: "/qr-generator", label: "QR Code Generator" },
   { href: "/pdf-to-jpg", label: "PDF to JPG" },
-  { href: "/add-watermark", label: "Add Watermark to Video" },
-  { href: "/pdf-to-text", label: "PDF to Text" },
-  { href: "/rephraser", label: "AI Rephraser" },
-  { href: "/pdf-to-text", label: "PDF to Text" },
 ];
 
 export function ToolsMenu({

@@ -72,6 +72,9 @@ const ImagesToPdfClient = dynamic(() => import("@/components/tools/clients/Image
 const ZipCreateClient = dynamic(() => import("@/components/tools/clients/ZipCreateClient").then((m) => ({ default: m.ZipCreateClient })));
 const ZipExtractClient = dynamic(() => import("@/components/tools/clients/ZipExtractClient").then((m) => ({ default: m.ZipExtractClient })));
 const QrGeneratorClient = dynamic(() => import("@/components/tools/clients/QrGeneratorClient").then((m) => ({ default: m.QrGeneratorClient })));
+const ServerLinkClient = dynamic(() => import("@/components/tools/clients/ServerLinkClient").then((m) => ({ default: m.ServerLinkClient })));
+const UtmBuilderClient = dynamic(() => import("@/components/tools/clients/UtmBuilderClient").then((m) => ({ default: m.UtmBuilderClient })));
+const LinkBuilderClient = dynamic(() => import("@/components/tools/clients/LinkBuilderClient").then((m) => ({ default: m.LinkBuilderClient })));
 const PendingClient = dynamic(() => import("@/components/tools/clients/PendingClient").then((m) => ({ default: m.PendingClient })));
 const FfmpegToolClient = dynamic(() => import("@/components/tools/clients/FfmpegToolClient").then((m) => ({ default: m.FfmpegToolClient })));
 const RemoveBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveBackgroundClient").then((m) => ({ default: m.RemoveBackgroundClient })));
@@ -641,6 +644,21 @@ export default function LocalisedToolPage({
       break;
     case "qr-generator":
       body = <QrGeneratorClient />;
+      break;
+    case "url-shortener":
+      body = <ServerLinkClient kind="short" />;
+      break;
+    case "deep-link":
+      body = <ServerLinkClient kind="deep" />;
+      break;
+    case "magic-link":
+      body = <ServerLinkClient kind="magic" />;
+      break;
+    case "utm-builder":
+      body = <UtmBuilderClient />;
+      break;
+    case "link-builder":
+      body = <LinkBuilderClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

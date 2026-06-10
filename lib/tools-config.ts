@@ -2247,6 +2247,70 @@ TOOLS.push(
     [{ title: "Fill in your details", body: "Name, title, company, email, phone, website." }, { title: "Pick an accent colour", body: "See the signature update live." }, { title: "Copy & paste", body: "Drop it straight into Gmail or Outlook." }]),
 );
 
+// ── Link tools (URL shortener, smart/deep link, magic link + client builders) ─
+// The three server-backed link tools are login-required and screen every
+// destination with Google Safe Browsing before creating the link. The two
+// builders (UTM, mailto/wifi) are pure client-side.
+TOOLS.push(
+  {
+    slug: "url-shortener", phase: 3, kind: "edge", category: "utilities", icon: Link2, tone: "slate",
+    name: "URL Shortener",
+    short: "Turn a long URL into a short, safe konvertools.com/s/… link.",
+    h1: "Free URL Shortener — Short Links with Anti-Phishing Protection",
+    metaTitle: "Free URL Shortener — Short, Safe Links | Konvertools",
+    metaDescription: "Shorten any URL into a tidy, trackable link. Every destination is screened with Google Safe Browsing so you never share a phishing or malware link. Free, sign-in required.",
+    primaryKeyword: "url shortener", accept: [], freeMaxMb: 0, outputType: "Short link",
+    steps: [
+      { title: "Paste a long URL", body: "Any http(s) link you want to shorten." },
+      { title: "We screen it", body: "Google Safe Browsing checks for phishing and malware." },
+      { title: "Copy your short link", body: "Optionally pick a custom alias." },
+    ],
+    faqs: codeFaqs("URL Shortener"),
+  },
+  {
+    slug: "deep-link", phase: 3, kind: "edge", category: "utilities", icon: Smartphone, tone: "slate",
+    name: "Smart / Deep Link Generator",
+    short: "One link that opens your app on iOS & Android, with a web fallback.",
+    h1: "Smart & Deep Link Generator — One Link for iOS, Android & Web",
+    metaTitle: "Smart / Deep Link Generator — App + Web Fallback | Konvertools",
+    metaDescription: "Create a single smart link that opens your iOS or Android app when installed and falls back to a web page everywhere else. Anti-phishing screened. Free, sign-in required.",
+    primaryKeyword: "deep link generator", accept: [], freeMaxMb: 0, outputType: "Smart link",
+    steps: [
+      { title: "Set a web fallback", body: "The page to open on desktop or if the app isn't installed." },
+      { title: "Add app URLs", body: "Your iOS and/or Android deep-link or store URLs." },
+      { title: "Share one link", body: "It routes each visitor to the right place." },
+    ],
+    faqs: codeFaqs("Smart / Deep Link Generator"),
+  },
+  {
+    slug: "magic-link", phase: 3, kind: "edge", category: "utilities", icon: Sparkles, tone: "slate",
+    name: "Magic Link Generator",
+    short: "Single-use or expiring links for confirmations and invites.",
+    h1: "Magic Link Generator — Single-Use & Expiring Links",
+    metaTitle: "Magic Link Generator — Single-Use & Expiring Links | Konvertools",
+    metaDescription: "Create a single-use or time-limited link that stops working once it expires or hits its click limit — ideal for confirmations, one-off downloads and invitations. Free, sign-in required.",
+    primaryKeyword: "magic link generator", accept: [], freeMaxMb: 0, outputType: "Magic link",
+    steps: [
+      { title: "Paste the destination", body: "Where the link should lead." },
+      { title: "Set the limits", body: "Expire after N days and/or after N clicks." },
+      { title: "Share it once", body: "It self-destructs when the limit is reached." },
+    ],
+    faqs: codeFaqs("Magic Link Generator"),
+  },
+  utilTool("utm-builder", Tags, "UTM Builder", "Build campaign-tagged URLs for analytics.",
+    "UTM Builder — Free UTM Campaign URL Generator",
+    "UTM Builder Online — Campaign URL Generator | Konvertools",
+    "Build campaign-tagged URLs with utm_source, utm_medium, utm_campaign, utm_term and utm_content for Google Analytics. Free, in-browser, nothing uploaded.",
+    "utm builder", "Tagged URL",
+    [{ title: "Enter your URL", body: "The landing page you're promoting." }, { title: "Fill the UTM fields", body: "Source, medium, campaign and optional term/content." }, { title: "Copy the tagged link", body: "Ready for your ads, emails and posts." }]),
+  utilTool("link-builder", Mail, "Special Link Builder", "Build mailto, Wi-Fi, SMS and phone links.",
+    "Special Link Builder — mailto, Wi-Fi, SMS & tel Links",
+    "Special Link Builder — mailto / Wi-Fi / SMS / tel | Konvertools",
+    "Build mailto links with subject and body, Wi-Fi connect codes, prefilled SMS and click-to-call tel links. Free, in-browser, nothing uploaded.",
+    "mailto link generator", "Link",
+    [{ title: "Pick a type", body: "Email, Wi-Fi, SMS or phone." }, { title: "Fill the fields", body: "Recipients, message, network, number…" }, { title: "Copy the link", body: "Paste it into a page, button or QR code." }]),
+);
+
 // ── New file-based modules (images + documents) ────────────────────────────
 TOOLS.push(
   imgTool("social-media-crop", Crop, "Social Media Image Cropper", "Crop images to the exact ratio for every platform.",

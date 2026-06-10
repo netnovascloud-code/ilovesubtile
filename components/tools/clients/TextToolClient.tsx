@@ -7,10 +7,13 @@ import { cn } from "@/lib/utils";
 import { TEXT_TOOLS } from "@/lib/text-tools";
 import { useLocale } from "@/hooks/useLocale";
 import { getCommonUi } from "@/lib/i18n/tool-ui";
+import { TEXT_TOOLS_I18N } from "@/lib/i18n/text-tools-i18n";
 
 export function TextToolClient({ slug }: { slug: string }) {
   const def = TEXT_TOOLS[slug];
-  const t = getCommonUi(useLocale());
+  const locale = useLocale();
+  const t = getCommonUi(locale);
+  const L = TEXT_TOOLS_I18N[slug]?.[locale];
   const [input, setInput] = useState("");
   const [mode, setMode] = useState(def?.defaultMode ?? def?.modes?.[0]?.id ?? "default");
   const [copied, setCopied] = useState(false);
@@ -58,7 +61,7 @@ export function TextToolClient({ slug }: { slug: string }) {
                 mode === m.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900",
               )}
             >
-              {m.label}
+              {L?.modes?.[m.id] ?? m.label}
             </button>
           ))}
         </div>
@@ -66,11 +69,11 @@ export function TextToolClient({ slug }: { slug: string }) {
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-ink-700">{def.inputLabel}</label>
+          <label className="mb-1.5 block text-sm font-medium text-ink-700">{L?.inputLabel ?? def.inputLabel}</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={def.inputPlaceholder}
+            placeholder={L?.inputPlaceholder ?? def.inputPlaceholder}
             spellCheck={false}
             className={cn(
               "h-72 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100",
@@ -81,7 +84,7 @@ export function TextToolClient({ slug }: { slug: string }) {
 
         <div>
           <div className="mb-1.5 flex items-center justify-between">
-            <label className="text-sm font-medium text-ink-700">{def.outputLabel}</label>
+            <label className="text-sm font-medium text-ink-700">{L?.outputLabel ?? def.outputLabel}</label>
             <div className="flex gap-1">
               <Button size="sm" variant="outline" onClick={copy} disabled={!output}>
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}

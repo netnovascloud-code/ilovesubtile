@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useLocale } from "@/hooks/useLocale";
 
 type Mode = "of" | "is_what" | "change";
 
@@ -13,7 +14,272 @@ function show(n: number): string {
   return (Math.round(n * 1e6) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 6 });
 }
 
+const T: Record<string, Record<string, string>> = {
+  en: {
+    tabOf: "% of a number",
+    tabIsWhat: "X is what % of Y",
+    tabChange: "% increase / decrease",
+    aOf: "Percentage (%)",
+    bOf: "Of value",
+    aIsWhat: "Value X",
+    bIsWhat: "Of total Y",
+    aChange: "From",
+    bChange: "To",
+    result: "Result",
+    privacy: "Everything is computed live in your browser — nothing is sent anywhere.",
+  },
+  fr: {
+    tabOf: "% d'un nombre",
+    tabIsWhat: "X représente quel % de Y",
+    tabChange: "% d'augmentation / diminution",
+    aOf: "Pourcentage (%)",
+    bOf: "De la valeur",
+    aIsWhat: "Valeur X",
+    bIsWhat: "Du total Y",
+    aChange: "De",
+    bChange: "À",
+    result: "Résultat",
+    privacy: "Tout est calculé en direct dans votre navigateur — rien n'est envoyé nulle part.",
+  },
+  es: {
+    tabOf: "% de un número",
+    tabIsWhat: "X es qué % de Y",
+    tabChange: "% de aumento / disminución",
+    aOf: "Porcentaje (%)",
+    bOf: "Del valor",
+    aIsWhat: "Valor X",
+    bIsWhat: "Del total Y",
+    aChange: "Desde",
+    bChange: "Hasta",
+    result: "Resultado",
+    privacy: "Todo se calcula en tiempo real en su navegador — nada se envía a ningún lado.",
+  },
+  pt: {
+    tabOf: "% de um número",
+    tabIsWhat: "X é qual % de Y",
+    tabChange: "% de aumento / diminuição",
+    aOf: "Percentagem (%)",
+    bOf: "Do valor",
+    aIsWhat: "Valor X",
+    bIsWhat: "Do total Y",
+    aChange: "De",
+    bChange: "Para",
+    result: "Resultado",
+    privacy: "Tudo é calculado em tempo real no seu navegador — nada é enviado para lado nenhum.",
+  },
+  de: {
+    tabOf: "% einer Zahl",
+    tabIsWhat: "X ist was % von Y",
+    tabChange: "% Erhöhung / Verringerung",
+    aOf: "Prozentsatz (%)",
+    bOf: "Von Wert",
+    aIsWhat: "Wert X",
+    bIsWhat: "Von Gesamt Y",
+    aChange: "Von",
+    bChange: "Zu",
+    result: "Ergebnis",
+    privacy: "Alles wird live in Ihrem Browser berechnet — nichts wird gesendet.",
+  },
+  it: {
+    tabOf: "% di un numero",
+    tabIsWhat: "X è quale % di Y",
+    tabChange: "% aumento / diminuzione",
+    aOf: "Percentuale (%)",
+    bOf: "Del valore",
+    aIsWhat: "Valore X",
+    bIsWhat: "Del totale Y",
+    aChange: "Da",
+    bChange: "A",
+    result: "Risultato",
+    privacy: "Tutto viene calcolato in tempo reale nel tuo browser — nulla viene inviato da nessuna parte.",
+  },
+  nl: {
+    tabOf: "% van een getal",
+    tabIsWhat: "X is hoeveel % van Y",
+    tabChange: "% stijging / daling",
+    aOf: "Percentage (%)",
+    bOf: "Van waarde",
+    aIsWhat: "Waarde X",
+    bIsWhat: "Van totaal Y",
+    aChange: "Van",
+    bChange: "Naar",
+    result: "Resultaat",
+    privacy: "Alles wordt live in uw browser berekend — er wordt niets verzonden.",
+  },
+  ja: {
+    tabOf: "数値の %",
+    tabIsWhat: "X は Y の何 %",
+    tabChange: "% 増加 / 減少",
+    aOf: "パーセント (%)",
+    bOf: "値",
+    aIsWhat: "値 X",
+    bIsWhat: "合計 Y",
+    aChange: "開始値",
+    bChange: "終了値",
+    result: "結果",
+    privacy: "すべてブラウザ内でリアルタイム計算 — データはどこにも送信されません。",
+  },
+  zh: {
+    tabOf: "数值的 %",
+    tabIsWhat: "X 是 Y 的百分之几",
+    tabChange: "% 增加 / 减少",
+    aOf: "百分比 (%)",
+    bOf: "值",
+    aIsWhat: "值 X",
+    bIsWhat: "总计 Y",
+    aChange: "从",
+    bChange: "到",
+    result: "结果",
+    privacy: "所有内容在您的浏览器中实时计算 — 不发送任何数据。",
+  },
+  ko: {
+    tabOf: "숫자의 %",
+    tabIsWhat: "X는 Y의 몇 %인가",
+    tabChange: "% 증가 / 감소",
+    aOf: "백분율 (%)",
+    bOf: "값",
+    aIsWhat: "값 X",
+    bIsWhat: "전체 Y",
+    aChange: "시작",
+    bChange: "끝",
+    result: "결과",
+    privacy: "모든 계산이 브라우저에서 실시간으로 이루어집니다 — 아무것도 전송되지 않습니다.",
+  },
+  ar: {
+    tabOf: "% من رقم",
+    tabIsWhat: "X هي ما نسبة % من Y",
+    tabChange: "% زيادة / نقصان",
+    aOf: "النسبة المئوية (%)",
+    bOf: "من القيمة",
+    aIsWhat: "القيمة X",
+    bIsWhat: "من الإجمالي Y",
+    aChange: "من",
+    bChange: "إلى",
+    result: "النتيجة",
+    privacy: "يتم حساب كل شيء مباشرةً في متصفحك — لا يُرسل أي شيء إلى أي مكان.",
+  },
+  ru: {
+    tabOf: "% от числа",
+    tabIsWhat: "X составляет какой % от Y",
+    tabChange: "% увеличение / уменьшение",
+    aOf: "Процент (%)",
+    bOf: "От значения",
+    aIsWhat: "Значение X",
+    bIsWhat: "От суммы Y",
+    aChange: "Из",
+    bChange: "В",
+    result: "Результат",
+    privacy: "Всё вычисляется в реальном времени в вашем браузере — ничего никуда не отправляется.",
+  },
+  hi: {
+    tabOf: "संख्या का %",
+    tabIsWhat: "X, Y का कितना % है",
+    tabChange: "% वृद्धि / कमी",
+    aOf: "प्रतिशत (%)",
+    bOf: "मूल्य का",
+    aIsWhat: "मूल्य X",
+    bIsWhat: "कुल Y का",
+    aChange: "से",
+    bChange: "तक",
+    result: "परिणाम",
+    privacy: "सब कुछ आपके ब्राउज़र में लाइव गणना होती है — कुछ भी कहीं नहीं भेजा जाता।",
+  },
+  tr: {
+    tabOf: "Bir sayının %'si",
+    tabIsWhat: "X, Y'nin yüzde kaçı",
+    tabChange: "% artış / azalış",
+    aOf: "Yüzde (%)",
+    bOf: "Değerin",
+    aIsWhat: "X değeri",
+    bIsWhat: "Toplam Y'nin",
+    aChange: "Başlangıç",
+    bChange: "Bitiş",
+    result: "Sonuç",
+    privacy: "Her şey tarayıcınızda canlı hesaplanır — hiçbir şey hiçbir yere gönderilmez.",
+  },
+  id: {
+    tabOf: "% dari sebuah angka",
+    tabIsWhat: "X adalah berapa % dari Y",
+    tabChange: "% kenaikan / penurunan",
+    aOf: "Persentase (%)",
+    bOf: "Dari nilai",
+    aIsWhat: "Nilai X",
+    bIsWhat: "Dari total Y",
+    aChange: "Dari",
+    bChange: "Ke",
+    result: "Hasil",
+    privacy: "Semua dihitung secara langsung di browser Anda — tidak ada yang dikirim ke mana pun.",
+  },
+  vi: {
+    tabOf: "% của một số",
+    tabIsWhat: "X là bao nhiêu % của Y",
+    tabChange: "% tăng / giảm",
+    aOf: "Phần trăm (%)",
+    bOf: "Của giá trị",
+    aIsWhat: "Giá trị X",
+    bIsWhat: "Của tổng Y",
+    aChange: "Từ",
+    bChange: "Đến",
+    result: "Kết quả",
+    privacy: "Tất cả được tính toán trực tiếp trong trình duyệt của bạn — không có gì được gửi đi.",
+  },
+  sv: {
+    tabOf: "% av ett tal",
+    tabIsWhat: "X är hur många % av Y",
+    tabChange: "% ökning / minskning",
+    aOf: "Procent (%)",
+    bOf: "Av värdet",
+    aIsWhat: "Värde X",
+    bIsWhat: "Av totalt Y",
+    aChange: "Från",
+    bChange: "Till",
+    result: "Resultat",
+    privacy: "Allt beräknas live i din webbläsare — ingenting skickas någonstans.",
+  },
+  pl: {
+    tabOf: "% liczby",
+    tabIsWhat: "X to ile % z Y",
+    tabChange: "% wzrost / spadek",
+    aOf: "Procent (%)",
+    bOf: "Z wartości",
+    aIsWhat: "Wartość X",
+    bIsWhat: "Z sumy Y",
+    aChange: "Od",
+    bChange: "Do",
+    result: "Wynik",
+    privacy: "Wszystko jest obliczane na bieżąco w Twojej przeglądarce — nic nie jest wysyłane.",
+  },
+  uk: {
+    tabOf: "% від числа",
+    tabIsWhat: "X становить який % від Y",
+    tabChange: "% збільшення / зменшення",
+    aOf: "Відсоток (%)",
+    bOf: "Від значення",
+    aIsWhat: "Значення X",
+    bIsWhat: "Від суми Y",
+    aChange: "Від",
+    bChange: "До",
+    result: "Результат",
+    privacy: "Усе обчислюється в режимі реального часу у вашому браузері — нічого нікуди не надсилається.",
+  },
+  cs: {
+    tabOf: "% z čísla",
+    tabIsWhat: "X je kolik % z Y",
+    tabChange: "% nárůst / pokles",
+    aOf: "Procento (%)",
+    bOf: "Z hodnoty",
+    aIsWhat: "Hodnota X",
+    bIsWhat: "Z celku Y",
+    aChange: "Od",
+    bChange: "Do",
+    result: "Výsledek",
+    privacy: "Vše se počítá živě ve vašem prohlížeči — nic se nikam neposílá.",
+  },
+};
+
 export function PercentageCalculatorClient() {
+  const s = T[useLocale()] ?? T.en;
+
   const [mode, setMode] = useState<Mode>("of");
   const [a, setA] = useState("15");
   const [b, setB] = useState("200");
@@ -27,9 +293,9 @@ export function PercentageCalculatorClient() {
   }, [mode, a, b]);
 
   const labels: Record<Mode, { tab: string; a: string; b: string }> = {
-    of: { tab: "% of a number", a: "Percentage (%)", b: "Of value" },
-    is_what: { tab: "X is what % of Y", a: "Value X", b: "Of total Y" },
-    change: { tab: "% increase / decrease", a: "From", b: "To" },
+    of: { tab: s.tabOf, a: s.aOf, b: s.bOf },
+    is_what: { tab: s.tabIsWhat, a: s.aIsWhat, b: s.bIsWhat },
+    change: { tab: s.tabChange, a: s.aChange, b: s.bChange },
   };
 
   return (
@@ -57,13 +323,13 @@ export function PercentageCalculatorClient() {
       </div>
 
       <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-5">
-        <div className="text-xs uppercase tracking-wide text-brand-700">{result?.label ?? "Result"}</div>
+        <div className="text-xs uppercase tracking-wide text-brand-700">{result?.label ?? s.result}</div>
         <div className="mt-1 text-3xl font-semibold text-ink-900">
           {result ? `${show(result.value)}${result.suffix ?? ""}` : "—"}
         </div>
       </div>
 
-      <p className="text-xs text-ink-400">Everything is computed live in your browser — nothing is sent anywhere.</p>
+      <p className="text-xs text-ink-400">{s.privacy}</p>
     </div>
   );
 }

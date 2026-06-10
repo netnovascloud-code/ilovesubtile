@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/hooks/useLocale";
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
   const m = hex.replace("#", "").match(/^([0-9a-f]{3}|[0-9a-f]{6})$/i);
@@ -42,6 +43,69 @@ function rgbToCmyk(r: number, g: number, b: number): { c: number; m: number; y: 
   };
 }
 
+const T: Record<string, Record<string, string>> = {
+  en: {
+    privacy: "100% in your browser — nothing is uploaded. Free and unlimited.",
+  },
+  fr: {
+    privacy: "100 % dans votre navigateur — rien n'est envoyé. Gratuit et illimité.",
+  },
+  es: {
+    privacy: "100 % en tu navegador — nada se sube. Gratis e ilimitado.",
+  },
+  pt: {
+    privacy: "100% no seu navegador — nada é enviado. Gratuito e ilimitado.",
+  },
+  de: {
+    privacy: "100 % im Browser — nichts wird hochgeladen. Kostenlos und unbegrenzt.",
+  },
+  it: {
+    privacy: "100% nel tuo browser — nulla viene caricato. Gratuito e illimitato.",
+  },
+  nl: {
+    privacy: "100% in uw browser — er wordt niets geüpload. Gratis en onbeperkt.",
+  },
+  ja: {
+    privacy: "ブラウザ内で 100% 処理 — 何もアップロードされません。無料・無制限。",
+  },
+  zh: {
+    privacy: "在您的浏览器中 100% 处理 — 不上传任何内容。免费且无限制。",
+  },
+  ko: {
+    privacy: "브라우저에서 100% 처리 — 아무것도 업로드되지 않습니다. 무료 및 무제한.",
+  },
+  ar: {
+    privacy: "100٪ في متصفحك — لا يُرفع شيء. مجاني وغير محدود.",
+  },
+  ru: {
+    privacy: "100% в вашем браузере — ничего не загружается. Бесплатно и без ограничений.",
+  },
+  hi: {
+    privacy: "आपके ब्राउज़र में 100% — कुछ भी अपलोड नहीं होता। मुफ़्त और असीमित।",
+  },
+  tr: {
+    privacy: "Tarayıcınızda %100 işlem — hiçbir şey yüklenmez. Ücretsiz ve sınırsız.",
+  },
+  id: {
+    privacy: "100% di browser Anda — tidak ada yang diunggah. Gratis dan tak terbatas.",
+  },
+  vi: {
+    privacy: "100% trong trình duyệt của bạn — không có gì được tải lên. Miễn phí và không giới hạn.",
+  },
+  sv: {
+    privacy: "100 % i din webbläsare — inget laddas upp. Gratis och obegränsat.",
+  },
+  pl: {
+    privacy: "100% w Twojej przeglądarce — nic nie jest wysyłane. Bezpłatnie i bez ograniczeń.",
+  },
+  uk: {
+    privacy: "100% у вашому браузері — нічого не завантажується. Безкоштовно та без обмежень.",
+  },
+  cs: {
+    privacy: "100 % ve vašem prohlížeči — nic se nenačítá. Zdarma a bez omezení.",
+  },
+};
+
 function Row({ label, value, onCopy, copied }: { label: string; value: string; onCopy: () => void; copied: boolean }) {
   return (
     <div className="flex items-center gap-2">
@@ -55,6 +119,9 @@ function Row({ label, value, onCopy, copied }: { label: string; value: string; o
 }
 
 export function ColorConverterClient() {
+  const locale = useLocale();
+  const s = T[locale] ?? T.en;
+
   const [hex, setHex] = useState("#2D6BE4");
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -100,7 +167,7 @@ export function ColorConverterClient() {
         <Row label="RGB" value={rgbStr} onCopy={() => copy("rgb", rgbStr)} copied={copied === "rgb"} />
         <Row label="HSL" value={hslStr} onCopy={() => copy("hsl", hslStr)} copied={copied === "hsl"} />
         <Row label="CMYK" value={cmykStr} onCopy={() => copy("cmyk", cmykStr)} copied={copied === "cmyk"} />
-        <p className="pt-2 text-xs text-ink-400">100% in your browser — nothing is uploaded. Free and unlimited.</p>
+        <p className="pt-2 text-xs text-ink-400">{s.privacy}</p>
       </div>
     </div>
   );

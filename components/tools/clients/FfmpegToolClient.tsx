@@ -8,9 +8,12 @@ import { categoryTheme } from "@/lib/category-theme";
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 import { getFfmpeg } from "@/lib/ffmpeg-client";
 import type { ToolCategory } from "@/lib/tools-config";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 
 export function FfmpegToolClient({ slug, category }: { slug: string; category: ToolCategory }) {
   const tool = FFMPEG_TOOLS[slug];
+  const t = getCommonUi(useLocale());
   const th = categoryTheme(category);
   const [file, setFile] = useState<File | null>(null);
   const [outUrl, setOutUrl] = useState<string | null>(null);
@@ -55,7 +58,7 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
       // "undefined"). Log the original for diagnostics.
       console.error("FFmpeg conversion error:", e);
       const detail = e instanceof Error ? e.message : typeof e === "string" ? e : JSON.stringify(e);
-      setError(`Conversion failed: ${detail || "the conversion engine could not start. Please retry."}`);
+      setError(`${t.conversionFailed}: ${detail || "the conversion engine could not start. Please retry."}`);
       setPhase("idle");
     }
   }
@@ -69,8 +72,8 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
           <span className={cn("grid h-12 w-12 place-items-center rounded-xl", th.iconBg, th.iconText)}>
             <Upload className="h-6 w-6" />
           </span>
-          <span className="mt-3 font-semibold text-ink-900">Click to upload {tool.label}</span>
-          <span className="mt-0.5 text-xs text-ink-400">Accepted: {tool.accept}</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.clickToUpload} {tool.label}</span>
+          <span className="mt-0.5 text-xs text-ink-400">{t.accepted}: {tool.accept}</span>
           <input type="file" accept={tool.accept} className="hidden" onChange={(e) => { setFile(e.target.files?.[0] ?? null); setOutUrl(null); setError(null); }} />
         </label>
       ) : (
@@ -124,8 +127,8 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
         <div className="flex items-center gap-3 rounded-lg border border-ink-100 bg-white px-4 py-3">
           <Loader2 className="h-4 w-4 animate-spin text-brand-500" />
           <div className="flex-1">
-            <p className="text-sm font-medium text-ink-900">{phase === "loading" ? "Loading FFmpeg…" : "Converting…"}</p>
-            <p className="text-xs text-ink-400">{phase === "loading" ? "First load is ~30 MB; cached afterwards." : `${progress}% complete`}</p>
+            <p className="text-sm font-medium text-ink-900">{phase === "loading" ? t.loadingEngine : t.converting}</p>
+            <p className="text-xs text-ink-400">{phase === "loading" ? t.firstLoad : `${progress}${t.percentComplete}`}</p>
           </div>
           <div className="h-1.5 w-32 overflow-hidden rounded-full bg-ink-100">
             <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${progress}%` }} />
@@ -136,17 +139,17 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
       <div className="flex flex-wrap gap-2">
         <Button onClick={run} disabled={!file || busy} size="lg">
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {phase === "done" ? "Convert again" : busy ? (phase === "loading" ? "Loading…" : "Converting…") : "Convert"}
+          {phase === "done" ? t.convertAgain : busy ? (phase === "loading" ? t.loadingEngine : t.converting) : t.convert}
         </Button>
         {outUrl && (
           <a href={outUrl} download={outName}>
-            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download · {formatBytes(outSize)}</Button>
+            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> {t.download} · {formatBytes(outSize)}</Button>
           </a>
         )}
       </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <p className="text-xs text-ink-400">Processed 100% in your browser via FFmpeg WebAssembly — your file is never uploaded.</p>
+      <p className="text-xs text-ink-400">{t.privacyFfmpeg}</p>
     </div>
   );
 }

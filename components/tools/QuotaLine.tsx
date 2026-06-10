@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import { useLocale } from "@/hooks/useLocale";
 import { localePath } from "@/lib/i18n/locales";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 
 /**
  * One-line, non-intrusive daily-quota hint under the tool H1.
@@ -18,6 +19,7 @@ import { localePath } from "@/lib/i18n/locales";
 export function QuotaLine() {
   const { user, plan, loading } = useUser();
   const locale = useLocale();
+  const t = getCommonUi(locale);
   if (loading) return null;
 
   const pricing = localePath(locale, "pricing");
@@ -25,7 +27,7 @@ export function QuotaLine() {
   if (plan === "pro" || plan === "business") {
     return (
       <p className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-green-600">
-        <Check className="h-3.5 w-3.5" /> Unlimited
+        <Check className="h-3.5 w-3.5" /> {t.unlimited}
       </p>
     );
   }
@@ -33,9 +35,9 @@ export function QuotaLine() {
   if (!user) {
     return (
       <p className="mt-3 text-sm text-ink-400">
-        2 free AI runs/day —{" "}
+        {t.quotaAnonPrefix}{" "}
         <Link href="/login" className="text-brand-600 hover:underline">
-          Sign in for 3
+          {t.quotaAnonLink}
         </Link>
       </p>
     );
@@ -43,9 +45,9 @@ export function QuotaLine() {
 
   return (
     <p className="mt-3 text-sm text-ink-400">
-      Free plan: 3 AI runs/day —{" "}
+      {t.quotaFreePrefix}{" "}
       <Link href={pricing} className="text-brand-600 hover:underline">
-        Go Pro for 500/month
+        {t.quotaFreeLink}
       </Link>
     </p>
   );

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Bookmark, BookmarkPlus, X, Lock } from "lucide-react";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { useUser } from "@/hooks/useUser";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 import { loadTemplates, saveTemplate, deleteTemplate, type Template } from "@/lib/templates";
 
 /**
@@ -21,6 +23,7 @@ export function TemplatesBar<S extends Record<string, unknown>>({
   onApply: (s: S) => void;
 }) {
   const { user, plan } = useUser();
+  const t = getCommonUi(useLocale());
   const [items, setItems] = useState<Template<S>[]>([]);
   const [saving, setSaving] = useState(false);
   const canSave = !!user && (plan === "pro" || plan === "business");
@@ -35,7 +38,7 @@ export function TemplatesBar<S extends Record<string, unknown>>({
 
   async function save() {
     if (!user || saving) return;
-    const name = window.prompt("Name this template:");
+    const name = window.prompt(t.tplNamePrompt);
     if (!name?.trim()) return;
     setSaving(true);
     try {
@@ -54,8 +57,8 @@ export function TemplatesBar<S extends Record<string, unknown>>({
       <div className="flex flex-wrap items-center gap-2 rounded-lg border border-dashed border-ink-200 bg-white/60 px-3 py-2 text-xs text-ink-500">
         <Lock className="h-3.5 w-3.5" />
         <span>
-          <Link href="/pricing" className="font-medium text-brand-600 hover:underline">Upgrade to Pro</Link>
-          {" "}to save your settings as reusable templates.
+          <Link href="/pricing" className="font-medium text-brand-600 hover:underline">{t.tplUpgrade}</Link>
+          {" "}{t.tplUpgradeSuffix}
         </span>
       </div>
     );
@@ -63,8 +66,8 @@ export function TemplatesBar<S extends Record<string, unknown>>({
 
   return (
     <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-ink-100 bg-white p-2">
-      <span className="mr-1 inline-flex items-center gap-1 text-xs font-medium text-ink-500"><Bookmark className="h-3 w-3" /> My templates</span>
-      {items.length === 0 && <span className="text-xs text-ink-400">No templates yet.</span>}
+      <span className="mr-1 inline-flex items-center gap-1 text-xs font-medium text-ink-500"><Bookmark className="h-3 w-3" /> {t.tplMine}</span>
+      {items.length === 0 && <span className="text-xs text-ink-400">{t.tplNone}</span>}
       {items.map((t) => (
         <span key={t.id} className="group inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700">
           <button onClick={() => onApply(t.settings)} className="hover:underline" title="Apply this template">{t.name}</button>
@@ -72,7 +75,7 @@ export function TemplatesBar<S extends Record<string, unknown>>({
         </span>
       ))}
       <button onClick={save} disabled={saving} className="ml-auto inline-flex items-center gap-1 rounded-full border border-ink-200 px-2.5 py-1 text-xs font-medium text-ink-700 hover:border-brand-300 hover:text-brand-600 disabled:opacity-50">
-        <BookmarkPlus className="h-3 w-3" /> {saving ? "Saving…" : "Save current"}
+        <BookmarkPlus className="h-3 w-3" /> {saving ? t.tplSaving : t.tplSave}
       </button>
     </div>
   );

@@ -5,9 +5,12 @@ import { Copy, Download, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TEXT_TOOLS } from "@/lib/text-tools";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 
 export function TextToolClient({ slug }: { slug: string }) {
   const def = TEXT_TOOLS[slug];
+  const t = getCommonUi(useLocale());
   const [input, setInput] = useState("");
   const [mode, setMode] = useState(def?.defaultMode ?? def?.modes?.[0]?.id ?? "default");
   const [copied, setCopied] = useState(false);
@@ -82,11 +85,11 @@ export function TextToolClient({ slug }: { slug: string }) {
             <div className="flex gap-1">
               <Button size="sm" variant="outline" onClick={copy} disabled={!output}>
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                {copied ? "Copied" : "Copy"}
+                {copied ? t.copied : t.copy}
               </Button>
               {def.download && (
                 <Button size="sm" variant="outline" onClick={download} disabled={!output}>
-                  <Download className="h-3.5 w-3.5" /> Download
+                  <Download className="h-3.5 w-3.5" /> {t.download}
                 </Button>
               )}
             </div>
@@ -95,7 +98,7 @@ export function TextToolClient({ slug }: { slug: string }) {
             value={error ? "" : output}
             readOnly
             spellCheck={false}
-            placeholder="Result appears here instantly…"
+            placeholder={t.resultPlaceholder}
             className={cn(
               "h-72 w-full resize-y rounded-lg border bg-ink-50/50 p-3 text-ink-900 focus:outline-none",
               error ? "border-red-200" : "border-ink-200",
@@ -110,9 +113,7 @@ export function TextToolClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      <p className="text-xs text-ink-400">
-        100% in your browser — nothing is uploaded. Free and unlimited, no account needed.
-      </p>
+      <p className="text-xs text-ink-400">{t.privacyText}</p>
     </div>
   );
 }

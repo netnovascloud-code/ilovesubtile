@@ -127,6 +127,18 @@ export async function middleware(request: NextRequest) {
     response.cookies.set(LOCALE_COOKIE, seg, { maxAge: 60 * 60 * 24 * 365, path: "/" });
   }
 
+  // /en/<anything> → 308 to /<anything>. English is served unprefixed, so an
+  // explicit /en/ prefix (manual URL, stale bookmark, mis-built link) would
+  // otherwise 404. Strip it and redirect to the canonical English path.
+  {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts[0] === "en") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/" + parts.slice(1).join("/");
+      return NextResponse.redirect(url, 308);
+    }
+  }
+
   // /<locale>/<en-only-slug> → 308 to /<en-only-slug>. Keeps SEO juice on the
   // English canonical and removes the 404 hole identified in the i18n audit.
   // Doesn't touch /<locale>/<tool-slug> because tools all have localised

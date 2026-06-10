@@ -12,9 +12,12 @@ import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { CharMeter } from "@/components/tools/CharMeter";
 import { useCharLimit } from "@/hooks/useCharLimit";
 import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
+  const t = getCommonUi(useLocale());
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -138,18 +141,18 @@ export function AiTextClient({ slug }: { slug: string }) {
             <label className="text-sm font-medium text-ink-700">{def.outputLabel}</label>
             <Button size="sm" variant="outline" onClick={copy} disabled={!output}>
               {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-              {copied ? "Copied" : "Copy"}
+              {copied ? t.copied : t.copy}
             </Button>
           </div>
           <div className="h-64 w-full overflow-auto whitespace-pre-wrap rounded-lg border border-ink-200 bg-ink-50/50 p-3 text-sm text-ink-900">
-            {loading ? <span className="text-ink-400">Working on it…</span> : output || <span className="text-ink-300">Your result will appear here.</span>}
+            {loading ? <span className="text-ink-400">{t.working}</span> : output || <span className="text-ink-300">{t.aiResultPlaceholder}</span>}
           </div>
         </div>
       </div>
 
       <Button onClick={run} disabled={!input.trim() || loading || meter.over} size="lg">
         <Sparkles className="h-4 w-4" />
-        {loading ? "Processing…" : def.cta}
+        {loading ? t.processing : def.cta}
       </Button>
 
       {error && (

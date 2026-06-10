@@ -65,7 +65,11 @@ function parseCsv(text: string): string[][] {
 }
 
 function csvEscape(v: unknown): string {
-  const s = v === null || v === undefined ? "" : String(v);
+  // Nested objects/arrays previously stringified to "[object Object]"; serialize
+  // them as JSON so the cell keeps the real data (and gets quoted below).
+  const s = v === null || v === undefined ? ""
+    : typeof v === "object" ? JSON.stringify(v)
+    : String(v);
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 

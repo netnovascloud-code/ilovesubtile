@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { TOOLS_BY_SLUG } from "@/lib/tools-config";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
-import { HtmlToPdfClient } from "@/components/tools/clients/HtmlToPdfClient";
+import { LinkBuilderClient } from "@/components/tools/clients/LinkBuilderClient";
 import { buildToolMetadata } from "@/lib/seo";
 
-const tool = TOOLS_BY_SLUG["html-to-pdf"];
+const tool = TOOLS_BY_SLUG["link-builder"];
 export const metadata: Metadata = buildToolMetadata(tool);
 
 export default function Page() {
   return (
     <ToolPageShell tool={tool}>
-      <HtmlToPdfClient />
+      <LinkBuilderClient />
     </ToolPageShell>
   );
 }

@@ -41,13 +41,16 @@ function buildCsp(nonce: string): string {
     "font-src 'self' data: https://fonts.gstatic.com",
     "img-src 'self' data: blob: https: *.supabase.co",
     "media-src 'self' blob:",
-    "worker-src 'self' blob:",
+    "worker-src 'self' blob: https://cdn.jsdelivr.net",
     // wss://*.supabase.co is REQUIRED — @supabase/ssr opens a Realtime
     // WebSocket on session resolution (incl. the OAuth callback at /?code=…).
     // CSP treats wss:// and https:// as distinct schemes, so listing the https
     // origin alone blocks the socket and crashes the browser client.
     // https://vercel.live: feedback widget on *.vercel.app preview deploys.
-    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
+    // cdn.jsdelivr.net + tessdata.projectnaptha.com: Tesseract.js (PDF OCR /
+    // image-to-text) fetches its WASM core + worker from jsDelivr and the
+    // language model (eng.traineddata.gz) from projectnaptha by default.
+    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
     "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",
@@ -93,6 +96,11 @@ export async function middleware(request: NextRequest) {
   const nonce = generateNonce();
   const extra = new Headers();
   extra.set("x-nonce", nonce);
+  // Thread the URL locale to the root layout the same way as the nonce, so
+  // <html lang> / dir are correct in the SERVER render (SEO, screen readers,
+  // browser auto-translate) instead of being patched client-side after mount.
+  const seg0 = request.nextUrl.pathname.split("/").filter(Boolean)[0] ?? "";
+  extra.set("x-locale", LOCALES.has(seg0) ? seg0 : "en");
 
   const response = await updateSupabaseSession(request, extra);
   const csp = buildCsp(nonce);
@@ -117,6 +125,18 @@ export async function middleware(request: NextRequest) {
   const seg = pathname.split("/").filter(Boolean)[0];
   if (seg && LOCALES.has(seg) && request.cookies.get(LOCALE_COOKIE)?.value !== seg) {
     response.cookies.set(LOCALE_COOKIE, seg, { maxAge: 60 * 60 * 24 * 365, path: "/" });
+  }
+
+  // /en/<anything> → 308 to /<anything>. English is served unprefixed, so an
+  // explicit /en/ prefix (manual URL, stale bookmark, mis-built link) would
+  // otherwise 404. Strip it and redirect to the canonical English path.
+  {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts[0] === "en") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/" + parts.slice(1).join("/");
+      return NextResponse.redirect(url, 308);
+    }
   }
 
   // /<locale>/<en-only-slug> → 308 to /<en-only-slug>. Keeps SEO juice on the

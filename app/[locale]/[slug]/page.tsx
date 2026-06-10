@@ -61,7 +61,6 @@ const ComparePdfClient = dynamic(() => import("@/components/tools/clients/Compar
 const ImageToIcoClient = dynamic(() => import("@/components/tools/clients/ImageToIcoClient").then((m) => ({ default: m.ImageToIcoClient })));
 const WatermarkImageClient = dynamic(() => import("@/components/tools/clients/WatermarkImageClient").then((m) => ({ default: m.WatermarkImageClient })));
 const ExtractColorsClient = dynamic(() => import("@/components/tools/clients/ExtractColorsClient").then((m) => ({ default: m.ExtractColorsClient })));
-const PdfToExcelClient = dynamic(() => import("@/components/tools/clients/PdfToExcelClient").then((m) => ({ default: m.PdfToExcelClient })));
 const InvoiceGeneratorClient = dynamic(() => import("@/components/tools/clients/InvoiceGeneratorClient").then((m) => ({ default: m.InvoiceGeneratorClient })));
 const QrCodeReaderClient = dynamic(() => import("@/components/tools/clients/QrCodeReaderClient").then((m) => ({ default: m.QrCodeReaderClient })));
 const BarcodeGeneratorClient = dynamic(() => import("@/components/tools/clients/BarcodeGeneratorClient").then((m) => ({ default: m.BarcodeGeneratorClient })));
@@ -73,18 +72,16 @@ const ImagesToPdfClient = dynamic(() => import("@/components/tools/clients/Image
 const ZipCreateClient = dynamic(() => import("@/components/tools/clients/ZipCreateClient").then((m) => ({ default: m.ZipCreateClient })));
 const ZipExtractClient = dynamic(() => import("@/components/tools/clients/ZipExtractClient").then((m) => ({ default: m.ZipExtractClient })));
 const QrGeneratorClient = dynamic(() => import("@/components/tools/clients/QrGeneratorClient").then((m) => ({ default: m.QrGeneratorClient })));
+const ServerLinkClient = dynamic(() => import("@/components/tools/clients/ServerLinkClient").then((m) => ({ default: m.ServerLinkClient })));
+const UtmBuilderClient = dynamic(() => import("@/components/tools/clients/UtmBuilderClient").then((m) => ({ default: m.UtmBuilderClient })));
+const LinkBuilderClient = dynamic(() => import("@/components/tools/clients/LinkBuilderClient").then((m) => ({ default: m.LinkBuilderClient })));
 const PendingClient = dynamic(() => import("@/components/tools/clients/PendingClient").then((m) => ({ default: m.PendingClient })));
 const FfmpegToolClient = dynamic(() => import("@/components/tools/clients/FfmpegToolClient").then((m) => ({ default: m.FfmpegToolClient })));
 const RemoveBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveBackgroundClient").then((m) => ({ default: m.RemoveBackgroundClient })));
 const RemoveVideoBackgroundClient = dynamic(() => import("@/components/tools/clients/RemoveVideoBackgroundClient").then((m) => ({ default: m.RemoveVideoBackgroundClient })));
 const PdfToTextClient = dynamic(() => import("@/components/tools/clients/PdfToTextClient").then((m) => ({ default: m.PdfToTextClient })));
-const PdfToWordClient = dynamic(() => import("@/components/tools/clients/PdfToWordClient").then((m) => ({ default: m.PdfToWordClient })));
 const MergeAudioClient = dynamic(() => import("@/components/tools/clients/MergeAudioClient").then((m) => ({ default: m.MergeAudioClient })));
 const PdfToJpgClient = dynamic(() => import("@/components/tools/clients/PdfToJpgClient").then((m) => ({ default: m.PdfToJpgClient })));
-const WordToPdfClient = dynamic(() => import("@/components/tools/clients/WordToPdfClient").then((m) => ({ default: m.WordToPdfClient })));
-const HtmlToPdfClient = dynamic(() => import("@/components/tools/clients/HtmlToPdfClient").then((m) => ({ default: m.HtmlToPdfClient })));
-const ExcelToPdfClient = dynamic(() => import("@/components/tools/clients/ExcelToPdfClient").then((m) => ({ default: m.ExcelToPdfClient })));
-const CompressPdfClient = dynamic(() => import("@/components/tools/clients/CompressPdfClient").then((m) => ({ default: m.CompressPdfClient })));
 const WatermarkVideoClient = dynamic(() => import("@/components/tools/clients/WatermarkVideoClient").then((m) => ({ default: m.WatermarkVideoClient })));
 const AudioToVideoClient = dynamic(() => import("@/components/tools/clients/AudioToVideoClient").then((m) => ({ default: m.AudioToVideoClient })));
 const AdjustImageClient = dynamic(() => import("@/components/tools/clients/AdjustImageClient").then((m) => ({ default: m.AdjustImageClient })));
@@ -119,6 +116,9 @@ const ResumeBuilderClient = dynamic(() => import("@/components/tools/clients/Res
 const CoverLetterClient = dynamic(() => import("@/components/tools/clients/CoverLetterClient").then((m) => ({ default: m.CoverLetterClient })));
 const ContractAnalyzerClient = dynamic(() => import("@/components/tools/clients/ContractAnalyzerClient").then((m) => ({ default: m.ContractAnalyzerClient })));
 const VideoThumbnailClient = dynamic(() => import("@/components/tools/clients/VideoThumbnailClient").then((m) => ({ default: m.VideoThumbnailClient })));
+const SshKeyGeneratorClient = dynamic(() => import("@/components/tools/clients/SshKeyGeneratorClient").then((m) => ({ default: m.SshKeyGeneratorClient })));
+const TextEncryptorClient = dynamic(() => import("@/components/tools/clients/TextEncryptorClient").then((m) => ({ default: m.TextEncryptorClient })));
+const FileEncryptorClient = dynamic(() => import("@/components/tools/clients/FileEncryptorClient").then((m) => ({ default: m.FileEncryptorClient })));
 import { FFMPEG_TOOLS } from "@/lib/ffmpeg-tools";
 const ImageToolClient = dynamic(() => import("@/components/tools/clients/ImageToolClient").then((m) => ({ default: m.ImageToolClient })));
 const AiTextClient = dynamic(() => import("@/components/tools/clients/AiTextClient").then((m) => ({ default: m.AiTextClient })));
@@ -282,13 +282,6 @@ export default function LocalisedToolPage({
       </ToolPageShell>
     );
   }
-  if (tool.slug === "pdf-to-word") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <PdfToWordClient />
-      </ToolPageShell>
-    );
-  }
   if (tool.slug === "merge-audio") {
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
@@ -296,38 +289,10 @@ export default function LocalisedToolPage({
       </ToolPageShell>
     );
   }
-  if (tool.slug === "word-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <WordToPdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "html-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <HtmlToPdfClient />
-      </ToolPageShell>
-    );
-  }
   if (tool.slug === "add-watermark") {
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <WatermarkVideoClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "excel-to-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <ExcelToPdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "compress-pdf") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <CompressPdfClient />
       </ToolPageShell>
     );
   }
@@ -349,13 +314,6 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <ComparePdfClient />
-      </ToolPageShell>
-    );
-  }
-  if (tool.slug === "pdf-to-excel") {
-    return (
-      <ToolPageShell tool={tool} locale={locale} override={override}>
-        <PdfToExcelClient />
       </ToolPageShell>
     );
   }
@@ -534,6 +492,15 @@ export default function LocalisedToolPage({
     case "url-scanner":
       body = <UrlScannerClient />;
       break;
+    case "ssh-key-generator":
+      body = <SshKeyGeneratorClient />;
+      break;
+    case "text-encryptor":
+      body = <TextEncryptorClient />;
+      break;
+    case "file-encryptor":
+      body = <FileEncryptorClient />;
+      break;
     case "timezone-converter":
       body = <TimezoneConverterClient />;
       break;
@@ -677,6 +644,21 @@ export default function LocalisedToolPage({
       break;
     case "qr-generator":
       body = <QrGeneratorClient />;
+      break;
+    case "url-shortener":
+      body = <ServerLinkClient kind="short" />;
+      break;
+    case "deep-link":
+      body = <ServerLinkClient kind="deep" />;
+      break;
+    case "magic-link":
+      body = <ServerLinkClient kind="magic" />;
+      break;
+    case "utm-builder":
+      body = <UtmBuilderClient />;
+      break;
+    case "link-builder":
+      body = <LinkBuilderClient />;
       break;
     case "api":
       // The /api page has its own bespoke layout; redirect logic isn't worth it

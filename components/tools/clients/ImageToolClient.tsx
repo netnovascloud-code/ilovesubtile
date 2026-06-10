@@ -7,6 +7,8 @@ import { formatBytes, cn } from "@/lib/utils";
 import { IMAGE_TOOLS, resolveOutput, supportsQualityMime } from "@/lib/image-tools";
 import { categoryTheme } from "@/lib/category-theme";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 
 const TH = categoryTheme("images");
 
@@ -14,6 +16,7 @@ type Loaded = { file: File; img: HTMLImageElement; url: string; w: number; h: nu
 
 export function ImageToolClient({ slug }: { slug: string }) {
   const cfg = IMAGE_TOOLS[slug];
+  const t = getCommonUi(useLocale());
   const [src, setSrc] = useState<Loaded | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -34,11 +37,20 @@ export function ImageToolClient({ slug }: { slug: string }) {
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      setSrc({ file, img, url, w: img.naturalWidth, h: img.naturalHeight });
-      setWidth(img.naturalWidth);
-      setHeight(img.naturalHeight);
+      // SVGs often lack intrinsic dimensions (naturalWidth/Height = 0, or a
+      // 150px UA default), which previously produced a 1px/150px raster. Fall
+      // back to a usable default; the resize controls still let the user pick.
+      const isSvg = file.type === "image/svg+xml" || /\.svg$/i.test(file.name);
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (isSvg && (w <= 1 || h <= 1 || (w === 150 && h === 150))) {
+        const ratio = w > 1 && h > 1 ? h / w : 1;
+        w = 1024; h = Math.round(1024 * ratio);
+      }
+      setSrc({ file, img, url, w, h });
+      setWidth(w);
+      setHeight(h);
       setAngle(0);
-      setCrop({ x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight });
+      setCrop({ x: 0, y: 0, w, h });
     };
     img.onerror = () => { setError("Could not read this image. Try a different file."); URL.revokeObjectURL(url); };
     img.src = url;
@@ -123,8 +135,8 @@ export function ImageToolClient({ slug }: { slug: string }) {
           <span className={cn("grid h-12 w-12 place-items-center rounded-xl", TH.iconBg, TH.iconText)}>
             <Upload className="h-6 w-6" />
           </span>
-          <span className="mt-3 font-semibold text-ink-900">Click to upload an image</span>
-          <span className="mt-1 text-sm text-ink-400">or drag and drop · processed privately in your browser</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.uploadImage}</span>
+          <span className="mt-1 text-sm text-ink-400">{t.dragDropPrivate}</span>
           <input
             type="file"
             accept={cfg.accept}
@@ -143,7 +155,7 @@ export function ImageToolClient({ slug }: { slug: string }) {
               onClick={() => { setSrc(null); setResult(null); }}
               className="inline-flex items-center gap-1 rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"
             >
-              <X className="h-3.5 w-3.5" /> Change
+              <X className="h-3.5 w-3.5" /> {t.change}
             </button>
           </div>
 
@@ -165,15 +177,15 @@ export function ImageToolClient({ slug }: { slug: string }) {
           <div className="flex flex-wrap items-end gap-4 rounded-lg border border-ink-100 bg-white p-4">
             {cfg.controls.resize && (
               <>
-                <Field label="Width">
+                <Field label={t.width}>
                   <input type="number" min={1} value={width} onChange={(e) => onWidth(Number(e.target.value))} className={numCls} />
                 </Field>
-                <Field label="Height">
+                <Field label={t.height}>
                   <input type="number" min={1} value={height} onChange={(e) => onHeight(Number(e.target.value))} className={numCls} />
                 </Field>
                 <label className="flex items-center gap-2 pb-2 text-sm text-ink-600">
                   <input type="checkbox" checked={lockAspect} onChange={(e) => setLockAspect(e.target.checked)} />
-                  Lock ratio
+                  {t.lockRatio}
                 </label>
               </>
             )}
@@ -181,33 +193,33 @@ export function ImageToolClient({ slug }: { slug: string }) {
               <>
                 <Field label="X"><input type="number" min={0} value={crop.x} onChange={(e) => setCrop((c) => ({ ...c, x: Number(e.target.value) }))} className={numCls} /></Field>
                 <Field label="Y"><input type="number" min={0} value={crop.y} onChange={(e) => setCrop((c) => ({ ...c, y: Number(e.target.value) }))} className={numCls} /></Field>
-                <Field label="Width"><input type="number" min={1} value={crop.w} onChange={(e) => setCrop((c) => ({ ...c, w: Number(e.target.value) }))} className={numCls} /></Field>
-                <Field label="Height"><input type="number" min={1} value={crop.h} onChange={(e) => setCrop((c) => ({ ...c, h: Number(e.target.value) }))} className={numCls} /></Field>
+                <Field label={t.width}><input type="number" min={1} value={crop.w} onChange={(e) => setCrop((c) => ({ ...c, w: Number(e.target.value) }))} className={numCls} /></Field>
+                <Field label={t.height}><input type="number" min={1} value={crop.h} onChange={(e) => setCrop((c) => ({ ...c, h: Number(e.target.value) }))} className={numCls} /></Field>
               </>
             )}
             {cfg.controls.rotate && (
-              <Field label="Rotate">
+              <Field label={t.rotate}>
                 <Button size="sm" variant="outline" onClick={() => setAngle((a) => (a + 90) % 360)}>
                   <RotateCw className="h-3.5 w-3.5" /> {angle}°
                 </Button>
               </Field>
             )}
             {cfg.controls.quality && (
-              <Field label={`Quality · ${quality}`}>
+              <Field label={`${t.quality} · ${quality}`}>
                 <input type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))} className="w-40 accent-brand-500" />
               </Field>
             )}
             {!cfg.controls.resize && !cfg.controls.crop && !cfg.controls.rotate && !cfg.controls.quality && (
-              <p className="pb-2 text-sm text-ink-500">Ready — your converted file is on the right.</p>
+              <p className="pb-2 text-sm text-ink-500">{t.ready}</p>
             )}
           </div>
 
           {/* Preview + result */}
           <div className="grid gap-4 md:grid-cols-2">
-            <Preview title="Original" url={src.url} />
+            <Preview title={t.original} url={src.url} />
             <div className="rounded-lg border border-ink-100 bg-white p-4">
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-medium text-ink-700">Result</span>
+                <span className="text-sm font-medium text-ink-700">{t.result}</span>
                 {result && (
                   <span className={cn("text-xs", result.size < src.file.size ? "text-emerald-600" : "text-ink-400")}>
                     {formatBytes(result.size)}
@@ -217,7 +229,7 @@ export function ImageToolClient({ slug }: { slug: string }) {
               </div>
               <div className="grid min-h-40 place-items-center rounded bg-[repeating-conic-gradient(#f3f4f6_0_25%,#fff_0_50%)] bg-[length:16px_16px] p-2">
                 {busy ? (
-                  <span className="text-sm text-ink-400">Processing…</span>
+                  <span className="text-sm text-ink-400">{t.processing}</span>
                 ) : result ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={result.url} alt="Result" className="max-h-72 max-w-full object-contain" />
@@ -227,7 +239,7 @@ export function ImageToolClient({ slug }: { slug: string }) {
               </div>
               {result && (
                 <a href={result.url} download={`${slug}.${result.ext}`} className="mt-3 block">
-                  <Button className="w-full"><Download className="h-4 w-4" /> Download .{result.ext}</Button>
+                  <Button className="w-full"><Download className="h-4 w-4" /> {t.download} .{result.ext}</Button>
                 </a>
               )}
             </div>
@@ -236,7 +248,7 @@ export function ImageToolClient({ slug }: { slug: string }) {
       )}
 
       {error && <p className="text-sm text-red-600">{error}</p>}
-      <p className="text-xs text-ink-400">100% in your browser — your image is never uploaded. Free and unlimited.</p>
+      <p className="text-xs text-ink-400">{t.privacyImage}</p>
     </div>
   );
 }

@@ -13,16 +13,16 @@ const FEATURED: { icon: typeof Sparkles; href: string; label: string; desc: stri
   { icon: Languages, href: "/translator", label: "AI Translator", desc: "30+ languages, formal/informal" },
   { icon: WandSparkles, href: "/ai-humanizer", label: "AI Humanizer", desc: "Make AI text sound human" },
   { icon: Eraser, href: "/remove-background", label: "Remove Background", desc: "Transparent PNG in seconds" },
-  { icon: FileDown, href: "/compress-pdf", label: "Compress PDF", desc: "Shrink scans & image PDFs" },
+  { icon: FileDown, href: "/merge-pdf", label: "Merge PDF", desc: "Combine PDFs into one file" },
 ];
 
 const NEW: Item[] = [
+  { href: "/url-shortener", label: "URL Shortener" },
+  { href: "/deep-link", label: "Smart / Deep Link" },
+  { href: "/magic-link", label: "Magic Link" },
+  { href: "/utm-builder", label: "UTM Builder" },
   { href: "/qr-generator", label: "QR Code Generator" },
-  { href: "/excel-to-pdf", label: "Excel to PDF" },
-  { href: "/add-watermark", label: "Add Watermark to Video" },
-  { href: "/pdf-to-text", label: "PDF to Text" },
-  { href: "/rephraser", label: "AI Rephraser" },
-  { href: "/word-to-pdf", label: "Word to PDF" },
+  { href: "/pdf-to-jpg", label: "PDF to JPG" },
 ];
 
 export function ToolsMenu({

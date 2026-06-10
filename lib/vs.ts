@@ -40,7 +40,7 @@ export const VS: Record<string, Vs> = {
       "Most conversions never leave your device, so they're instant and private.",
     ],
     whenThem: "iLovePDF has a polished mobile app and desktop app, and some advanced PDF-specific features (OCR, signatures) that Konvertools doesn't offer yet. If you live entirely in PDFs and want native apps, it's a fair choice.",
-    ctaSlugs: ["merge-pdf", "pdf-to-word", "compress-pdf"],
+    ctaSlugs: ["merge-pdf", "pdf-to-jpg", "pdf-to-text"],
   },
   convertio: {
     id: "convertio",
@@ -88,7 +88,7 @@ export const VS: Record<string, Vs> = {
       "Most tools run locally — faster and more private.",
     ],
     whenThem: "Smallpdf has e-signatures, a desktop app and tight Dropbox/Drive integrations. If you need legally-tracked signing or cloud-storage hooks, it wins there.",
-    ctaSlugs: ["compress-pdf", "split-pdf", "pdf-to-jpg"],
+    ctaSlugs: ["pdf-to-jpg", "split-pdf", "pdf-to-text"],
   },
   "adobe-acrobat": {
     id: "adobe-acrobat",
@@ -112,7 +112,7 @@ export const VS: Record<string, Vs> = {
       "A whole conversion suite alongside the PDF tools.",
     ],
     whenThem: "Acrobat Pro is unmatched for deep PDF editing, OCR, fillable forms, redaction and compliant e-signatures. For professional document workflows, it's worth the price.",
-    ctaSlugs: ["merge-pdf", "compress-pdf", "watermark-pdf"],
+    ctaSlugs: ["merge-pdf", "pdf-to-jpg", "watermark-pdf"],
   },
   zamzar: {
     id: "zamzar",
@@ -136,7 +136,7 @@ export const VS: Record<string, Vs> = {
       "AI transcription, translation and text tools Zamzar has no equivalent for.",
     ],
     whenThem: "Zamzar's headline is breadth — over a thousand format pairs including CAD, ebooks and legacy office formats a browser can't touch. For an obscure one-off conversion, it's the safer bet.",
-    ctaSlugs: ["png-to-jpg", "mp3-to-wav", "pdf-to-word"],
+    ctaSlugs: ["png-to-jpg", "mp3-to-wav", "pdf-to-text"],
   },
   cloudconvert: {
     id: "cloudconvert",

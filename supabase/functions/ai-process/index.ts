@@ -39,7 +39,7 @@ function utcMonth(): string {
 // use the small model: the strings are short UI/SEO snippets where small is
 // plenty, and its far higher rate limit avoids 429 storms when the fill script
 // translates ~2000 (tool, locale) pairs in one pass.
-const LARGE = new Set(["chapters", "summary", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
+const LARGE = new Set(["chapters", "summary", "summarize", "translate", "rephrase", "product-description", "email-pro", "humanize", "cover-letter", "contract-analyze"]);
 
 function buildSystem(task: string, opts: { target?: string; style?: string; format?: string; register?: string; level?: string }): string | null {
   switch (task) {
@@ -48,7 +48,7 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "clean":
       return `You receive subtitle text. Fix obvious transcription errors, normalise punctuation, and remove [music] / (sigh) style annotations. Preserve every line break.`;
     case "summary":
-      return `You receive a transcript. Return a 4-point summary, one point per line, each line starting with "• ". Plain text only.`;
+      return `You receive a transcript. Return a 4-point summary, written in the SAME language as the transcript, one point per line, each line starting with "• ". Plain text only.`;
     case "translate": {
       const reg = opts.register === "formal" ? " Use a polite, formal register (e.g. vouvoiement in French, Sie in German)."
         : opts.register === "informal" ? " Use a casual, informal register (e.g. tutoiement in French, du in German)."
@@ -64,9 +64,9 @@ function buildSystem(task: string, opts: { target?: string; style?: string; form
     case "rephrase":
       return `Rewrite the user's text in a ${opts.style || "clear, neutral"} style/tone. Keep the original meaning and language. Output ONLY the rewritten text.`;
     case "summarize":
-      if (opts.format === "sentence") return `Summarise the user's text in a single concise sentence. Output only that sentence.`;
-      if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs. Output only the summary.`;
-      return `Summarise the user's text as 3-6 key points, one per line, each line starting with "• ". Output only the points, plain text.`;
+      if (opts.format === "sentence") return `Summarise the user's text in a single concise sentence, written in the SAME language as the text. Output only that sentence.`;
+      if (opts.format === "detailed") return `Write a detailed summary of the user's text in 1-3 short paragraphs, written in the SAME language as the text. Output only the summary.`;
+      return `Summarise the user's text as 3-6 key points, written in the SAME language as the text, one per line, each line starting with "• ". Output only the points, plain text.`;
     case "grammar":
       return `Correct spelling, grammar and punctuation in the user's text. Keep the same language, meaning and formatting. Output ONLY the corrected text.`;
     case "simplify":
@@ -185,8 +185,10 @@ Deno.serve(async (req) => {
   let system = baseSystem;
   // Part 4 — force clean plain text on every prose task.
   if (!wantsJson) system += ` Write your answer in plain text only — no Markdown, no asterisks (*), no bold or italic markers, no headings, no code fences.`;
-  // Part 3 — make the model answer in the SAME language as the input.
-  if (!TARGET_OR_STRUCTURED.has(task)) system += ` IMPORTANT: Reply in the SAME language as the user's text — detect that language and write your entire answer in it. Never switch to English unless the user's text is itself in English.`;
+  // Part 3 — make the model answer in the SAME language as the input. The old
+  // wording only forbade switching *to English*, so the model freely drifted to
+  // French/German on English input (rephrase/humanize). Forbid any switch.
+  if (!TARGET_OR_STRUCTURED.has(task)) system = `CRITICAL LANGUAGE RULE — read this first: detect the language of the user's text and write your ENTIRE answer in that exact same language. Never translate or switch to another language (English in → English out, French in → French out), regardless of any interface language. ` + system;
   // Contracts can run long — bump the cap to 120 KB only for that task to
   // keep memory predictable on the smaller default tasks.
   const maxLen = task === "contract-analyze" ? 120_000 : 40_000;
@@ -275,7 +277,7 @@ Deno.serve(async (req) => {
       model,
       messages: [{ role: "system", content: system }, { role: "user", content: text }],
       ...(wantsJson ? { response_format: { type: "json_object" } } : {}),
-      temperature: task === "translate" || task === "grammar" ? 0.1 : task === "humanize" ? 0.85 : wantsJson ? 0.2 : 0.4,
+      temperature: task === "translate" || task === "grammar" || task === "summarize" ? 0.1 : task === "humanize" ? 0.85 : wantsJson ? 0.2 : 0.4,
     }),
   });
 

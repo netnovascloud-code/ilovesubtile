@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Auth/cookie-driven page — must render per request (the top-level redirect()
+// + cookie read otherwise tripped a 503 on the RSC navigation fetch).
+export const dynamic = "force-dynamic";
+
 /**
  * /billing — subscription & payment management.
  *

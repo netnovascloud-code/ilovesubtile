@@ -10,6 +10,7 @@ import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
+import { isLocale, isRtl, type Locale } from "@/lib/i18n/locales";
 import { CATEGORIES } from "@/lib/tools-config";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -54,7 +55,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // <script>/<Script> so it executes under the nonce-based CSP. Reading the
   // header opts this layout into dynamic rendering — accepted trade-off for
   // dropping 'unsafe-inline' on script-src.
-  const nonce = headers().get("x-nonce") ?? undefined;
+  const h = headers();
+  const nonce = h.get("x-nonce") ?? undefined;
+  // URL locale, threaded by middleware as x-locale. This layout already reads
+  // headers() for the nonce (dynamic rendering), so reading the locale here is
+  // free — and it makes the SERVER-rendered <html lang>/<dir> correct on every
+  // /<locale>/… page instead of relying on the client-side HtmlLang patch.
+  const xl = h.get("x-locale") ?? "en";
+  const locale: Locale = isLocale(xl) ? xl : "en";
   return (
     // suppressHydrationWarning: HtmlLang mutates documentElement.lang/dir
     // post-mount based on the konver_locale cookie (a French visitor on a
@@ -65,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // Next.js pattern for cookie-driven theme/locale switching — it does NOT
     // hide real mismatches in children, only the html attributes we mutate
     // intentionally.
-    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
+    <html lang={locale} dir={isRtl(locale) ? "rtl" : undefined} suppressHydrationWarning className={jakarta.variable}>
       <head>
         {/* Ezoic — display ads. Loaded only for Free users when ADS_ENABLED is
             on (see EzoicLoader); never injected for Pro/Business or while ads

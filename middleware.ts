@@ -96,6 +96,11 @@ export async function middleware(request: NextRequest) {
   const nonce = generateNonce();
   const extra = new Headers();
   extra.set("x-nonce", nonce);
+  // Thread the URL locale to the root layout the same way as the nonce, so
+  // <html lang> / dir are correct in the SERVER render (SEO, screen readers,
+  // browser auto-translate) instead of being patched client-side after mount.
+  const seg0 = request.nextUrl.pathname.split("/").filter(Boolean)[0] ?? "";
+  extra.set("x-locale", LOCALES.has(seg0) ? seg0 : "en");
 
   const response = await updateSupabaseSession(request, extra);
   const csp = buildCsp(nonce);

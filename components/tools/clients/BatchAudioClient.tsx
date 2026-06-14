@@ -4,28 +4,13 @@ import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
 
 type Job = { id: string; file: File; status: "queued" | "running" | "done" | "error"; blob?: Blob; outName?: string; error?: string };
 
-let ffmpegPromise: Promise<unknown> | null = null;
-type FfmpegLike = { exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<unknown>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<unknown> };
-
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ff;
-    })();
-  }
-  return (await ffmpegPromise) as FfmpegLike;
-}
+// FFmpeg.wasm loads via the shared, resilient singleton in lib/ffmpeg-client
+// (self-hosted worker + CDN fallback + load timeout). See its header for why a
+// local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
 const MAX_FILES = 50;
 const BITRATES = [

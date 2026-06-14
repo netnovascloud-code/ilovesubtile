@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 import { useUser } from "@/hooks/useUser";
 import { useLocale } from "@/hooks/useLocale";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
 
 // ── @imgly background removal (loaded from CDN so onnxruntime never enters
 // the webpack/SWC client chunk — same trick as the image tool) ─────────────
@@ -20,27 +21,9 @@ async function getBg(): Promise<BgModule> {
   return bgPromise;
 }
 
-// ── FFmpeg.wasm singleton ───────────────────────────────────────────────────
-type FfmpegLike = {
-  exec: (a: string[]) => Promise<number>;
-  writeFile: (n: string, d: Uint8Array) => Promise<unknown>;
-  readFile: (n: string) => Promise<Uint8Array>;
-  deleteFile: (n: string) => Promise<unknown>;
-};
-let ffmpegPromise: Promise<FfmpegLike> | null = null;
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({ coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"), wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm") });
-      return ff as unknown as FfmpegLike;
-    })();
-  }
-  return ffmpegPromise;
-}
+// ── FFmpeg.wasm — shared, resilient singleton (lib/ffmpeg-client) ────────────
+// Self-hosted worker + CDN fallback + load timeout; see that file's header for
+// why a local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
 type Bg = { id: string; label: string; swatch: string; color: string | null };
 

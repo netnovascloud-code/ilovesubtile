@@ -56,6 +56,12 @@ export function AiTextClient({ slug }: { slug: string }) {
           });
           return;
         }
+        if (data.error === "rate_limited") {
+          // The function returns a human message (e.g. "Too many requests from
+          // your network. Sign in for higher limits, or retry in 42s.").
+          setError(data.message || "Too many requests right now — please wait a moment and try again.");
+          return;
+        }
         setError(
           data.error === "text_too_long"
             ? "That text is too long — please shorten it and try again."

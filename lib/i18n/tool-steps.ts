@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n/locales";
+import { GENERATED_STEP_TRANSLATIONS } from "./tool-steps.generated";
 
 export type LocalisedStep = { title: string; body: string };
 type StepsBySlug = Record<string, LocalisedStep[]>;
@@ -1002,5 +1003,7 @@ const hi: StepsBySlug = {
 const ALL: Partial<Record<Locale, StepsBySlug>> = { fr, es, pt, de, it, nl, ja, zh, ko, ar, ru, hi };
 
 export function getLocalisedSteps(slug: string, locale: Locale): LocalisedStep[] | null {
-  return ALL[locale]?.[slug] ?? null;
+  // Hand-authored steps win; the machine-generated overlay fills the long tail;
+  // a null result lets ToolPageShell fall back to the English source.
+  return ALL[locale]?.[slug] ?? GENERATED_STEP_TRANSLATIONS[slug]?.[locale] ?? null;
 }

@@ -3,9 +3,9 @@
 // and Business are monthly (UTC calendar month).
 export type Plan = "free" | "pro" | "business";
 
-// KONVER quotas: anonymous = 2/day (client-gated), signed-in free = 3/day,
+// KONVER quotas: anonymous = 2/day (client-gated), signed-in free = 5/day,
 // Pro = 500/month, Business = 3,000/month.
-export const DAILY_LIMIT: Record<Plan, number> = { free: 3, pro: 0, business: 0 };
+export const DAILY_LIMIT: Record<Plan, number> = { free: 5, pro: 0, business: 0 };
 export const ANON_DAILY_LIMIT = 2;
 export const MONTHLY_LIMIT: Record<Plan, number> = { free: 0, pro: 500, business: 3000 };
 

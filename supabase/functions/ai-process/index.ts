@@ -27,8 +27,8 @@ function corsFor(req: Request): Record<string, string> {
 // Quota mirrors of lib/quotas.ts — keep in sync when adjusting limits.
 // Free is a rolling 24-hour counter; Pro and Business are monthly (UTC
 // calendar month). Anonymous traffic is gated client-side.
-// KONVER quotas: signed-in free = 3/day (anonymous is gated client-side at 2).
-const DAILY_LIMIT: Record<string, number> = { free: 3, pro: 0, business: 0 };
+// KONVER quotas: signed-in free = 5/day (anonymous is gated client-side at 2).
+const DAILY_LIMIT: Record<string, number> = { free: 5, pro: 0, business: 0 };
 const MONTHLY_LIMIT: Record<string, number> = { free: 0, pro: 500, business: 3000 };
 function utcMonth(): string {
   const d = new Date();
@@ -260,7 +260,7 @@ Deno.serve(async (req) => {
     try {
       const xff = req.headers.get("x-forwarded-for") ?? "";
       const ip = xff.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
-      const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "ai-process", p_limit: 30, p_window_secs: 3600 });
+      const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "ai-process", p_limit: 120, p_window_secs: 3600 });
       const row = Array.isArray(rl) ? rl[0] : rl;
       if (row && row.allowed === false) {
         const retry = Number(row.retry_after ?? 3600);

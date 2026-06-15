@@ -12,6 +12,7 @@ import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2 } from "lucide-react"
 import { PLANS, type PlanKey } from "@/lib/plans";
 import { BUSINESS_MONTHLY_CREDITS } from "@/lib/credits";
 import { getBilling } from "@/lib/i18n/account";
+import { getPlanFeatures } from "@/lib/i18n/plan-features";
 import { localePath, type Locale } from "@/lib/i18n/locales";
 
 type AccountPlan = "free" | PlanKey;
@@ -146,7 +147,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
           </CardHeader>
           <CardContent>
             <ul className="grid gap-2 sm:grid-cols-2">
-              {planDef.features.map((f) => (
+              {getPlanFeatures(locale)[plan].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-ink-700">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
                   <span>{f}</span>

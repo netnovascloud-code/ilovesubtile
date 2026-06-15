@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/hooks/useLocale";
 
 /** Parse a YYYY-MM-DD value into a LOCAL date at midnight (no timezone drift). */
@@ -407,7 +407,10 @@ export function AgeCalculatorClient() {
   const s = T[useLocale()] ?? T.en;
 
   const [dob, setDob] = useState("");
-  const [asOf, setAsOf] = useState(todayValue());
+  // Seed empty so SSR and the first client render agree, then fill "today" after
+  // mount — todayValue() is runtime-dependent and would otherwise hydration-mismatch.
+  const [asOf, setAsOf] = useState("");
+  useEffect(() => setAsOf(todayValue()), []);
 
   const result = useMemo(() => {
     const birth = parseLocalDate(dob);

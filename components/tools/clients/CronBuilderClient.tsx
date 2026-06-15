@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/hooks/useLocale";
@@ -603,6 +603,10 @@ export function CronBuilderClient() {
 
   const [expr, setExpr] = useState("0 9 * * 1-5");
   const [copied, setCopied] = useState(false);
+  // nextFires()/toLocaleString() are runtime-dependent; render them only after
+  // mount so SSR and the first client render agree (avoids a hydration mismatch).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const parts = useMemo(() => fieldFromExpr(expr), [expr]);
   const sample = useMemo(() => nextFires(parts, 5), [parts]);
 
@@ -643,7 +647,7 @@ export function CronBuilderClient() {
       <div className="rounded-lg border border-ink-100 bg-white p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-ink-400">{s.next5}</p>
         <ul className="mt-2 space-y-1 font-mono text-sm">
-          {sample.length === 0 ? (
+          {!mounted ? null : sample.length === 0 ? (
             <li className="text-ink-400">{s.noMatch}</li>
           ) : sample.map((d, i) => (
             <li key={i} className="text-ink-700">{d.toLocaleString()}</li>

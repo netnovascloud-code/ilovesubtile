@@ -829,10 +829,16 @@ export function InvoiceGeneratorClient() {
   const [seller, setSeller] = useState("Your company\n123 Main Street\n75001 Paris\nFR12345678901");
   const [buyer, setBuyer] = useState("Customer Ltd.\n456 High Road\n10001 New York");
   const [invoiceNo, setInvoiceNo] = useState("INV-2025-001");
-  const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
-  const [due, setDue] = useState(() => {
-    const d = new Date(); d.setDate(d.getDate() + 30); return d.toISOString().slice(0, 10);
-  });
+  // Seed empty so SSR and the first client render agree; fill the real dates after
+  // mount (new Date() is runtime-dependent and would otherwise hydration-mismatch).
+  const [date, setDate] = useState("");
+  const [due, setDue] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    setDate(today.toISOString().slice(0, 10));
+    const dueDate = new Date(); dueDate.setDate(dueDate.getDate() + 30);
+    setDue(dueDate.toISOString().slice(0, 10));
+  }, []);
   const [currency, setCurrency] = useState("EUR");
   const [taxRate, setTaxRate] = useState(20);
   const [notes, setNotes] = useState(s.default_notes);

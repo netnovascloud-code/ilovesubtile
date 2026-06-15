@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { planLimit, type Plan } from "@/lib/ai-quotas";
+import { getBilling } from "@/lib/i18n/account";
+import { type Locale } from "@/lib/i18n/locales";
 
 type Usage = { kind: "daily" | "monthly"; used: number; limit: number; remaining: number; resetsAt: Date | null };
 
@@ -22,7 +24,8 @@ function utcMonth(): string {
  * shared browser client, which throws. Renders nothing until the fetch
  * resolves, so there's no SSR-baked markup to hydration-mismatch.
  */
-export function AiUsageCard() {
+export function AiUsageCard({ locale = "en" }: { locale?: Locale }) {
+  const s = getBilling(locale);
   const [u, setU] = useState<Usage | null>(null);
 
   useEffect(() => {
@@ -61,22 +64,22 @@ export function AiUsageCard() {
   const shown = Math.min(u.used, u.limit);
   const pct = u.limit > 0 ? Math.min(100, Math.round((shown / u.limit) * 100)) : 0;
   const bar = u.remaining === 0 ? "bg-red-500" : pct >= 80 ? "bg-amber-500" : "bg-brand-500";
-  const period = u.kind === "monthly" ? "this month" : "today";
+  const usedLabel = u.kind === "monthly" ? s.runsThisMonth : s.runsToday;
   const resets = u.kind === "monthly" && u.resetsAt
-    ? `Resets on ${u.resetsAt.toLocaleDateString(undefined, { month: "short", day: "numeric" })}.`
-    : "Resets 24h after your first run.";
+    ? s.resetsOn(u.resetsAt.toLocaleDateString(locale, { month: "short", day: "numeric" }))
+    : s.resets24h;
 
   return (
     <Card className="mt-6">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-brand-500" /> AI usage</CardTitle>
+        <CardTitle className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-brand-500" /> {s.aiUsage}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 text-sm">
           <span className="text-ink-700">
-            <span className="font-semibold text-ink-900">{u.used.toLocaleString()}</span> / {u.limit.toLocaleString()} AI runs used {period}
+            <span className="font-semibold text-ink-900">{u.used.toLocaleString(locale)}</span> / {u.limit.toLocaleString(locale)} {usedLabel}
           </span>
-          <span className="text-ink-500">{u.remaining.toLocaleString()} left</span>
+          <span className="text-ink-500">{s.left(u.remaining.toLocaleString(locale))}</span>
         </div>
         <div
           className="mt-2 h-2 w-full overflow-hidden rounded-full bg-ink-100"

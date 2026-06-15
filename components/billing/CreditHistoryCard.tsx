@@ -4,26 +4,28 @@ import { useEffect, useState } from "react";
 import { History } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
+import { getBilling } from "@/lib/i18n/account";
+import { type Locale } from "@/lib/i18n/locales";
 
 type Tx = { id: string; amount: number; reason: string; balance_after: number; created_at: string };
-
-/** Turn a ledger `reason` ("pack:scale", "api:rephrase", …) into a friendly label. */
-function label(reason: string): string {
-  if (reason.startsWith("pack:")) return `Credit pack · ${reason.slice(5)}`;
-  if (reason.startsWith("api:")) return `API call · ${reason.slice(4)}`;
-  if (reason === "business_monthly_grant") return "Monthly Business credits";
-  return reason;
-}
 
 /**
  * Recent credit-ledger entries for the signed-in user. RLS ("credit_tx read
  * own") restricts the query to the caller's own rows. Renders nothing until the
  * fetch resolves — so there is no SSR-baked markup to hydration-mismatch — and
- * stays hidden when the ledger is empty (e.g. free accounts that never bought
- * or spent credits).
+ * stays hidden when the ledger is empty.
  */
-export function CreditHistoryCard() {
+export function CreditHistoryCard({ locale = "en" }: { locale?: Locale }) {
+  const s = getBilling(locale);
   const [rows, setRows] = useState<Tx[] | null>(null);
+
+  /** Turn a ledger `reason` ("pack:scale", "api:rephrase", …) into a friendly label. */
+  function label(reason: string): string {
+    if (reason.startsWith("pack:")) return s.creditPack(reason.slice(5));
+    if (reason.startsWith("api:")) return s.apiCall(reason.slice(4));
+    if (reason === "business_monthly_grant") return s.monthlyGrant;
+    return reason;
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -49,7 +51,7 @@ export function CreditHistoryCard() {
   return (
     <Card className="mt-6">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><History className="h-4 w-4 text-brand-500" /> Credit history</CardTitle>
+        <CardTitle className="flex items-center gap-2"><History className="h-4 w-4 text-brand-500" /> {s.creditHistory}</CardTitle>
       </CardHeader>
       <CardContent>
         <ul className="divide-y divide-ink-100 text-sm">
@@ -58,14 +60,14 @@ export function CreditHistoryCard() {
               <div className="min-w-0">
                 <p className="truncate text-ink-800">{label(t.reason)}</p>
                 <p className="text-xs text-ink-400">
-                  {new Date(t.created_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
+                  {new Date(t.created_at).toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" })}
                 </p>
               </div>
               <div className="shrink-0 text-right tabular-nums">
                 <p className={t.amount >= 0 ? "font-medium text-emerald-600" : "font-medium text-ink-700"}>
-                  {t.amount >= 0 ? "+" : ""}{t.amount.toLocaleString()}
+                  {t.amount >= 0 ? "+" : ""}{t.amount.toLocaleString(locale)}
                 </p>
-                <p className="text-xs text-ink-400">bal. {t.balance_after.toLocaleString()}</p>
+                <p className="text-xs text-ink-400">{s.bal(t.balance_after.toLocaleString(locale))}</p>
               </div>
             </li>
           ))}

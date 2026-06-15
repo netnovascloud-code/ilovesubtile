@@ -105,6 +105,8 @@ export function Header() {
           <UserMenu
             loginHref={loginHref}
             registerHref={registerHref}
+            dashboardHref={localePath(locale, "dashboard")}
+            billingHref={localePath(locale, "billing")}
             labels={{
               login: t.login,
               start: t.start,

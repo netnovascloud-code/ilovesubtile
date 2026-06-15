@@ -21,14 +21,19 @@ const EN_ONLY_SLUGS = new Set([
   "veed-alternative",
 ]);
 
-/** App sections with NO localised route (auth, account, system/docs pages).
+/** App sections that have NO localised route (auth, account, system/docs pages).
  *  A /<locale>/<section> hit — language switch, bookmark, stale link — would
  *  otherwise 404 through the dynamic [slug] route, so we strip the locale
  *  prefix and 308 to the English canonical. Matches nested paths too
- *  (e.g. /fr/billing/checkout → /billing/checkout). */
+ *  (e.g. /fr/dashboard, /fr/login). */
 const ROOT_ONLY_SECTIONS = new Set([
-  "dashboard", "billing", "login", "register", "developer", "api",
+  "dashboard", "login", "register", "developer", "api",
 ]);
+
+/** Sections with a localised root (e.g. /[locale]/billing exists) but whose
+ *  deeper paths stay English-only (billing/checkout). Only the sub-paths are
+ *  stripped — a bare /<locale>/billing renders its real localised route. */
+const LOCALISED_ROOT_EN_SUBPATHS = new Set(["billing"]);
 
 /** Build the per-request Content-Security-Policy with a fresh nonce. The
  *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
@@ -161,15 +166,20 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // /<locale>/<root-only-section>(/…) → 308 to the English canonical (strip the
-  // locale prefix). These account/system pages have no localised route, so a
-  // language switch onto /fr/billing etc. would 404 — redirect instead.
+  // /<locale>/<english-only-path> → 308 to the English canonical (strip the
+  // locale prefix). Covers fully English-only sections (dashboard, login, …)
+  // and the English-only sub-paths of localised roots (billing/checkout). A
+  // bare /<locale>/billing is NOT stripped — it has a real localised route.
   {
     const parts = pathname.split("/").filter(Boolean);
-    if (parts.length >= 2 && LOCALES.has(parts[0]) && ROOT_ONLY_SECTIONS.has(parts[1])) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/" + parts.slice(1).join("/");
-      return NextResponse.redirect(url, 308);
+    if (parts.length >= 2 && LOCALES.has(parts[0])) {
+      const seg = parts[1];
+      const strip = ROOT_ONLY_SECTIONS.has(seg) || (LOCALISED_ROOT_EN_SUBPATHS.has(seg) && parts.length >= 3);
+      if (strip) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/" + parts.slice(1).join("/");
+        return NextResponse.redirect(url, 308);
+      }
     }
   }
 

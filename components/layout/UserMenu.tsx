@@ -19,10 +19,14 @@ export function UserMenu({
   labels,
   loginHref = "/login",
   registerHref = "/register",
+  dashboardHref = "/dashboard",
+  billingHref = "/billing",
 }: {
   labels: { login: string; start: string; dashboard: string; billing: string; logout: string };
   loginHref?: string;
   registerHref?: string;
+  dashboardHref?: string;
+  billingHref?: string;
 }) {
   const { user, plan, loading } = useUser();
   const [open, setOpen] = useState(false);
@@ -85,10 +89,10 @@ export function UserMenu({
             <div className="mt-0.5 text-xs uppercase tracking-wide text-brand-600">{plan}</div>
           </div>
           <div className="my-1 h-px bg-ink-100" />
-          <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
+          <Link href={dashboardHref} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
             <LayoutDashboard className="h-4 w-4" /> {labels.dashboard}
           </Link>
-          <Link href="/billing" onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
+          <Link href={billingHref} onClick={() => setOpen(false)} className="flex items-center gap-2 rounded px-3 py-2 text-sm text-ink-700 hover:bg-ink-50">
             <CreditCard className="h-4 w-4" /> {labels.billing}
           </Link>
           <div className="my-1 h-px bg-ink-100" />

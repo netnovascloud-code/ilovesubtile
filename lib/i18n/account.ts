@@ -163,3 +163,91 @@ const TABLE: Partial<Record<Locale, BillingStrings>> = { en, fr };
 export function getBilling(locale: Locale): BillingStrings {
   return TABLE[locale] ?? en;
 }
+
+export type DashboardStrings = {
+  title: string;
+  signedInAs: (email: string) => string;
+  emptyState: string;
+  upgrade: string;
+  aiUsage: string;
+  periodDaily: string;
+  periodMonthly: string;
+  usedLeft: (left: string) => string;
+  dailyLimitReached: string;
+  monthlyLimitReached: string;
+  recentJobsCard: string;
+  upTo20: string;
+  plan: string;
+  manageSubscription: string;
+  cancelsOn: (d: string) => string;
+  paymentOverdue: string;
+  renewsOn: (d: string) => string;
+  noActiveSub: string;
+  creditBalance: string;
+  manageBilling: string;
+  recentJobsDesc: string;
+  noJobs: string;
+  download: string;
+  linkExpired: string;
+};
+
+const dashEn: DashboardStrings = {
+  title: "Dashboard",
+  signedInAs: (e) => `Signed in as ${e}`,
+  emptyState: "You're viewing the empty state. Configure Supabase to enable real data.",
+  upgrade: "Upgrade",
+  aiUsage: "AI usage",
+  periodDaily: "Runs in the last 24 hours",
+  periodMonthly: "AI conversions this month",
+  usedLeft: (left) => `used · ${left} left`,
+  dailyLimitReached: "Daily limit reached. Resets every 24h.",
+  monthlyLimitReached: "Monthly quota reached. Resets on the 1st.",
+  recentJobsCard: "Recent jobs",
+  upTo20: "Up to 20 shown",
+  plan: "Plan",
+  manageSubscription: "Manage your subscription",
+  cancelsOn: (d) => `Cancels on ${d} — access until then`,
+  paymentOverdue: "Payment overdue — please update billing",
+  renewsOn: (d) => `Renews on ${d}`,
+  noActiveSub: "No active subscription",
+  creditBalance: "Credit balance:",
+  manageBilling: "Manage billing",
+  recentJobsDesc: "Last 20 files you processed. Download links expire after 1 hour.",
+  noJobs: "No jobs yet. Try a tool to see them here.",
+  download: "Download",
+  linkExpired: "Link expired",
+};
+
+const dashFr: DashboardStrings = {
+  title: "Tableau de bord",
+  signedInAs: (e) => `Connecté en tant que ${e}`,
+  emptyState: "Vous voyez l'état vide. Configurez Supabase pour activer les données réelles.",
+  upgrade: "Mettre à niveau",
+  aiUsage: "Utilisation IA",
+  periodDaily: "Requêtes sur les dernières 24 h",
+  periodMonthly: "Conversions IA ce mois-ci",
+  usedLeft: (left) => `utilisées · ${left} restantes`,
+  dailyLimitReached: "Limite quotidienne atteinte. Réinitialisation toutes les 24 h.",
+  monthlyLimitReached: "Quota mensuel atteint. Réinitialisation le 1er.",
+  recentJobsCard: "Conversions récentes",
+  upTo20: "20 maximum affichées",
+  plan: "Offre",
+  manageSubscription: "Gérez votre abonnement",
+  cancelsOn: (d) => `Résiliation le ${d} — accès jusque-là`,
+  paymentOverdue: "Paiement en retard — veuillez mettre à jour la facturation",
+  renewsOn: (d) => `Renouvellement le ${d}`,
+  noActiveSub: "Aucun abonnement actif",
+  creditBalance: "Solde de crédits :",
+  manageBilling: "Gérer la facturation",
+  recentJobsDesc: "Les 20 derniers fichiers traités. Les liens de téléchargement expirent après 1 heure.",
+  noJobs: "Aucune conversion pour l'instant. Lancez un outil pour les voir ici.",
+  download: "Télécharger",
+  linkExpired: "Lien expiré",
+};
+
+const DASH_TABLE: Partial<Record<Locale, DashboardStrings>> = { en: dashEn, fr: dashFr };
+
+/** Dashboard strings for a locale, falling back to English. */
+export function getDashboard(locale: Locale): DashboardStrings {
+  return DASH_TABLE[locale] ?? dashEn;
+}

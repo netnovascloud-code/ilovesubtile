@@ -22,7 +22,14 @@ export function AiQuotaPill() {
     : ratio < 0.2 ? "border-amber-200 bg-amber-50 text-amber-700"
     : "border-ink-100 bg-ink-50 text-ink-700";
   const fmt = (n: number) => { try { return n.toLocaleString(locale); } catch { return n.toLocaleString(); } };
-  const unit = q.kind === "monthly" ? "/mo" : "/d";
+  // Localised period suffix (the bar showed "/mo" on a French site). EN base +
+  // FR; other locales fall back to the English abbreviation.
+  const UNIT: Partial<Record<typeof locale, { mo: string; d: string }>> = {
+    en: { mo: "/mo", d: "/d" },
+    fr: { mo: "/mois", d: "/j" },
+  };
+  const unitSet = UNIT[locale] ?? UNIT.en!;
+  const unit = q.kind === "monthly" ? unitSet.mo : unitSet.d;
 
   return (
     <Link

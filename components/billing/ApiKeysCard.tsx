@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { edgeFnUrl } from "@/lib/utils";
+import { type Locale } from "@/lib/i18n/locales";
 
 type ApiKey = {
   id: string;
@@ -16,7 +17,7 @@ type ApiKey = {
   created_at: string;
 };
 
-export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }) {
+export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; credits: number; locale?: Locale }) {
   const [keys, setKeys] = useState<ApiKey[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
@@ -110,7 +111,7 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
           <h3 className="font-semibold text-ink-900">API keys</h3>
         </div>
         <div className="text-sm text-ink-500">
-          Credits: <span className="font-semibold text-ink-900">{credits.toLocaleString()}</span>
+          Credits: <span className="font-semibold text-ink-900">{credits.toLocaleString(locale)}</span>
         </div>
       </div>
 
@@ -159,7 +160,7 @@ export function ApiKeysCard({ plan, credits }: { plan: string; credits: number }
                   <p className="mt-0.5 text-xs text-ink-400">
                     <code className="font-mono">{k.key_prefix}…</code>
                     <span className="ml-2">
-                      {k.last_used_at ? `used ${new Date(k.last_used_at).toLocaleDateString()}` : "never used"}
+                      {k.last_used_at ? `used ${new Date(k.last_used_at).toLocaleDateString(locale)}` : "never used"}
                     </span>
                   </p>
                 </div>

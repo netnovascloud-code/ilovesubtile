@@ -27,7 +27,7 @@ const EN_ONLY_SLUGS = new Set([
  *  prefix and 308 to the English canonical. Matches nested paths too
  *  (e.g. /fr/dashboard, /fr/login). */
 const ROOT_ONLY_SECTIONS = new Set([
-  "dashboard", "login", "register", "developer", "api",
+  "login", "register", "developer", "api",
 ]);
 
 /** Sections with a localised root (e.g. /[locale]/billing exists) but whose
@@ -187,27 +187,34 @@ export async function middleware(request: NextRequest) {
   // /billing canonical (direct link, bookmark, header link before the cookie
   // settled), is sent to the localised route so the WHOLE page is translated —
   // not just the chrome — and the cookie-vs-URL hydration residue can't appear.
-  if (pathname === "/billing") {
+  if (pathname === "/billing" || pathname === "/dashboard") {
     const target = preferredLocale(request);
     if (target) {
       const url = request.nextUrl.clone();
-      url.pathname = `/${target}/billing`;
+      url.pathname = `/${target}${pathname}`;
       return NextResponse.redirect(url);
     }
   }
 
-  if (pathname.startsWith("/dashboard")) {
-    // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
-    // it into `.0`/`.1` chunks when large — so match by *contains*, not
-    // endsWith, otherwise chunked sessions look logged-out (redirect loop).
-    const hasSession = [...request.cookies.getAll()].some(
-      (c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"),
-    );
-    if (!hasSession) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(url);
+  // Auth gate for the dashboard — English /dashboard and localised
+  // /<locale>/dashboard. Presence-only check on the session cookie; the page
+  // resolves the real session.
+  {
+    const dparts = pathname.split("/").filter(Boolean);
+    const isDashboard = dparts[0] === "dashboard" || (LOCALES.has(dparts[0]) && dparts[1] === "dashboard");
+    if (isDashboard) {
+      // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
+      // it into `.0`/`.1` chunks when large — so match by *contains*, not
+      // endsWith, otherwise chunked sessions look logged-out (redirect loop).
+      const hasSession = [...request.cookies.getAll()].some(
+        (c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"),
+      );
+      if (!hasSession) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/login";
+        url.searchParams.set("redirect", pathname);
+        return NextResponse.redirect(url);
+      }
     }
   }
 

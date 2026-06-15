@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
+import { AiUsageCard } from "@/components/billing/AiUsageCard";
+import { CreditHistoryCard } from "@/components/billing/CreditHistoryCard";
 import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { PLANS, type PlanKey } from "@/lib/plans";
 import { BUSINESS_MONTHLY_CREDITS } from "@/lib/credits";
@@ -39,6 +41,7 @@ export default async function BillingPage() {
   let email: string | null = null;
   let plan: AccountPlan = "free";
   let credits = 0;
+  let purchasedCredits = 0;
   let monthlyGrant = 0;
   let subStatus: string | null = null;
   let renewsAt: string | null = null;
@@ -63,7 +66,8 @@ export default async function BillingPage() {
       lsSubscriptionId = (profile?.ls_subscription_id as string | null) ?? null;
       const thisMonth = new Date().toISOString().slice(0, 7);
       monthlyGrant = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
-      credits = (profile?.credits ?? 0) + monthlyGrant;
+      purchasedCredits = profile?.credits ?? 0;
+      credits = purchasedCredits + monthlyGrant;
     }
   } catch {
     needsLogin = true;
@@ -185,6 +189,9 @@ export default async function BillingPage() {
         </Card>
       )}
 
+      {/* ── AI usage (live meter) ────────────────────────────────── */}
+      <AiUsageCard />
+
       {/* ── Credits (embedded purchase, no redirect) ─────────────── */}
       <div className="mt-6">
         <div className="mb-2 flex items-baseline justify-between">
@@ -193,8 +200,25 @@ export default async function BillingPage() {
             Balance: <span className="font-semibold text-ink-900">{credits.toLocaleString()}</span>
           </span>
         </div>
+        {credits > 0 && (
+          <div className="mb-3 grid gap-2 rounded-lg border border-ink-100 bg-white p-3 text-sm sm:grid-cols-2">
+            {plan === "business" && (
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-ink-600">Monthly (Business)</span>
+                <span className="text-ink-900"><span className="font-medium">{monthlyGrant.toLocaleString()}</span> / {BUSINESS_MONTHLY_CREDITS.toLocaleString()} · resets 1st</span>
+              </div>
+            )}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-ink-600">Purchased packs</span>
+              <span className="text-ink-900"><span className="font-medium">{purchasedCredits.toLocaleString()}</span> · never expire</span>
+            </div>
+          </div>
+        )}
         <BuyCreditsCard />
       </div>
+
+      {/* ── Credit history (ledger) ──────────────────────────────── */}
+      <CreditHistoryCard />
 
       {/* ── Invoices ─────────────────────────────────────────────── */}
       <Card className="mt-6">

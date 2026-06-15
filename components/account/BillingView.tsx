@@ -81,7 +81,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="container max-w-3xl py-10">
+    <div className="container max-w-5xl py-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <Link href={localePath(locale, "dashboard")} className="inline-flex items-center gap-1 text-xs text-ink-500 hover:text-ink-900">

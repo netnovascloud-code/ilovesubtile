@@ -5,6 +5,10 @@ import { SITE_URL } from "@/lib/utils";
 import { LegalRender } from "@/lib/legal/render";
 import { COOKIES_EN } from "@/lib/legal/cookies-en";
 import { COOKIES_TRANSLATIONS } from "@/lib/legal/cookies-translations";
+import { COOKIES_TRANSLATIONS_GENERATED } from "@/lib/legal/cookies-translations.generated";
+
+// Script-filled locales, overridden by any hand-curated translation.
+const COOKIES = { ...COOKIES_TRANSLATIONS_GENERATED, ...COOKIES_TRANSLATIONS };
 
 export function generateStaticParams() {
   return LOCALES.filter((l) => l !== "en").map((locale) => ({ locale }));
@@ -33,7 +37,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
 export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
-  const translated = COOKIES_TRANSLATIONS[locale];
+  const translated = COOKIES[locale];
   if (translated) return <LegalRender doc={translated} />;
   return (
     <>

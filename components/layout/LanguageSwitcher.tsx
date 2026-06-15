@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Globe, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,7 +9,9 @@ import { LANGUAGE_NAMES, NON_DEFAULT_LOCALES, isLocale, DEFAULT_LOCALE, type Loc
 const ALL: Locale[] = [DEFAULT_LOCALE, ...NON_DEFAULT_LOCALES];
 
 /** Keep the user on the SAME page when switching language: strip the current
- *  locale prefix, then prepend the target one. */
+ *  locale prefix, then prepend the target one. Non-localised sections
+ *  (dashboard, billing, login, …) have no /<locale>/ route — middleware
+ *  308-redirects those back to the English canonical, so this never 404s. */
 function swapLocale(pathname: string, target: Locale): string {
   const parts = pathname.split("/").filter(Boolean);
   if (parts[0] && isLocale(parts[0]) && parts[0] !== "en") parts.shift();
@@ -19,9 +20,8 @@ function swapLocale(pathname: string, target: Locale): string {
   return rest ? `/${target}/${rest}` : `/${target}`;
 }
 
-/** Footer language picker — same spot, now a compact dropdown (opens upward).
- *  hreflang for crawlers lives in the <head> alternates, so a JS dropdown is
- *  fine here. */
+/** Footer language picker — a compact dropdown (opens upward). hreflang for
+ *  crawlers lives in the <head> alternates, so a JS dropdown is fine here. */
 export function LanguageSwitcher({ current }: { current: Locale }) {
   const pathname = usePathname() ?? "/";
   const [open, setOpen] = useState(false);
@@ -34,6 +34,17 @@ export function LanguageSwitcher({ current }: { current: Locale }) {
     document.addEventListener("keydown", onKey);
     return () => { document.removeEventListener("mousedown", onClick); document.removeEventListener("keydown", onKey); };
   }, []);
+
+  /** Persist the choice in the NEXT_LOCALE cookie, then hard-navigate so EVERY
+   *  layer (server render, <html lang>/dir, and every client useLocale() reader)
+   *  picks up the new language at once — no manual refresh and no half-translated
+   *  UI. A soft <Link> nav left client components on the stale cookie value,
+   *  which is exactly the "I have to reload to see the new language" bug. */
+  function switchTo(loc: Locale) {
+    setOpen(false);
+    document.cookie = `NEXT_LOCALE=${loc}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    window.location.assign(swapLocale(pathname, loc));
+  }
 
   return (
     <div ref={ref} className="relative">
@@ -55,17 +66,17 @@ export function LanguageSwitcher({ current }: { current: Locale }) {
         >
           {ALL.map((loc) => (
             <li key={loc}>
-              <Link
-                href={swapLocale(pathname, loc)}
-                hrefLang={loc}
-                onClick={() => setOpen(false)}
+              <button
+                type="button"
+                lang={loc}
+                onClick={() => switchTo(loc)}
                 className={cn(
-                  "block rounded px-3 py-1.5 text-sm transition-colors hover:bg-ink-50",
+                  "block w-full rounded px-3 py-1.5 text-left text-sm transition-colors hover:bg-ink-50",
                   loc === current ? "font-semibold text-brand-700" : "text-ink-600",
                 )}
               >
                 {LANGUAGE_NAMES[loc]}
-              </Link>
+              </button>
             </li>
           ))}
         </ul>

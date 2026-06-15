@@ -107,6 +107,11 @@ export function Footer() {
                 Cookies
               </Link>
             </li>
+            <li>
+              <Link href={localePath(locale, "legal-notice")} className="hover:text-ink-900">
+                {locale === "fr" ? "Mentions légales" : "Legal notice"}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

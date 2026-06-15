@@ -183,6 +183,19 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // A visitor whose language preference is non-English, landing on the English
+  // /billing canonical (direct link, bookmark, header link before the cookie
+  // settled), is sent to the localised route so the WHOLE page is translated —
+  // not just the chrome — and the cookie-vs-URL hydration residue can't appear.
+  if (pathname === "/billing") {
+    const target = preferredLocale(request);
+    if (target) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${target}/billing`;
+      return NextResponse.redirect(url);
+    }
+  }
+
   if (pathname.startsWith("/dashboard")) {
     // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
     // it into `.0`/`.1` chunks when large — so match by *contains*, not

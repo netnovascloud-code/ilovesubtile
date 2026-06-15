@@ -185,7 +185,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
             </div>
           </div>
         )}
-        <BuyCreditsCard />
+        <BuyCreditsCard locale={locale} />
       </div>
 
       {/* ── Credit history (ledger) ──────────────────────────────── */}

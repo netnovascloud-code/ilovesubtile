@@ -50,6 +50,13 @@ export type BillingStrings = {
   apiCall: (task: string) => string;
   monthlyGrant: string;
   bal: (n: string) => string;
+  // BuyCreditsCard
+  buyCreditsTitle: string;
+  buyCreditsSubtitle: string;
+  creditsUnit: string;
+  perCreditSuffix: string;
+  buy: string;
+  buyCreditsBusinessNote: string;
 };
 
 const en: BillingStrings = {
@@ -93,6 +100,12 @@ const en: BillingStrings = {
   apiCall: (t) => `API call · ${t}`,
   monthlyGrant: "Monthly Business credits",
   bal: (n) => `bal. ${n}`,
+  buyCreditsTitle: "Buy API credits",
+  buyCreditsSubtitle: "Top up your balance for the REST API. Credits never expire.",
+  creditsUnit: "credits",
+  perCreditSuffix: "/credit",
+  buy: "Buy",
+  buyCreditsBusinessNote: "Business plans also include 300 credits every month (these reset monthly; purchased packs don't).",
 };
 
 const fr: BillingStrings = {
@@ -136,6 +149,12 @@ const fr: BillingStrings = {
   apiCall: (t) => `Appel API · ${t}`,
   monthlyGrant: "Crédits Business mensuels",
   bal: (n) => `solde ${n}`,
+  buyCreditsTitle: "Acheter des crédits API",
+  buyCreditsSubtitle: "Rechargez votre solde pour l'API REST. Les crédits n'expirent jamais.",
+  creditsUnit: "crédits",
+  perCreditSuffix: "/crédit",
+  buy: "Acheter",
+  buyCreditsBusinessNote: "Les offres Business incluent aussi 300 crédits chaque mois (réinitialisés mensuellement ; les packs achetés, non).",
 };
 
 const TABLE: Partial<Record<Locale, BillingStrings>> = { en, fr };

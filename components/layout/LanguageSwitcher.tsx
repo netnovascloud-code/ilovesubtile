@@ -35,14 +35,21 @@ export function LanguageSwitcher({ current }: { current: Locale }) {
     return () => { document.removeEventListener("mousedown", onClick); document.removeEventListener("keydown", onKey); };
   }, []);
 
-  /** Persist the choice in the NEXT_LOCALE cookie, then hard-navigate so EVERY
-   *  layer (server render, <html lang>/dir, and every client useLocale() reader)
-   *  picks up the new language at once — no manual refresh and no half-translated
-   *  UI. A soft <Link> nav left client components on the stale cookie value,
-   *  which is exactly the "I have to reload to see the new language" bug. */
+  /** Persist the choice, then hard-navigate so EVERY layer (server render,
+   *  <html lang>/dir, and every client useLocale() reader) picks up the new
+   *  language at once — no manual refresh and no half-translated chrome.
+   *
+   *  TWO cookies, two readers — both must agree or the chrome desyncs (the bug
+   *  this fixes):
+   *   • konver_locale → useLocale() / HtmlLang drive the footer, navbar and
+   *     <html lang> on non-prefixed routes. This is the one that was missing.
+   *   • NEXT_LOCALE   → middleware's `/` auto-redirect + x-locale. Without it,
+   *     switching to English on `/` would bounce straight back to /<old-locale>. */
   function switchTo(loc: Locale) {
     setOpen(false);
-    document.cookie = `NEXT_LOCALE=${loc}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    const maxAge = 60 * 60 * 24 * 365;
+    document.cookie = `konver_locale=${loc}; path=/; max-age=${maxAge}; samesite=lax`;
+    document.cookie = `NEXT_LOCALE=${loc}; path=/; max-age=${maxAge}; samesite=lax`;
     window.location.assign(swapLocale(pathname, loc));
   }
 

@@ -93,13 +93,18 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink-900">{t.legal}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
-              <Link href="/privacy" className="hover:text-ink-900">
+              <Link href={localePath(locale, "privacy")} className="hover:text-ink-900">
                 {t.privacy}
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:text-ink-900">
+              <Link href={localePath(locale, "terms")} className="hover:text-ink-900">
                 {t.terms}
+              </Link>
+            </li>
+            <li>
+              <Link href={localePath(locale, "cookies")} className="hover:text-ink-900">
+                Cookies
               </Link>
             </li>
           </ul>

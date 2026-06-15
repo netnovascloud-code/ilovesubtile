@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
+import { DashboardCharts } from "@/components/account/DashboardCharts";
 import { type PlanKey } from "@/lib/quotas";
 import { planLimit, type Plan } from "@/lib/ai-quotas";
 import { getDashboard } from "@/lib/i18n/account";
@@ -186,6 +187,8 @@ export async function DashboardView({ locale }: { locale: Locale }) {
           </CardContent>
         </Card>
       </div>
+
+      <DashboardCharts locale={locale} />
 
       <Card className="mt-8">
         <CardHeader>

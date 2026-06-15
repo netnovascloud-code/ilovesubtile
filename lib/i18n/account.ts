@@ -189,6 +189,16 @@ export type DashboardStrings = {
   noJobs: string;
   download: string;
   linkExpired: string;
+  // Stats / charts
+  statsTitle: string;
+  convOverTime: string;
+  successRate: string;
+  successful: string;
+  errors: string;
+  topTools: string;
+  creditsOverTime: string;
+  noData: string;
+  totalConversions: string;
 };
 
 const dashEn: DashboardStrings = {
@@ -216,6 +226,15 @@ const dashEn: DashboardStrings = {
   noJobs: "No jobs yet. Try a tool to see them here.",
   download: "Download",
   linkExpired: "Link expired",
+  statsTitle: "Statistics",
+  convOverTime: "Conversions (last 14 days)",
+  successRate: "Success rate",
+  successful: "successful",
+  errors: "errors",
+  topTools: "Most-used tools",
+  creditsOverTime: "Credit balance over time",
+  noData: "No data yet — run a tool to see your stats here.",
+  totalConversions: "Total conversions",
 };
 
 const dashFr: DashboardStrings = {
@@ -243,6 +262,15 @@ const dashFr: DashboardStrings = {
   noJobs: "Aucune conversion pour l'instant. Lancez un outil pour les voir ici.",
   download: "Télécharger",
   linkExpired: "Lien expiré",
+  statsTitle: "Statistiques",
+  convOverTime: "Conversions (14 derniers jours)",
+  successRate: "Taux de réussite",
+  successful: "réussies",
+  errors: "en erreur",
+  topTools: "Outils les plus utilisés",
+  creditsOverTime: "Solde de crédits dans le temps",
+  noData: "Aucune donnée pour l'instant — lancez un outil pour voir vos stats ici.",
+  totalConversions: "Conversions totales",
 };
 
 const DASH_TABLE: Partial<Record<Locale, DashboardStrings>> = { en: dashEn, fr: dashFr };

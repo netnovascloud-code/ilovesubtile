@@ -96,7 +96,7 @@ export function Header() {
           <ToolsMenu categories={categories} toolsHref={toolsHref} />
           <Link href="/workflow" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Workflow</Link>
           <Link href="/batch" className="text-sm text-ink-700 transition-colors hover:text-ink-900">Batch</Link>
-          <Link href={localePath(locale, "pricing")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
+          <Link href={localePath(locale, "pricing")} prefetch={false} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
           <Link href="/api" className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>
 

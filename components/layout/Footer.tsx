@@ -61,7 +61,7 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink-900">{t.product}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
-              <Link href={localePath(locale, "pricing")} className="hover:text-ink-900">
+              <Link href={localePath(locale, "pricing")} prefetch={false} className="hover:text-ink-900">
                 {t.pricing}
               </Link>
             </li>

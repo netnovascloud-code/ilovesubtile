@@ -133,7 +133,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
 
           {plan === "free" && (
             <div className="mt-4">
-              <Link href={localePath(locale, "pricing")}><Button>{s.seePlans}</Button></Link>
+              <Link href={localePath(locale, "pricing")} prefetch={false}><Button>{s.seePlans}</Button></Link>
             </div>
           )}
         </CardContent>

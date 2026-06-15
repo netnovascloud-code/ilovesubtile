@@ -31,7 +31,7 @@ export function ProGate({ children, blurb }: { children: ReactNode; blurb?: stri
       <h2 className="mt-4 text-lg font-semibold text-ink-900">{t.proFeatureTitle}</h2>
       <p className="mx-auto mt-2 max-w-md text-sm text-ink-600">{blurb ?? t.proFeatureBody}</p>
       <div className="mt-5 flex flex-wrap justify-center gap-2">
-        <Link href={localePath(locale, "pricing")}>
+        <Link href={localePath(locale, "pricing")} prefetch={false}>
           <Button>{t.proFeatureCta}</Button>
         </Link>
         {!user && (

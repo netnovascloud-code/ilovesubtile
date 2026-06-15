@@ -34,6 +34,7 @@ export function AiQuotaPill() {
   return (
     <Link
       href={localePath(locale, "pricing")}
+      prefetch={false}
       title={`${fmt(q.remaining)} / ${fmt(q.limit)} AI runs remaining`}
       className={cn("inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium tabular-nums transition-colors hover:brightness-95", tone)}
     >

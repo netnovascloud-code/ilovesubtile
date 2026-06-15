@@ -251,3 +251,82 @@ const DASH_TABLE: Partial<Record<Locale, DashboardStrings>> = { en: dashEn, fr: 
 export function getDashboard(locale: Locale): DashboardStrings {
   return DASH_TABLE[locale] ?? dashEn;
 }
+
+export type ApiKeysStrings = {
+  title: string;
+  credits: string;
+  businessOnly: string;
+  copyNow: string;
+  copied: string;
+  copy: string;
+  loading: string;
+  noKeys: string;
+  defaultKeyName: string;
+  used: (d: string) => string;
+  neverUsed: string;
+  revoke: string;
+  namePlaceholder: string;
+  generating: string;
+  generate: string;
+  atLimit: (n: number) => string;
+  confirmTitle: string;
+  confirmBody: (name: string, prefix: string) => string;
+  confirmYes: string;
+  confirmCancel: string;
+  errRevoke: string;
+};
+
+const keysEn: ApiKeysStrings = {
+  title: "API keys",
+  credits: "Credits:",
+  businessOnly: "The REST API is a Business-plan feature. Upgrade to generate keys and call the API.",
+  copyNow: "Copy your key now — it won't be shown again.",
+  copied: "Copied",
+  copy: "Copy",
+  loading: "Loading…",
+  noKeys: "No active keys yet.",
+  defaultKeyName: "API key",
+  used: (d) => `used ${d}`,
+  neverUsed: "never used",
+  revoke: "Revoke",
+  namePlaceholder: "Key name (required, e.g. Production)",
+  generating: "Generating…",
+  generate: "Generate API key",
+  atLimit: (n) => `You've reached the maximum of ${n} active keys. Revoke one to create another.`,
+  confirmTitle: "Revoke this API key permanently?",
+  confirmBody: (name, prefix) => `"${name}" (${prefix}…) — this action is irreversible. Every application currently using this key will stop working immediately and start receiving 401 errors. The key cannot be reactivated; you'll have to create a new one and update your integrations.`,
+  confirmYes: "Yes, revoke permanently",
+  confirmCancel: "Cancel",
+  errRevoke: "Could not revoke the key.",
+};
+
+const keysFr: ApiKeysStrings = {
+  title: "Clés API",
+  credits: "Crédits :",
+  businessOnly: "L'API REST est une fonctionnalité de l'offre Business. Passez à Business pour générer des clés et appeler l'API.",
+  copyNow: "Copiez votre clé maintenant — elle ne sera plus affichée.",
+  copied: "Copié",
+  copy: "Copier",
+  loading: "Chargement…",
+  noKeys: "Aucune clé active pour l'instant.",
+  defaultKeyName: "Clé API",
+  used: (d) => `utilisée le ${d}`,
+  neverUsed: "jamais utilisée",
+  revoke: "Révoquer",
+  namePlaceholder: "Nom de la clé (requis, ex. Production)",
+  generating: "Génération…",
+  generate: "Générer une clé API",
+  atLimit: (n) => `Vous avez atteint le maximum de ${n} clés actives. Révoquez-en une pour en créer une autre.`,
+  confirmTitle: "Révoquer définitivement cette clé API ?",
+  confirmBody: (name, prefix) => `« ${name} » (${prefix}…) — cette action est irréversible. Toute application utilisant cette clé cessera immédiatement de fonctionner et recevra des erreurs 401. La clé ne peut pas être réactivée ; vous devrez en créer une nouvelle et mettre à jour vos intégrations.`,
+  confirmYes: "Oui, révoquer définitivement",
+  confirmCancel: "Annuler",
+  errRevoke: "Impossible de révoquer la clé.",
+};
+
+const KEYS_TABLE: Partial<Record<Locale, ApiKeysStrings>> = { en: keysEn, fr: keysFr };
+
+/** API-keys card strings for a locale, falling back to English. */
+export function getApiKeys(locale: Locale): ApiKeysStrings {
+  return KEYS_TABLE[locale] ?? keysEn;
+}

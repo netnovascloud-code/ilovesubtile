@@ -102,7 +102,7 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
                 </h2>
                 <p className="mt-3 text-ink-500">{ui.home.upgradeBody}</p>
                 <div className="mt-6 flex gap-3">
-                  <Link href={localePath(locale, "pricing")}>
+                  <Link href={localePath(locale, "pricing")} prefetch={false}>
                     <Button>{ui.home.upgradeCtaPrimary}</Button>
                   </Link>
                   <Link href="/register">

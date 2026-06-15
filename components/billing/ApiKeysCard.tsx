@@ -7,6 +7,7 @@ import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { edgeFnUrl } from "@/lib/utils";
 import { type Locale } from "@/lib/i18n/locales";
+import { getApiKeys } from "@/lib/i18n/account";
 
 type ApiKey = {
   id: string;
@@ -18,6 +19,7 @@ type ApiKey = {
 };
 
 export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; credits: number; locale?: Locale }) {
+  const s = getApiKeys(locale);
   const [keys, setKeys] = useState<ApiKey[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
@@ -97,7 +99,7 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
       await load();
       setPendingRevoke(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not revoke the key.");
+      setError(err instanceof Error ? err.message : s.errRevoke);
     } finally {
       setRevoking(false);
     }
@@ -108,22 +110,22 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <KeyRound className="h-4 w-4 text-ink-500" />
-          <h3 className="font-semibold text-ink-900">API keys</h3>
+          <h3 className="font-semibold text-ink-900">{s.title}</h3>
         </div>
         <div className="text-sm text-ink-500">
-          Credits: <span className="font-semibold text-ink-900">{credits.toLocaleString(locale)}</span>
+          {s.credits} <span className="font-semibold text-ink-900">{credits.toLocaleString(locale)}</span>
         </div>
       </div>
 
       {!isBusiness && (
         <p className="mt-3 rounded border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
-          The REST API is a Business-plan feature. Upgrade to generate keys and call the API.
+          {s.businessOnly}
         </p>
       )}
 
       {freshKey && (
         <div className="mt-4 rounded border border-green-200 bg-green-50 p-3">
-          <p className="text-xs text-green-800">Copy your key now — it won&apos;t be shown again.</p>
+          <p className="text-xs text-green-800">{s.copyNow}</p>
           <div className="mt-2 flex items-center gap-2">
             <code className="flex-1 overflow-x-auto rounded bg-white px-2 py-1 font-mono text-xs text-ink-900">
               {freshKey}
@@ -138,7 +140,7 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
               }}
             >
               <Copy className="h-3.5 w-3.5" />
-              {copied ? "Copied" : "Copy"}
+              {copied ? s.copied : s.copy}
             </Button>
           </div>
         </div>
@@ -148,19 +150,19 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
 
       <div className="mt-4">
         {loading ? (
-          <p className="text-sm text-ink-400">Loading…</p>
+          <p className="text-sm text-ink-400">{s.loading}</p>
         ) : keys.filter((k) => !k.revoked).length === 0 ? (
-          <p className="text-sm text-ink-500">No active keys yet.</p>
+          <p className="text-sm text-ink-500">{s.noKeys}</p>
         ) : (
           <ul className="divide-y divide-ink-100 text-sm">
             {keys.filter((k) => !k.revoked).map((k) => (
               <li key={k.id} className="flex items-center justify-between py-2">
                 <div className="min-w-0">
-                  <p className="truncate font-medium text-ink-900">{k.name || "API key"}</p>
+                  <p className="truncate font-medium text-ink-900">{k.name || s.defaultKeyName}</p>
                   <p className="mt-0.5 text-xs text-ink-400">
                     <code className="font-mono">{k.key_prefix}…</code>
                     <span className="ml-2">
-                      {k.last_used_at ? `used ${new Date(k.last_used_at).toLocaleDateString(locale)}` : "never used"}
+                      {k.last_used_at ? s.used(new Date(k.last_used_at).toLocaleDateString(locale)) : s.neverUsed}
                     </span>
                   </p>
                 </div>
@@ -168,7 +170,7 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
                   onClick={() => setPendingRevoke(k)}
                   className="inline-flex items-center gap-1 rounded p-1 text-xs text-ink-400 hover:bg-red-50 hover:text-red-600"
                 >
-                  <Trash2 className="h-3.5 w-3.5" /> Revoke
+                  <Trash2 className="h-3.5 w-3.5" /> {s.revoke}
                 </button>
               </li>
             ))}
@@ -183,7 +185,7 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
           onChange={(e) => setName(e.target.value)}
           maxLength={60}
           disabled={!isBusiness || creating || atKeyLimit}
-          placeholder="Key name (required, e.g. Production)"
+          placeholder={s.namePlaceholder}
           onKeyDown={(e) => {
             if (e.key === "Enter" && isBusiness && !creating && nameValid && !atKeyLimit) create();
           }}
@@ -191,21 +193,21 @@ export function ApiKeysCard({ plan, credits, locale = "en" }: { plan: string; cr
         />
         <Button size="sm" onClick={create} disabled={!isBusiness || creating || !nameValid || atKeyLimit}>
           <Plus className="h-3.5 w-3.5" />
-          {creating ? "Generating…" : "Generate API key"}
+          {creating ? s.generating : s.generate}
         </Button>
       </div>
       {isBusiness && atKeyLimit && (
-        <p className="mt-2 text-xs text-amber-700">You&apos;ve reached the maximum of {MAX_KEYS} active keys. Revoke one to create another.</p>
+        <p className="mt-2 text-xs text-amber-700">{s.atLimit(MAX_KEYS)}</p>
       )}
 
       <ConfirmDialog
         open={pendingRevoke !== null}
         busy={revoking}
         options={{
-          title: "Revoke this API key permanently?",
-          body: `"${pendingRevoke?.name || "API key"}" (${pendingRevoke?.key_prefix ?? ""}…) — this action is irreversible. Every application currently using this key will stop working immediately and start receiving 401 errors. The key cannot be reactivated; you'll have to create a new one and update your integrations.`,
-          confirmLabel: "Yes, revoke permanently",
-          cancelLabel: "Cancel",
+          title: s.confirmTitle,
+          body: s.confirmBody(pendingRevoke?.name || s.defaultKeyName, pendingRevoke?.key_prefix ?? ""),
+          confirmLabel: s.confirmYes,
+          cancelLabel: s.confirmCancel,
           danger: true,
         }}
         onConfirm={confirmRevoke}

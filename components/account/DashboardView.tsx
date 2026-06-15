@@ -129,7 +129,7 @@ export async function DashboardView({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-2">
           <Badge className="bg-brand-50 text-brand-700">{plan.toUpperCase()}</Badge>
           {plan === "free" && (
-            <Link href={localePath(locale, "pricing")}>
+            <Link href={localePath(locale, "pricing")} prefetch={false}>
               <Button size="sm">{s.upgrade}</Button>
             </Link>
           )}
@@ -181,7 +181,7 @@ export async function DashboardView({ locale }: { locale: Locale }) {
               {s.creditBalance} <span className="font-medium text-ink-900">{credits.toLocaleString(locale)}</span>
             </p>
             <div className="mt-3">
-              <Link href={localePath(locale, "billing")}><Button variant="outline" size="sm">{s.manageBilling}</Button></Link>
+              <Link href={localePath(locale, "billing")} prefetch={false}><Button variant="outline" size="sm">{s.manageBilling}</Button></Link>
             </div>
           </CardContent>
         </Card>

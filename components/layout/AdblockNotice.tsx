@@ -40,7 +40,7 @@ export function AdblockNotice() {
           <p className="font-medium text-ink-900">{t.title}</p>
           <p className="mt-1 text-ink-500">
             {t.body1}{" "}
-            <Link href={localePath(locale, "pricing")} className="text-brand-600 underline">
+            <Link href={localePath(locale, "pricing")} prefetch={false} className="text-brand-600 underline">
               {t.goPro}
             </Link>
             {t.body2}

@@ -9,7 +9,7 @@ langs["x-default"] = `${SITE_URL}/batch`;
 
 export const metadata: Metadata = {
   title: "Batch Converter — Process 50 Files at Once",
-  description: "Convert up to 50 images (WebP/JPG/PNG) or compress 50 PDFs in one go, then download a ZIP. 100% in-browser.",
+  description: "Convert up to 50 images (WebP/JPG/PNG), compress PDFs, batch-convert audio to MP3, or compress videos — all in one pass, then download a single ZIP. 100% in your browser.",
   alternates: { canonical: "/batch", languages: langs },
 };
 

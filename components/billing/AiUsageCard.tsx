@@ -70,7 +70,7 @@ export function AiUsageCard({ locale = "en" }: { locale?: Locale }) {
     : s.resets24h;
 
   return (
-    <Card className="mt-6">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-brand-500" /> {s.aiUsage}</CardTitle>
       </CardHeader>

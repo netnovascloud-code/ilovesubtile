@@ -93,78 +93,86 @@ export async function BillingView({ locale }: { locale: Locale }) {
         <Badge className="bg-brand-50 text-brand-700">{plan.toUpperCase()}</Badge>
       </div>
 
-      {/* ── Subscription ─────────────────────────────────────────── */}
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle>{s.subscription}</CardTitle>
-          <CardDescription>
-            {isSubscriber ? s.subDescSubscriber : isComped ? s.subDescComped : s.subDescFree}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <p className="text-2xl font-semibold capitalize text-ink-900">{planDef?.name ?? s.free}</p>
-            {isSubscriber && (
-              <span className="text-sm text-ink-500">
-                €{plan === "business" ? PLANS.business.priceMonthly : PLANS.pro.priceMonthly}{s.perMo}
-              </span>
-            )}
-          </div>
-          {statusLine && <p className="mt-1 text-sm text-ink-500">{statusLine}</p>}
-
-          {isSubscriber && (
-            <div className="mt-4">
-              <BillingPortalButton />
-              <p className="mt-2 text-xs text-ink-400">{s.portalNote}</p>
-            </div>
-          )}
-
-          {isComped && (
-            <div className="mt-4">
-              <div className="flex items-start gap-2 rounded-md bg-emerald-50/60 px-3 py-2.5 text-sm text-emerald-800">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
-                <div>
-                  <p className="font-medium">{s.compedTitle(planDef?.name ?? "")}</p>
-                  <p className="mt-0.5 text-xs text-emerald-700">{s.compedBody}</p>
-                </div>
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        {/* ── Left: subscription & plan ──────────────────────────── */}
+        <div className="space-y-6">
+          {/* Subscription */}
+          <Card>
+            <CardHeader>
+              <CardTitle>{s.subscription}</CardTitle>
+              <CardDescription>
+                {isSubscriber ? s.subDescSubscriber : isComped ? s.subDescComped : s.subDescFree}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="text-2xl font-semibold capitalize text-ink-900">{planDef?.name ?? s.free}</p>
+                {isSubscriber && (
+                  <span className="text-sm text-ink-500">
+                    €{plan === "business" ? PLANS.business.priceMonthly : PLANS.pro.priceMonthly}{s.perMo}
+                  </span>
+                )}
               </div>
-            </div>
+              {statusLine && <p className="mt-1 text-sm text-ink-500">{statusLine}</p>}
+
+              {isSubscriber && (
+                <div className="mt-4">
+                  <BillingPortalButton />
+                  <p className="mt-2 text-xs text-ink-400">{s.portalNote}</p>
+                </div>
+              )}
+
+              {isComped && (
+                <div className="mt-4">
+                  <div className="flex items-start gap-2 rounded-md bg-emerald-50/60 px-3 py-2.5 text-sm text-emerald-800">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
+                    <div>
+                      <p className="font-medium">{s.compedTitle(planDef?.name ?? "")}</p>
+                      <p className="mt-0.5 text-xs text-emerald-700">{s.compedBody}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {plan === "free" && (
+                <div className="mt-4">
+                  <Link href={localePath(locale, "pricing")} prefetch={false}><Button>{s.seePlans}</Button></Link>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Plan benefits (paid plans) */}
+          {planDef && (
+            <Card>
+              <CardHeader>
+                <CardTitle>{s.whatsIncluded(planDef.name)}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {getPlanFeatures(locale)[plan].map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-ink-700">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                {plan === "business" && (
+                  <p className="mt-3 text-xs text-ink-400">{s.businessCreditsNote(BUSINESS_MONTHLY_CREDITS.toLocaleString(locale))}</p>
+                )}
+              </CardContent>
+            </Card>
           )}
+        </div>
 
-          {plan === "free" && (
-            <div className="mt-4">
-              <Link href={localePath(locale, "pricing")} prefetch={false}><Button>{s.seePlans}</Button></Link>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        {/* ── Right: usage & history ─────────────────────────────── */}
+        <div className="space-y-6">
+          <AiUsageCard locale={locale} />
+          <CreditHistoryCard locale={locale} />
+        </div>
+      </div>
 
-      {/* ── Plan benefits (paid plans) ───────────────────────────── */}
-      {planDef && (
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle>{s.whatsIncluded(planDef.name)}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="grid gap-2 sm:grid-cols-2">
-              {getPlanFeatures(locale)[plan].map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm text-ink-700">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-            {plan === "business" && (
-              <p className="mt-3 text-xs text-ink-400">{s.businessCreditsNote(BUSINESS_MONTHLY_CREDITS.toLocaleString(locale))}</p>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
-      {/* ── AI usage (live meter) ────────────────────────────────── */}
-      <AiUsageCard locale={locale} />
-
-      {/* ── Credits (embedded purchase, no redirect) ─────────────── */}
+      {/* ── Credits (embedded purchase, full width) ──────────────── */}
       <div className="mt-6">
         <div className="mb-2 flex items-baseline justify-between">
           <h2 className="text-lg font-semibold text-ink-900">{s.apiCredits}</h2>
@@ -188,9 +196,6 @@ export async function BillingView({ locale }: { locale: Locale }) {
         )}
         <BuyCreditsCard locale={locale} />
       </div>
-
-      {/* ── Credit history (ledger) ──────────────────────────────── */}
-      <CreditHistoryCard locale={locale} />
 
       {/* ── Invoices ─────────────────────────────────────────────── */}
       <Card className="mt-6">

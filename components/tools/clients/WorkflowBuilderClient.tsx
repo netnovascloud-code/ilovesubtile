@@ -30,6 +30,22 @@ export function WorkflowBuilderClient() {
 
   useEffect(() => () => { cleanup.current.forEach((u) => URL.revokeObjectURL(u)); }, []);
 
+  // Assistant hand-off: when the AI assistant proposes an image pipeline it
+  // stashes the ordered step kinds here and routes the user to this page. We
+  // validate each against the known kinds (a stale/garbage value is ignored)
+  // and pre-fill the pipeline, then clear it so a refresh starts clean.
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("konver_wf_steps");
+      if (!raw) return;
+      sessionStorage.removeItem("konver_wf_steps");
+      const kinds = (JSON.parse(raw) as unknown[])
+        .filter((k): k is StepKind => typeof k === "string" && (ADDABLE as string[]).includes(k))
+        .slice(0, MAX_STEPS);
+      if (kinds.length) setSteps(kinds.map((k) => defaultStep(k)));
+    } catch { /* ignore a malformed hand-off */ }
+  }, []);
+
   function pick(f: File | null) {
     if (!f) return;
     setError(null); setResultUrl(null); setDoneIdx([]);

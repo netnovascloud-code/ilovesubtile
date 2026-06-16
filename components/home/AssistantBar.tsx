@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, Loader2, Wand2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Sparkles, ArrowRight, Loader2, Wand2, GitBranch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TOOLS, TOOLS_BY_SLUG } from "@/lib/tools-config";
 import { callTool } from "@/lib/tool-api";
@@ -25,6 +26,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "You've reached your AI limit. Upgrade your plan or try again later.",
     suggested: "Suggested steps",
     open: "Open",
+    buildWorkflow: "Build these as one workflow",
   },
   fr: {
     title: "Dites à l'assistant ce que vous voulez faire",
@@ -37,6 +39,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Vous avez atteint votre limite IA. Passez à l'offre supérieure ou réessayez plus tard.",
     suggested: "Étapes suggérées",
     open: "Ouvrir",
+    buildWorkflow: "En faire un seul workflow",
   },
   es: {
     title: "Dile al asistente lo que quieres hacer",
@@ -262,8 +265,23 @@ const CATALOGUE = TOOLS.filter((t) => !t.pending)
   .map((t) => `${t.slug} — ${t.name} — ${t.short}`)
   .join("\n");
 
+// Image tools that map to a Workflow-Builder step kind. When the assistant
+// suggests a chain of two or more of these, we offer to assemble them into a
+// single in-browser pipeline (no extra AI call — the builder runs locally).
+const SLUG_TO_KIND: Record<string, string> = {
+  "resize-image": "resize",
+  "rotate-image": "rotate",
+  "grayscale-image": "grayscale",
+  "watermark-image": "watermark",
+  "images-to-pdf": "to-pdf",
+  "png-to-jpg": "format", "jpg-to-png": "format", "png-to-webp": "format",
+  "jpg-to-webp": "format", "webp-to-jpg": "format", "webp-to-png": "format",
+  "avif-to-jpg": "format", "avif-to-png": "format", "compress-image": "format",
+};
+
 export function AssistantBar({ locale }: { locale: Locale }) {
   const s = T[locale] ?? T.en;
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -347,6 +365,24 @@ export function AssistantBar({ locale }: { locale: Locale }) {
                 );
               })}
             </ol>
+
+            {(() => {
+              const kinds = steps.map((st) => SLUG_TO_KIND[st.slug]).filter(Boolean);
+              if (kinds.length < 2) return null;
+              return (
+                <div className="mt-4 text-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      try { sessionStorage.setItem("konver_wf_steps", JSON.stringify(kinds.slice(0, 5))); } catch { /* ignore */ }
+                      router.push(localePath(locale, "workflow"));
+                    }}
+                  >
+                    <GitBranch className="h-4 w-4" /> {s.buildWorkflow ?? T.en.buildWorkflow}
+                  </Button>
+                </div>
+              );
+            })()}
           </div>
         )}
       </div>

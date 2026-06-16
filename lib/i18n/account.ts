@@ -21,6 +21,13 @@ export type BillingStrings = {
   paymentOverdue: string;
   renewsAuto: (d: string) => string;
   subActive: string;
+  managePortal: string;
+  changePaymentMethod: string;
+  opening: string;
+  noSubscriptionError: string;
+  signInFirstError: string;
+  portalError: string;
+  networkError: string;
   portalNote: string;
   compedTitle: (plan: string) => string;
   compedBody: string;
@@ -73,6 +80,13 @@ const en: BillingStrings = {
   paymentOverdue: "Payment overdue — update your card below to keep access.",
   renewsAuto: (d) => `Renews automatically on ${d}.`,
   subActive: "Subscription active.",
+  managePortal: "Manage billing",
+  changePaymentMethod: "Change payment method",
+  opening: "Opening…",
+  noSubscriptionError: "No active subscription.",
+  signInFirstError: "Sign in first.",
+  portalError: "Billing portal error.",
+  networkError: "Network error.",
   portalNote: "Opens your secure Lemon Squeezy portal: payment method, plan changes, invoices and cancellation.",
   compedTitle: (p) => `Your ${p} plan is active.`,
   compedBody: "It was granted directly on your account, so there's no payment method or invoice to manage here.",
@@ -122,6 +136,13 @@ const fr: BillingStrings = {
   paymentOverdue: "Paiement en retard — mettez à jour votre carte ci-dessous pour conserver l'accès.",
   renewsAuto: (d) => `Renouvellement automatique le ${d}.`,
   subActive: "Abonnement actif.",
+  managePortal: "Gérer la facturation",
+  changePaymentMethod: "Changer de moyen de paiement",
+  opening: "Ouverture…",
+  noSubscriptionError: "Aucun abonnement actif.",
+  signInFirstError: "Connectez-vous d'abord.",
+  portalError: "Erreur du portail de facturation.",
+  networkError: "Erreur réseau.",
   portalNote: "Ouvre votre portail Lemon Squeezy sécurisé : moyen de paiement, changement d'offre, factures et résiliation.",
   compedTitle: (p) => `Votre offre ${p} est active.`,
   compedBody: "Elle a été accordée directement sur votre compte : il n'y a donc ni moyen de paiement ni facture à gérer ici.",

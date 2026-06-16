@@ -4,7 +4,7 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BillingPortalButton } from "@/components/billing/BillingPortalButton";
+import { SubscriptionActions } from "@/components/billing/SubscriptionActions";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { AiUsageCard } from "@/components/billing/AiUsageCard";
 import { CreditHistoryCard } from "@/components/billing/CreditHistoryCard";
@@ -117,7 +117,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
 
               {isSubscriber && (
                 <div className="mt-4">
-                  <BillingPortalButton />
+                  <SubscriptionActions locale={locale} />
                   <p className="mt-2 text-xs text-ink-400">{s.portalNote}</p>
                 </div>
               )}

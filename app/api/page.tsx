@@ -269,6 +269,33 @@ export default function ApiDocsPage() {
           </section>
 
           <section>
+            <h2 className="text-xl font-semibold text-ink-900">What the API covers</h2>
+            <p className="mt-2 text-sm">
+              The API is <strong>server-to-server</strong>: you send a file (or text) plus your key, we process it on our
+              infrastructure and return the result. It exposes only the tools that genuinely need a server —
+              <strong> transcription</strong> (audio/video → text, Voxtral) and <strong>text &amp; AI</strong> (translate,
+              summarise, rephrase, humanise, convert code). OCR and server-side video/heavy-format conversions are rolling
+              out next.
+            </p>
+            <p className="mt-2 text-sm">
+              Our <Link href="/" className="text-brand-600 hover:underline">browser tools</Link> — image, PDF and audio
+              edits, background removal, format conversions — are <strong>not</strong> in the API, by design. They run
+              entirely in the visitor&rsquo;s browser, so there is nothing to call server-side: the file never leaves the
+              device and these tools stay free, unlimited and private. Run them client-side in your own product instead.
+            </p>
+            <p className="mt-2 text-sm text-ink-500">
+              The same per-plan limits apply to API calls as to the web app. Uploads are capped by plan
+              (Free 20&nbsp;MB · Pro 1&nbsp;GB · Business 5&nbsp;GB) and enforced server-side; long media is billed per
+              started minute, so video length is bounded by your credit balance rather than a hard cut-off. Every call is
+              metered against your key — <code className="rounded bg-ink-100 px-1">api_keys</code> →{" "}
+              <code className="rounded bg-ink-100 px-1">jobs</code> →{" "}
+              <code className="rounded bg-ink-100 px-1">credit_transactions</code> — and follows one lifecycle: create the
+              task → send the file → we process it → you fetch the result → the file is deleted. The Mistral key stays
+              secret on our servers and is never exposed.
+            </p>
+          </section>
+
+          <section>
             <h2 className="text-xl font-semibold text-ink-900">Endpoints</h2>
             <ul className="mt-4 space-y-6">
               {ENDPOINTS.map((e) => (

@@ -9,6 +9,7 @@ import { TOOLS, TOOLS_BY_SLUG } from "@/lib/tools-config";
 import { callTool } from "@/lib/tool-api";
 import { type Locale, localePath } from "@/lib/i18n/locales";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
+import { AiQuotaPill } from "@/components/billing/AiQuotaPill";
 
 type Step = { slug: string; why: string };
 
@@ -332,6 +333,7 @@ export function AssistantBar({ locale }: { locale: Locale }) {
           </div>
           <h2 className="text-2xl font-semibold tracking-tight text-ink-900">{s.title}</h2>
           <p className="mt-2 text-sm text-ink-500">{s.subtitle}</p>
+          <div className="mt-3 flex justify-center"><AiQuotaPill /></div>
         </div>
 
         <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-2 sm:flex-row">

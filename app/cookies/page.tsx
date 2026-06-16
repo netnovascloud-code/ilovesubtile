@@ -18,5 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <LegalRender doc={COOKIES_EN} />;
+  return <LegalRender doc={COOKIES_EN} slug="cookies" />;
 }

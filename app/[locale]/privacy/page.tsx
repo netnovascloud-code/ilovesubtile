@@ -41,7 +41,7 @@ export default function Page({ params }: { params: { locale: string } }) {
   // Once the locale has been translated, render the native version with no
   // banner. Until then, render EN with the pending notice. Either way, the
   // English version remains the legally-binding one (see Terms section 13).
-  if (translated) return <LegalRender doc={translated} />;
+  if (translated) return <LegalRender doc={translated} locale={locale} slug="privacy" />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -52,7 +52,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <LegalRender doc={PRIVACY_EN} />
+      <LegalRender doc={PRIVACY_EN} locale={locale} slug="privacy" />
     </>
   );
 }

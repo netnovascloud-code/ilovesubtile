@@ -30,5 +30,5 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
   const translated = LEGAL_NOTICE[locale];
-  return <LegalRender doc={translated ?? LEGAL_NOTICE_EN} />;
+  return <LegalRender doc={translated ?? LEGAL_NOTICE_EN} locale={locale} slug="legal-notice" />;
 }

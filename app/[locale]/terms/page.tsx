@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
   const translated = TERMS_TRANSLATIONS[locale];
-  if (translated) return <LegalRender doc={translated} />;
+  if (translated) return <LegalRender doc={translated} locale={locale} slug="terms" />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -49,7 +49,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <LegalRender doc={TERMS_EN} />
+      <LegalRender doc={TERMS_EN} locale={locale} slug="terms" />
     </>
   );
 }

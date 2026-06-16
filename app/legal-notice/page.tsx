@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <LegalRender doc={LEGAL_NOTICE_EN} />;
+  return <LegalRender doc={LEGAL_NOTICE_EN} slug="legal-notice" />;
 }

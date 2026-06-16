@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
   const translated = COOKIES[locale];
-  if (translated) return <LegalRender doc={translated} />;
+  if (translated) return <LegalRender doc={translated} locale={locale} slug="cookies" />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -49,7 +49,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <LegalRender doc={COOKIES_EN} />
+      <LegalRender doc={COOKIES_EN} locale={locale} slug="cookies" />
     </>
   );
 }

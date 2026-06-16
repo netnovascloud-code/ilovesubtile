@@ -9,9 +9,11 @@ function num(v: string): number {
   const n = Number(v);
   return Number.isFinite(n) ? n : NaN;
 }
-function show(n: number): string {
+function show(locale: string, n: number): string {
   if (!Number.isFinite(n)) return "—";
-  return (Math.round(n * 1e6) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 6 });
+  const v = Math.round(n * 1e6) / 1e6;
+  const opts = { maximumFractionDigits: 6 } as const;
+  try { return v.toLocaleString(locale, opts); } catch { return v.toLocaleString("en-US", opts); }
 }
 
 const T: Record<string, Record<string, string>> = {
@@ -26,6 +28,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "From",
     bChange: "To",
     result: "Result",
+    labelOf: "{x}% of {y}",
+    labelIsWhat: "{x} is this % of {y}",
+    labelChange: "Change from {x} to {y}",
     privacy: "Everything is computed live in your browser — nothing is sent anywhere.",
   },
   fr: {
@@ -39,6 +44,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "De",
     bChange: "À",
     result: "Résultat",
+    labelOf: "{x} % de {y}",
+    labelIsWhat: "{x} représente ce % de {y}",
+    labelChange: "Variation de {x} à {y}",
     privacy: "Tout est calculé en direct dans votre navigateur — rien n'est envoyé nulle part.",
   },
   es: {
@@ -52,6 +60,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Desde",
     bChange: "Hasta",
     result: "Resultado",
+    labelOf: "{x} % de {y}",
+    labelIsWhat: "{x} es este % de {y}",
+    labelChange: "Cambio de {x} a {y}",
     privacy: "Todo se calcula en tiempo real en su navegador — nada se envía a ningún lado.",
   },
   pt: {
@@ -65,6 +76,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "De",
     bChange: "Para",
     result: "Resultado",
+    labelOf: "{x} % de {y}",
+    labelIsWhat: "{x} é esta % de {y}",
+    labelChange: "Variação de {x} para {y}",
     privacy: "Tudo é calculado em tempo real no seu navegador — nada é enviado para lado nenhum.",
   },
   de: {
@@ -78,6 +92,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Von",
     bChange: "Zu",
     result: "Ergebnis",
+    labelOf: "{x}% von {y}",
+    labelIsWhat: "{x} ist dieser % von {y}",
+    labelChange: "Änderung von {x} zu {y}",
     privacy: "Alles wird live in Ihrem Browser berechnet — nichts wird gesendet.",
   },
   it: {
@@ -91,6 +108,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Da",
     bChange: "A",
     result: "Risultato",
+    labelOf: "{x}% di {y}",
+    labelIsWhat: "{x} è questa % di {y}",
+    labelChange: "Variazione da {x} a {y}",
     privacy: "Tutto viene calcolato in tempo reale nel tuo browser — nulla viene inviato da nessuna parte.",
   },
   nl: {
@@ -104,6 +124,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Van",
     bChange: "Naar",
     result: "Resultaat",
+    labelOf: "{x}% van {y}",
+    labelIsWhat: "{x} is dit % van {y}",
+    labelChange: "Verandering van {x} naar {y}",
     privacy: "Alles wordt live in uw browser berekend — er wordt niets verzonden.",
   },
   ja: {
@@ -117,6 +140,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "開始値",
     bChange: "終了値",
     result: "結果",
+    labelOf: "{y} の {x}%",
+    labelIsWhat: "{x} は {y} のこの %",
+    labelChange: "{x} から {y} への変化",
     privacy: "すべてブラウザ内でリアルタイム計算 — データはどこにも送信されません。",
   },
   zh: {
@@ -130,6 +156,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "从",
     bChange: "到",
     result: "结果",
+    labelOf: "{y} 的 {x}%",
+    labelIsWhat: "{x} 是 {y} 的这个 %",
+    labelChange: "从 {x} 到 {y} 的变化",
     privacy: "所有内容在您的浏览器中实时计算 — 不发送任何数据。",
   },
   ko: {
@@ -143,6 +172,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "시작",
     bChange: "끝",
     result: "결과",
+    labelOf: "{y}의 {x}%",
+    labelIsWhat: "{x}는 {y}의 이 %",
+    labelChange: "{x}에서 {y}(으)로의 변화",
     privacy: "모든 계산이 브라우저에서 실시간으로 이루어집니다 — 아무것도 전송되지 않습니다.",
   },
   ar: {
@@ -156,6 +188,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "من",
     bChange: "إلى",
     result: "النتيجة",
+    labelOf: "{x}٪ من {y}",
+    labelIsWhat: "{x} هي هذه النسبة % من {y}",
+    labelChange: "التغير من {x} إلى {y}",
     privacy: "يتم حساب كل شيء مباشرةً في متصفحك — لا يُرسل أي شيء إلى أي مكان.",
   },
   ru: {
@@ -169,6 +204,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Из",
     bChange: "В",
     result: "Результат",
+    labelOf: "{x}% от {y}",
+    labelIsWhat: "{x} — это столько % от {y}",
+    labelChange: "Изменение с {x} на {y}",
     privacy: "Всё вычисляется в реальном времени в вашем браузере — ничего никуда не отправляется.",
   },
   hi: {
@@ -182,6 +220,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "से",
     bChange: "तक",
     result: "परिणाम",
+    labelOf: "{y} का {x}%",
+    labelIsWhat: "{x}, {y} का यह % है",
+    labelChange: "{x} से {y} तक परिवर्तन",
     privacy: "सब कुछ आपके ब्राउज़र में लाइव गणना होती है — कुछ भी कहीं नहीं भेजा जाता।",
   },
   tr: {
@@ -195,6 +236,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Başlangıç",
     bChange: "Bitiş",
     result: "Sonuç",
+    labelOf: "{y} sayısının %{x}'i",
+    labelIsWhat: "{x}, {y}'nin bu yüzdesi",
+    labelChange: "{x} değerinden {y} değerine değişim",
     privacy: "Her şey tarayıcınızda canlı hesaplanır — hiçbir şey hiçbir yere gönderilmez.",
   },
   id: {
@@ -208,6 +252,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Dari",
     bChange: "Ke",
     result: "Hasil",
+    labelOf: "{x}% dari {y}",
+    labelIsWhat: "{x} adalah persentase ini dari {y}",
+    labelChange: "Perubahan dari {x} ke {y}",
     privacy: "Semua dihitung secara langsung di browser Anda — tidak ada yang dikirim ke mana pun.",
   },
   vi: {
@@ -221,6 +268,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Từ",
     bChange: "Đến",
     result: "Kết quả",
+    labelOf: "{x}% của {y}",
+    labelIsWhat: "{x} là phần trăm này của {y}",
+    labelChange: "Thay đổi từ {x} đến {y}",
     privacy: "Tất cả được tính toán trực tiếp trong trình duyệt của bạn — không có gì được gửi đi.",
   },
   sv: {
@@ -234,6 +284,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Från",
     bChange: "Till",
     result: "Resultat",
+    labelOf: "{x}% av {y}",
+    labelIsWhat: "{x} är denna % av {y}",
+    labelChange: "Förändring från {x} till {y}",
     privacy: "Allt beräknas live i din webbläsare — ingenting skickas någonstans.",
   },
   pl: {
@@ -247,6 +300,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Od",
     bChange: "Do",
     result: "Wynik",
+    labelOf: "{x}% z {y}",
+    labelIsWhat: "{x} to ten % z {y}",
+    labelChange: "Zmiana z {x} na {y}",
     privacy: "Wszystko jest obliczane na bieżąco w Twojej przeglądarce — nic nie jest wysyłane.",
   },
   uk: {
@@ -260,6 +316,9 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Від",
     bChange: "До",
     result: "Результат",
+    labelOf: "{x}% від {y}",
+    labelIsWhat: "{x} — це стільки % від {y}",
+    labelChange: "Зміна з {x} на {y}",
     privacy: "Усе обчислюється в режимі реального часу у вашому браузері — нічого нікуди не надсилається.",
   },
   cs: {
@@ -273,12 +332,16 @@ const T: Record<string, Record<string, string>> = {
     aChange: "Od",
     bChange: "Do",
     result: "Výsledek",
+    labelOf: "{x} % z {y}",
+    labelIsWhat: "{x} je toto % z {y}",
+    labelChange: "Změna z {x} na {y}",
     privacy: "Vše se počítá živě ve vašem prohlížeči — nic se nikam neposílá.",
   },
 };
 
 export function PercentageCalculatorClient() {
-  const s = T[useLocale()] ?? T.en;
+  const locale = useLocale();
+  const s = T[locale] ?? T.en;
 
   const [mode, setMode] = useState<Mode>("of");
   const [a, setA] = useState("15");
@@ -287,10 +350,11 @@ export function PercentageCalculatorClient() {
   const result = useMemo(() => {
     const x = num(a), y = num(b);
     if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
-    if (mode === "of") return { label: `${show(x)}% of ${show(y)}`, value: (x / 100) * y };
-    if (mode === "is_what") return { label: `${show(x)} is this % of ${show(y)}`, value: y === 0 ? NaN : (x / y) * 100, suffix: "%" };
-    return { label: `Change from ${show(x)} to ${show(y)}`, value: x === 0 ? NaN : ((y - x) / Math.abs(x)) * 100, suffix: "%" };
-  }, [mode, a, b]);
+    const fx = show(locale, x), fy = show(locale, y);
+    if (mode === "of") return { label: s.labelOf.replace("{x}", fx).replace("{y}", fy), value: (x / 100) * y };
+    if (mode === "is_what") return { label: s.labelIsWhat.replace("{x}", fx).replace("{y}", fy), value: y === 0 ? NaN : (x / y) * 100, suffix: "%" };
+    return { label: s.labelChange.replace("{x}", fx).replace("{y}", fy), value: x === 0 ? NaN : ((y - x) / Math.abs(x)) * 100, suffix: "%" };
+  }, [mode, a, b, s, locale]);
 
   const labels: Record<Mode, { tab: string; a: string; b: string }> = {
     of: { tab: s.tabOf, a: s.aOf, b: s.bOf },
@@ -325,7 +389,7 @@ export function PercentageCalculatorClient() {
       <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-5">
         <div className="text-xs uppercase tracking-wide text-brand-700">{result?.label ?? s.result}</div>
         <div className="mt-1 text-3xl font-semibold text-ink-900">
-          {result ? `${show(result.value)}${result.suffix ?? ""}` : "—"}
+          {result ? `${show(locale, result.value)}${result.suffix ?? ""}` : "—"}
         </div>
       </div>
 

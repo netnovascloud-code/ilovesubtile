@@ -101,6 +101,9 @@ Deno.serve(async (req) => {
       userId = data.user?.id ?? null;
     } catch { /* anon */ }
   }
+  // Restores the pre-charged quota slot if the model call fails (mirrors
+  // ai-process). Best-effort, fail-open.
+  let refundQuota: () => Promise<void> = async () => {};
   if (userId) {
     try {
       const { data: prof } = await svc.from("profiles")
@@ -121,6 +124,12 @@ Deno.serve(async (req) => {
           daily_usage: current + 1,
           usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
         }).eq("id", userId);
+        refundQuota = async () => {
+          try {
+            const { data: p } = await svc.from("profiles").select("daily_usage").eq("id", userId!).maybeSingle();
+            await svc.from("profiles").update({ daily_usage: Math.max(0, (p?.daily_usage ?? 1) - 1) }).eq("id", userId!);
+          } catch { /* best-effort */ }
+        };
       } else {
         const limit = MONTHLY_LIMIT[plan] ?? MONTHLY_LIMIT.pro;
         const month = utcMonth();
@@ -131,6 +140,12 @@ Deno.serve(async (req) => {
           return json({ error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() }, { status: 429 });
         }
         await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+        refundQuota = async () => {
+          try {
+            const { data: p } = await svc.from("profiles").select("monthly_ai_usage").eq("id", userId!).maybeSingle();
+            await svc.from("profiles").update({ monthly_ai_usage: Math.max(0, (p?.monthly_ai_usage ?? 1) - 1) }).eq("id", userId!);
+          } catch { /* best-effort */ }
+        };
       }
     } catch { /* fail-open */ }
   } else {
@@ -164,7 +179,7 @@ Deno.serve(async (req) => {
       temperature: wantsJson ? 0.1 : 0.3,
     }),
   });
-  if (!res.ok) return json({ error: "processing_failed", message: (await res.text()).slice(0, 600) }, { status: 502 });
+  if (!res.ok) { await refundQuota(); return json({ error: "processing_failed", message: (await res.text()).slice(0, 600) }, { status: 502 }); }
   const out = (await res.json()) as { choices: { message: { content: string } }[] };
   const content = out.choices?.[0]?.message?.content?.trim() ?? "";
 
@@ -173,7 +188,7 @@ Deno.serve(async (req) => {
 
   if (wantsJson) {
     try { return json({ data: JSON.parse(content) }); }
-    catch { return json({ error: "bad_model_output", raw: content.slice(0, 600) }, { status: 502 }); }
+    catch { await refundQuota(); return json({ error: "bad_model_output", raw: content.slice(0, 600) }, { status: 502 }); }
   }
   return json({ output: content });
 });

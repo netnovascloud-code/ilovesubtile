@@ -57,6 +57,13 @@ export type ChromeStrings = {
   };
   editor: { openAnother: string; export: string; delete: string; openFile: string; cues: string };
   srtToText: { merged: string; perCue: string };
+  discover: {
+    /** Template containing the placeholder "{category}", e.g. "More in {category}". */
+    moreIn: string;
+    alsoPopular: string;
+    /** Localized category display names, keyed by the category slug. */
+    categories: Record<string, string>;
+  };
   auth: {
     loginTitle: string;
     loginLead: string;
@@ -91,6 +98,7 @@ const en: ChromeStrings = {
   clean: { title: "What should we clean?", summary: "{a} cues in · {b} after cleanup.", cancel: "Cancel", download: "Download cleaned file", stripSdh: "Strip SDH tags like [music] (sigh)", removeDup: "Remove consecutive duplicate lines", shouting: "Convert ALL-CAPS to sentence case", collapseWs: "Collapse multiple spaces", trim: "Trim whitespace around each line" },
   editor: { openAnother: "Open another", export: "Export", delete: "Delete", openFile: "Open file", cues: "{n} cues" },
   srtToText: { merged: "Layout: merged paragraphs", perCue: "Layout: one line per cue" },
+  discover: { moreIn: "More in {category}", alsoPopular: "Also popular", categories: { documents: "Documents", audio: "Audio", video: "Video", images: "Images", subtitles: "Subtitles", developer: "Developer", "text-ai": "Text & AI", utilities: "Utilities", archives: "Archives", security: "Security" } },
   auth: { loginTitle: "Welcome back", loginLead: "Log in to your Konvertools account.", registerTitle: "Create your account", registerLead: "5 free runs per day. No credit card required.", email: "Email", password: "Password", loginCta: "Log in", registerCta: "Create account", loading: "Please wait…", orWithEmail: "or with email", google: "Continue with Google", checkInbox: "Check your inbox to confirm your email.", noAccount: "Don't have an account?", createOne: "Create one", hasAccount: "Already have an account?", logIn: "Log in" },
 };
 
@@ -108,6 +116,7 @@ const fr: ChromeStrings = {
   clean: { title: "Que faut-il nettoyer ?", summary: "{a} lignes en entrée · {b} après nettoyage.", cancel: "Annuler", download: "Télécharger le fichier nettoyé", stripSdh: "Supprimer les balises SDH comme [musique] (soupir)", removeDup: "Supprimer les lignes en doublon consécutives", shouting: "Convertir les MAJUSCULES en casse de phrase", collapseWs: "Réduire les espaces multiples", trim: "Couper les espaces autour de chaque ligne" },
   editor: { openAnother: "Ouvrir un autre", export: "Exporter", delete: "Supprimer", openFile: "Ouvrir un fichier", cues: "{n} lignes" },
   srtToText: { merged: "Mise en page : paragraphes fusionnés", perCue: "Mise en page : une ligne par cue" },
+  discover: { moreIn: "Plus dans {category}", alsoPopular: "Aussi populaires", categories: { documents: "Documents", audio: "Audio", video: "Vidéo", images: "Images", subtitles: "Sous-titres", developer: "Développeur", "text-ai": "Texte & IA", utilities: "Utilitaires", archives: "Archives", security: "Sécurité" } },
   auth: { loginTitle: "Bon retour", loginLead: "Connectez-vous à votre compte Konvertools.", registerTitle: "Créez votre compte", registerLead: "5 utilisations gratuites par jour. Sans carte bancaire.", email: "E-mail", password: "Mot de passe", loginCta: "Se connecter", registerCta: "Créer le compte", loading: "Veuillez patienter…", orWithEmail: "ou avec un e-mail", google: "Continuer avec Google", checkInbox: "Consultez votre boîte mail pour confirmer votre e-mail.", noAccount: "Pas encore de compte ?", createOne: "Créez-en un", hasAccount: "Déjà un compte ?", logIn: "Se connecter" },
 };
 
@@ -125,6 +134,7 @@ const es: ChromeStrings = {
   clean: { title: "¿Qué hay que limpiar?", summary: "{a} líneas de entrada · {b} tras la limpieza.", cancel: "Cancelar", download: "Descargar archivo limpio", stripSdh: "Quitar etiquetas SDH como [música] (suspiro)", removeDup: "Eliminar líneas duplicadas consecutivas", shouting: "Convertir MAYÚSCULAS a mayúsculas de oración", collapseWs: "Colapsar espacios múltiples", trim: "Recortar espacios alrededor de cada línea" },
   editor: { openAnother: "Abrir otro", export: "Exportar", delete: "Eliminar", openFile: "Abrir archivo", cues: "{n} líneas" },
   srtToText: { merged: "Diseño: párrafos fusionados", perCue: "Diseño: una línea por cue" },
+  discover: { moreIn: "Más en {category}", alsoPopular: "También populares", categories: { documents: "Documentos", audio: "Audio", video: "Vídeo", images: "Imágenes", subtitles: "Subtítulos", developer: "Desarrollo", "text-ai": "Texto e IA", utilities: "Utilidades", archives: "Archivos comprimidos", security: "Seguridad" } },
   auth: { loginTitle: "Bienvenido de nuevo", loginLead: "Inicia sesión en tu cuenta Konvertools.", registerTitle: "Crea tu cuenta", registerLead: "5 usos gratuitos al día. Sin tarjeta.", email: "Correo", password: "Contraseña", loginCta: "Iniciar sesión", registerCta: "Crear cuenta", loading: "Un momento…", orWithEmail: "o con correo", google: "Continuar con Google", checkInbox: "Revisa tu correo para confirmar.", noAccount: "¿No tienes cuenta?", createOne: "Crea una", hasAccount: "¿Ya tienes cuenta?", logIn: "Inicia sesión" },
 };
 
@@ -142,6 +152,7 @@ const pt: ChromeStrings = {
   clean: { title: "O que limpar?", summary: "{a} linhas de entrada · {b} após a limpeza.", cancel: "Cancelar", download: "Baixar arquivo limpo", stripSdh: "Remover tags SDH como [música] (suspiro)", removeDup: "Remover linhas duplicadas consecutivas", shouting: "Converter MAIÚSCULAS para caixa de frase", collapseWs: "Colapsar espaços múltiplos", trim: "Aparar espaços ao redor de cada linha" },
   editor: { openAnother: "Abrir outro", export: "Exportar", delete: "Excluir", openFile: "Abrir arquivo", cues: "{n} linhas" },
   srtToText: { merged: "Layout: parágrafos mesclados", perCue: "Layout: uma linha por cue" },
+  discover: { moreIn: "Mais em {category}", alsoPopular: "Também populares", categories: { documents: "Documentos", audio: "Áudio", video: "Vídeo", images: "Imagens", subtitles: "Legendas", developer: "Desenvolvimento", "text-ai": "Texto e IA", utilities: "Utilitários", archives: "Arquivos compactados", security: "Segurança" } },
   auth: { loginTitle: "Bem-vindo de volta", loginLead: "Entre na sua conta Konvertools.", registerTitle: "Crie sua conta", registerLead: "5 usos grátis por dia. Sem cartão.", email: "E-mail", password: "Senha", loginCta: "Entrar", registerCta: "Criar conta", loading: "Aguarde…", orWithEmail: "ou com e-mail", google: "Continuar com Google", checkInbox: "Confira seu e-mail para confirmar.", noAccount: "Ainda não tem conta?", createOne: "Crie uma", hasAccount: "Já tem conta?", logIn: "Entrar" },
 };
 
@@ -159,6 +170,7 @@ const de: ChromeStrings = {
   clean: { title: "Was soll bereinigt werden?", summary: "{a} Cues rein · {b} nach Bereinigung.", cancel: "Abbrechen", download: "Bereinigte Datei herunterladen", stripSdh: "SDH-Tags wie [Musik] (seufzt) entfernen", removeDup: "Aufeinanderfolgende doppelte Zeilen entfernen", shouting: "GROSSBUCHSTABEN in Satzform umwandeln", collapseWs: "Mehrfach-Leerzeichen reduzieren", trim: "Leerzeichen um jede Zeile trimmen" },
   editor: { openAnother: "Andere öffnen", export: "Exportieren", delete: "Löschen", openFile: "Datei öffnen", cues: "{n} Cues" },
   srtToText: { merged: "Layout: zusammengeführte Absätze", perCue: "Layout: eine Zeile pro Cue" },
+  discover: { moreIn: "Mehr aus {category}", alsoPopular: "Ebenfalls beliebt", categories: { documents: "Dokumente", audio: "Audio", video: "Video", images: "Bilder", subtitles: "Untertitel", developer: "Entwickler", "text-ai": "Text & KI", utilities: "Werkzeuge", archives: "Archive", security: "Sicherheit" } },
   auth: { loginTitle: "Willkommen zurück", loginLead: "Melde dich bei deinem Konvertools-Konto an.", registerTitle: "Konto erstellen", registerLead: "5 kostenlose Durchläufe pro Tag. Keine Karte erforderlich.", email: "E-Mail", password: "Passwort", loginCta: "Anmelden", registerCta: "Konto erstellen", loading: "Bitte warten…", orWithEmail: "oder mit E-Mail", google: "Mit Google fortfahren", checkInbox: "Prüfe dein Postfach zur Bestätigung.", noAccount: "Noch kein Konto?", createOne: "Eines erstellen", hasAccount: "Schon ein Konto?", logIn: "Anmelden" },
 };
 
@@ -176,6 +188,7 @@ const it: ChromeStrings = {
   clean: { title: "Cosa pulire?", summary: "{a} righe in ingresso · {b} dopo la pulizia.", cancel: "Annulla", download: "Scarica il file pulito", stripSdh: "Rimuovere tag SDH come [musica] (sospiro)", removeDup: "Rimuovere righe duplicate consecutive", shouting: "Convertire MAIUSCOLO in maiuscolo di frase", collapseWs: "Ridurre spazi multipli", trim: "Tagliare gli spazi attorno a ogni riga" },
   editor: { openAnother: "Apri un altro", export: "Esporta", delete: "Elimina", openFile: "Apri file", cues: "{n} righe" },
   srtToText: { merged: "Layout: paragrafi uniti", perCue: "Layout: una riga per cue" },
+  discover: { moreIn: "Altro in {category}", alsoPopular: "Anche popolari", categories: { documents: "Documenti", audio: "Audio", video: "Video", images: "Immagini", subtitles: "Sottotitoli", developer: "Sviluppatori", "text-ai": "Testo e IA", utilities: "Utilità", archives: "Archivi", security: "Sicurezza" } },
   auth: { loginTitle: "Bentornato", loginLead: "Accedi al tuo account Konvertools.", registerTitle: "Crea il tuo account", registerLead: "5 utilizzi gratis al giorno. Senza carta.", email: "E-mail", password: "Password", loginCta: "Accedi", registerCta: "Crea account", loading: "Attendere…", orWithEmail: "o con e-mail", google: "Continua con Google", checkInbox: "Controlla la posta per confermare.", noAccount: "Non hai un account?", createOne: "Creane uno", hasAccount: "Hai già un account?", logIn: "Accedi" },
 };
 
@@ -193,6 +206,7 @@ const nl: ChromeStrings = {
   clean: { title: "Wat moet er opgeschoond?", summary: "{a} cues in · {b} na opschonen.", cancel: "Annuleren", download: "Opgeschoond bestand downloaden", stripSdh: "SDH-tags verwijderen zoals [muziek] (zucht)", removeDup: "Opeenvolgende dubbele regels verwijderen", shouting: "HOOFDLETTERS naar zinshoofdletters", collapseWs: "Meerdere spaties samenvoegen", trim: "Witruimte rond elke regel trimmen" },
   editor: { openAnother: "Andere openen", export: "Exporteren", delete: "Verwijderen", openFile: "Bestand openen", cues: "{n} cues" },
   srtToText: { merged: "Layout: samengevoegde alinea's", perCue: "Layout: één regel per cue" },
+  discover: { moreIn: "Meer in {category}", alsoPopular: "Ook populair", categories: { documents: "Documenten", audio: "Audio", video: "Video", images: "Afbeeldingen", subtitles: "Ondertitels", developer: "Ontwikkelaar", "text-ai": "Tekst & AI", utilities: "Hulpmiddelen", archives: "Archieven", security: "Beveiliging" } },
   auth: { loginTitle: "Welkom terug", loginLead: "Log in op je Konvertools-account.", registerTitle: "Maak je account", registerLead: "5 gratis runs per dag. Geen creditcard.", email: "E-mail", password: "Wachtwoord", loginCta: "Inloggen", registerCta: "Account maken", loading: "Een ogenblik…", orWithEmail: "of met e-mail", google: "Doorgaan met Google", checkInbox: "Controleer je inbox om te bevestigen.", noAccount: "Nog geen account?", createOne: "Maak er een", hasAccount: "Heb je al een account?", logIn: "Inloggen" },
 };
 
@@ -210,6 +224,7 @@ const ja: ChromeStrings = {
   clean: { title: "何をクリーンアップしますか？", summary: "入力 {a} キュー · クリーンアップ後 {b}。", cancel: "キャンセル", download: "クリーンアップ済みをダウンロード", stripSdh: "[音楽] (ため息) のような SDH タグを削除", removeDup: "連続する重複行を削除", shouting: "全大文字を文頭大文字に変換", collapseWs: "連続する空白をまとめる", trim: "各行の前後の空白を削除" },
   editor: { openAnother: "別を開く", export: "エクスポート", delete: "削除", openFile: "ファイルを開く", cues: "{n} キュー" },
   srtToText: { merged: "レイアウト：段落を結合", perCue: "レイアウト：キューごとに 1 行" },
+  discover: { moreIn: "{category}の他のツール", alsoPopular: "人気のツール", categories: { documents: "ドキュメント", audio: "オーディオ", video: "動画", images: "画像", subtitles: "字幕", developer: "開発者向け", "text-ai": "テキストと AI", utilities: "ユーティリティ", archives: "アーカイブ", security: "セキュリティ" } },
   auth: { loginTitle: "お帰りなさい", loginLead: "Konvertools アカウントにログイン。", registerTitle: "アカウント作成", registerLead: "1 日 5 回まで無料。クレジットカード不要。", email: "メール", password: "パスワード", loginCta: "ログイン", registerCta: "アカウント作成", loading: "お待ちください…", orWithEmail: "またはメールで", google: "Google で続行", checkInbox: "確認メールを受信箱でご確認ください。", noAccount: "アカウントをお持ちでない方は？", createOne: "作成する", hasAccount: "既にアカウントをお持ちですか？", logIn: "ログイン" },
 };
 
@@ -227,6 +242,7 @@ const zh: ChromeStrings = {
   clean: { title: "需要清理什么?", summary: "输入 {a} 行 · 清理后 {b}。", cancel: "取消", download: "下载已清理文件", stripSdh: "去除 [音乐] (叹气) 等 SDH 标签", removeDup: "去除相邻重复行", shouting: "将全大写转为句首大写", collapseWs: "合并多余空格", trim: "修剪每行首尾空格" },
   editor: { openAnother: "打开另一个", export: "导出", delete: "删除", openFile: "打开文件", cues: "{n} 行" },
   srtToText: { merged: "布局:合并段落", perCue: "布局:每行一句" },
+  discover: { moreIn: "更多{category}工具", alsoPopular: "热门工具", categories: { documents: "文档", audio: "音频", video: "视频", images: "图像", subtitles: "字幕", developer: "开发者", "text-ai": "文本与 AI", utilities: "实用工具", archives: "压缩包", security: "安全" } },
   auth: { loginTitle: "欢迎回来", loginLead: "登录您的 Konvertools 帐户。", registerTitle: "创建帐户", registerLead: "每日 5 次免费使用。无需信用卡。", email: "邮箱", password: "密码", loginCta: "登录", registerCta: "创建帐户", loading: "请稍候…", orWithEmail: "或使用邮箱", google: "使用 Google 继续", checkInbox: "请查收邮件确认。", noAccount: "还没有帐户?", createOne: "创建一个", hasAccount: "已有帐户?", logIn: "登录" },
 };
 
@@ -244,6 +260,7 @@ const ko: ChromeStrings = {
   clean: { title: "무엇을 정리할까요?", summary: "입력 {a}개 큐 · 정리 후 {b}.", cancel: "취소", download: "정리된 파일 다운로드", stripSdh: "[음악] (한숨) 같은 SDH 태그 제거", removeDup: "연속 중복 줄 제거", shouting: "전체 대문자를 문장형 대소문자로", collapseWs: "여러 공백을 하나로", trim: "각 줄의 공백 자르기" },
   editor: { openAnother: "다른 거 열기", export: "내보내기", delete: "삭제", openFile: "파일 열기", cues: "{n}개 큐" },
   srtToText: { merged: "레이아웃: 단락 병합", perCue: "레이아웃: 큐당 한 줄" },
+  discover: { moreIn: "{category} 더 보기", alsoPopular: "인기 도구", categories: { documents: "문서", audio: "오디오", video: "동영상", images: "이미지", subtitles: "자막", developer: "개발자", "text-ai": "텍스트 & AI", utilities: "유틸리티", archives: "압축 파일", security: "보안" } },
   auth: { loginTitle: "다시 오신 것을 환영합니다", loginLead: "Konvertools 계정에 로그인.", registerTitle: "계정 만들기", registerLead: "하루 5회 무료. 카드 불필요.", email: "이메일", password: "비밀번호", loginCta: "로그인", registerCta: "계정 만들기", loading: "잠시만요…", orWithEmail: "또는 이메일로", google: "Google 로 계속", checkInbox: "확인 이메일을 확인해 주세요.", noAccount: "계정이 없으신가요?", createOne: "만들기", hasAccount: "이미 계정이 있나요?", logIn: "로그인" },
 };
 
@@ -261,6 +278,7 @@ const ar: ChromeStrings = {
   clean: { title: "ماذا ننظّف؟", summary: "{a} سطور دخلت · {b} بعد التنظيف.", cancel: "إلغاء", download: "تنزيل الملف النظيف", stripSdh: "إزالة وسوم SDH مثل [موسيقى] (تنهد)", removeDup: "إزالة الأسطر المكرّرة المتتالية", shouting: "تحويل الأحرف الكبيرة إلى صياغة جملة", collapseWs: "دمج المسافات المتعددة", trim: "إزالة المسافات حول كل سطر" },
   editor: { openAnother: "افتح آخر", export: "تصدير", delete: "حذف", openFile: "افتح ملفًا", cues: "{n} سطر" },
   srtToText: { merged: "التخطيط: فقرات مدمجة", perCue: "التخطيط: سطر لكل cue" },
+  discover: { moreIn: "المزيد في {category}", alsoPopular: "شائع أيضًا", categories: { documents: "المستندات", audio: "الصوت", video: "الفيديو", images: "الصور", subtitles: "الترجمات", developer: "المطوّرون", "text-ai": "النص والذكاء الاصطناعي", utilities: "الأدوات", archives: "الأرشيفات", security: "الأمان" } },
   auth: { loginTitle: "مرحبًا بعودتك", loginLead: "سجّل دخول إلى حساب Konvertools.", registerTitle: "أنشئ حسابك", registerLead: "5 استخدامات مجانية يوميًا. لا حاجة لبطاقة.", email: "البريد", password: "كلمة المرور", loginCta: "تسجيل الدخول", registerCta: "إنشاء حساب", loading: "يرجى الانتظار…", orWithEmail: "أو بالبريد", google: "متابعة بـ Google", checkInbox: "تفقّد بريدك للتأكيد.", noAccount: "لا تملك حسابًا؟", createOne: "أنشئ واحدًا", hasAccount: "تملك حسابًا بالفعل؟", logIn: "تسجيل الدخول" },
 };
 
@@ -278,6 +296,7 @@ const ru: ChromeStrings = {
   clean: { title: "Что почистить?", summary: "Вход: {a} реплик · после очистки: {b}.", cancel: "Отмена", download: "Скачать очищенный файл", stripSdh: "Убрать SDH-теги вроде [музыка] (вздох)", removeDup: "Убрать подряд идущие дубликаты", shouting: "ПРОПИСНЫЕ → регистр предложения", collapseWs: "Сжать множественные пробелы", trim: "Обрезать пробелы вокруг строк" },
   editor: { openAnother: "Открыть другой", export: "Экспорт", delete: "Удалить", openFile: "Открыть файл", cues: "{n} реплик" },
   srtToText: { merged: "Раскладка: объединённые абзацы", perCue: "Раскладка: одна строка на реплику" },
+  discover: { moreIn: "Ещё в разделе «{category}»", alsoPopular: "Также популярно", categories: { documents: "Документы", audio: "Аудио", video: "Видео", images: "Изображения", subtitles: "Субтитры", developer: "Разработка", "text-ai": "Текст и ИИ", utilities: "Утилиты", archives: "Архивы", security: "Безопасность" } },
   auth: { loginTitle: "С возвращением", loginLead: "Войдите в аккаунт Konvertools.", registerTitle: "Создать аккаунт", registerLead: "5 бесплатных запусков в день. Карта не нужна.", email: "Email", password: "Пароль", loginCta: "Войти", registerCta: "Создать аккаунт", loading: "Подождите…", orWithEmail: "или по email", google: "Продолжить с Google", checkInbox: "Проверьте почту для подтверждения.", noAccount: "Нет аккаунта?", createOne: "Создайте", hasAccount: "Уже есть аккаунт?", logIn: "Войти" },
 };
 
@@ -295,6 +314,7 @@ const hi: ChromeStrings = {
   clean: { title: "क्या साफ़ करना है?", summary: "{a} क्यू इनपुट · सफ़ाई के बाद {b}।", cancel: "रद्द करें", download: "साफ़ की गई फ़ाइल डाउनलोड करें", stripSdh: "[संगीत] (आह) जैसे SDH टैग हटाएँ", removeDup: "लगातार डुप्लिकेट लाइनें हटाएँ", shouting: "ALL-CAPS को वाक्य केस में बदलें", collapseWs: "कई स्पेस को संक्षिप्त करें", trim: "हर लाइन के आसपास स्पेस ट्रिम करें" },
   editor: { openAnother: "दूसरा खोलें", export: "एक्सपोर्ट", delete: "हटाएँ", openFile: "फ़ाइल खोलें", cues: "{n} क्यू" },
   srtToText: { merged: "लेआउट: मर्ज किए गए पैराग्राफ़", perCue: "लेआउट: हर क्यू के लिए एक लाइन" },
+  discover: { moreIn: "{category} में और", alsoPopular: "ये भी लोकप्रिय", categories: { documents: "दस्तावेज़", audio: "ऑडियो", video: "वीडियो", images: "इमेज", subtitles: "सबटाइटल", developer: "डेवलपर", "text-ai": "टेक्स्ट और AI", utilities: "उपयोगिताएँ", archives: "आर्काइव", security: "सुरक्षा" } },
   auth: { loginTitle: "वापसी पर स्वागत है", loginLead: "अपने Konvertools खाते में लॉग इन करें।", registerTitle: "अपना खाता बनाएँ", registerLead: "रोज़ 5 मुफ़्त रन। क्रेडिट कार्ड ज़रूरी नहीं।", email: "ईमेल", password: "पासवर्ड", loginCta: "लॉग इन", registerCta: "खाता बनाएँ", loading: "कृपया प्रतीक्षा करें…", orWithEmail: "या ईमेल से", google: "Google से जारी रखें", checkInbox: "पुष्टि के लिए अपना इनबॉक्स देखें।", noAccount: "खाता नहीं है?", createOne: "एक बनाएँ", hasAccount: "पहले से खाता है?", logIn: "लॉग इन" },
 };
 
@@ -312,6 +332,7 @@ const tr: ChromeStrings = {
   clean: { title: "Neyi temizleyelim?", summary: "{a} satır girdi · temizlikten sonra {b}.", cancel: "İptal", download: "Temizlenmiş dosyayı indir", stripSdh: "[müzik] (iç çeker) gibi SDH etiketlerini kaldır", removeDup: "Ardışık yinelenen satırları kaldır", shouting: "BÜYÜK HARFLERİ cümle düzenine çevir", collapseWs: "Birden çok boşluğu birleştir", trim: "Her satırın etrafındaki boşlukları kırp" },
   editor: { openAnother: "Başka aç", export: "Dışa aktar", delete: "Sil", openFile: "Dosya aç", cues: "{n} satır" },
   srtToText: { merged: "Düzen: birleştirilmiş paragraflar", perCue: "Düzen: her altyazı için bir satır" },
+  discover: { moreIn: "{category} kategorisinde daha fazlası", alsoPopular: "Ayrıca popüler", categories: { documents: "Belgeler", audio: "Ses", video: "Video", images: "Görüntüler", subtitles: "Altyazılar", developer: "Geliştirici", "text-ai": "Metin ve Yapay Zeka", utilities: "Araçlar", archives: "Arşivler", security: "Güvenlik" } },
   auth: { loginTitle: "Tekrar hoş geldiniz", loginLead: "Konvertools hesabınıza giriş yapın.", registerTitle: "Hesabınızı oluşturun", registerLead: "Günde 5 ücretsiz kullanım. Kredi kartı gerekmez.", email: "E-posta", password: "Şifre", loginCta: "Giriş yap", registerCta: "Hesap oluştur", loading: "Lütfen bekleyin…", orWithEmail: "veya e-posta ile", google: "Google ile devam et", checkInbox: "E-postanızı onaylamak için gelen kutunuzu kontrol edin.", noAccount: "Hesabınız yok mu?", createOne: "Bir tane oluşturun", hasAccount: "Zaten hesabınız var mı?", logIn: "Giriş yap" },
 };
 
@@ -329,6 +350,7 @@ const id: ChromeStrings = {
   clean: { title: "Apa yang harus dibersihkan?", summary: "{a} baris masuk · {b} setelah pembersihan.", cancel: "Batal", download: "Unduh file bersih", stripSdh: "Hapus tag SDH seperti [musik] (mendesah)", removeDup: "Hapus baris duplikat berturut-turut", shouting: "Ubah HURUF KAPITAL ke huruf kalimat", collapseWs: "Gabungkan beberapa spasi", trim: "Pangkas spasi di sekitar setiap baris" },
   editor: { openAnother: "Buka lainnya", export: "Ekspor", delete: "Hapus", openFile: "Buka file", cues: "{n} baris" },
   srtToText: { merged: "Tata letak: paragraf digabung", perCue: "Tata letak: satu baris per teks" },
+  discover: { moreIn: "Lainnya di {category}", alsoPopular: "Juga populer", categories: { documents: "Dokumen", audio: "Audio", video: "Video", images: "Gambar", subtitles: "Subtitle", developer: "Pengembang", "text-ai": "Teks & AI", utilities: "Utilitas", archives: "Arsip", security: "Keamanan" } },
   auth: { loginTitle: "Selamat datang kembali", loginLead: "Masuk ke akun Konvertools Anda.", registerTitle: "Buat akun Anda", registerLead: "5 penggunaan gratis per hari. Tanpa kartu kredit.", email: "Email", password: "Kata sandi", loginCta: "Masuk", registerCta: "Buat akun", loading: "Mohon tunggu…", orWithEmail: "atau dengan email", google: "Lanjutkan dengan Google", checkInbox: "Periksa kotak masuk untuk konfirmasi email.", noAccount: "Belum punya akun?", createOne: "Buat satu", hasAccount: "Sudah punya akun?", logIn: "Masuk" },
 };
 
@@ -346,6 +368,7 @@ const vi: ChromeStrings = {
   clean: { title: "Cần dọn dẹp gì?", summary: "{a} dòng vào · {b} sau khi dọn dẹp.", cancel: "Hủy", download: "Tải tệp đã dọn dẹp", stripSdh: "Xóa thẻ SDH như [nhạc] (thở dài)", removeDup: "Xóa các dòng trùng lặp liên tiếp", shouting: "Chuyển CHỮ HOA thành kiểu câu", collapseWs: "Gộp nhiều khoảng trắng", trim: "Cắt khoảng trắng quanh mỗi dòng" },
   editor: { openAnother: "Mở tệp khác", export: "Xuất", delete: "Xóa", openFile: "Mở tệp", cues: "{n} dòng" },
   srtToText: { merged: "Bố cục: đoạn văn được gộp", perCue: "Bố cục: một dòng cho mỗi phụ đề" },
+  discover: { moreIn: "Thêm trong {category}", alsoPopular: "Cũng phổ biến", categories: { documents: "Tài liệu", audio: "Âm thanh", video: "Video", images: "Hình ảnh", subtitles: "Phụ đề", developer: "Nhà phát triển", "text-ai": "Văn bản & AI", utilities: "Tiện ích", archives: "Lưu trữ", security: "Bảo mật" } },
   auth: { loginTitle: "Chào mừng trở lại", loginLead: "Đăng nhập vào tài khoản Konvertools của bạn.", registerTitle: "Tạo tài khoản của bạn", registerLead: "5 lượt miễn phí mỗi ngày. Không cần thẻ tín dụng.", email: "Email", password: "Mật khẩu", loginCta: "Đăng nhập", registerCta: "Tạo tài khoản", loading: "Vui lòng đợi…", orWithEmail: "hoặc bằng email", google: "Tiếp tục với Google", checkInbox: "Kiểm tra hộp thư để xác nhận email.", noAccount: "Chưa có tài khoản?", createOne: "Tạo một tài khoản", hasAccount: "Đã có tài khoản?", logIn: "Đăng nhập" },
 };
 
@@ -363,6 +386,7 @@ const sv: ChromeStrings = {
   clean: { title: "Vad ska vi rensa?", summary: "{a} rader in · {b} efter rensning.", cancel: "Avbryt", download: "Ladda ner rensad fil", stripSdh: "Ta bort SDH-taggar som [musik] (suck)", removeDup: "Ta bort upprepade dubbletter", shouting: "Konvertera VERSALER till meningsform", collapseWs: "Slå ihop flera mellanslag", trim: "Trimma blanksteg runt varje rad" },
   editor: { openAnother: "Öppna en annan", export: "Exportera", delete: "Ta bort", openFile: "Öppna fil", cues: "{n} rader" },
   srtToText: { merged: "Layout: sammanslagna stycken", perCue: "Layout: en rad per textrad" },
+  discover: { moreIn: "Mer i {category}", alsoPopular: "Även populärt", categories: { documents: "Dokument", audio: "Ljud", video: "Video", images: "Bilder", subtitles: "Undertexter", developer: "Utvecklare", "text-ai": "Text & AI", utilities: "Verktyg", archives: "Arkiv", security: "Säkerhet" } },
   auth: { loginTitle: "Välkommen tillbaka", loginLead: "Logga in på ditt Konvertools-konto.", registerTitle: "Skapa ditt konto", registerLead: "5 gratis körningar per dag. Inget kreditkort krävs.", email: "E-post", password: "Lösenord", loginCta: "Logga in", registerCta: "Skapa konto", loading: "Vänta…", orWithEmail: "eller med e-post", google: "Fortsätt med Google", checkInbox: "Kolla din inkorg för att bekräfta din e-post.", noAccount: "Har du inget konto?", createOne: "Skapa ett", hasAccount: "Har du redan ett konto?", logIn: "Logga in" },
 };
 
@@ -380,6 +404,7 @@ const pl: ChromeStrings = {
   clean: { title: "Co wyczyścić?", summary: "{a} wierszy na wejściu · {b} po czyszczeniu.", cancel: "Anuluj", download: "Pobierz wyczyszczony plik", stripSdh: "Usuń tagi SDH, np. [muzyka] (westchnienie)", removeDup: "Usuń kolejne zduplikowane wiersze", shouting: "Zamień WIELKIE LITERY na zdaniowe", collapseWs: "Scal wielokrotne spacje", trim: "Przytnij spacje wokół każdego wiersza" },
   editor: { openAnother: "Otwórz inny", export: "Eksportuj", delete: "Usuń", openFile: "Otwórz plik", cues: "{n} wierszy" },
   srtToText: { merged: "Układ: scalone akapity", perCue: "Układ: jeden wiersz na napis" },
+  discover: { moreIn: "Więcej w kategorii {category}", alsoPopular: "Również popularne", categories: { documents: "Dokumenty", audio: "Audio", video: "Wideo", images: "Obrazy", subtitles: "Napisy", developer: "Dla programistów", "text-ai": "Tekst i AI", utilities: "Narzędzia", archives: "Archiwa", security: "Bezpieczeństwo" } },
   auth: { loginTitle: "Witaj ponownie", loginLead: "Zaloguj się na konto Konvertools.", registerTitle: "Utwórz konto", registerLead: "5 darmowych użyć dziennie. Bez karty.", email: "E-mail", password: "Hasło", loginCta: "Zaloguj się", registerCta: "Utwórz konto", loading: "Proszę czekać…", orWithEmail: "lub przez e-mail", google: "Kontynuuj z Google", checkInbox: "Sprawdź skrzynkę, aby potwierdzić e-mail.", noAccount: "Nie masz konta?", createOne: "Utwórz je", hasAccount: "Masz już konto?", logIn: "Zaloguj się" },
 };
 
@@ -397,6 +422,7 @@ const uk: ChromeStrings = {
   clean: { title: "Що очистити?", summary: "{a} рядків на вході · {b} після очищення.", cancel: "Скасувати", download: "Завантажити очищений файл", stripSdh: "Видалити теги SDH, як-от [музика] (зітхання)", removeDup: "Видалити послідовні дублікати рядків", shouting: "Перетворити ВЕЛИКІ ЛІТЕРИ на регістр речення", collapseWs: "Об'єднати кілька пробілів", trim: "Обрізати пробіли навколо кожного рядка" },
   editor: { openAnother: "Відкрити інший", export: "Експорт", delete: "Видалити", openFile: "Відкрити файл", cues: "{n} рядків" },
   srtToText: { merged: "Макет: об'єднані абзаци", perCue: "Макет: один рядок на субтитр" },
+  discover: { moreIn: "Більше в розділі «{category}»", alsoPopular: "Також популярне", categories: { documents: "Документи", audio: "Аудіо", video: "Відео", images: "Зображення", subtitles: "Субтитри", developer: "Розробка", "text-ai": "Текст і ШІ", utilities: "Утиліти", archives: "Архіви", security: "Безпека" } },
   auth: { loginTitle: "З поверненням", loginLead: "Увійдіть до облікового запису Konvertools.", registerTitle: "Створіть обліковий запис", registerLead: "5 безкоштовних запусків на день. Без картки.", email: "Електронна пошта", password: "Пароль", loginCta: "Увійти", registerCta: "Створити обліковий запис", loading: "Зачекайте…", orWithEmail: "або через email", google: "Продовжити з Google", checkInbox: "Перевірте пошту для підтвердження.", noAccount: "Немає облікового запису?", createOne: "Створіть його", hasAccount: "Уже маєте обліковий запис?", logIn: "Увійти" },
 };
 
@@ -414,6 +440,7 @@ const cs: ChromeStrings = {
   clean: { title: "Co vyčistit?", summary: "{a} řádků na vstupu · {b} po vyčištění.", cancel: "Zrušit", download: "Stáhnout vyčištěný soubor", stripSdh: "Odstranit SDH značky jako [hudba] (povzdech)", removeDup: "Odstranit po sobě jdoucí duplicitní řádky", shouting: "Převést VELKÁ PÍSMENA na větný formát", collapseWs: "Sloučit více mezer", trim: "Oříznout mezery kolem každého řádku" },
   editor: { openAnother: "Otevřít jiný", export: "Exportovat", delete: "Smazat", openFile: "Otevřít soubor", cues: "{n} řádků" },
   srtToText: { merged: "Rozvržení: sloučené odstavce", perCue: "Rozvržení: jeden řádek na titulek" },
+  discover: { moreIn: "Více v kategorii {category}", alsoPopular: "Také oblíbené", categories: { documents: "Dokumenty", audio: "Zvuk", video: "Video", images: "Obrázky", subtitles: "Titulky", developer: "Pro vývojáře", "text-ai": "Text a AI", utilities: "Nástroje", archives: "Archivy", security: "Zabezpečení" } },
   auth: { loginTitle: "Vítejte zpět", loginLead: "Přihlaste se ke svému účtu Konvertools.", registerTitle: "Vytvořte si účet", registerLead: "5 bezplatných použití denně. Bez karty.", email: "E-mail", password: "Heslo", loginCta: "Přihlásit se", registerCta: "Vytvořit účet", loading: "Čekejte prosím…", orWithEmail: "nebo e-mailem", google: "Pokračovat s Google", checkInbox: "Zkontrolujte schránku pro potvrzení e-mailu.", noAccount: "Nemáte účet?", createOne: "Vytvořte si ho", hasAccount: "Už máte účet?", logIn: "Přihlásit se" },
 };
 

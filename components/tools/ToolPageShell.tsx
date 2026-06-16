@@ -169,7 +169,7 @@ export function ToolPageShell({
             {moreInCategory.length > 0 && (
               <div>
                 <h2 className="text-lg font-semibold text-ink-900">
-                  More in {tool.category === "text-ai" ? "Text & AI" : tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}
+                  {chrome.discover.moreIn.replace("{category}", chrome.discover.categories[tool.category] ?? tool.category)}
                 </h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {moreInCategory.map((rt) => {
@@ -188,7 +188,7 @@ export function ToolPageShell({
             )}
             {alsoPopular.length > 0 && (
               <div className={moreInCategory.length > 0 ? "mt-8" : ""}>
-                <h2 className="text-lg font-semibold text-ink-900">Also popular</h2>
+                <h2 className="text-lg font-semibold text-ink-900">{chrome.discover.alsoPopular}</h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-3">
                   {alsoPopular.map((rt) => {
                     const i18n = locale === "en" ? null : resolveToolI18n(rt.slug, locale);

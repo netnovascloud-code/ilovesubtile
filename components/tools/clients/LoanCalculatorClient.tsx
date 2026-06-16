@@ -3,9 +3,10 @@
 import { useMemo, useState } from "react";
 import { useLocale } from "@/hooks/useLocale";
 
-function money(n: number): string {
+function money(locale: string, n: number): string {
   if (!Number.isFinite(n)) return "—";
-  return n.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  const opts = { maximumFractionDigits: 2, minimumFractionDigits: 2 } as const;
+  try { return n.toLocaleString(locale, opts); } catch { return n.toLocaleString("en-US", opts); }
 }
 
 const T: Record<string, Record<string, string>> = {
@@ -192,7 +193,8 @@ const T: Record<string, Record<string, string>> = {
 };
 
 export function LoanCalculatorClient() {
-  const s = T[useLocale()] ?? T.en;
+  const locale = useLocale();
+  const s = T[locale] ?? T.en;
 
   const [amount, setAmount] = useState("20000");
   const [rate, setRate] = useState("5");
@@ -232,15 +234,15 @@ export function LoanCalculatorClient() {
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-4">
           <div className="text-xs uppercase tracking-wide text-brand-700">{s.monthlyPayment}</div>
-          <div className="mt-1 text-2xl font-semibold text-ink-900">{result ? money(result.monthly) : "—"}</div>
+          <div className="mt-1 text-2xl font-semibold text-ink-900">{result ? money(locale, result.monthly) : "—"}</div>
         </div>
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="text-xs uppercase tracking-wide text-ink-400">{s.totalInterest}</div>
-          <div className="mt-1 text-2xl font-semibold text-amber-700">{result ? money(result.interest) : "—"}</div>
+          <div className="mt-1 text-2xl font-semibold text-amber-700">{result ? money(locale, result.interest) : "—"}</div>
         </div>
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="text-xs uppercase tracking-wide text-ink-400">{s.totalRepaid}</div>
-          <div className="mt-1 text-2xl font-semibold text-ink-900">{result ? money(result.total) : "—"}</div>
+          <div className="mt-1 text-2xl font-semibold text-ink-900">{result ? money(locale, result.total) : "—"}</div>
         </div>
       </div>
 

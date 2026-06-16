@@ -236,7 +236,11 @@ const T: Record<string, Record<string, string>> = {
 };
 
 export function UnixTimestampClient() {
-  const s = T[useLocale()] ?? T.en;
+  const locale = useLocale();
+  const s = T[locale] ?? T.en;
+  // BCP-47 tag for date formatting. Keep en → en-GB (the day-month order the
+  // page shipped with); every other supported locale code is a valid Intl tag.
+  const dateLocale = locale === "en" ? "en-GB" : locale;
 
   // SSR can't pick a stable "now", so we start at 0 and let useEffect seed
   // the real values after mount. Without this the rendered seconds-since-epoch
@@ -322,7 +326,7 @@ export function UnixTimestampClient() {
         {date ? (
           <ul className="mt-4 space-y-2 text-sm">
             {ZONES.map((tz) => {
-              const value = date.toLocaleString("en-GB", { timeZone: tz, dateStyle: "full", timeStyle: "medium" });
+              const value = date.toLocaleString(dateLocale, { timeZone: tz, dateStyle: "full", timeStyle: "medium" });
               return (
                 <li key={tz} className="flex items-center gap-3 rounded border border-ink-100 px-3 py-2">
                   <span className="w-44 shrink-0 font-mono text-xs uppercase tracking-wide text-ink-400">{tz}</span>

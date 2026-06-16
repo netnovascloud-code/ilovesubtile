@@ -31,6 +31,7 @@ const FN_MAP: Record<string, string> = {
   "keyword-extractor": "ai-process",
   "detect-language": "ai-process",
   "smart-drop": "ai-process",
+  "smart-assistant": "ai-assistant",
   "cover-letter": "ai-process",
   "contract-analyzer": "ai-process",
   // Vision tools — all handled by the ai-vision function via `task` (sends

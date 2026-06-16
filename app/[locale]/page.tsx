@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
+import { AssistantBar } from "@/components/home/AssistantBar";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
@@ -91,6 +92,8 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
           empty: hx.empty,
         }}
       />
+
+      <AssistantBar locale={locale} />
 
       <section className="border-t border-ink-100 bg-surface">
         <div className="container py-20">

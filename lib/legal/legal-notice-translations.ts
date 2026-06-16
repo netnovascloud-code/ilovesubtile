@@ -2,23 +2,23 @@ import type { LegalDoc } from "@/lib/legal/types";
 import type { Locale } from "@/lib/seo";
 
 // Hand-authored Legal Notice translations. English (lib/legal/legal-notice-en.ts)
-// is the canonical source; locales not present here fall back to English.
-// Company-identity values remain PLACEHOLDERS until the publisher provides them.
+// is the canonical source; locales not present here fall back to English (which
+// already carries the real publisher data). The values are common across
+// languages — only the labels are translated.
 
 const LEGAL_NOTICE_FR: LegalDoc = {
   h1: "Mentions légales",
-  lastUpdated: "2026-06-15",
+  lastUpdated: "2026-06-16",
   lastUpdatedLabel: "Dernière mise à jour : %DATE%",
   sections: [
     {
       id: "publisher",
       title: "1. Éditeur",
       blocks: [
-        { kind: "p", text: "Ce site est édité par **[RAISON SOCIALE — à compléter]**." },
+        { kind: "p", text: "Ce site est édité par **Mayeul Flory**, entrepreneur individuel (EI) exerçant sous le nom commercial **FUSION-IA**." },
         { kind: "ul", items: [
-          "Forme juridique : **[ex. SAS / SARL / micro-entreprise — à compléter]**" + " (capital social : **[montant, si société]**)",
-          "Siège social : **[adresse postale complète — à compléter]**",
-          "E-mail : [support@konvertools.com](mailto:support@konvertools.com) · Téléphone : **[numéro — à compléter]**",
+          "Siège : Charbonnières-les-Bains (69260), France.",
+          "E-mail : [contact@konvertools.com](mailto:contact@konvertools.com)",
         ] },
       ],
     },
@@ -27,8 +27,9 @@ const LEGAL_NOTICE_FR: LegalDoc = {
       title: "2. Immatriculation et TVA",
       blocks: [
         { kind: "ul", items: [
-          "Immatriculation : **[SIRET / SIREN / RCS + ville — à compléter]** (ou « entrepreneur individuel »)",
-          "N° de TVA intracommunautaire : **[numéro, le cas échéant — à compléter]**",
+          "SIREN : 924 763 717 — SIRET : 924 763 717 00015",
+          "Immatriculé au Registre National des Entreprises (RNE) ; non inscrit au Registre du Commerce et des Sociétés (RCS).",
+          "N° de TVA intracommunautaire : FR80924763717",
         ] },
       ],
     },
@@ -36,17 +37,17 @@ const LEGAL_NOTICE_FR: LegalDoc = {
       id: "director",
       title: "3. Directeur de la publication",
       blocks: [
-        { kind: "p", text: "Directeur de la publication : **[nom complet — à compléter]**." },
+        { kind: "p", text: "Directeur de la publication : **Mayeul Flory**." },
       ],
     },
     {
       id: "hosting",
       title: "4. Hébergement",
       blocks: [
-        { kind: "p", text: "L'application est hébergée par :" },
+        { kind: "p", text: "Le Service s'appuie sur les prestataires suivants :" },
         { kind: "ul", items: [
-          "**Vercel Inc.** — 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis — [vercel.com](https://vercel.com) (hébergement de l'application et CDN).",
-          "**Supabase, Inc.** — [supabase.com](https://supabase.com) (base de données, authentification et stockage). *Vérifiez l'adresse officielle du prestataire avant publication.*",
+          "Hébergement du site : **OVH SAS** — 2 rue Kellermann, 59100 Roubaix, France — [ovh.com](https://www.ovh.com).",
+          "Base de données, authentification et stockage : **Supabase** — données hébergées en Europe (eu-west-1) — [supabase.com](https://supabase.com).",
         ] },
       ],
     },
@@ -61,7 +62,7 @@ const LEGAL_NOTICE_FR: LegalDoc = {
       id: "contact",
       title: "6. Contact",
       blocks: [
-        { kind: "p", text: "Pour toute question concernant ces mentions ou le Service, contactez [support@konvertools.com](mailto:support@konvertools.com)." },
+        { kind: "p", text: "Pour toute question concernant ces mentions ou le Service, contactez [contact@konvertools.com](mailto:contact@konvertools.com)." },
       ],
     },
   ],

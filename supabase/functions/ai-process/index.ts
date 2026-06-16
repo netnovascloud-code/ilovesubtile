@@ -205,6 +205,11 @@ Deno.serve(async (req) => {
     } catch { /* anon */ }
   }
 
+  // If we pre-charge a quota slot below, this restores it when the model call
+  // fails — a failed run must never count against the user's daily/monthly cap.
+  // Best-effort and fail-open, mirroring the increment itself.
+  let refundQuota: () => Promise<void> = async () => {};
+
   if (userId) {
     try {
       const { data: prof } = await svc.from("profiles")
@@ -230,6 +235,12 @@ Deno.serve(async (req) => {
           daily_usage: current + 1,
           usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
         }).eq("id", userId);
+        refundQuota = async () => {
+          try {
+            const { data: p } = await svc.from("profiles").select("daily_usage").eq("id", userId!).maybeSingle();
+            await svc.from("profiles").update({ daily_usage: Math.max(0, (p?.daily_usage ?? 1) - 1) }).eq("id", userId!);
+          } catch { /* best-effort */ }
+        };
       } else {
         // Pro / Business: monthly counter keyed by UTC YYYY-MM.
         const limit = MONTHLY_LIMIT[plan] ?? MONTHLY_LIMIT.pro;
@@ -251,6 +262,12 @@ Deno.serve(async (req) => {
           monthly_ai_usage: used + 1,
           monthly_ai_month: month,
         }).eq("id", userId);
+        refundQuota = async () => {
+          try {
+            const { data: p } = await svc.from("profiles").select("monthly_ai_usage").eq("id", userId!).maybeSingle();
+            await svc.from("profiles").update({ monthly_ai_usage: Math.max(0, (p?.monthly_ai_usage ?? 1) - 1) }).eq("id", userId!);
+          } catch { /* best-effort */ }
+        };
       }
     } catch { /* fail-open: never block on a quota bookkeeping error */ }
   } else {
@@ -281,9 +298,18 @@ Deno.serve(async (req) => {
     }),
   });
 
-  if (!res.ok) return json({ error: "processing_failed", message: await res.text() }, { status: 502 });
-  const data = (await res.json()) as { choices: { message: { content: string } }[] };
-  let output = data.choices?.[0]?.message?.content?.trim() ?? "";
+  if (!res.ok) {
+    await refundQuota();
+    return json({ error: "processing_failed", message: await res.text() }, { status: 502 });
+  }
+  let output = "";
+  try {
+    const data = (await res.json()) as { choices: { message: { content: string } }[] };
+    output = data.choices?.[0]?.message?.content?.trim() ?? "";
+  } catch {
+    await refundQuota();
+    return json({ error: "processing_failed", message: "Malformed model response." }, { status: 502 });
+  }
   // Part 4 — clean markdown out of prose answers (skip JSON tasks and hashtags,
   // whose '#' must survive).
   if (!wantsJson && task !== "hashtags") output = stripMarkdown(output);

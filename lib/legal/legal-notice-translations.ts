@@ -29,7 +29,7 @@ const LEGAL_NOTICE_FR: LegalDoc = {
         { kind: "ul", items: [
           "SIREN : 924 763 717 — SIRET : 924 763 717 00015",
           "Immatriculé au Registre National des Entreprises (RNE) ; non inscrit au Registre du Commerce et des Sociétés (RCS).",
-          "N° de TVA intracommunautaire : FR80924763717",
+          "TVA non applicable, art. 293 B du CGI.",
         ] },
       ],
     },

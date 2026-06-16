@@ -27,7 +27,7 @@ export const LEGAL_NOTICE_EN: LegalDoc = {
         { kind: "ul", items: [
           "SIREN: 924 763 717 — SIRET: 924 763 717 00015",
           "Registered with the National Business Register (RNE); not registered with the Trade and Companies Register (RCS).",
-          "Intra-EU VAT number: FR80924763717",
+          "VAT: not applicable — art. 293 B of the French General Tax Code (franchise en base de TVA).",
         ] },
       ],
     },

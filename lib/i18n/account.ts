@@ -199,6 +199,7 @@ export type DashboardStrings = {
   creditsOverTime: string;
   noData: string;
   totalConversions: string;
+  kpiCredits: string;
 };
 
 const dashEn: DashboardStrings = {
@@ -235,6 +236,7 @@ const dashEn: DashboardStrings = {
   creditsOverTime: "Credit balance over time",
   noData: "No data yet — run a tool to see your stats here.",
   totalConversions: "Total conversions",
+  kpiCredits: "Credits",
 };
 
 const dashFr: DashboardStrings = {
@@ -271,6 +273,7 @@ const dashFr: DashboardStrings = {
   creditsOverTime: "Solde de crédits dans le temps",
   noData: "Aucune donnée pour l'instant — lancez un outil pour voir vos stats ici.",
   totalConversions: "Conversions totales",
+  kpiCredits: "Crédits",
 };
 
 const DASH_TABLE: Partial<Record<Locale, DashboardStrings>> = { en: dashEn, fr: dashFr };

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { DashboardCharts } from "@/components/account/DashboardCharts";
+import { DashboardKpis } from "@/components/account/DashboardKpis";
 import { type PlanKey } from "@/lib/quotas";
 import { planLimit, type Plan } from "@/lib/ai-quotas";
 import { getDashboard } from "@/lib/i18n/account";
@@ -103,9 +104,6 @@ export async function DashboardView({ locale }: { locale: Locale }) {
     const thisMonth = new Date().toISOString().slice(0, 7);
     displayedUsage = monthlyAiMonth === thisMonth ? monthlyAiUsage : 0;
   }
-  const periodLabel = kind === "daily" ? s.periodDaily : s.periodMonthly;
-  const atLimit = displayedUsage >= limit;
-
   const renewLabel = renewsAt
     ? new Date(renewsAt).toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" })
     : null;
@@ -129,6 +127,9 @@ export async function DashboardView({ locale }: { locale: Locale }) {
         </div>
         <div className="flex items-center gap-2">
           <Badge className="bg-brand-50 text-brand-700">{plan.toUpperCase()}</Badge>
+          <Link href={localePath(locale, "billing")} prefetch={false}>
+            <Button variant="outline" size="sm">{s.manageBilling}</Button>
+          </Link>
           {plan === "free" && (
             <Link href={localePath(locale, "pricing")} prefetch={false}>
               <Button size="sm">{s.upgrade}</Button>
@@ -137,55 +138,17 @@ export async function DashboardView({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>{s.aiUsage}</CardTitle>
-            <CardDescription>{periodLabel}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-semibold text-ink-900">
-              {displayedUsage.toLocaleString(locale)} / {limit.toLocaleString(locale)}
-            </div>
-            <p className="mt-1 text-xs text-ink-400">{s.usedLeft(Math.max(0, limit - displayedUsage).toLocaleString(locale))}</p>
-            {atLimit && (
-              <p className="mt-2 text-xs text-amber-700">
-                {kind === "daily" ? s.dailyLimitReached : s.monthlyLimitReached}
-              </p>
-            )}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{s.recentJobsCard}</CardTitle>
-            <CardDescription>{s.upTo20}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-semibold text-ink-900">
-              {jobs.length}{jobs.length === 20 ? "+" : ""}
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{s.plan}</CardTitle>
-            <CardDescription>{s.manageSubscription}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold capitalize text-ink-900">{plan}</p>
-            {planSubtitle ? (
-              <p className="mt-1 text-xs text-ink-500">{planSubtitle}</p>
-            ) : plan === "free" ? (
-              <p className="mt-1 text-xs text-ink-400">{s.noActiveSub}</p>
-            ) : null}
-            <p className="mt-2 text-xs text-ink-500">
-              {s.creditBalance} <span className="font-medium text-ink-900">{credits.toLocaleString(locale)}</span>
-            </p>
-            <div className="mt-3">
-              <Link href={localePath(locale, "billing")} prefetch={false}><Button variant="outline" size="sm">{s.manageBilling}</Button></Link>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="mt-8">
+        <DashboardKpis
+          locale={locale}
+          credits={credits}
+          aiUsed={displayedUsage}
+          aiLimit={limit}
+          aiKind={kind}
+          recentJobs={jobs.length}
+          plan={plan}
+          planSubtitle={planSubtitle}
+        />
       </div>
 
       <DashboardCharts locale={locale} />

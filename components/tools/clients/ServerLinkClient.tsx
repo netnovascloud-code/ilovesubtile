@@ -950,7 +950,12 @@ export function ServerLinkClient({ kind }: { kind: Kind }) {
         if (days.trim()) payload.expires_in_days = Number(days);
         if (maxClicks.trim()) payload.max_clicks = Number(maxClicks);
       }
-      const res = await callTool("create-link", payload);
+      // callTool expects a TOOL SLUG (which it maps to the create-link function
+      // via FN_MAP and echoes as ?tool=… for logging) — not the function name.
+      // Passing "create-link" here threw "No backend function mapped" before any
+      // request was sent, surfacing as the generic network error.
+      const slug = kind === "deep" ? "deep-link" : kind === "magic" ? "magic-link" : "url-shortener";
+      const res = await callTool(slug, payload);
       const data = await res.json().catch(() => ({}));
       if (res.status === 401) {
         setError(s.error_sign_in);

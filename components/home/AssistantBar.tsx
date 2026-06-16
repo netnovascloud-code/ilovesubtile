@@ -52,6 +52,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Has alcanzado tu límite de IA. Mejora tu plan o inténtalo más tarde.",
     suggested: "Pasos sugeridos",
     open: "Abrir",
+    buildWorkflow: "Crear un solo flujo de trabajo",
   },
   pt: {
     title: "Diga ao assistente o que você quer fazer",
@@ -64,6 +65,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Você atingiu o seu limite de IA. Faça upgrade do seu plano ou tente novamente mais tarde.",
     suggested: "Passos sugeridos",
     open: "Abrir",
+    buildWorkflow: "Criar um único fluxo de trabalho",
   },
   de: {
     title: "Sag dem Assistenten, was du tun möchtest",
@@ -76,6 +78,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Du hast dein KI-Limit erreicht. Upgrade deinen Tarif oder versuche es später erneut.",
     suggested: "Vorgeschlagene Schritte",
     open: "Öffnen",
+    buildWorkflow: "Daraus einen Workflow machen",
   },
   it: {
     title: "Di' all'assistente cosa vuoi fare",
@@ -88,6 +91,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Hai raggiunto il tuo limite IA. Passa a un piano superiore o riprova più tardi.",
     suggested: "Passaggi suggeriti",
     open: "Apri",
+    buildWorkflow: "Crea un unico flusso di lavoro",
   },
   nl: {
     title: "Vertel de assistent wat je wilt doen",
@@ -100,6 +104,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Je hebt je AI-limiet bereikt. Upgrade je abonnement of probeer het later opnieuw.",
     suggested: "Voorgestelde stappen",
     open: "Openen",
+    buildWorkflow: "Maak er één workflow van",
   },
   ja: {
     title: "やりたいことをアシスタントに伝えてください",
@@ -112,6 +117,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "AIの利用上限に達しました。プランをアップグレードするか、後ほど再度お試しください。",
     suggested: "おすすめの手順",
     open: "開く",
+    buildWorkflow: "ひとつのワークフローにまとめる",
   },
   zh: {
     title: "告诉助手你想做什么",
@@ -124,6 +130,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "你已达到 AI 使用上限。请升级套餐或稍后再试。",
     suggested: "建议步骤",
     open: "打开",
+    buildWorkflow: "合并为一个工作流",
   },
   ko: {
     title: "무엇을 하고 싶은지 어시스턴트에게 알려주세요",
@@ -136,6 +143,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "AI 사용 한도에 도달했습니다. 요금제를 업그레이드하거나 나중에 다시 시도해 주세요.",
     suggested: "추천 단계",
     open: "열기",
+    buildWorkflow: "하나의 워크플로로 묶기",
   },
   ar: {
     title: "أخبر المساعد بما تريد فعله",
@@ -148,6 +156,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "لقد وصلت إلى حد استخدام الذكاء الاصطناعي. قم بترقية خطتك أو حاول لاحقًا.",
     suggested: "الخطوات المقترحة",
     open: "فتح",
+    buildWorkflow: "اجعلها سير عمل واحدًا",
   },
   ru: {
     title: "Скажите ассистенту, что вы хотите сделать",
@@ -160,6 +169,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Вы достигли лимита ИИ. Повысьте тариф или попробуйте позже.",
     suggested: "Предлагаемые шаги",
     open: "Открыть",
+    buildWorkflow: "Объединить в один процесс",
   },
   hi: {
     title: "असिस्टेंट को बताएं कि आप क्या करना चाहते हैं",
@@ -172,6 +182,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "आप अपनी AI सीमा तक पहुँच गए हैं। अपना प्लान अपग्रेड करें या बाद में फिर कोशिश करें।",
     suggested: "सुझाए गए चरण",
     open: "खोलें",
+    buildWorkflow: "इन्हें एक वर्कफ़्लो बनाएं",
   },
   tr: {
     title: "Asistana ne yapmak istediğini söyle",
@@ -184,6 +195,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Yapay zekâ limitine ulaştın. Planını yükselt veya daha sonra tekrar dene.",
     suggested: "Önerilen adımlar",
     open: "Aç",
+    buildWorkflow: "Bunları tek bir iş akışı yap",
   },
   id: {
     title: "Beri tahu asisten apa yang ingin Anda lakukan",
@@ -196,6 +208,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Anda telah mencapai batas AI. Tingkatkan paket Anda atau coba lagi nanti.",
     suggested: "Langkah yang disarankan",
     open: "Buka",
+    buildWorkflow: "Jadikan satu alur kerja",
   },
   vi: {
     title: "Cho trợ lý biết bạn muốn làm gì",
@@ -208,6 +221,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Bạn đã đạt giới hạn AI. Hãy nâng cấp gói hoặc thử lại sau.",
     suggested: "Các bước gợi ý",
     open: "Mở",
+    buildWorkflow: "Gộp thành một quy trình",
   },
   sv: {
     title: "Berätta för assistenten vad du vill göra",
@@ -220,6 +234,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Du har nått din AI-gräns. Uppgradera din plan eller försök igen senare.",
     suggested: "Föreslagna steg",
     open: "Öppna",
+    buildWorkflow: "Gör dem till ett arbetsflöde",
   },
   pl: {
     title: "Powiedz asystentowi, co chcesz zrobić",
@@ -232,6 +247,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Osiągnięto limit AI. Ulepsz swój plan lub spróbuj ponownie później.",
     suggested: "Sugerowane kroki",
     open: "Otwórz",
+    buildWorkflow: "Połącz w jeden przepływ pracy",
   },
   uk: {
     title: "Скажіть асистенту, що ви хочете зробити",
@@ -244,6 +260,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Ви досягли ліміту ШІ. Оновіть тарифний план або спробуйте пізніше.",
     suggested: "Запропоновані кроки",
     open: "Відкрити",
+    buildWorkflow: "Об'єднати в один процес",
   },
   cs: {
     title: "Řekněte asistentovi, co chcete udělat",
@@ -256,6 +273,7 @@ const T: Record<string, Record<string, string>> = {
     limit: "Dosáhli jste limitu AI. Vylepšete svůj plán nebo to zkuste později.",
     suggested: "Navržené kroky",
     open: "Otevřít",
+    buildWorkflow: "Spojit do jednoho pracovního postupu",
   },
 };
 

@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const l of LOCALES) alts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/cookies`;
   alts["x-default"] = `${SITE_URL}/cookies`;
   return {
-    title: "Cookie Policy",
+    title: COOKIES[locale]?.h1 ?? "Cookie Policy",
     description: "The cookies Konvertools uses and how to control them.",
     alternates: { canonical: `${HREFLANG_PREFIX[locale]}/cookies`, languages: alts },
   };

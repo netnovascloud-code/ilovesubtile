@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const l of LOCALES) alts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/privacy`;
   alts["x-default"] = `${SITE_URL}/privacy`;
   return {
-    title: "Privacy Policy",
+    title: PRIVACY_TRANSLATIONS[locale]?.h1 ?? "Privacy Policy",
     description: "How Konvertools handles your data — GDPR-compliant, files never stored.",
     alternates: { canonical: `${HREFLANG_PREFIX[locale]}/privacy`, languages: alts },
   };

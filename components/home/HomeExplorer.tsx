@@ -93,15 +93,15 @@ export function HomeExplorer({
     return (
       <Link
         href={`${prefix}/${t.slug}`}
-        className="group flex min-h-[170px] flex-col rounded-xl border border-ink-100 bg-white p-5 text-left shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-ink-200 hover:shadow-cardHover"
+        className="group relative flex min-h-[170px] flex-col rounded-xl border border-ink-100 bg-white p-5 text-left shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-ink-200 hover:shadow-cardHover"
       >
-        <div className="relative w-fit">
+        {t.ai && (
+          <span className="absolute right-3 top-3 rounded-md px-[6px] py-[2px] text-[10px] font-bold uppercase tracking-[0.08em] text-white shadow-sm" style={{ backgroundColor: "#2563EB" }}>
+            {strings.ai}
+          </span>
+        )}
+        <div className="w-fit">
           <ToolGlyph category={t.category} iconName={t.iconName} px={52} />
-          {t.ai && (
-            <span className="absolute -right-4 -top-1.5 rounded-md px-[5px] py-[2px] text-[10px] font-bold uppercase tracking-[0.08em] text-white shadow-sm" style={{ backgroundColor: "#2563EB" }}>
-              {strings.ai}
-            </span>
-          )}
         </div>
         <h3 className="mt-4 font-semibold text-ink-900">{t.name}</h3>
         <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-500">{t.short}</p>

@@ -83,7 +83,7 @@ export function DashboardCharts({ locale }: { locale: Locale }) {
         const topTools = [...toolCount.entries()].map(([tool, count]) => ({ tool, count })).sort((a, b) => b.count - a.count).slice(0, 6);
 
         setStats({ total: jobs.length, perDay: days, done, errors: errs, topTools, credits: tx.map((t) => t.balance_after).slice(-24) });
-      } catch { if (!cancelled) setStats(null); }
+      } catch { if (!cancelled) setStats({ total: 0, perDay: [], done: 0, errors: 0, topTools: [], credits: [] }); }
     })();
     return () => { cancelled = true; };
   }, [locale]);

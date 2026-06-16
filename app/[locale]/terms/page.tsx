@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const l of LOCALES) alts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/terms`;
   alts["x-default"] = `${SITE_URL}/terms`;
   return {
-    title: "Terms of Service",
+    title: TERMS_TRANSLATIONS[locale]?.h1 ?? "Terms of Service",
     description: "Legal terms governing use of Konvertools — service description, liability, billing and French jurisdiction.",
     alternates: { canonical: `${HREFLANG_PREFIX[locale]}/terms`, languages: alts },
   };

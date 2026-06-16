@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { DEFAULT_LOCALE, type Locale, localePath } from "@/lib/i18n/locales";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
+import { RunsOnBadge } from "@/components/tools/RunsOnBadge";
 
 // Soft, tasteful per-tool tint (pastel on white, Linear-like).
 const TONE_BG: Record<ToolDefinition["tone"], string> = {
@@ -45,6 +46,9 @@ export function ToolCard({
       </div>
       <h3 className="mt-4 font-semibold text-ink-900">{name}</h3>
       <p className="mt-1 text-sm leading-relaxed text-ink-500">{short}</p>
+      <div className="mt-3">
+        <RunsOnBadge kind={tool.kind} locale={locale} />
+      </div>
       <div className="mt-4 flex items-center text-sm font-medium text-brand-600 opacity-0 transition-opacity group-hover:opacity-100">
         {chrome.card.open} <ArrowRight className="ml-1 h-4 w-4" />
       </div>

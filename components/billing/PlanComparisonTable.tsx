@@ -1,7 +1,7 @@
 import { Check, Minus } from "lucide-react";
 import { PLANS, FREE_PLAN } from "@/lib/plans";
 import { DAILY_LIMIT, MONTHLY_LIMIT } from "@/lib/ai-quotas";
-import { PLAN_FILE_MB, PLAN_TIME_SEC } from "@/lib/plan-limits";
+import { PLAN_FILE_MB, PLAN_TIME_SEC, PLAN_VIDEO_MAX_MB, PLAN_VIDEO_MAX_SEC } from "@/lib/plan-limits";
 import { getCompare } from "@/lib/i18n/plan-compare";
 import { type Locale } from "@/lib/i18n/locales";
 
@@ -12,6 +12,10 @@ function mb(value: number, locale: Locale): string {
 /** "90 s" / "5 min" / "15 min" from the canonical per-plan time budget. */
 function secs(value: number, locale: Locale): string {
   return value >= 60 ? `${(value / 60).toLocaleString(locale)} min` : `${value.toLocaleString(locale)} s`;
+}
+/** "3 min" / "30 min" / "3 h" — video duration cap, promoting to hours at 1 h. */
+function dur(value: number, locale: Locale): string {
+  return value >= 3600 ? `${(value / 3600).toLocaleString(locale)} h` : `${(value / 60).toLocaleString(locale)} min`;
 }
 
 type Cell = string | boolean;
@@ -39,6 +43,18 @@ export function PlanComparisonTable({ locale }: { locale: Locale }) {
       free: mb(PLAN_FILE_MB.free, locale),
       pro: mb(PLAN_FILE_MB.pro, locale),
       business: mb(PLAN_FILE_MB.business, locale),
+    },
+    {
+      label: s.rows.videoSize,
+      free: mb(PLAN_VIDEO_MAX_MB.free, locale),
+      pro: mb(PLAN_VIDEO_MAX_MB.pro, locale),
+      business: mb(PLAN_VIDEO_MAX_MB.business, locale),
+    },
+    {
+      label: s.rows.videoDuration,
+      free: dur(PLAN_VIDEO_MAX_SEC.free, locale),
+      pro: dur(PLAN_VIDEO_MAX_SEC.pro, locale),
+      business: dur(PLAN_VIDEO_MAX_SEC.business, locale),
     },
     {
       label: s.rows.procTime,

@@ -23,6 +23,8 @@ export type CompareStrings = {
   rows: {
     aiRuns: string;
     fileSize: string;
+    videoSize: string;
+    videoDuration: string;
     procTime: string;
     batch: string;
     templates: string;
@@ -49,6 +51,8 @@ const en: CompareStrings = {
   rows: {
     aiRuns: "AI conversions",
     fileSize: "Max file size",
+    videoSize: "Video: max weight",
+    videoDuration: "Video: max duration",
     procTime: "Max processing time",
     batch: "Batch processing",
     templates: "Saved templates",
@@ -75,6 +79,8 @@ const fr: CompareStrings = {
   rows: {
     aiRuns: "Conversions IA",
     fileSize: "Taille de fichier max",
+    videoSize: "Vidéo : poids max",
+    videoDuration: "Vidéo : durée max",
     procTime: "Temps de traitement max",
     batch: "Traitement par lot",
     templates: "Modèles enregistrés",

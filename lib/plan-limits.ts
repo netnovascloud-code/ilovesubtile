@@ -46,3 +46,38 @@ export const PLAN_TIME_SEC: Record<Plan, number> = {
 export function planFileMb(plan: Plan): number {
   return PLAN_FILE_MB[plan];
 }
+
+/** Per-plan VIDEO caps — two dimensions, both enforced (the stricter one wins).
+ *  Weight in MB, duration in seconds. KONVER: Free 200 MB / 3 min · Pro 1 GB /
+ *  30 min · Business 5 GB / 3 h. These are the canonical defaults the UI gates
+ *  on; the authoritative server path (when a video tool runs server-side) may
+ *  override them from billing_config so they can be tuned without a redeploy. */
+export const PLAN_VIDEO_MAX_MB: Record<Plan, number> = {
+  free: 200,
+  pro: 1024,
+  business: 5120,
+};
+export const PLAN_VIDEO_MAX_SEC: Record<Plan, number> = {
+  free: 180,    // 3 minutes
+  pro: 1800,    // 30 minutes
+  business: 10800, // 3 hours
+};
+
+export type VideoLimitCheck =
+  | { ok: true }
+  | { ok: false; kind: "weight"; limitMb: number; limitSec: number }
+  | { ok: false; kind: "duration"; limitMb: number; limitSec: number };
+
+/** Validate a video against the caller's plan on BOTH weight and duration.
+ *  The first limit exceeded (weight checked first, then duration) is reported so
+ *  the UI can explain exactly which one blocked. `seconds` may be null when the
+ *  duration could not be read — in that case only the weight cap is enforced. */
+export function checkVideoLimits(plan: Plan, bytes: number, seconds: number | null): VideoLimitCheck {
+  const limitMb = PLAN_VIDEO_MAX_MB[plan];
+  const limitSec = PLAN_VIDEO_MAX_SEC[plan];
+  if (bytes > limitMb * 1024 * 1024) return { ok: false, kind: "weight", limitMb, limitSec };
+  if (seconds != null && Number.isFinite(seconds) && seconds > limitSec) {
+    return { ok: false, kind: "duration", limitMb, limitSec };
+  }
+  return { ok: true };
+}

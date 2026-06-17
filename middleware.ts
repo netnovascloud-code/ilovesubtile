@@ -27,7 +27,7 @@ const EN_ONLY_SLUGS = new Set([
  *  prefix and 308 to the English canonical. Matches nested paths too
  *  (e.g. /fr/dashboard, /fr/login). */
 const ROOT_ONLY_SECTIONS = new Set([
-  "login", "register", "developer", "api",
+  "login", "register", "developer", "api", "workflow", "batch",
 ]);
 
 /** Sections with a localised root (e.g. /[locale]/billing exists) but whose

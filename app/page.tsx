@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Heart, ShieldCheck, Sparkles, GitBranch, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
-import { AssistantBar } from "@/components/home/AssistantBar";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { getStrings } from "@/lib/i18n/strings";
@@ -48,8 +47,6 @@ export default function Home() {
           empty: hx.empty,
         }}
       />
-
-      <AssistantBar locale="en" />
 
       <section className="border-t border-ink-100 bg-white">
         <div className="container py-16">

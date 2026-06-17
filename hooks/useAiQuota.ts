@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { useUser } from "@/hooks/useUser";
 import { planLimit, type Plan } from "@/lib/ai-quotas";
@@ -32,6 +32,11 @@ export function useAiQuota(): AiQuotaState & { refresh: () => Promise<void> } {
   const [state, setState] = useState<AiQuotaState>({
     plan: "free", kind: "daily", limit: 2, used: 0, remaining: 2, resetsAt: null, loading: true,
   });
+  // Unique per hook instance: Supabase throws "cannot add callbacks after
+  // subscribe()" if two `.channel()` calls share a topic, which happens when
+  // more than one consumer (e.g. the header pill + a usage card) mounts on the
+  // same page. A per-instance suffix gives each its own channel.
+  const instanceId = useRef(Math.random().toString(36).slice(2));
 
   const compute = useCallback(
     (row: { daily_usage?: number; monthly_ai_usage?: number; monthly_ai_month?: string | null }) => {
@@ -93,7 +98,7 @@ export function useAiQuota(): AiQuotaState & { refresh: () => Promise<void> } {
     // Realtime: every edge-function run UPDATEs profiles → the meter ticks
     // down within ~100ms without a manual refresh.
     const ch = sb
-      .channel(`profile_quota:${user.id}`)
+      .channel(`profile_quota:${user.id}:${instanceId.current}`)
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "profiles", filter: `id=eq.${user.id}` },

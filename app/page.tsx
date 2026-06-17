@@ -6,6 +6,7 @@ import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { getStrings } from "@/lib/i18n/strings";
 import { getHomeExplorer } from "@/lib/i18n/home-explorer";
+import { LOCALES } from "@/lib/i18n/locales";
 
 const WHY = [
   { icon: Heart, title: "Free to start", body: "No credit card. Use the core tools forever for free." },
@@ -40,7 +41,7 @@ export default function Home() {
           subtitle: hx.subtitle,
           placeholder: hx.placeholder,
           all: hx.all,
-          counter: hx.counter.replace("{n}", String(tools.length)),
+          counter: hx.counter.replace("{n}", String(tools.length)).replace("{l}", String(LOCALES.length)),
           suggestions: SUGGEST.map((s, i) => ({ ...s, label: hx.suggestions[i] })),
           ai: hx.ai,
           seeAll: hx.seeAll,

@@ -84,7 +84,7 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
           subtitle: hx.subtitle,
           placeholder: hx.placeholder,
           all: hx.all,
-          counter: hx.counter.replace("{n}", String(tools.length)),
+          counter: hx.counter.replace("{n}", String(tools.length)).replace("{l}", String(LOCALES.length)),
           suggestions: SUGGEST.map((s, i) => ({ ...s, label: hx.suggestions[i] })),
           ai: hx.ai,
           seeAll: hx.seeAll,

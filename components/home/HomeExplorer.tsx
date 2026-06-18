@@ -24,7 +24,10 @@ export type HomeStrings = {
   empty: string;
 };
 
-const PREVIEW_PER_CATEGORY = 8;
+// Max columns shown in a one-row category preview (matches the grid's widest
+// breakpoint). The grid below clips to exactly the column count per screen size,
+// so a category always previews a single clean row; "see all" opens the rest.
+const PREVIEW_PER_CATEGORY = 7;
 
 const SYNONYMS: Record<string, string[]> = {
   photo: ["image"], photos: ["image"], picture: ["image"], pic: ["image"],
@@ -194,7 +197,7 @@ export function HomeExplorer({
                     <div className="flex items-center gap-2">
                       <ToolIcon name={chip.iconName} size={20} color={categoryAccent(chip.id)} strokeWidth={2} />
                       <h2 className="text-xl font-bold tracking-tight text-ink-900">{categoryLabels[chip.id] ?? chip.label}</h2>
-                      {total > PREVIEW_PER_CATEGORY && (
+                      {total > 2 && (
                         <button
                           onClick={() => { setActive(chip.id); setQuery(""); scrollToTop(); }}
                           className={cn("ml-auto inline-flex items-center gap-1 text-sm font-semibold hover:underline", th.accentText)}
@@ -203,7 +206,16 @@ export function HomeExplorer({
                         </button>
                       )}
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 min-[2400px]:grid-cols-7">
+                    {/* One row per screen size: the grid clips to exactly the column
+                        count at each breakpoint (2→3→4→5→6→7); the rest live behind
+                        "see all". */}
+                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 min-[2400px]:grid-cols-7
+                      [&>*:nth-child(n+3)]:hidden
+                      md:[&>*:nth-child(-n+3)]:block md:[&>*:nth-child(n+4)]:hidden
+                      lg:[&>*:nth-child(-n+4)]:block lg:[&>*:nth-child(n+5)]:hidden
+                      2xl:[&>*:nth-child(-n+5)]:block 2xl:[&>*:nth-child(n+6)]:hidden
+                      min-[1800px]:[&>*:nth-child(-n+6)]:block min-[1800px]:[&>*:nth-child(n+7)]:hidden
+                      min-[2400px]:[&>*:nth-child(-n+7)]:block">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>

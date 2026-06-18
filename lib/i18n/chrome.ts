@@ -2,6 +2,28 @@ import type { Locale } from "@/lib/i18n/locales";
 
 export type ChromeStrings = {
   nav: { tools: string; workflow: string; batch: string; pricing: string; api: string; login: string; start: string };
+  toolsMenu: {
+    featured: string;
+    categories: string;
+    all: string;
+    new: string;
+    featuredItems: {
+      workflow: { label: string; desc: string };
+      batch: { label: string; desc: string };
+      translator: { label: string; desc: string };
+      humanizer: { label: string; desc: string };
+      removeBg: { label: string; desc: string };
+      mergePdf: { label: string; desc: string };
+    };
+    newItems: {
+      urlShortener: string;
+      deepLink: string;
+      magicLink: string;
+      utmBuilder: string;
+      qrGenerator: string;
+      pdfToJpg: string;
+    };
+  };
   footer: {
     tagline: string;
     gdprBadge: string;
@@ -86,6 +108,21 @@ export type ChromeStrings = {
 
 const en: ChromeStrings = {
   nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Pricing", api: "API", login: "Log in", start: "Get started" },
+  toolsMenu: {
+    featured: "Featured", categories: "Categories", all: "All", new: "New",
+    featuredItems: {
+      workflow: { label: "Workflow Builder", desc: "Chain conversions in one click" },
+      batch: { label: "Batch Converter", desc: "Process up to 50 files" },
+      translator: { label: "AI Translator", desc: "30+ languages, formal/informal" },
+      humanizer: { label: "AI Humanizer", desc: "Make AI text sound human" },
+      removeBg: { label: "Remove Background", desc: "Transparent PNG in seconds" },
+      mergePdf: { label: "Merge PDF", desc: "Combine PDFs into one file" },
+    },
+    newItems: {
+      urlShortener: "URL Shortener", deepLink: "Smart / Deep Link", magicLink: "Magic Link",
+      utmBuilder: "UTM Builder", qrGenerator: "QR Code Generator", pdfToJpg: "PDF to JPG",
+    },
+  },
   footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", gdprBadge: "GDPR Compliant · Files never stored", topTools: "Top tools", categories: "Categories", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
   card: { open: "Open", pro: "Pro" },
   account: { billing: "Billing", logout: "Log out" },
@@ -104,6 +141,21 @@ const en: ChromeStrings = {
 
 const fr: ChromeStrings = {
   nav: { tools: "Outils", workflow: "Workflow", batch: "Par lot", pricing: "Tarifs", api: "API", login: "Connexion", start: "Commencer" },
+  toolsMenu: {
+    featured: "En vedette", categories: "Catégories", all: "Tous", new: "Nouveau",
+    featuredItems: {
+      workflow: { label: "Générateur de workflow", desc: "Enchaînez les conversions en un clic" },
+      batch: { label: "Convertisseur par lot", desc: "Traitez jusqu'à 50 fichiers" },
+      translator: { label: "Traducteur IA", desc: "30+ langues, formel/informel" },
+      humanizer: { label: "Humaniseur IA", desc: "Rendez un texte IA naturel" },
+      removeBg: { label: "Supprimer l'arrière-plan", desc: "PNG transparent en quelques secondes" },
+      mergePdf: { label: "Fusionner des PDF", desc: "Combinez des PDF en un seul fichier" },
+    },
+    newItems: {
+      urlShortener: "Raccourcisseur d'URL", deepLink: "Lien intelligent / profond", magicLink: "Lien magique",
+      utmBuilder: "Générateur UTM", qrGenerator: "Générateur de QR code", pdfToJpg: "PDF en JPG",
+    },
+  },
   footer: { tagline: "Outils de conversion en ligne gratuits — fichiers, images, code, texte et plus. Un outil simple par tâche.", gdprBadge: "Conforme RGPD · Fichiers jamais stockés", topTools: "Outils phares", product: "Produit", legal: "Mentions légales", pricing: "Tarifs", api: "API", dashboard: "Tableau de bord", vsVeed: "vs VEED.io", privacy: "Confidentialité", terms: "CGU", rights: "Tous droits réservés." },
   card: { open: "Ouvrir", pro: "Pro" },
   account: { billing: "Facturation", logout: "Déconnexion" },
@@ -122,6 +174,21 @@ const fr: ChromeStrings = {
 
 const es: ChromeStrings = {
   nav: { tools: "Herramientas", workflow: "Flujos", batch: "Por lotes", pricing: "Precios", api: "API", login: "Iniciar sesión", start: "Empezar" },
+  toolsMenu: {
+    featured: "Destacados", categories: "Categorías", all: "Todas", new: "Nuevo",
+    featuredItems: {
+      workflow: { label: "Creador de flujos", desc: "Encadena conversiones en un clic" },
+      batch: { label: "Conversor por lotes", desc: "Procesa hasta 50 archivos" },
+      translator: { label: "Traductor con IA", desc: "30+ idiomas, formal/informal" },
+      humanizer: { label: "Humanizador de IA", desc: "Haz que el texto de IA suene humano" },
+      removeBg: { label: "Quitar fondo", desc: "PNG transparente en segundos" },
+      mergePdf: { label: "Unir PDF", desc: "Combina varios PDF en un archivo" },
+    },
+    newItems: {
+      urlShortener: "Acortador de URL", deepLink: "Enlace inteligente / profundo", magicLink: "Enlace mágico",
+      utmBuilder: "Generador UTM", qrGenerator: "Generador de código QR", pdfToJpg: "PDF a JPG",
+    },
+  },
   footer: { tagline: "Herramientas de conversión online gratis — archivos, imágenes, código, texto y más. Una herramienta simple por tarea.", gdprBadge: "Conforme con el RGPD · Archivos nunca almacenados", topTools: "Herramientas destacadas", product: "Producto", legal: "Legal", pricing: "Precios", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Privacidad", terms: "Términos", rights: "Todos los derechos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Facturación", logout: "Cerrar sesión" },
@@ -140,6 +207,21 @@ const es: ChromeStrings = {
 
 const pt: ChromeStrings = {
   nav: { tools: "Ferramentas", workflow: "Workflow", batch: "Em lote", pricing: "Preços", api: "API", login: "Entrar", start: "Começar" },
+  toolsMenu: {
+    featured: "Em destaque", categories: "Categorias", all: "Todas", new: "Novo",
+    featuredItems: {
+      workflow: { label: "Criador de workflow", desc: "Encadeie conversões em um clique" },
+      batch: { label: "Conversor em lote", desc: "Processe até 50 arquivos" },
+      translator: { label: "Tradutor com IA", desc: "30+ idiomas, formal/informal" },
+      humanizer: { label: "Humanizador de IA", desc: "Faça o texto de IA soar humano" },
+      removeBg: { label: "Remover fundo", desc: "PNG transparente em segundos" },
+      mergePdf: { label: "Juntar PDF", desc: "Combine vários PDF em um arquivo" },
+    },
+    newItems: {
+      urlShortener: "Encurtador de URL", deepLink: "Link inteligente / profundo", magicLink: "Link mágico",
+      utmBuilder: "Gerador de UTM", qrGenerator: "Gerador de código QR", pdfToJpg: "PDF para JPG",
+    },
+  },
   footer: { tagline: "Ferramentas de conversão online grátis — arquivos, imagens, código, texto e mais. Uma ferramenta simples por tarefa.", gdprBadge: "Em conformidade com o RGPD · Arquivos nunca armazenados", topTools: "Ferramentas em destaque", product: "Produto", legal: "Legal", pricing: "Preços", api: "API", dashboard: "Painel", vsVeed: "vs VEED.io", privacy: "Privacidade", terms: "Termos", rights: "Todos os direitos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Faturamento", logout: "Sair" },
@@ -158,6 +240,21 @@ const pt: ChromeStrings = {
 
 const de: ChromeStrings = {
   nav: { tools: "Tools", workflow: "Workflow", batch: "Stapel", pricing: "Preise", api: "API", login: "Anmelden", start: "Loslegen" },
+  toolsMenu: {
+    featured: "Empfohlen", categories: "Kategorien", all: "Alle", new: "Neu",
+    featuredItems: {
+      workflow: { label: "Workflow-Builder", desc: "Konvertierungen mit einem Klick verketten" },
+      batch: { label: "Stapel-Konverter", desc: "Bis zu 50 Dateien verarbeiten" },
+      translator: { label: "KI-Übersetzer", desc: "30+ Sprachen, formell/informell" },
+      humanizer: { label: "KI-Humanizer", desc: "KI-Texte menschlich klingen lassen" },
+      removeBg: { label: "Hintergrund entfernen", desc: "Transparentes PNG in Sekunden" },
+      mergePdf: { label: "PDF zusammenführen", desc: "PDFs zu einer Datei kombinieren" },
+    },
+    newItems: {
+      urlShortener: "URL-Kürzer", deepLink: "Smart- / Deep-Link", magicLink: "Magic Link",
+      utmBuilder: "UTM-Builder", qrGenerator: "QR-Code-Generator", pdfToJpg: "PDF zu JPG",
+    },
+  },
   footer: { tagline: "Kostenlose Online-Konvertierungstools — Dateien, Bilder, Code, Text und mehr. Ein einfaches Tool pro Aufgabe.", gdprBadge: "DSGVO-konform · Dateien werden nie gespeichert", topTools: "Top-Tools", product: "Produkt", legal: "Rechtliches", pricing: "Preise", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Datenschutz", terms: "AGB", rights: "Alle Rechte vorbehalten." },
   card: { open: "Öffnen", pro: "Pro" },
   account: { billing: "Abrechnung", logout: "Abmelden" },
@@ -176,6 +273,21 @@ const de: ChromeStrings = {
 
 const it: ChromeStrings = {
   nav: { tools: "Strumenti", workflow: "Workflow", batch: "In blocco", pricing: "Prezzi", api: "API", login: "Accedi", start: "Inizia" },
+  toolsMenu: {
+    featured: "In evidenza", categories: "Categorie", all: "Tutti", new: "Novità",
+    featuredItems: {
+      workflow: { label: "Creatore di workflow", desc: "Concatena conversioni con un clic" },
+      batch: { label: "Convertitore in blocco", desc: "Elabora fino a 50 file" },
+      translator: { label: "Traduttore IA", desc: "30+ lingue, formale/informale" },
+      humanizer: { label: "Umanizzatore IA", desc: "Rendi naturale il testo dell'IA" },
+      removeBg: { label: "Rimuovi sfondo", desc: "PNG trasparente in pochi secondi" },
+      mergePdf: { label: "Unisci PDF", desc: "Combina più PDF in un unico file" },
+    },
+    newItems: {
+      urlShortener: "Accorciatore di URL", deepLink: "Link intelligente / profondo", magicLink: "Link magico",
+      utmBuilder: "Generatore UTM", qrGenerator: "Generatore di codici QR", pdfToJpg: "PDF in JPG",
+    },
+  },
   footer: { tagline: "Strumenti di conversione online gratuiti — file, immagini, codice, testo e altro. Uno strumento semplice per attività.", gdprBadge: "Conforme al GDPR · File mai memorizzati", topTools: "Strumenti principali", product: "Prodotto", legal: "Legale", pricing: "Prezzi", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Termini", rights: "Tutti i diritti riservati." },
   card: { open: "Apri", pro: "Pro" },
   account: { billing: "Fatturazione", logout: "Esci" },
@@ -194,6 +306,21 @@ const it: ChromeStrings = {
 
 const nl: ChromeStrings = {
   nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Prijzen", api: "API", login: "Inloggen", start: "Aan de slag" },
+  toolsMenu: {
+    featured: "Uitgelicht", categories: "Categorieën", all: "Alle", new: "Nieuw",
+    featuredItems: {
+      workflow: { label: "Workflow-builder", desc: "Koppel conversies in één klik" },
+      batch: { label: "Batch-converter", desc: "Verwerk tot 50 bestanden" },
+      translator: { label: "AI-vertaler", desc: "30+ talen, formeel/informeel" },
+      humanizer: { label: "AI-humanizer", desc: "Laat AI-tekst menselijk klinken" },
+      removeBg: { label: "Achtergrond verwijderen", desc: "Transparante PNG in seconden" },
+      mergePdf: { label: "PDF samenvoegen", desc: "Combineer PDF's tot één bestand" },
+    },
+    newItems: {
+      urlShortener: "URL-verkorter", deepLink: "Slimme / deep link", magicLink: "Magic link",
+      utmBuilder: "UTM-builder", qrGenerator: "QR-codegenerator", pdfToJpg: "PDF naar JPG",
+    },
+  },
   footer: { tagline: "Gratis online conversietools — bestanden, afbeeldingen, code, tekst en meer. Eén eenvoudige tool per taak.", gdprBadge: "AVG-conform · Bestanden nooit opgeslagen", topTools: "Top-tools", product: "Product", legal: "Juridisch", pricing: "Prijzen", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Voorwaarden", rights: "Alle rechten voorbehouden." },
   card: { open: "Openen", pro: "Pro" },
   account: { billing: "Facturering", logout: "Uitloggen" },
@@ -212,6 +339,21 @@ const nl: ChromeStrings = {
 
 const ja: ChromeStrings = {
   nav: { tools: "ツール", workflow: "ワークフロー", batch: "一括処理", pricing: "料金", api: "API", login: "ログイン", start: "始める" },
+  toolsMenu: {
+    featured: "おすすめ", categories: "カテゴリー", all: "すべて", new: "新着",
+    featuredItems: {
+      workflow: { label: "ワークフロービルダー", desc: "ワンクリックで変換を連結" },
+      batch: { label: "一括変換ツール", desc: "最大 50 ファイルを処理" },
+      translator: { label: "AI 翻訳", desc: "30+ 言語、フォーマル/カジュアル" },
+      humanizer: { label: "AI ヒューマナイザー", desc: "AI の文章を自然な人間らしさに" },
+      removeBg: { label: "背景を削除", desc: "数秒で透過 PNG に" },
+      mergePdf: { label: "PDF を結合", desc: "複数の PDF を 1 つのファイルに" },
+    },
+    newItems: {
+      urlShortener: "URL 短縮", deepLink: "スマート / ディープリンク", magicLink: "マジックリンク",
+      utmBuilder: "UTM ビルダー", qrGenerator: "QR コード生成", pdfToJpg: "PDF を JPG に",
+    },
+  },
   footer: { tagline: "無料のオンライン変換ツール — ファイル、画像、コード、テキストなど。作業ごとにシンプルなツール 1 つ。", gdprBadge: "GDPR 準拠 · ファイルは保存されません", topTools: "主要ツール", product: "プロダクト", legal: "法的事項", pricing: "料金", api: "API", dashboard: "ダッシュボード", vsVeed: "VEED.io との比較", privacy: "プライバシー", terms: "利用規約", rights: "All rights reserved." },
   card: { open: "開く", pro: "Pro" },
   account: { billing: "請求", logout: "ログアウト" },
@@ -230,6 +372,21 @@ const ja: ChromeStrings = {
 
 const zh: ChromeStrings = {
   nav: { tools: "工具", workflow: "工作流", batch: "批量", pricing: "价格", api: "API", login: "登录", start: "开始使用" },
+  toolsMenu: {
+    featured: "精选", categories: "分类", all: "全部", new: "新增",
+    featuredItems: {
+      workflow: { label: "工作流构建器", desc: "一键串联多个转换" },
+      batch: { label: "批量转换器", desc: "最多处理 50 个文件" },
+      translator: { label: "AI 翻译", desc: "30+ 种语言，正式/非正式" },
+      humanizer: { label: "AI 人性化", desc: "让 AI 文本更像真人所写" },
+      removeBg: { label: "移除背景", desc: "几秒生成透明 PNG" },
+      mergePdf: { label: "合并 PDF", desc: "将多个 PDF 合为一个文件" },
+    },
+    newItems: {
+      urlShortener: "短链接生成", deepLink: "智能 / 深度链接", magicLink: "魔法链接",
+      utmBuilder: "UTM 构建器", qrGenerator: "二维码生成器", pdfToJpg: "PDF 转 JPG",
+    },
+  },
   footer: { tagline: "免费在线转换工具 — 文件、图像、代码、文本等。每项任务一个简单工具。", gdprBadge: "符合 GDPR · 文件从不存储", topTools: "热门工具", product: "产品", legal: "法律", pricing: "价格", api: "API", dashboard: "面板", vsVeed: "对比 VEED.io", privacy: "隐私", terms: "条款", rights: "保留所有权利。" },
   card: { open: "打开", pro: "Pro" },
   account: { billing: "账单", logout: "退出登录" },
@@ -248,6 +405,21 @@ const zh: ChromeStrings = {
 
 const ko: ChromeStrings = {
   nav: { tools: "도구", workflow: "워크플로", batch: "일괄", pricing: "요금", api: "API", login: "로그인", start: "시작하기" },
+  toolsMenu: {
+    featured: "추천", categories: "카테고리", all: "전체", new: "신규",
+    featuredItems: {
+      workflow: { label: "워크플로 빌더", desc: "클릭 한 번으로 변환 연결" },
+      batch: { label: "일괄 변환기", desc: "최대 50개 파일 처리" },
+      translator: { label: "AI 번역기", desc: "30+ 개 언어, 격식/비격식" },
+      humanizer: { label: "AI 휴머나이저", desc: "AI 텍스트를 사람처럼 자연스럽게" },
+      removeBg: { label: "배경 제거", desc: "몇 초 만에 투명 PNG" },
+      mergePdf: { label: "PDF 병합", desc: "여러 PDF를 한 파일로" },
+    },
+    newItems: {
+      urlShortener: "URL 단축기", deepLink: "스마트 / 딥 링크", magicLink: "매직 링크",
+      utmBuilder: "UTM 빌더", qrGenerator: "QR 코드 생성기", pdfToJpg: "PDF를 JPG로",
+    },
+  },
   footer: { tagline: "무료 온라인 변환 도구 — 파일, 이미지, 코드, 텍스트 등. 작업마다 간단한 도구 하나.", gdprBadge: "GDPR 준수 · 파일은 저장되지 않습니다", topTools: "주요 도구", product: "프로덕트", legal: "법적 사항", pricing: "요금", api: "API", dashboard: "대시보드", vsVeed: "VEED.io 비교", privacy: "개인정보", terms: "이용약관", rights: "All rights reserved." },
   card: { open: "열기", pro: "Pro" },
   account: { billing: "결제", logout: "로그아웃" },
@@ -266,6 +438,21 @@ const ko: ChromeStrings = {
 
 const ar: ChromeStrings = {
   nav: { tools: "الأدوات", workflow: "سير العمل", batch: "دفعة", pricing: "الأسعار", api: "API", login: "تسجيل الدخول", start: "ابدأ" },
+  toolsMenu: {
+    featured: "مميّزة", categories: "الفئات", all: "الكل", new: "جديد",
+    featuredItems: {
+      workflow: { label: "منشئ سير العمل", desc: "اربط التحويلات بنقرة واحدة" },
+      batch: { label: "محوّل الدفعات", desc: "عالج حتى 50 ملفًا" },
+      translator: { label: "مترجم الذكاء الاصطناعي", desc: "30+ لغة، رسمي/غير رسمي" },
+      humanizer: { label: "مؤنسن الذكاء الاصطناعي", desc: "اجعل نص الذكاء الاصطناعي يبدو بشريًا" },
+      removeBg: { label: "إزالة الخلفية", desc: "PNG شفاف في ثوانٍ" },
+      mergePdf: { label: "دمج PDF", desc: "ادمج ملفات PDF في ملف واحد" },
+    },
+    newItems: {
+      urlShortener: "مختصِر الروابط URL", deepLink: "رابط ذكي / عميق", magicLink: "رابط سحري",
+      utmBuilder: "منشئ UTM", qrGenerator: "منشئ رمز QR", pdfToJpg: "PDF إلى JPG",
+    },
+  },
   footer: { tagline: "أدوات تحويل مجانية عبر الإنترنت — ملفات وصور وأكواد ونصوص والمزيد. أداة بسيطة لكل مهمة.", gdprBadge: "متوافق مع GDPR · لا يتم تخزين الملفات أبدًا", topTools: "الأدوات الأساسية", product: "المنتج", legal: "قانوني", pricing: "الأسعار", api: "API", dashboard: "لوحة التحكم", vsVeed: "مقارنة بـ VEED.io", privacy: "الخصوصية", terms: "الشروط", rights: "جميع الحقوق محفوظة." },
   card: { open: "افتح", pro: "Pro" },
   account: { billing: "الفوترة", logout: "تسجيل الخروج" },
@@ -284,6 +471,21 @@ const ar: ChromeStrings = {
 
 const ru: ChromeStrings = {
   nav: { tools: "Инструменты", workflow: "Процессы", batch: "Пакетно", pricing: "Тарифы", api: "API", login: "Войти", start: "Начать" },
+  toolsMenu: {
+    featured: "Рекомендуемые", categories: "Категории", all: "Все", new: "Новое",
+    featuredItems: {
+      workflow: { label: "Конструктор процессов", desc: "Объединяйте конвертации в один клик" },
+      batch: { label: "Пакетный конвертер", desc: "Обрабатывайте до 50 файлов" },
+      translator: { label: "ИИ-переводчик", desc: "30+ языков, формально/неформально" },
+      humanizer: { label: "ИИ-гуманизатор", desc: "Сделайте ИИ-текст человечным" },
+      removeBg: { label: "Удалить фон", desc: "Прозрачный PNG за секунды" },
+      mergePdf: { label: "Объединить PDF", desc: "Соедините PDF в один файл" },
+    },
+    newItems: {
+      urlShortener: "Сокращатель URL", deepLink: "Умная / диплинк-ссылка", magicLink: "Магическая ссылка",
+      utmBuilder: "Конструктор UTM", qrGenerator: "Генератор QR-кодов", pdfToJpg: "PDF в JPG",
+    },
+  },
   footer: { tagline: "Бесплатные онлайн-инструменты конвертации — файлы, изображения, код, текст и другое. Один простой инструмент на задачу.", gdprBadge: "Соответствует GDPR · Файлы никогда не хранятся", topTools: "Основные инструменты", product: "Продукт", legal: "Правовое", pricing: "Тарифы", api: "API", dashboard: "Панель", vsVeed: "Сравнение с VEED.io", privacy: "Конфиденциальность", terms: "Условия", rights: "Все права защищены." },
   card: { open: "Открыть", pro: "Pro" },
   account: { billing: "Оплата", logout: "Выйти" },
@@ -302,6 +504,21 @@ const ru: ChromeStrings = {
 
 const hi: ChromeStrings = {
   nav: { tools: "टूल", workflow: "वर्कफ़्लो", batch: "बैच", pricing: "मूल्य", api: "API", login: "लॉग इन", start: "शुरू करें" },
+  toolsMenu: {
+    featured: "विशेष", categories: "श्रेणियाँ", all: "सभी", new: "नया",
+    featuredItems: {
+      workflow: { label: "वर्कफ़्लो बिल्डर", desc: "एक क्लिक में रूपांतरण जोड़ें" },
+      batch: { label: "बैच कनवर्टर", desc: "50 तक फ़ाइलें प्रोसेस करें" },
+      translator: { label: "AI अनुवादक", desc: "30+ भाषाएँ, औपचारिक/अनौपचारिक" },
+      humanizer: { label: "AI ह्यूमनाइज़र", desc: "AI टेक्स्ट को इंसानी बनाएँ" },
+      removeBg: { label: "बैकग्राउंड हटाएँ", desc: "सेकंडों में पारदर्शी PNG" },
+      mergePdf: { label: "PDF मर्ज करें", desc: "कई PDF को एक फ़ाइल में जोड़ें" },
+    },
+    newItems: {
+      urlShortener: "URL शॉर्टनर", deepLink: "स्मार्ट / डीप लिंक", magicLink: "मैजिक लिंक",
+      utmBuilder: "UTM बिल्डर", qrGenerator: "QR कोड जनरेटर", pdfToJpg: "PDF से JPG",
+    },
+  },
   footer: { tagline: "मुफ़्त ऑनलाइन रूपांतरण टूल — फ़ाइलें, इमेज, कोड, टेक्स्ट और बहुत कुछ। हर काम के लिए एक सरल टूल।", gdprBadge: "GDPR अनुपालन · फ़ाइलें कभी संग्रहीत नहीं", topTools: "मुख्य टूल", product: "उत्पाद", legal: "क़ानूनी", pricing: "मूल्य", api: "API", dashboard: "डैशबोर्ड", vsVeed: "VEED.io से तुलना", privacy: "गोपनीयता", terms: "शर्तें", rights: "सर्वाधिकार सुरक्षित।" },
   card: { open: "खोलें", pro: "Pro" },
   account: { billing: "बिलिंग", logout: "लॉग आउट" },
@@ -320,6 +537,21 @@ const hi: ChromeStrings = {
 
 const tr: ChromeStrings = {
   nav: { tools: "Araçlar", workflow: "İş akışı", batch: "Toplu", pricing: "Fiyatlar", api: "API", login: "Giriş yap", start: "Başla" },
+  toolsMenu: {
+    featured: "Öne çıkanlar", categories: "Kategoriler", all: "Tümü", new: "Yeni",
+    featuredItems: {
+      workflow: { label: "İş akışı oluşturucu", desc: "Dönüştürmeleri tek tıkla zincirleyin" },
+      batch: { label: "Toplu dönüştürücü", desc: "50'ye kadar dosya işleyin" },
+      translator: { label: "Yapay zeka çevirmeni", desc: "30+ dil, resmi/samimi" },
+      humanizer: { label: "Yapay zeka insanlaştırıcı", desc: "Yapay zeka metnini insansı yapın" },
+      removeBg: { label: "Arka planı kaldır", desc: "Saniyeler içinde şeffaf PNG" },
+      mergePdf: { label: "PDF birleştir", desc: "PDF'leri tek dosyada birleştirin" },
+    },
+    newItems: {
+      urlShortener: "URL kısaltıcı", deepLink: "Akıllı / derin bağlantı", magicLink: "Sihirli bağlantı",
+      utmBuilder: "UTM oluşturucu", qrGenerator: "QR kod oluşturucu", pdfToJpg: "PDF'den JPG'ye",
+    },
+  },
   footer: { tagline: "Ücretsiz çevrimiçi dönüştürme araçları — dosyalar, görüntüler, kod, metin ve daha fazlası. Her iş için tek bir basit araç.", gdprBadge: "GDPR uyumlu · Dosyalar asla saklanmaz", topTools: "En iyi araçlar", product: "Ürün", legal: "Yasal", pricing: "Fiyatlar", api: "API", dashboard: "Panel", vsVeed: "VEED.io karşılaştırması", privacy: "Gizlilik", terms: "Şartlar", rights: "Tüm hakları saklıdır." },
   card: { open: "Aç", pro: "Pro" },
   account: { billing: "Faturalandırma", logout: "Çıkış yap" },
@@ -338,6 +570,21 @@ const tr: ChromeStrings = {
 
 const id: ChromeStrings = {
   nav: { tools: "Alat", workflow: "Alur kerja", batch: "Massal", pricing: "Harga", api: "API", login: "Masuk", start: "Mulai" },
+  toolsMenu: {
+    featured: "Unggulan", categories: "Kategori", all: "Semua", new: "Baru",
+    featuredItems: {
+      workflow: { label: "Pembuat alur kerja", desc: "Rangkai konversi dalam satu klik" },
+      batch: { label: "Konverter massal", desc: "Proses hingga 50 file" },
+      translator: { label: "Penerjemah AI", desc: "30+ bahasa, formal/informal" },
+      humanizer: { label: "Humanizer AI", desc: "Buat teks AI terdengar manusiawi" },
+      removeBg: { label: "Hapus latar belakang", desc: "PNG transparan dalam hitungan detik" },
+      mergePdf: { label: "Gabungkan PDF", desc: "Gabungkan PDF jadi satu file" },
+    },
+    newItems: {
+      urlShortener: "Pemendek URL", deepLink: "Tautan pintar / dalam", magicLink: "Tautan ajaib",
+      utmBuilder: "Pembuat UTM", qrGenerator: "Pembuat kode QR", pdfToJpg: "PDF ke JPG",
+    },
+  },
   footer: { tagline: "Alat konversi online gratis — file, gambar, kode, teks, dan lainnya. Satu alat sederhana per tugas.", gdprBadge: "Patuh GDPR · File tidak pernah disimpan", topTools: "Alat unggulan", product: "Produk", legal: "Hukum", pricing: "Harga", api: "API", dashboard: "Dasbor", vsVeed: "vs VEED.io", privacy: "Privasi", terms: "Ketentuan", rights: "Semua hak dilindungi." },
   card: { open: "Buka", pro: "Pro" },
   account: { billing: "Penagihan", logout: "Keluar" },
@@ -356,6 +603,21 @@ const id: ChromeStrings = {
 
 const vi: ChromeStrings = {
   nav: { tools: "Công cụ", workflow: "Quy trình", batch: "Hàng loạt", pricing: "Giá", api: "API", login: "Đăng nhập", start: "Bắt đầu" },
+  toolsMenu: {
+    featured: "Nổi bật", categories: "Danh mục", all: "Tất cả", new: "Mới",
+    featuredItems: {
+      workflow: { label: "Trình tạo quy trình", desc: "Nối các bước chuyển đổi trong một cú nhấp" },
+      batch: { label: "Trình chuyển đổi hàng loạt", desc: "Xử lý tối đa 50 tệp" },
+      translator: { label: "Trình dịch AI", desc: "30+ ngôn ngữ, trang trọng/thân mật" },
+      humanizer: { label: "Trình nhân hóa AI", desc: "Làm văn bản AI nghe tự nhiên như người viết" },
+      removeBg: { label: "Xóa nền", desc: "PNG trong suốt trong vài giây" },
+      mergePdf: { label: "Gộp PDF", desc: "Kết hợp nhiều PDF thành một tệp" },
+    },
+    newItems: {
+      urlShortener: "Rút gọn URL", deepLink: "Liên kết thông minh / sâu", magicLink: "Liên kết kỳ diệu",
+      utmBuilder: "Trình tạo UTM", qrGenerator: "Trình tạo mã QR", pdfToJpg: "PDF sang JPG",
+    },
+  },
   footer: { tagline: "Công cụ chuyển đổi trực tuyến miễn phí — tệp, hình ảnh, mã, văn bản và hơn thế. Một công cụ đơn giản cho mỗi tác vụ.", gdprBadge: "Tuân thủ GDPR · Tệp không bao giờ được lưu trữ", topTools: "Công cụ hàng đầu", product: "Sản phẩm", legal: "Pháp lý", pricing: "Giá", api: "API", dashboard: "Bảng điều khiển", vsVeed: "So với VEED.io", privacy: "Quyền riêng tư", terms: "Điều khoản", rights: "Bảo lưu mọi quyền." },
   card: { open: "Mở", pro: "Pro" },
   account: { billing: "Thanh toán", logout: "Đăng xuất" },
@@ -374,6 +636,21 @@ const vi: ChromeStrings = {
 
 const sv: ChromeStrings = {
   nav: { tools: "Verktyg", workflow: "Arbetsflöde", batch: "Batch", pricing: "Priser", api: "API", login: "Logga in", start: "Kom igång" },
+  toolsMenu: {
+    featured: "Utvalda", categories: "Kategorier", all: "Alla", new: "Nytt",
+    featuredItems: {
+      workflow: { label: "Arbetsflödesbyggare", desc: "Kedja konverteringar med ett klick" },
+      batch: { label: "Batch-konverterare", desc: "Bearbeta upp till 50 filer" },
+      translator: { label: "AI-översättare", desc: "30+ språk, formellt/informellt" },
+      humanizer: { label: "AI-humanizer", desc: "Få AI-text att låta mänsklig" },
+      removeBg: { label: "Ta bort bakgrund", desc: "Transparent PNG på sekunder" },
+      mergePdf: { label: "Slå ihop PDF", desc: "Kombinera PDF:er till en fil" },
+    },
+    newItems: {
+      urlShortener: "URL-förkortare", deepLink: "Smart / djuplänk", magicLink: "Magisk länk",
+      utmBuilder: "UTM-byggare", qrGenerator: "QR-kodgenerator", pdfToJpg: "PDF till JPG",
+    },
+  },
   footer: { tagline: "Gratis onlineverktyg för konvertering — filer, bilder, kod, text och mer. Ett enkelt verktyg per uppgift.", gdprBadge: "GDPR-kompatibel · Filer lagras aldrig", topTools: "Toppverktyg", product: "Produkt", legal: "Juridik", pricing: "Priser", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Integritet", terms: "Villkor", rights: "Alla rättigheter förbehållna." },
   card: { open: "Öppna", pro: "Pro" },
   account: { billing: "Fakturering", logout: "Logga ut" },
@@ -392,6 +669,21 @@ const sv: ChromeStrings = {
 
 const pl: ChromeStrings = {
   nav: { tools: "Narzędzia", workflow: "Przepływ", batch: "Wsadowo", pricing: "Cennik", api: "API", login: "Zaloguj się", start: "Zacznij" },
+  toolsMenu: {
+    featured: "Polecane", categories: "Kategorie", all: "Wszystkie", new: "Nowość",
+    featuredItems: {
+      workflow: { label: "Kreator przepływów", desc: "Łącz konwersje jednym kliknięciem" },
+      batch: { label: "Konwerter wsadowy", desc: "Przetwarzaj do 50 plików" },
+      translator: { label: "Tłumacz AI", desc: "30+ języków, formalnie/nieformalnie" },
+      humanizer: { label: "Humanizer AI", desc: "Spraw, by tekst AI brzmiał ludzko" },
+      removeBg: { label: "Usuń tło", desc: "Przezroczysty PNG w kilka sekund" },
+      mergePdf: { label: "Scal PDF", desc: "Połącz pliki PDF w jeden" },
+    },
+    newItems: {
+      urlShortener: "Skracacz URL", deepLink: "Inteligentny / głęboki link", magicLink: "Magiczny link",
+      utmBuilder: "Kreator UTM", qrGenerator: "Generator kodów QR", pdfToJpg: "PDF na JPG",
+    },
+  },
   footer: { tagline: "Darmowe narzędzia konwersji online — pliki, obrazy, kod, tekst i więcej. Jedno proste narzędzie do każdego zadania.", gdprBadge: "Zgodny z RODO · Pliki nigdy nie są przechowywane", topTools: "Najlepsze narzędzia", product: "Produkt", legal: "Informacje prawne", pricing: "Cennik", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Prywatność", terms: "Warunki", rights: "Wszelkie prawa zastrzeżone." },
   card: { open: "Otwórz", pro: "Pro" },
   account: { billing: "Rozliczenia", logout: "Wyloguj się" },
@@ -410,6 +702,21 @@ const pl: ChromeStrings = {
 
 const uk: ChromeStrings = {
   nav: { tools: "Інструменти", workflow: "Процеси", batch: "Пакетно", pricing: "Ціни", api: "API", login: "Увійти", start: "Почати" },
+  toolsMenu: {
+    featured: "Рекомендовані", categories: "Категорії", all: "Усі", new: "Нове",
+    featuredItems: {
+      workflow: { label: "Конструктор процесів", desc: "Поєднуйте конвертації одним кліком" },
+      batch: { label: "Пакетний конвертер", desc: "Обробляйте до 50 файлів" },
+      translator: { label: "ШІ-перекладач", desc: "30+ мов, формально/неформально" },
+      humanizer: { label: "ШІ-гуманізатор", desc: "Зробіть ШІ-текст людянішим" },
+      removeBg: { label: "Видалити фон", desc: "Прозорий PNG за секунди" },
+      mergePdf: { label: "Об'єднати PDF", desc: "З'єднайте PDF в один файл" },
+    },
+    newItems: {
+      urlShortener: "Скорочувач URL", deepLink: "Розумне / глибоке посилання", magicLink: "Магічне посилання",
+      utmBuilder: "Конструктор UTM", qrGenerator: "Генератор QR-кодів", pdfToJpg: "PDF у JPG",
+    },
+  },
   footer: { tagline: "Безкоштовні онлайн-інструменти конвертації — файли, зображення, код, текст тощо. Один простий інструмент на завдання.", gdprBadge: "Відповідає GDPR · Файли ніколи не зберігаються", topTools: "Найкращі інструменти", product: "Продукт", legal: "Юридична інформація", pricing: "Ціни", api: "API", dashboard: "Панель", vsVeed: "проти VEED.io", privacy: "Конфіденційність", terms: "Умови", rights: "Усі права захищено." },
   card: { open: "Відкрити", pro: "Pro" },
   account: { billing: "Оплата", logout: "Вийти" },
@@ -428,6 +735,21 @@ const uk: ChromeStrings = {
 
 const cs: ChromeStrings = {
   nav: { tools: "Nástroje", workflow: "Workflow", batch: "Dávkově", pricing: "Ceny", api: "API", login: "Přihlásit se", start: "Začít" },
+  toolsMenu: {
+    featured: "Doporučené", categories: "Kategorie", all: "Vše", new: "Nové",
+    featuredItems: {
+      workflow: { label: "Tvůrce workflow", desc: "Spojte konverze jedním kliknutím" },
+      batch: { label: "Dávkový převodník", desc: "Zpracujte až 50 souborů" },
+      translator: { label: "AI překladač", desc: "30+ jazyků, formálně/neformálně" },
+      humanizer: { label: "AI humanizér", desc: "Ať text od AI zní lidsky" },
+      removeBg: { label: "Odebrat pozadí", desc: "Průhledný PNG během pár sekund" },
+      mergePdf: { label: "Sloučit PDF", desc: "Spojte PDF do jednoho souboru" },
+    },
+    newItems: {
+      urlShortener: "Zkracovač URL", deepLink: "Chytrý / hluboký odkaz", magicLink: "Magický odkaz",
+      utmBuilder: "Tvůrce UTM", qrGenerator: "Generátor QR kódů", pdfToJpg: "PDF do JPG",
+    },
+  },
   footer: { tagline: "Bezplatné online nástroje pro konverzi — soubory, obrázky, kód, text a další. Jeden jednoduchý nástroj na úkol.", gdprBadge: "V souladu s GDPR · Soubory se nikdy neukládají", topTools: "Hlavní nástroje", product: "Produkt", legal: "Právní informace", pricing: "Ceny", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Soukromí", terms: "Podmínky", rights: "Všechna práva vyhrazena." },
   card: { open: "Otevřít", pro: "Pro" },
   account: { billing: "Fakturace", logout: "Odhlásit se" },

@@ -18,7 +18,10 @@ const config: Config = {
     container: {
       center: true,
       padding: { DEFAULT: "1rem", lg: "2rem" },
-      screens: { "2xl": "1536px" },
+      // Full-bleed: the .container spans the whole viewport (only padded), at
+      // every breakpoint — no centered max-width column. Pages that still want a
+      // narrow reading column opt in with a max-w-* utility (utilities win).
+      screens: { sm: "100%", md: "100%", lg: "100%", xl: "100%", "2xl": "100%" },
     },
     extend: {
       fontFamily: {

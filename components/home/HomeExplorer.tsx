@@ -203,7 +203,7 @@ export function HomeExplorer({
                         </button>
                       )}
                     </div>
-                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 min-[2400px]:grid-cols-7">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export function HomeExplorer({
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+            <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 min-[2400px]:grid-cols-7">
               {filtered.map((t) => <Card key={t.slug} t={t} />)}
             </div>
           )}

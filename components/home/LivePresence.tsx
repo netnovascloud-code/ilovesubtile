@@ -34,7 +34,7 @@ export function LivePresence({ locale }: { locale: Locale }) {
   const s = getLivePresence(locale);
 
   return (
-    <div className="mt-4 flex items-center justify-center gap-2 text-sm text-ink-500">
+    <span className="inline-flex items-center gap-2 text-sm text-ink-500">
       <span className="relative flex h-2 w-2">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -42,6 +42,6 @@ export function LivePresence({ locale }: { locale: Locale }) {
       <span className="tabular-nums">
         <strong className="font-semibold text-ink-700">{count.toLocaleString(locale)}</strong> {s.online}
       </span>
-    </div>
+    </span>
   );
 }

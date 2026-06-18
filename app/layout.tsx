@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AdblockNotice } from "@/components/layout/AdblockNotice";
+import { ConversionTracker } from "@/components/tools/ConversionTracker";
 import { EzoicLoader } from "@/components/ads/EzoicLoader";
 import { HtmlLang } from "@/components/layout/HtmlLang";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex-1">{children}</div>
         <Footer />
         <AdblockNotice />
+        <ConversionTracker />
       </body>
     </html>
   );

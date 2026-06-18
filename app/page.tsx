@@ -3,6 +3,7 @@ import { Heart, ShieldCheck, Sparkles, GitBranch, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
 import { LivePresence } from "@/components/home/LivePresence";
+import { LiveConversions } from "@/components/home/LiveConversions";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { getStrings } from "@/lib/i18n/strings";
@@ -51,7 +52,10 @@ export default function Home() {
       />
 
       <div className="container pb-8">
-        <LivePresence locale="en" />
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <LiveConversions locale="en" />
+          <LivePresence locale="en" />
+        </div>
       </div>
 
       <section className="border-t border-ink-100 bg-white">

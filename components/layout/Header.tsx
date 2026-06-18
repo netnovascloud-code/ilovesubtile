@@ -46,8 +46,8 @@ export function Header() {
   // Flat list used only for the mobile drawer.
   const MOBILE_NAV = [
     { href: toolsHref, label: t.tools },
-    { href: localePath(locale, "workflow"), label: "Workflow" },
-    { href: localePath(locale, "batch"), label: "Batch" },
+    { href: localePath(locale, "workflow"), label: t.workflow },
+    { href: localePath(locale, "batch"), label: t.batch },
     { href: "/translator", label: "Translator" },
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
@@ -94,8 +94,8 @@ export function Header() {
 
         <nav className="hidden items-center gap-7 md:flex">
           <ToolsMenu categories={categories} toolsHref={toolsHref} locale={locale} />
-          <Link href={localePath(locale, "workflow")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">Workflow</Link>
-          <Link href={localePath(locale, "batch")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">Batch</Link>
+          <Link href={localePath(locale, "workflow")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.workflow}</Link>
+          <Link href={localePath(locale, "batch")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.batch}</Link>
           <Link href={localePath(locale, "pricing")} prefetch={false} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
           <Link href={localePath(locale, "api")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>

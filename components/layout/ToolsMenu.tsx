@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronDown, Sparkles, GitBranch, Layers, Languages, WandSparkles, Eraser, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { localePath, type Locale } from "@/lib/i18n/locales";
+import { getChrome } from "@/lib/i18n/chrome";
 
 type Item = { href: string; label: string; desc?: string };
 
@@ -52,7 +53,7 @@ export function ToolsMenu({
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1 text-sm text-ink-700 transition-colors hover:text-ink-900"
       >
-        Tools <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+        {getChrome(locale).nav.tools} <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (

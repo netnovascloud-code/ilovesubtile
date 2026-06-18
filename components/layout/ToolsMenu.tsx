@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles, GitBranch, Layers, Languages, WandSparkles, Eraser, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { localePath, type Locale } from "@/lib/i18n/locales";
 
 type Item = { href: string; label: string; desc?: string };
 
@@ -28,9 +29,11 @@ const NEW: Item[] = [
 export function ToolsMenu({
   categories,
   toolsHref,
+  locale,
 }: {
   categories: { id: string; label: string; href: string }[];
   toolsHref: string;
+  locale: Locale;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -62,7 +65,8 @@ export function ToolsMenu({
               </p>
               <div className="grid grid-cols-2 gap-1">
                 {FEATURED.map(({ icon: Icon, href, label, desc }) => (
-                  <Link key={href} href={href} onClick={() => setOpen(false)} className="group flex items-start gap-2 rounded-lg p-2 transition-colors hover:bg-ink-50">
+                  // workflow / batch now have localised routes; the rest keep their href.
+                  <Link key={href} href={href === "/workflow" || href === "/batch" ? localePath(locale, href.slice(1)) : href} onClick={() => setOpen(false)} className="group flex items-start gap-2 rounded-lg p-2 transition-colors hover:bg-ink-50">
                     <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-50 text-brand-600"><Icon className="h-3.5 w-3.5" /></span>
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium text-ink-900">{label}</span>

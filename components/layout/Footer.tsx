@@ -66,8 +66,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              {/* /api has no localized route — link un-prefixed to avoid a 404. */}
-              <Link href="/api" className="hover:text-ink-900">
+              <Link href={localePath(locale, "api")} className="hover:text-ink-900">
                 {t.api}
               </Link>
             </li>

@@ -25,9 +25,10 @@ const EN_ONLY_SLUGS = new Set([
  *  A /<locale>/<section> hit — language switch, bookmark, stale link — would
  *  otherwise 404 through the dynamic [slug] route, so we strip the locale
  *  prefix and 308 to the English canonical. Matches nested paths too
- *  (e.g. /fr/dashboard, /fr/login). */
+ *  (e.g. /fr/dashboard, /fr/login). NOTE: workflow / batch / api now HAVE
+ *  localised routes under app/[locale]/… so they are intentionally NOT here. */
 const ROOT_ONLY_SECTIONS = new Set([
-  "login", "register", "developer", "api", "workflow", "batch",
+  "login", "register", "developer",
 ]);
 
 /** Sections with a localised root (e.g. /[locale]/billing exists) but whose

@@ -49,12 +49,14 @@ const QUOTA_MONTHLY: Record<string, number> = { pro: 500, business: 3000 };
 async function enforceAiQuota(
   svc: ReturnType<typeof getServiceClient>,
   userId: string,
-): Promise<{ ok: true } | { ok: false; status: number; body: Record<string, unknown> }> {
+): Promise<{ ok: true; refund: () => Promise<void> } | { ok: false; status: number; body: Record<string, unknown> }> {
   try {
     const { data: prof } = await svc.from("profiles")
       .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month")
       .eq("id", userId).maybeSingle();
     const plan = (prof?.plan as string) ?? "free";
+    // Restores the slot we're about to charge if the transcription later fails.
+    let refund: () => Promise<void> = async () => {};
     if (plan === "free") {
       const limit = QUOTA_DAILY.free;
       const now = Date.now();
@@ -68,6 +70,12 @@ async function enforceAiQuota(
         daily_usage: current + 1,
         usage_reset_at: overdue ? new Date().toISOString() : (prof?.usage_reset_at ?? new Date().toISOString()),
       }).eq("id", userId);
+      refund = async () => {
+        try {
+          const { data: p } = await svc.from("profiles").select("daily_usage").eq("id", userId).maybeSingle();
+          await svc.from("profiles").update({ daily_usage: Math.max(0, (p?.daily_usage ?? 1) - 1) }).eq("id", userId);
+        } catch { /* best-effort */ }
+      };
     } else {
       const limit = QUOTA_MONTHLY[plan] ?? QUOTA_MONTHLY.pro;
       const d = new Date();
@@ -79,10 +87,16 @@ async function enforceAiQuota(
         return { ok: false, status: 429, body: { error: "monthly_limit", plan, limit, used, remaining: 0, resetAt: next.toISOString() } };
       }
       await svc.from("profiles").update({ monthly_ai_usage: used + 1, monthly_ai_month: month }).eq("id", userId);
+      refund = async () => {
+        try {
+          const { data: p } = await svc.from("profiles").select("monthly_ai_usage").eq("id", userId).maybeSingle();
+          await svc.from("profiles").update({ monthly_ai_usage: Math.max(0, (p?.monthly_ai_usage ?? 1) - 1) }).eq("id", userId);
+        } catch { /* best-effort */ }
+      };
     }
-    return { ok: true };
+    return { ok: true, refund };
   } catch {
-    return { ok: true }; // fail-open — never block on a counter glitch
+    return { ok: true, refund: async () => {} }; // fail-open — never block on a counter glitch
   }
 }
 
@@ -166,7 +180,7 @@ Deno.serve(async (req) => {
     headers: { Authorization: `Bearer ${mistralKey}` },
     body: voxtralForm,
   });
-  if (!res.ok) return json({ error: "mistral_failed", message: await res.text() }, { status: 502 });
+  if (!res.ok) { await quota.refund(); return json({ error: "mistral_failed", message: await res.text() }, { status: 502 }); }
 
   const verbose = await res.json() as { text?: string; language?: string; segments?: Segment[] };
 
@@ -174,7 +188,7 @@ Deno.serve(async (req) => {
     ? verbose.segments
     : segmentsFromPlainText(verbose.text ?? "");
 
-  if (!segments.length) return json({ error: "empty_transcription" }, { status: 502 });
+  if (!segments.length) { await quota.refund(); return json({ error: "empty_transcription" }, { status: 502 }); }
 
   const srt = srtFromSegments(segments);
 
@@ -193,7 +207,7 @@ Deno.serve(async (req) => {
 
   const { error: uploadError } = await supabase.storage.from("results")
     .upload(path, new Blob([srt], { type: "application/x-subrip" }), { contentType: "application/x-subrip" });
-  if (uploadError) return json({ error: "storage_failed", message: uploadError.message }, { status: 500 });
+  if (uploadError) { await quota.refund(); return json({ error: "storage_failed", message: uploadError.message }, { status: 500 }); }
 
   const { data: signed } = await supabase.storage.from("results").createSignedUrl(path, 3600);
 

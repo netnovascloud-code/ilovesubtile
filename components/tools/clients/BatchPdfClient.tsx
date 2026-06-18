@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Files } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n/locales";
+import { getBatch } from "@/lib/i18n/page-batch";
 
 type Job = { id: string; file: File; status: "queued" | "running" | "done" | "error"; blob?: Blob; outName?: string; error?: string };
 
@@ -20,9 +22,9 @@ async function loadPdfjs(): Promise<PdfJs> {
 }
 
 const PRESETS = [
-  { id: "low", label: "Strong (smaller)", scale: 1.2, quality: 0.6 },
-  { id: "med", label: "Balanced", scale: 1.5, quality: 0.75 },
-  { id: "high", label: "High quality", scale: 2.0, quality: 0.88 },
+  { id: "low", labelKey: "presetStrong", scale: 1.2, quality: 0.6 },
+  { id: "med", labelKey: "presetBalanced", scale: 1.5, quality: 0.75 },
+  { id: "high", labelKey: "presetHigh", scale: 2.0, quality: 0.88 },
 ] as const;
 
 const MAX_FILES = 50;
@@ -50,7 +52,9 @@ async function compressOne(file: File, scale: number, quality: number, pdfjs: Pd
   return new Blob([await out.save() as BlobPart], { type: "application/pdf" });
 }
 
-export function BatchPdfClient() {
+export function BatchPdfClient({ locale }: { locale: Locale }) {
+  const t = getBatch(locale).pdf;
+  const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [preset, setPreset] = useState<string>("med");
   const [busy, setBusy] = useState(false);
@@ -115,20 +119,20 @@ export function BatchPdfClient() {
       {jobs.length === 0 ? (
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-rose-300 bg-rose-50/40 px-6 py-16 text-center transition-colors hover:brightness-95">
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-rose-50 text-rose-600"><Files className="h-6 w-6" /></span>
-          <span className="mt-3 font-semibold text-ink-900">Drop up to {MAX_FILES} PDFs</span>
-          <span className="mt-0.5 text-xs text-ink-400">Each is re-rendered to JPEG pages — biggest wins on image-heavy or scanned PDFs.</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.dropTitle(MAX_FILES)}</span>
+          <span className="mt-0.5 text-xs text-ink-400">{t.dropHint}</span>
           <input type="file" multiple accept="application/pdf,.pdf" className="hidden" onChange={(e) => add(e.target.files)} />
         </label>
       ) : (
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm font-medium text-ink-900">{jobs.length} PDF{jobs.length > 1 ? "s" : ""} queued</span>
+            <span className="text-sm font-medium text-ink-900">{t.queued(jobs.length)}</span>
             <div className="flex gap-2">
               <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:bg-ink-50">
-                <Upload className="h-3.5 w-3.5" /> Add more
+                <Upload className="h-3.5 w-3.5" /> {common.addMore}
                 <input type="file" multiple accept="application/pdf,.pdf" className="hidden" onChange={(e) => add(e.target.files)} />
               </label>
-              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> Clear</Button>
+              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> {common.clear}</Button>
             </div>
           </div>
           <ul className="mt-3 max-h-72 space-y-1 overflow-y-auto text-sm">
@@ -149,10 +153,10 @@ export function BatchPdfClient() {
       )}
 
       <div className="rounded-lg border border-ink-100 bg-white p-4">
-        <label className="mb-1 block text-xs font-medium text-ink-500">Compression preset</label>
+        <label className="mb-1 block text-xs font-medium text-ink-500">{t.preset}</label>
         <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">
           {PRESETS.map((p) => (
-            <button key={p.id} onClick={() => setPreset(p.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", preset === p.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{p.label}</button>
+            <button key={p.id} onClick={() => setPreset(p.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", preset === p.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{t[p.labelKey]}</button>
           ))}
         </div>
       </div>
@@ -160,19 +164,19 @@ export function BatchPdfClient() {
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={runAll} disabled={jobs.length === 0 || busy} size="lg">
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {busy ? `Compressing ${done}/${total}…` : `Compress ${jobs.length || ""} PDFs`}
+          {busy ? t.compressing(done, total) : t.compress(String(jobs.length || ""))}
         </Button>
         {zipUrl && (
           <a href={zipUrl} download="konver-pdfs.zip">
-            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
+            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> {common.downloadZip} · {formatBytes(zipSize)}</Button>
           </a>
         )}
         {!busy && total > 0 && done > 0 && (
-          <span className="text-sm text-ink-500">{done} done{errors > 0 ? ` · ${errors} failed` : ""}</span>
+          <span className="text-sm text-ink-500">{common.done(done)}{errors > 0 ? ` · ${common.failed(errors)}` : ""}</span>
         )}
       </div>
 
-      <p className="text-xs text-ink-400">Processed 100% in your browser — your PDFs are never uploaded. The output is image-based (no selectable text).</p>
+      <p className="text-xs text-ink-400">{t.privacy}</p>
     </div>
   );
 }

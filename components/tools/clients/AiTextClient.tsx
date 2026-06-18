@@ -12,9 +12,15 @@ import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { CharMeter } from "@/components/tools/CharMeter";
 import { useCharLimit } from "@/hooks/useCharLimit";
 import { QuotaReachedModal, type QuotaReason } from "@/components/billing/QuotaReachedModal";
+import { useLocale } from "@/hooks/useLocale";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
+import { AI_TEXT_I18N, REPHRASE_STYLE_I18N, SUMMARY_FORMAT_I18N } from "@/lib/i18n/ai-text-i18n";
 
 export function AiTextClient({ slug }: { slug: string }) {
   const def = AI_TEXT_TOOLS[slug];
+  const locale = useLocale();
+  const t = getCommonUi(locale);
+  const L = AI_TEXT_I18N[slug]?.[locale];
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,6 +54,12 @@ export function AiTextClient({ slug }: { slug: string }) {
             kind: data.error === "monthly_limit" ? "monthly" : "daily",
             limit: data.limit ?? 0, used: data.used ?? 0, resetAt: data.resetAt ?? null,
           });
+          return;
+        }
+        if (data.error === "rate_limited") {
+          // The function returns a human message (e.g. "Too many requests from
+          // your network. Sign in for higher limits, or retry in 42s.").
+          setError(data.message || "Too many requests right now — please wait a moment and try again.");
           return;
         }
         setError(
@@ -100,7 +112,7 @@ export function AiTextClient({ slug }: { slug: string }) {
                 <button key={s} onClick={() => setStyle(s)}
                   className={cn("rounded-full border px-3 py-1 text-sm transition-colors",
                     style === s ? "border-brand-300 bg-brand-50 text-brand-700" : "border-ink-200 bg-white text-ink-600 hover:border-ink-300")}>
-                  {s}
+                  {REPHRASE_STYLE_I18N[locale]?.[s] ?? s}
                 </button>
               ))}
             </div>
@@ -111,7 +123,7 @@ export function AiTextClient({ slug }: { slug: string }) {
                 <button key={f.id} onClick={() => setFormat(f.id)}
                   className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                     format === f.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>
-                  {f.label}
+                  {SUMMARY_FORMAT_I18N[locale]?.[f.id] ?? f.label}
                 </button>
               ))}
             </div>
@@ -121,11 +133,11 @@ export function AiTextClient({ slug }: { slug: string }) {
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-ink-700">{def.inputLabel}</label>
+          <label className="mb-1.5 block text-sm font-medium text-ink-700">{L?.inputLabel ?? def.inputLabel}</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={def.inputPlaceholder}
+            placeholder={L?.inputPlaceholder ?? def.inputPlaceholder}
             className={cn(
               "h-64 w-full resize-y rounded-lg border bg-white p-3 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2",
               meter.over ? "border-red-300 focus:border-red-400 focus:ring-red-100" : "border-ink-200 focus:border-brand-400 focus:ring-brand-100",
@@ -135,21 +147,21 @@ export function AiTextClient({ slug }: { slug: string }) {
         </div>
         <div>
           <div className="mb-1.5 flex items-center justify-between">
-            <label className="text-sm font-medium text-ink-700">{def.outputLabel}</label>
+            <label className="text-sm font-medium text-ink-700">{L?.outputLabel ?? def.outputLabel}</label>
             <Button size="sm" variant="outline" onClick={copy} disabled={!output}>
               {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-              {copied ? "Copied" : "Copy"}
+              {copied ? t.copied : t.copy}
             </Button>
           </div>
           <div className="h-64 w-full overflow-auto whitespace-pre-wrap rounded-lg border border-ink-200 bg-ink-50/50 p-3 text-sm text-ink-900">
-            {loading ? <span className="text-ink-400">Working on it…</span> : output || <span className="text-ink-300">Your result will appear here.</span>}
+            {loading ? <span className="text-ink-400">{t.working}</span> : output || <span className="text-ink-300">{t.aiResultPlaceholder}</span>}
           </div>
         </div>
       </div>
 
       <Button onClick={run} disabled={!input.trim() || loading || meter.over} size="lg">
         <Sparkles className="h-4 w-4" />
-        {loading ? "Processing…" : def.cta}
+        {loading ? t.processing : (L?.cta ?? def.cta)}
       </Button>
 
       {error && (

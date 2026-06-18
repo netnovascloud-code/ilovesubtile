@@ -4,38 +4,27 @@ import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
+import type { Locale } from "@/lib/i18n/locales";
+import { getBatch } from "@/lib/i18n/page-batch";
 
 type Job = { id: string; file: File; status: "queued" | "running" | "done" | "error"; blob?: Blob; outName?: string; error?: string };
 
-let ffmpegPromise: Promise<unknown> | null = null;
-type FfmpegLike = { exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<unknown>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<unknown> };
-
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ff;
-    })();
-  }
-  return (await ffmpegPromise) as FfmpegLike;
-}
+// FFmpeg.wasm loads via the shared, resilient singleton in lib/ffmpeg-client
+// (self-hosted worker + CDN fallback + load timeout). See its header for why a
+// local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
 const MAX_FILES = 50;
 const BITRATES = [
-  { id: "128k", label: "128 kbps · small" },
-  { id: "192k", label: "192 kbps · balanced" },
-  { id: "256k", label: "256 kbps · good" },
-  { id: "320k", label: "320 kbps · max" },
-];
+  { id: "128k", labelKey: "bitrate128" },
+  { id: "192k", labelKey: "bitrate192" },
+  { id: "256k", labelKey: "bitrate256" },
+  { id: "320k", labelKey: "bitrate320" },
+] as const;
 
-export function BatchAudioClient() {
+export function BatchAudioClient({ locale }: { locale: Locale }) {
+  const t = getBatch(locale).audio;
+  const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [bitrate, setBitrate] = useState<string>("192k");
   const [busy, setBusy] = useState(false);
@@ -109,20 +98,20 @@ export function BatchAudioClient() {
       {jobs.length === 0 ? (
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-amber-300 bg-amber-50/40 px-6 py-16 text-center transition-colors hover:brightness-95">
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-amber-50 text-amber-600"><Music className="h-6 w-6" /></span>
-          <span className="mt-3 font-semibold text-ink-900">Drop up to {MAX_FILES} audio files</span>
-          <span className="mt-0.5 text-xs text-ink-400">MP3 · WAV · M4A · FLAC · OGG — converted to MP3 in your browser</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.dropTitle(MAX_FILES)}</span>
+          <span className="mt-0.5 text-xs text-ink-400">{t.dropHint}</span>
           <input type="file" multiple accept="audio/*,.mp3,.wav,.m4a,.aac,.flac,.ogg,.opus" className="hidden" onChange={(e) => add(e.target.files)} />
         </label>
       ) : (
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm font-medium text-ink-900">{jobs.length} audio file{jobs.length > 1 ? "s" : ""} queued</span>
+            <span className="text-sm font-medium text-ink-900">{t.queued(jobs.length)}</span>
             <div className="flex gap-2">
               <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:bg-ink-50">
-                <Upload className="h-3.5 w-3.5" /> Add more
+                <Upload className="h-3.5 w-3.5" /> {common.addMore}
                 <input type="file" multiple accept="audio/*,.mp3,.wav,.m4a,.aac,.flac,.ogg,.opus" className="hidden" onChange={(e) => add(e.target.files)} />
               </label>
-              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> Clear</Button>
+              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> {common.clear}</Button>
             </div>
           </div>
           <ul className="mt-3 max-h-72 space-y-1 overflow-y-auto text-sm">
@@ -143,10 +132,10 @@ export function BatchAudioClient() {
       )}
 
       <div className="rounded-lg border border-ink-100 bg-white p-4">
-        <label className="mb-1 block text-xs font-medium text-ink-500">Output bitrate</label>
+        <label className="mb-1 block text-xs font-medium text-ink-500">{t.bitrate}</label>
         <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">
           {BITRATES.map((b) => (
-            <button key={b.id} onClick={() => setBitrate(b.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", bitrate === b.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{b.label}</button>
+            <button key={b.id} onClick={() => setBitrate(b.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", bitrate === b.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{t[b.labelKey]}</button>
           ))}
         </div>
       </div>
@@ -154,26 +143,26 @@ export function BatchAudioClient() {
       {phase === "loading" && (
         <div className="flex items-center gap-3 rounded-lg border border-ink-100 bg-white px-4 py-3">
           <Loader2 className="h-4 w-4 animate-spin text-brand-500" />
-          <span className="text-sm text-ink-700">Loading FFmpeg (~30 MB) — only the first time.</span>
+          <span className="text-sm text-ink-700">{common.loadingFfmpeg}</span>
         </div>
       )}
 
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={runAll} disabled={jobs.length === 0 || busy} size="lg">
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {busy ? `Converting ${done}/${total}…` : `Convert ${jobs.length || ""} to MP3`}
+          {busy ? t.converting(done, total) : t.convert(String(jobs.length || ""))}
         </Button>
         {zipUrl && (
           <a href={zipUrl} download="konver-audio.zip">
-            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
+            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> {common.downloadZip} · {formatBytes(zipSize)}</Button>
           </a>
         )}
         {!busy && total > 0 && done > 0 && (
-          <span className="text-sm text-ink-500">{done} done{errors > 0 ? ` · ${errors} failed` : ""}</span>
+          <span className="text-sm text-ink-500">{common.done(done)}{errors > 0 ? ` · ${common.failed(errors)}` : ""}</span>
         )}
       </div>
 
-      <p className="text-xs text-ink-400">Processed 100% in your browser via FFmpeg.wasm — your files are never uploaded.</p>
+      <p className="text-xs text-ink-400">{t.privacy}</p>
     </div>
   );
 }

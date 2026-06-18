@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
+import { LivePresence } from "@/components/home/LivePresence";
+import { LiveConversions } from "@/components/home/LiveConversions";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
 import { categoryLabel } from "@/lib/i18n/resolve-category-i18n";
@@ -83,7 +86,7 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
           subtitle: hx.subtitle,
           placeholder: hx.placeholder,
           all: hx.all,
-          counter: hx.counter.replace("{n}", String(tools.length)),
+          counter: hx.counter.replace("{n}", String(tools.length)).replace("{l}", String(LOCALES.length)),
           suggestions: SUGGEST.map((s, i) => ({ ...s, label: hx.suggestions[i] })),
           ai: hx.ai,
           seeAll: hx.seeAll,
@@ -91,17 +94,24 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
         }}
       />
 
+      <div className="container pb-8">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <LiveConversions locale={locale} />
+          <LivePresence locale={locale} />
+        </div>
+      </div>
+
       <section className="border-t border-ink-100 bg-surface">
         <div className="container py-20">
           <div className="rounded-lg border border-ink-100 bg-white p-10 shadow-card md:p-14">
             <div className="grid items-center gap-8 md:grid-cols-2">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-ink-900 md:text-3xl">
+                <h2 className="text-2xl font-semibold tracking-tight text-ink-900 [text-wrap:balance] md:text-3xl">
                   {ui.home.upgradeTitle}
                 </h2>
                 <p className="mt-3 text-ink-500">{ui.home.upgradeBody}</p>
                 <div className="mt-6 flex gap-3">
-                  <Link href={localePath(locale, "pricing")}>
+                  <Link href={localePath(locale, "pricing")} prefetch={false}>
                     <Button>{ui.home.upgradeCtaPrimary}</Button>
                   </Link>
                   <Link href="/register">
@@ -109,9 +119,12 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
                   </Link>
                 </div>
               </div>
-              <ul className="space-y-3 text-sm text-ink-700">
+              <ul className="space-y-2.5 rounded-xl border border-ink-100 bg-surface/60 p-5">
                 {ui.home.upgradeFeatures.map((f) => (
-                  <li key={f}>✓ {f}</li>
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-ink-700">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                    <span>{f}</span>
+                  </li>
                 ))}
               </ul>
             </div>

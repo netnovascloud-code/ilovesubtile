@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PricingTiles } from "@/components/billing/PricingTiles";
+import { PlanComparisonTable } from "@/components/billing/PlanComparisonTable";
 import { getStrings } from "@/lib/i18n/strings";
 import { getToolUi } from "@/lib/i18n/tool-ui";
 import { getPlanFeatures } from "@/lib/i18n/plan-features";
@@ -54,6 +55,8 @@ export default function LocalisedPricing({ params }: { params: { locale: string 
           intervalLabels={intervalLabels}
           features={getPlanFeatures(locale)}
         />
+
+        <PlanComparisonTable locale={locale} />
 
         <p className="mt-10 text-center text-xs text-ink-400">{ui.footnote}</p>
       </div>

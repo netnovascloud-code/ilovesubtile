@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Files } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n/locales";
+import { getBatch, type BatchStrings } from "@/lib/i18n/page-batch";
 
 type Job = {
   id: string;
@@ -15,20 +17,20 @@ type Job = {
 };
 
 const FORMATS = [
-  { id: "image/webp", label: "WebP (recommended)", ext: "webp" },
-  { id: "image/jpeg", label: "JPG", ext: "jpg" },
-  { id: "image/png", label: "PNG", ext: "png" },
+  { id: "image/webp", labelKey: "formatWebp", ext: "webp" },
+  { id: "image/jpeg", labelKey: "formatJpg", ext: "jpg" },
+  { id: "image/png", labelKey: "formatPng", ext: "png" },
 ] as const;
 
 const MAX_FILES = 50;
 
-async function convertOne(file: File, mime: string, quality: number, maxSide: number | null): Promise<Blob> {
+async function convertOne(file: File, mime: string, quality: number, maxSide: number | null, t: BatchStrings["image"]): Promise<Blob> {
   const url = URL.createObjectURL(file);
   try {
     const img = await new Promise<HTMLImageElement>((res, rej) => {
       const i = new Image();
       i.onload = () => res(i);
-      i.onerror = () => rej(new Error("Could not decode image"));
+      i.onerror = () => rej(new Error(t.errDecode));
       i.src = url;
     });
     let w = img.naturalWidth, h = img.naturalHeight;
@@ -39,16 +41,18 @@ async function convertOne(file: File, mime: string, quality: number, maxSide: nu
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
     const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Canvas unavailable");
+    if (!ctx) throw new Error(t.errCanvas);
     if (mime === "image/jpeg") { ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0, 0, w, h); }
     ctx.drawImage(img, 0, 0, w, h);
     return await new Promise<Blob>((res, rej) =>
-      canvas.toBlob((b) => (b ? res(b) : rej(new Error("Encoding failed"))), mime, quality),
+      canvas.toBlob((b) => (b ? res(b) : rej(new Error(t.errEncode))), mime, quality),
     );
   } finally { URL.revokeObjectURL(url); }
 }
 
-export function BatchImageClient() {
+export function BatchImageClient({ locale }: { locale: Locale }) {
+  const t = getBatch(locale).image;
+  const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [format, setFormat] = useState<string>("image/webp");
   const [quality, setQuality] = useState(80);
@@ -88,7 +92,7 @@ export function BatchImageClient() {
         setJobs((s) => s.map((x) => x.id === j.id ? { ...x, status: "running" } : x));
         try {
           const outName = `${j.file.name.replace(/\.[^.]+$/, "")}.${fmt.ext}`;
-          const blob = await convertOne(j.file, fmt.id, q, maxSide || null);
+          const blob = await convertOne(j.file, fmt.id, q, maxSide || null, t);
           setJobs((s) => s.map((x) => x.id === j.id ? { ...x, status: "done", blob, outName } : x));
         } catch (e) {
           setJobs((s) => s.map((x) => x.id === j.id ? { ...x, status: "error", error: (e as Error).message } : x));
@@ -122,20 +126,20 @@ export function BatchImageClient() {
       {jobs.length === 0 ? (
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-emerald-300 bg-emerald-50/40 px-6 py-16 text-center transition-colors hover:brightness-95">
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600"><Files className="h-6 w-6" /></span>
-          <span className="mt-3 font-semibold text-ink-900">Drop up to {MAX_FILES} images</span>
-          <span className="mt-0.5 text-xs text-ink-400">JPG · PNG · WebP · GIF · BMP — processed in your browser, packed in a ZIP</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.dropTitle(MAX_FILES)}</span>
+          <span className="mt-0.5 text-xs text-ink-400">{t.dropHint}</span>
           <input type="file" multiple accept="image/*" className="hidden" onChange={(e) => add(e.target.files)} />
         </label>
       ) : (
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm font-medium text-ink-900">{jobs.length} image{jobs.length > 1 ? "s" : ""} queued</span>
+            <span className="text-sm font-medium text-ink-900">{t.queued(jobs.length)}</span>
             <div className="flex gap-2">
               <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:bg-ink-50">
-                <Upload className="h-3.5 w-3.5" /> Add more
+                <Upload className="h-3.5 w-3.5" /> {common.addMore}
                 <input type="file" multiple accept="image/*" className="hidden" onChange={(e) => add(e.target.files)} />
               </label>
-              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> Clear</Button>
+              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> {common.clear}</Button>
             </div>
           </div>
           <ul className="mt-3 max-h-72 space-y-1 overflow-y-auto text-sm">
@@ -157,22 +161,22 @@ export function BatchImageClient() {
 
       <div className="grid gap-4 rounded-lg border border-ink-100 bg-white p-4 md:grid-cols-2">
         <div>
-          <label className="mb-1 block text-xs font-medium text-ink-500">Target format</label>
+          <label className="mb-1 block text-xs font-medium text-ink-500">{t.targetFormat}</label>
           <div className="inline-flex rounded-lg border border-ink-200 p-1">
             {FORMATS.map((f) => (
-              <button key={f.id} onClick={() => setFormat(f.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", format === f.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{f.label}</button>
+              <button key={f.id} onClick={() => setFormat(f.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", format === f.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{t[f.labelKey]}</button>
             ))}
           </div>
         </div>
         <div>
           {format !== "image/png" && (
             <div>
-              <label className="mb-1 block text-xs font-medium text-ink-500">Quality · {quality}</label>
+              <label className="mb-1 block text-xs font-medium text-ink-500">{t.quality(quality)}</label>
               <input type="range" min={20} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))} className="w-full accent-brand-500" />
             </div>
           )}
           <div className="mt-3">
-            <label className="mb-1 block text-xs font-medium text-ink-500">Max dimension (px) · 0 = keep</label>
+            <label className="mb-1 block text-xs font-medium text-ink-500">{t.maxDimension}</label>
             <input type="number" min={0} max={8192} value={maxSide} onChange={(e) => setMaxSide(Number(e.target.value))} className="w-32 rounded-md border border-ink-200 bg-white px-2 py-1 text-sm" />
           </div>
         </div>
@@ -181,19 +185,19 @@ export function BatchImageClient() {
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={runAll} disabled={jobs.length === 0 || busy} size="lg">
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {busy ? `Processing ${done}/${total}…` : `Process ${jobs.length || ""} images`}
+          {busy ? t.processing(done, total) : t.process(String(jobs.length || ""))}
         </Button>
         {zipUrl && (
           <a href={zipUrl} download="konver-batch.zip">
-            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
+            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> {common.downloadZip} · {formatBytes(zipSize)}</Button>
           </a>
         )}
         {!busy && total > 0 && done > 0 && (
-          <span className="text-sm text-ink-500">{done} done{errors > 0 ? ` · ${errors} failed` : ""}</span>
+          <span className="text-sm text-ink-500">{common.done(done)}{errors > 0 ? ` · ${common.failed(errors)}` : ""}</span>
         )}
       </div>
 
-      <p className="text-xs text-ink-400">Processed 100% in your browser — your images are never uploaded.</p>
+      <p className="text-xs text-ink-400">{t.privacy}</p>
     </div>
   );
 }

@@ -61,13 +61,12 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink-900">{t.product}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
-              <Link href={localePath(locale, "pricing")} className="hover:text-ink-900">
+              <Link href={localePath(locale, "pricing")} prefetch={false} className="hover:text-ink-900">
                 {t.pricing}
               </Link>
             </li>
             <li>
-              {/* /api has no localized route — link un-prefixed to avoid a 404. */}
-              <Link href="/api" className="hover:text-ink-900">
+              <Link href={localePath(locale, "api")} className="hover:text-ink-900">
                 {t.api}
               </Link>
             </li>
@@ -93,13 +92,23 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink-900">{t.legal}</div>
           <ul className="mt-3 space-y-2 text-sm text-ink-500">
             <li>
-              <Link href="/privacy" className="hover:text-ink-900">
+              <Link href={localePath(locale, "privacy")} className="hover:text-ink-900">
                 {t.privacy}
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:text-ink-900">
+              <Link href={localePath(locale, "terms")} className="hover:text-ink-900">
                 {t.terms}
+              </Link>
+            </li>
+            <li>
+              <Link href={localePath(locale, "cookies")} className="hover:text-ink-900">
+                Cookies
+              </Link>
+            </li>
+            <li>
+              <Link href={localePath(locale, "legal-notice")} className="hover:text-ink-900">
+                {locale === "fr" ? "Mentions légales" : "Legal notice"}
               </Link>
             </li>
           </ul>

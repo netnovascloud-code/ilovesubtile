@@ -4,37 +4,26 @@ import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatBytes } from "@/lib/utils";
+import { getFfmpeg } from "@/lib/ffmpeg-client";
+import type { Locale } from "@/lib/i18n/locales";
+import { getBatch } from "@/lib/i18n/page-batch";
 
 type Job = { id: string; file: File; status: "queued" | "running" | "done" | "error"; blob?: Blob; outName?: string; error?: string };
 
-let ffmpegPromise: Promise<unknown> | null = null;
-type FfmpegLike = { exec: (args: string[]) => Promise<number>; writeFile: (n: string, d: Uint8Array) => Promise<unknown>; readFile: (n: string) => Promise<Uint8Array>; deleteFile: (n: string) => Promise<unknown> };
-
-async function getFfmpeg(): Promise<FfmpegLike> {
-  if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ff = new FFmpeg();
-      const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-      await ff.load({
-        coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-      });
-      return ff;
-    })();
-  }
-  return (await ffmpegPromise) as FfmpegLike;
-}
+// FFmpeg.wasm loads via the shared, resilient singleton in lib/ffmpeg-client
+// (self-hosted worker + CDN fallback + load timeout). See its header for why a
+// local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
 const MAX_FILES = 20;
 const CRF_PRESETS = [
-  { id: "32", label: "Strong (CRF 32)" },
-  { id: "28", label: "Balanced (CRF 28)" },
-  { id: "23", label: "High (CRF 23)" },
-];
+  { id: "32", labelKey: "presetStrong" },
+  { id: "28", labelKey: "presetBalanced" },
+  { id: "23", labelKey: "presetHigh" },
+] as const;
 
-export function BatchVideoClient() {
+export function BatchVideoClient({ locale }: { locale: Locale }) {
+  const t = getBatch(locale).video;
+  const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [crf, setCrf] = useState<string>("28");
   const [busy, setBusy] = useState(false);
@@ -108,20 +97,20 @@ export function BatchVideoClient() {
       {jobs.length === 0 ? (
         <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-violet-300 bg-violet-50/40 px-6 py-16 text-center transition-colors hover:brightness-95">
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-violet-50 text-violet-600"><Video className="h-6 w-6" /></span>
-          <span className="mt-3 font-semibold text-ink-900">Drop up to {MAX_FILES} videos</span>
-          <span className="mt-0.5 text-xs text-ink-400">MP4 · MOV · MKV · WebM — re-encoded with H.264 + AAC in your browser</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.dropTitle(MAX_FILES)}</span>
+          <span className="mt-0.5 text-xs text-ink-400">{t.dropHint}</span>
           <input type="file" multiple accept="video/*,.mp4,.mov,.mkv,.webm,.avi" className="hidden" onChange={(e) => add(e.target.files)} />
         </label>
       ) : (
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm font-medium text-ink-900">{jobs.length} video{jobs.length > 1 ? "s" : ""} queued</span>
+            <span className="text-sm font-medium text-ink-900">{t.queued(jobs.length)}</span>
             <div className="flex gap-2">
               <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:bg-ink-50">
-                <Upload className="h-3.5 w-3.5" /> Add more
+                <Upload className="h-3.5 w-3.5" /> {common.addMore}
                 <input type="file" multiple accept="video/*,.mp4,.mov,.mkv,.webm,.avi" className="hidden" onChange={(e) => add(e.target.files)} />
               </label>
-              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> Clear</Button>
+              <Button size="sm" variant="outline" onClick={clear}><X className="h-3.5 w-3.5" /> {common.clear}</Button>
             </div>
           </div>
           <ul className="mt-3 max-h-72 space-y-1 overflow-y-auto text-sm">
@@ -142,10 +131,10 @@ export function BatchVideoClient() {
       )}
 
       <div className="rounded-lg border border-ink-100 bg-white p-4">
-        <label className="mb-1 block text-xs font-medium text-ink-500">Quality preset (lower CRF = bigger file, higher quality)</label>
+        <label className="mb-1 block text-xs font-medium text-ink-500">{t.preset}</label>
         <div className="inline-flex rounded-lg border border-ink-200 bg-white p-1">
           {CRF_PRESETS.map((p) => (
-            <button key={p.id} onClick={() => setCrf(p.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", crf === p.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{p.label}</button>
+            <button key={p.id} onClick={() => setCrf(p.id)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", crf === p.id ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{t[p.labelKey]}</button>
           ))}
         </div>
       </div>
@@ -153,26 +142,26 @@ export function BatchVideoClient() {
       {phase === "loading" && (
         <div className="flex items-center gap-3 rounded-lg border border-ink-100 bg-white px-4 py-3">
           <Loader2 className="h-4 w-4 animate-spin text-brand-500" />
-          <span className="text-sm text-ink-700">Loading FFmpeg (~30 MB) — only the first time.</span>
+          <span className="text-sm text-ink-700">{common.loadingFfmpeg}</span>
         </div>
       )}
 
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={runAll} disabled={jobs.length === 0 || busy} size="lg">
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-          {busy ? `Compressing ${done}/${total}…` : `Compress ${jobs.length || ""} videos`}
+          {busy ? t.compressing(done, total) : t.compress(String(jobs.length || ""))}
         </Button>
         {zipUrl && (
           <a href={zipUrl} download="konver-videos.zip">
-            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> Download ZIP · {formatBytes(zipSize)}</Button>
+            <Button size="lg" variant="outline"><Download className="h-4 w-4" /> {common.downloadZip} · {formatBytes(zipSize)}</Button>
           </a>
         )}
         {!busy && total > 0 && done > 0 && (
-          <span className="text-sm text-ink-500">{done} done{errors > 0 ? ` · ${errors} failed` : ""}</span>
+          <span className="text-sm text-ink-500">{common.done(done)}{errors > 0 ? ` · ${common.failed(errors)}` : ""}</span>
         )}
       </div>
 
-      <p className="text-xs text-ink-400">Processed 100% in your browser via FFmpeg.wasm — your videos are never uploaded. Big files are slow; consider trimming first.</p>
+      <p className="text-xs text-ink-400">{t.privacy}</p>
     </div>
   );
 }

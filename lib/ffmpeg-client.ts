@@ -30,10 +30,21 @@
 //     loading from esm.sh/unpkg without CORP (pdf.js, tesseract, @imgly, jsQR,
 //     zxing), plus Google Fonts and Ezoic ads.
 
-const CORE_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm";
+// The core (~30 MB) is fetched at runtime and turned into a blob URL. We try
+// two CDNs in order so a single CDN hiccup (unpkg 5xx / regional block) doesn't
+// leave every audio/video tool dead. Both hosts are allow-listed in the CSP
+// connect-src (next.config.mjs / middleware.ts).
+const CORE_BASES = [
+  "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm",
+  "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm",
+];
 // Self-hosted ESM worker (copied from @ffmpeg/ffmpeg/dist/esm) — same-origin so
 // it isn't mangled by Webpack and satisfies the CSP worker-src 'self'.
 const WORKER_URL = "/ffmpeg/worker.js";
+// A 404 on the worker (or a wedged CDN) makes @ffmpeg/ffmpeg's load() hang
+// forever with no error — the UI then sits on "loading" with no progress and
+// no failure. Cap it so a stuck load surfaces as a clear, retryable error.
+const LOAD_TIMEOUT_MS = 60_000;
 
 export type FfmpegInstance = {
   exec: (args: string[]) => Promise<number>;
@@ -45,19 +56,48 @@ export type FfmpegInstance = {
 
 let ffmpegPromise: Promise<unknown> | null = null;
 
+function withTimeout<T>(p: Promise<T>, ms: number, message: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(message)), ms);
+    p.then(
+      (v) => { clearTimeout(timer); resolve(v); },
+      (e) => { clearTimeout(timer); reject(e); },
+    );
+  });
+}
+
+async function loadFfmpeg(): Promise<FfmpegInstance> {
+  const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+  const { toBlobURL } = await import("@ffmpeg/util");
+  const classWorkerURL = new URL(WORKER_URL, window.location.origin).href;
+  let lastErr: unknown;
+  for (const base of CORE_BASES) {
+    try {
+      const ffmpeg = new FFmpeg();
+      const [coreURL, wasmURL] = await Promise.all([
+        toBlobURL(`${base}/ffmpeg-core.js`, "text/javascript"),
+        toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
+      ]);
+      await withTimeout(
+        ffmpeg.load({ coreURL, wasmURL, classWorkerURL }),
+        LOAD_TIMEOUT_MS,
+        "The conversion engine timed out while loading. Check your connection or try another browser.",
+      );
+      return ffmpeg as unknown as FfmpegInstance;
+    } catch (e) {
+      lastErr = e; // try the next CDN
+    }
+  }
+  throw lastErr instanceof Error
+    ? lastErr
+    : new Error("Could not load the conversion engine — please retry.");
+}
+
 export async function getFfmpeg(onProgress?: (p: number) => void): Promise<FfmpegInstance> {
   if (!ffmpegPromise) {
-    ffmpegPromise = (async () => {
-      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-      const { toBlobURL } = await import("@ffmpeg/util");
-      const ffmpeg = new FFmpeg();
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, "text/javascript"),
-        wasmURL: await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, "application/wasm"),
-        classWorkerURL: new URL(WORKER_URL, window.location.origin).href,
-      });
-      return ffmpeg;
-    })();
+    // Reset the cache on failure so the next attempt re-tries (and can fall
+    // through to the backup CDN) instead of replaying a rejected promise.
+    ffmpegPromise = loadFfmpeg().catch((e) => { ffmpegPromise = null; throw e; });
   }
   const ff = (await ffmpegPromise) as FfmpegInstance;
   if (onProgress) ff.on("progress", (e) => onProgress(Math.max(1, Math.min(99, Math.round((e.progress ?? 0) * 100)))));

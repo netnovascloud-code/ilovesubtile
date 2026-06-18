@@ -12,6 +12,7 @@
 //   node scripts/fill-translations.mjs                          # fill everything
 //   node scripts/fill-translations.mjs --target tools           # tools only
 //   node scripts/fill-translations.mjs --target categories
+//   node scripts/fill-translations.mjs --target steps           # "How it works" step cards
 //   node scripts/fill-translations.mjs --locale fr --limit 20
 //
 // Resumable: writes the overlay back to disk every 10 successful translations
@@ -25,6 +26,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const TOOL_PATH = resolve(ROOT, "lib/i18n/tool-translations.generated.ts");
 const CAT_PATH = resolve(ROOT, "lib/i18n/category-translations.generated.ts");
+const STEPS_PATH = resolve(ROOT, "lib/i18n/tool-steps.generated.ts");
 
 const LOCALES = [
   ["fr", "French"], ["es", "Spanish"], ["pt", "Portuguese"], ["de", "German"],
@@ -83,6 +85,16 @@ async function main() {
       typeName: "ToolI18n",
       typeImport: 'import type { ToolI18n } from "./tool-translations";',
       apiTask: "i18n-tool",
+      env,
+    });
+  }
+  if (TARGET === "all" || TARGET === "steps") {
+    const { HAND_STEP_SLUGS } = await loadHandStepSlugs();
+    const { GENERATED_STEP_TRANSLATIONS } = await import(STEPS_PATH);
+    await processSteps({
+      items: TOOLS.filter((t) => Array.isArray(t.steps) && t.steps.length),
+      handHas: (slug, loc) => HAND_STEP_SLUGS.has(`${loc}:${slug}`),
+      generated: structuredClone(GENERATED_STEP_TRANSLATIONS),
       env,
     });
   }
@@ -148,6 +160,115 @@ async function processTarget(cfg) {
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
   await flush(cfg, generated);
   console.log(`${title}: filled ${done}${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
+}
+
+// Which (locale, slug) step sets are already hand-authored in lib/i18n/tool-steps.ts?
+// Parsed from source text — the file can't be `import`ed (path aliases + TS).
+async function loadHandStepSlugs() {
+  const HAND_STEP_SLUGS = new Set();
+  let raw;
+  try { raw = await readFile(resolve(ROOT, "lib/i18n/tool-steps.ts"), "utf8"); }
+  catch { return { HAND_STEP_SLUGS }; }
+  // Each `const <loc>: StepsBySlug = { ... };` block lists slug keys at indent 2.
+  const blockRe = /const\s+([a-z]{2}):\s*StepsBySlug\s*=\s*\{/g;
+  let m;
+  const starts = [];
+  while ((m = blockRe.exec(raw))) starts.push({ loc: m[1], idx: m.index });
+  for (let i = 0; i < starts.length; i++) {
+    const region = raw.slice(starts[i].idx, i + 1 < starts.length ? starts[i + 1].idx : raw.length);
+    const keyRe = /\n {2}"?([\w-]+)"?:\s*\[/g;
+    let k;
+    while ((k = keyRe.exec(region))) HAND_STEP_SLUGS.add(`${starts[i].loc}:${k[1]}`);
+  }
+  return { HAND_STEP_SLUGS };
+}
+
+async function processSteps(cfg) {
+  const { items, handHas, generated, env } = cfg;
+  const locales = ONLY_LOCALE ? LOCALES.filter(([c]) => c === ONLY_LOCALE) : LOCALES;
+
+  const jobs = [];
+  const perLocale = Object.fromEntries(locales.map(([c]) => [c, 0]));
+  let touched = 0;
+  for (const item of items) {
+    const slug = item.slug;
+    let gap = false;
+    for (const [code, lang] of locales) {
+      if (handHas(slug, code) || generated[slug]?.[code]) continue;
+      perLocale[code]++; gap = true;
+      jobs.push({ slug, code, lang, steps: item.steps.map((s) => ({ title: s.title, body: s.body })) });
+    }
+    if (gap && ++touched > LIMIT) break;
+  }
+
+  console.log(`\nSteps audit (${items.length} tools × ${locales.length} locales):`);
+  for (const [code] of locales) console.log(`  ${code}: ${perLocale[code]} missing`);
+  console.log(`  ── ${jobs.length} (tool,locale) pairs to fill\n`);
+  if (DRY_RUN) { console.log("Dry run — no API calls."); return; }
+  if (jobs.length === 0) { console.log("Nothing to fill. ✅"); return; }
+
+  let done = 0, failed = 0;
+  const queue = [...jobs];
+  const worker = async () => {
+    while (queue.length) {
+      const job = queue.shift();
+      try {
+        (generated[job.slug] ??= {})[job.code] = await translateSteps(job, env);
+        if (++done % 10 === 0) { await flushSteps(generated); process.stdout.write(`  …${done}/${jobs.length}\n`); }
+      } catch (e) { failed++; console.warn(`  ! ${job.slug} [${job.code}]: ${e.message}`); }
+    }
+  };
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+  await flushSteps(generated);
+  console.log(`Steps: filled ${done}${failed ? `, ${failed} failed (re-run to retry)` : ""}. ✅`);
+}
+
+async function translateSteps(job, env) {
+  let lastErr;
+  const n = job.steps.length;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) await sleep(Math.min(2000 * 2 ** (attempt - 1), 30_000) + Math.random() * 500);
+    let res;
+    try {
+      res = await fetch(`${env.url}/functions/v1/ai-process`, {
+        method: "POST",
+        headers: { apikey: env.anon, Authorization: `Bearer ${env.anon}`, "Content-Type": "application/json", Origin: "https://konvertools.com" },
+        body: JSON.stringify({ task: "i18n-tool", text: JSON.stringify({ steps: job.steps }), options: { target: job.lang } }),
+      });
+    } catch (e) { lastErr = e; continue; }
+    if (res.status === 429 || res.status >= 500) { lastErr = new Error(`HTTP ${res.status}`); continue; }
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 160)}`);
+    const { output, error, message } = await res.json();
+    if (!output) { lastErr = new Error(message ?? error ?? "empty response"); continue; }
+    let parsed;
+    try { parsed = JSON.parse(output); } catch { lastErr = new Error(`bad output: ${output.slice(0, 120)}`); continue; }
+    const arr = Array.isArray(parsed) ? parsed : parsed.steps;
+    if (!Array.isArray(arr) || arr.length !== n) { lastErr = new Error("step count mismatch"); continue; }
+    let ok = true;
+    for (const s of arr) if (!s || typeof s.title !== "string" || typeof s.body !== "string" || !s.title.trim() || !s.body.trim()) { ok = false; break; }
+    if (!ok) { lastErr = new Error("incomplete step fields"); continue; }
+    return arr.map((s) => ({ title: s.title.trim(), body: s.body.trim() }));
+  }
+  throw lastErr ?? new Error("exhausted retries");
+}
+
+async function flushSteps(generated) {
+  const sorted = {};
+  for (const slug of Object.keys(generated).sort()) {
+    sorted[slug] = {};
+    for (const code of Object.keys(generated[slug]).sort()) sorted[slug][code] = generated[slug][code];
+  }
+  const body = `import type { Locale } from "@/lib/i18n/locales";
+import type { LocalisedStep } from "./tool-steps";
+
+/**
+ * AUTO-GENERATED — do not edit by hand. Produced by scripts/fill-translations.mjs --target steps.
+ * Localised "How it works" step cards, keyed slug → locale. getLocalisedSteps prefers
+ * hand-authored steps and falls back to the English source when a pair is absent.
+ */
+export const GENERATED_STEP_TRANSLATIONS: Record<string, Partial<Record<Locale, LocalisedStep[]>>> = ${JSON.stringify(sorted, null, 2)};
+`;
+  await writeFile(STEPS_PATH, body, "utf8");
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

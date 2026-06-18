@@ -31,6 +31,7 @@ const FN_MAP: Record<string, string> = {
   "keyword-extractor": "ai-process",
   "detect-language": "ai-process",
   "smart-drop": "ai-process",
+  "smart-assistant": "ai-assistant",
   "cover-letter": "ai-process",
   "contract-analyzer": "ai-process",
   // Vision tools — all handled by the ai-vision function via `task` (sends
@@ -46,6 +47,12 @@ const FN_MAP: Record<string, string> = {
   "phishing-detector": "security-tools",
   "url-scanner": "security-tools",
   "ssl-checker": "security-tools",
+  // Link tools — all create rows via the create-link function (login required,
+  // anti-phishing screened). The light builders (UTM, mailto/wifi) are pure
+  // client-side and don't map here.
+  "url-shortener": "create-link",
+  "deep-link": "create-link",
+  "magic-link": "create-link",
 };
 
 export function toolFunction(slug: string): string | null {

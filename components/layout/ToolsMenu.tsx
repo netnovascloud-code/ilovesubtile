@@ -4,33 +4,37 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles, GitBranch, Layers, Languages, WandSparkles, Eraser, FileDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { localePath, type Locale } from "@/lib/i18n/locales";
+import { getChrome } from "@/lib/i18n/chrome";
 
-type Item = { href: string; label: string; desc?: string };
-
-const FEATURED: { icon: typeof Sparkles; href: string; label: string; desc: string }[] = [
-  { icon: GitBranch, href: "/workflow", label: "Workflow Builder", desc: "Chain conversions in one click" },
-  { icon: Layers, href: "/batch", label: "Batch Converter", desc: "Process up to 50 files" },
-  { icon: Languages, href: "/translator", label: "AI Translator", desc: "30+ languages, formal/informal" },
-  { icon: WandSparkles, href: "/ai-humanizer", label: "AI Humanizer", desc: "Make AI text sound human" },
-  { icon: Eraser, href: "/remove-background", label: "Remove Background", desc: "Transparent PNG in seconds" },
-  { icon: FileDown, href: "/merge-pdf", label: "Merge PDF", desc: "Combine PDFs into one file" },
+// Icons + hrefs are static; labels/descriptions come from the locale dict
+// (chrome.toolsMenu) so the whole mega-menu is translated.
+const FEATURED: { icon: typeof Sparkles; href: string; key: keyof ReturnType<typeof getChrome>["toolsMenu"]["featuredItems"] }[] = [
+  { icon: GitBranch, href: "/workflow", key: "workflow" },
+  { icon: Layers, href: "/batch", key: "batch" },
+  { icon: Languages, href: "/translator", key: "translator" },
+  { icon: WandSparkles, href: "/ai-humanizer", key: "humanizer" },
+  { icon: Eraser, href: "/remove-background", key: "removeBg" },
+  { icon: FileDown, href: "/merge-pdf", key: "mergePdf" },
 ];
 
-const NEW: Item[] = [
-  { href: "/qr-generator", label: "QR Code Generator" },
-  { href: "/pdf-to-jpg", label: "PDF to JPG" },
-  { href: "/add-watermark", label: "Add Watermark to Video" },
-  { href: "/pdf-to-text", label: "PDF to Text" },
-  { href: "/rephraser", label: "AI Rephraser" },
-  { href: "/pdf-to-text", label: "PDF to Text" },
+const NEW: { href: string; key: keyof ReturnType<typeof getChrome>["toolsMenu"]["newItems"] }[] = [
+  { href: "/url-shortener", key: "urlShortener" },
+  { href: "/deep-link", key: "deepLink" },
+  { href: "/magic-link", key: "magicLink" },
+  { href: "/utm-builder", key: "utmBuilder" },
+  { href: "/qr-generator", key: "qrGenerator" },
+  { href: "/pdf-to-jpg", key: "pdfToJpg" },
 ];
 
 export function ToolsMenu({
   categories,
   toolsHref,
+  locale,
 }: {
   categories: { id: string; label: string; href: string }[];
   toolsHref: string;
+  locale: Locale;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,13 +47,16 @@ export function ToolsMenu({
     return () => document.removeEventListener("mousedown", onDoc);
   }, []);
 
+  const chrome = getChrome(locale);
+  const tm = chrome.toolsMenu;
+
   return (
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1 text-sm text-ink-700 transition-colors hover:text-ink-900"
       >
-        Tools <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+        {chrome.nav.tools} <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
 
       {open && (
@@ -58,15 +65,16 @@ export function ToolsMenu({
             {/* Featured */}
             <div className="border-r border-ink-100 p-4">
               <p className="mb-2 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
-                <Sparkles className="h-3 w-3" /> Featured
+                <Sparkles className="h-3 w-3" /> {tm.featured}
               </p>
               <div className="grid grid-cols-2 gap-1">
-                {FEATURED.map(({ icon: Icon, href, label, desc }) => (
-                  <Link key={href} href={href} onClick={() => setOpen(false)} className="group flex items-start gap-2 rounded-lg p-2 transition-colors hover:bg-ink-50">
+                {FEATURED.map(({ icon: Icon, href, key }) => (
+                  // workflow / batch now have localised routes; the rest keep their href.
+                  <Link key={href} href={href === "/workflow" || href === "/batch" ? localePath(locale, href.slice(1)) : href} onClick={() => setOpen(false)} className="group flex items-start gap-2 rounded-lg p-2 transition-colors hover:bg-ink-50">
                     <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-50 text-brand-600"><Icon className="h-3.5 w-3.5" /></span>
                     <span className="min-w-0">
-                      <span className="block truncate text-sm font-medium text-ink-900">{label}</span>
-                      <span className="block truncate text-[11px] text-ink-400">{desc}</span>
+                      <span className="block truncate text-sm font-medium text-ink-900">{tm.featuredItems[key].label}</span>
+                      <span className="block truncate text-[11px] text-ink-400">{tm.featuredItems[key].desc}</span>
                     </span>
                   </Link>
                 ))}
@@ -75,7 +83,7 @@ export function ToolsMenu({
 
             {/* Categories + New */}
             <div className="p-4">
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">Categories</p>
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">{tm.categories}</p>
               <div className="flex flex-wrap gap-1">
                 {categories.map((c) => (
                   <Link key={c.id} href={c.href} onClick={() => setOpen(false)} className="rounded-full bg-ink-50 px-2.5 py-1 text-xs font-medium text-ink-600 hover:bg-ink-100 hover:text-ink-900">
@@ -83,14 +91,14 @@ export function ToolsMenu({
                   </Link>
                 ))}
                 <Link href={toolsHref} onClick={() => setOpen(false)} className="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700 hover:bg-brand-100">
-                  All →
+                  {tm.all} →
                 </Link>
               </div>
-              <p className="mb-2 mt-4 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-600">New</p>
+              <p className="mb-2 mt-4 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-600">{tm.new}</p>
               <ul className="space-y-0.5">
                 {NEW.map((i) => (
                   <li key={i.href}>
-                    <Link href={i.href} onClick={() => setOpen(false)} className="block rounded px-1.5 py-1 text-sm text-ink-700 hover:bg-ink-50 hover:text-ink-900">{i.label}</Link>
+                    <Link href={i.href} onClick={() => setOpen(false)} className="block rounded px-1.5 py-1 text-sm text-ink-700 hover:bg-ink-50 hover:text-ink-900">{tm.newItems[i.key]}</Link>
                   </li>
                 ))}
               </ul>

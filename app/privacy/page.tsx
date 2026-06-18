@@ -20,5 +20,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <LegalRender doc={PRIVACY_EN} />;
+  return <LegalRender doc={PRIVACY_EN} slug="privacy" />;
 }

@@ -30,6 +30,8 @@ import { dirname, resolve } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const OUT_PATH = resolve(ROOT, "lib/legal/legal-translations.generated.ts");
+const COOKIES_OUT_PATH = resolve(ROOT, "lib/legal/cookies-translations.generated.ts");
+const LEGAL_NOTICE_OUT_PATH = resolve(ROOT, "lib/legal/legal-notice-translations.generated.ts");
 
 const LOCALES = [
   ["fr", "French"], ["es", "Spanish"], ["pt", "Portuguese"], ["de", "German"],
@@ -168,22 +170,58 @@ function emitFile(privacy, terms) {
   ].join("\n");
 }
 
+function emitCookies(cookies) {
+  return [
+    `import type { Locale } from "@/lib/seo";`,
+    `import type { LegalDoc } from "@/lib/legal/types";`,
+    ``,
+    `/**`,
+    ` * AUTO-GENERATED — do not edit by hand. Produced by scripts/translate-legal.mjs.`,
+    ` * Hand-authored overrides in lib/legal/cookies-translations.ts take precedence.`,
+    ` */`,
+    `export const COOKIES_TRANSLATIONS_GENERATED: Partial<Record<Locale, LegalDoc>> = ${JSON.stringify(cookies, null, 2)};`,
+    ``,
+  ].join("\n");
+}
+
+function emitLegalNotice(notice) {
+  return [
+    `import type { Locale } from "@/lib/seo";`,
+    `import type { LegalDoc } from "@/lib/legal/types";`,
+    ``,
+    `/**`,
+    ` * AUTO-GENERATED — do not edit by hand. Produced by scripts/translate-legal.mjs.`,
+    ` * Hand-authored overrides in lib/legal/legal-notice-translations.ts take precedence.`,
+    ` */`,
+    `export const LEGAL_NOTICE_TRANSLATIONS_GENERATED: Partial<Record<Locale, LegalDoc>> = ${JSON.stringify(notice, null, 2)};`,
+    ``,
+  ].join("\n");
+}
+
 async function main() {
   const env = DRY_RUN ? null : await loadEnv();
   const { PRIVACY_EN } = await import(resolve(ROOT, "lib/legal/privacy-en.ts"));
   const { TERMS_EN } = await import(resolve(ROOT, "lib/legal/terms-en.ts"));
+  const { COOKIES_EN } = await import(resolve(ROOT, "lib/legal/cookies-en.ts"));
+  const { LEGAL_NOTICE_EN } = await import(resolve(ROOT, "lib/legal/legal-notice-en.ts"));
 
   let existing = { PRIVACY_TRANSLATIONS: {}, TERMS_TRANSLATIONS: {} };
   try { existing = await import(OUT_PATH); } catch { /* fresh start */ }
+  let existingCookies = { COOKIES_TRANSLATIONS_GENERATED: {} };
+  try { existingCookies = await import(COOKIES_OUT_PATH); } catch { /* fresh start */ }
+  let existingNotice = { LEGAL_NOTICE_TRANSLATIONS_GENERATED: {} };
+  try { existingNotice = await import(LEGAL_NOTICE_OUT_PATH); } catch { /* fresh start */ }
   const privacy = { ...(existing.PRIVACY_TRANSLATIONS ?? {}) };
   const terms = { ...(existing.TERMS_TRANSLATIONS ?? {}) };
+  const cookies = { ...(existingCookies.COOKIES_TRANSLATIONS_GENERATED ?? {}) };
+  const legalNotice = { ...(existingNotice.LEGAL_NOTICE_TRANSLATIONS_GENERATED ?? {}) };
 
   let done = 0, errors = 0;
   for (const [code, name] of LOCALES) {
     if (ONLY_LOCALE && ONLY_LOCALE !== code) continue;
-    for (const docName of ["privacy", "terms"]) {
+    for (const docName of ["privacy", "terms", "cookies", "legal-notice"]) {
       if (ONLY_DOC && ONLY_DOC !== docName) continue;
-      const overlay = docName === "privacy" ? privacy : terms;
+      const overlay = docName === "privacy" ? privacy : docName === "terms" ? terms : docName === "cookies" ? cookies : legalNotice;
       if (overlay[code] && !FORCE) {
         process.stdout.write(`SKIP ${docName}:${code} (already translated; --force to redo)\n`);
         continue;
@@ -194,10 +232,12 @@ async function main() {
       }
       process.stdout.write(`▶ ${docName}:${code} (${name}) — single call\n`);
       try {
-        const src = docName === "privacy" ? PRIVACY_EN : TERMS_EN;
+        const src = docName === "privacy" ? PRIVACY_EN : docName === "terms" ? TERMS_EN : docName === "cookies" ? COOKIES_EN : LEGAL_NOTICE_EN;
         overlay[code] = await translateDoc(src, name, env);
         done++;
-        await writeFile(OUT_PATH, emitFile(privacy, terms), "utf8");
+        if (docName === "cookies") await writeFile(COOKIES_OUT_PATH, emitCookies(cookies), "utf8");
+        else if (docName === "legal-notice") await writeFile(LEGAL_NOTICE_OUT_PATH, emitLegalNotice(legalNotice), "utf8");
+        else await writeFile(OUT_PATH, emitFile(privacy, terms), "utf8");
         // Pause briefly between calls to keep well under Mistral's rate limit.
         await new Promise((r) => setTimeout(r, 600));
       } catch (e) {

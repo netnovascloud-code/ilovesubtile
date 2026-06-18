@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const l of LOCALES) alts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/privacy`;
   alts["x-default"] = `${SITE_URL}/privacy`;
   return {
-    title: "Privacy Policy",
+    title: PRIVACY_TRANSLATIONS[locale]?.h1 ?? "Privacy Policy",
     description: "How Konvertools handles your data — GDPR-compliant, files never stored.",
     alternates: { canonical: `${HREFLANG_PREFIX[locale]}/privacy`, languages: alts },
   };
@@ -41,7 +41,7 @@ export default function Page({ params }: { params: { locale: string } }) {
   // Once the locale has been translated, render the native version with no
   // banner. Until then, render EN with the pending notice. Either way, the
   // English version remains the legally-binding one (see Terms section 13).
-  if (translated) return <LegalRender doc={translated} />;
+  if (translated) return <LegalRender doc={translated} locale={locale} slug="privacy" />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -52,7 +52,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <LegalRender doc={PRIVACY_EN} />
+      <LegalRender doc={PRIVACY_EN} locale={locale} slug="privacy" />
     </>
   );
 }

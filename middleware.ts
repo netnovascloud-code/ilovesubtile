@@ -21,6 +21,21 @@ const EN_ONLY_SLUGS = new Set([
   "veed-alternative",
 ]);
 
+/** App sections that have NO localised route (auth, account, system/docs pages).
+ *  A /<locale>/<section> hit — language switch, bookmark, stale link — would
+ *  otherwise 404 through the dynamic [slug] route, so we strip the locale
+ *  prefix and 308 to the English canonical. Matches nested paths too
+ *  (e.g. /fr/dashboard, /fr/login). NOTE: workflow / batch / api now HAVE
+ *  localised routes under app/[locale]/… so they are intentionally NOT here. */
+const ROOT_ONLY_SECTIONS = new Set([
+  "login", "register", "developer",
+]);
+
+/** Sections with a localised root (e.g. /[locale]/billing exists) but whose
+ *  deeper paths stay English-only (billing/checkout). Only the sub-paths are
+ *  stripped — a bare /<locale>/billing renders its real localised route. */
+const LOCALISED_ROOT_EN_SUBPATHS = new Set(["billing"]);
+
 /** Build the per-request Content-Security-Policy with a fresh nonce. The
  *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
  *  scripts loaded by a nonced script are then trusted by propagation, so
@@ -96,6 +111,11 @@ export async function middleware(request: NextRequest) {
   const nonce = generateNonce();
   const extra = new Headers();
   extra.set("x-nonce", nonce);
+  // Thread the URL locale to the root layout the same way as the nonce, so
+  // <html lang> / dir are correct in the SERVER render (SEO, screen readers,
+  // browser auto-translate) instead of being patched client-side after mount.
+  const seg0 = request.nextUrl.pathname.split("/").filter(Boolean)[0] ?? "";
+  extra.set("x-locale", LOCALES.has(seg0) ? seg0 : "en");
 
   const response = await updateSupabaseSession(request, extra);
   const csp = buildCsp(nonce);
@@ -122,6 +142,18 @@ export async function middleware(request: NextRequest) {
     response.cookies.set(LOCALE_COOKIE, seg, { maxAge: 60 * 60 * 24 * 365, path: "/" });
   }
 
+  // /en/<anything> → 308 to /<anything>. English is served unprefixed, so an
+  // explicit /en/ prefix (manual URL, stale bookmark, mis-built link) would
+  // otherwise 404. Strip it and redirect to the canonical English path.
+  {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts[0] === "en") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/" + parts.slice(1).join("/");
+      return NextResponse.redirect(url, 308);
+    }
+  }
+
   // /<locale>/<en-only-slug> → 308 to /<en-only-slug>. Keeps SEO juice on the
   // English canonical and removes the 404 hole identified in the i18n audit.
   // Doesn't touch /<locale>/<tool-slug> because tools all have localised
@@ -135,18 +167,55 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (pathname.startsWith("/dashboard")) {
-    // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
-    // it into `.0`/`.1` chunks when large — so match by *contains*, not
-    // endsWith, otherwise chunked sessions look logged-out (redirect loop).
-    const hasSession = [...request.cookies.getAll()].some(
-      (c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"),
-    );
-    if (!hasSession) {
+  // /<locale>/<english-only-path> → 308 to the English canonical (strip the
+  // locale prefix). Covers fully English-only sections (dashboard, login, …)
+  // and the English-only sub-paths of localised roots (billing/checkout). A
+  // bare /<locale>/billing is NOT stripped — it has a real localised route.
+  {
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts.length >= 2 && LOCALES.has(parts[0])) {
+      const seg = parts[1];
+      const strip = ROOT_ONLY_SECTIONS.has(seg) || (LOCALISED_ROOT_EN_SUBPATHS.has(seg) && parts.length >= 3);
+      if (strip) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/" + parts.slice(1).join("/");
+        return NextResponse.redirect(url, 308);
+      }
+    }
+  }
+
+  // A visitor whose language preference is non-English, landing on the English
+  // /billing canonical (direct link, bookmark, header link before the cookie
+  // settled), is sent to the localised route so the WHOLE page is translated —
+  // not just the chrome — and the cookie-vs-URL hydration residue can't appear.
+  if (pathname === "/billing" || pathname === "/dashboard") {
+    const target = preferredLocale(request);
+    if (target) {
       const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirect", pathname);
+      url.pathname = `/${target}${pathname}`;
       return NextResponse.redirect(url);
+    }
+  }
+
+  // Auth gate for the dashboard — English /dashboard and localised
+  // /<locale>/dashboard. Presence-only check on the session cookie; the page
+  // resolves the real session.
+  {
+    const dparts = pathname.split("/").filter(Boolean);
+    const isDashboard = dparts[0] === "dashboard" || (LOCALES.has(dparts[0]) && dparts[1] === "dashboard");
+    if (isDashboard) {
+      // @supabase/ssr stores the session as `sb-<ref>-auth-token`, and splits
+      // it into `.0`/`.1` chunks when large — so match by *contains*, not
+      // endsWith, otherwise chunked sessions look logged-out (redirect loop).
+      const hasSession = [...request.cookies.getAll()].some(
+        (c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"),
+      );
+      if (!hasSession) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/login";
+        url.searchParams.set("redirect", pathname);
+        return NextResponse.redirect(url);
+      }
     }
   }
 

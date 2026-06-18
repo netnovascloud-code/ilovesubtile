@@ -1,10 +1,15 @@
 // Konvertools — open the Lemon Squeezy customer portal for the authenticated
-// user. Lemon Squeezy issues a signed, time-limited portal URL per subscription
-// (urls.customer_portal); the customer can update payment method, switch plan,
-// view invoices and cancel there.
+// user. Lemon Squeezy issues signed, time-limited URLs per subscription
+// (urls.customer_portal, urls.update_payment_method); the customer can update
+// their payment method, switch plan, view invoices and cancel there. Both URLs
+// are short-lived (~24h) and regenerated on every fetch, so we hit the LS API
+// fresh on each click and never store them.
 //
 // POST /functions/v1/lemonsqueezy-portal
-// Returns: { url: "https://<store>.lemonsqueezy.com/billing?..." }
+// Returns: {
+//   url: "https://<store>.lemonsqueezy.com/billing?...",              // customer portal
+//   updatePaymentMethodUrl: "https://<store>.lemonsqueezy.com/..."    // change card
+// }
 //
 // Deploy:  supabase functions deploy lemonsqueezy-portal
 // Secrets: LEMONSQUEEZY_API_KEY
@@ -66,9 +71,11 @@ Deno.serve(async (req) => {
     });
     const body = await res.json();
     if (!res.ok) return json({ error: "lemonsqueezy_failed", detail: body?.errors ?? body }, { status: 502 });
-    const portal = body?.data?.attributes?.urls?.customer_portal;
-    if (!portal) return json({ error: "no_portal_url" }, { status: 502 });
-    return json({ url: portal });
+    const urls = body?.data?.attributes?.urls ?? {};
+    const portal = urls.customer_portal ?? null;
+    const updatePaymentMethodUrl = urls.update_payment_method ?? null;
+    if (!portal && !updatePaymentMethodUrl) return json({ error: "no_portal_url" }, { status: 502 });
+    return json({ url: portal, updatePaymentMethodUrl });
   } catch (err) {
     return json({ error: "lemonsqueezy_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
   }

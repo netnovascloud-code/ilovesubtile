@@ -15,6 +15,7 @@ import { getLocalisedFaqs } from "@/lib/i18n/faq-templates";
 import { getLocalisedSteps } from "@/lib/i18n/tool-steps";
 import { resolveToolI18n } from "@/lib/i18n/resolve-tool-i18n";
 import { getChrome } from "@/lib/i18n/chrome";
+import { getCommonUi } from "@/lib/i18n/tool-ui";
 import { QuotaLine } from "@/components/tools/QuotaLine";
 
 function localisedFaqSchema(faqs: ToolFaq[]) {
@@ -42,6 +43,7 @@ export function ToolPageShell({
 }) {
   const ui = getStrings(locale);
   const chrome = getChrome(locale);
+  const common = getCommonUi(locale);
   const name = override?.name ?? tool.name;
   const h1 = override?.h1 ?? tool.h1;
   const description = override?.metaDescription ?? tool.metaDescription;
@@ -125,7 +127,7 @@ export function ToolPageShell({
       <main className="container py-10">
         {children}
         <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-ink-400">
-          🔒 Your files are deleted automatically after download. Never stored, never shared.
+          {common.privacyFiles}
         </p>
       </main>
 
@@ -167,7 +169,7 @@ export function ToolPageShell({
             {moreInCategory.length > 0 && (
               <div>
                 <h2 className="text-lg font-semibold text-ink-900">
-                  More in {tool.category === "text-ai" ? "Text & AI" : tool.category.charAt(0).toUpperCase() + tool.category.slice(1)}
+                  {chrome.discover.moreIn.replace("{category}", chrome.discover.categories[tool.category] ?? tool.category)}
                 </h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {moreInCategory.map((rt) => {
@@ -186,7 +188,7 @@ export function ToolPageShell({
             )}
             {alsoPopular.length > 0 && (
               <div className={moreInCategory.length > 0 ? "mt-8" : ""}>
-                <h2 className="text-lg font-semibold text-ink-900">Also popular</h2>
+                <h2 className="text-lg font-semibold text-ink-900">{chrome.discover.alsoPopular}</h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-3">
                   {alsoPopular.map((rt) => {
                     const i18n = locale === "en" ? null : resolveToolI18n(rt.slug, locale);

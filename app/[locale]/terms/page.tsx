@@ -28,7 +28,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   for (const l of LOCALES) alts[l] = `${SITE_URL}${HREFLANG_PREFIX[l]}/terms`;
   alts["x-default"] = `${SITE_URL}/terms`;
   return {
-    title: "Terms of Service",
+    title: TERMS_TRANSLATIONS[locale]?.h1 ?? "Terms of Service",
     description: "Legal terms governing use of Konvertools — service description, liability, billing and French jurisdiction.",
     alternates: { canonical: `${HREFLANG_PREFIX[locale]}/terms`, languages: alts },
   };
@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale;
   if (!LOCALES.includes(locale)) notFound();
   const translated = TERMS_TRANSLATIONS[locale];
-  if (translated) return <LegalRender doc={translated} />;
+  if (translated) return <LegalRender doc={translated} locale={locale} slug="terms" />;
   return (
     <>
       <div className="container max-w-3xl pt-10">
@@ -49,7 +49,7 @@ export default function Page({ params }: { params: { locale: string } }) {
           </p>
         </div>
       </div>
-      <LegalRender doc={TERMS_EN} />
+      <LegalRender doc={TERMS_EN} locale={locale} slug="terms" />
     </>
   );
 }

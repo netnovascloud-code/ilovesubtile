@@ -2795,15 +2795,15 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Best Free VEED.io Alternative — Konvertools",
     metaTitle: "Free VEED Alternative — No Watermark, AI Subtitles | Konvertools",
     metaDescription:
-      "Looking for a VEED.io alternative? Konvertools is fast, focused on subtitles only, with Pro at €25/mo vs €18/mo.",
+      "Looking for a VEED.io alternative? Konvertools is fast, focused on subtitles only, with a real free tier and no watermark on text outputs.",
     bulletPoints: [
       "AI subtitle generation with AI — modern, European, accurate.",
-      "€25/month Pro vs VEED's €18/month — and a real free tier.",
+      "A real free tier that lets you generate and download real files.",
       "Single-purpose UI: drop a file, get subtitles. No video editor maze.",
       "No watermark on text outputs (SRT, VTT, TXT) — ever.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€25/month", them: "€18/month" },
+      { feature: "Runs in browser (private)", us: "Yes — files never uploaded", them: "Cloud upload required" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Limited, watermarked" },
       { feature: "File size limit", us: "Up to 500 MB (Pro)", them: "Tiered by plan" },
       { feature: "AI subtitles", us: "AI, 30+ langs", them: "Yes" },
@@ -2812,7 +2812,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed / focus", us: "One job per tool", them: "Full editor (heavier)" },
     ],
     faqs: [
-      { q: "How does Konvertools's price compare to VEED?", a: "Pro is €25/month vs VEED's €18/month, and our free tier lets you actually generate and download real files." },
+      { q: "How does Konvertools compare to VEED?", a: "Konvertools is focused on subtitles and runs most tools right in your browser, so files are never uploaded — and the free tier lets you actually generate and download real files." },
       { q: "Can I import my VEED subtitles?", a: "Export your captions from VEED as SRT or VTT and drop them into any Konvertools tool — translate, sync, clean or burn them in." },
       { q: "Does Konvertools add a watermark?", a: "Never on SRT/VTT/TXT outputs. Burned-in video gets a small watermark on the free plan only; Pro removes it." },
       { q: "Is Konvertools a full video editor like VEED?", a: "No, and that's the point. Konvertools does subtitles only — each tool does one job fast, with no editor learning curve." },
@@ -2824,14 +2824,14 @@ export const ALTERNATIVES: AlternativeDef[] = [
     title: "Best Free Kapwing Alternative — Konvertools",
     metaTitle: "Free Kapwing Alternative — Subtitle Focused | Konvertools",
     metaDescription:
-      "Kapwing alternative built for subtitles. Lighter and faster, with Pro at €25/month vs Kapwing's $16/month.",
+      "Kapwing alternative built for subtitles. Lighter and faster, with a real free tier and no watermark on text outputs.",
     bulletPoints: [
       "Generate, translate, sync, burn-in — all in one place.",
       "No bloated video editor. Just subtitle tools that ship.",
       "Free tier you can actually use — no 4-minute video cap.",
     ],
     comparison: [
-      { feature: "Pro price", us: "€25/month", them: "$16/month" },
+      { feature: "Runs in browser (private)", us: "Yes — files never uploaded", them: "Cloud render queue" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermark + limits" },
       { feature: "Focus", us: "Subtitles only", them: "General editor" },
       { feature: "AI subtitles", us: "AI", them: "Yes" },
@@ -2840,7 +2840,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed", us: "Instant client-side conversions", them: "Cloud render queue" },
     ],
     faqs: [
-      { q: "Why pick Konvertools over Kapwing?", a: "If you only need subtitles, Kapwing's full editor is overkill. Konvertools is lighter and faster, with Pro at €25/month vs Kapwing's $16/month." },
+      { q: "Why pick Konvertools over Kapwing?", a: "If you only need subtitles, Kapwing's full editor is overkill. Konvertools is lighter and faster, with a real free tier and most tools running right in your browser — nothing is uploaded." },
       { q: "Can I move my Kapwing captions over?", a: "Yes — export as SRT/VTT and use any Konvertools tool on them." },
       { q: "Is there a free plan?", a: "Yes, with a daily quota and no watermark on text files." },
       { q: "Do conversions upload my files?", a: "SRT↔VTT, sync, clean and SRT-to-text run entirely in your browser — nothing is uploaded." },
@@ -2890,7 +2890,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "AI subtitle generation", us: "Yes (AI)", them: "No" },
       { feature: "Number of subtitle tools", us: "16", them: "~1" },
       { feature: "Translation", us: "30+ languages", them: "No" },
-      { feature: "Pro price", us: "€25/month", them: "~$9/month (all tools)" },
+      { feature: "Runs in browser (private)", us: "Yes — files never uploaded", them: "Cloud upload required" },
       { feature: "Free plan", us: "Yes — daily quota", them: "Watermarked" },
       { feature: "Watermark on text", us: "Never", them: "Free plan" },
       { feature: "Focus", us: "Subtitles specialist", them: "General media utils" },
@@ -2920,7 +2920,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Tool breadth", us: "100+ across 9 categories", them: "~25, PDF-only" },
       { feature: "AI tools", us: "Transcribe, translate, rephrase…", them: "Limited" },
       { feature: "Runs in browser", us: "Most tools, no upload", them: "Server-side" },
-      { feature: "Pro price", us: "€25/month", them: "~€7/month" },
+      { feature: "File retention (GDPR)", us: "Files deleted within 30 min", them: "Kept for hours" },
     ],
     faqs: [
       { q: "Does Konvertools do everything iLovePDF does?", a: "It covers the everyday PDF jobs — merge, split, compress, convert, watermark, page numbers — and adds images, audio, video, code and AI text." },
@@ -2936,13 +2936,13 @@ export const ALTERNATIVES: AlternativeDef[] = [
     metaTitle: "Free Adobe Acrobat Alternative Online | Konvertools",
     metaDescription: "A free, no-install Adobe Acrobat alternative for everyday PDF jobs — merge, split, compress, convert, watermark — all in your browser, plus a full conversion suite.",
     bulletPoints: [
-      "Free for the 90% of jobs people actually do — no €19/month subscription.",
+      "Free for the 90% of jobs people actually do — no subscription required.",
       "Nothing to install — runs in your browser, no upload for most tools.",
       "Merge, split, compress, PDF↔Word, watermark, page numbers, compare.",
       "A whole conversion suite (image, audio, video, code, AI text) alongside.",
     ],
     comparison: [
-      { feature: "Price", us: "Free / €25/mo Pro", them: "~€19/month" },
+      { feature: "Free tier", us: "Everyday PDF jobs free in-browser", them: "Paid subscription only" },
       { feature: "Install", us: "None — web", them: "Desktop app" },
       { feature: "Everyday PDF jobs", us: "Yes, free", them: "Yes, paid" },
       { feature: "Runs in browser", us: "Yes, no upload", them: "App / cloud" },
@@ -2974,7 +2974,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Rephrase / summarize", us: "Yes", them: "Separate product" },
       { feature: "Beyond text", us: "PDF, images, audio, video", them: "Text & docs" },
       { feature: "Ads on free", us: "None", them: "Char-limited free" },
-      { feature: "Pro price", us: "€25/month", them: "~€8/month" },
+      { feature: "All-in-one suite", us: "150+ tools in one place", them: "Translation only" },
     ],
     faqs: [
       { q: "Is the translation as good as DeepL?", a: "DeepL still leads on raw nuance for some pairs. Konvertools's AI is very strong and adds subtitle, rephrase and summarize features DeepL lacks." },
@@ -3028,7 +3028,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Speed", us: "Instant (local)", them: "Upload + queue" },
       { feature: "AI tools", us: "Yes", them: "No" },
       { feature: "Format breadth", us: "Common formats", them: "300+ formats" },
-      { feature: "Pro price", us: "€25/month", them: "from $9.99/month" },
+      { feature: "Privacy", us: "Files stay on your device", them: "Uploaded to servers" },
     ],
     faqs: [
       { q: "Why is Konvertools faster?", a: "Most conversions happen in your browser, so there's no upload and no server queue — the result is instant." },
@@ -3055,7 +3055,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
       { feature: "Install / extension", us: "None — paste & go", them: "Extension / app" },
       { feature: "Translation", us: "30+ languages", them: "No" },
       { feature: "Beyond writing", us: "PDF, images, audio, video", them: "Writing only" },
-      { feature: "Pro price", us: "€25/month", them: "~€12/month" },
+      { feature: "Free tier", us: "Free AI grammar, no card", them: "Limited free, paywalled" },
     ],
     faqs: [
       { q: "Does Konvertools check grammar like Grammarly?", a: "Yes — paste your text and the AI fixes grammar, spelling and clarity, plus rephrasing and summarizing." },

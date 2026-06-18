@@ -77,7 +77,7 @@ export const TERMS_EN: LegalDoc = {
       title: "7. Subscriptions, billing and refunds",
       blocks: [
         { kind: "ul", items: [
-          "**Plans**: Free (€0), Pro (€12/month or €99/year), Business (€39/month or €349/year). Plan features and quotas are as described on our [Pricing page](/pricing) at the time of purchase. We reserve the right to amend plan features with 30 days' notice.",
+          "**Plans**: Free (€0), Pro (€25/month or €210/year), Business (€79/month or €664/year). Plan features and quotas are as described on our [Pricing page](/pricing) at the time of purchase. We reserve the right to amend plan features with 30 days' notice.",
           "**Auto-renewal**: monthly and annual subscriptions renew automatically at the same cadence until cancelled. You can cancel at any time from your dashboard; cancellation takes effect at the end of the current billing period. You retain access until that date.",
           "**Right of withdrawal (EU)**: under Article L. 221-28 of the French Consumer Code, when you actively use the Service during the initial 14-day withdrawal period you expressly consent to the immediate performance of the contract and waive your right of withdrawal. If you have not used any paid feature, you may withdraw within 14 days by emailing [support@konvertools.com](mailto:support@konvertools.com) and we will issue a full refund within 14 days.",
           "**No partial refunds**: outside the withdrawal scenario above, fees already paid for the current billing period are non-refundable.",

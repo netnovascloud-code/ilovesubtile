@@ -181,7 +181,7 @@ const en: ApiStrings = {
   sidebar: {
     getKeyTitle: "Get an API key",
     getKeyBody:
-      "The REST API is included with the Business plan (€39/month) — 300 credits every month, plus top-up packs that never expire.",
+      "The REST API is included with the Business plan (€79/month) — 300 credits every month, plus top-up packs that never expire.",
     seePricing: "See pricing →",
     creditPacksTitle: "Credit packs",
     creditPacksNote: "Top-ups never expire.",
@@ -278,7 +278,7 @@ const fr: ApiStrings = {
   sidebar: {
     getKeyTitle: "Obtenir une clé API",
     getKeyBody:
-      "L’API REST est incluse dans l’offre Business (39 €/mois) — 300 crédits chaque mois, plus des packs de recharge qui n’expirent jamais.",
+      "L’API REST est incluse dans l’offre Business (79 €/mois) — 300 crédits chaque mois, plus des packs de recharge qui n’expirent jamais.",
     seePricing: "Voir les tarifs →",
     creditPacksTitle: "Packs de crédits",
     creditPacksNote: "Les recharges n’expirent jamais.",
@@ -375,7 +375,7 @@ const es: ApiStrings = {
   sidebar: {
     getKeyTitle: "Obtener una clave de API",
     getKeyBody:
-      "La API REST está incluida en el plan Business (39 €/mes) — 300 créditos cada mes, más packs de recarga que nunca caducan.",
+      "La API REST está incluida en el plan Business (79 €/mes) — 300 créditos cada mes, más packs de recarga que nunca caducan.",
     seePricing: "Ver precios →",
     creditPacksTitle: "Packs de créditos",
     creditPacksNote: "Las recargas nunca caducan.",
@@ -472,7 +472,7 @@ const pt: ApiStrings = {
   sidebar: {
     getKeyTitle: "Obter uma chave de API",
     getKeyBody:
-      "A API REST está incluída no plano Business (€39/mês) — 300 créditos por mês, além de pacotes de recarga que nunca expiram.",
+      "A API REST está incluída no plano Business (€79/mês) — 300 créditos por mês, além de pacotes de recarga que nunca expiram.",
     seePricing: "Ver preços →",
     creditPacksTitle: "Pacotes de créditos",
     creditPacksNote: "As recargas nunca expiram.",
@@ -569,7 +569,7 @@ const de: ApiStrings = {
   sidebar: {
     getKeyTitle: "API-Schlüssel erhalten",
     getKeyBody:
-      "Die REST-API ist im Business-Tarif (39 €/Monat) enthalten — 300 Credits pro Monat, plus Aufstockungspakete, die nie verfallen.",
+      "Die REST-API ist im Business-Tarif (79 €/Monat) enthalten — 300 Credits pro Monat, plus Aufstockungspakete, die nie verfallen.",
     seePricing: "Preise ansehen →",
     creditPacksTitle: "Credit-Pakete",
     creditPacksNote: "Aufstockungen verfallen nie.",
@@ -666,7 +666,7 @@ const it: ApiStrings = {
   sidebar: {
     getKeyTitle: "Ottieni una chiave API",
     getKeyBody:
-      "L’API REST è inclusa nel piano Business (39 €/mese) — 300 crediti ogni mese, più pacchetti di ricarica che non scadono mai.",
+      "L’API REST è inclusa nel piano Business (79 €/mese) — 300 crediti ogni mese, più pacchetti di ricarica che non scadono mai.",
     seePricing: "Vedi i prezzi →",
     creditPacksTitle: "Pacchetti di crediti",
     creditPacksNote: "Le ricariche non scadono mai.",
@@ -763,7 +763,7 @@ const nl: ApiStrings = {
   sidebar: {
     getKeyTitle: "Een API-sleutel verkrijgen",
     getKeyBody:
-      "De REST-API zit bij het Business-abonnement (€39/maand) — 300 credits per maand, plus bijvulpakketten die nooit verlopen.",
+      "De REST-API zit bij het Business-abonnement (€79/maand) — 300 credits per maand, plus bijvulpakketten die nooit verlopen.",
     seePricing: "Bekijk prijzen →",
     creditPacksTitle: "Creditpakketten",
     creditPacksNote: "Bijvullingen verlopen nooit.",
@@ -860,7 +860,7 @@ const ja: ApiStrings = {
   sidebar: {
     getKeyTitle: "APIキーを取得",
     getKeyBody:
-      "REST APIはBusinessプラン（€39/月）に含まれます — 毎月300クレジット、加えて失効しないチャージパック。",
+      "REST APIはBusinessプラン（€79/月）に含まれます — 毎月300クレジット、加えて失効しないチャージパック。",
     seePricing: "料金を見る →",
     creditPacksTitle: "クレジットパック",
     creditPacksNote: "チャージは失効しません。",
@@ -957,7 +957,7 @@ const zh: ApiStrings = {
   sidebar: {
     getKeyTitle: "获取 API 密钥",
     getKeyBody:
-      "REST API 包含在 Business 计划（€39/月）中 — 每月 300 积分，外加永不过期的充值包。",
+      "REST API 包含在 Business 计划（€79/月）中 — 每月 300 积分，外加永不过期的充值包。",
     seePricing: "查看价格 →",
     creditPacksTitle: "积分包",
     creditPacksNote: "充值永不过期。",
@@ -1054,7 +1054,7 @@ const ko: ApiStrings = {
   sidebar: {
     getKeyTitle: "API 키 받기",
     getKeyBody:
-      "REST API는 Business 요금제(€39/월)에 포함됩니다 — 매월 300크레딧, 그리고 만료되지 않는 충전 팩.",
+      "REST API는 Business 요금제(€79/월)에 포함됩니다 — 매월 300크레딧, 그리고 만료되지 않는 충전 팩.",
     seePricing: "요금 보기 →",
     creditPacksTitle: "크레딧 팩",
     creditPacksNote: "충전은 만료되지 않습니다.",
@@ -1151,7 +1151,7 @@ const ar: ApiStrings = {
   sidebar: {
     getKeyTitle: "احصل على مفتاح API",
     getKeyBody:
-      "واجهة REST API مضمّنة في خطة Business (39 €/شهر) — 300 رصيد كل شهر، بالإضافة إلى حزم شحن لا تنتهي صلاحيتها أبدًا.",
+      "واجهة REST API مضمّنة في خطة Business (79 €/شهر) — 300 رصيد كل شهر، بالإضافة إلى حزم شحن لا تنتهي صلاحيتها أبدًا.",
     seePricing: "عرض الأسعار ←",
     creditPacksTitle: "حزم الأرصدة",
     creditPacksNote: "عمليات الشحن لا تنتهي صلاحيتها أبدًا.",
@@ -1248,7 +1248,7 @@ const ru: ApiStrings = {
   sidebar: {
     getKeyTitle: "Получить ключ API",
     getKeyBody:
-      "REST API входит в план Business (39 €/мес) — 300 кредитов каждый месяц плюс пакеты пополнения, которые никогда не сгорают.",
+      "REST API входит в план Business (79 €/мес) — 300 кредитов каждый месяц плюс пакеты пополнения, которые никогда не сгорают.",
     seePricing: "Смотреть цены →",
     creditPacksTitle: "Пакеты кредитов",
     creditPacksNote: "Пополнения никогда не сгорают.",
@@ -1345,7 +1345,7 @@ const hi: ApiStrings = {
   sidebar: {
     getKeyTitle: "एक API कुंजी प्राप्त करें",
     getKeyBody:
-      "REST API, Business योजना (€39/माह) में शामिल है — हर माह 300 क्रेडिट, साथ ही टॉप-अप पैक जो कभी समाप्त नहीं होते।",
+      "REST API, Business योजना (€79/माह) में शामिल है — हर माह 300 क्रेडिट, साथ ही टॉप-अप पैक जो कभी समाप्त नहीं होते।",
     seePricing: "मूल्य निर्धारण देखें →",
     creditPacksTitle: "क्रेडिट पैक",
     creditPacksNote: "टॉप-अप कभी समाप्त नहीं होते।",
@@ -1442,7 +1442,7 @@ const tr: ApiStrings = {
   sidebar: {
     getKeyTitle: "Bir API anahtarı edinin",
     getKeyBody:
-      "REST API, Business planına dahildir (€39/ay) — her ay 300 kredi, ayrıca asla sona ermeyen yükleme paketleri.",
+      "REST API, Business planına dahildir (€79/ay) — her ay 300 kredi, ayrıca asla sona ermeyen yükleme paketleri.",
     seePricing: "Fiyatlandırmaya bakın →",
     creditPacksTitle: "Kredi paketleri",
     creditPacksNote: "Yüklemeler asla sona ermez.",
@@ -1539,7 +1539,7 @@ const id: ApiStrings = {
   sidebar: {
     getKeyTitle: "Dapatkan kunci API",
     getKeyBody:
-      "REST API disertakan dalam paket Business (€39/bulan) — 300 kredit setiap bulan, plus paket isi ulang yang tidak pernah kedaluwarsa.",
+      "REST API disertakan dalam paket Business (€79/bulan) — 300 kredit setiap bulan, plus paket isi ulang yang tidak pernah kedaluwarsa.",
     seePricing: "Lihat harga →",
     creditPacksTitle: "Paket kredit",
     creditPacksNote: "Isi ulang tidak pernah kedaluwarsa.",
@@ -1636,7 +1636,7 @@ const vi: ApiStrings = {
   sidebar: {
     getKeyTitle: "Lấy một khóa API",
     getKeyBody:
-      "REST API đi kèm gói Business (€39/tháng) — 300 tín dụng mỗi tháng, cùng các gói nạp thêm không bao giờ hết hạn.",
+      "REST API đi kèm gói Business (€79/tháng) — 300 tín dụng mỗi tháng, cùng các gói nạp thêm không bao giờ hết hạn.",
     seePricing: "Xem giá →",
     creditPacksTitle: "Gói tín dụng",
     creditPacksNote: "Các lần nạp thêm không bao giờ hết hạn.",
@@ -1733,7 +1733,7 @@ const sv: ApiStrings = {
   sidebar: {
     getKeyTitle: "Skaffa en API-nyckel",
     getKeyBody:
-      "REST-API:et ingår i Business-planen (39 €/månad) — 300 krediter varje månad, plus påfyllnadspaket som aldrig förfaller.",
+      "REST-API:et ingår i Business-planen (79 €/månad) — 300 krediter varje månad, plus påfyllnadspaket som aldrig förfaller.",
     seePricing: "Se priser →",
     creditPacksTitle: "Kreditpaket",
     creditPacksNote: "Påfyllningar förfaller aldrig.",
@@ -1830,7 +1830,7 @@ const pl: ApiStrings = {
   sidebar: {
     getKeyTitle: "Uzyskaj klucz API",
     getKeyBody:
-      "REST API jest dołączone do planu Business (39 €/miesiąc) — 300 kredytów co miesiąc, plus pakiety doładowań, które nigdy nie wygasają.",
+      "REST API jest dołączone do planu Business (79 €/miesiąc) — 300 kredytów co miesiąc, plus pakiety doładowań, które nigdy nie wygasają.",
     seePricing: "Zobacz cennik →",
     creditPacksTitle: "Pakiety kredytów",
     creditPacksNote: "Doładowania nigdy nie wygasają.",
@@ -1927,7 +1927,7 @@ const uk: ApiStrings = {
   sidebar: {
     getKeyTitle: "Отримати ключ API",
     getKeyBody:
-      "REST API входить до плану Business (39 €/місяць) — 300 кредитів щомісяця, а також пакети поповнення, які ніколи не згоряють.",
+      "REST API входить до плану Business (79 €/місяць) — 300 кредитів щомісяця, а також пакети поповнення, які ніколи не згоряють.",
     seePricing: "Переглянути ціни →",
     creditPacksTitle: "Пакети кредитів",
     creditPacksNote: "Поповнення ніколи не згоряють.",
@@ -2024,7 +2024,7 @@ const cs: ApiStrings = {
   sidebar: {
     getKeyTitle: "Získat klíč API",
     getKeyBody:
-      "REST API je součástí plánu Business (39 €/měsíc) — 300 kreditů každý měsíc, plus dobíjecí balíčky, které nikdy nevyprší.",
+      "REST API je součástí plánu Business (79 €/měsíc) — 300 kreditů každý měsíc, plus dobíjecí balíčky, které nikdy nevyprší.",
     seePricing: "Zobrazit ceny →",
     creditPacksTitle: "Balíčky kreditů",
     creditPacksNote: "Dobití nikdy nevyprší.",

@@ -371,7 +371,7 @@ const cEn: CommonUi = {
   result: "Result", original: "Original", resultPlaceholder: "Result appears here instantly…", aiResultPlaceholder: "Your result will appear here.", ready: "Ready — your converted file is on the right.",
   width: "Width", height: "Height", lockRatio: "Lock ratio", quality: "Quality", rotate: "Rotate", conversionFailed: "Conversion failed",
   privacyFiles: "🔒 Your files are deleted automatically after download. Never stored, never shared.", privacyImage: "100% in your browser — your image is never uploaded. Free and unlimited.", privacyFfmpeg: "Processed 100% in your browser via FFmpeg WebAssembly — your file is never uploaded.", privacyText: "100% in your browser — nothing is uploaded. Free and unlimited, no account needed.",
-  quotaAnonPrefix: "2 free AI runs/day —", quotaAnonLink: "Sign in for 3", quotaFreePrefix: "Free plan: 3 AI runs/day —", quotaFreeLink: "Go Pro for 500/month", unlimited: "Unlimited",
+  quotaAnonPrefix: "2 free AI runs/day —", quotaAnonLink: "Sign in for 5", quotaFreePrefix: "Free plan: 5 AI runs/day —", quotaFreeLink: "Go Pro for 500/month", unlimited: "Unlimited",
   tplUpgrade: "Upgrade to Pro", tplUpgradeSuffix: "to save your settings as reusable templates.", tplMine: "My templates", tplNone: "No templates yet.", tplSave: "Save current", tplSaving: "Saving…", tplNamePrompt: "Name this template:",
 };
 const cFr: CommonUi = {
@@ -381,7 +381,7 @@ const cFr: CommonUi = {
   result: "Résultat", original: "Original", resultPlaceholder: "Le résultat apparaît ici instantanément…", aiResultPlaceholder: "Votre résultat apparaîtra ici.", ready: "Prêt — votre fichier converti est à droite.",
   width: "Largeur", height: "Hauteur", lockRatio: "Verrouiller le ratio", quality: "Qualité", rotate: "Pivoter", conversionFailed: "Échec de la conversion",
   privacyFiles: "🔒 Vos fichiers sont supprimés automatiquement après le téléchargement. Jamais stockés, jamais partagés.", privacyImage: "100 % dans votre navigateur — votre image n'est jamais téléversée. Gratuit et illimité.", privacyFfmpeg: "Traité à 100 % dans votre navigateur via FFmpeg WebAssembly — votre fichier n'est jamais téléversé.", privacyText: "100 % dans votre navigateur — rien n'est téléversé. Gratuit et illimité, sans compte.",
-  quotaAnonPrefix: "2 utilisations IA gratuites/jour —", quotaAnonLink: "Connectez-vous pour 3", quotaFreePrefix: "Offre gratuite : 3 utilisations IA/jour —", quotaFreeLink: "Passez Pro pour 500/mois", unlimited: "Illimité",
+  quotaAnonPrefix: "2 utilisations IA gratuites/jour —", quotaAnonLink: "Connectez-vous pour 5", quotaFreePrefix: "Offre gratuite : 5 utilisations IA/jour —", quotaFreeLink: "Passez Pro pour 500/mois", unlimited: "Illimité",
   tplUpgrade: "Passer à Pro", tplUpgradeSuffix: "pour enregistrer vos réglages comme modèles réutilisables.", tplMine: "Mes modèles", tplNone: "Aucun modèle pour l'instant.", tplSave: "Enregistrer", tplSaving: "Enregistrement…", tplNamePrompt: "Nommez ce modèle :",
 };
 const cEs: CommonUi = {
@@ -391,7 +391,7 @@ const cEs: CommonUi = {
   result: "Resultado", original: "Original", resultPlaceholder: "El resultado aparece aquí al instante…", aiResultPlaceholder: "Tu resultado aparecerá aquí.", ready: "Listo — tu archivo convertido está a la derecha.",
   width: "Ancho", height: "Alto", lockRatio: "Bloquear proporción", quality: "Calidad", rotate: "Rotar", conversionFailed: "Error de conversión",
   privacyFiles: "🔒 Tus archivos se eliminan automáticamente tras la descarga. Nunca almacenados, nunca compartidos.", privacyImage: "100 % en tu navegador — tu imagen nunca se sube. Gratis e ilimitado.", privacyFfmpeg: "Procesado 100 % en tu navegador con FFmpeg WebAssembly — tu archivo nunca se sube.", privacyText: "100 % en tu navegador — nada se sube. Gratis e ilimitado, sin cuenta.",
-  quotaAnonPrefix: "2 usos de IA gratis/día —", quotaAnonLink: "Inicia sesión para 3", quotaFreePrefix: "Plan gratis: 3 usos de IA/día —", quotaFreeLink: "Hazte Pro por 500/mes", unlimited: "Ilimitado",
+  quotaAnonPrefix: "2 usos de IA gratis/día —", quotaAnonLink: "Inicia sesión para 5", quotaFreePrefix: "Plan gratis: 5 usos de IA/día —", quotaFreeLink: "Hazte Pro por 500/mes", unlimited: "Ilimitado",
   tplUpgrade: "Hazte Pro", tplUpgradeSuffix: "para guardar tus ajustes como plantillas reutilizables.", tplMine: "Mis plantillas", tplNone: "Aún no hay plantillas.", tplSave: "Guardar actual", tplSaving: "Guardando…", tplNamePrompt: "Nombra esta plantilla:",
 };
 const cPt: CommonUi = {
@@ -401,7 +401,7 @@ const cPt: CommonUi = {
   result: "Resultado", original: "Original", resultPlaceholder: "O resultado aparece aqui instantaneamente…", aiResultPlaceholder: "Seu resultado aparecerá aqui.", ready: "Pronto — seu arquivo convertido está à direita.",
   width: "Largura", height: "Altura", lockRatio: "Travar proporção", quality: "Qualidade", rotate: "Girar", conversionFailed: "Falha na conversão",
   privacyFiles: "🔒 Seus arquivos são excluídos automaticamente após o download. Nunca armazenados, nunca compartilhados.", privacyImage: "100% no seu navegador — sua imagem nunca é enviada. Grátis e ilimitado.", privacyFfmpeg: "Processado 100% no seu navegador via FFmpeg WebAssembly — seu arquivo nunca é enviado.", privacyText: "100% no seu navegador — nada é enviado. Grátis e ilimitado, sem conta.",
-  quotaAnonPrefix: "2 usos de IA grátis/dia —", quotaAnonLink: "Entre para 3", quotaFreePrefix: "Plano grátis: 3 usos de IA/dia —", quotaFreeLink: "Seja Pro por 500/mês", unlimited: "Ilimitado",
+  quotaAnonPrefix: "2 usos de IA grátis/dia —", quotaAnonLink: "Entre para 5", quotaFreePrefix: "Plano grátis: 5 usos de IA/dia —", quotaFreeLink: "Seja Pro por 500/mês", unlimited: "Ilimitado",
   tplUpgrade: "Seja Pro", tplUpgradeSuffix: "para salvar suas configurações como modelos reutilizáveis.", tplMine: "Meus modelos", tplNone: "Ainda sem modelos.", tplSave: "Salvar atual", tplSaving: "Salvando…", tplNamePrompt: "Dê um nome a este modelo:",
 };
 const cDe: CommonUi = {
@@ -411,7 +411,7 @@ const cDe: CommonUi = {
   result: "Ergebnis", original: "Original", resultPlaceholder: "Das Ergebnis erscheint hier sofort…", aiResultPlaceholder: "Dein Ergebnis erscheint hier.", ready: "Fertig — deine konvertierte Datei ist rechts.",
   width: "Breite", height: "Höhe", lockRatio: "Seitenverhältnis sperren", quality: "Qualität", rotate: "Drehen", conversionFailed: "Konvertierung fehlgeschlagen",
   privacyFiles: "🔒 Deine Dateien werden nach dem Download automatisch gelöscht. Nie gespeichert, nie geteilt.", privacyImage: "100 % in deinem Browser — dein Bild wird nie hochgeladen. Kostenlos und unbegrenzt.", privacyFfmpeg: "Zu 100 % in deinem Browser via FFmpeg WebAssembly verarbeitet — deine Datei wird nie hochgeladen.", privacyText: "100 % in deinem Browser — nichts wird hochgeladen. Kostenlos und unbegrenzt, ohne Konto.",
-  quotaAnonPrefix: "2 kostenlose KI-Läufe/Tag —", quotaAnonLink: "Anmelden für 3", quotaFreePrefix: "Gratis-Plan: 3 KI-Läufe/Tag —", quotaFreeLink: "Pro für 500/Monat", unlimited: "Unbegrenzt",
+  quotaAnonPrefix: "2 kostenlose KI-Läufe/Tag —", quotaAnonLink: "Anmelden für 5", quotaFreePrefix: "Gratis-Plan: 5 KI-Läufe/Tag —", quotaFreeLink: "Pro für 500/Monat", unlimited: "Unbegrenzt",
   tplUpgrade: "Auf Pro upgraden", tplUpgradeSuffix: "um deine Einstellungen als wiederverwendbare Vorlagen zu speichern.", tplMine: "Meine Vorlagen", tplNone: "Noch keine Vorlagen.", tplSave: "Aktuelle speichern", tplSaving: "Speichern…", tplNamePrompt: "Benenne diese Vorlage:",
 };
 const cIt: CommonUi = {
@@ -421,7 +421,7 @@ const cIt: CommonUi = {
   result: "Risultato", original: "Originale", resultPlaceholder: "Il risultato appare qui all'istante…", aiResultPlaceholder: "Il tuo risultato apparirà qui.", ready: "Pronto — il file convertito è a destra.",
   width: "Larghezza", height: "Altezza", lockRatio: "Blocca proporzioni", quality: "Qualità", rotate: "Ruota", conversionFailed: "Conversione non riuscita",
   privacyFiles: "🔒 I tuoi file vengono eliminati automaticamente dopo il download. Mai memorizzati, mai condivisi.", privacyImage: "100% nel tuo browser — la tua immagine non viene mai caricata. Gratis e illimitato.", privacyFfmpeg: "Elaborato al 100% nel tuo browser con FFmpeg WebAssembly — il tuo file non viene mai caricato.", privacyText: "100% nel tuo browser — nulla viene caricato. Gratis e illimitato, senza account.",
-  quotaAnonPrefix: "2 usi IA gratis/giorno —", quotaAnonLink: "Accedi per 3", quotaFreePrefix: "Piano gratis: 3 usi IA/giorno —", quotaFreeLink: "Passa a Pro per 500/mese", unlimited: "Illimitato",
+  quotaAnonPrefix: "2 usi IA gratis/giorno —", quotaAnonLink: "Accedi per 5", quotaFreePrefix: "Piano gratis: 5 usi IA/giorno —", quotaFreeLink: "Passa a Pro per 500/mese", unlimited: "Illimitato",
   tplUpgrade: "Passa a Pro", tplUpgradeSuffix: "per salvare le impostazioni come modelli riutilizzabili.", tplMine: "I miei modelli", tplNone: "Ancora nessun modello.", tplSave: "Salva attuale", tplSaving: "Salvataggio…", tplNamePrompt: "Dai un nome a questo modello:",
 };
 const cNl: CommonUi = {
@@ -431,7 +431,7 @@ const cNl: CommonUi = {
   result: "Resultaat", original: "Origineel", resultPlaceholder: "Het resultaat verschijnt hier direct…", aiResultPlaceholder: "Je resultaat verschijnt hier.", ready: "Klaar — je geconverteerde bestand staat rechts.",
   width: "Breedte", height: "Hoogte", lockRatio: "Verhouding vergrendelen", quality: "Kwaliteit", rotate: "Draaien", conversionFailed: "Conversie mislukt",
   privacyFiles: "🔒 Je bestanden worden na het downloaden automatisch verwijderd. Nooit opgeslagen, nooit gedeeld.", privacyImage: "100% in je browser — je afbeelding wordt nooit geüpload. Gratis en onbeperkt.", privacyFfmpeg: "100% in je browser verwerkt via FFmpeg WebAssembly — je bestand wordt nooit geüpload.", privacyText: "100% in je browser — niets wordt geüpload. Gratis en onbeperkt, zonder account.",
-  quotaAnonPrefix: "2 gratis AI-runs/dag —", quotaAnonLink: "Log in voor 3", quotaFreePrefix: "Gratis plan: 3 AI-runs/dag —", quotaFreeLink: "Ga Pro voor 500/maand", unlimited: "Onbeperkt",
+  quotaAnonPrefix: "2 gratis AI-runs/dag —", quotaAnonLink: "Log in voor 5", quotaFreePrefix: "Gratis plan: 5 AI-runs/dag —", quotaFreeLink: "Ga Pro voor 500/maand", unlimited: "Onbeperkt",
   tplUpgrade: "Upgrade naar Pro", tplUpgradeSuffix: "om je instellingen als herbruikbare sjablonen op te slaan.", tplMine: "Mijn sjablonen", tplNone: "Nog geen sjablonen.", tplSave: "Huidige opslaan", tplSaving: "Opslaan…", tplNamePrompt: "Geef dit sjabloon een naam:",
 };
 const cJa: CommonUi = {
@@ -441,7 +441,7 @@ const cJa: CommonUi = {
   result: "結果", original: "元", resultPlaceholder: "結果がここに即座に表示されます…", aiResultPlaceholder: "結果がここに表示されます。", ready: "準備完了 — 変換後のファイルは右側です。",
   width: "幅", height: "高さ", lockRatio: "縦横比を固定", quality: "品質", rotate: "回転", conversionFailed: "変換に失敗しました",
   privacyFiles: "🔒 ファイルはダウンロード後に自動削除されます。保存も共有も一切しません。", privacyImage: "100% ブラウザ内 — 画像はアップロードされません。無料・無制限。", privacyFfmpeg: "FFmpeg WebAssembly により 100% ブラウザ内で処理 — ファイルはアップロードされません。", privacyText: "100% ブラウザ内 — 何もアップロードされません。無料・無制限、アカウント不要。",
-  quotaAnonPrefix: "無料の AI 実行 2 回/日 —", quotaAnonLink: "ログインで 3 回", quotaFreePrefix: "無料プラン：AI 実行 3 回/日 —", quotaFreeLink: "Pro で月 500 回", unlimited: "無制限",
+  quotaAnonPrefix: "無料の AI 実行 2 回/日 —", quotaAnonLink: "ログインで 5 回", quotaFreePrefix: "無料プラン：AI 実行 5 回/日 —", quotaFreeLink: "Pro で月 500 回", unlimited: "無制限",
   tplUpgrade: "Pro にアップグレード", tplUpgradeSuffix: "して設定を再利用可能なテンプレートとして保存。", tplMine: "マイテンプレート", tplNone: "まだテンプレートがありません。", tplSave: "現在の設定を保存", tplSaving: "保存中…", tplNamePrompt: "このテンプレートに名前を付けてください：",
 };
 const cZh: CommonUi = {
@@ -451,7 +451,7 @@ const cZh: CommonUi = {
   result: "结果", original: "原始", resultPlaceholder: "结果会立即显示在这里…", aiResultPlaceholder: "您的结果将显示在这里。", ready: "就绪 — 转换后的文件在右侧。",
   width: "宽度", height: "高度", lockRatio: "锁定比例", quality: "质量", rotate: "旋转", conversionFailed: "转换失败",
   privacyFiles: "🔒 文件在下载后自动删除。绝不存储,绝不分享。", privacyImage: "100% 在您的浏览器中 — 图片绝不上传。免费且无限制。", privacyFfmpeg: "通过 FFmpeg WebAssembly 100% 在浏览器中处理 — 文件绝不上传。", privacyText: "100% 在您的浏览器中 — 不上传任何内容。免费无限制,无需账户。",
-  quotaAnonPrefix: "每天 2 次免费 AI —", quotaAnonLink: "登录可用 3 次", quotaFreePrefix: "免费版:每天 3 次 AI —", quotaFreeLink: "升级 Pro 每月 500 次", unlimited: "无限制",
+  quotaAnonPrefix: "每天 2 次免费 AI —", quotaAnonLink: "登录可用 5 次", quotaFreePrefix: "免费版:每天 5 次 AI —", quotaFreeLink: "升级 Pro 每月 500 次", unlimited: "无限制",
   tplUpgrade: "升级到 Pro", tplUpgradeSuffix: "即可将设置保存为可复用模板。", tplMine: "我的模板", tplNone: "还没有模板。", tplSave: "保存当前", tplSaving: "保存中…", tplNamePrompt: "为此模板命名:",
 };
 const cKo: CommonUi = {
@@ -461,7 +461,7 @@ const cKo: CommonUi = {
   result: "결과", original: "원본", resultPlaceholder: "결과가 여기에 즉시 표시됩니다…", aiResultPlaceholder: "결과가 여기에 표시됩니다.", ready: "준비됨 — 변환된 파일이 오른쪽에 있습니다.",
   width: "너비", height: "높이", lockRatio: "비율 잠금", quality: "품질", rotate: "회전", conversionFailed: "변환 실패",
   privacyFiles: "🔒 파일은 다운로드 후 자동으로 삭제됩니다. 저장하거나 공유하지 않습니다.", privacyImage: "100% 브라우저에서 — 이미지는 업로드되지 않습니다. 무료, 무제한.", privacyFfmpeg: "FFmpeg WebAssembly 로 100% 브라우저에서 처리 — 파일은 업로드되지 않습니다.", privacyText: "100% 브라우저에서 — 아무것도 업로드되지 않습니다. 무료, 무제한, 계정 불필요.",
-  quotaAnonPrefix: "무료 AI 하루 2회 —", quotaAnonLink: "로그인하면 3회", quotaFreePrefix: "무료 플랜: AI 하루 3회 —", quotaFreeLink: "Pro 로 월 500회", unlimited: "무제한",
+  quotaAnonPrefix: "무료 AI 하루 2회 —", quotaAnonLink: "로그인하면 5회", quotaFreePrefix: "무료 플랜: AI 하루 5회 —", quotaFreeLink: "Pro 로 월 500회", unlimited: "무제한",
   tplUpgrade: "Pro 로 업그레이드", tplUpgradeSuffix: "하여 설정을 재사용 가능한 템플릿으로 저장하세요.", tplMine: "내 템플릿", tplNone: "아직 템플릿이 없습니다.", tplSave: "현재 저장", tplSaving: "저장 중…", tplNamePrompt: "이 템플릿의 이름을 지정하세요:",
 };
 const cAr: CommonUi = {
@@ -471,7 +471,7 @@ const cAr: CommonUi = {
   result: "النتيجة", original: "الأصل", resultPlaceholder: "تظهر النتيجة هنا فورًا…", aiResultPlaceholder: "ستظهر نتيجتك هنا.", ready: "جاهز — ملفك المحوّل على اليمين.",
   width: "العرض", height: "الارتفاع", lockRatio: "قفل النسبة", quality: "الجودة", rotate: "تدوير", conversionFailed: "فشل التحويل",
   privacyFiles: "🔒 تُحذف ملفاتك تلقائيًا بعد التنزيل. لا تُخزَّن ولا تُشارك أبدًا.", privacyImage: "100% داخل متصفحك — لا تُرفع صورتك أبدًا. مجاني وبلا حدود.", privacyFfmpeg: "تتم المعالجة 100% داخل متصفحك عبر FFmpeg WebAssembly — لا يُرفع ملفك أبدًا.", privacyText: "100% داخل متصفحك — لا يُرفع أي شيء. مجاني وبلا حدود وبدون حساب.",
-  quotaAnonPrefix: "تشغيلان مجانيان للذكاء الاصطناعي/يوم —", quotaAnonLink: "سجّل الدخول لـ 3", quotaFreePrefix: "الخطة المجانية: 3 تشغيلات ذكاء اصطناعي/يوم —", quotaFreeLink: "اشترك في Pro لـ 500/شهر", unlimited: "غير محدود",
+  quotaAnonPrefix: "تشغيلان مجانيان للذكاء الاصطناعي/يوم —", quotaAnonLink: "سجّل الدخول لـ 5", quotaFreePrefix: "الخطة المجانية: 5 تشغيلات ذكاء اصطناعي/يوم —", quotaFreeLink: "اشترك في Pro لـ 500/شهر", unlimited: "غير محدود",
   tplUpgrade: "الترقية إلى Pro", tplUpgradeSuffix: "لحفظ إعداداتك كقوالب قابلة لإعادة الاستخدام.", tplMine: "قوالبي", tplNone: "لا توجد قوالب بعد.", tplSave: "حفظ الحالي", tplSaving: "جارٍ الحفظ…", tplNamePrompt: "أعطِ اسمًا لهذا القالب:",
 };
 const cRu: CommonUi = {
@@ -481,7 +481,7 @@ const cRu: CommonUi = {
   result: "Результат", original: "Оригинал", resultPlaceholder: "Результат появится здесь мгновенно…", aiResultPlaceholder: "Ваш результат появится здесь.", ready: "Готово — конвертированный файл справа.",
   width: "Ширина", height: "Высота", lockRatio: "Сохранять пропорции", quality: "Качество", rotate: "Повернуть", conversionFailed: "Ошибка конвертации",
   privacyFiles: "🔒 Ваши файлы удаляются автоматически после скачивания. Никогда не хранятся и не передаются.", privacyImage: "100% в вашем браузере — изображение не загружается на сервер. Бесплатно и без ограничений.", privacyFfmpeg: "Обработка на 100% в браузере через FFmpeg WebAssembly — файл не загружается на сервер.", privacyText: "100% в вашем браузере — ничего не загружается. Бесплатно, без ограничений и без аккаунта.",
-  quotaAnonPrefix: "2 бесплатных запуска ИИ/день —", quotaAnonLink: "Войдите для 3", quotaFreePrefix: "Бесплатный план: 3 запуска ИИ/день —", quotaFreeLink: "Pro — 500/месяц", unlimited: "Без ограничений",
+  quotaAnonPrefix: "2 бесплатных запуска ИИ/день —", quotaAnonLink: "Войдите для 5", quotaFreePrefix: "Бесплатный план: 5 запусков ИИ/день —", quotaFreeLink: "Pro — 500/месяц", unlimited: "Без ограничений",
   tplUpgrade: "Перейти на Pro", tplUpgradeSuffix: "чтобы сохранять настройки как многоразовые шаблоны.", tplMine: "Мои шаблоны", tplNone: "Шаблонов пока нет.", tplSave: "Сохранить текущие", tplSaving: "Сохранение…", tplNamePrompt: "Назовите этот шаблон:",
 };
 const cHi: CommonUi = {
@@ -491,7 +491,7 @@ const cHi: CommonUi = {
   result: "परिणाम", original: "मूल", resultPlaceholder: "परिणाम यहाँ तुरंत दिखता है…", aiResultPlaceholder: "आपका परिणाम यहाँ दिखेगा।", ready: "तैयार — आपकी कन्वर्ट की गई फ़ाइल दाईं ओर है।",
   width: "चौड़ाई", height: "ऊँचाई", lockRatio: "अनुपात लॉक करें", quality: "गुणवत्ता", rotate: "घुमाएँ", conversionFailed: "कन्वर्ज़न विफल",
   privacyFiles: "🔒 डाउनलोड के बाद आपकी फ़ाइलें स्वतः हट जाती हैं। कभी संग्रहीत नहीं, कभी साझा नहीं।", privacyImage: "100% आपके ब्राउज़र में — आपकी छवि कभी अपलोड नहीं होती। मुफ़्त और असीमित।", privacyFfmpeg: "FFmpeg WebAssembly के ज़रिए 100% आपके ब्राउज़र में संसाधित — आपकी फ़ाइल कभी अपलोड नहीं होती।", privacyText: "100% आपके ब्राउज़र में — कुछ भी अपलोड नहीं होता। मुफ़्त, असीमित, बिना खाता।",
-  quotaAnonPrefix: "2 मुफ़्त AI उपयोग/दिन —", quotaAnonLink: "3 के लिए साइन इन करें", quotaFreePrefix: "मुफ़्त प्लान: 3 AI उपयोग/दिन —", quotaFreeLink: "500/माह के लिए Pro लें", unlimited: "असीमित",
+  quotaAnonPrefix: "2 मुफ़्त AI उपयोग/दिन —", quotaAnonLink: "5 के लिए साइन इन करें", quotaFreePrefix: "मुफ़्त प्लान: 5 AI उपयोग/दिन —", quotaFreeLink: "500/माह के लिए Pro लें", unlimited: "असीमित",
   tplUpgrade: "Pro में अपग्रेड करें", tplUpgradeSuffix: "ताकि अपनी सेटिंग्स पुन: प्रयोज्य टेम्पलेट के रूप में सहेज सकें।", tplMine: "मेरे टेम्पलेट", tplNone: "अभी कोई टेम्पलेट नहीं।", tplSave: "वर्तमान सहेजें", tplSaving: "सहेजा जा रहा है…", tplNamePrompt: "इस टेम्पलेट को नाम दें:",
 };
 const cTr: CommonUi = {
@@ -501,7 +501,7 @@ const cTr: CommonUi = {
   result: "Sonuç", original: "Orijinal", resultPlaceholder: "Sonuç anında burada görünür…", aiResultPlaceholder: "Sonucunuz burada görünecek.", ready: "Hazır — dönüştürülen dosyanız sağda.",
   width: "Genişlik", height: "Yükseklik", lockRatio: "Oranı kilitle", quality: "Kalite", rotate: "Döndür", conversionFailed: "Dönüştürme başarısız",
   privacyFiles: "🔒 Dosyalarınız indirildikten sonra otomatik silinir. Asla saklanmaz, asla paylaşılmaz.", privacyImage: "%100 tarayıcınızda — resminiz asla yüklenmez. Ücretsiz ve sınırsız.", privacyFfmpeg: "FFmpeg WebAssembly ile %100 tarayıcınızda işlenir — dosyanız asla yüklenmez.", privacyText: "%100 tarayıcınızda — hiçbir şey yüklenmez. Ücretsiz, sınırsız, hesapsız.",
-  quotaAnonPrefix: "Günde 2 ücretsiz AI çalıştırması —", quotaAnonLink: "3 için giriş yapın", quotaFreePrefix: "Ücretsiz plan: günde 3 AI çalıştırması —", quotaFreeLink: "Ayda 500 için Pro", unlimited: "Sınırsız",
+  quotaAnonPrefix: "Günde 2 ücretsiz AI çalıştırması —", quotaAnonLink: "5 için giriş yapın", quotaFreePrefix: "Ücretsiz plan: günde 5 AI çalıştırması —", quotaFreeLink: "Ayda 500 için Pro", unlimited: "Sınırsız",
   tplUpgrade: "Pro'ya yükselt", tplUpgradeSuffix: "ayarlarınızı yeniden kullanılabilir şablonlar olarak kaydetmek için.", tplMine: "Şablonlarım", tplNone: "Henüz şablon yok.", tplSave: "Geçerli olanı kaydet", tplSaving: "Kaydediliyor…", tplNamePrompt: "Bu şablona bir ad verin:",
 };
 const cId: CommonUi = {
@@ -511,7 +511,7 @@ const cId: CommonUi = {
   result: "Hasil", original: "Asli", resultPlaceholder: "Hasil muncul di sini secara instan…", aiResultPlaceholder: "Hasil Anda akan muncul di sini.", ready: "Siap — file hasil konversi ada di kanan.",
   width: "Lebar", height: "Tinggi", lockRatio: "Kunci rasio", quality: "Kualitas", rotate: "Putar", conversionFailed: "Konversi gagal",
   privacyFiles: "🔒 File Anda otomatis dihapus setelah diunduh. Tidak pernah disimpan, tidak pernah dibagikan.", privacyImage: "100% di browser Anda — gambar Anda tidak pernah diunggah. Gratis dan tanpa batas.", privacyFfmpeg: "Diproses 100% di browser Anda via FFmpeg WebAssembly — file Anda tidak pernah diunggah.", privacyText: "100% di browser Anda — tidak ada yang diunggah. Gratis, tanpa batas, tanpa akun.",
-  quotaAnonPrefix: "2 proses AI gratis/hari —", quotaAnonLink: "Masuk untuk 3", quotaFreePrefix: "Paket gratis: 3 proses AI/hari —", quotaFreeLink: "Pro untuk 500/bulan", unlimited: "Tanpa batas",
+  quotaAnonPrefix: "2 proses AI gratis/hari —", quotaAnonLink: "Masuk untuk 5", quotaFreePrefix: "Paket gratis: 5 proses AI/hari —", quotaFreeLink: "Pro untuk 500/bulan", unlimited: "Tanpa batas",
   tplUpgrade: "Tingkatkan ke Pro", tplUpgradeSuffix: "untuk menyimpan pengaturan sebagai template yang dapat dipakai ulang.", tplMine: "Template saya", tplNone: "Belum ada template.", tplSave: "Simpan saat ini", tplSaving: "Menyimpan…", tplNamePrompt: "Beri nama template ini:",
 };
 const cVi: CommonUi = {
@@ -521,7 +521,7 @@ const cVi: CommonUi = {
   result: "Kết quả", original: "Bản gốc", resultPlaceholder: "Kết quả xuất hiện ngay tại đây…", aiResultPlaceholder: "Kết quả của bạn sẽ xuất hiện ở đây.", ready: "Sẵn sàng — tệp đã chuyển đổi ở bên phải.",
   width: "Chiều rộng", height: "Chiều cao", lockRatio: "Khóa tỉ lệ", quality: "Chất lượng", rotate: "Xoay", conversionFailed: "Chuyển đổi thất bại",
   privacyFiles: "🔒 Tệp của bạn tự động bị xóa sau khi tải xuống. Không bao giờ lưu trữ, không bao giờ chia sẻ.", privacyImage: "100% trong trình duyệt của bạn — hình ảnh không bao giờ được tải lên. Miễn phí và không giới hạn.", privacyFfmpeg: "Xử lý 100% trong trình duyệt của bạn qua FFmpeg WebAssembly — tệp không bao giờ được tải lên.", privacyText: "100% trong trình duyệt của bạn — không tải lên bất cứ thứ gì. Miễn phí, không giới hạn, không cần tài khoản.",
-  quotaAnonPrefix: "2 lượt AI miễn phí/ngày —", quotaAnonLink: "Đăng nhập để có 3", quotaFreePrefix: "Gói miễn phí: 3 lượt AI/ngày —", quotaFreeLink: "Lên Pro để có 500/tháng", unlimited: "Không giới hạn",
+  quotaAnonPrefix: "2 lượt AI miễn phí/ngày —", quotaAnonLink: "Đăng nhập để có 5", quotaFreePrefix: "Gói miễn phí: 5 lượt AI/ngày —", quotaFreeLink: "Lên Pro để có 500/tháng", unlimited: "Không giới hạn",
   tplUpgrade: "Nâng cấp lên Pro", tplUpgradeSuffix: "để lưu cài đặt thành mẫu dùng lại.", tplMine: "Mẫu của tôi", tplNone: "Chưa có mẫu nào.", tplSave: "Lưu hiện tại", tplSaving: "Đang lưu…", tplNamePrompt: "Đặt tên cho mẫu này:",
 };
 const cSv: CommonUi = {
@@ -531,7 +531,7 @@ const cSv: CommonUi = {
   result: "Resultat", original: "Original", resultPlaceholder: "Resultatet visas här direkt…", aiResultPlaceholder: "Ditt resultat visas här.", ready: "Klart — din konverterade fil är till höger.",
   width: "Bredd", height: "Höjd", lockRatio: "Lås proportion", quality: "Kvalitet", rotate: "Rotera", conversionFailed: "Konvertering misslyckades",
   privacyFiles: "🔒 Dina filer raderas automatiskt efter nedladdning. Lagras aldrig, delas aldrig.", privacyImage: "100 % i din webbläsare — din bild laddas aldrig upp. Gratis och obegränsat.", privacyFfmpeg: "Bearbetas 100 % i din webbläsare via FFmpeg WebAssembly — din fil laddas aldrig upp.", privacyText: "100 % i din webbläsare — inget laddas upp. Gratis, obegränsat, inget konto.",
-  quotaAnonPrefix: "2 gratis AI-körningar/dag —", quotaAnonLink: "Logga in för 3", quotaFreePrefix: "Gratisplan: 3 AI-körningar/dag —", quotaFreeLink: "Bli Pro för 500/månad", unlimited: "Obegränsat",
+  quotaAnonPrefix: "2 gratis AI-körningar/dag —", quotaAnonLink: "Logga in för 5", quotaFreePrefix: "Gratisplan: 5 AI-körningar/dag —", quotaFreeLink: "Bli Pro för 500/månad", unlimited: "Obegränsat",
   tplUpgrade: "Uppgradera till Pro", tplUpgradeSuffix: "för att spara dina inställningar som återanvändbara mallar.", tplMine: "Mina mallar", tplNone: "Inga mallar än.", tplSave: "Spara aktuell", tplSaving: "Sparar…", tplNamePrompt: "Namnge den här mallen:",
 };
 const cPl: CommonUi = {
@@ -541,7 +541,7 @@ const cPl: CommonUi = {
   result: "Wynik", original: "Oryginał", resultPlaceholder: "Wynik pojawia się tutaj natychmiast…", aiResultPlaceholder: "Twój wynik pojawi się tutaj.", ready: "Gotowe — przekonwertowany plik jest po prawej.",
   width: "Szerokość", height: "Wysokość", lockRatio: "Zablokuj proporcje", quality: "Jakość", rotate: "Obróć", conversionFailed: "Konwersja nie powiodła się",
   privacyFiles: "🔒 Twoje pliki są automatycznie usuwane po pobraniu. Nigdy nie przechowywane, nigdy nieudostępniane.", privacyImage: "100% w Twojej przeglądarce — obraz nigdy nie jest przesyłany. Za darmo i bez limitu.", privacyFfmpeg: "Przetwarzane w 100% w przeglądarce przez FFmpeg WebAssembly — plik nigdy nie jest przesyłany.", privacyText: "100% w Twojej przeglądarce — nic nie jest przesyłane. Za darmo, bez limitu, bez konta.",
-  quotaAnonPrefix: "2 darmowe uruchomienia AI/dzień —", quotaAnonLink: "Zaloguj się, by mieć 3", quotaFreePrefix: "Plan darmowy: 3 uruchomienia AI/dzień —", quotaFreeLink: "Pro za 500/miesiąc", unlimited: "Bez limitu",
+  quotaAnonPrefix: "2 darmowe uruchomienia AI/dzień —", quotaAnonLink: "Zaloguj się, by mieć 5", quotaFreePrefix: "Plan darmowy: 5 uruchomień AI/dzień —", quotaFreeLink: "Pro za 500/miesiąc", unlimited: "Bez limitu",
   tplUpgrade: "Przejdź na Pro", tplUpgradeSuffix: "aby zapisywać ustawienia jako szablony wielokrotnego użytku.", tplMine: "Moje szablony", tplNone: "Brak szablonów.", tplSave: "Zapisz bieżące", tplSaving: "Zapisywanie…", tplNamePrompt: "Nazwij ten szablon:",
 };
 const cUk: CommonUi = {
@@ -551,7 +551,7 @@ const cUk: CommonUi = {
   result: "Результат", original: "Оригінал", resultPlaceholder: "Результат з'явиться тут миттєво…", aiResultPlaceholder: "Ваш результат з'явиться тут.", ready: "Готово — конвертований файл праворуч.",
   width: "Ширина", height: "Висота", lockRatio: "Зафіксувати пропорції", quality: "Якість", rotate: "Повернути", conversionFailed: "Помилка конвертації",
   privacyFiles: "🔒 Ваші файли автоматично видаляються після завантаження. Ніколи не зберігаються й не передаються.", privacyImage: "100% у вашому браузері — зображення ніколи не завантажується на сервер. Безкоштовно й без обмежень.", privacyFfmpeg: "Обробка на 100% у браузері через FFmpeg WebAssembly — файл ніколи не завантажується на сервер.", privacyText: "100% у вашому браузері — нічого не завантажується. Безкоштовно, без обмежень і без акаунта.",
-  quotaAnonPrefix: "2 безкоштовні запуски ШІ/день —", quotaAnonLink: "Увійдіть для 3", quotaFreePrefix: "Безкоштовний план: 3 запуски ШІ/день —", quotaFreeLink: "Pro за 500/місяць", unlimited: "Без обмежень",
+  quotaAnonPrefix: "2 безкоштовні запуски ШІ/день —", quotaAnonLink: "Увійдіть для 5", quotaFreePrefix: "Безкоштовний план: 5 запусків ШІ/день —", quotaFreeLink: "Pro за 500/місяць", unlimited: "Без обмежень",
   tplUpgrade: "Перейти на Pro", tplUpgradeSuffix: "щоб зберігати налаштування як багаторазові шаблони.", tplMine: "Мої шаблони", tplNone: "Шаблонів ще немає.", tplSave: "Зберегти поточні", tplSaving: "Збереження…", tplNamePrompt: "Назвіть цей шаблон:",
 };
 const cCs: CommonUi = {
@@ -561,7 +561,7 @@ const cCs: CommonUi = {
   result: "Výsledek", original: "Originál", resultPlaceholder: "Výsledek se zobrazí zde okamžitě…", aiResultPlaceholder: "Váš výsledek se zobrazí zde.", ready: "Hotovo — převedený soubor je vpravo.",
   width: "Šířka", height: "Výška", lockRatio: "Zamknout poměr", quality: "Kvalita", rotate: "Otočit", conversionFailed: "Převod se nezdařil",
   privacyFiles: "🔒 Vaše soubory se po stažení automaticky smažou. Nikdy se neukládají ani nesdílejí.", privacyImage: "100 % ve vašem prohlížeči — obrázek se nikdy nenahrává. Zdarma a bez omezení.", privacyFfmpeg: "Zpracováno 100 % ve vašem prohlížeči přes FFmpeg WebAssembly — soubor se nikdy nenahrává.", privacyText: "100 % ve vašem prohlížeči — nic se nenahrává. Zdarma, bez omezení, bez účtu.",
-  quotaAnonPrefix: "2 běhy AI zdarma/den —", quotaAnonLink: "Přihlaste se pro 3", quotaFreePrefix: "Plán zdarma: 3 běhy AI/den —", quotaFreeLink: "Pro za 500/měsíc", unlimited: "Bez omezení",
+  quotaAnonPrefix: "2 běhy AI zdarma/den —", quotaAnonLink: "Přihlaste se pro 5", quotaFreePrefix: "Plán zdarma: 5 běhů AI/den —", quotaFreeLink: "Pro za 500/měsíc", unlimited: "Bez omezení",
   tplUpgrade: "Přejít na Pro", tplUpgradeSuffix: "pro uložení nastavení jako znovupoužitelných šablon.", tplMine: "Moje šablony", tplNone: "Zatím žádné šablony.", tplSave: "Uložit aktuální", tplSaving: "Ukládání…", tplNamePrompt: "Pojmenujte tuto šablonu:",
 };
 

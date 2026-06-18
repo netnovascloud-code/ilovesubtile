@@ -41,7 +41,7 @@ export function LiveConversions({ locale }: { locale: Locale }) {
     return () => { cancelled = true; sb.removeChannel(ch); };
   }, []);
 
-  if (count == null || count < 1) return null;
+  if (count == null) return null;
   const s = getLiveConversions(locale);
 
   return (

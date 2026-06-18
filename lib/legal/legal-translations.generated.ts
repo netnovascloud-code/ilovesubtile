@@ -4957,7 +4957,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Formules** : Gratuite (0 €), Pro (12 €/mois ou 99 €/an), Business (39 €/mois ou 349 €/an). Les fonctionnalités et quotas des formules sont ceux décrits sur notre page [Tarifs](/pricing) au moment de l'achat. Nous nous réservons le droit de modifier les fonctionnalités des formules avec un préavis de 30 jours.",
+              "**Formules** : Gratuite (0 €), Pro (25 €/mois ou 210 €/an), Business (79 €/mois ou 664 €/an). Les fonctionnalités et quotas des formules sont ceux décrits sur notre page [Tarifs](/pricing) au moment de l'achat. Nous nous réservons le droit de modifier les fonctionnalités des formules avec un préavis de 30 jours.",
               "**Renouvellement automatique** : les abonnements mensuels et annuels se renouvellent automatiquement selon la même périodicité jusqu'à annulation. Vous pouvez annuler à tout moment depuis votre tableau de bord ; l'annulation prend effet à la fin de la période de facturation en cours. Vous conservez l'accès jusqu'à cette date.",
               "**Droit de rétractation (UE)** : conformément à l'article L. 221-28 du Code de la consommation français, lorsque vous utilisez activement le Service pendant la période initiale de rétractation de 14 jours, vous consentez expressément à l'exécution immédiate du contrat et renoncez à votre droit de rétractation. Si vous n'avez pas utilisé de fonctionnalité payante, vous pouvez vous rétracter dans les 14 jours en envoyant un e-mail à [support@konvertools.com](mailto:support@konvertools.com) et nous effectuerons un remboursement intégral sous 14 jours.",
               "**Aucun remboursement partiel** : en dehors du scénario de rétractation ci-dessus, les frais déjà payés pour la période de facturation en cours ne sont pas remboursables.",
@@ -5152,7 +5152,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Planes**: Gratis (€0), Pro (€12/mes o €99/año), Business (€39/mes o €349/año). Las características y cuotas de los planes se describen en nuestra página de [Precios](/pricing) en el momento de la compra. Nos reservamos el derecho de modificar las características de los planes con 30 días de antelación.",
+              "**Planes**: Gratis (€0), Pro (€25/mes o €210/año), Business (€79/mes o €664/año). Las características y cuotas de los planes se describen en nuestra página de [Precios](/pricing) en el momento de la compra. Nos reservamos el derecho de modificar las características de los planes con 30 días de antelación.",
               "**Renovación automática**: las suscripciones mensuales y anuales se renuevan automáticamente en la misma cadencia hasta que se cancelen. Puede cancelar en cualquier momento desde su panel; la cancelación surte efecto al final del período de facturación actual. Mantiene el acceso hasta esa fecha.",
               "**Derecho de desistimiento (UE)**: según el Artículo L. 221-28 del Código de Consumo francés, si utiliza activamente el Servicio durante el período inicial de 14 días de desistimiento, usted consiente expresamente la ejecución inmediata del contrato y renuncia a su derecho de desistimiento. Si no ha utilizado ninguna función de pago, puede desistir en un plazo de 14 días enviando un correo a [support@konvertools.com](mailto:support@konvertools.com) y le reembolsaremos el importe íntegro en un plazo de 14 días.",
               "**Sin reembolsos parciales**: fuera del escenario de desistimiento anterior, las tarifas ya pagadas por el período de facturación actual no son reembolsables.",
@@ -5347,7 +5347,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Planos**: Gratuito (€0), Pro (€12/mês ou €99/ano), Business (€39/mês ou €349/ano). Os recursos e cotas dos planos são os descritos na nossa [página de Preços](/pricing) no momento da compra. Reservamo-nos o direito de alterar os recursos dos planos com 30 dias de antecedência.",
+              "**Planos**: Gratuito (€0), Pro (€25/mês ou €210/ano), Business (€79/mês ou €664/ano). Os recursos e cotas dos planos são os descritos na nossa [página de Preços](/pricing) no momento da compra. Reservamo-nos o direito de alterar os recursos dos planos com 30 dias de antecedência.",
               "**Renovação automática**: assinaturas mensais e anuais são renovadas automaticamente na mesma periodicidade até serem canceladas. Você pode cancelar a qualquer momento pelo painel de controle; o cancelamento entra em vigor no final do período de faturamento atual. Você mantém o acesso até essa data.",
               "**Direito de arrependimento (UE)**: nos termos do Artigo L. 221-28 do Código de Defesa do Consumidor francês, quando você utiliza ativamente o Serviço durante o período inicial de 14 dias de arrependimento, você consente expressamente com a execução imediata do contrato e renuncia ao seu direito de arrependimento. Se não tiver utilizado nenhum recurso pago, você poderá se arrepender no prazo de 14 dias enviando um e-mail para [support@konvertools.com](mailto:support@konvertools.com) e nós reembolsaremos integralmente em até 14 dias.",
               "**Sem reembolsos parciais**: fora do cenário de arrependimento acima, taxas já pagas pelo período de faturamento atual não são reembolsáveis.",
@@ -5542,7 +5542,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Tarife**: Kostenlos (0 €), Pro (12 €/Monat oder 99 €/Jahr), Business (39 €/Monat oder 349 €/Jahr). Die Funktionen und Kontingente der Tarife sind wie auf unserer [Preisseite](/pricing) zum Zeitpunkt des Kaufs beschrieben. Wir behalten uns vor, die Tariffunktionen mit 30-tägiger Vorankündigung zu ändern.",
+              "**Tarife**: Kostenlos (0 €), Pro (25 €/Monat oder 210 €/Jahr), Business (79 €/Monat oder 664 €/Jahr). Die Funktionen und Kontingente der Tarife sind wie auf unserer [Preisseite](/pricing) zum Zeitpunkt des Kaufs beschrieben. Wir behalten uns vor, die Tariffunktionen mit 30-tägiger Vorankündigung zu ändern.",
               "**Automatische Verlängerung**: Monatliche und jährliche Abonnements verlängern sich automatisch in derselben Frequenz, bis sie gekündigt werden. Sie können jederzeit über Ihr Dashboard kündigen; die Kündigung wird am Ende der aktuellen Abrechnungsperiode wirksam. Sie behalten bis dahin den Zugang.",
               "**Rücktrittsrecht (EU)**: Gemäß Artikel L. 221-28 des französischen Verbrauchergesetzbuchs erklären Sie durch aktive Nutzung des Dienstes während der anfänglichen 14-tägigen Rücktrittsfrist ausdrücklich Ihr Einverständnis mit der sofortigen Vertragserfüllung und verzichten auf Ihr Rücktrittsrecht. Falls Sie keine kostenpflichtigen Funktionen genutzt haben, können Sie innerhalb von 14 Tagen per E-Mail an [support@konvertools.com](mailto:support@konvertools.com) zurücktreten, und wir erstatten Ihnen den Betrag innerhalb von 14 Tagen.",
               "**Keine Teilrückerstattungen**: Außerhalb des oben genannten Rücktrittsszenarios sind bereits gezahlte Gebühren für die aktuelle Abrechnungsperiode nicht erstattungsfähig.",
@@ -5737,7 +5737,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Piani**: Gratuito (€0), Pro (€12/mese o €99/anno), Business (€39/mese o €349/anno). Le funzionalità e le quote dei piani sono descritte nella nostra pagina [Prezzi](/pricing) al momento dell'acquisto. Ci riserviamo il diritto di modificare le funzionalità dei piani con un preavviso di 30 giorni.",
+              "**Piani**: Gratuito (€0), Pro (€25/mese o €210/anno), Business (€79/mese o €664/anno). Le funzionalità e le quote dei piani sono descritte nella nostra pagina [Prezzi](/pricing) al momento dell'acquisto. Ci riserviamo il diritto di modificare le funzionalità dei piani con un preavviso di 30 giorni.",
               "**Rinnovo automatico**: gli abbonamenti mensili e annuali si rinnovano automaticamente alla stessa cadenza fino alla cancellazione. Puoi annullare in qualsiasi momento dal tuo pannello di controllo; la cancellazione avrà effetto alla fine del periodo di fatturazione corrente. Conservi l'accesso fino a quella data.",
               "**Diritto di recesso (UE)**: ai sensi dell'Articolo L. 221-28 del Codice del Consumo francese, qualora tu utilizzi attivamente il Servizio durante il periodo iniziale di 14 giorni per il recesso, dai il tuo consenso espresso all'esecuzione immediata del contratto e rinunci al tuo diritto di recesso. Se non hai utilizzato alcuna funzionalità a pagamento, puoi recedere entro 14 giorni inviando un'email a [support@konvertools.com](mailto:support@konvertools.com) e procederemo con un rimborso completo entro 14 giorni.",
               "**Nessun rimborso parziale**: al di fuori dello scenario di recesso sopra descritto, le tariffe già pagate per il periodo di fatturazione corrente non sono rimborsabili.",
@@ -5932,7 +5932,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Plannen**: Gratis (€0), Pro (€12/maand of €99/jaar), Business (€39/maand of €349/jaar). De functies en quotumlimieten van de abonnementen zijn zoals beschreven op onze [Prijzenpagina](/pricing) op het moment van aankoop. Wij behouden ons het recht voor om abonnementfuncties met 30 dagen voorafgaande kennisgeving te wijzigen.",
+              "**Plannen**: Gratis (€0), Pro (€25/maand of €210/jaar), Business (€79/maand of €664/jaar). De functies en quotumlimieten van de abonnementen zijn zoals beschreven op onze [Prijzenpagina](/pricing) op het moment van aankoop. Wij behouden ons het recht voor om abonnementfuncties met 30 dagen voorafgaande kennisgeving te wijzigen.",
               "**Automatische verlenging**: maand- en jaarabonnementen verlengen zich automatisch op dezelfde frequentie totdat ze worden geannuleerd. U kunt op elk moment annuleren via uw dashboard; de annulering treedt in werking aan het einde van de huidige factureringsperiode. U behoudt toegang tot de Dienst tot die datum.",
               "**Herroepingsrecht (EU)**: op grond van Artikel L. 221-28 van de Franse Consumentenwet, wanneer u de Dienst actief gebruikt tijdens de initiële herroepingsperiode van 14 dagen, stemt u er expliciet mee in dat de overeenkomst onmiddellijk wordt uitgevoerd en doet u afstand van uw herroepingsrecht. Indien u geen betaalde functie heeft gebruikt, kunt u binnen 14 dagen herroepen door een e-mail te sturen naar [support@konvertools.com](mailto:support@konvertools.com) en wij zullen binnen 14 dagen een volledige restitutie verlenen.",
               "**Geen gedeeltelijke restituties**: buiten bovenstaand herroepingscenario zijn reeds betaalde kosten voor de huidige factureringsperiode niet restitueerbaar.",
@@ -6322,7 +6322,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**套餐**：免费（€0）、专业版（€12/月或€99/年）、商业版（€39/月或€349/年）。套餐功能与配额以购买时我们[定价页面](/pricing)上所述为准。我们保留在提前 30 天通知的情况下修改套餐功能的权利。",
+              "**套餐**：免费（€0）、专业版（€25/月或€210/年）、商业版（€79/月或€664/年）。套餐功能与配额以购买时我们[定价页面](/pricing)上所述为准。我们保留在提前 30 天通知的情况下修改套餐功能的权利。",
               "**自动续费**：月度和年度订阅将自动续费，直至取消。您可随时从仪表板取消订阅；取消将在当前计费周期结束时生效。您将保留访问权限直至该日期。",
               "**撤回权（欧盟）**：根据《法国消费者法》第 L. 221-28 条，在初始 14 天撤回期内主动使用服务的情况下，您明确同意立即履行合同并放弃撤回权。如您未使用任何付费功能，可在 14 天内通过发送邮件至 [support@konvertools.com](mailto:support@konvertools.com) 申请撤回，我们将在 14 天内全额退款。",
               "**不予部分退款**：除上述撤回情形外，当前计费周期内已支付的费用概不退款。",
@@ -6517,7 +6517,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**플랜**: 무료(€0), Pro(€12/월 또는 €99/년), Business(€39/월 또는 €349/년). 플랜의 기능 및 할당량은 구매 시 [가격 페이지](/pricing)에서 설명한 바와 같습니다. 저희는 30일 전에 통보하고 플랜 기능을 수정할 권리를 보유합니다.",
+              "**플랜**: 무료(€0), Pro(€25/월 또는 €210/년), Business(€79/월 또는 €664/년). 플랜의 기능 및 할당량은 구매 시 [가격 페이지](/pricing)에서 설명한 바와 같습니다. 저희는 30일 전에 통보하고 플랜 기능을 수정할 권리를 보유합니다.",
               "**자동 갱신**: 월별 및 연간 구독은 취소할 때까지 동일한 주기로 자동 갱신됩니다. 언제든지 대시보드에서 취소할 수 있으며, 취소는 현재 결제 기간이 종료될 때 적용됩니다. 해당 날짜까지 액세스가 유지됩니다.",
               "**철회권(EU)**: 프랑스 소비자법 제 L. 221-28조에 따라, 초기 14일 철회 기간 동안 서비스를 적극적으로 사용한 경우, 귀하는 계약을 즉시 이행하는 데 명시적으로 동의하며 철회권을 포기합니다. 유료 기능을 사용하지 않은 경우, [support@konvertools.com](mailto:support@konvertools.com)으로 이메일을 보내 14일 이내에 철회할 수 있으며, 저희는 14일 이내에 전액 환불을 발행합니다.",
               "**부분 환불 불가**: 위의 철회 시나리오 외에는 현재 결제 기간에 대해 이미 지급된 수수료는 환불되지 않습니다.",
@@ -6907,7 +6907,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Тарифы**: Бесплатный (€0), Pro (€12/месяц или €99/год), Business (€39/месяц или €349/год). Особенности тарифов и квоты описаны на нашей [странице тарифов](/pricing) на момент покупки. Мы оставляем за собой право изменять особенности тарифов с уведомлением за 30 дней.",
+              "**Тарифы**: Бесплатный (€0), Pro (€25/месяц или €210/год), Business (€79/месяц или €664/год). Особенности тарифов и квоты описаны на нашей [странице тарифов](/pricing) на момент покупки. Мы оставляем за собой право изменять особенности тарифов с уведомлением за 30 дней.",
               "**Автопродление**: ежемесячные и ежегодные подписки продлеваются автоматически до момента отмены. Вы можете отменить подписку в любой момент через личный кабинет; отмена вступает в силу в конце текущего расчётного периода. Вы сохраняете доступ до этой даты.",
               "**Право на отказ (ЕС)**: в соответствии со статьёй L. 221-28 Французского потребительского кодекса, если вы активно используете Сервис в течение первоначального 14-дневного периода отказа, вы прямо соглашаетесь на немедленное исполнение договора и отказываетесь от права на отказ. Если вы не использовали ни одну платную функцию, вы можете отказаться в течение 14 дней, отправив письмо на [support@konvertools.com](mailto:support@konvertools.com), и мы вернём вам полную сумму в течение 14 дней.",
               "**Возврат средств не производится**: за пределами описанного выше сценария отказа, уплаченные за текущий расчётный период средства не подлежат возврату.",
@@ -7102,7 +7102,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**योजनाएँ**: मुफ्त (€0), प्रो (€12/माह या €99/वर्ष), बिजनेस (€39/माह या €349/वर्ष)। योजना सुविधाओं और कोटा हमारे [मूल्य निर्धारण पृष्ठ](/pricing) पर खरीद के समय वर्णित हैं। हम 30 दिनों के नोटिस के साथ योजना सुविधाओं में संशोधन करने का अधिकार सुरक्षित रखते हैं।",
+              "**योजनाएँ**: मुफ्त (€0), प्रो (€25/माह या €210/वर्ष), बिजनेस (€79/माह या €664/वर्ष)। योजना सुविधाओं और कोटा हमारे [मूल्य निर्धारण पृष्ठ](/pricing) पर खरीद के समय वर्णित हैं। हम 30 दिनों के नोटिस के साथ योजना सुविधाओं में संशोधन करने का अधिकार सुरक्षित रखते हैं।",
               "**स्वतः-नवीनीकरण**: मासिक और वार्षिक सदस्यताएँ उसी क्रम में स्वतः नवीनीकृत होती हैं जब तक रद्द नहीं की जाती। आप अपने डैशबोर्ड से किसी भी समय रद्द कर सकते हैं; रद्दीकरण वर्तमान बिलिंग अवधि के अंत में प्रभावी होता है। आप उस तिथि तक पहुंच बरकरार रखते हैं।",
               "**वापसी का अधिकार (ईयू)**: फ्रांसीसी उपभोक्ता संहिता के अनुच्छेद L. 221-28 के तहत, जब आप प्रारंभिक 14-दिवसीय वापसी अवधि के दौरान सक्रिय रूप से सेवा का उपयोग करते हैं, तो आप स्पष्ट रूप से अनुबंध के त्वरित निष्पादन के लिए सहमत होते हैं और अपनी वापसी के अधिकार को त्याग देते हैं। यदि आपने किसी भी सशुल्क सुविधा का उपयोग नहीं किया है, तो आप 14 दिनों के भीतर [support@konvertools.com](mailto:support@konvertools.com) पर ईमेल करके वापसी कर सकते हैं और हम 14 दिनों के भीतर पूर्ण धनवापसी जारी करेंगे।",
               "**आंशिक धनवापसी नहीं**: ऊपर वर्णित वापसी परिदृश्य के अलावा, वर्तमान बिलिंग अवधि के लिए पहले से भुगतान किए गए शुल्क गैर-वापसी योग्य हैं।",
@@ -7297,7 +7297,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Paket**: Gratis (€0), Pro (€12/bulan atau €99/tahun), Bisnis (€39/bulan atau €349/tahun). Fitur dan kuota paket dijelaskan di [halaman Harga kami](/pricing) pada saat pembelian. Kami berhak untuk mengubah fitur paket dengan pemberitahuan 30 hari sebelumnya.",
+              "**Paket**: Gratis (€0), Pro (€25/bulan atau €210/tahun), Bisnis (€79/bulan atau €664/tahun). Fitur dan kuota paket dijelaskan di [halaman Harga kami](/pricing) pada saat pembelian. Kami berhak untuk mengubah fitur paket dengan pemberitahuan 30 hari sebelumnya.",
               "**Pembaruan otomatis**: langganan bulanan dan tahunan diperbarui secara otomatis dengan frekuensi yang sama hingga dibatalkan. Anda dapat membatalkan kapan saja melalui dasbor Anda; pembatalan berlaku pada akhir periode penagihan saat ini. Anda tetap memiliki akses hingga tanggal tersebut.",
               "**Hak penarikan (UE)**: berdasarkan Pasal L. 221-28 dari Kode Konsumen Prancis, jika Anda secara aktif menggunakan Layanan selama periode penarikan awal 14 hari, Anda secara tegas menyetujui pelaksanaan kontrak secara langsung dan melepaskan hak penarikan Anda. Jika Anda tidak menggunakan fitur berbayar apa pun, Anda dapat menarik diri dalam 14 hari dengan mengirimkan email ke [support@konvertools.com](mailto:support@konvertools.com) dan kami akan mengembalikan dana secara penuh dalam 14 hari.",
               "**Tidak ada pengembalian sebagian**: di luar skenario penarikan di atas, biaya yang telah dibayarkan untuk periode penagihan saat ini tidak dapat dikembalikan.",
@@ -7492,7 +7492,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Các gói**: Miễn phí (€0), Pro (€12/tháng hoặc €99/năm), Business (€39/tháng hoặc €349/năm). Các tính năng và hạn ngạch của gói được mô tả trên trang [Bảng giá](/pricing) của chúng tôi tại thời điểm mua. Chúng tôi có quyền sửa đổi tính năng gói với thông báo trước 30 ngày.",
+              "**Các gói**: Miễn phí (€0), Pro (€25/tháng hoặc €210/năm), Business (€79/tháng hoặc €664/năm). Các tính năng và hạn ngạch của gói được mô tả trên trang [Bảng giá](/pricing) của chúng tôi tại thời điểm mua. Chúng tôi có quyền sửa đổi tính năng gói với thông báo trước 30 ngày.",
               "**Tự động gia hạn**: đăng ký hàng tháng và hàng năm tự động gia hạn theo cùng chu kỳ cho đến khi bị hủy. Bạn có thể hủy bất kỳ lúc nào từ bảng điều khiển của mình; việc hủy có hiệu lực vào cuối kỳ thanh toán hiện tại. Bạn vẫn có quyền truy cập cho đến ngày đó.",
               "**Quyền rút lui (EU)**: theo Điều L. 221-28 của Bộ luật Tiêu dùng Pháp, khi bạn chủ động sử dụng Dịch vụ trong giai đoạn rút lui ban đầu 14 ngày, bạn đồng ý rõ ràng với việc thực hiện ngay lập tức hợp đồng và từ bỏ quyền rút lui của mình. Nếu bạn chưa sử dụng bất kỳ tính năng trả phí nào, bạn có thể rút lui trong vòng 14 ngày bằng cách gửi email đến [support@konvertools.com](mailto:support@konvertools.com) và chúng tôi sẽ hoàn tiền đầy đủ trong vòng 14 ngày.",
               "**Không hoàn tiền một phần**: ngoài trường hợp rút lui nêu trên, phí đã thanh toán cho kỳ thanh toán hiện tại không được hoàn lại.",
@@ -7687,7 +7687,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Abonnemang**: Gratis (€0), Pro (€12/månad eller €99/år), Business (€39/månad eller €349/år). Funktioner och kvoter för abonnemang beskrivs på vår [Prissida](/pricing) vid köptillfället. Vi förbehåller oss rätten att ändra abonnemangets funktioner med 30 dagars varsel.",
+              "**Abonnemang**: Gratis (€0), Pro (€25/månad eller €210/år), Business (€79/månad eller €664/år). Funktioner och kvoter för abonnemang beskrivs på vår [Prissida](/pricing) vid köptillfället. Vi förbehåller oss rätten att ändra abonnemangets funktioner med 30 dagars varsel.",
               "**Automatisk förnyelse**: Månads- och årsabonnemang förnyas automatiskt med samma intervall tills de sägs upp. Du kan säga upp när som helst från din instrumentpanel; uppsägningen träder i kraft vid slutet av den aktuella faktureringsperioden. Du behåller åtkomst tills dess.",
               "**Ångerrätt (EU)**: enligt Artikel L. 221-28 i den franska konsumentkodexen, när du aktivt använder Tjänsten under den initiala 14-dagars ångerfristen godkänner du uttryckligen att avtalet fullgörs omedelbart och avstår från din ångerrätt. Om du inte har använt någon betald funktion kan du ångra dig inom 14 dagar genom att skicka ett e-postmeddelande till [support@konvertools.com](mailto:support@konvertools.com) och vi kommer att utfärda en full återbetalning inom 14 dagar.",
               "**Inga partiella återbetalningar**: utanför ovanstående ångerfrist är redan betalda avgifter för den aktuella faktureringsperioden icke-återbetalningsbara.",
@@ -7882,7 +7882,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Plany**: Darmowy (0 €), Pro (12 €/miesiąc lub 99 €/rok), Business (39 €/miesiąc lub 349 €/rok). Funkcje i limity planów są opisane na naszej stronie [Cennik](/pricing) w momencie zakupu. Zastrzegamy sobie prawo do zmiany funkcji planów z 30-dniowym wyprzedzeniem.",
+              "**Plany**: Darmowy (0 €), Pro (25 €/miesiąc lub 210 €/rok), Business (79 €/miesiąc lub 664 €/rok). Funkcje i limity planów są opisane na naszej stronie [Cennik](/pricing) w momencie zakupu. Zastrzegamy sobie prawo do zmiany funkcji planów z 30-dniowym wyprzedzeniem.",
               "**Autoodnawianie**: subskrypcje miesięczne i roczne odnawiają się automatycznie w tym samym cyklu, chyba że zostaną anulowane. Możesz anulować je w dowolnym momencie z poziomu panelu użytkownika; anulowanie wchodzi w życie z końcem bieżącego okresu rozliczeniowego. Zachowujesz dostęp do Usługi do tego czasu.",
               "**Prawo odstąpienia (UE)**: zgodnie z art. L. 221-28 francuskiego Kodeksu konsumenckiego, jeśli aktywnie korzystasz z Usługi w początkowym 14-dniowym okresie odstąpienia, wyrażasz zgodę na natychmiastowe wykonanie umowy i rezygnujesz z prawa do odstąpienia. Jeśli nie korzystałeś z żadnej płatnej funkcji, możesz odstąpić w ciągu 14 dni, wysyłając wiadomość na adres [support@konvertools.com](mailto:support@konvertools.com), a my dokonamy pełnego zwrotu w ciągu 14 dni.",
               "**Brak częściowych zwrotów**: poza powyższym scenariuszem odstąpienia, opłaty już uiszczone za bieżący okres rozliczeniowy nie podlegają zwrotowi.",
@@ -8077,7 +8077,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Тарифні плани**: Безкоштовний (€0), Pro (€12/місяць або €99/рік), Business (€39/місяць або €349/рік). Особливості та ліміти тарифних планів описані на нашій сторінці [Ціни](/pricing) на момент покупки. Ми залишаємо за собою право змінювати особливості тарифних планів із попередженням за 30 днів.",
+              "**Тарифні плани**: Безкоштовний (€0), Pro (€25/місяць або €210/рік), Business (€79/місяць або €664/рік). Особливості та ліміти тарифних планів описані на нашій сторінці [Ціни](/pricing) на момент покупки. Ми залишаємо за собою право змінювати особливості тарифних планів із попередженням за 30 днів.",
               "**Автоматичне поновлення**: щомісячні та річні підписки поновлюються автоматично з тією ж періодичністю до моменту скасування. Ви можете скасувати підписку в будь-який час через свій кабінет; скасування набуває чинності наприкінці поточного періоду оплати. Ви зберігаєте доступ до Сервісу до цієї дати.",
               "**Право на відмову (ЄС)**: відповідно до статті L. 221-28 Французького кодексу захисту прав споживачів, якщо ви активно використовуєте Сервіс протягом початкового 14-денного періоду відмови, ви прямо погоджуєтеся на негайне виконання договору та відмовляєтеся від свого права на відмову. Якщо ви не використовували жодну платну функцію, ви можете відмовитися протягом 14 днів, надіславши електронний лист на [support@konvertools.com](mailto:support@konvertools.com), і ми здійснимо повне повернення коштів протягом 14 днів.",
               "**Без часткового повернення коштів**: за межами вищезазначеного сценарію відмови, вже сплачені за поточний період оплати кошти не підлягають поверненню.",
@@ -8272,7 +8272,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Tarify**: Bezplatný (0 €), Pro (12 €/měsíc nebo 99 €/rok), Business (39 €/měsíc nebo 349 €/rok). Funkce a kvóty jednotlivých tarifů jsou popsány na naší stránce [Ceník](/pricing) v době nákupu. Vyhrazujeme si právo měnit funkce tarifů s třicetidenním předstihem.",
+              "**Tarify**: Bezplatný (0 €), Pro (25 €/měsíc nebo 210 €/rok), Business (79 €/měsíc nebo 664 €/rok). Funkce a kvóty jednotlivých tarifů jsou popsány na naší stránce [Ceník](/pricing) v době nákupu. Vyhrazujeme si právo měnit funkce tarifů s třicetidenním předstihem.",
               "**Automatické obnovení**: Měsíční a roční předplatné se automaticky obnovují ve stejné frekvenci, dokud nejsou zrušena. Můžete je zrušit kdykoli z vašeho panelu; zrušení nabývá účinnosti na konci aktuálního fakturačního období. Přístup si ponecháte až do tohoto data.",
               "**Právo na odstoupení (EU)**: podle článku L. 221-28 francouzského zákoníku o ochraně spotřebitele, pokud aktivně používáte Službu během počátečního čtrnáctidenního období na odstoupení, výslovně souhlasíte s okamžitým plněním smlouvy a vzdáváte se práva na odstoupení. Pokud jste nepoužili žádnou placenou funkci, můžete odstoupit do čtrnácti dnů zasláním e-mailu na [support@konvertools.com](mailto:support@konvertools.com) a my vám do čtrnácti dnů vydáme plnou refundaci.",
               "**Žádné částečné refundace**: mimo výše uvedený scénář odstoupení nejsou již zaplacené poplatky za aktuální fakturační období refundovatelné.",
@@ -8467,7 +8467,7 @@ export const TERMS_TRANSLATIONS: Partial<Record<Locale, LegalDoc>> = {
           {
             "kind": "ul",
             "items": [
-              "**Planlar**: Ücretsiz (€0), Pro (€12/ay veya €99/yıl), İş (€39/ay veya €349/yıl). Plan özellikleri ve kotaları, satın alma sırasında [Fiyatlandırma sayfamızda](/pricing) açıklandığı şekildedir. Plan özelliklerinde 30 günlük bildirimle değişiklik yapma hakkımız saklıdır.",
+              "**Planlar**: Ücretsiz (€0), Pro (€25/ay veya €210/yıl), İş (€79/ay veya €664/yıl). Plan özellikleri ve kotaları, satın alma sırasında [Fiyatlandırma sayfamızda](/pricing) açıklandığı şekildedir. Plan özelliklerinde 30 günlük bildirimle değişiklik yapma hakkımız saklıdır.",
               "**Otomatik yenileme**: Aylık ve yıllık abonelikler, iptal edilene kadar aynı sıklıkta otomatik olarak yenilenir. Aboneliğinizi kontrol panelinizden herhangi bir zamanda iptal edebilirsiniz; iptal, cari faturalandırma döneminin sonunda geçerli olur. O tarihe kadar erişiminizi korursunuz.",
               "**Cayma hakkı (AB)**: Fransız Tüketici Kanunu'nun L. 221-28 maddesi uyarınca, ilk 14 günlük cayma süresi içinde Hizmet'i aktif olarak kullanmanız durumunda sözleşmenin hemen icrasına açıkça rıza gösterir ve cayma hakkından feragat etmiş sayılırsınız. Ücretli herhangi bir özelliği kullanmamışsanız, [support@konvertools.com](mailto:support@konvertools.com) adresine e-posta göndererek 14 gün içinde cayabilir ve size 14 gün içinde tam iade yaparız.",
               "**Kısmi iadeler yoktur**: yukarıdaki cayma senaryosu dışında, cari faturalandırma dönemine ait ücretler iade edilemez.",

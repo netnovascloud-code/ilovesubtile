@@ -12,8 +12,8 @@
 export const PLANS = {
   pro: {
     name: "Pro",
-    priceMonthly: 12,
-    priceAnnual: 99,
+    priceMonthly: 25,
+    priceAnnual: 210,
     features: [
       "500 AI conversions / month",
       "Workflow Builder",
@@ -29,8 +29,8 @@ export const PLANS = {
   },
   business: {
     name: "Business",
-    priceMonthly: 39,
-    priceAnnual: 349,
+    priceMonthly: 79,
+    priceAnnual: 664,
     features: [
       "3,000 AI conversions / month",
       "Everything in Pro",
@@ -52,7 +52,7 @@ export const FREE_PLAN = {
   priceAnnual: 0,
   features: [
     "All browser tools, free & unlimited",
-    "AI tools: 2/day",
+    "AI tools: 5/day",
     "AI files up to 20 MB",
     "Watermark on burned-in video",
     "Ads during AI processing",

@@ -93,7 +93,7 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
       </section>
 
       <main className="container py-12">
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {localized.map((t) => {
             const theme = categoryTheme(t.category);
             return (

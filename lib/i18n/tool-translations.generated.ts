@@ -13723,6 +13723,57 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "Chuyển đổi tệp phông chữ giữa TTF, OTF, WOFF và WOFF2 ngay trong trình duyệt của bạn. Nhiều tệp cùng lúc — miễn phí, riêng tư, phông chữ của bạn không bao giờ được tải lên."
     }
   },
+  "text-to-speech": {
+    "cs": {
+      "name": "Převod textu na řeč",
+      "short": "Převeďte text na přirozeně znějící řeč (MP3).",
+      "h1": "Převod textu na řeč online — přirozené AI hlasy, stažení MP3",
+      "metaTitle": "Převod textu na řeč online — přirozené AI hlasy (MP3) | Konvertools",
+      "metaDescription": "Převeďte text na přirozenou AI řeč a stáhněte si MP3. Několik hlasů, mnoho jazyků. Zpracováno na našich serverech — váš text se nikdy neukládá."
+    },
+    "id": {
+      "name": "Teks ke Suara",
+      "short": "Ubah teks menjadi suara yang terdengar alami (MP3).",
+      "h1": "Teks ke Suara Online — Suara AI Alami, Unduh MP3",
+      "metaTitle": "Teks ke Suara Online — Suara AI Alami (MP3) | Konvertools",
+      "metaDescription": "Ubah teks menjadi suara AI yang alami dan unduh MP3-nya. Beberapa suara, banyak bahasa. Diproses di server kami — teks Anda tidak pernah disimpan."
+    },
+    "pl": {
+      "name": "Zamiana tekstu na mowę",
+      "short": "Zamień tekst na naturalnie brzmiącą mowę (MP3).",
+      "h1": "Zamiana tekstu na mowę online — naturalne głosy AI, pobieranie MP3",
+      "metaTitle": "Zamiana tekstu na mowę online — naturalne głosy AI (MP3) | Konvertools",
+      "metaDescription": "Zamień tekst na naturalną mowę AI i pobierz plik MP3. Kilka głosów, wiele języków. Przetwarzane na naszych serwerach — Twój tekst nigdy nie jest przechowywany."
+    },
+    "sv": {
+      "name": "Text till tal",
+      "short": "Omvandla text till naturligt klingande tal (MP3).",
+      "h1": "Text till tal online — Naturliga AI-röster, MP3-nedladdning",
+      "metaTitle": "Text till tal online — Naturliga AI-röster (MP3) | Konvertools",
+      "metaDescription": "Omvandla text till naturligt AI-tal och ladda ner MP3-filen. Flera röster, många språk. Bearbetas på våra servrar — din text lagras aldrig."
+    },
+    "tr": {
+      "name": "Metni Sese Dönüştürme",
+      "short": "Metni doğal sesli konuşmaya dönüştürün (MP3).",
+      "h1": "Çevrimiçi Metni Sese Dönüştürme — Doğal AI Sesleri, MP3 İndirme",
+      "metaTitle": "Çevrimiçi Metni Sese Dönüştürme — Doğal AI Sesleri (MP3) | Konvertools",
+      "metaDescription": "Metni doğal AI konuşmasına dönüştürün ve MP3'ü indirin. Birkaç ses, birçok dil. Sunucularımızda işlenir — metniniz asla saklanmaz."
+    },
+    "uk": {
+      "name": "Перетворення тексту на мовлення",
+      "short": "Перетворюйте текст на природне мовлення (MP3).",
+      "h1": "Перетворення тексту на мовлення онлайн — природні голоси ШІ, завантаження MP3",
+      "metaTitle": "Перетворення тексту на мовлення онлайн — природні голоси ШІ (MP3) | Konvertools",
+      "metaDescription": "Перетворюйте текст на природне мовлення ШІ та завантажуйте MP3. Кілька голосів, багато мов. Обробляється на наших серверах — ваш текст ніколи не зберігається."
+    },
+    "vi": {
+      "name": "Chuyển văn bản thành giọng nói",
+      "short": "Biến văn bản thành giọng nói tự nhiên (MP3).",
+      "h1": "Chuyển văn bản thành giọng nói trực tuyến — Giọng AI tự nhiên, tải MP3",
+      "metaTitle": "Chuyển văn bản thành giọng nói trực tuyến — Giọng AI tự nhiên (MP3) | Konvertools",
+      "metaDescription": "Biến văn bản thành giọng nói AI tự nhiên và tải tệp MP3. Nhiều giọng, nhiều ngôn ngữ. Được xử lý trên máy chủ của chúng tôi — văn bản của bạn không bao giờ được lưu trữ."
+    }
+  },
   "qr-generator": {
     "cs": {
       "name": "Generátor QR kódu",

@@ -29,6 +29,7 @@ export type BillingStrings = {
   portalError: string;
   networkError: string;
   portalNote: string;
+  portalNoteCustomer?: string;
   compedTitle: (plan: string) => string;
   compedBody: string;
   seePlans: string;
@@ -89,6 +90,7 @@ const en: BillingStrings = {
   portalError: "Billing portal error.",
   networkError: "Network error.",
   portalNote: "Opens your secure Lemon Squeezy portal: payment method, plan changes, invoices and cancellation.",
+  portalNoteCustomer: "Opens your Lemon Squeezy customer portal: update your payment method and download receipts for your purchases.",
   compedTitle: (p) => `Your ${p} plan is active.`,
   compedBody: "It was granted directly on your account, so there's no payment method or invoice to manage here.",
   seePlans: "See plans",
@@ -146,6 +148,7 @@ const fr: BillingStrings = {
   portalError: "Erreur du portail de facturation.",
   networkError: "Erreur réseau.",
   portalNote: "Ouvre votre portail Lemon Squeezy sécurisé : moyen de paiement, changement d'offre, factures et résiliation.",
+  portalNoteCustomer: "Ouvre votre portail client Lemon Squeezy : mettez à jour votre moyen de paiement et téléchargez les reçus de vos achats.",
   compedTitle: (p) => `Votre offre ${p} est active.`,
   compedBody: "Elle a été accordée directement sur votre compte : il n'y a donc ni moyen de paiement ni facture à gérer ici.",
   seePlans: "Voir les offres",

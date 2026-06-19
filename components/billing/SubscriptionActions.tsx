@@ -17,7 +17,7 @@ type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: s
  * subscription server-side (LS API key never leaves the function) and returns
  * fresh, signed, ~24h URLs — so we fetch on every click and never store them.
  */
-export function SubscriptionActions({ locale }: { locale: Locale }) {
+export function SubscriptionActions({ locale, customerOnly = false }: { locale: Locale; customerOnly?: boolean }) {
   const s = getBilling(locale);
   // Track which action is in-flight so the two buttons spin independently.
   const [busy, setBusy] = useState<"portal" | "card" | null>(null);
@@ -37,7 +37,7 @@ export function SubscriptionActions({ locale }: { locale: Locale }) {
       const body = (await res.json()) as PortalResponse;
       const target = kind === "portal" ? body.url : (body.updatePaymentMethodUrl ?? body.url);
       if (!res.ok || !target) {
-        setError(body.error === "no_subscription" ? s.noSubscriptionError : s.portalError);
+        setError(body.error === "no_subscription" || body.error === "no_billing_account" ? s.noSubscriptionError : s.portalError);
         return;
       }
       window.location.href = target;
@@ -46,6 +46,21 @@ export function SubscriptionActions({ locale }: { locale: Locale }) {
     } finally {
       setBusy(null);
     }
+  }
+
+  // Customer-only (no active subscription, but a Lemon Squeezy customer that
+  // bought credit packs / has a comped plan): one button → the customer portal,
+  // where they can update their card and download receipts.
+  if (customerOnly) {
+    return (
+      <div>
+        <Button variant="outline" size="sm" onClick={() => go("portal")} disabled={busy !== null}>
+          <CreditCard className="mr-1.5 h-4 w-4" />
+          {busy === "portal" ? s.opening : s.managePortal}
+        </Button>
+        {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      </div>
+    );
   }
 
   return (

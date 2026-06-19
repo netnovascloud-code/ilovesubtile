@@ -34,6 +34,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
   let subStatus: string | null = null;
   let renewsAt: string | null = null;
   let lsSubscriptionId: string | null = null;
+  let lsCustomerId: string | null = null;
   let needsLogin = false;
 
   try {
@@ -45,13 +46,14 @@ export async function BillingView({ locale }: { locale: Locale }) {
       email = userData.user.email ?? null;
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, credits, monthly_credits, monthly_credits_month, ls_subscription_status, ls_renews_at, ls_subscription_id")
+        .select("plan, credits, monthly_credits, monthly_credits_month, ls_subscription_status, ls_renews_at, ls_subscription_id, ls_customer_id")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as AccountPlan | undefined) ?? "free");
       subStatus = (profile?.ls_subscription_status as string | null) ?? null;
       renewsAt = (profile?.ls_renews_at as string | null) ?? null;
       lsSubscriptionId = (profile?.ls_subscription_id as string | null) ?? null;
+      lsCustomerId = (profile?.ls_customer_id as string | null) ?? null;
       const thisMonth = new Date().toISOString().slice(0, 7);
       monthlyGrant = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
       purchasedCredits = profile?.credits ?? 0;
@@ -70,6 +72,10 @@ export async function BillingView({ locale }: { locale: Locale }) {
 
   const isSubscriber = !!lsSubscriptionId;
   const isComped = plan !== "free" && !lsSubscriptionId;
+  // A Lemon Squeezy customer without an active subscription (comped plan that
+  // bought credit packs, or a Free user who bought packs): the customer portal
+  // still lets them update their card and download receipts.
+  const hasCustomerPortal = !isSubscriber && !!lsCustomerId;
 
   let statusLine: string | null = null;
   if (isSubscriber && renewLabel) {
@@ -123,14 +129,21 @@ export async function BillingView({ locale }: { locale: Locale }) {
               )}
 
               {isComped && (
-                <div className="mt-4">
+                <div className="mt-4 space-y-3">
                   <div className="flex items-start gap-2 rounded-md bg-emerald-50/60 px-3 py-2.5 text-sm text-emerald-800">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
                     <div>
                       <p className="font-medium">{s.compedTitle(planDef?.name ?? "")}</p>
-                      <p className="mt-0.5 text-xs text-emerald-700">{s.compedBody}</p>
+                      {/* Only claim "nothing to manage" when there's truly no LS customer. */}
+                      {!hasCustomerPortal && <p className="mt-0.5 text-xs text-emerald-700">{s.compedBody}</p>}
                     </div>
                   </div>
+                  {hasCustomerPortal && (
+                    <div>
+                      <SubscriptionActions locale={locale} customerOnly />
+                      <p className="mt-2 text-xs text-ink-400">{s.portalNoteCustomer ?? s.portalNote}</p>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -138,6 +151,12 @@ export async function BillingView({ locale }: { locale: Locale }) {
                 <div className="mt-4">
                   <Link href={localePath(locale, "pricing")} prefetch={false}><Button>{s.seePlans}</Button></Link>
                   <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-400"><CreditCard className="h-3.5 w-3.5" /> {s.manageAfterSub}</p>
+                  {hasCustomerPortal && (
+                    <div className="mt-3">
+                      <SubscriptionActions locale={locale} customerOnly />
+                      <p className="mt-2 text-xs text-ink-400">{s.portalNoteCustomer ?? s.portalNote}</p>
+                    </div>
+                  )}
                 </div>
               )}
             </CardContent>

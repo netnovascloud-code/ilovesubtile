@@ -201,7 +201,7 @@ export function PdfRotateClient() {
 
   async function rotate() {
     if (!file || busy) return;
-    setBusy(true); setError(null); setResultUrl(null);
+    if (resultUrl) URL.revokeObjectURL(resultUrl); setBusy(true); setError(null); setResultUrl(null);
     try {
       const { PDFDocument, degrees } = await import("pdf-lib");
       const doc = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: true });

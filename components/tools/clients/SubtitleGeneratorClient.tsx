@@ -69,7 +69,7 @@ export function SubtitleGeneratorClient({ crossLinks = [] }: { crossLinks?: { hr
           const cues = parseSubtitles(srt);
           const vtt = toVtt(cues);
           const blob = new Blob([vtt], { type: "text/vtt;charset=utf-8" });
-          url = URL.createObjectURL(blob);
+          if (resultUrl) URL.revokeObjectURL(resultUrl); url = URL.createObjectURL(blob);
           name = name.replace(/\.srt$/i, ".vtt");
         } catch {
           // fall back to SRT

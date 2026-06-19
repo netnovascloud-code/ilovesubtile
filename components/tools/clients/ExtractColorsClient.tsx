@@ -200,7 +200,7 @@ export function ExtractColorsClient() {
     if (!f) return;
     setError(null); setPalette(null);
     setFile(f);
-    setSrcUrl(URL.createObjectURL(f));
+    if (srcUrl) URL.revokeObjectURL(srcUrl); setSrcUrl(URL.createObjectURL(f));
     try {
       const bmp = await createImageBitmap(f);
       const max = 160;

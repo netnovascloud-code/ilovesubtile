@@ -235,7 +235,7 @@ export function BarcodeReaderClient() {
     if (!f) return;
     setError(null); setResult(null);
     setFile(f);
-    const url = URL.createObjectURL(f);
+    if (srcUrl) URL.revokeObjectURL(srcUrl); const url = URL.createObjectURL(f);
     setSrcUrl(url);
     setBusy(true);
     try {

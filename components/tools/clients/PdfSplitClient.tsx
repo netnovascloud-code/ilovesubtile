@@ -268,7 +268,7 @@ export function PdfSplitClient() {
 
   async function split() {
     if (!file || busy) return;
-    setBusy(true); setError(null); setResultUrl(null);
+    if (resultUrl) URL.revokeObjectURL(resultUrl); setBusy(true); setError(null); setResultUrl(null);
     try {
       const [{ PDFDocument }, { default: JSZip }] = await Promise.all([import("pdf-lib"), import("jszip")]);
       const groups = parseRanges(ranges, pageCount);

@@ -269,7 +269,7 @@ export function ImagesToPdfClient() {
 
   async function generate() {
     if (items.length === 0 || busy) return;
-    setBusy(true); setError(null); setResultUrl(null);
+    if (resultUrl) URL.revokeObjectURL(resultUrl); setBusy(true); setError(null); setResultUrl(null);
     try {
       const { PDFDocument } = await import("pdf-lib");
       const doc = await PDFDocument.create();

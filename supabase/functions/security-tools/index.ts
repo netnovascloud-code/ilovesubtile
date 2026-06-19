@@ -141,6 +141,9 @@ const THREAT_LABEL: Record<string, string> = {
 function isPrivateHost(host: string): boolean {
   const h = host.toLowerCase();
   if (["localhost", "ip6-localhost", "ip6-loopback", "metadata.google.internal"].includes(h)) return true;
+  // Any IPv6 literal (bracketed "[::1]" or bare). The compressed / IPv4-mapped
+  // forms bypass prefix checks, so block them all rather than range-matching.
+  if (h.startsWith("[") || h.includes(":")) return true;
   const m4 = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
   if (m4) {
     const [a, b] = [Number(m4[1]), Number(m4[2])];

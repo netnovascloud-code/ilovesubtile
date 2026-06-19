@@ -60,6 +60,8 @@ function assertSafeUrl(raw: string): URL {
   if (["localhost", "ip6-localhost", "ip6-loopback", "metadata.google.internal"].includes(host)) {
     throw new Error("private_host_forbidden");
   }
+  // Internal aliases (cloud metadata, mDNS, k8s/service discovery, …).
+  if (host.endsWith(".internal") || host.endsWith(".local")) throw new Error("private_host_forbidden");
   const m4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
   if (m4) {
     const [a, b] = [Number(m4[1]), Number(m4[2])];
@@ -71,12 +73,10 @@ function assertSafeUrl(raw: string): URL {
       a >= 224;                            // multicast / reserved
     if (priv) throw new Error("private_ip_forbidden");
   }
-  if (host.startsWith("[")) {
-    const v6 = host.slice(1, -1).toLowerCase();
-    if (v6 === "::1" || v6.startsWith("fc") || v6.startsWith("fd") || v6.startsWith("fe80")) {
-      throw new Error("private_ip_forbidden");
-    }
-  }
+  // Block EVERY IPv6 literal: the compressed / IPv4-mapped forms
+  // (e.g. [::ffff:169.254.169.254] → [::ffff:a9fe:a9fe]) slip past prefix
+  // denylists, and a user-supplied file URL never needs a raw IPv6 literal.
+  if (host.startsWith("[")) throw new Error("ipv6_literal_forbidden");
   return u;
 }
 

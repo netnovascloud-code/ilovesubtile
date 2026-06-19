@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, X, Loader2, Upload, Trash2, GripVertical } from "lucide-react";
+import { ReorderButtons } from "@/components/tools/ReorderButtons";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
@@ -526,6 +527,7 @@ export function ImagesToGifClient() {
             <img src={f.url} alt={`frame ${i + 1}`} className="mx-auto block max-h-28 w-auto" />
             <div className="mt-1 flex items-center justify-between text-[10px] text-ink-500">
               <GripVertical className="h-3 w-3" />
+              <ReorderButtons index={i} count={frames.length} onMove={move} />
               <span>#{i + 1}</span>
             </div>
           </li>

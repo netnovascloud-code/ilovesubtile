@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, X, Loader2, GripVertical, Trash2, RotateCw, Upload } from "lucide-react";
+import { ReorderButtons } from "@/components/tools/ReorderButtons";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
@@ -435,6 +436,7 @@ export function OrganizePdfClient() {
                 <img src={p.thumb} alt={`${s.page} ${i + 1}`} style={{ transform: `rotate(${p.rotation}deg)` }} className="mx-auto block max-h-44 w-auto transition-transform" />
                 <div className="mt-1 flex items-center justify-between text-xs text-ink-500">
                   <GripVertical className="h-3 w-3" />
+                  <ReorderButtons index={i} count={pages.length} onMove={move} />
                   <span>{s.page} {i + 1}</span>
                   <span className="font-mono text-ink-400">#{p.sourceIndex + 1}</span>
                 </div>

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, GripVertical } from "lucide-react";
+import { ReorderButtons } from "@/components/tools/ReorderButtons";
 import { Button } from "@/components/ui/button";
 import { formatBytes, cn } from "@/lib/utils";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
@@ -332,7 +333,10 @@ export function ImagesToPdfClient() {
               <GripVertical className="absolute left-1 bottom-1 z-10 h-3.5 w-3.5 cursor-grab text-ink-300" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={e.previewUrl} alt="" className="aspect-square w-full rounded object-contain" />
-              <p className="mt-1 truncate text-[11px] text-ink-500">{e.file.name} · {formatBytes(e.file.size)}</p>
+              <div className="mt-1 flex items-center justify-between gap-1">
+                <p className="truncate text-[11px] text-ink-500">{e.file.name} · {formatBytes(e.file.size)}</p>
+                <ReorderButtons index={i} count={items.length} onMove={move} />
+              </div>
             </li>
           ))}
         </ul>

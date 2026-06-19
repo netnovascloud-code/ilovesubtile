@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, GripVertical } from "lucide-react";
+import { ReorderButtons } from "@/components/tools/ReorderButtons";
 import { Button } from "@/components/ui/button";
 import { formatBytes } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
@@ -265,6 +266,7 @@ export function PdfMergeClient() {
               className="flex items-center gap-3 rounded-lg border border-ink-100 bg-white px-3 py-2"
             >
               <GripVertical className="h-4 w-4 cursor-grab text-ink-300" />
+              <ReorderButtons index={i} count={items.length} onMove={move} />
               <span className="grid h-6 w-6 place-items-center rounded bg-blue-50 text-xs font-bold text-blue-600">{i + 1}</span>
               <span className="flex-1 truncate text-sm text-ink-800">{e.file.name}</span>
               <span className="text-xs text-ink-400">{formatBytes(e.file.size)}</span>

@@ -47,9 +47,13 @@ after the tests pass.
   race) need a **dedicated test Supabase project** — never run them against prod.
   Add GitHub Secrets `SUPABASE_TEST_URL` + `SUPABASE_TEST_SERVICE_ROLE_KEY`; mock
   Mistral and Lemon Squeezy so no real credits/payments are consumed.
-- **Sentry** needs a Sentry project DSN (`NEXT_PUBLIC_SENTRY_DSN`, plus
-  `SENTRY_AUTH_TOKEN` for source maps) before the SDK is wired into the app and the
-  Edge Functions.
+- **Sentry** — the Edge Function side is built: `supabase/functions/_shared/sentry.ts`
+  (`captureEdgeException`, tested in `tests/sentry-edge.test.ts`) sends errors to
+  Sentry over HTTP and is **inert until `SENTRY_DSN` is set** as a Supabase secret.
+  It's wired into `api-gateway`'s upstream-error paths; the other functions follow
+  the same one-liner in their `catch` blocks. The **frontend** SDK (`@sentry/nextjs`
+  client/server/edge init, source maps via `SENTRY_AUTH_TOKEN`) and the dashboard
+  email alerts still need a Sentry project DSN before wiring.
 
 This repository is the **scaffold**: every page exists, every route is reachable, all SEO metadata (JSON-LD `SoftwareApplication`, `FAQPage`, `BreadcrumbList`, hreflang) is in place. Five of the JS-only tools are fully functional in the browser today. The rest need a backend to be wired up.
 

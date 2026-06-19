@@ -19,6 +19,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // Key hashing + validation rules live in a shared module so they're exercised by
 // the Node test suite (tests/api-key.test.ts) — same code, single source of truth.
 import { sha256Hex, isValidApiKeyFormat, isKeyUsable } from "../_shared/api-key.ts";
+// Best-effort error monitoring (inert until SENTRY_DSN is set).
+import { captureEdgeException } from "../_shared/sentry.ts";
 
 const BUY_CREDITS_URL = "https://konvertools.com/pricing";
 
@@ -310,7 +312,7 @@ Deno.serve(async (req) => {
     });
     let output = "";
     try { output = await mistralChat(mistralKey, system, text, action !== "explain_code"); }
-    catch (e) { return err("processing_failed", e instanceof Error ? e.message : "Upstream model error — not charged.", 502); }
+    catch (e) { await captureEdgeException(e, { fn: "api-gateway" }); return err("processing_failed", e instanceof Error ? e.message : "Upstream model error — not charged.", 502); }
 
     const { data: newBalance, error: spendErr } = await svc.rpc("spend_credits", { p_user: userId, p_amount: cost, p_reason: `api:${action}` });
     if (spendErr) return insufficient(cost, balance);
@@ -410,6 +412,7 @@ Deno.serve(async (req) => {
         outSrt = cues.map((c, i) => `${i + 1}\n${c.start} --> ${c.end}\n${out[i]}`).join("\n\n") + "\n";
       }
     } catch (e) {
+      await captureEdgeException(e, { fn: "api-gateway" });
       return err("processing_failed", e instanceof Error ? e.message : "Upstream model error — not charged.", 502);
     }
 

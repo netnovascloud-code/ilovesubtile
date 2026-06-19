@@ -10,6 +10,7 @@
  */
 
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 
 const RELOAD_GUARD = "konver_chunk_reloaded";
 
@@ -21,6 +22,9 @@ function isChunkLoadError(err: unknown): boolean {
 
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
+    // Report the crash to Sentry (no-op unless a DSN is configured), but skip
+    // benign post-deploy chunk errors which we just reload through.
+    if (!isChunkLoadError(error)) Sentry.captureException(error);
     if (isChunkLoadError(error) && typeof window !== "undefined" && !sessionStorage.getItem(RELOAD_GUARD)) {
       sessionStorage.setItem(RELOAD_GUARD, "1");
       window.location.reload();

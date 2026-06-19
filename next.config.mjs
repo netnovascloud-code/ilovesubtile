@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+import { withSentryConfig } from "@sentry/nextjs";
+
 // Content-Security-Policy is set per-request in middleware.ts with a fresh
 // nonce + 'strict-dynamic' instead of 'unsafe-inline'. The other security
 // headers below are static and apply to every response via next.config.mjs.
@@ -31,10 +33,19 @@ const nextConfig = {
     // Tree-shake icon imports so we don't ship the whole lucide-react index per
     // page (123 import statements across the repo). Saves ~30-50 kB on shared.
     optimizePackageImports: ["lucide-react"],
+    // Required on Next 14 for instrumentation.ts (Sentry server/edge init) to run.
+    instrumentationHook: true,
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
 };
 
-export default nextConfig;
+// Wrap with Sentry. Source-map upload only runs when SENTRY_AUTH_TOKEN is set,
+// so builds without it (and the runtime when no DSN is set) are unaffected.
+export default withSentryConfig(nextConfig, {
+  silent: true,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN },
+  disableLogger: true,
+});

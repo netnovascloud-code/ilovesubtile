@@ -126,6 +126,7 @@ export function HomeExplorer({
                 type="search"
                 value={query}
                 autoFocus
+                aria-label={strings.placeholder}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={strings.placeholder}
                 className="w-full rounded-2xl border border-ink-200/70 bg-white py-5 pl-14 pr-5 text-base text-ink-900 shadow-[0_10px_40px_-12px_rgb(15_23_42_/_0.2)] outline-none transition-shadow placeholder:text-ink-300 focus:border-brand-300 focus:shadow-[0_12px_48px_-12px_rgb(45_107_228_/_0.3)] md:text-lg"

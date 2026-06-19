@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { Type, Download, X, Loader2 } from "lucide-react";
-import { Font, woff2 } from "fonteditor-core";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/hooks/useLocale";
@@ -28,14 +27,21 @@ function inTypeFromName(name: string): InType | null {
   return null;
 }
 
+// Load the (large, wasm-bundling) font lib only when a conversion actually runs,
+// so it doesn't ship in the page's initial JS bundle.
+let libPromise: Promise<typeof import("fonteditor-core")> | null = null;
+const loadLib = () => (libPromise ??= import("fonteditor-core"));
+
 // woff2 needs its wasm initialised once before reading/writing that format.
 let woff2Ready: Promise<unknown> | null = null;
-function ensureWoff2() {
+async function ensureWoff2() {
+  const { woff2 } = await loadLib();
   if (!woff2Ready) woff2Ready = woff2.init("/woff2.wasm");
   return woff2Ready;
 }
 
 async function convertFont(buf: ArrayBuffer, inType: InType, outType: OutType): Promise<ArrayBuffer> {
+  const { Font } = await loadLib();
   if (inType === "woff2" || outType === "woff2") await ensureWoff2();
   const font = Font.create(buf, { type: inType, hinting: true });
   // In the browser write() returns an ArrayBuffer (the Node Buffer path needs no

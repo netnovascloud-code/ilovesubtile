@@ -1,8 +1,8 @@
 // Pure-canvas image operations used by the workflow builder. Each op takes a
 // Blob in and returns a Blob out, optionally with a different MIME type so
 // the next step can react. All run 100% in the browser.
-
-import { PDFDocument } from "pdf-lib";
+// pdf-lib is imported lazily inside the to-pdf step so it stays out of the
+// workflow page's initial bundle.
 
 export type StepKind = "resize" | "format" | "rotate" | "grayscale" | "watermark" | "to-pdf";
 
@@ -113,6 +113,7 @@ async function runWatermark(blob: Blob, s: Extract<Step, { kind: "watermark" }>)
 }
 
 async function runToPdf(blob: Blob, s: Extract<Step, { kind: "to-pdf" }>): Promise<Blob> {
+  const { PDFDocument } = await import("pdf-lib");
   const img = await loadImage(blob);
   const doc = await PDFDocument.create();
   // Ensure JPEG/PNG bytes for embedding. If the blob is something else, re-encode to PNG.

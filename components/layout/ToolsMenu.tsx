@@ -43,8 +43,10 @@ export function ToolsMenu({
     function onDoc(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") setOpen(false); }
     document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("mousedown", onDoc); document.removeEventListener("keydown", onKey); };
   }, []);
 
   const chrome = getChrome(locale);
@@ -54,6 +56,8 @@ export function ToolsMenu({
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
         onClick={() => setOpen((v) => !v)}
+        aria-haspopup="true"
+        aria-expanded={open}
         className="inline-flex items-center gap-1 text-sm text-ink-700 transition-colors hover:text-ink-900"
       >
         {chrome.nav.tools} <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />

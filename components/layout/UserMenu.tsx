@@ -74,6 +74,9 @@ export function UserMenu({
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Account menu"
         className="flex items-center gap-2 rounded-full border border-ink-100 bg-white py-1 pl-1 pr-2 text-sm hover:bg-ink-50"
       >
         <span className="grid h-7 w-7 place-items-center rounded-full bg-brand-500 text-xs font-semibold text-white">

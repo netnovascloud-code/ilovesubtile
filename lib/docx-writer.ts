@@ -1,7 +1,7 @@
 // Minimal, dependency-free .docx writer. A .docx is a ZIP of Open XML parts;
 // we emit the three required parts plus one paragraph per text line. The result
 // opens cleanly and is fully editable in Word, Google Docs and LibreOffice.
-import JSZip from "jszip";
+// JSZip is imported lazily inside buildDocx so it doesn't ship in the page bundle.
 
 function escapeXml(s: string): string {
   let out = "";
@@ -52,6 +52,7 @@ export async function buildDocx(lines: string[], headingIndexes: Set<number> = n
   </w:body>
 </w:document>`;
 
+  const { default: JSZip } = await import("jszip");
   const zip = new JSZip();
   zip.file("[Content_Types].xml", CONTENT_TYPES);
   zip.file("_rels/.rels", RELS);

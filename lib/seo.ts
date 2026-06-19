@@ -112,11 +112,10 @@ export function softwareApplicationSchema(
       priceCurrency: "EUR",
       availability: "https://schema.org/InStock",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "2847",
-    },
+    // No aggregateRating: Google requires ratings to reflect genuine on-page
+    // reviews. A hardcoded identical rating site-wide is "spammy structured
+    // markup" (manual-action / rich-result-suppression risk), so it's removed
+    // until real reviews exist.
   };
 }
 

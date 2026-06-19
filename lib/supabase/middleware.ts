@@ -3,7 +3,8 @@ import { NextResponse, type NextRequest } from "next/server";
 
 /** Refreshes the Supabase session cookie and propagates any extra request
  *  headers (e.g. the per-request CSP nonce) to the rendered page. The page
- *  reads them via next/headers `headers()`. */
+ *  reads them via next/headers `headers()`. Also returns the caller's id and
+ *  Authenticator Assurance Level (aal1 / aal2) so middleware can enforce 2FA. */
 export async function updateSupabaseSession(request: NextRequest, extraReqHeaders?: Headers) {
   // Bake extra headers into the NextResponse.next({ request: { headers } })
   // invocation so server components downstream can read them.
@@ -17,7 +18,7 @@ export async function updateSupabaseSession(request: NextRequest, extraReqHeader
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anon) return response;
+  if (!url || !anon) return { response, userId: null, aal: null };
 
   const supabase = createServerClient(url, anon, {
     cookies: {
@@ -35,6 +36,16 @@ export async function updateSupabaseSession(request: NextRequest, extraReqHeader
     },
   });
 
-  await supabase.auth.getUser();
-  return response;
+  const { data: { user } } = await supabase.auth.getUser();
+  let aal: string | null = null;
+  if (user) {
+    try {
+      const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+      aal = data?.currentLevel ?? null;
+    } catch {
+      // Leave aal null on a lookup error — fail-open so a transient glitch can
+      // never lock a user out of their own account.
+    }
+  }
+  return { response, userId: user?.id ?? null, aal };
 }

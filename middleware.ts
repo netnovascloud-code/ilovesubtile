@@ -117,10 +117,31 @@ export async function middleware(request: NextRequest) {
   const seg0 = request.nextUrl.pathname.split("/").filter(Boolean)[0] ?? "";
   extra.set("x-locale", LOCALES.has(seg0) ? seg0 : "en");
 
-  const response = await updateSupabaseSession(request, extra);
+  const { response, userId, aal } = await updateSupabaseSession(request, extra);
   const csp = buildCsp(nonce);
   response.headers.set("Content-Security-Policy", csp);
   const { pathname } = request.nextUrl;
+
+  // ── Mandatory TOTP gate ────────────────────────────────────────────────
+  // A logged-in user who hasn't completed 2FA (aal1) is sent to /auth/2fa
+  // before any other page — enrolment on first login, challenge afterwards.
+  // Auth pages are exempt so there's no redirect loop and "log out" always
+  // works. Ships DORMANT: activate by setting MFA_REQUIRED=true once TOTP is
+  // enabled in Supabase Auth and you've enrolled yourself at /auth/2fa.
+  if (process.env.MFA_REQUIRED === "true" && userId && aal === "aal1") {
+    const exempt =
+      pathname.startsWith("/auth/") ||
+      pathname === "/login" ||
+      pathname === "/register" ||
+      pathname === "/logout";
+    if (!exempt) {
+      const url = request.nextUrl.clone();
+      url.search = "";
+      url.pathname = "/auth/2fa";
+      url.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(url);
+    }
+  }
 
   // Locale auto-redirect: only on the English root. Once the user is on a
   // localised path, leave them be — the chosen language never changes mid-navigation.

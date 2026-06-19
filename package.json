@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "docx": "^9.7.1",
+    "fonteditor-core": "^2.6.3",
     "js-md5": "^0.8.3",
     "jspdf": "^4.2.1",
     "jszip": "^3.10.1",

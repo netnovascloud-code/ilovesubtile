@@ -2155,6 +2155,22 @@ TOOLS.push({
 // ── Utilities — QR generator ──────────────────────────────────────────────
 TOOLS.push(
   {
+    slug: "font-converter", phase: 3, kind: "client", category: "utilities", icon: Type, tone: "slate",
+    name: "Font Converter",
+    short: "Convert fonts between TTF, OTF, WOFF and WOFF2.",
+    h1: "Font Converter Online — TTF, OTF, WOFF & WOFF2 Free",
+    metaTitle: "Font Converter Online — TTF / OTF / WOFF / WOFF2 Free | Konvertools",
+    metaDescription: "Convert font files between TTF, OTF, WOFF and WOFF2 right in your browser. Batch several at once — free, private, your fonts are never uploaded.",
+    primaryKeyword: "font converter",
+    accept: ["ttf", "otf", "woff", "woff2"], freeMaxMb: 0, outputType: "Font",
+    steps: [
+      { title: "Drop your fonts", body: "TTF, OTF, WOFF or WOFF2 — several at once." },
+      { title: "Pick the output", body: "WOFF2, WOFF or TTF." },
+      { title: "Download", body: "Converted in your browser, never uploaded." },
+    ],
+    faqs: codeFaqs("Font Converter"),
+  },
+  {
     slug: "qr-generator", phase: 3, kind: "client", category: "utilities", icon: QrCode, tone: "slate",
     name: "QR Code Generator", short: "Create a QR code from any text, URL or Wi-Fi info.",
     h1: "QR Code Generator Online — Free, Custom Colours",

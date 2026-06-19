@@ -72,6 +72,7 @@ const ImagesToPdfClient = dynamic(() => import("@/components/tools/clients/Image
 const ZipCreateClient = dynamic(() => import("@/components/tools/clients/ZipCreateClient").then((m) => ({ default: m.ZipCreateClient })));
 const ZipExtractClient = dynamic(() => import("@/components/tools/clients/ZipExtractClient").then((m) => ({ default: m.ZipExtractClient })));
 const QrGeneratorClient = dynamic(() => import("@/components/tools/clients/QrGeneratorClient").then((m) => ({ default: m.QrGeneratorClient })));
+const FontConverterClient = dynamic(() => import("@/components/tools/clients/FontConverterClient").then((m) => ({ default: m.FontConverterClient })));
 const ServerLinkClient = dynamic(() => import("@/components/tools/clients/ServerLinkClient").then((m) => ({ default: m.ServerLinkClient })));
 const UtmBuilderClient = dynamic(() => import("@/components/tools/clients/UtmBuilderClient").then((m) => ({ default: m.UtmBuilderClient })));
 const LinkBuilderClient = dynamic(() => import("@/components/tools/clients/LinkBuilderClient").then((m) => ({ default: m.LinkBuilderClient })));
@@ -644,6 +645,9 @@ export default function LocalisedToolPage({
       break;
     case "qr-generator":
       body = <QrGeneratorClient />;
+      break;
+    case "font-converter":
+      body = <FontConverterClient />;
       break;
     case "url-shortener":
       body = <ServerLinkClient kind="short" />;

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Upload, X, Download, Loader2, Check, AlertCircle, Files } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, formatBytes } from "@/lib/utils";
+import { cn, formatBytes, uniqueFilename } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n/locales";
 import { getBatch, type BatchStrings } from "@/lib/i18n/page-batch";
 
@@ -108,7 +108,8 @@ export function BatchImageClient({ locale }: { locale: Locale }) {
     if (ok.length > 0) {
       const { default: JSZip } = await import("jszip");
       const zip = new JSZip();
-      ok.forEach((j) => zip.file(j.outName!, j.blob!));
+      const used = new Set<string>();
+      ok.forEach((j) => zip.file(uniqueFilename(j.outName!, used), j.blob!));
       const zipBlob = await zip.generateAsync({ type: "blob" });
       if (cleanup.current) URL.revokeObjectURL(cleanup.current);
       const url = URL.createObjectURL(zipBlob);

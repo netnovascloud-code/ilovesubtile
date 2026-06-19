@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { formatBytes, safeInternalPath, edgeFnUrl } from "@/lib/utils";
+import { formatBytes, safeInternalPath, edgeFnUrl, uniqueFilename } from "@/lib/utils";
 
 describe("formatBytes", () => {
   it("scales B → KB → MB → GB with rounding", () => {
@@ -40,5 +40,28 @@ describe("edgeFnUrl", () => {
   it("builds the functions path and appends query", () => {
     expect(edgeFnUrl("api-gateway").endsWith("/functions/v1/api-gateway")).toBe(true);
     expect(edgeFnUrl("ai-process", { tool: "x" }).endsWith("/functions/v1/ai-process?tool=x")).toBe(true);
+  });
+});
+
+describe("uniqueFilename — prevents batch ZIP entries from overwriting each other", () => {
+  it("returns the name unchanged the first time", () => {
+    const used = new Set<string>();
+    expect(uniqueFilename("photo.webp", used)).toBe("photo.webp");
+  });
+  it("suffixes ' (n)' before the extension on repeated names", () => {
+    const used = new Set<string>();
+    expect(uniqueFilename("photo.webp", used)).toBe("photo.webp");
+    expect(uniqueFilename("photo.webp", used)).toBe("photo (2).webp");
+    expect(uniqueFilename("photo.webp", used)).toBe("photo (3).webp");
+  });
+  it("handles extension-less names", () => {
+    const used = new Set<string>();
+    expect(uniqueFilename("README", used)).toBe("README");
+    expect(uniqueFilename("README", used)).toBe("README (2)");
+  });
+  it("leaves genuinely distinct names alone", () => {
+    const used = new Set<string>();
+    expect(uniqueFilename("a.png", used)).toBe("a.png");
+    expect(uniqueFilename("b.png", used)).toBe("b.png");
   });
 });

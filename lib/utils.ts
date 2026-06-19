@@ -52,3 +52,28 @@ export function edgeFnUrl(name: string, query?: Record<string, string>) {
   const qs = new URLSearchParams(query).toString();
   return qs ? `${base}?${qs}` : base;
 }
+
+/**
+ * Return a filename unique within `used` (which it mutates), inserting " (n)"
+ * before the extension on collision: "a.webp" → "a (2).webp" → "a (3).webp".
+ *
+ * Batch tools derive each output name from the input name, so two inputs that
+ * share a name (e.g. two "photo.png") would otherwise produce the same ZIP
+ * entry and silently overwrite each other — the user would get back fewer files
+ * than they put in. Run every name through this before adding it to a JSZip.
+ */
+export function uniqueFilename(name: string, used: Set<string>): string {
+  if (!used.has(name)) {
+    used.add(name);
+    return name;
+  }
+  const dot = name.lastIndexOf(".");
+  const base = dot > 0 ? name.slice(0, dot) : name;
+  const ext = dot > 0 ? name.slice(dot) : "";
+  let n = 2;
+  let candidate = `${base} (${n})${ext}`;
+  while (used.has(candidate)) candidate = `${base} (${++n})${ext}`;
+  used.add(candidate);
+  return candidate;
+}
+

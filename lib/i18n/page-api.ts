@@ -45,21 +45,9 @@ export type ApiStrings = {
     p2b: string;
     p3: string;
   };
-  /** Endpoint descriptions, keyed by their action. */
-  endpoints: Record<
-    | "me"
-    | "transcribe"
-    | "translate"
-    | "rephrase"
-    | "summarize"
-    | "humanize"
-    | "convert_code"
-    | "job"
-    | "remove_background"
-    | "convert_pdf"
-    | "convert_image",
-    string
-  >;
+  /** Endpoint descriptions, keyed by their action. Loosely typed so locales can
+   *  omit niche keys (the docs renderer falls back to the English copy). */
+  endpoints: Record<string, string>;
   /** Error "When" descriptions, keyed by the error name. */
   errors: Record<
     | "bad_request"
@@ -151,12 +139,12 @@ const en: ApiStrings = {
     convert_code:
       "Convert source code between languages. Params: `code`, `from_language`, `to_language`.",
     job: "Fetch a job by id. Pass &id=<uuid>.",
-    remove_background:
-      "Cut out a transparent PNG. Runs in-browser today (free & unlimited); REST access is rolling out.",
-    convert_pdf:
-      "merge / split / compress / rotate / to_images / to_text. Runs in-browser today; REST access is rolling out.",
-    convert_image:
-      "Re-encode to a target format with quality/resize. Runs in-browser today; REST access is rolling out.",
+    explain_code: "Explain what a snippet of code does, in plain language. Params: `code`.",
+    validate_email: "Check an email's deliverability: syntax, domain/MX records and disposable-provider detection. Params: `email`.",
+    scan_url: "Check a URL against Google Safe Browsing for malware / phishing. Params: `url`.",
+    password_check: "Check a password's SHA-1 against HaveIBeenPwned via k-anonymity (only the hash prefix is sent). Params: `sha1`.",
+    ssl_check: "Read a host's live TLS certificate: validity, issuer, SANs, key strength. Params: `url`.",
+    analyze_phishing: "Analyse an email/message for phishing & scam signals (AI + Safe Browsing). Params: `text`.",
   },
   errors: {
     bad_request: "Missing or invalid parameter — the message says which.",

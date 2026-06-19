@@ -19,10 +19,13 @@ type Endpoint = {
     | "summarize"
     | "humanize"
     | "convert_code"
+    | "explain_code"
     | "job"
-    | "remove_background"
-    | "convert_pdf"
-    | "convert_image";
+    | "validate_email"
+    | "scan_url"
+    | "password_check"
+    | "ssl_check"
+    | "analyze_phishing";
   cost: string;
   curl: string;
   js: string;
@@ -44,7 +47,7 @@ const me = await r.json();`,
   "email": "you@example.com",
   "plan": "business",
   "credits": 2000,
-  "max_file_mb": 2048
+  "max_file_mb": 5120
 }`,
   },
   {
@@ -193,34 +196,106 @@ const { job } = await r.json();`,
 }`,
   },
   {
-    method: "POST", action: "remove_background", cost: "2 credits", status: "soon",
-    curl: `# In-browser today: https://konvertools.com/remove-background
-# REST coming soon.`,
-    js: `// In-browser today: https://konvertools.com/remove-background
-// REST coming soon.`,
+    method: "POST", action: "explain_code", cost: "3 credits",
+    curl: `curl -X POST "${BASE}?action=explain_code" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"code":"def add(a, b): return a + b"}'`,
+    js: `const r = await fetch("${BASE}?action=explain_code", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ code }),
+});`,
     response: `{
-  "error": "not_implemented",
-  "message": "remove_background runs in-browser today and isn't yet available over REST. You were not charged."
+  "output": "This function returns the sum of its two arguments…",
+  "credits_remaining": 1957,
+  "cost": 3
 }`,
   },
   {
-    method: "POST", action: "convert_pdf", cost: "1 credit", status: "soon",
-    curl: `# In-browser today: https://konvertools.com/merge-pdf (and friends)
-# REST coming soon.`,
-    js: `// In-browser today; REST coming soon.`,
+    method: "POST", action: "validate_email", cost: "1 credit",
+    curl: `curl -X POST "${BASE}?action=validate_email" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"email":"you@example.com"}'`,
+    js: `const r = await fetch("${BASE}?action=validate_email", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ email }),
+});`,
     response: `{
-  "error": "not_implemented",
-  "message": "convert_pdf runs in-browser today and isn't yet available over REST. You were not charged."
+  "result": { "verdict": "valid", "score": 100, "checks": { "mx": true, "disposable": false } },
+  "credits_remaining": 1956,
+  "cost": 1
 }`,
   },
   {
-    method: "POST", action: "convert_image", cost: "1 credit", status: "soon",
-    curl: `# In-browser today: https://konvertools.com/png-to-jpg (and friends)
-# REST coming soon.`,
-    js: `// In-browser today; REST coming soon.`,
+    method: "POST", action: "scan_url", cost: "1 credit",
+    curl: `curl -X POST "${BASE}?action=scan_url" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"url":"https://example.com"}'`,
+    js: `const r = await fetch("${BASE}?action=scan_url", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ url }),
+});`,
     response: `{
-  "error": "not_implemented",
-  "message": "convert_image runs in-browser today and isn't yet available over REST. You were not charged."
+  "result": { "verdict": "safe", "threats": [], "source": "Google Safe Browsing" },
+  "credits_remaining": 1955,
+  "cost": 1
+}`,
+  },
+  {
+    method: "POST", action: "password_check", cost: "1 credit",
+    curl: `curl -X POST "${BASE}?action=password_check" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"sha1":"5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8"}'`,
+    js: `// Hash the password locally (SHA-1); only the hash is sent.
+const r = await fetch("${BASE}?action=password_check", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ sha1 }),
+});`,
+    response: `{
+  "result": { "compromised": true, "count": 3730471, "source": "HaveIBeenPwned" },
+  "credits_remaining": 1954,
+  "cost": 1
+}`,
+  },
+  {
+    method: "POST", action: "ssl_check", cost: "1 credit",
+    curl: `curl -X POST "${BASE}?action=ssl_check" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"url":"https://example.com"}'`,
+    js: `const r = await fetch("${BASE}?action=ssl_check", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ url }),
+});`,
+    response: `{
+  "result": { "valid": true, "daysRemaining": 67, "issuer": "Let's Encrypt", "keyStrength": "ECDSA P-256" },
+  "credits_remaining": 1953,
+  "cost": 1
+}`,
+  },
+  {
+    method: "POST", action: "analyze_phishing", cost: "3 credits",
+    curl: `curl -X POST "${BASE}?action=analyze_phishing" \\
+  -H "Authorization: Bearer knv_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"text":"Your account is suspended. Click here to verify…"}'`,
+    js: `const r = await fetch("${BASE}?action=analyze_phishing", {
+  method: "POST",
+  headers: { Authorization: "Bearer knv_live_...", "Content-Type": "application/json" },
+  body: JSON.stringify({ text }),
+});`,
+    response: `{
+  "result": { "score": 88, "verdict": "dangerous", "signals": ["Urgency", "Credential request"] },
+  "credits_remaining": 1950,
+  "cost": 3
 }`,
   },
 ];
@@ -248,6 +323,9 @@ const ERROR_EXAMPLE = `{
 
 export function ApiDocsBody({ locale = "en" }: { locale?: Locale }) {
   const t = getApi(locale);
+  // The security / explain_code endpoints may not be translated in every locale
+  // yet — fall back to the English description so no row renders blank.
+  const enEndpoints = getApi("en").endpoints;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
@@ -307,7 +385,7 @@ export function ApiDocsBody({ locale = "en" }: { locale?: Locale }) {
                   )}
                   <span className="ml-auto rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">{e.cost}</span>
                 </div>
-                <p className="mt-2 text-sm text-ink-500">{t.endpoints[e.action]}</p>
+                <p className="mt-2 text-sm text-ink-500">{t.endpoints[e.action] ?? enEndpoints[e.action]}</p>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   <div>
                     <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-400">cURL</p>

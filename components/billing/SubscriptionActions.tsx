@@ -8,7 +8,7 @@ import { edgeFnUrl } from "@/lib/utils";
 import { getBilling } from "@/lib/i18n/account";
 import { type Locale } from "@/lib/i18n/locales";
 
-type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: string };
+type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: string; scope?: string; status?: number };
 
 /**
  * Subscription self-service for active subscribers: open the Lemon Squeezy
@@ -37,7 +37,11 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
       const body = (await res.json()) as PortalResponse;
       const target = kind === "portal" ? body.url : (body.updatePaymentMethodUrl ?? body.url);
       if (!res.ok || !target) {
-        setError(body.error === "no_subscription" || body.error === "no_billing_account" ? s.noSubscriptionError : s.portalError);
+        const base = body.error === "no_subscription" || body.error === "no_billing_account" ? s.noSubscriptionError : s.portalError;
+        // Surface a concise diagnostic (e.g. "lemonsqueezy_failed/customer 404")
+        // so a misconfig (test/live key mismatch → 404) is obvious, not silent.
+        const diag = body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
+        setError(base + diag);
         return;
       }
       window.location.href = target;

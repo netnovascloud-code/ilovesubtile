@@ -72,11 +72,14 @@ Deno.serve(async (req) => {
         headers: { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" },
       });
       const body = await res.json();
-      if (!res.ok) return json({ error: "lemonsqueezy_failed", detail: body?.errors ?? body }, { status: 502 });
+      if (!res.ok) {
+        console.error("LS subscription fetch failed", res.status, JSON.stringify(body).slice(0, 400));
+        return json({ error: "lemonsqueezy_failed", scope: "subscription", status: res.status, detail: body?.errors ?? body }, { status: 502 });
+      }
       const urls = body?.data?.attributes?.urls ?? {};
       const portal = urls.customer_portal ?? null;
       const updatePaymentMethodUrl = urls.update_payment_method ?? null;
-      if (!portal && !updatePaymentMethodUrl) return json({ error: "no_portal_url" }, { status: 502 });
+      if (!portal && !updatePaymentMethodUrl) return json({ error: "no_portal_url", scope: "subscription" }, { status: 502 });
       return json({ url: portal, updatePaymentMethodUrl });
     }
 
@@ -89,9 +92,15 @@ Deno.serve(async (req) => {
         headers: { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" },
       });
       const body = await res.json();
-      if (!res.ok) return json({ error: "lemonsqueezy_failed", detail: body?.errors ?? body }, { status: 502 });
+      if (!res.ok) {
+        console.error("LS customer fetch failed", res.status, JSON.stringify(body).slice(0, 400));
+        return json({ error: "lemonsqueezy_failed", scope: "customer", status: res.status, detail: body?.errors ?? body }, { status: 502 });
+      }
       const portal = body?.data?.attributes?.urls?.customer_portal ?? null;
-      if (!portal) return json({ error: "no_portal_url" }, { status: 502 });
+      if (!portal) {
+        console.error("LS customer has no portal url", JSON.stringify(body?.data?.attributes?.urls ?? {}).slice(0, 400));
+        return json({ error: "no_portal_url", scope: "customer" }, { status: 502 });
+      }
       return json({ url: portal });
     }
 

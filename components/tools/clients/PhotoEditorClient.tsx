@@ -462,7 +462,8 @@ export function PhotoEditorClient() {
       const c = document.createElement("canvas");
       renderTo(c, img, 1, f, angle, flipH, flipV);
       const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
-      const blob: Blob = await new Promise((res) => c.toBlob((b) => res(b!), mime, 0.94));
+      const blob: Blob | null = await new Promise((res) => c.toBlob((b) => res(b), mime, 0.94));
+      if (!blob) return;
       if (out) URL.revokeObjectURL(out.url);
       setOut({ url: URL.createObjectURL(blob), size: blob.size });
     } finally {

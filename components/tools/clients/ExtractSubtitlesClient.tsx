@@ -461,7 +461,10 @@ export function ExtractSubtitlesClient() {
     try {
       const logs: string[] = [];
       const ff = await getFfmpeg();
-      ff.on("log", (e) => { if (typeof e.message === "string") logs.push(e.message); });
+      // Named so we can remove it — getFfmpeg() is a singleton, so an anonymous
+      // listener added every run would accumulate (stale closures + memory).
+      const onLog = (e: { message?: string }) => { if (typeof e.message === "string") logs.push(e.message); };
+      ff.on("log", onLog);
       const { fetchFile } = await import("@ffmpeg/util");
       const inExt = (f.name.split(".").pop() || "mkv").toLowerCase();
       const input = `input.${inExt}`;
@@ -471,6 +474,7 @@ export function ExtractSubtitlesClient() {
       // (expected). We parse the captured lines for Subtitle streams.
       setPhase("probing");
       try { await ff.exec(["-hide_banner", "-i", input]); } catch { /* expected non-zero */ }
+      ff.off("log", onLog); // probe done — stop capturing so the listener doesn't pile up
 
       const streams: { codec: string; lang: string }[] = [];
       const re = /Stream #\d+:\d+(?:\[[^\]]*\])?(?:\(([^)]+)\))?:\s*Subtitle:\s*([A-Za-z0-9_]+)/g;

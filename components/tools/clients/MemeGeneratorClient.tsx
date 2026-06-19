@@ -226,7 +226,8 @@ export function MemeGeneratorClient() {
     const c = document.createElement("canvas");
     c.width = img.naturalWidth; c.height = img.naturalHeight;
     drawMeme(c.getContext("2d")!, img, c.width, c.height, top, bottom, (fontSize * c.width) / 600);
-    const blob: Blob = await new Promise((res) => c.toBlob((b) => res(b!), "image/png"));
+    const blob: Blob | null = await new Promise((res) => c.toBlob((b) => res(b), "image/png"));
+    if (!blob) return;
     if (out) URL.revokeObjectURL(out.url);
     setOut({ url: URL.createObjectURL(blob), size: blob.size });
   }, [img, top, bottom, fontSize, out]);

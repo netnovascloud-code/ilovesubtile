@@ -52,6 +52,7 @@ export type FfmpegInstance = {
   readFile: (n: string) => Promise<Uint8Array>;
   deleteFile: (n: string) => Promise<void>;
   on: (event: string, h: (e: { progress?: number; type?: string; message?: string }) => void) => void;
+  off: (event: string, h: (e: { progress?: number; type?: string; message?: string }) => void) => void;
 };
 
 let ffmpegPromise: Promise<unknown> | null = null;

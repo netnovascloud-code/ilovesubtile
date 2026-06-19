@@ -59,7 +59,9 @@ function round(n: number) {
   if (!isFinite(n)) return "—";
   const abs = Math.abs(n);
   const digits = abs === 0 ? 0 : abs < 0.01 ? 6 : abs < 1 ? 4 : abs < 100 ? 3 : 2;
-  return n.toFixed(digits).replace(/\.?0+$/, "");
+  const s = n.toFixed(digits);
+  // Only trim trailing zeros when there's a decimal point — otherwise "0" → "".
+  return s.includes(".") ? s.replace(/\.?0+$/, "") : s;
 }
 
 const T: Record<string, Record<string, string>> = {

@@ -226,9 +226,9 @@ function markdownToHtml(md: string): string {
     if (h) { closeList(); out.push(`<h${h[1].length}>${mdInline(h[2])}</h${h[1].length}>`); i++; continue; }
     if (/^\s*>\s?/.test(line)) { closeList(); out.push(`<blockquote>${mdInline(line.replace(/^\s*>\s?/, ""))}</blockquote>`); i++; continue; }
     const ul = line.match(/^\s*[-*+]\s+(.*)$/);
-    const ol = line.match(/^\s*\d+\.\s+(.*)$/);
+    const ol = line.match(/^\s*(\d+)\.\s+(.*)$/);
     if (ul) { if (listType !== "ul") { closeList(); out.push("<ul>"); listType = "ul"; } out.push(`<li>${mdInline(ul[1])}</li>`); i++; continue; }
-    if (ol) { if (listType !== "ol") { closeList(); out.push("<ol>"); listType = "ol"; } out.push(`<li>${mdInline(ol[1])}</li>`); i++; continue; }
+    if (ol) { if (listType !== "ol") { closeList(); out.push(ol[1] === "1" ? "<ol>" : `<ol start="${ol[1]}">`); listType = "ol"; } out.push(`<li>${mdInline(ol[2])}</li>`); i++; continue; }
     if (line.trim() === "") { closeList(); i++; continue; }
     closeList();
     out.push(`<p>${mdInline(line)}</p>`);
@@ -570,7 +570,7 @@ export const TEXT_TOOLS: Record<string, TextToolDef> = {
       const sentences = (input.match(/[.!?]+(\s|$)/g) ?? []).length;
       const paragraphs = input.split(/\n{2,}/).filter((p) => p.trim()).length;
       const lines = input === "" ? 0 : input.split("\n").length;
-      const readingMin = Math.max(1, Math.round(words / 200));
+      const readingMin = words === 0 ? 0 : Math.max(1, Math.round(words / 200));
       return [
         `Words:           ${words}`,
         `Characters:      ${chars}`,

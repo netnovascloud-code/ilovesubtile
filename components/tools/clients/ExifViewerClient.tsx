@@ -332,7 +332,8 @@ export function ExifViewerClient() {
       canvas.getContext("2d")!.drawImage(bmp, 0, 0);
       bmp.close?.();
       const isJpg = /jpe?g/i.test(file.type);
-      const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), isJpg ? "image/jpeg" : "image/png", isJpg ? 0.95 : undefined));
+      const blob: Blob | null = await new Promise((res) => canvas.toBlob((b) => res(b), isJpg ? "image/jpeg" : "image/png", isJpg ? 0.95 : undefined));
+      if (!blob) return;
       if (cleanup.current) URL.revokeObjectURL(cleanup.current);
       const url = URL.createObjectURL(blob);
       cleanup.current = url;

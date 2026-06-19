@@ -531,7 +531,7 @@ export function PhotoEditorClient() {
           {busy ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{s.exporting}</> : s.exportImage}
         </Button>
         {out && (
-          <a href={out.url} download={`edited-${file.name}`}
+          <a href={out.url} download={`edited-${file.name.replace(/\.[^.]+$/, "")}.${file.type === "image/png" ? "png" : "jpg"}`}
             className="inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-100">
             <Download className="h-4 w-4" /> {s.download} ({formatBytes(out.size)})
           </a>

@@ -349,7 +349,9 @@ export function ExcelToJsonClient() {
     setFile(f); setError(null); setOutput(""); setBusy(true);
     try {
       const data = new Uint8Array(await f.arrayBuffer());
-      const { wb } = await safeReadWorkbook(data);
+      // cellDates so date cells parse to JS Dates (→ ISO strings in JSON) instead
+      // of raw Excel serial numbers like 45672.
+      const { wb } = await safeReadWorkbook(data, { cellDates: true });
       setSheets(wb.SheetNames);
       const first = wb.SheetNames[0];
       setSheet(first);

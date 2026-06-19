@@ -566,12 +566,17 @@ function nextFires(parts: Record<Field, string>, count = 5): Date[] {
   const stop = new Date(now.getTime() + 14 * 24 * 3600 * 1000);
   for (let t = now.getTime(); t <= stop.getTime() && out.length < count; t += 60_000) {
     const d = new Date(t);
+    const domOk = fieldMatches(d.getDate(), parts.dom, 1, 31);
+    const dowOk = dowMatches(d.getDay(), parts.dow);
+    // POSIX/Vixie cron: when BOTH day-of-month and day-of-week are restricted,
+    // the job fires when EITHER matches (OR); otherwise both must match.
+    const bothDaysRestricted = parts.dom.trim() !== "*" && parts.dow.trim() !== "*";
+    const dayOk = bothDaysRestricted ? (domOk || dowOk) : (domOk && dowOk);
     if (
       fieldMatches(d.getMinutes(), parts.minute, 0, 59) &&
       fieldMatches(d.getHours(), parts.hour, 0, 23) &&
-      fieldMatches(d.getDate(), parts.dom, 1, 31) &&
       fieldMatches(d.getMonth() + 1, parts.month, 1, 12, MONTH_NAMES) &&
-      dowMatches(d.getDay(), parts.dow)
+      dayOk
     ) out.push(new Date(d));
   }
   return out;

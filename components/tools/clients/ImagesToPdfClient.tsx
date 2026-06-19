@@ -350,7 +350,7 @@ export function ImagesToPdfClient() {
           {pageSize !== "Fit" && (
             <label className="flex items-center gap-2 text-sm text-ink-600">
               {s.margin}
-              <input type="number" min={0} max={120} value={margin} onChange={(e) => setMargin(Number(e.target.value))} className="w-20 rounded-md border border-ink-200 bg-white px-2 py-1 text-sm" />
+              <input type="number" min={0} max={120} value={margin} onChange={(e) => setMargin(Number(e.target.value) || 0)} className="w-20 rounded-md border border-ink-200 bg-white px-2 py-1 text-sm" />
               pt
             </label>
           )}

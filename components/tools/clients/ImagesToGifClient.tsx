@@ -551,7 +551,7 @@ export function ImagesToGifClient() {
         <div className="space-y-2 rounded-lg border border-ink-100 bg-ink-50/40 p-3 text-sm text-ink-600">
           <div className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />{s.encodingGif}</div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-ink-200">
-            <div className="h-full bg-brand-500 transition-all" style={{ width: `${Math.round(progress * 100)}%` }} />
+            <div className="h-full bg-brand-500 transition-all" style={{ width: `${progress}%` }} />
           </div>
         </div>
       )}

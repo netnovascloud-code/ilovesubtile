@@ -22,15 +22,22 @@ export function RegexClient() {
   const { matches, error } = useMemo(() => {
     if (!pattern) return { matches: [], error: null as string | null };
     let re: RegExp;
-    try { re = new RegExp(pattern, flagStr.includes("g") ? flagStr : flagStr + "g"); }
+    try { re = new RegExp(pattern, flagStr); }
     catch (e) { return { matches: [], error: (e as Error).message }; }
     const found: { index: number; match: string; groups: string[] }[] = [];
-    let m: RegExpExecArray | null;
-    let guard = 0;
-    while ((m = re.exec(text)) !== null && guard < 10000) {
-      found.push({ index: m.index, match: m[0], groups: m.slice(1) });
-      if (m.index === re.lastIndex) re.lastIndex++;
-      guard++;
+    if (flagStr.includes("g")) {
+      let m: RegExpExecArray | null;
+      let guard = 0;
+      while ((m = re.exec(text)) !== null && guard < 10000) {
+        found.push({ index: m.index, match: m[0], groups: m.slice(1) });
+        if (m.index === re.lastIndex) re.lastIndex++;
+        guard++;
+      }
+    } else {
+      // Non-global: a regex tester must report exactly one match, matching the
+      // displayed /flags. (Previously 'g' was force-appended → always global.)
+      const m = re.exec(text);
+      if (m) found.push({ index: m.index, match: m[0], groups: m.slice(1) });
     }
     return { matches: found, error: null };
   }, [pattern, flagStr, text]);

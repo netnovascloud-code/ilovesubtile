@@ -498,21 +498,6 @@ Deno.serve(async (req) => {
     if (text.length > 40_000) return json({ error: "text_too_long" }, { status: 413 });
     // No anonymous AI: the phishing detector uses Mistral, so it requires login.
     if (!userId) return json({ error: "auth_required", message: "Sign in to use the phishing detector." }, { status: 401 });
-    // Anonymous callers (no signed-in user) aren't covered by enforceBucket —
-    // cap them per client IP so the public anon key can't drive unlimited
-    // Mistral phishing analyses from outside the browser. Fail-open on error.
-    if (!userId) {
-      try {
-        const xff = req.headers.get("x-forwarded-for") ?? "";
-        const ip = xff.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
-        const { data: rl } = await svc.rpc("ip_rate_hit", { p_ip: ip, p_bucket: "phishing-anon", p_limit: 20, p_window_secs: 3600 });
-        const row = Array.isArray(rl) ? rl[0] : rl;
-        if (row && row.allowed === false) {
-          const retry = Number(row.retry_after ?? 3600);
-          return json({ error: "rate_limited", message: `Too many requests from your network. Retry in ${retry}s.`, retry_after: retry }, { status: 429 });
-        }
-      } catch { /* fail-open */ }
-    }
     const gate = await enforceBucket(svc, userId, "phishing");
     if (gate.blocked) return json(gate.body, { status: 429 });
 

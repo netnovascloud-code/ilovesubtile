@@ -736,7 +736,10 @@ export function LinkBuilderClient() {
       if (cc.trim()) params.set("cc", cc.trim());
       if (subject.trim()) params.set("subject", subject.trim());
       if (emailBody.trim()) params.set("body", emailBody);
-      const qs = params.toString();
+      // URLSearchParams encodes spaces as "+", but mailto clients (RFC 6068) show
+      // "+" literally — they want %20. A literal "+" is already %2B here, so this
+      // only rewrites the space-encoding. Matches the sms branch's encodeURIComponent.
+      const qs = params.toString().replace(/\+/g, "%20");
       return `mailto:${to.trim()}${qs ? `?${qs}` : ""}`;
     }
     if (tab === "wifi") {

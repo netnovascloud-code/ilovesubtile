@@ -53,8 +53,6 @@ const FN_MAP: Record<string, string> = {
   "url-shortener": "create-link",
   "deep-link": "create-link",
   "magic-link": "create-link",
-  // Text-to-speech — OpenAI TTS via the text-to-speech function (returns mp3 bytes).
-  "text-to-speech": "text-to-speech",
 };
 
 export function toolFunction(slug: string): string | null {

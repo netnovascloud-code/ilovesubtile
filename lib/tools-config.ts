@@ -2171,6 +2171,22 @@ TOOLS.push(
     faqs: codeFaqs("Font Converter"),
   },
   {
+    slug: "text-to-speech", phase: 3, kind: "ai", category: "text-ai", icon: Volume2, tone: "violet",
+    name: "Text to Speech",
+    short: "Turn text into natural-sounding speech (MP3).",
+    h1: "Text to Speech Online — Natural AI Voices, MP3 Download",
+    metaTitle: "Text to Speech Online — Natural AI Voices (MP3) | Konvertools",
+    metaDescription: "Convert text into natural AI speech and download the MP3. Several voices, many languages. Processed on our servers — your text is never stored.",
+    primaryKeyword: "text to speech",
+    accept: [], freeMaxMb: 0, outputType: "MP3",
+    steps: [
+      { title: "Type your text", body: "Paste or write what you want spoken." },
+      { title: "Pick a voice", body: "Choose from several natural voices." },
+      { title: "Generate & download", body: "Listen, then download the MP3." },
+    ],
+    faqs: aiFaqs("Text to Speech"),
+  },
+  {
     slug: "qr-generator", phase: 3, kind: "client", category: "utilities", icon: QrCode, tone: "slate",
     name: "QR Code Generator", short: "Create a QR code from any text, URL or Wi-Fi info.",
     h1: "QR Code Generator Online — Free, Custom Colours",

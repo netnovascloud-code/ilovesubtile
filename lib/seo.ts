@@ -140,7 +140,7 @@ export function breadcrumbSchema(
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: override?.homeLabel ?? "Home", item: `${SITE_URL}${HREFLANG_PREFIX[locale]}/` },
+      { "@type": "ListItem", position: 1, name: override?.homeLabel ?? "Home", item: `${SITE_URL}${HREFLANG_PREFIX[locale] || "/"}` },
       { "@type": "ListItem", position: 2, name: override?.name ?? tool.name, item: `${SITE_URL}${HREFLANG_PREFIX[locale]}/${tool.slug}` },
     ],
   };

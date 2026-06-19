@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
-    languages: Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l]}/`])),
+    languages: Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l] || "/"}`])),
   },
   robots: { index: true, follow: true },
 };

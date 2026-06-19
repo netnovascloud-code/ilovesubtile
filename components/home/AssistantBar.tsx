@@ -340,6 +340,7 @@ export function AssistantBar({ locale }: { locale: Locale }) {
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") ask(); }}
             placeholder={s.placeholder}
+            aria-label={s.title}
             className="flex-1 rounded-lg border border-ink-200 bg-white px-4 py-3 text-sm text-ink-900 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100"
           />
           <Button onClick={ask} disabled={busy || !prompt.trim()} size="lg">

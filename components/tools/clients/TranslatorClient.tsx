@@ -84,7 +84,7 @@ export function TranslatorClient() {
         {/* Source */}
         <div className="flex flex-col rounded-xl border border-ink-200 bg-white">
           <div className="flex items-center justify-between border-b border-ink-100 px-3 py-2">
-            <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)} className={selectCls}>
+            <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)} className={selectCls} aria-label="Source language">
               <option value="auto">Detect language</option>
               {LANGUAGES.map((l) => <option key={l.code} value={l.code}>{l.native}</option>)}
             </select>
@@ -93,6 +93,7 @@ export function TranslatorClient() {
             value={source}
             onChange={(e) => setSource(e.target.value.slice(0, MAX))}
             autoFocus
+            aria-label="Text to translate"
             placeholder="Type to translate…"
             className="h-72 w-full resize-none bg-transparent p-4 text-base text-ink-900 placeholder:text-ink-300 focus:outline-none"
           />
@@ -106,7 +107,7 @@ export function TranslatorClient() {
 
         {/* Swap */}
         <div className="flex items-center justify-center">
-          <button onClick={swap} title="Swap languages" className="rounded-full border border-ink-200 bg-white p-2 text-ink-500 transition-colors hover:text-brand-600 disabled:opacity-40" disabled={sourceLang === "auto"}>
+          <button onClick={swap} title="Swap languages" aria-label="Swap languages" className="rounded-full border border-ink-200 bg-white p-2 text-ink-500 transition-colors hover:text-brand-600 disabled:opacity-40" disabled={sourceLang === "auto"}>
             <ArrowLeftRight className="h-4 w-4" />
           </button>
         </div>
@@ -114,7 +115,7 @@ export function TranslatorClient() {
         {/* Target */}
         <div className="flex flex-col rounded-xl border border-ink-200 bg-ink-50/40">
           <div className="flex items-center justify-between border-b border-ink-100 px-3 py-2">
-            <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)} className={selectCls}>
+            <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)} className={selectCls} aria-label="Target language">
               {LANGUAGES.filter((l) => l.code !== "EN" || true).map((l) => <option key={l.code} value={l.code}>{l.native}</option>)}
             </select>
             {loading && <Loader2 className="h-4 w-4 animate-spin text-brand-500" />}
@@ -122,6 +123,7 @@ export function TranslatorClient() {
           <textarea
             value={target}
             readOnly
+            aria-label="Translation"
             placeholder="Translation"
             className="h-72 w-full resize-none bg-transparent p-4 text-base text-ink-900 placeholder:text-ink-300 focus:outline-none"
           />

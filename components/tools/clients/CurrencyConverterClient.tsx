@@ -252,12 +252,12 @@ export function CurrencyConverterClient() {
     <div className="space-y-5">
       <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr]">
         <div className="rounded-lg border border-ink-100 bg-white p-4">
-          <label className="block text-xs font-medium text-ink-500">{s.from}</label>
-          <select value={from} onChange={(e) => setFrom(e.target.value)}
+          <label htmlFor="cc-from" className="block text-xs font-medium text-ink-500">{s.from}</label>
+          <select id="cc-from" value={from} onChange={(e) => setFrom(e.target.value)}
             className="mt-1 w-full rounded-md border border-ink-200 bg-white px-3 py-2 font-semibold text-ink-900">
             {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
-          <input type="number" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)}
+          <input type="number" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} aria-label={`${s.from} — ${from}`}
             className="mt-3 w-full rounded-md border border-ink-200 bg-white px-3 py-2 text-2xl font-semibold text-ink-900 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100" />
         </div>
 
@@ -268,8 +268,8 @@ export function CurrencyConverterClient() {
         </div>
 
         <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-4">
-          <label className="block text-xs font-medium text-brand-700">{s.to}</label>
-          <select value={to} onChange={(e) => setTo(e.target.value)}
+          <label htmlFor="cc-to" className="block text-xs font-medium text-brand-700">{s.to}</label>
+          <select id="cc-to" value={to} onChange={(e) => setTo(e.target.value)}
             className="mt-1 w-full rounded-md border border-ink-200 bg-white px-3 py-2 font-semibold text-ink-900">
             {CURRENCIES.filter((c) => c !== from).map((c) => <option key={c} value={c}>{c}</option>)}
           </select>

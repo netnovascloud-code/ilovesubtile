@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { Bold, Italic, AlignLeft, AlignCenter, AlignRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -53,6 +54,7 @@ export function SubtitleStylePicker({
     previewText: string;
   };
 }) {
+  const uid = useId();
   const set = <K extends keyof SubtitleStyle>(k: K, v: SubtitleStyle[K]) =>
     onChange({ ...value, [k]: v });
 
@@ -65,8 +67,9 @@ export function SubtitleStylePicker({
     <div className="grid gap-6 md:grid-cols-2">
       <div className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-ink-700">{labels.font}</label>
+          <label htmlFor={`${uid}-font`} className="text-sm font-medium text-ink-700">{labels.font}</label>
           <select
+            id={`${uid}-font`}
             value={value.fontFamily}
             onChange={(e) => set("fontFamily", e.target.value as SubtitleStyle["fontFamily"])}
             className="mt-1 h-10 w-full rounded border border-ink-200 bg-white px-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
@@ -80,10 +83,11 @@ export function SubtitleStylePicker({
         </div>
 
         <div>
-          <label className="text-sm font-medium text-ink-700">
+          <label htmlFor={`${uid}-size`} className="text-sm font-medium text-ink-700">
             {labels.size}: {value.fontSizePx}px
           </label>
           <input
+            id={`${uid}-size`}
             type="range"
             min={14}
             max={72}
@@ -95,8 +99,9 @@ export function SubtitleStylePicker({
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-sm font-medium text-ink-700">{labels.color}</label>
+            <label htmlFor={`${uid}-color`} className="text-sm font-medium text-ink-700">{labels.color}</label>
             <input
+              id={`${uid}-color`}
               type="color"
               value={value.color}
               onChange={(e) => set("color", e.target.value)}
@@ -104,8 +109,9 @@ export function SubtitleStylePicker({
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-ink-700">{labels.outline}</label>
+            <label htmlFor={`${uid}-outline`} className="text-sm font-medium text-ink-700">{labels.outline}</label>
             <input
+              id={`${uid}-outline`}
               type="color"
               value={value.outlineColor}
               onChange={(e) => set("outlineColor", e.target.value)}
@@ -115,10 +121,11 @@ export function SubtitleStylePicker({
         </div>
 
         <div>
-          <label className="text-sm font-medium text-ink-700">
+          <label htmlFor={`${uid}-outline-width`} className="text-sm font-medium text-ink-700">
             {labels.outlineWidth}: {value.outlineWidth}px
           </label>
           <input
+            id={`${uid}-outline-width`}
             type="range"
             min={0}
             max={6}
@@ -190,6 +197,7 @@ export function SubtitleStylePicker({
                   key={a.v}
                   type="button"
                   aria-pressed={value.align === a.v}
+                  aria-label={`${labels.align}: ${a.v}`}
                   onClick={() => set("align", a.v)}
                   className={cn(
                     "flex flex-1 items-center justify-center rounded border px-2 py-1.5",

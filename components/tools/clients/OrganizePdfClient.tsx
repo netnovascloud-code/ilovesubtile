@@ -425,10 +425,10 @@ export function OrganizePdfClient() {
                 onDrop={() => { if (dragIdx.current !== null) move(dragIdx.current, i); dragIdx.current = null; }}
                 className="group relative cursor-move rounded-lg border border-ink-200 bg-white p-2 shadow-sm hover:border-brand-300">
                 <div className="absolute right-1 top-1 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                  <button onClick={() => rotate(i)} className="grid h-6 w-6 place-items-center rounded bg-white/90 text-ink-700 shadow ring-1 ring-ink-200 hover:bg-brand-50" title={s.rotatePage}>
+                  <button onClick={() => rotate(i)} className="grid h-6 w-6 place-items-center rounded bg-white/90 text-ink-700 shadow ring-1 ring-ink-200 hover:bg-brand-50" title={s.rotatePage} aria-label={s.rotatePage}>
                     <RotateCw className="h-3.5 w-3.5" />
                   </button>
-                  <button onClick={() => remove(i)} className="grid h-6 w-6 place-items-center rounded bg-white/90 text-red-600 shadow ring-1 ring-ink-200 hover:bg-red-50" title={s.deletePage}>
+                  <button onClick={() => remove(i)} className="grid h-6 w-6 place-items-center rounded bg-white/90 text-red-600 shadow ring-1 ring-ink-200 hover:bg-red-50" title={s.deletePage} aria-label={s.deletePage}>
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>

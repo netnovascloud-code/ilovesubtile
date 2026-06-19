@@ -153,7 +153,7 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: HOME_LABEL[locale], item: `${SITE}${HREFLANG_PREFIX[locale]}/` },
+            { "@type": "ListItem", position: 1, name: HOME_LABEL[locale], item: `${SITE}${HREFLANG_PREFIX[locale] || "/"}` },
             { "@type": "ListItem", position: 2, name: label, item: canonical },
           ],
         }}

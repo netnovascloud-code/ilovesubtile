@@ -11,16 +11,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
+  // For the homepage (path "/") the bare root keeps its slash but localized
+  // homes must drop it (`/fr` not `/fr/`) to match trailingSlash:false; for any
+  // other path the prefix + path already yields a non-trailing-slash URL.
   const altsFor = (path: string) => ({
     languages: Object.fromEntries(
-      LOCALES.map((l) => [l, `${SITE_URL}${HREFLANG_PREFIX[l]}${path}`]),
+      LOCALES.map((l) => [
+        l,
+        path === "/" ? `${SITE_URL}${HREFLANG_PREFIX[l] || "/"}` : `${SITE_URL}${HREFLANG_PREFIX[l]}${path}`,
+      ]),
     ),
   });
 
   // Homepage — one entry per locale, each pointing to itself with full hreflang.
   for (const loc of LOCALES) {
     entries.push({
-      url: `${SITE_URL}${HREFLANG_PREFIX[loc]}/`,
+      url: `${SITE_URL}${HREFLANG_PREFIX[loc] || "/"}`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: loc === "en" ? 1 : 0.9,

@@ -282,7 +282,7 @@ export function QrGeneratorClient() {
               <button key={sz} onClick={() => setSize(sz)} className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors", size === sz ? "bg-brand-500 text-white" : "text-ink-600 hover:text-ink-900")}>{sz}px</button>
             ))}
           </div>
-          <select value={level} onChange={(e) => setLevel(e.target.value)} className="rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm">
+          <select value={level} onChange={(e) => setLevel(e.target.value)} aria-label={s.errorCorrection} className="rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm">
             {LEVELS.map((l) => <option key={l.id} value={l.id}>{s.errorCorrection}: {l.label}</option>)}
           </select>
           <label className="flex items-center gap-2 text-sm text-ink-600">{s.fgLabel} <input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="h-8 w-10 cursor-pointer rounded border border-ink-200" /></label>

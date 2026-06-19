@@ -692,15 +692,15 @@ export function UnitConverterClient() {
 
       <div className="grid items-end gap-3 md:grid-cols-[1fr_auto_1fr]">
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-ink-500">{s.from}</label>
+          <label htmlFor="uc-from-value" className="block text-xs font-medium text-ink-500">{s.from}</label>
           <div className="flex gap-2">
-            <input value={value} onChange={(e) => setValue(e.target.value)} type="number" inputMode="decimal" className={`flex-1 ${selectCls}`} />
+            <input id="uc-from-value" value={value} onChange={(e) => setValue(e.target.value)} type="number" inputMode="decimal" className={`flex-1 ${selectCls}`} />
             {groupId === "temperature" ? (
-              <select value={tempFrom} onChange={(e) => setTempFrom(e.target.value)} className={selectCls}>
+              <select value={tempFrom} onChange={(e) => setTempFrom(e.target.value)} className={selectCls} aria-label={`${s.from} — ${s.temperature}`}>
                 <option value="C">°C</option><option value="F">°F</option><option value="K">K</option>
               </select>
             ) : (
-              <select value={fromUnit} onChange={(e) => setFromUnit(e.target.value)} className={selectCls}>
+              <select value={fromUnit} onChange={(e) => setFromUnit(e.target.value)} className={selectCls} aria-label={s.from}>
                 {group?.units.map((u) => <option key={u.id} value={u.id}>{translateUnitLabel(u.label)}</option>)}
               </select>
             )}
@@ -710,15 +710,15 @@ export function UnitConverterClient() {
           <Button size="sm" variant="outline" onClick={swap}><ArrowRightLeft className="h-3.5 w-3.5" /></Button>
         </div>
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-ink-500">{s.to}</label>
+          <label htmlFor="uc-to-value" className="block text-xs font-medium text-ink-500">{s.to}</label>
           <div className="flex gap-2">
-            <input readOnly value={output} className={`flex-1 bg-ink-50/50 ${selectCls}`} />
+            <input id="uc-to-value" readOnly value={output} aria-label={s.to} className={`flex-1 bg-ink-50/50 ${selectCls}`} />
             {groupId === "temperature" ? (
-              <select value={tempTo} onChange={(e) => setTempTo(e.target.value)} className={selectCls}>
+              <select value={tempTo} onChange={(e) => setTempTo(e.target.value)} className={selectCls} aria-label={`${s.to} — ${s.temperature}`}>
                 <option value="C">°C</option><option value="F">°F</option><option value="K">K</option>
               </select>
             ) : (
-              <select value={toUnit} onChange={(e) => setToUnit(e.target.value)} className={selectCls}>
+              <select value={toUnit} onChange={(e) => setToUnit(e.target.value)} className={selectCls} aria-label={s.to}>
                 {group?.units.map((u) => <option key={u.id} value={u.id}>{translateUnitLabel(u.label)}</option>)}
               </select>
             )}

@@ -24,9 +24,12 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   if (!isLocale(params.locale) || params.locale === "en") return {};
   const locale = params.locale;
   const ui = getStrings(locale);
-  const canonicalPath = `${HREFLANG_PREFIX[locale]}/`;
+  // Non-default locales only here (en is handled by app/page.tsx), so the prefix
+  // is always non-empty — emit it without a trailing slash to match every other
+  // route (trailingSlash:false would 308 "/fr/" → "/fr" otherwise).
+  const canonicalPath = HREFLANG_PREFIX[locale];
   const alts: Record<string, string> = {};
-  for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc]}/`;
+  for (const loc of LOCALES) alts[loc] = `${SITE_URL}${HREFLANG_PREFIX[loc] || "/"}`;
   alts["x-default"] = `${SITE_URL}/`;
   return {
     title: { absolute: `Konvertools — ${ui.hero.title}` },

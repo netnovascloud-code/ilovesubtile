@@ -326,7 +326,7 @@ export function ImagesToPdfClient() {
               className="group relative rounded-lg border border-ink-100 bg-white p-2"
             >
               <div className="absolute right-1 top-1 z-10 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                <button onClick={() => remove(e.id)} className="rounded-md bg-white/90 p-1 text-ink-400 shadow hover:text-red-600"><X className="h-3 w-3" /></button>
+                <button onClick={() => remove(e.id)} aria-label="Remove" className="rounded-md bg-white/90 p-1 text-ink-400 shadow hover:text-red-600"><X className="h-3 w-3" /></button>
               </div>
               <span className="absolute left-1 top-1 z-10 grid h-5 w-5 place-items-center rounded bg-blue-600 text-[10px] font-bold text-white">{i + 1}</span>
               <GripVertical className="absolute left-1 bottom-1 z-10 h-3.5 w-3.5 cursor-grab text-ink-300" />

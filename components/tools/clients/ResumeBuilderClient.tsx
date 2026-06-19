@@ -1182,7 +1182,7 @@ export function ResumeBuilderClient() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={r.photo} alt="" className="h-6 w-6 rounded object-cover" />
                   {s.added}
-                  <button onClick={() => setR((prev) => ({ ...prev, photo: null }))} className="text-ink-400 hover:text-red-600"><X className="h-3 w-3" /></button>
+                  <button onClick={() => setR((prev) => ({ ...prev, photo: null }))} aria-label="Remove" className="text-ink-400 hover:text-red-600"><X className="h-3 w-3" /></button>
                 </span>
               ) : (
                 <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-ink-200 px-3 py-1.5 text-xs font-medium text-ink-600 hover:border-ink-300">

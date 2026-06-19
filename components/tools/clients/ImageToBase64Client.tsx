@@ -419,7 +419,7 @@ export function ImageToBase64Client() {
               <span className="font-medium text-ink-900">{file.name}</span>
               <span className="ml-2 text-ink-400">{formatBytes(file.size)} · {file.type}</span>
             </div>
-            <button onClick={() => { setFile(null); setB64(""); }} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+            <button onClick={() => { setFile(null); setB64(""); }} aria-label="Remove" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
           </div>
         )}
 

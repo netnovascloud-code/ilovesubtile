@@ -234,7 +234,7 @@ export function ExtractColorsClient() {
       ) : (
         <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-white px-4 py-2.5 text-sm">
           <div className="min-w-0 truncate"><span className="font-medium text-ink-900">{file.name}</span><span className="ml-2 text-ink-400">{formatBytes(file.size)}</span></div>
-          <button onClick={() => { setFile(null); setSrcUrl(null); setPalette(null); }} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+          <button onClick={() => { setFile(null); setSrcUrl(null); setPalette(null); }} aria-label="Remove" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
 

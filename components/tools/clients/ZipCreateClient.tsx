@@ -80,7 +80,7 @@ export function ZipCreateClient() {
             <li key={i} className="flex items-center gap-2 rounded-md border border-ink-100 bg-white px-3 py-1.5 text-sm">
               <span className="flex-1 truncate text-ink-800">{f.name}</span>
               <span className="text-xs text-ink-400">{formatBytes(f.size)}</span>
-              <button onClick={() => remove(i)} className="rounded p-1 text-ink-400 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
+              <button onClick={() => remove(i)} aria-label="Remove" className="rounded p-1 text-ink-400 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
             </li>
           ))}
           <li className="px-3 py-1 text-xs text-ink-400">{files.length} {s.files} · {s.total} {formatBytes(total)}</li>

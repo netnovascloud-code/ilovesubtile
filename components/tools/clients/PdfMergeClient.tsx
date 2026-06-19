@@ -268,7 +268,7 @@ export function PdfMergeClient() {
               <span className="grid h-6 w-6 place-items-center rounded bg-blue-50 text-xs font-bold text-blue-600">{i + 1}</span>
               <span className="flex-1 truncate text-sm text-ink-800">{e.file.name}</span>
               <span className="text-xs text-ink-400">{formatBytes(e.file.size)}</span>
-              <button onClick={() => remove(e.id)} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
+              <button onClick={() => remove(e.id)} aria-label="Remove" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
             </li>
           ))}
         </ul>

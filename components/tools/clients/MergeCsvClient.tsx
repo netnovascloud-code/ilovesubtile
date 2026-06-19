@@ -387,7 +387,7 @@ export function MergeCsvClient() {
                   <span className="font-medium text-ink-900">{e.file.name}</span>
                   <span className="ml-2 text-xs text-ink-400">{e.rows.length} {s.rowsCols} · {e.headers.length} {s.cols}</span>
                 </span>
-                <button onClick={() => remove(e.id)} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
+                <button onClick={() => remove(e.id)} aria-label="Remove" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
               </li>
             ))}
           </ul>

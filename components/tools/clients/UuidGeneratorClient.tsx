@@ -301,7 +301,7 @@ export function UuidGeneratorClient() {
           <li key={i} className="flex items-center gap-3 px-4 py-2">
             <span className="w-12 shrink-0 text-xs text-ink-300">{i + 1}</span>
             <code className="flex-1 break-all font-mono text-sm text-ink-800">{id}</code>
-            <button onClick={() => copyOne(i)} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700">
+            <button onClick={() => copyOne(i)} aria-label="Copy" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700">
               {copiedOne === i ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
             </button>
           </li>

@@ -998,7 +998,7 @@ export function InvoiceGeneratorClient() {
                 <input value={l.desc} onChange={(e) => update(i, { desc: e.target.value })} placeholder={s.description_placeholder} className="col-span-6 rounded-md border border-ink-200 px-2 py-1.5" />
                 <input type="number" min={0} value={l.qty} onChange={(e) => update(i, { qty: Number(e.target.value) || 0 })} placeholder={s.qty_placeholder} className="col-span-2 rounded-md border border-ink-200 px-2 py-1.5 text-right" />
                 <input type="number" min={0} step="0.01" value={l.unitPrice} onChange={(e) => update(i, { unitPrice: Number(e.target.value) || 0 })} placeholder={s.unit_placeholder} className="col-span-3 rounded-md border border-ink-200 px-2 py-1.5 text-right" />
-                <button onClick={() => del(l.id)} className="col-span-1 rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><Trash2 className="mx-auto h-3.5 w-3.5" /></button>
+                <button onClick={() => del(l.id)} aria-label="Delete" className="col-span-1 rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-red-600"><Trash2 className="mx-auto h-3.5 w-3.5" /></button>
               </li>
             ))}
           </ul>

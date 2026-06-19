@@ -145,7 +145,7 @@ export function BatchPdfClient({ locale }: { locale: Locale }) {
                 {j.status === "done" && <Check className="h-3.5 w-3.5 text-emerald-600" />}
                 {j.status === "error" && <AlertCircle className="h-3.5 w-3.5 text-red-500" />}
                 {j.status === "queued" && !busy && (
-                  <button onClick={() => remove(j.id)} className="rounded p-1 text-ink-400 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
+                  <button onClick={() => remove(j.id)} aria-label="Remove" className="rounded p-1 text-ink-400 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
                 )}
               </li>
             ))}

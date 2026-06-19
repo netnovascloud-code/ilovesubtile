@@ -278,7 +278,7 @@ function Drop({ label, file, onPick, onClear }: { label: string; file: File | nu
   return file ? (
     <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-white px-3 py-2 text-sm">
       <span className="min-w-0 truncate"><span className="font-medium text-ink-900">{file.name}</span><span className="ml-2 text-ink-400">{formatBytes(file.size)}</span></span>
-      <button onClick={onClear} className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+      <button onClick={onClear} aria-label="Remove" className="rounded p-1 text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
     </div>
   ) : (
     <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-blue-300 bg-blue-50/40 px-4 py-8 text-center transition-colors hover:brightness-95">

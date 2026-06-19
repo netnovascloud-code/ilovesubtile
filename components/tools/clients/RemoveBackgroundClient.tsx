@@ -339,7 +339,7 @@ export function RemoveBackgroundClient() {
             <span className="font-medium text-ink-900">{file.name}</span>
             <span className="ml-2 text-ink-400">{formatBytes(file.size)}</span>
           </div>
-          <button onClick={() => { setFile(null); setSrcUrl(null); setOutUrl(null); }} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+          <button onClick={() => { setFile(null); setSrcUrl(null); setOutUrl(null); }} aria-label="Remove" className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
 

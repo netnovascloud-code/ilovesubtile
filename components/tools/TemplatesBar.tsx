@@ -71,7 +71,7 @@ export function TemplatesBar<S extends Record<string, unknown>>({
       {items.map((t) => (
         <span key={t.id} className="group inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700">
           <button onClick={() => onApply(t.settings)} className="hover:underline" title="Apply this template">{t.name}</button>
-          <button onClick={() => remove(t.id)} className="ml-1 rounded p-0.5 text-brand-500 opacity-60 transition-opacity hover:bg-brand-100 hover:opacity-100" title="Delete"><X className="h-3 w-3" /></button>
+          <button onClick={() => remove(t.id)} aria-label="Delete template" className="ml-1 rounded p-0.5 text-brand-500 opacity-60 transition-opacity hover:bg-brand-100 hover:opacity-100" title="Delete"><X className="h-3 w-3" /></button>
         </span>
       ))}
       <button onClick={save} disabled={saving} className="ml-auto inline-flex items-center gap-1 rounded-full border border-ink-200 px-2.5 py-1 text-xs font-medium text-ink-700 hover:border-brand-300 hover:text-brand-600 disabled:opacity-50">

@@ -114,7 +114,7 @@ export function WorkflowBuilderClient({ locale }: { locale: Locale }) {
       ) : (
         <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-white px-4 py-2.5">
           <div className="min-w-0 truncate text-sm"><span className="font-medium text-ink-900">{file.name}</span><span className="ml-2 text-ink-400">{formatBytes(file.size)}</span></div>
-          <button onClick={() => { setFile(null); setSrcUrl(null); setResultUrl(null); }} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+          <button onClick={() => { setFile(null); setSrcUrl(null); setResultUrl(null); }} aria-label="Remove" className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
 
@@ -147,7 +147,7 @@ export function WorkflowBuilderClient({ locale }: { locale: Locale }) {
                 <div className="ml-auto flex gap-1">
                   <button onClick={() => move(s.id, -1)} disabled={i === 0} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 disabled:opacity-30">↑</button>
                   <button onClick={() => move(s.id, 1)} disabled={i === steps.length - 1} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 disabled:opacity-30">↓</button>
-                  <button onClick={() => remove(s.id)} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
+                  <button onClick={() => remove(s.id)} aria-label="Remove" className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-red-600"><X className="h-3.5 w-3.5" /></button>
                 </div>
               </div>
               <StepEditor step={s} onChange={(patch) => update(s.id, patch)} t={t} />

@@ -74,7 +74,7 @@ export function ZipExtractClient() {
             <span className="font-medium text-ink-900">{file.name}</span>
             <span className="ml-2 text-ink-400">{entries.length} {s.files} · {formatBytes(file.size)}</span>
           </div>
-          <button onClick={clear} className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
+          <button onClick={clear} aria-label="Remove" className="rounded p-1 text-xs text-ink-400 hover:bg-ink-50 hover:text-ink-700"><X className="h-3.5 w-3.5" /></button>
         </div>
       )}
 

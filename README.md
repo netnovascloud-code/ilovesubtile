@@ -133,7 +133,10 @@ or `supabase secrets set`). The full list:
 - `LS_VARIANT_PRO_MONTHLY`, `LS_VARIANT_PRO_ANNUAL`, `LS_VARIANT_BIZ_MONTHLY`, `LS_VARIANT_BIZ_ANNUAL` — subscription variant IDs read by `lemonsqueezy-checkout`
 - `LS_VARIANT_PACK_STARTER`, `LS_VARIANT_PACK_GROWTH`, `LS_VARIANT_PACK_SCALE`, `LS_VARIANT_PACK_STUDIO` — credit-pack variant IDs
 - `RESEND_API_KEY` — used by `send-email`
-- `VPS_API_URL`, `VPS_API_KEY` — used by `process-ffmpeg` (only when you wire your FFmpeg worker)
+- `RESEND_FROM` — optional sender override for `send-email` (must be a verified Resend domain/sender)
+
+All file conversions run **in the browser** (FFmpeg.wasm, pdf-lib, canvas, …) and
+all AI tasks go to **Mistral** — Konvertools uses **no external processing server**.
 
 `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are injected automatically by
 Supabase into every Edge Function — you don't set those yourself.
@@ -246,9 +249,6 @@ supabase secrets set LEMONSQUEEZY_WEBHOOK_SECRET=...
 supabase secrets set LS_VARIANT_PRO_MONTHLY=... LS_VARIANT_PRO_ANNUAL=...
 supabase secrets set LS_VARIANT_BIZ_MONTHLY=... LS_VARIANT_BIZ_ANNUAL=...
 supabase secrets set LS_VARIANT_PACK_STARTER=... LS_VARIANT_PACK_GROWTH=... LS_VARIANT_PACK_SCALE=... LS_VARIANT_PACK_STUDIO=...
-# Only when you have your own FFmpeg worker:
-supabase secrets set VPS_API_URL=https://your-ffmpeg-host/api
-supabase secrets set VPS_API_KEY=...
 
 supabase functions deploy process-subtitles
 supabase functions deploy translate-subtitles
@@ -311,8 +311,7 @@ Enable Google in Supabase → Authentication → Providers and add `http://local
 - ✅ Auth pages, dashboard, pricing, API docs
 - ✅ Supabase migrations + 6 Edge Function stubs
 - ✅ Sitemap, robots, 404
+- ✅ No external processing server: audio/video/PDF/image conversions run in the browser (FFmpeg.wasm, pdf-lib, canvas). `process-ffmpeg` and `convert` are retired kill-switches (501).
 - ⏳ Backend secrets (AI / Lemon Squeezy / Resend) — Edge Functions deployed and live, just need keys set
-- ⏳ FFmpeg worker — `process-ffmpeg` deployed and returns a clean error until you set `VPS_API_URL` + `VPS_API_KEY`
 - ⏳ Full i18n for tool pages (only homepage is localised today)
 - ⏳ Ad network integration (Ezoic / Media.net)
-- ⏳ FFmpeg worker on Hetzner

@@ -49,8 +49,11 @@ function parseTimecodeLine(line: string): { start: number; end: number } | null 
   const ma = TIME_SRT.exec(a) || TIME_VTT.exec(a);
   const mb = TIME_SRT.exec(b.split(/\s+/)[0] ?? b) || TIME_VTT.exec(b.split(/\s+/)[0] ?? b);
   if (!ma || !mb) return null;
-  const start = ma.length === 5 ? toMs(ma[1], ma[2], ma[3], ma[4]) : toMs("0", ma[2], ma[3], ma[4]);
-  const end = mb.length === 5 ? toMs(mb[1], mb[2], mb[3], mb[4]) : toMs("0", mb[2], mb[3], mb[4]);
+  // The hours group is optional in VTT (mm:ss.mmm). A match array's length is
+  // always (groups + 1), so branch on whether group 1 actually matched, not on
+  // `.length` (which was always 5 → undefined hours → NaN for hour-less VTT).
+  const start = ma[1] !== undefined ? toMs(ma[1], ma[2], ma[3], ma[4]) : toMs("0", ma[2], ma[3], ma[4]);
+  const end = mb[1] !== undefined ? toMs(mb[1], mb[2], mb[3], mb[4]) : toMs("0", mb[2], mb[3], mb[4]);
   return { start, end };
 }
 

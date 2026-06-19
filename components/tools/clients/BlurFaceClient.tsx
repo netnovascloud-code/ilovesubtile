@@ -274,6 +274,7 @@ export function BlurFaceClient() {
     const url = URL.createObjectURL(f);
     const i = new Image();
     i.onload = () => { setFile(f); setImg(i); URL.revokeObjectURL(url); };
+    i.onerror = () => URL.revokeObjectURL(url); // don't leak the URL on a bad image
     i.src = url;
   }, []);
 

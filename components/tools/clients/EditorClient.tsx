@@ -49,8 +49,10 @@ export function EditorClient() {
         setError("Couldn't detect SRT or VTT format.");
         return;
       }
+      const parsed = parseSubtitles(raw);
+      if (!parsed.length) { setError("No subtitles found in that file."); return; }
       setFormat(fmt);
-      setCues(parseSubtitles(raw));
+      setCues(parsed);
       setFilename(file.name);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't parse that file.");

@@ -472,9 +472,15 @@ export function ImageCollageClient() {
     for (const f of Array.from(files)) {
       if (!f.type.startsWith("image/")) continue;
       const url = URL.createObjectURL(f);
-      const img = await new Promise<HTMLImageElement>((res) => {
-        const i = new Image(); i.onload = () => res(i); i.src = url;
+      const img = await new Promise<HTMLImageElement | null>((res) => {
+        const i = new Image();
+        i.onload = () => res(i);
+        // Without onerror a corrupt file (that still passes the type check) would
+        // hang the await forever, blocking the whole batch and leaking the URL.
+        i.onerror = () => { URL.revokeObjectURL(url); res(null); };
+        i.src = url;
       });
+      if (!img) continue;
       next.push({ id: crypto.randomUUID(), file: f, url, img });
     }
     setPhotos((p) => [...p, ...next]);
@@ -501,7 +507,8 @@ export function ImageCollageClient() {
     const cap = layout.cols * layout.rows;
     const c = document.createElement("canvas");
     drawCollage(c, photos.slice(0, cap), layout, gap, bg, side);
-    const blob: Blob = await new Promise((res) => c.toBlob((b) => res(b!), "image/png"));
+    const blob: Blob | null = await new Promise((res) => c.toBlob((b) => res(b), "image/png"));
+    if (!blob) return; // toBlob can return null past the canvas-area limit
     if (out) URL.revokeObjectURL(out.url);
     setOut({ url: URL.createObjectURL(blob), size: blob.size });
   }, [photos, layout, gap, bg, side, out]);

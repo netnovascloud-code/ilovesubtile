@@ -55,8 +55,10 @@ export function CleanClient() {
         setError(chrome.errors.badFormat);
         return;
       }
+      const parsed = parseSubtitles(raw);
+      if (!parsed.length) { setError(chrome.errors.noCues); return; }
       setFormat(fmt);
-      setCues(parseSubtitles(raw));
+      setCues(parsed);
       setFilename(file.name);
     } catch (err) {
       setError(err instanceof Error ? err.message : chrome.errors.cantParse);

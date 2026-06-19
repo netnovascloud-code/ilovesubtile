@@ -381,10 +381,13 @@ export function ImageToBase64Client() {
   function decode() {
     setDecodeUrl(null);
     if (decodeRef.current) { URL.revokeObjectURL(decodeRef.current); decodeRef.current = null; }
-    const raw = decodeInput.trim();
+    // Strip all whitespace first so line-wrapped data URIs (common in CSS/email)
+    // still match — previously the '.' in the regex didn't span newlines, so a
+    // wrapped payload fell through and atob choked on the "data:..." prefix.
+    const raw = decodeInput.trim().replace(/\s+/g, "");
     if (!raw) return;
     const m = raw.match(/^data:(image\/[a-z0-9+\-.]+);base64,(.+)$/i);
-    const data = m ? m[2] : raw.replace(/\s+/g, "");
+    const data = m ? m[2] : raw;
     const mime = m ? m[1] : decodeMime;
     setDecodeName(`decoded.${EXT_BY_MIME[mime.toLowerCase()] ?? "bin"}`);
     try {

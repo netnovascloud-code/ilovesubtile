@@ -93,7 +93,245 @@ const FR: Strings = {
   privacy: "Traité à 100 % dans votre navigateur — vos polices ne sont jamais envoyées.",
 };
 
-const TABLE: Partial<Record<Locale, Strings>> = { en: EN, fr: FR };
+const ES: Strings = {
+  drop: "Suelta archivos de fuente o haz clic para elegir",
+  hint: "TTF · OTF · WOFF · WOFF2 — convierte varias a la vez",
+  outputFormat: "Formato de salida",
+  convert: "Convertir",
+  converting: "Convirtiendo…",
+  download: "Descargar",
+  clear: "Borrar",
+  unsupported: "Archivo no compatible (usa TTF, OTF, WOFF o WOFF2)",
+  failed: "No se pudo convertir esta fuente",
+  privacy: "100 % procesado en tu navegador: tus fuentes nunca se suben.",
+};
+
+const PT: Strings = {
+  drop: "Solte arquivos de fonte ou clique para escolher",
+  hint: "TTF · OTF · WOFF · WOFF2 — converta várias de uma vez",
+  outputFormat: "Formato de saída",
+  convert: "Converter",
+  converting: "Convertendo…",
+  download: "Baixar",
+  clear: "Limpar",
+  unsupported: "Arquivo não suportado (use TTF, OTF, WOFF ou WOFF2)",
+  failed: "Não foi possível converter esta fonte",
+  privacy: "100% processado no seu navegador — suas fontes nunca são enviadas.",
+};
+
+const DE: Strings = {
+  drop: "Schriftdateien ablegen oder zum Auswählen klicken",
+  hint: "TTF · OTF · WOFF · WOFF2 — mehrere auf einmal konvertieren",
+  outputFormat: "Ausgabeformat",
+  convert: "Konvertieren",
+  converting: "Konvertiere…",
+  download: "Herunterladen",
+  clear: "Leeren",
+  unsupported: "Nicht unterstützte Datei (nutze TTF, OTF, WOFF oder WOFF2)",
+  failed: "Diese Schrift konnte nicht konvertiert werden",
+  privacy: "100 % im Browser verarbeitet — deine Schriften werden nie hochgeladen.",
+};
+
+const IT: Strings = {
+  drop: "Trascina i file di font o clicca per scegliere",
+  hint: "TTF · OTF · WOFF · WOFF2 — convertine più di uno alla volta",
+  outputFormat: "Formato di output",
+  convert: "Converti",
+  converting: "Conversione…",
+  download: "Scarica",
+  clear: "Cancella",
+  unsupported: "File non supportato (usa TTF, OTF, WOFF o WOFF2)",
+  failed: "Impossibile convertire questo font",
+  privacy: "Elaborato al 100% nel tuo browser — i tuoi font non vengono mai caricati.",
+};
+
+const NL: Strings = {
+  drop: "Sleep lettertypebestanden of klik om te kiezen",
+  hint: "TTF · OTF · WOFF · WOFF2 — converteer er meerdere tegelijk",
+  outputFormat: "Uitvoerformaat",
+  convert: "Converteren",
+  converting: "Converteren…",
+  download: "Downloaden",
+  clear: "Wissen",
+  unsupported: "Niet-ondersteund bestand (gebruik TTF, OTF, WOFF of WOFF2)",
+  failed: "Dit lettertype kon niet worden geconverteerd",
+  privacy: "100% verwerkt in je browser — je lettertypen worden nooit geüpload.",
+};
+
+const JA: Strings = {
+  drop: "フォントファイルをドロップまたはクリックして選択",
+  hint: "TTF · OTF · WOFF · WOFF2 — 複数を一度に変換",
+  outputFormat: "出力フォーマット",
+  convert: "変換",
+  converting: "変換中…",
+  download: "ダウンロード",
+  clear: "クリア",
+  unsupported: "対応していないファイルです（TTF、OTF、WOFF、WOFF2 を使用）",
+  failed: "このフォントを変換できませんでした",
+  privacy: "100% ブラウザ内で処理 — フォントがアップロードされることはありません。",
+};
+
+const ZH: Strings = {
+  drop: "拖放字体文件或点击选择",
+  hint: "TTF · OTF · WOFF · WOFF2 — 一次转换多个",
+  outputFormat: "输出格式",
+  convert: "转换",
+  converting: "转换中…",
+  download: "下载",
+  clear: "清除",
+  unsupported: "不支持的文件（请使用 TTF、OTF、WOFF 或 WOFF2）",
+  failed: "无法转换此字体",
+  privacy: "100% 在您的浏览器中处理 — 您的字体绝不会被上传。",
+};
+
+const KO: Strings = {
+  drop: "글꼴 파일을 끌어다 놓거나 클릭하여 선택",
+  hint: "TTF · OTF · WOFF · WOFF2 — 여러 개를 한 번에 변환",
+  outputFormat: "출력 형식",
+  convert: "변환",
+  converting: "변환 중…",
+  download: "다운로드",
+  clear: "지우기",
+  unsupported: "지원하지 않는 파일입니다 (TTF, OTF, WOFF 또는 WOFF2 사용)",
+  failed: "이 글꼴을 변환할 수 없습니다",
+  privacy: "100% 브라우저에서 처리 — 글꼴은 절대 업로드되지 않습니다.",
+};
+
+const AR: Strings = {
+  drop: "أفلت ملفات الخطوط أو انقر للاختيار",
+  hint: "TTF · OTF · WOFF · WOFF2 — حوّل عدة ملفات دفعة واحدة",
+  outputFormat: "صيغة الإخراج",
+  convert: "تحويل",
+  converting: "جارٍ التحويل…",
+  download: "تنزيل",
+  clear: "مسح",
+  unsupported: "ملف غير مدعوم (استخدم TTF أو OTF أو WOFF أو WOFF2)",
+  failed: "تعذّر تحويل هذا الخط",
+  privacy: "تتم المعالجة 100% في متصفحك — لا يتم رفع خطوطك أبدًا.",
+};
+
+const RU: Strings = {
+  drop: "Перетащите файлы шрифтов или нажмите, чтобы выбрать",
+  hint: "TTF · OTF · WOFF · WOFF2 — конвертируйте несколько сразу",
+  outputFormat: "Формат вывода",
+  convert: "Конвертировать",
+  converting: "Конвертация…",
+  download: "Скачать",
+  clear: "Очистить",
+  unsupported: "Неподдерживаемый файл (используйте TTF, OTF, WOFF или WOFF2)",
+  failed: "Не удалось конвертировать этот шрифт",
+  privacy: "100% обрабатывается в вашем браузере — ваши шрифты никогда не загружаются.",
+};
+
+const HI: Strings = {
+  drop: "फ़ॉन्ट फ़ाइलें छोड़ें या चुनने के लिए क्लिक करें",
+  hint: "TTF · OTF · WOFF · WOFF2 — एक साथ कई बदलें",
+  outputFormat: "आउटपुट प्रारूप",
+  convert: "बदलें",
+  converting: "बदला जा रहा है…",
+  download: "डाउनलोड करें",
+  clear: "साफ़ करें",
+  unsupported: "असमर्थित फ़ाइल (TTF, OTF, WOFF या WOFF2 का उपयोग करें)",
+  failed: "इस फ़ॉन्ट को बदला नहीं जा सका",
+  privacy: "100% आपके ब्राउज़र में संसाधित — आपके फ़ॉन्ट कभी अपलोड नहीं होते।",
+};
+
+const TR: Strings = {
+  drop: "Yazı tipi dosyalarını bırakın veya seçmek için tıklayın",
+  hint: "TTF · OTF · WOFF · WOFF2 — birden fazlasını bir kerede dönüştürün",
+  outputFormat: "Çıktı biçimi",
+  convert: "Dönüştür",
+  converting: "Dönüştürülüyor…",
+  download: "İndir",
+  clear: "Temizle",
+  unsupported: "Desteklenmeyen dosya (TTF, OTF, WOFF veya WOFF2 kullanın)",
+  failed: "Bu yazı tipi dönüştürülemedi",
+  privacy: "%100 tarayıcınızda işlenir — yazı tipleriniz asla yüklenmez.",
+};
+
+const ID: Strings = {
+  drop: "Letakkan file font atau klik untuk memilih",
+  hint: "TTF · OTF · WOFF · WOFF2 — konversi beberapa sekaligus",
+  outputFormat: "Format keluaran",
+  convert: "Konversi",
+  converting: "Mengonversi…",
+  download: "Unduh",
+  clear: "Hapus",
+  unsupported: "File tidak didukung (gunakan TTF, OTF, WOFF, atau WOFF2)",
+  failed: "Tidak dapat mengonversi font ini",
+  privacy: "100% diproses di peramban Anda — font Anda tidak pernah diunggah.",
+};
+
+const VI: Strings = {
+  drop: "Thả tệp phông chữ hoặc nhấp để chọn",
+  hint: "TTF · OTF · WOFF · WOFF2 — chuyển đổi nhiều tệp cùng lúc",
+  outputFormat: "Định dạng đầu ra",
+  convert: "Chuyển đổi",
+  converting: "Đang chuyển đổi…",
+  download: "Tải xuống",
+  clear: "Xóa",
+  unsupported: "Tệp không được hỗ trợ (dùng TTF, OTF, WOFF hoặc WOFF2)",
+  failed: "Không thể chuyển đổi phông chữ này",
+  privacy: "Xử lý 100% trong trình duyệt của bạn — phông chữ của bạn không bao giờ được tải lên.",
+};
+
+const SV: Strings = {
+  drop: "Släpp teckensnittsfiler eller klicka för att välja",
+  hint: "TTF · OTF · WOFF · WOFF2 — konvertera flera samtidigt",
+  outputFormat: "Utdataformat",
+  convert: "Konvertera",
+  converting: "Konverterar…",
+  download: "Ladda ner",
+  clear: "Rensa",
+  unsupported: "Filformatet stöds inte (använd TTF, OTF, WOFF eller WOFF2)",
+  failed: "Det gick inte att konvertera det här teckensnittet",
+  privacy: "100 % bearbetas i din webbläsare — dina teckensnitt laddas aldrig upp.",
+};
+
+const PL: Strings = {
+  drop: "Upuść pliki czcionek lub kliknij, aby wybrać",
+  hint: "TTF · OTF · WOFF · WOFF2 — konwertuj kilka naraz",
+  outputFormat: "Format wyjściowy",
+  convert: "Konwertuj",
+  converting: "Konwertowanie…",
+  download: "Pobierz",
+  clear: "Wyczyść",
+  unsupported: "Nieobsługiwany plik (użyj TTF, OTF, WOFF lub WOFF2)",
+  failed: "Nie można przekonwertować tej czcionki",
+  privacy: "100% przetwarzane w Twojej przeglądarce — Twoje czcionki nigdy nie są przesyłane.",
+};
+
+const UK: Strings = {
+  drop: "Перетягніть файли шрифтів або натисніть, щоб вибрати",
+  hint: "TTF · OTF · WOFF · WOFF2 — конвертуйте кілька одночасно",
+  outputFormat: "Формат виводу",
+  convert: "Конвертувати",
+  converting: "Конвертація…",
+  download: "Завантажити",
+  clear: "Очистити",
+  unsupported: "Непідтримуваний файл (використовуйте TTF, OTF, WOFF або WOFF2)",
+  failed: "Не вдалося конвертувати цей шрифт",
+  privacy: "100% обробляється у вашому браузері — ваші шрифти ніколи не завантажуються.",
+};
+
+const CS: Strings = {
+  drop: "Přetáhněte soubory písem nebo klikněte pro výběr",
+  hint: "TTF · OTF · WOFF · WOFF2 — převeďte několik najednou",
+  outputFormat: "Výstupní formát",
+  convert: "Převést",
+  converting: "Převádím…",
+  download: "Stáhnout",
+  clear: "Vymazat",
+  unsupported: "Nepodporovaný soubor (použijte TTF, OTF, WOFF nebo WOFF2)",
+  failed: "Toto písmo se nepodařilo převést",
+  privacy: "100 % zpracováno ve vašem prohlížeči — vaše písma se nikdy nenahrávají.",
+};
+
+const TABLE: Partial<Record<Locale, Strings>> = {
+  en: EN, fr: FR, es: ES, pt: PT, de: DE, it: IT, nl: NL, ja: JA, zh: ZH,
+  ko: KO, ar: AR, ru: RU, hi: HI, tr: TR, id: ID, vi: VI, sv: SV, pl: PL,
+  uk: UK, cs: CS,
+};
 
 export function FontConverterClient() {
   const locale = useLocale();

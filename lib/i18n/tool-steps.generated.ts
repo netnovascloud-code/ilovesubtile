@@ -16626,6 +16626,274 @@ export const GENERATED_STEP_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       }
     ]
   },
+  "font-converter": {
+    "ar": [
+      {
+        "title": "أفلت خطوطك",
+        "body": "TTF أو OTF أو WOFF أو WOFF2 — عدة ملفات دفعة واحدة."
+      },
+      {
+        "title": "اختر صيغة الإخراج",
+        "body": "WOFF2 أو WOFF أو TTF."
+      },
+      {
+        "title": "تنزيل",
+        "body": "يتم التحويل في متصفحك، ولا يُرفع أبدًا."
+      }
+    ],
+    "cs": [
+      {
+        "title": "Přetáhněte svá písma",
+        "body": "TTF, OTF, WOFF nebo WOFF2 — několik najednou."
+      },
+      {
+        "title": "Vyberte výstup",
+        "body": "WOFF2, WOFF nebo TTF."
+      },
+      {
+        "title": "Stáhnout",
+        "body": "Převedeno ve vašem prohlížeči, nikdy se nenahrává."
+      }
+    ],
+    "de": [
+      {
+        "title": "Schriften ablegen",
+        "body": "TTF, OTF, WOFF oder WOFF2 — mehrere auf einmal."
+      },
+      {
+        "title": "Ausgabe wählen",
+        "body": "WOFF2, WOFF oder TTF."
+      },
+      {
+        "title": "Herunterladen",
+        "body": "Im Browser konvertiert, nie hochgeladen."
+      }
+    ],
+    "es": [
+      {
+        "title": "Suelta tus fuentes",
+        "body": "TTF, OTF, WOFF o WOFF2 — varias a la vez."
+      },
+      {
+        "title": "Elige la salida",
+        "body": "WOFF2, WOFF o TTF."
+      },
+      {
+        "title": "Descargar",
+        "body": "Convertido en tu navegador, nunca se sube."
+      }
+    ],
+    "fr": [
+      {
+        "title": "Déposez vos polices",
+        "body": "TTF, OTF, WOFF ou WOFF2 — plusieurs à la fois."
+      },
+      {
+        "title": "Choisissez la sortie",
+        "body": "WOFF2, WOFF ou TTF."
+      },
+      {
+        "title": "Téléchargez",
+        "body": "Converti dans votre navigateur, jamais envoyé."
+      }
+    ],
+    "hi": [
+      {
+        "title": "अपने फ़ॉन्ट छोड़ें",
+        "body": "TTF, OTF, WOFF या WOFF2 — एक साथ कई।"
+      },
+      {
+        "title": "आउटपुट चुनें",
+        "body": "WOFF2, WOFF या TTF।"
+      },
+      {
+        "title": "डाउनलोड करें",
+        "body": "आपके ब्राउज़र में बदला गया, कभी अपलोड नहीं हुआ।"
+      }
+    ],
+    "id": [
+      {
+        "title": "Letakkan font Anda",
+        "body": "TTF, OTF, WOFF, atau WOFF2 — beberapa sekaligus."
+      },
+      {
+        "title": "Pilih keluaran",
+        "body": "WOFF2, WOFF, atau TTF."
+      },
+      {
+        "title": "Unduh",
+        "body": "Dikonversi di peramban Anda, tidak pernah diunggah."
+      }
+    ],
+    "it": [
+      {
+        "title": "Trascina i tuoi font",
+        "body": "TTF, OTF, WOFF o WOFF2 — più di uno alla volta."
+      },
+      {
+        "title": "Scegli l'output",
+        "body": "WOFF2, WOFF o TTF."
+      },
+      {
+        "title": "Scarica",
+        "body": "Convertito nel tuo browser, mai caricato."
+      }
+    ],
+    "ja": [
+      {
+        "title": "フォントをドロップ",
+        "body": "TTF・OTF・WOFF・WOFF2 — 複数を一度に。"
+      },
+      {
+        "title": "出力を選ぶ",
+        "body": "WOFF2・WOFF・TTF。"
+      },
+      {
+        "title": "ダウンロード",
+        "body": "ブラウザ内で変換、アップロードは一切なし。"
+      }
+    ],
+    "ko": [
+      {
+        "title": "글꼴을 끌어다 놓기",
+        "body": "TTF, OTF, WOFF 또는 WOFF2 — 여러 개를 한 번에."
+      },
+      {
+        "title": "출력 선택",
+        "body": "WOFF2, WOFF 또는 TTF."
+      },
+      {
+        "title": "다운로드",
+        "body": "브라우저에서 변환되며 업로드되지 않습니다."
+      }
+    ],
+    "nl": [
+      {
+        "title": "Sleep je lettertypen",
+        "body": "TTF, OTF, WOFF of WOFF2 — meerdere tegelijk."
+      },
+      {
+        "title": "Kies de uitvoer",
+        "body": "WOFF2, WOFF of TTF."
+      },
+      {
+        "title": "Downloaden",
+        "body": "Geconverteerd in je browser, nooit geüpload."
+      }
+    ],
+    "pl": [
+      {
+        "title": "Upuść swoje czcionki",
+        "body": "TTF, OTF, WOFF lub WOFF2 — kilka naraz."
+      },
+      {
+        "title": "Wybierz format wyjściowy",
+        "body": "WOFF2, WOFF lub TTF."
+      },
+      {
+        "title": "Pobierz",
+        "body": "Konwertowane w Twojej przeglądarce, nigdy nieprzesyłane."
+      }
+    ],
+    "pt": [
+      {
+        "title": "Solte suas fontes",
+        "body": "TTF, OTF, WOFF ou WOFF2 — várias de uma vez."
+      },
+      {
+        "title": "Escolha a saída",
+        "body": "WOFF2, WOFF ou TTF."
+      },
+      {
+        "title": "Baixar",
+        "body": "Convertido no seu navegador, nunca enviado."
+      }
+    ],
+    "ru": [
+      {
+        "title": "Перетащите шрифты",
+        "body": "TTF, OTF, WOFF или WOFF2 — несколько сразу."
+      },
+      {
+        "title": "Выберите формат вывода",
+        "body": "WOFF2, WOFF или TTF."
+      },
+      {
+        "title": "Скачать",
+        "body": "Конвертируется в вашем браузере, никогда не загружается."
+      }
+    ],
+    "sv": [
+      {
+        "title": "Släpp dina teckensnitt",
+        "body": "TTF, OTF, WOFF eller WOFF2 — flera samtidigt."
+      },
+      {
+        "title": "Välj utdata",
+        "body": "WOFF2, WOFF eller TTF."
+      },
+      {
+        "title": "Ladda ner",
+        "body": "Konverteras i din webbläsare, laddas aldrig upp."
+      }
+    ],
+    "tr": [
+      {
+        "title": "Yazı tiplerini bırakın",
+        "body": "TTF, OTF, WOFF veya WOFF2 — aynı anda birden fazla."
+      },
+      {
+        "title": "Çıktıyı seçin",
+        "body": "WOFF2, WOFF veya TTF."
+      },
+      {
+        "title": "İndir",
+        "body": "Tarayıcınızda dönüştürülür, asla yüklenmez."
+      }
+    ],
+    "uk": [
+      {
+        "title": "Перетягніть свої шрифти",
+        "body": "TTF, OTF, WOFF або WOFF2 — кілька одночасно."
+      },
+      {
+        "title": "Виберіть формат виводу",
+        "body": "WOFF2, WOFF або TTF."
+      },
+      {
+        "title": "Завантажити",
+        "body": "Конвертується у вашому браузері, ніколи не завантажується."
+      }
+    ],
+    "vi": [
+      {
+        "title": "Thả phông chữ của bạn",
+        "body": "TTF, OTF, WOFF hoặc WOFF2 — nhiều tệp cùng lúc."
+      },
+      {
+        "title": "Chọn định dạng đầu ra",
+        "body": "WOFF2, WOFF hoặc TTF."
+      },
+      {
+        "title": "Tải xuống",
+        "body": "Được chuyển đổi trong trình duyệt của bạn, không bao giờ tải lên."
+      }
+    ],
+    "zh": [
+      {
+        "title": "拖入你的字体",
+        "body": "TTF、OTF、WOFF 或 WOFF2 — 一次多个。"
+      },
+      {
+        "title": "选择输出格式",
+        "body": "WOFF2、WOFF 或 TTF。"
+      },
+      {
+        "title": "下载",
+        "body": "在你的浏览器中转换，绝不上传。"
+      }
+    ]
+  },
   "qr-generator": {
     "ar": [
       {

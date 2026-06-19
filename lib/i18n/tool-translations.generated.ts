@@ -13672,6 +13672,57 @@ export const GENERATED_TOOL_TRANSLATIONS: Record<string, Partial<Record<Locale, 
       "metaDescription": "在浏览器中上传图像或使用设备相机解码二维码。免费、私密 — 您的图像不会被上传。"
     }
   },
+  "font-converter": {
+    "cs": {
+      "name": "Převodník písem",
+      "short": "Převádějte písma mezi TTF, OTF, WOFF a WOFF2.",
+      "h1": "Online převodník písem — TTF, OTF, WOFF a WOFF2 zdarma",
+      "metaTitle": "Online převodník písem — TTF / OTF / WOFF / WOFF2 zdarma | Konvertools",
+      "metaDescription": "Převádějte soubory písem mezi TTF, OTF, WOFF a WOFF2 přímo v prohlížeči. Několik najednou — zdarma, soukromě, vaše písma se nikdy nenahrávají."
+    },
+    "id": {
+      "name": "Konverter Font",
+      "short": "Konversi font antara TTF, OTF, WOFF, dan WOFF2.",
+      "h1": "Konverter Font Online — TTF, OTF, WOFF & WOFF2 Gratis",
+      "metaTitle": "Konverter Font Online — TTF / OTF / WOFF / WOFF2 Gratis | Konvertools",
+      "metaDescription": "Konversi file font antara TTF, OTF, WOFF, dan WOFF2 langsung di peramban Anda. Beberapa sekaligus — gratis, privat, font Anda tidak pernah diunggah."
+    },
+    "pl": {
+      "name": "Konwerter czcionek",
+      "short": "Konwertuj czcionki między TTF, OTF, WOFF i WOFF2.",
+      "h1": "Konwerter czcionek online — TTF, OTF, WOFF i WOFF2 za darmo",
+      "metaTitle": "Konwerter czcionek online — TTF / OTF / WOFF / WOFF2 za darmo | Konvertools",
+      "metaDescription": "Konwertuj pliki czcionek między TTF, OTF, WOFF i WOFF2 bezpośrednio w przeglądarce. Kilka naraz — za darmo, prywatnie, Twoje czcionki nigdy nie są przesyłane."
+    },
+    "sv": {
+      "name": "Teckensnittskonverterare",
+      "short": "Konvertera teckensnitt mellan TTF, OTF, WOFF och WOFF2.",
+      "h1": "Teckensnittskonverterare online — TTF, OTF, WOFF & WOFF2 gratis",
+      "metaTitle": "Teckensnittskonverterare online — TTF / OTF / WOFF / WOFF2 gratis | Konvertools",
+      "metaDescription": "Konvertera teckensnittsfiler mellan TTF, OTF, WOFF och WOFF2 direkt i webbläsaren. Flera samtidigt — gratis, privat, dina teckensnitt laddas aldrig upp."
+    },
+    "tr": {
+      "name": "Yazı Tipi Dönüştürücü",
+      "short": "Yazı tiplerini TTF, OTF, WOFF ve WOFF2 arasında dönüştürün.",
+      "h1": "Çevrimiçi Yazı Tipi Dönüştürücü — TTF, OTF, WOFF & WOFF2 Ücretsiz",
+      "metaTitle": "Çevrimiçi Yazı Tipi Dönüştürücü — TTF / OTF / WOFF / WOFF2 Ücretsiz | Konvertools",
+      "metaDescription": "Yazı tipi dosyalarını doğrudan tarayıcınızda TTF, OTF, WOFF ve WOFF2 arasında dönüştürün. Aynı anda birden fazla — ücretsiz, gizli, yazı tipleriniz asla yüklenmez."
+    },
+    "uk": {
+      "name": "Конвертер шрифтів",
+      "short": "Конвертуйте шрифти між TTF, OTF, WOFF і WOFF2.",
+      "h1": "Конвертер шрифтів онлайн — TTF, OTF, WOFF і WOFF2 безкоштовно",
+      "metaTitle": "Конвертер шрифтів онлайн — TTF / OTF / WOFF / WOFF2 безкоштовно | Konvertools",
+      "metaDescription": "Конвертуйте файли шрифтів між TTF, OTF, WOFF і WOFF2 прямо у браузері. Кілька одночасно — безкоштовно, приватно, ваші шрифти ніколи не завантажуються."
+    },
+    "vi": {
+      "name": "Trình chuyển đổi phông chữ",
+      "short": "Chuyển đổi phông chữ giữa TTF, OTF, WOFF và WOFF2.",
+      "h1": "Trình chuyển đổi phông chữ trực tuyến — TTF, OTF, WOFF & WOFF2 miễn phí",
+      "metaTitle": "Trình chuyển đổi phông chữ trực tuyến — TTF / OTF / WOFF / WOFF2 miễn phí | Konvertools",
+      "metaDescription": "Chuyển đổi tệp phông chữ giữa TTF, OTF, WOFF và WOFF2 ngay trong trình duyệt của bạn. Nhiều tệp cùng lúc — miễn phí, riêng tư, phông chữ của bạn không bao giờ được tải lên."
+    }
+  },
   "qr-generator": {
     "cs": {
       "name": "Generátor QR kódu",

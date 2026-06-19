@@ -101,6 +101,8 @@ Deno.serve(async (req) => {
       userId = data.user?.id ?? null;
     } catch { /* anon */ }
   }
+  // No anonymous AI: the vision tools require a signed-in user.
+  if (!userId) return json({ error: "auth_required", message: "Sign in to use the AI tools." }, { status: 401 });
   // Restores the pre-charged quota slot if the model call fails (mirrors
   // ai-process). Best-effort, fail-open.
   let refundQuota: () => Promise<void> = async () => {};

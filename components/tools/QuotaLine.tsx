@@ -33,11 +33,12 @@ export function QuotaLine() {
   }
 
   if (!user) {
+    // No anonymous AI: logged-out visitors must sign in (free account) to use
+    // the AI/edge tools — enforced server-side in the AI Edge Functions.
     return (
       <p className="mt-3 text-sm text-ink-400">
-        {t.quotaAnonPrefix}{" "}
         <Link href="/login" className="text-brand-600 hover:underline">
-          {t.quotaAnonLink}
+          {t.quotaAnonRequire ?? "Sign in to use the AI tools — free account"}
         </Link>
       </p>
     );

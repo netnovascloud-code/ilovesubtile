@@ -361,6 +361,8 @@ export type CommonUi = {
   width: string; height: string; lockRatio: string; quality: string; rotate: string; conversionFailed: string;
   privacyFiles: string; privacyImage: string; privacyFfmpeg: string; privacyText: string;
   quotaAnonPrefix: string; quotaAnonLink: string; quotaFreePrefix: string; quotaFreeLink: string; unlimited: string;
+  /** Anonymous notice for AI/edge tools — login is required (optional; falls back to EN). */
+  quotaAnonRequire?: string;
   tplUpgrade: string; tplUpgradeSuffix: string; tplMine: string; tplNone: string; tplSave: string; tplSaving: string; tplNamePrompt: string;
 };
 
@@ -372,6 +374,7 @@ const cEn: CommonUi = {
   width: "Width", height: "Height", lockRatio: "Lock ratio", quality: "Quality", rotate: "Rotate", conversionFailed: "Conversion failed",
   privacyFiles: "🔒 Your files are deleted automatically after download. Never stored, never shared.", privacyImage: "100% in your browser — your image is never uploaded. Free and unlimited.", privacyFfmpeg: "Processed 100% in your browser via FFmpeg WebAssembly — your file is never uploaded.", privacyText: "100% in your browser — nothing is uploaded. Free and unlimited, no account needed.",
   quotaAnonPrefix: "2 free AI runs/day —", quotaAnonLink: "Sign in for 5", quotaFreePrefix: "Free plan: 5 AI runs/day —", quotaFreeLink: "Go Pro for 500/month", unlimited: "Unlimited",
+  quotaAnonRequire: "Sign in to use the AI tools — free account",
   tplUpgrade: "Upgrade to Pro", tplUpgradeSuffix: "to save your settings as reusable templates.", tplMine: "My templates", tplNone: "No templates yet.", tplSave: "Save current", tplSaving: "Saving…", tplNamePrompt: "Name this template:",
 };
 const cFr: CommonUi = {
@@ -382,6 +385,7 @@ const cFr: CommonUi = {
   width: "Largeur", height: "Hauteur", lockRatio: "Verrouiller le ratio", quality: "Qualité", rotate: "Pivoter", conversionFailed: "Échec de la conversion",
   privacyFiles: "🔒 Vos fichiers sont supprimés automatiquement après le téléchargement. Jamais stockés, jamais partagés.", privacyImage: "100 % dans votre navigateur — votre image n'est jamais téléversée. Gratuit et illimité.", privacyFfmpeg: "Traité à 100 % dans votre navigateur via FFmpeg WebAssembly — votre fichier n'est jamais téléversé.", privacyText: "100 % dans votre navigateur — rien n'est téléversé. Gratuit et illimité, sans compte.",
   quotaAnonPrefix: "2 utilisations IA gratuites/jour —", quotaAnonLink: "Connectez-vous pour 5", quotaFreePrefix: "Offre gratuite : 5 utilisations IA/jour —", quotaFreeLink: "Passez Pro pour 500/mois", unlimited: "Illimité",
+  quotaAnonRequire: "Connectez-vous pour utiliser les outils IA — compte gratuit",
   tplUpgrade: "Passer à Pro", tplUpgradeSuffix: "pour enregistrer vos réglages comme modèles réutilisables.", tplMine: "Mes modèles", tplNone: "Aucun modèle pour l'instant.", tplSave: "Enregistrer", tplSaving: "Enregistrement…", tplNamePrompt: "Nommez ce modèle :",
 };
 const cEs: CommonUi = {

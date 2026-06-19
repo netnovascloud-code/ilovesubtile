@@ -1,8 +1,10 @@
 import { getSupabaseServer } from "@/lib/supabase/server";
 
-/** Per-plan daily run cap on tools that hit the backend. */
+/** Per-plan daily run cap on tools that hit the backend. Anonymous = 0: the
+ *  AI tools require a (free) account — no AI request is served to logged-out
+ *  visitors (enforced server-side in the AI Edge Functions). */
 export const DAILY_LIMITS = {
-  anonymous: 2,
+  anonymous: 0,
   free: 2,
   pro: Infinity,
   business: Infinity,

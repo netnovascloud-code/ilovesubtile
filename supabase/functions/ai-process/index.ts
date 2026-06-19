@@ -205,6 +205,15 @@ Deno.serve(async (req) => {
     } catch { /* anon */ }
   }
 
+  // No anonymous AI: every PUBLIC task requires a signed-in user. The internal
+  // generation tasks (i18n-tool / i18n-category / translate-legal) are run by the
+  // fill scripts with the public anon key, so they stay exempt (and remain
+  // IP-rate-limited below).
+  const INTERNAL_TASKS = new Set(["i18n-tool", "i18n-category", "translate-legal"]);
+  if (!userId && !INTERNAL_TASKS.has(task)) {
+    return json({ error: "auth_required", message: "Sign in to use the AI tools." }, { status: 401 });
+  }
+
   // If we pre-charge a quota slot below, this restores it when the model call
   // fails — a failed run must never count against the user's daily/monthly cap.
   // Best-effort and fail-open, mirroring the increment itself.

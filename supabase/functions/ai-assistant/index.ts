@@ -67,6 +67,9 @@ Deno.serve(async (req) => {
     } catch { /* anon */ }
   }
 
+  // No anonymous AI: the assistant requires a signed-in user.
+  if (!userId) return json({ error: "auth_required", message: "Sign in to use the AI tools." }, { status: 401 });
+
   // Restores the pre-charged slot if the model call fails. Best-effort, fail-open.
   let refundQuota: () => Promise<void> = async () => {};
   if (userId) {

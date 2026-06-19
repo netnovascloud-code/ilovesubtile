@@ -496,6 +496,8 @@ Deno.serve(async (req) => {
     const text = (body.text ?? "").trim();
     if (!text) return json({ error: "bad_request", message: "Paste the email content." }, { status: 400 });
     if (text.length > 40_000) return json({ error: "text_too_long" }, { status: 413 });
+    // No anonymous AI: the phishing detector uses Mistral, so it requires login.
+    if (!userId) return json({ error: "auth_required", message: "Sign in to use the phishing detector." }, { status: 401 });
     // Anonymous callers (no signed-in user) aren't covered by enforceBucket —
     // cap them per client IP so the public anon key can't drive unlimited
     // Mistral phishing analyses from outside the browser. Fail-open on error.

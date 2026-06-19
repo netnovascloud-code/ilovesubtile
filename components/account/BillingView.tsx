@@ -8,7 +8,7 @@ import { SubscriptionActions } from "@/components/billing/SubscriptionActions";
 import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { AiUsageCard } from "@/components/billing/AiUsageCard";
 import { CreditHistoryCard } from "@/components/billing/CreditHistoryCard";
-import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2, CreditCard } from "lucide-react";
 import { PLANS, type PlanKey } from "@/lib/plans";
 import { BUSINESS_MONTHLY_CREDITS } from "@/lib/credits";
 import { getBilling } from "@/lib/i18n/account";
@@ -137,6 +137,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
               {plan === "free" && (
                 <div className="mt-4">
                   <Link href={localePath(locale, "pricing")} prefetch={false}><Button>{s.seePlans}</Button></Link>
+                  <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-400"><CreditCard className="h-3.5 w-3.5" /> {s.manageAfterSub}</p>
                 </div>
               )}
             </CardContent>

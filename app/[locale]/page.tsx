@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
-import { LivePresence } from "@/components/home/LivePresence";
 import { LiveConversions } from "@/components/home/LiveConversions";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
@@ -100,7 +99,6 @@ export default function LocaleHome({ params }: { params: { locale: string } }) {
       <div className="container pb-8">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           <LiveConversions locale={locale} />
-          <LivePresence locale={locale} />
         </div>
       </div>
 

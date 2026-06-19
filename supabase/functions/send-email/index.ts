@@ -6,10 +6,13 @@
 //   • Anonymous calls (no Authorization at all) → 401.
 //
 // This prevents the previous abuse vector where any signed-in user could send
-// arbitrary emails from hello@konvertools.com to any recipient.
+// arbitrary emails from the sender address to any recipient.
 //
 // Deploy: supabase functions deploy send-email
 // Secrets: RESEND_API_KEY, SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+// Optional: RESEND_FROM (sender, e.g. "Konvertools <no-reply@konvertools.com>").
+//   Whatever you use must be a VERIFIED domain/sender in your Resend account,
+//   otherwise Resend returns 422 and the send fails.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -125,7 +128,7 @@ Deno.serve(async (req) => {
     method: "POST",
     headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "Konvertools <no-reply@konvertools.com>",
+      from: Deno.env.get("RESEND_FROM") ?? "Konvertools <no-reply@konvertools.com>",
       to: body.to,
       subject: tpl.subject,
       html: tpl.html,

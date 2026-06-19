@@ -32,6 +32,7 @@ export type BillingStrings = {
   compedTitle: (plan: string) => string;
   compedBody: string;
   seePlans: string;
+  manageAfterSub: string;
   whatsIncluded: (plan: string) => string;
   businessCreditsNote: (n: string) => string;
   apiCredits: string;
@@ -91,6 +92,7 @@ const en: BillingStrings = {
   compedTitle: (p) => `Your ${p} plan is active.`,
   compedBody: "It was granted directly on your account, so there's no payment method or invoice to manage here.",
   seePlans: "See plans",
+  manageAfterSub: "Once you subscribe, manage your payment method, invoices and cancellation right here.",
   whatsIncluded: (p) => `What's included in ${p}`,
   businessCreditsNote: (n) => `Business includes ${n} API credits every month (reset on the 1st), on top of any credit packs you buy.`,
   apiCredits: "API credits",
@@ -147,6 +149,7 @@ const fr: BillingStrings = {
   compedTitle: (p) => `Votre offre ${p} est active.`,
   compedBody: "Elle a été accordée directement sur votre compte : il n'y a donc ni moyen de paiement ni facture à gérer ici.",
   seePlans: "Voir les offres",
+  manageAfterSub: "Une fois abonné, gérez votre moyen de paiement, vos factures et la résiliation directement ici.",
   whatsIncluded: (p) => `Ce qui est inclus dans ${p}`,
   businessCreditsNote: (n) => `Business inclut ${n} crédits API chaque mois (réinitialisés le 1er), en plus des packs de crédits que vous achetez.`,
   apiCredits: "Crédits API",

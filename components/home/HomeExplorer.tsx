@@ -27,7 +27,7 @@ export type HomeStrings = {
 // Max columns shown in a one-row category preview (matches the grid's widest
 // breakpoint). The grid below clips to exactly the column count per screen size,
 // so a category always previews a single clean row; "see all" opens the rest.
-const PREVIEW_PER_CATEGORY = 7;
+const PREVIEW_PER_CATEGORY = 6;
 
 const SYNONYMS: Record<string, string[]> = {
   photo: ["image"], photos: ["image"], picture: ["image"], pic: ["image"],
@@ -207,16 +207,11 @@ export function HomeExplorer({
                         </button>
                       )}
                     </div>
-                    {/* One row per screen size: the grid clips to exactly the column
-                        count at each breakpoint (2→3→4→5→6→7); the rest live behind
-                        "see all". */}
-                    <div className="mt-5 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 min-[2400px]:grid-cols-7
-                      [&>*:nth-child(n+3)]:hidden
-                      md:[&>*:nth-child(-n+3)]:block md:[&>*:nth-child(n+4)]:hidden
-                      lg:[&>*:nth-child(-n+4)]:block lg:[&>*:nth-child(n+5)]:hidden
-                      2xl:[&>*:nth-child(-n+5)]:block 2xl:[&>*:nth-child(n+6)]:hidden
-                      min-[1800px]:[&>*:nth-child(-n+6)]:block min-[1800px]:[&>*:nth-child(n+7)]:hidden
-                      min-[2400px]:[&>*:nth-child(-n+7)]:block">
+                    {/* A full preview row per category: up to PREVIEW_PER_CATEGORY
+                        tools in a clean responsive grid (2 / 3 / 6 columns — each
+                        divides PREVIEW evenly so every breakpoint shows full rows);
+                        the rest live behind "see all". */}
+                    <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                       {preview.map((t) => <Card key={t.slug} t={t} />)}
                     </div>
                   </div>

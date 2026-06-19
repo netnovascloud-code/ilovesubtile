@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Heart, ShieldCheck, Sparkles, GitBranch, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HomeExplorer } from "@/components/home/HomeExplorer";
-import { LivePresence } from "@/components/home/LivePresence";
 import { LiveConversions } from "@/components/home/LiveConversions";
 import { TOOLS, CATEGORIES, toCardSpec } from "@/lib/tools-config";
 import { toolKeywords } from "@/lib/keywords";
@@ -54,7 +53,6 @@ export default function Home() {
       <div className="container pb-8">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           <LiveConversions locale="en" />
-          <LivePresence locale="en" />
         </div>
       </div>
 

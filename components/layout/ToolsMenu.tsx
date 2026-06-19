@@ -2,20 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Sparkles, GitBranch, Layers, Languages, WandSparkles, Eraser, FileDown } from "lucide-react";
+import { ChevronDown, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { localePath, type Locale } from "@/lib/i18n/locales";
 import { getChrome } from "@/lib/i18n/chrome";
 
 // Icons + hrefs are static; labels/descriptions come from the locale dict
 // (chrome.toolsMenu) so the whole mega-menu is translated.
-const FEATURED: { icon: typeof Sparkles; href: string; key: keyof ReturnType<typeof getChrome>["toolsMenu"]["featuredItems"] }[] = [
-  { icon: GitBranch, href: "/workflow", key: "workflow" },
-  { icon: Layers, href: "/batch", key: "batch" },
-  { icon: Languages, href: "/translator", key: "translator" },
-  { icon: WandSparkles, href: "/ai-humanizer", key: "humanizer" },
-  { icon: Eraser, href: "/remove-background", key: "removeBg" },
-  { icon: FileDown, href: "/merge-pdf", key: "mergePdf" },
+const FEATURED: { emoji: string; href: string; key: keyof ReturnType<typeof getChrome>["toolsMenu"]["featuredItems"] }[] = [
+  { emoji: "🔗", href: "/workflow", key: "workflow" },
+  { emoji: "📦", href: "/batch", key: "batch" },
+  { emoji: "🌐", href: "/translator", key: "translator" },
+  { emoji: "🪄", href: "/ai-humanizer", key: "humanizer" },
+  { emoji: "✂️", href: "/remove-background", key: "removeBg" },
+  { emoji: "📄", href: "/merge-pdf", key: "mergePdf" },
 ];
 
 const NEW: { href: string; key: keyof ReturnType<typeof getChrome>["toolsMenu"]["newItems"] }[] = [
@@ -72,10 +72,10 @@ export function ToolsMenu({
                 <Sparkles className="h-3 w-3" /> {tm.featured}
               </p>
               <div className="grid grid-cols-2 gap-1">
-                {FEATURED.map(({ icon: Icon, href, key }) => (
+                {FEATURED.map(({ emoji, href, key }) => (
                   // workflow / batch now have localised routes; the rest keep their href.
                   <Link key={href} href={href === "/workflow" || href === "/batch" ? localePath(locale, href.slice(1)) : href} onClick={() => setOpen(false)} className="group flex items-start gap-2 rounded-lg p-2 transition-colors hover:bg-ink-50">
-                    <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-50 text-brand-600"><Icon className="h-3.5 w-3.5" /></span>
+                    <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-brand-50 text-base leading-none">{emoji}</span>
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium text-ink-900">{tm.featuredItems[key].label}</span>
                       <span className="block truncate text-[11px] text-ink-400">{tm.featuredItems[key].desc}</span>

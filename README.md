@@ -1,6 +1,55 @@
 # CaptionFlow
 
+[![CI](https://github.com/netnovascloud-code/ilovesubtile/actions/workflows/ci.yml/badge.svg)](https://github.com/netnovascloud-code/ilovesubtile/actions/workflows/ci.yml)
+
 Free online subtitle tools, built like iLovePDF — one focused page per tool, drop your file, get your result.
+
+## Testing & CI
+
+Run locally:
+
+```bash
+npm run test:run     # run the tests once (CI mode)
+npm test             # watch mode
+npm run typecheck    # tsc --noEmit
+npm run lint         # next lint
+```
+
+The suite tests the **real** logic behind the four critical flows. Edge Functions
+run on Deno, so their environment-agnostic logic is extracted into shared modules
+(`supabase/functions/_shared/`) that both the Deno function **and** the Node tests
+import — we test the production code, not a copy. Each suite has success **and**
+rejection/failure-detection cases.
+
+| Area (file) | What's covered |
+| --- | --- |
+| `tests/credits.test.ts` | Credit cost math (`lib/credits.ts`): transcribe per-minute rounding, translate per-1k-words, short/long tiers, word count. |
+| `tests/plan-limits.test.ts` | Per-plan upload caps (`lib/plan-limits.ts`) + AI quota resolver (`lib/ai-quotas.ts`): Free 20 MB / Pro 1 GB / Business 5 GB, anon-2 vs free-5, daily vs monthly. |
+| `tests/ls-signature.test.ts` | Lemon Squeezy webhook HMAC (`_shared/ls-signature.ts`, used by `lemonsqueezy-webhook`): valid passes; tampered / forged / missing signature rejected. |
+| `tests/api-key.test.ts` | API-key SHA-256 + format + usability (`_shared/api-key.ts`, used by `api-gateway`): random / revoked / not-found rejected. |
+
+CI (`.github/workflows/ci.yml`) runs `npm ci → typecheck → lint → test:run` on every
+push and PR to `main`. **The current tests need no secrets** (pure logic + Node
+crypto), so CI runs with zero configuration.
+
+### Gating the Vercel deploy on CI
+
+Vercel auto-deploys on push, independently of GitHub Actions. To block a deploy
+when tests fail: either (a) in Vercel → Settings → Git set the **Production Branch**
+to `main` and enable *"Only deploy if checks pass"*, or (b) disable Vercel's auto
+git-deploy and deploy from the workflow with the Vercel CLI (`VERCEL_TOKEN` secret)
+after the tests pass.
+
+### Not yet wired (needs infrastructure you provision)
+
+- **Full DB-integration tests** (the `spend_credits` / `api_rate_hit` RPCs, webhook
+  writes to `profiles`, idempotence, the monthly reset, the concurrent double-spend
+  race) need a **dedicated test Supabase project** — never run them against prod.
+  Add GitHub Secrets `SUPABASE_TEST_URL` + `SUPABASE_TEST_SERVICE_ROLE_KEY`; mock
+  Mistral and Lemon Squeezy so no real credits/payments are consumed.
+- **Sentry** needs a Sentry project DSN (`NEXT_PUBLIC_SENTRY_DSN`, plus
+  `SENTRY_AUTH_TOKEN` for source maps) before the SDK is wired into the app and the
+  Edge Functions.
 
 This repository is the **scaffold**: every page exists, every route is reachable, all SEO metadata (JSON-LD `SoftwareApplication`, `FAQPage`, `BreadcrumbList`, hreflang) is in place. Five of the JS-only tools are fully functional in the browser today. The rest need a backend to be wired up.
 

@@ -1,0 +1,30 @@
+name: CI
+
+# Runs on every push to main and every PR into main. typecheck + lint + tests
+# must all pass. The current test suite is pure (no DB/secrets), so it runs
+# anywhere with zero configuration. See README "Testing" for how to gate the
+# Vercel production deploy on this workflow.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: typecheck · lint · tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install (deterministic)
+        run: npm ci
+      - name: Type-check
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Tests
+        run: npm run test:run

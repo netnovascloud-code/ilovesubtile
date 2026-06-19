@@ -20,33 +20,15 @@
 //   https://<project>.supabase.co/functions/v1/lemonsqueezy-webhook
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+// Signature verification lives in a shared module so it's exercised by the Node
+// test suite (tests/ls-signature.test.ts) — same code, single source of truth.
+import { verifySignature } from "../_shared/ls-signature.ts";
 
 function json(body: unknown, init: ResponseInit = {}) {
   return new Response(JSON.stringify(body), { ...init, headers: { "Content-Type": "application/json", ...(init.headers ?? {}) } });
 }
 function getServiceClient() {
   return createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-}
-
-const enc = new TextEncoder();
-
-/** Constant-time hex compare. */
-function timingSafeEqualHex(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
-}
-
-/** Verify X-Signature = hex(HMAC-SHA256(rawBody, secret)). */
-async function verifySignature(rawBody: string, signature: string, secret: string): Promise<boolean> {
-  if (!signature) return false;
-  const keyData = await crypto.subtle.importKey(
-    "raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
-  );
-  const mac = await crypto.subtle.sign("HMAC", keyData, enc.encode(rawBody));
-  const expected = [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, "0")).join("");
-  return timingSafeEqualHex(expected, signature.trim().toLowerCase());
 }
 
 type LsCustom = { user_id?: string; kind?: string; plan?: string; pack?: string; credits?: string };

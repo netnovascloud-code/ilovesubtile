@@ -16,6 +16,9 @@
 // Deploy: supabase functions deploy api-gateway --no-verify-jwt
 // Secret: MISTRAL_API_KEY
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+// Key hashing + validation rules live in a shared module so they're exercised by
+// the Node test suite (tests/api-key.test.ts) — same code, single source of truth.
+import { sha256Hex, isValidApiKeyFormat, isKeyUsable } from "../_shared/api-key.ts";
 
 const BUY_CREDITS_URL = "https://konvertools.com/pricing";
 
@@ -42,10 +45,6 @@ function corsFor(req: Request): Record<string, string> {
     "Access-Control-Allow-Headers": "authorization, content-type",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   };
-}
-async function sha256(s: string): Promise<string> {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 /** Validate a single URL against the SSRF denylist. Throws on rejection. */
@@ -239,10 +238,10 @@ Deno.serve(async (req) => {
   // Accept the current knv_ prefix and the legacy wyr_ / cf_ prefixes (keys
   // issued before the Konvertools rename / pre-Wyrlo CaptionFlow era). Validation
   // is hash-based, so old keys keep working.
-  if (!/^(knv|wyr|cf)_/.test(raw)) return err("missing_api_key", "Send Authorization: Bearer knv_live_…", 401);
-  const hash = await sha256(raw);
+  if (!isValidApiKeyFormat(raw)) return err("missing_api_key", "Send Authorization: Bearer knv_live_…", 401);
+  const hash = await sha256Hex(raw);
   const { data: keyRow } = await svc.from("api_keys").select("id, user_id, revoked").eq("key_hash", hash).maybeSingle();
-  if (!keyRow || keyRow.revoked) return err("invalid_api_key", "API key not found or revoked.", 401);
+  if (!isKeyUsable(keyRow)) return err("invalid_api_key", "API key not found or revoked.", 401);
   const userId = keyRow.user_id as string;
   await svc.from("api_keys").update({ last_used_at: new Date().toISOString() }).eq("id", keyRow.id);
 

@@ -11,21 +11,23 @@ import { type Locale } from "@/lib/i18n/locales";
 type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: string; scope?: string; status?: number };
 
 /**
- * Subscription self-service for active subscribers: open the Lemon Squeezy
- * customer portal, or jump straight to the "change payment method" page. Both
- * URLs come from the same `lemonsqueezy-portal` Edge Function, which fetches the
- * subscription server-side (LS API key never leaves the function) and returns
- * fresh, signed, ~24h URLs — so we fetch on every click and never store them.
+ * Subscription self-service: open the Lemon Squeezy customer portal, or jump
+ * straight to the "change payment method" page. Both URLs come from the
+ * `lemonsqueezy-portal` Edge Function (LS key never leaves the server). When the
+ * caller has no active subscription, that's a calm, expected state — shown as a
+ * neutral note ("No active subscription"), not a red error.
  */
 export function SubscriptionActions({ locale, customerOnly = false }: { locale: Locale; customerOnly?: boolean }) {
   const s = getBilling(locale);
   // Track which action is in-flight so the two buttons spin independently.
   const [busy, setBusy] = useState<"portal" | "card" | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
   async function go(kind: "portal" | "card") {
     setBusy(kind);
     setError(null);
+    setInfo(null);
     try {
       const supabase = getSupabaseBrowser();
       const { data: { session } } = await supabase.auth.getSession();
@@ -38,11 +40,11 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
       const target = kind === "portal" ? body.url : (body.updatePaymentMethodUrl ?? body.url);
       if (!res.ok || !target) {
         // "No subscription" is a calm, expected state (comped plan / one-time
-        // buyer with no recurring payment). Real failures keep a diagnostic.
+        // buyer with no recurring payment) → neutral note. Real failures → error.
         const calm = body.error === "no_subscription" || body.error === "no_billing_account" || body.error === "no_subscription_portal";
-        const base = calm ? s.noSubscriptionError : s.portalError;
-        const diag = !calm && body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
-        setError(base + diag);
+        if (calm) { setInfo(s.noSubscriptionError); return; }
+        const diag = body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
+        setError(s.portalError + diag);
         return;
       }
       window.location.href = target;
@@ -53,9 +55,16 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
     }
   }
 
-  // Customer-only (no active subscription, but a Lemon Squeezy customer that
-  // bought credit packs / has a comped plan): one button → the customer portal,
-  // where they can update their card and download receipts.
+  const messages = (
+    <>
+      {info && <p className="mt-2 text-xs text-ink-500">{info}</p>}
+      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+    </>
+  );
+
+  // Customer-only (no recorded subscription, but a Lemon Squeezy customer): one
+  // button → the portal. The Edge Function still checks LS for a real
+  // subscription first; if none, it shows the neutral "no subscription" note.
   if (customerOnly) {
     return (
       <div>
@@ -63,7 +72,7 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
           <CreditCard className="mr-1.5 h-4 w-4" />
           {busy === "portal" ? s.opening : s.managePortal}
         </Button>
-        {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+        {messages}
       </div>
     );
   }
@@ -80,7 +89,7 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
           {busy === "portal" ? s.opening : s.managePortal}
         </Button>
       </div>
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {messages}
     </div>
   );
 }

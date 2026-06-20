@@ -64,13 +64,39 @@ Deno.serve(async (req) => {
   const { data: profile } = await supabase
     .from("profiles").select("ls_subscription_id, ls_customer_id").eq("id", caller.id).maybeSingle();
 
+  const lsHeaders = { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" };
+
   try {
-    // 1) Active subscription → the subscription portal (manage card, switch plan,
-    //    invoices, cancel). Returns both the portal and the direct change-card URL.
-    if (profile?.ls_subscription_id) {
-      const res = await fetch(`${LS_API}/subscriptions/${profile.ls_subscription_id}`, {
-        headers: { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" },
-      });
+    let subId = profile?.ls_subscription_id ?? null;
+
+    // Self-heal: no recorded subscription but we know the LS customer → ask LS
+    // directly (covers a missed/failed subscription_created webhook). If found,
+    // backfill the profile so the billing page shows the right state next load.
+    if (!subId && profile?.ls_customer_id) {
+      const res = await fetch(`${LS_API}/subscriptions?filter[customer_id]=${profile.ls_customer_id}`, { headers: lsHeaders });
+      const body = await res.json();
+      if (!res.ok) {
+        console.error("LS subscriptions list failed", res.status, JSON.stringify(body).slice(0, 400));
+      } else {
+        const subs = Array.isArray(body?.data) ? body.data : [];
+        const LIVE = ["active", "on_trial", "past_due", "unpaid", "paused", "cancelled"];
+        const pick = subs.find((sub: { attributes?: { status?: string } }) => LIVE.includes(sub?.attributes?.status ?? "")) ?? subs[0] ?? null;
+        if (pick?.id) {
+          subId = String(pick.id);
+          try {
+            await supabase.from("profiles").update({
+              ls_subscription_id: subId,
+              ls_subscription_status: pick.attributes?.status ?? null,
+              ls_renews_at: pick.attributes?.renews_at ?? null,
+            }).eq("id", caller.id);
+          } catch { /* best-effort backfill */ }
+        }
+      }
+    }
+
+    // Subscription portal (manage card, switch plan, invoices, cancel).
+    if (subId) {
+      const res = await fetch(`${LS_API}/subscriptions/${subId}`, { headers: lsHeaders });
       const body = await res.json();
       if (!res.ok) {
         console.error("LS subscription fetch failed", res.status, JSON.stringify(body).slice(0, 400));
@@ -79,34 +105,14 @@ Deno.serve(async (req) => {
       const urls = body?.data?.attributes?.urls ?? {};
       const portal = urls.customer_portal ?? null;
       const updatePaymentMethodUrl = urls.update_payment_method ?? null;
-      if (!portal && !updatePaymentMethodUrl) return json({ error: "no_portal_url", scope: "subscription" }, { status: 502 });
+      if (!portal && !updatePaymentMethodUrl) return json({ error: "no_subscription_portal", scope: "subscription" }, { status: 502 });
       return json({ url: portal, updatePaymentMethodUrl });
     }
 
-    // 2) No subscription but a known Lemon Squeezy customer (e.g. a comped plan
-    //    that bought credit packs, or a one-off pack buyer on Free). The CUSTOMER
-    //    portal still lets them update their payment method and download every
-    //    receipt — so we surface it instead of saying "nothing to manage".
-    if (profile?.ls_customer_id) {
-      const res = await fetch(`${LS_API}/customers/${profile.ls_customer_id}`, {
-        headers: { "Authorization": `Bearer ${key}`, "Accept": "application/vnd.api+json" },
-      });
-      const body = await res.json();
-      if (!res.ok) {
-        console.error("LS customer fetch failed", res.status, JSON.stringify(body).slice(0, 400));
-        return json({ error: "lemonsqueezy_failed", scope: "customer", status: res.status, detail: body?.errors ?? body }, { status: 502 });
-      }
-      const portal = body?.data?.attributes?.urls?.customer_portal ?? null;
-      if (!portal) {
-        console.error("LS customer has no portal url", JSON.stringify(body?.data?.attributes?.urls ?? {}).slice(0, 400));
-        return json({ error: "no_portal_url", scope: "customer" }, { status: 502 });
-      }
-      return json({ url: portal });
-    }
-
-    // 3) No Lemon Squeezy relationship at all (e.g. comped plan that never bought
-    //    anything). There is genuinely no payment method or receipt to manage.
-    return json({ error: "no_billing_account" }, { status: 400 });
+    // No subscription anywhere. Lemon Squeezy only issues a portal for
+    // subscriptions, so a one-time pack buyer / comped plan has nothing to
+    // manage here (receipts are emailed automatically).
+    return json({ error: "no_subscription" }, { status: 400 });
   } catch (err) {
     return json({ error: "lemonsqueezy_failed", message: err instanceof Error ? err.message : "?" }, { status: 502 });
   }

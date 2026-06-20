@@ -37,10 +37,11 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
       const body = (await res.json()) as PortalResponse;
       const target = kind === "portal" ? body.url : (body.updatePaymentMethodUrl ?? body.url);
       if (!res.ok || !target) {
-        const base = body.error === "no_subscription" || body.error === "no_billing_account" ? s.noSubscriptionError : s.portalError;
-        // Surface a concise diagnostic (e.g. "lemonsqueezy_failed/customer 404")
-        // so a misconfig (test/live key mismatch → 404) is obvious, not silent.
-        const diag = body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
+        // "No subscription" is a calm, expected state (comped plan / one-time
+        // buyer with no recurring payment). Real failures keep a diagnostic.
+        const calm = body.error === "no_subscription" || body.error === "no_billing_account" || body.error === "no_subscription_portal";
+        const base = calm ? s.noSubscriptionError : s.portalError;
+        const diag = !calm && body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
         setError(base + diag);
         return;
       }

@@ -43,6 +43,7 @@ const HtmlToImageClient = dynamic(() => import("@/components/tools/clients/HtmlT
 const BlurFaceClient = dynamic(() => import("@/components/tools/clients/BlurFaceClient").then((m) => ({ default: m.BlurFaceClient })));
 const HeicConvertClient = dynamic(() => import("@/components/tools/clients/HeicConvertClient").then((m) => ({ default: m.HeicConvertClient })));
 const OrganizePdfClient = dynamic(() => import("@/components/tools/clients/OrganizePdfClient").then((m) => ({ default: m.OrganizePdfClient })));
+const CompressPdfClient = dynamic(() => import("@/components/tools/clients/CompressPdfClient").then((m) => ({ default: m.CompressPdfClient })));
 const ExtractPdfPagesClient = dynamic(() => import("@/components/tools/clients/ExtractPdfPagesClient").then((m) => ({ default: m.ExtractPdfPagesClient })));
 const EditPdfMetadataClient = dynamic(() => import("@/components/tools/clients/EditPdfMetadataClient").then((m) => ({ default: m.EditPdfMetadataClient })));
 const ImagesToGifClient = dynamic(() => import("@/components/tools/clients/ImagesToGifClient").then((m) => ({ default: m.ImagesToGifClient })));
@@ -280,6 +281,13 @@ export default function LocalisedToolPage({
     return (
       <ToolPageShell tool={tool} locale={locale} override={override}>
         <PdfToJpgClient />
+      </ToolPageShell>
+    );
+  }
+  if (tool.slug === "compress-pdf") {
+    return (
+      <ToolPageShell tool={tool} locale={locale} override={override}>
+        <CompressPdfClient />
       </ToolPageShell>
     );
   }

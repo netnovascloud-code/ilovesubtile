@@ -5,8 +5,10 @@
  * `lemonsqueezy-portal`, `lemonsqueezy-webhook`). The Lemon Squeezy store and
  * variant IDs live in those functions' secrets, not in the frontend.
  *
- * Lemon Squeezy is our Merchant of Record — it collects and remits VAT/sales
- * tax worldwide, so we never handle tax ourselves.
+ * Paddle is our Merchant of Record — it collects and remits VAT/sales tax
+ * worldwide, so we never handle tax ourselves. (The checkout/portal/webhook
+ * edge functions are still named `lemonsqueezy-*` pending the backend
+ * migration to Paddle — only the customer-facing copy says Paddle for now.)
  */
 
 export const PLANS = {

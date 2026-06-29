@@ -123,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // Other top-level pages — English only.
-  for (const p of ["/api", "/translator", "/rephraser", "/ai-humanizer", "/batch", "/workflow", "/privacy", "/terms"]) {
+  for (const p of ["/api", "/translator", "/rephraser", "/ai-humanizer", "/batch", "/workflow", "/privacy", "/terms", "/refund"]) {
     entries.push({
       url: `${SITE_URL}${p}`,
       lastModified: now,
@@ -135,7 +135,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Legal pages — locale variants with proper hreflang. Native translations
   // load when ready; until then the route serves the English source with a
   // translation-in-progress notice.
-  for (const p of ["/privacy", "/terms"]) {
+  for (const p of ["/privacy", "/terms", "/refund"]) {
     for (const loc of LOCALES) {
       if (loc === "en") continue;
       entries.push({

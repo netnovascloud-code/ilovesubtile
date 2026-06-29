@@ -111,6 +111,11 @@ export function Footer() {
                 {locale === "fr" ? "Mentions légales" : "Legal notice"}
               </Link>
             </li>
+            <li>
+              <Link href={localePath(locale, "refund")} className="hover:text-ink-900">
+                {locale === "fr" ? "Remboursements" : "Refunds"}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

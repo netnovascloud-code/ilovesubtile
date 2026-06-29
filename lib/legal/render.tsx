@@ -106,7 +106,10 @@ export function LegalRender({
 }: {
   doc: LegalDoc;
   locale?: Locale;
-  slug?: LegalSlug;
+  // "refund" renders with the same chrome but is not part of the four
+  // cross-linked core docs (ALL_SLUGS), so it widens the prop without
+  // entering the related-docs footer set.
+  slug?: LegalSlug | "refund";
 }) {
   const nav = NAV[locale] ?? NAV.en!;
   const showToc = doc.sections.length > 4;

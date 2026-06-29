@@ -20,6 +20,18 @@ export async function updateSupabaseSession(request: NextRequest, extraReqHeader
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anon) return { response, userId: null, aal: null };
 
+  // Anonymous fast-path. The overwhelming majority of traffic is logged-out,
+  // and with no `sb-<ref>-auth-token` cookie there is no session to validate
+  // or refresh — so skip constructing the client and the GoTrue /user round
+  // trip entirely. Without this, every navigation AND every sub-request that
+  // matches the middleware matcher hits /auth/v1/user, which is exactly the
+  // flood of /user calls visible in the auth logs. (Chunked sessions split the
+  // cookie into .0/.1, so match by *contains*, not equality.)
+  const hasAuthCookie = request.cookies
+    .getAll()
+    .some((c) => c.name.startsWith("sb-") && c.name.includes("-auth-token"));
+  if (!hasAuthCookie) return { response, userId: null, aal: null };
+
   const supabase = createServerClient(url, anon, {
     cookies: {
       get: (name: string) => request.cookies.get(name)?.value,
@@ -38,7 +50,11 @@ export async function updateSupabaseSession(request: NextRequest, extraReqHeader
 
   const { data: { user } } = await supabase.auth.getUser();
   let aal: string | null = null;
-  if (user) {
+  // Only resolve the Authenticator Assurance Level when the MFA gate is armed.
+  // The gate (in middleware.ts) ships dormant — it only fires when
+  // MFA_REQUIRED === "true" — so fetching the AAL otherwise is a wasted
+  // round-trip on every authenticated request.
+  if (user && process.env.MFA_REQUIRED === "true") {
     try {
       const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
       aal = data?.currentLevel ?? null;

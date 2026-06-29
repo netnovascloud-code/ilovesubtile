@@ -11,6 +11,34 @@ Each step says **WHO**, **WHERE**, **WHAT**, and a verification command.
 - [ ] Custom domain `konvertools.com` (and `konver.app`) points to Vercel.
 - [ ] DNS for emails (Resend SPF/DKIM) verified.
 
+## 0.1 · Auth emails via Resend (REQUIRED — confirmation / magic-link / reset)
+WHO: you · WHERE: Supabase Dashboard → **Authentication → Emails → SMTP Settings**
+
+IMPORTANT: Supabase sends **authentication** emails (signup confirmation,
+magic link, password reset, email-change) itself, through whatever SMTP is
+configured here — NOT through the `send-email` edge function. That edge
+function only sends *app* emails (welcome, job-done…). So even with Resend's
+domain verified, auth mails go out from the built-in
+`noreply@mail.app.supabase.io` (and are rate-limited to a few per hour) until
+you enable custom SMTP below.
+
+1. Toggle **Enable Custom SMTP** ON and enter:
+   - Host: `smtp.resend.com`
+   - Port: `465` (SSL) — or `587` (STARTTLS)
+   - Username: `resend`
+   - Password: your Resend API key (`re_…`) — the same one in `RESEND_API_KEY`
+   - Sender email: `no-reply@konvertools.com` (must be a **verified** domain in Resend)
+   - Sender name: `Konvertools`
+2. (Recommended) **Authentication → Emails → Templates** → rebrand the
+   Confirm-signup / Magic-link / Reset-password templates (logo, FR/EN copy).
+3. **Authentication → URL Configuration** → Site URL = `https://konvertools.com`;
+   add `https://konvertools.com/auth/callback` (and the Vercel preview URL) to
+   Redirect URLs so confirmation links land on `/auth/callback`.
+
+VERIFY: trigger a signup with a throwaway address, then check
+Supabase → Logs → Auth: the `mail.send` line must show
+`"mail_from":"no-reply@konvertools.com"` (not `…@mail.app.supabase.io`).
+
 ## 1 · Test the full payment flow (TEST MODE first)
 WHO: you · WHERE: konvertools.com (incognito)
 1. Sign up with a throwaway email.

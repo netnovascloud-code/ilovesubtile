@@ -22,9 +22,9 @@ type Cell = string | boolean;
 
 /**
  * Side-by-side Free / Pro / Business comparison for the limits that matter on
- * the free tier (AI quota, upload size, processing time, batch, ads, watermark,
- * API). Pure server component — every value is derived from the same config the
- * API gateway and edge functions enforce, so it stays truthful. Localised via
+ * the free tier (AI quota, upload size, processing time, batch, ads,
+ * watermark). Pure server component — every value is derived from the same
+ * config the edge functions enforce, so it stays truthful. Localised via
  * getCompare(locale) with an English fallback; horizontally scrollable on
  * mobile so the four columns never squash.
  */
@@ -67,7 +67,6 @@ export function PlanComparisonTable({ locale }: { locale: Locale }) {
     // Ads / watermark: "Yes" on free is the limitation, so the check sits on the paid columns.
     { label: s.rows.ads, free: true, pro: false, business: false },
     { label: s.rows.watermark, free: true, pro: false, business: false },
-    { label: s.rows.api, free: false, pro: false, business: s.apiBiz },
     { label: s.rows.browserTools, free: s.allTools, pro: s.allTools, business: s.allTools },
   ];
 

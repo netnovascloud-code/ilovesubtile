@@ -26,7 +26,6 @@ export const REFUND_EN: LegalDoc = {
         { kind: "p", text: "Konvertools offers:" },
         { kind: "ul", items: [
           "**Subscriptions** (Pro and Business) — recurring plans billed monthly or annually in advance.",
-          "**API credit packs** — one-time purchases of credits used to call the REST API. Credits are consumable digital goods and do not expire.",
           "A **Free plan**, which involves no payment and therefore nothing to refund.",
         ] },
       ],
@@ -53,19 +52,8 @@ export const REFUND_EN: LegalDoc = {
       ],
     },
     {
-      id: "credits",
-      title: "5. API credit packs",
-      blocks: [
-        { kind: "ul", items: [
-          "Credit packs are **consumable**. Once credits have been spent, the used portion is **non-refundable**.",
-          "If you bought a pack **by mistake and have not used any of its credits**, contact us within **14 days** and we will refund it in full.",
-          "Partially used packs are not refundable, except where required by law or in case of a service failure (see section 6).",
-        ] },
-      ],
-    },
-    {
       id: "always",
-      title: "6. When we always refund",
+      title: "5. When we always refund",
       blocks: [
         { kind: "p", text: "Regardless of the above, we will issue a full refund where:" },
         { kind: "ul", items: [
@@ -77,7 +65,7 @@ export const REFUND_EN: LegalDoc = {
     },
     {
       id: "how",
-      title: "7. How to request a refund",
+      title: "6. How to request a refund",
       blocks: [
         { kind: "p", text: "Email us at [contact@konvertools.com](mailto:contact@konvertools.com) with the email address used at purchase and your **order or receipt number** (shown on the receipt Paddle sent you). Tell us briefly what you would like refunded and why." },
         { kind: "p", text: "You can also contact Paddle's buyer support directly at [paddle.net](https://paddle.net) to look up your purchase, download your invoice, or request help with a payment." },
@@ -85,7 +73,7 @@ export const REFUND_EN: LegalDoc = {
     },
     {
       id: "processing",
-      title: "8. How refunds are processed",
+      title: "7. How refunds are processed",
       blocks: [
         { kind: "ul", items: [
           "Approved refunds are issued by **Paddle to your original payment method**.",
@@ -96,21 +84,21 @@ export const REFUND_EN: LegalDoc = {
     },
     {
       id: "chargebacks",
-      title: "9. Chargebacks",
+      title: "8. Chargebacks",
       blocks: [
         { kind: "p", text: "If you don't recognise a charge or have a billing problem, **please contact us first** — we can almost always resolve it faster than a bank dispute. Opening a chargeback without contacting us may lead to suspension of the related account while the dispute is investigated by Paddle." },
       ],
     },
     {
       id: "changes",
-      title: "10. Changes to this policy",
+      title: "9. Changes to this policy",
       blocks: [
         { kind: "p", text: "We may update this Refund Policy from time to time. The version in force is the one published on this page, with the \"last updated\" date above. Material changes do not affect purchases already made before the change." },
       ],
     },
     {
       id: "law",
-      title: "11. Governing law & contact",
+      title: "10. Governing law & contact",
       blocks: [
         { kind: "p", text: "This Refund Policy is governed by **French law**, without prejudice to the mandatory consumer-protection rules of your country of residence. For any question, contact [contact@konvertools.com](mailto:contact@konvertools.com)." },
       ],

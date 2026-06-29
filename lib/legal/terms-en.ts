@@ -81,63 +81,49 @@ export const TERMS_EN: LegalDoc = {
           "**Auto-renewal**: monthly and annual subscriptions renew automatically at the same cadence until cancelled. You can cancel at any time from your dashboard; cancellation takes effect at the end of the current billing period. You retain access until that date.",
           "**Right of withdrawal (EU)**: under Article L. 221-28 of the French Consumer Code, when you actively use the Service during the initial 14-day withdrawal period you expressly consent to the immediate performance of the contract and waive your right of withdrawal. If you have not used any paid feature, you may withdraw within 14 days by emailing [support@konvertools.com](mailto:support@konvertools.com) and we will issue a full refund within 14 days.",
           "**No partial refunds**: outside the withdrawal scenario above, fees already paid for the current billing period are non-refundable.",
-          "**Credits**: API credits purchased as one-time packs (\"Starter\", \"Growth\", \"Scale\", \"Studio\") **never expire**. The 300 credits automatically granted each month to Business subscribers expire at the end of the calendar month and are **not refundable**.",
           "**Price changes**: we may amend prices with 30 days' notice. Existing subscribers retain their current price until their next renewal date.",
           "**Tax**: Lemon Squeezy is the Merchant of Record for all purchases and acts as the seller of record. It calculates, collects and remits any VAT or sales tax due in your jurisdiction, so the price you pay at checkout already includes any applicable tax.",
         ] },
       ],
     },
     {
-      id: "api",
-      title: "8. Public REST API",
-      blocks: [
-        { kind: "p", text: "The Business plan exposes a public REST API authenticated by API keys you generate from your dashboard. Use of the API is governed additionally by:" },
-        { kind: "ul", items: [
-          "**Rate limits**: 60 requests per minute (Pro top-ups) or 120 requests per minute (Business). Sustained abuse may result in temporary throttling or permanent key revocation.",
-          "**Credit consumption**: each API call deducts credits at the rates published in our [API documentation](/api). Failed calls (5xx responses) do not deduct credits.",
-          "**Key security**: you are responsible for storing your API keys securely and rotating them if compromised. We may revoke any key at any time if we suspect abuse.",
-          "**Acceptable upstream use**: applications built on our API must comply with these Terms, including the acceptable-use section. You must not expose our API keys to end users (sub-license your service instead).",
-        ] },
-      ],
-    },
-    {
       id: "ip",
-      title: "9. Intellectual property",
+      title: "8. Intellectual property",
       blocks: [
         { kind: "p", text: "The name, logo, code, design, documentation, database structure and aggregated content of the Service are the exclusive property of the Publisher and are protected by French and international intellectual-property law. No licence is granted to you other than what is strictly necessary to use the Service as intended. You may not reproduce, modify, decompile or create derivative works of the Service or any portion of it, except as expressly permitted by applicable law." },
       ],
     },
     {
       id: "indemnity",
-      title: "10. Indemnification",
+      title: "9. Indemnification",
       blocks: [
         { kind: "p", text: "You agree to indemnify and hold the Publisher harmless from any claim, loss, damage, liability, cost or expense (including reasonable legal fees) arising from (a) your breach of these Terms, (b) your violation of any law or third-party right, or (c) any content you submitted to the Service." },
       ],
     },
     {
       id: "changes",
-      title: "11. Changes to the Terms",
+      title: "10. Changes to the Terms",
       blocks: [
         { kind: "p", text: "We may amend these Terms from time to time. Substantive changes will be notified by email to account holders at least thirty (30) days before they take effect. By continuing to use the Service after that period you accept the amended Terms. The latest version is always available at [https://konvertools.com/terms](https://konvertools.com/terms)." },
       ],
     },
     {
       id: "termination",
-      title: "12. Termination",
+      title: "11. Termination",
       blocks: [
         { kind: "p", text: "You may terminate your account at any time from your dashboard. We may terminate or suspend your account immediately and without notice if you breach these Terms, abuse the Service, or fail to pay a recurring subscription. Upon termination your data is deleted within thirty (30) days, except for billing records and consent records retained as described in our Privacy Policy." },
       ],
     },
     {
       id: "law",
-      title: "13. Governing law and jurisdiction",
+      title: "12. Governing law and jurisdiction",
       blocks: [
         { kind: "p", text: "These Terms are governed by the laws of France. Any dispute arising out of or in connection with these Terms or the Service shall be submitted to the exclusive jurisdiction of the courts of Paris, France, except where a consumer's mandatory right of action in their country of residence prevails under European Union or applicable national law. Before commencing legal action, you agree to attempt to resolve the dispute amicably by writing to [support@konvertools.com](mailto:support@konvertools.com). EU consumers may also use the European Commission's Online Dispute Resolution platform at [ec.europa.eu/consumers/odr](https://ec.europa.eu/consumers/odr)." },
       ],
     },
     {
       id: "misc",
-      title: "14. Miscellaneous",
+      title: "13. Miscellaneous",
       blocks: [
         { kind: "p", text: "If any provision of these Terms is held invalid or unenforceable, the remaining provisions remain in full effect. Our failure to enforce any right or provision is not a waiver of that right. These Terms (together with the Privacy Policy and any plan-specific terms referenced at purchase) constitute the entire agreement between you and the Publisher regarding the Service." },
       ],

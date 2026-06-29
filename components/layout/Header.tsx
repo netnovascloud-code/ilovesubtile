@@ -52,9 +52,8 @@ export function Header() {
     { href: "/rephraser", label: "Rephraser" },
     { href: "/ai-humanizer", label: "AI Humanizer" },
     { href: localePath(locale, "pricing"), label: t.pricing },
-    // workflow / batch / api now have localised routes (app/[locale]/…).
+    // workflow / batch now have localised routes (app/[locale]/…).
     // translator / rephraser / ai-humanizer stay English-only (SEO landing pages).
-    { href: localePath(locale, "api"), label: t.api },
   ];
 
   return (
@@ -97,7 +96,6 @@ export function Header() {
           <Link href={localePath(locale, "workflow")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.workflow}</Link>
           <Link href={localePath(locale, "batch")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.batch}</Link>
           <Link href={localePath(locale, "pricing")} prefetch={false} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.pricing}</Link>
-          <Link href={localePath(locale, "api")} className="text-sm text-ink-700 transition-colors hover:text-ink-900">{t.api}</Link>
         </nav>
 
         <div className="hidden md:flex md:items-center md:gap-3">

@@ -77,7 +77,7 @@ const en: UiStrings = {
     footnote: "All prices in EUR, VAT excluded. Annual plans available at checkout (save ~30%).",
     free: { desc: "All browser tools, free & unlimited.", cta: "Get started" },
     pro: { desc: "500 AI conversions/month · Workflow Builder · Batch 20 files.", cta: "Upgrade to Pro" },
-    business: { desc: "3,000 AI conversions/month · REST API · 300 API credits.", cta: "Choose Business" },
+    business: { desc: "3,000 AI conversions/month", cta: "Choose Business" },
   },
   tool: { howItWorks: "How it works", faq: "Frequently asked questions", breadcrumbHome: "Home", proBadge: "Pro feature" },
 };
@@ -121,7 +121,7 @@ const fr: UiStrings = {
     footnote: "Tous les prix en EUR, hors TVA. Plans annuels disponibles au paiement (économisez ~30 %).",
     free: { desc: "Tous les outils navigateur, gratuits et illimités.", cta: "Commencer" },
     pro: { desc: "500 conversions IA/mois · Workflow Builder · Batch 20 fichiers.", cta: "Passer à Pro" },
-    business: { desc: "3 000 conversions IA/mois · API REST · 300 crédits API.", cta: "Choisir Business" },
+    business: { desc: "3 000 conversions IA/mois", cta: "Choisir Business" },
   },
   tool: { howItWorks: "Comment ça marche", faq: "Questions fréquentes", breadcrumbHome: "Accueil", proBadge: "Fonction Pro" },
 };
@@ -165,7 +165,7 @@ const es: UiStrings = {
     footnote: "Todos los precios en EUR, IVA no incluido. Planes anuales disponibles en pago (ahorra ~30 %).",
     free: { desc: "Perfecto para usos puntuales.", cta: "Empezar" },
     pro: { desc: "500 conversiones IA/mes · Workflow Builder · Lote 20 archivos.", cta: "Pasar a Pro" },
-    business: { desc: "3.000 conversiones IA/mes · API REST · 300 créditos API.", cta: "Elegir Business" },
+    business: { desc: "3.000 conversiones IA/mes", cta: "Elegir Business" },
   },
   tool: { howItWorks: "Cómo funciona", faq: "Preguntas frecuentes", breadcrumbHome: "Inicio", proBadge: "Función Pro" },
 };
@@ -209,7 +209,7 @@ const pt: UiStrings = {
     footnote: "Todos os preços em EUR, IVA não incluído. Planos anuais disponíveis no checkout (economize ~30 %).",
     free: { desc: "Ideal para usos pontuais.", cta: "Começar" },
     pro: { desc: "500 conversões IA/mês · Workflow Builder · Lote 20 arquivos.", cta: "Ir para Pro" },
-    business: { desc: "3.000 conversões IA/mês · API REST · 300 créditos API.", cta: "Escolher Business" },
+    business: { desc: "3.000 conversões IA/mês", cta: "Escolher Business" },
   },
   tool: { howItWorks: "Como funciona", faq: "Perguntas frequentes", breadcrumbHome: "Início", proBadge: "Recurso Pro" },
 };
@@ -253,7 +253,7 @@ const de: UiStrings = {
     footnote: "Alle Preise in EUR, ohne MwSt. Jahrespläne im Checkout verfügbar (spare ~30 %).",
     free: { desc: "Ideal für gelegentliche Nutzung.", cta: "Loslegen" },
     pro: { desc: "500 KI-Konvertierungen/Monat · Workflow Builder · Batch 20 Dateien.", cta: "Auf Pro upgraden" },
-    business: { desc: "3.000 KI-Konvertierungen/Monat · REST-API · 300 API-Credits.", cta: "Business wählen" },
+    business: { desc: "3.000 KI-Konvertierungen/Monat", cta: "Business wählen" },
   },
   tool: { howItWorks: "So funktioniert's", faq: "Häufige Fragen", breadcrumbHome: "Startseite", proBadge: "Pro-Funktion" },
 };
@@ -297,7 +297,7 @@ const it: UiStrings = {
     footnote: "Tutti i prezzi in EUR, IVA esclusa. Piani annuali al checkout (risparmia ~30 %).",
     free: { desc: "Perfetto per usi sporadici.", cta: "Inizia" },
     pro: { desc: "500 conversioni IA/mese · Workflow Builder · Batch 20 file.", cta: "Passa a Pro" },
-    business: { desc: "3.000 conversioni IA/mese · API REST · 300 crediti API.", cta: "Scegli Business" },
+    business: { desc: "3.000 conversioni IA/mese", cta: "Scegli Business" },
   },
   tool: { howItWorks: "Come funziona", faq: "Domande frequenti", breadcrumbHome: "Home", proBadge: "Funzione Pro" },
 };
@@ -341,7 +341,7 @@ const nl: UiStrings = {
     footnote: "Alle prijzen in EUR, exclusief btw. Jaarplannen beschikbaar bij afrekenen (bespaar ~30 %).",
     free: { desc: "Ideaal voor losse klussen.", cta: "Aan de slag" },
     pro: { desc: "500 AI-conversies/maand · Workflow Builder · Batch 20 bestanden.", cta: "Upgrade naar Pro" },
-    business: { desc: "3.000 AI-conversies/maand · REST API · 300 API-credits.", cta: "Kies Business" },
+    business: { desc: "3.000 AI-conversies/maand", cta: "Kies Business" },
   },
   tool: { howItWorks: "Zo werkt het", faq: "Veelgestelde vragen", breadcrumbHome: "Home", proBadge: "Pro-functie" },
 };
@@ -385,7 +385,7 @@ const ja: UiStrings = {
     footnote: "価格はすべてEUR、税抜き。年間プランはチェックアウトで利用可（約30%お得）。",
     free: { desc: "単発の用途に最適。", cta: "始める" },
     pro: { desc: "月 500 回の AI 変換 · Workflow Builder · 20 ファイル一括", cta: "Proにアップグレード" },
-    business: { desc: "月 3,000 回の AI 変換 · REST API · 300 API クレジット", cta: "Businessを選ぶ" },
+    business: { desc: "月 3,000 回の AI 変換", cta: "Businessを選ぶ" },
   },
   tool: { howItWorks: "使い方", faq: "よくある質問", breadcrumbHome: "ホーム", proBadge: "Pro機能" },
 };
@@ -429,7 +429,7 @@ const zh: UiStrings = {
     footnote: "所有价格以欧元计,不含增值税。年付方案在结账时可选(节省约 30%)。",
     free: { desc: "适合一次性使用。", cta: "开始使用" },
     pro: { desc: "每月 500 次 AI 转换 · Workflow Builder · 批量 20 个文件", cta: "升级到 Pro" },
-    business: { desc: "每月 3,000 次 AI 转换 · REST API · 300 API 额度", cta: "选择 Business" },
+    business: { desc: "每月 3,000 次 AI 转换", cta: "选择 Business" },
   },
   tool: { howItWorks: "工作原理", faq: "常见问题", breadcrumbHome: "首页", proBadge: "Pro 功能" },
 };
@@ -473,7 +473,7 @@ const ko: UiStrings = {
     footnote: "모든 가격은 EUR이며 부가세 별도. 결제 시 연간 요금제 선택 가능(약 30% 절약).",
     free: { desc: "일회성 사용에 적합.", cta: "시작하기" },
     pro: { desc: "월 500회 AI 변환 · Workflow Builder · 20개 일괄 처리", cta: "Pro로 업그레이드" },
-    business: { desc: "월 3,000회 AI 변환 · REST API · 300 API 크레딧", cta: "Business 선택" },
+    business: { desc: "월 3,000회 AI 변환", cta: "Business 선택" },
   },
   tool: { howItWorks: "작동 방식", faq: "자주 묻는 질문", breadcrumbHome: "홈", proBadge: "Pro 기능" },
 };
@@ -517,7 +517,7 @@ const ar: UiStrings = {
     footnote: "كل الأسعار باليورو، بدون ضريبة القيمة المضافة. خطط سنوية متاحة عند الدفع (وفّر ~30%).",
     free: { desc: "مثالي للاستخدام العرضي.", cta: "ابدأ" },
     pro: { desc: "500 تحويل ذكاء اصطناعي/شهر · Workflow Builder · 20 ملفًا دفعة", cta: "الترقية إلى Pro" },
-    business: { desc: "3000 تحويل/شهر · REST API · 300 رصيد API", cta: "اختر Business" },
+    business: { desc: "3000 تحويل/شهر", cta: "اختر Business" },
   },
   tool: { howItWorks: "كيف يعمل", faq: "الأسئلة الشائعة", breadcrumbHome: "الرئيسية", proBadge: "ميزة Pro" },
 };
@@ -561,7 +561,7 @@ const ru: UiStrings = {
     footnote: "Все цены в EUR, без НДС. Годовые тарифы при оплате (экономия ~30%).",
     free: { desc: "Подходит для разовых задач.", cta: "Начать" },
     pro: { desc: "500 ИИ-конвертаций/мес · Workflow Builder · Пакет 20 файлов.", cta: "Перейти на Pro" },
-    business: { desc: "3000 ИИ-конвертаций/мес · REST API · 300 API-кредитов.", cta: "Выбрать Business" },
+    business: { desc: "3000 ИИ-конвертаций/мес", cta: "Выбрать Business" },
   },
   tool: { howItWorks: "Как это работает", faq: "Частые вопросы", breadcrumbHome: "Главная", proBadge: "Pro-функция" },
 };
@@ -605,7 +605,7 @@ const hi: UiStrings = {
     footnote: "सभी क़ीमतें EUR में, VAT शामिल नहीं। चेकआउट पर वार्षिक प्लान (~30% बचत)।",
     free: { desc: "एकल उपयोग के लिए बढ़िया।", cta: "शुरू करें" },
     pro: { desc: "500 AI रूपांतरण/माह · Workflow Builder · 20 फ़ाइलें बैच", cta: "Pro में अपग्रेड करें" },
-    business: { desc: "3,000 AI रूपांतरण/माह · REST API · 300 API क्रेडिट", cta: "Business चुनें" },
+    business: { desc: "3,000 AI रूपांतरण/माह", cta: "Business चुनें" },
   },
   tool: { howItWorks: "यह कैसे काम करता है", faq: "अक्सर पूछे जाने वाले प्रश्न", breadcrumbHome: "होम", proBadge: "Pro सुविधा" },
 };
@@ -643,7 +643,7 @@ const tr: UiStrings = {
     footnote: "Tüm fiyatlar EUR cinsinden, KDV hariç. Yıllık planlar ödemede mevcut (~%30 tasarruf).",
     free: { desc: "Tüm tarayıcı araçları, ücretsiz ve sınırsız.", cta: "Başla" },
     pro: { desc: "Aylık 500 AI dönüşümü · Workflow Builder · 20 dosya toplu işlem.", cta: "Pro'ya yükselt" },
-    business: { desc: "Aylık 3.000 AI dönüşümü · REST API · 300 API kredisi.", cta: "Business'ı seç" },
+    business: { desc: "Aylık 3.000 AI dönüşümü", cta: "Business'ı seç" },
   },
   tool: { howItWorks: "Nasıl çalışır", faq: "Sık sorulan sorular", breadcrumbHome: "Ana sayfa", proBadge: "Pro özelliği" },
 };
@@ -681,7 +681,7 @@ const id: UiStrings = {
     footnote: "Semua harga dalam EUR, belum termasuk PPN. Paket tahunan tersedia saat checkout (hemat ~30%).",
     free: { desc: "Semua alat browser, gratis & tanpa batas.", cta: "Mulai" },
     pro: { desc: "500 konversi AI/bulan · Workflow Builder · Batch 20 file.", cta: "Tingkatkan ke Pro" },
-    business: { desc: "3.000 konversi AI/bulan · REST API · 300 kredit API.", cta: "Pilih Business" },
+    business: { desc: "3.000 konversi AI/bulan", cta: "Pilih Business" },
   },
   tool: { howItWorks: "Cara kerja", faq: "Pertanyaan umum", breadcrumbHome: "Beranda", proBadge: "Fitur Pro" },
 };
@@ -719,7 +719,7 @@ const vi: UiStrings = {
     footnote: "Tất cả giá tính bằng EUR, chưa gồm VAT. Gói năm có sẵn khi thanh toán (tiết kiệm ~30%).",
     free: { desc: "Tất cả công cụ trình duyệt, miễn phí & không giới hạn.", cta: "Bắt đầu" },
     pro: { desc: "500 lượt AI/tháng · Workflow Builder · Hàng loạt 20 tệp.", cta: "Nâng cấp lên Pro" },
-    business: { desc: "3.000 lượt AI/tháng · REST API · 300 tín dụng API.", cta: "Chọn Business" },
+    business: { desc: "3.000 lượt AI/tháng", cta: "Chọn Business" },
   },
   tool: { howItWorks: "Cách hoạt động", faq: "Câu hỏi thường gặp", breadcrumbHome: "Trang chủ", proBadge: "Tính năng Pro" },
 };
@@ -757,7 +757,7 @@ const sv: UiStrings = {
     footnote: "Alla priser i EUR, exkl. moms. Årsplaner tillgängliga i kassan (spara ~30 %).",
     free: { desc: "Alla webbläsarverktyg, gratis & obegränsat.", cta: "Kom igång" },
     pro: { desc: "500 AI-konverteringar/månad · Workflow Builder · Batch 20 filer.", cta: "Uppgradera till Pro" },
-    business: { desc: "3 000 AI-konverteringar/månad · REST API · 300 API-krediter.", cta: "Välj Business" },
+    business: { desc: "3 000 AI-konverteringar/månad", cta: "Välj Business" },
   },
   tool: { howItWorks: "Så fungerar det", faq: "Vanliga frågor", breadcrumbHome: "Hem", proBadge: "Pro-funktion" },
 };
@@ -795,7 +795,7 @@ const pl: UiStrings = {
     footnote: "Wszystkie ceny w EUR, bez VAT. Plany roczne dostępne przy płatności (oszczędność ~30%).",
     free: { desc: "Wszystkie narzędzia w przeglądarce, za darmo i bez limitu.", cta: "Zacznij" },
     pro: { desc: "500 konwersji AI/mies. · Workflow Builder · Wsad 20 plików.", cta: "Przejdź na Pro" },
-    business: { desc: "3000 konwersji AI/mies. · REST API · 300 kredytów API.", cta: "Wybierz Business" },
+    business: { desc: "3000 konwersji AI/mies.", cta: "Wybierz Business" },
   },
   tool: { howItWorks: "Jak to działa", faq: "Najczęstsze pytania", breadcrumbHome: "Strona główna", proBadge: "Funkcja Pro" },
 };
@@ -833,7 +833,7 @@ const uk: UiStrings = {
     footnote: "Усі ціни в EUR, без ПДВ. Річні плани доступні під час оплати (економія ~30%).",
     free: { desc: "Усі браузерні інструменти, безкоштовно й без обмежень.", cta: "Почати" },
     pro: { desc: "500 AI-конвертацій/міс · Workflow Builder · Пакет 20 файлів.", cta: "Перейти на Pro" },
-    business: { desc: "3000 AI-конвертацій/міс · REST API · 300 API-кредитів.", cta: "Обрати Business" },
+    business: { desc: "3000 AI-конвертацій/міс", cta: "Обрати Business" },
   },
   tool: { howItWorks: "Як це працює", faq: "Поширені запитання", breadcrumbHome: "Головна", proBadge: "Функція Pro" },
 };
@@ -871,7 +871,7 @@ const cs: UiStrings = {
     footnote: "Všechny ceny v EUR, bez DPH. Roční plány dostupné při platbě (úspora ~30 %).",
     free: { desc: "Všechny nástroje v prohlížeči, zdarma a bez omezení.", cta: "Začít" },
     pro: { desc: "500 AI konverzí/měsíc · Workflow Builder · Dávka 20 souborů.", cta: "Přejít na Pro" },
-    business: { desc: "3 000 AI konverzí/měsíc · REST API · 300 API kreditů.", cta: "Vybrat Business" },
+    business: { desc: "3 000 AI konverzí/měsíc", cta: "Vybrat Business" },
   },
   tool: { howItWorks: "Jak to funguje", faq: "Časté dotazy", breadcrumbHome: "Domů", proBadge: "Funkce Pro" },
 };

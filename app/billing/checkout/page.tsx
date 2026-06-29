@@ -8,7 +8,6 @@
  *
  * Routing:
  *   /billing/checkout?plan=pro|business&interval=monthly|annual
- *   /billing/checkout?pack=starter|growth|scale|studio
  *
  * Auth: if there's no session we bounce to /login?redirect=<this url>, so after
  * sign-in the user lands back here and the checkout fires automatically. That's
@@ -33,14 +32,11 @@ function CheckoutLauncher() {
     if (started.current) return;
     started.current = true;
 
-    const pack = params.get("pack");
     const plan = params.get("plan");
     const interval = params.get("interval") === "annual" ? "annual" : "monthly";
 
-    // Build the query for the edge function + a human label for errors.
-    const query: Record<string, string> = pack
-      ? { pack }
-      : { plan: plan ?? "pro", interval };
+    // Build the query for the edge function.
+    const query: Record<string, string> = { plan: plan ?? "pro", interval };
 
     (async () => {
       try {
@@ -62,7 +58,6 @@ function CheckoutLauncher() {
           const known: Record<string, string> = {
             no_variant_configured: "This plan isn't on sale yet — please try again shortly.",
             invalid_plan: "That plan doesn't exist anymore. Pick one from Pricing.",
-            invalid_pack: "That credit pack doesn't exist anymore. Pick one from your dashboard.",
             unauthorized: "Your session expired. Please sign in again.",
             no_store: "Checkout isn't configured yet — please contact support.",
             missing_lemonsqueezy_key: "Checkout is temporarily unavailable. Please try again in a few minutes.",

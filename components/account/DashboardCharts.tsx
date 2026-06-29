@@ -8,7 +8,6 @@ import { getDashboard } from "@/lib/i18n/account";
 import { type Locale } from "@/lib/i18n/locales";
 
 type Job = { tool: string; status: string; created_at: string };
-type Tx = { balance_after: number; created_at: string };
 
 type Stats = {
   total: number;
@@ -16,7 +15,6 @@ type Stats = {
   done: number;
   errors: number;
   topTools: { tool: string; count: number }[];
-  credits: number[];
 };
 
 /** Count from 0 → target with an easeOut curve once `run` flips true. */
@@ -38,8 +36,8 @@ function useCountUp(target: number, run: boolean, ms = 900): number {
 }
 
 /**
- * Animated usage analytics for the signed-in user, built from real `jobs` and
- * `credit_transactions` rows (RLS restricts to the caller's own). Self-contained
+ * Animated usage analytics for the signed-in user, built from real `jobs`
+ * rows (RLS restricts to the caller's own). Self-contained
  * client fetch; renders nothing until the data resolves (no SSR-baked markup →
  * no hydration mismatch). Pure SVG/CSS, sober animations.
  */
@@ -57,13 +55,9 @@ export function DashboardCharts({ locale }: { locale: Locale }) {
         const { data: u } = await sb.auth.getUser();
         if (!u.user) { if (!cancelled) setStats(null); return; }
         const since = new Date(Date.now() - 90 * 86400000).toISOString();
-        const [{ data: jobsData }, { data: txData }] = await Promise.all([
-          sb.from("jobs").select("tool, status, created_at").eq("user_id", u.user.id).gte("created_at", since).order("created_at", { ascending: true }).limit(2000),
-          sb.from("credit_transactions").select("balance_after, created_at").eq("user_id", u.user.id).gte("created_at", since).order("created_at", { ascending: true }).limit(400),
-        ]);
+        const { data: jobsData } = await sb.from("jobs").select("tool, status, created_at").eq("user_id", u.user.id).gte("created_at", since).order("created_at", { ascending: true }).limit(2000);
         if (cancelled) return;
         const jobs = (jobsData as Job[] | null) ?? [];
-        const tx = (txData as Tx[] | null) ?? [];
 
         // Conversions per day for the last 14 days.
         const days: { label: string; count: number }[] = [];
@@ -82,8 +76,8 @@ export function DashboardCharts({ locale }: { locale: Locale }) {
         for (const j of jobs) toolCount.set(j.tool, (toolCount.get(j.tool) ?? 0) + 1);
         const topTools = [...toolCount.entries()].map(([tool, count]) => ({ tool, count })).sort((a, b) => b.count - a.count).slice(0, 6);
 
-        setStats({ total: jobs.length, perDay: days, done, errors: errs, topTools, credits: tx.map((t) => t.balance_after).slice(-24) });
-      } catch { if (!cancelled) setStats({ total: 0, perDay: [], done: 0, errors: 0, topTools: [], credits: [] }); }
+        setStats({ total: jobs.length, perDay: days, done, errors: errs, topTools });
+      } catch { if (!cancelled) setStats({ total: 0, perDay: [], done: 0, errors: 0, topTools: [] }); }
     })();
     return () => { cancelled = true; };
   }, [locale]);
@@ -105,7 +99,7 @@ export function DashboardCharts({ locale }: { locale: Locale }) {
   const pctCount = useCountUp(successPct, shown);
 
   if (!stats) return null;
-  if (stats.total === 0 && stats.credits.length === 0) {
+  if (stats.total === 0) {
     return (
       <Card className="mt-8">
         <CardHeader>
@@ -188,32 +182,6 @@ export function DashboardCharts({ locale }: { locale: Locale }) {
           </CardContent>
         </Card>
 
-        {/* Credit balance over time — animated line */}
-        <Card>
-          <CardHeader><CardTitle className="text-sm font-medium text-ink-700">{s.creditsOverTime}</CardTitle></CardHeader>
-          <CardContent>
-            {stats.credits.length < 2 ? (
-              <p className="flex h-32 items-center justify-center text-sm text-ink-400">—</p>
-            ) : (() => {
-              const w = 300, h = 110, pad = 6;
-              const max = Math.max(...stats.credits), min = Math.min(...stats.credits);
-              const span = max - min || 1;
-              const pts = stats.credits.map((v, i) => {
-                const x = pad + (i / (stats.credits.length - 1)) * (w - 2 * pad);
-                const y = pad + (1 - (v - min) / span) * (h - 2 * pad);
-                return `${x.toFixed(1)},${y.toFixed(1)}`;
-              }).join(" ");
-              return (
-                <svg viewBox={`0 0 ${w} ${h}`} className="h-32 w-full">
-                  <polyline
-                    points={pts} fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    style={{ strokeDasharray: 1000, strokeDashoffset: shown ? 0 : 1000, transition: "stroke-dashoffset 1100ms ease-out" }}
-                  />
-                </svg>
-              );
-            })()}
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

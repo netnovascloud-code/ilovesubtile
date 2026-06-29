@@ -23,10 +23,8 @@ rejection/failure-detection cases.
 
 | Area (file) | What's covered |
 | --- | --- |
-| `tests/credits.test.ts` | Credit cost math (`lib/credits.ts`): transcribe per-minute rounding, translate per-1k-words, short/long tiers, word count. |
 | `tests/plan-limits.test.ts` | Per-plan upload caps (`lib/plan-limits.ts`) + AI quota resolver (`lib/ai-quotas.ts`): Free 20 MB / Pro 1 GB / Business 5 GB, anon-2 vs free-5, daily vs monthly. |
 | `tests/ls-signature.test.ts` | Lemon Squeezy webhook HMAC (`_shared/ls-signature.ts`, used by `lemonsqueezy-webhook`): valid passes; tampered / forged / missing signature rejected. |
-| `tests/api-key.test.ts` | API-key SHA-256 + format + usability (`_shared/api-key.ts`, used by `api-gateway`): random / revoked / not-found rejected. |
 
 CI (`.github/workflows/ci.yml`) runs `npm ci → typecheck → lint → test:run` on every
 push and PR to `main`. **The current tests need no secrets** (pure logic + Node

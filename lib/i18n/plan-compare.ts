@@ -18,7 +18,6 @@ export type CompareStrings = {
   yes: string;
   no: string;
   unlimited: string;
-  apiBiz: string;
   allTools: string;
   rows: {
     aiRuns: string;
@@ -30,7 +29,6 @@ export type CompareStrings = {
     templates: string;
     ads: string;
     watermark: string;
-    api: string;
     browserTools: string;
   };
 };
@@ -46,7 +44,6 @@ const en: CompareStrings = {
   yes: "Yes",
   no: "No",
   unlimited: "Unlimited",
-  apiBiz: "Full API + 300 credits / mo",
   allTools: "All, unlimited",
   rows: {
     aiRuns: "AI conversions",
@@ -58,7 +55,6 @@ const en: CompareStrings = {
     templates: "Saved templates",
     ads: "Ads during AI processing",
     watermark: "Watermark on burned-in video",
-    api: "REST API",
     browserTools: "Browser tools (image, PDF, audio…)",
   },
 };
@@ -74,7 +70,6 @@ const fr: CompareStrings = {
   yes: "Oui",
   no: "Non",
   unlimited: "Illimité",
-  apiBiz: "API complète + 300 crédits / mois",
   allTools: "Tous, illimités",
   rows: {
     aiRuns: "Conversions IA",
@@ -86,7 +81,6 @@ const fr: CompareStrings = {
     templates: "Modèles enregistrés",
     ads: "Publicités pendant l'IA",
     watermark: "Filigrane sur vidéo incrustée",
-    api: "API REST",
     browserTools: "Outils navigateur (image, PDF, audio…)",
   },
 };

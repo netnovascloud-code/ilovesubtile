@@ -7,7 +7,7 @@ import { getPlanFeatures } from "@/lib/i18n/plan-features";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Free forever for browser tools. Pro at €25/month for unlimited AI, Workflow Builder and batch. Business at €79/month with the full REST API and 300 credits/month.",
+  description: "Free forever for browser tools. Pro at €25/month for unlimited AI, Workflow Builder and batch. Business at €79/month for teams, with higher quotas and priority support.",
   alternates: { canonical: "/pricing" },
 };
 

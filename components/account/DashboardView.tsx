@@ -4,8 +4,6 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ApiKeysCard } from "@/components/billing/ApiKeysCard";
-import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { DashboardCharts } from "@/components/account/DashboardCharts";
 import { DashboardKpis } from "@/components/account/DashboardKpis";
 import { type PlanKey } from "@/lib/quotas";
@@ -47,7 +45,6 @@ export async function DashboardView({ locale }: { locale: Locale }) {
 
   let email: string | null = null;
   let plan: PlanKey = "free";
-  let credits = 0;
   let dailyUsage = 0;
   let usageResetAt: string | null = null;
   let monthlyAiUsage = 0;
@@ -66,7 +63,7 @@ export async function DashboardView({ locale }: { locale: Locale }) {
     } else {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, credits, monthly_credits, monthly_credits_month, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at")
+        .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
@@ -76,9 +73,6 @@ export async function DashboardView({ locale }: { locale: Locale }) {
       monthlyAiMonth = profile?.monthly_ai_month ?? null;
       subStatus = (profile?.ls_subscription_status as string | null) ?? null;
       renewsAt = (profile?.ls_renews_at as string | null) ?? null;
-      const thisMonth = new Date().toISOString().slice(0, 7);
-      const monthly = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
-      credits = (profile?.credits ?? 0) + monthly;
 
       const { data: jobsData } = await supabase
         .from("jobs")
@@ -141,7 +135,6 @@ export async function DashboardView({ locale }: { locale: Locale }) {
       <div className="mt-8">
         <DashboardKpis
           locale={locale}
-          credits={credits}
           aiUsed={displayedUsage}
           aiLimit={limit}
           aiKind={kind}
@@ -193,14 +186,6 @@ export async function DashboardView({ locale }: { locale: Locale }) {
           )}
         </CardContent>
       </Card>
-
-      <div className="mt-8">
-        <ApiKeysCard plan={plan} credits={credits} locale={locale} />
-      </div>
-
-      <div className="mt-8">
-        <BuyCreditsCard locale={locale} />
-      </div>
     </div>
   );
 }

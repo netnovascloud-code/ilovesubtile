@@ -71,7 +71,7 @@ export function SectorPage({ sector }: { sector: Sector }) {
           <h2 className="text-2xl font-semibold text-ink-900">Get more, faster.</h2>
           <p className="mt-2 max-w-2xl text-ink-700">
             Pro unlocks unlimited AI runs, batch processing up to 20 files, saved templates, files up to 500 MB and no ads — €25/month.
-            Business adds the public REST API and 300 included credits every month — €79/month.
+            Business adds higher quotas, 5 team seats and priority support — €79/month.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link href="/pricing"><Button>See pricing</Button></Link>

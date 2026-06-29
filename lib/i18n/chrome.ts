@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/i18n/locales";
 
 export type ChromeStrings = {
-  nav: { tools: string; workflow: string; batch: string; pricing: string; api: string; login: string; start: string };
+  nav: { tools: string; workflow: string; batch: string; pricing: string; login: string; start: string };
   toolsMenu: {
     featured: string;
     categories: string;
@@ -34,7 +34,6 @@ export type ChromeStrings = {
     product: string;
     legal: string;
     pricing: string;
-    api: string;
     dashboard: string;
     vsVeed: string;
     privacy: string;
@@ -107,7 +106,7 @@ export type ChromeStrings = {
 };
 
 const en: ChromeStrings = {
-  nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Pricing", api: "API", login: "Log in", start: "Get started" },
+  nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Pricing", login: "Log in", start: "Get started" },
   toolsMenu: {
     featured: "Featured", categories: "Categories", all: "All", new: "New",
     featuredItems: {
@@ -123,7 +122,7 @@ const en: ChromeStrings = {
       utmBuilder: "UTM Builder", qrGenerator: "QR Code Generator", pdfToJpg: "PDF to JPG",
     },
   },
-  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", gdprBadge: "GDPR Compliant · Files never stored", topTools: "Top tools", categories: "Categories", product: "Product", legal: "Legal", pricing: "Pricing", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
+  footer: { tagline: "Free online conversion tools — files, images, code, text and more. One simple tool per job.", gdprBadge: "GDPR Compliant · Files never stored", topTools: "Top tools", categories: "Categories", product: "Product", legal: "Legal", pricing: "Pricing", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Terms", rights: "All rights reserved." },
   card: { open: "Open", pro: "Pro" },
   account: { billing: "Billing", logout: "Log out" },
   upload: { instant: "Instant conversion — runs in your browser, no upload needed", dropOrClick: "Drop your file or click to upload", dropHere: "Drop the file here", formats: "Accepted formats", maxFree: "Max {mb} MB on the free plan.", selectFile: "Select a file", fileTooLarge: "This file is {size}. Free limit is {mb} MB — upgrade to Pro for up to 500 MB." },
@@ -140,7 +139,7 @@ const en: ChromeStrings = {
 };
 
 const fr: ChromeStrings = {
-  nav: { tools: "Outils", workflow: "Workflow", batch: "Par lot", pricing: "Tarifs", api: "API", login: "Connexion", start: "Commencer" },
+  nav: { tools: "Outils", workflow: "Workflow", batch: "Par lot", pricing: "Tarifs", login: "Connexion", start: "Commencer" },
   toolsMenu: {
     featured: "En vedette", categories: "Catégories", all: "Tous", new: "Nouveau",
     featuredItems: {
@@ -156,7 +155,7 @@ const fr: ChromeStrings = {
       utmBuilder: "Générateur UTM", qrGenerator: "Générateur de QR code", pdfToJpg: "PDF en JPG",
     },
   },
-  footer: { tagline: "Outils de conversion en ligne gratuits — fichiers, images, code, texte et plus. Un outil simple par tâche.", gdprBadge: "Conforme RGPD · Fichiers jamais stockés", topTools: "Outils phares", product: "Produit", legal: "Mentions légales", pricing: "Tarifs", api: "API", dashboard: "Tableau de bord", vsVeed: "vs VEED.io", privacy: "Confidentialité", terms: "CGU", rights: "Tous droits réservés." },
+  footer: { tagline: "Outils de conversion en ligne gratuits — fichiers, images, code, texte et plus. Un outil simple par tâche.", gdprBadge: "Conforme RGPD · Fichiers jamais stockés", topTools: "Outils phares", product: "Produit", legal: "Mentions légales", pricing: "Tarifs", dashboard: "Tableau de bord", vsVeed: "vs VEED.io", privacy: "Confidentialité", terms: "CGU", rights: "Tous droits réservés." },
   card: { open: "Ouvrir", pro: "Pro" },
   account: { billing: "Facturation", logout: "Déconnexion" },
   upload: { instant: "Conversion instantanée — dans votre navigateur, aucun envoi requis", dropOrClick: "Déposez votre fichier ou cliquez pour téléverser", dropHere: "Déposez le fichier ici", formats: "Formats acceptés", maxFree: "Max {mb} Mo sur l'offre gratuite.", selectFile: "Choisir un fichier", fileTooLarge: "Ce fichier fait {size}. Limite gratuite : {mb} Mo — passez Pro pour jusqu'à 500 Mo." },
@@ -173,7 +172,7 @@ const fr: ChromeStrings = {
 };
 
 const es: ChromeStrings = {
-  nav: { tools: "Herramientas", workflow: "Flujos", batch: "Por lotes", pricing: "Precios", api: "API", login: "Iniciar sesión", start: "Empezar" },
+  nav: { tools: "Herramientas", workflow: "Flujos", batch: "Por lotes", pricing: "Precios", login: "Iniciar sesión", start: "Empezar" },
   toolsMenu: {
     featured: "Destacados", categories: "Categorías", all: "Todas", new: "Nuevo",
     featuredItems: {
@@ -189,7 +188,7 @@ const es: ChromeStrings = {
       utmBuilder: "Generador UTM", qrGenerator: "Generador de código QR", pdfToJpg: "PDF a JPG",
     },
   },
-  footer: { tagline: "Herramientas de conversión online gratis — archivos, imágenes, código, texto y más. Una herramienta simple por tarea.", gdprBadge: "Conforme con el RGPD · Archivos nunca almacenados", topTools: "Herramientas destacadas", product: "Producto", legal: "Legal", pricing: "Precios", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Privacidad", terms: "Términos", rights: "Todos los derechos reservados." },
+  footer: { tagline: "Herramientas de conversión online gratis — archivos, imágenes, código, texto y más. Una herramienta simple por tarea.", gdprBadge: "Conforme con el RGPD · Archivos nunca almacenados", topTools: "Herramientas destacadas", product: "Producto", legal: "Legal", pricing: "Precios", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Privacidad", terms: "Términos", rights: "Todos los derechos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Facturación", logout: "Cerrar sesión" },
   upload: { instant: "Conversión instantánea — en tu navegador, sin subir nada", dropOrClick: "Suelta tu archivo o haz clic para subirlo", dropHere: "Suelta el archivo aquí", formats: "Formatos aceptados", maxFree: "Máx. {mb} MB en el plan gratis.", selectFile: "Elegir un archivo", fileTooLarge: "Este archivo pesa {size}. El límite gratis es {mb} MB — pasa a Pro hasta 500 MB." },
@@ -206,7 +205,7 @@ const es: ChromeStrings = {
 };
 
 const pt: ChromeStrings = {
-  nav: { tools: "Ferramentas", workflow: "Workflow", batch: "Em lote", pricing: "Preços", api: "API", login: "Entrar", start: "Começar" },
+  nav: { tools: "Ferramentas", workflow: "Workflow", batch: "Em lote", pricing: "Preços", login: "Entrar", start: "Começar" },
   toolsMenu: {
     featured: "Em destaque", categories: "Categorias", all: "Todas", new: "Novo",
     featuredItems: {
@@ -222,7 +221,7 @@ const pt: ChromeStrings = {
       utmBuilder: "Gerador de UTM", qrGenerator: "Gerador de código QR", pdfToJpg: "PDF para JPG",
     },
   },
-  footer: { tagline: "Ferramentas de conversão online grátis — arquivos, imagens, código, texto e mais. Uma ferramenta simples por tarefa.", gdprBadge: "Em conformidade com o RGPD · Arquivos nunca armazenados", topTools: "Ferramentas em destaque", product: "Produto", legal: "Legal", pricing: "Preços", api: "API", dashboard: "Painel", vsVeed: "vs VEED.io", privacy: "Privacidade", terms: "Termos", rights: "Todos os direitos reservados." },
+  footer: { tagline: "Ferramentas de conversão online grátis — arquivos, imagens, código, texto e mais. Uma ferramenta simples por tarefa.", gdprBadge: "Em conformidade com o RGPD · Arquivos nunca armazenados", topTools: "Ferramentas em destaque", product: "Produto", legal: "Legal", pricing: "Preços", dashboard: "Painel", vsVeed: "vs VEED.io", privacy: "Privacidade", terms: "Termos", rights: "Todos os direitos reservados." },
   card: { open: "Abrir", pro: "Pro" },
   account: { billing: "Faturamento", logout: "Sair" },
   upload: { instant: "Conversão instantânea — no seu navegador, sem upload", dropOrClick: "Solte seu arquivo ou clique para enviar", dropHere: "Solte o arquivo aqui", formats: "Formatos aceitos", maxFree: "Máx. {mb} MB no plano grátis.", selectFile: "Escolher arquivo", fileTooLarge: "Este arquivo tem {size}. Limite grátis: {mb} MB — vá Pro até 500 MB." },
@@ -239,7 +238,7 @@ const pt: ChromeStrings = {
 };
 
 const de: ChromeStrings = {
-  nav: { tools: "Tools", workflow: "Workflow", batch: "Stapel", pricing: "Preise", api: "API", login: "Anmelden", start: "Loslegen" },
+  nav: { tools: "Tools", workflow: "Workflow", batch: "Stapel", pricing: "Preise", login: "Anmelden", start: "Loslegen" },
   toolsMenu: {
     featured: "Empfohlen", categories: "Kategorien", all: "Alle", new: "Neu",
     featuredItems: {
@@ -255,7 +254,7 @@ const de: ChromeStrings = {
       utmBuilder: "UTM-Builder", qrGenerator: "QR-Code-Generator", pdfToJpg: "PDF zu JPG",
     },
   },
-  footer: { tagline: "Kostenlose Online-Konvertierungstools — Dateien, Bilder, Code, Text und mehr. Ein einfaches Tool pro Aufgabe.", gdprBadge: "DSGVO-konform · Dateien werden nie gespeichert", topTools: "Top-Tools", product: "Produkt", legal: "Rechtliches", pricing: "Preise", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Datenschutz", terms: "AGB", rights: "Alle Rechte vorbehalten." },
+  footer: { tagline: "Kostenlose Online-Konvertierungstools — Dateien, Bilder, Code, Text und mehr. Ein einfaches Tool pro Aufgabe.", gdprBadge: "DSGVO-konform · Dateien werden nie gespeichert", topTools: "Top-Tools", product: "Produkt", legal: "Rechtliches", pricing: "Preise", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Datenschutz", terms: "AGB", rights: "Alle Rechte vorbehalten." },
   card: { open: "Öffnen", pro: "Pro" },
   account: { billing: "Abrechnung", logout: "Abmelden" },
   upload: { instant: "Sofortige Konvertierung — im Browser, kein Upload nötig", dropOrClick: "Datei hier ablegen oder klicken zum Hochladen", dropHere: "Datei hier ablegen", formats: "Akzeptierte Formate", maxFree: "Max. {mb} MB im Gratis-Plan.", selectFile: "Datei wählen", fileTooLarge: "Diese Datei ist {size}. Gratis-Limit: {mb} MB — Pro bis 500 MB." },
@@ -272,7 +271,7 @@ const de: ChromeStrings = {
 };
 
 const it: ChromeStrings = {
-  nav: { tools: "Strumenti", workflow: "Workflow", batch: "In blocco", pricing: "Prezzi", api: "API", login: "Accedi", start: "Inizia" },
+  nav: { tools: "Strumenti", workflow: "Workflow", batch: "In blocco", pricing: "Prezzi", login: "Accedi", start: "Inizia" },
   toolsMenu: {
     featured: "In evidenza", categories: "Categorie", all: "Tutti", new: "Novità",
     featuredItems: {
@@ -288,7 +287,7 @@ const it: ChromeStrings = {
       utmBuilder: "Generatore UTM", qrGenerator: "Generatore di codici QR", pdfToJpg: "PDF in JPG",
     },
   },
-  footer: { tagline: "Strumenti di conversione online gratuiti — file, immagini, codice, testo e altro. Uno strumento semplice per attività.", gdprBadge: "Conforme al GDPR · File mai memorizzati", topTools: "Strumenti principali", product: "Prodotto", legal: "Legale", pricing: "Prezzi", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Termini", rights: "Tutti i diritti riservati." },
+  footer: { tagline: "Strumenti di conversione online gratuiti — file, immagini, codice, testo e altro. Uno strumento semplice per attività.", gdprBadge: "Conforme al GDPR · File mai memorizzati", topTools: "Strumenti principali", product: "Prodotto", legal: "Legale", pricing: "Prezzi", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Termini", rights: "Tutti i diritti riservati." },
   card: { open: "Apri", pro: "Pro" },
   account: { billing: "Fatturazione", logout: "Esci" },
   upload: { instant: "Conversione istantanea — nel browser, nessun upload", dropOrClick: "Trascina il file o clicca per caricare", dropHere: "Rilascia il file qui", formats: "Formati accettati", maxFree: "Max {mb} MB nel piano gratuito.", selectFile: "Scegli un file", fileTooLarge: "Questo file è {size}. Limite gratis: {mb} MB — passa a Pro fino a 500 MB." },
@@ -305,7 +304,7 @@ const it: ChromeStrings = {
 };
 
 const nl: ChromeStrings = {
-  nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Prijzen", api: "API", login: "Inloggen", start: "Aan de slag" },
+  nav: { tools: "Tools", workflow: "Workflow", batch: "Batch", pricing: "Prijzen", login: "Inloggen", start: "Aan de slag" },
   toolsMenu: {
     featured: "Uitgelicht", categories: "Categorieën", all: "Alle", new: "Nieuw",
     featuredItems: {
@@ -321,7 +320,7 @@ const nl: ChromeStrings = {
       utmBuilder: "UTM-builder", qrGenerator: "QR-codegenerator", pdfToJpg: "PDF naar JPG",
     },
   },
-  footer: { tagline: "Gratis online conversietools — bestanden, afbeeldingen, code, tekst en meer. Eén eenvoudige tool per taak.", gdprBadge: "AVG-conform · Bestanden nooit opgeslagen", topTools: "Top-tools", product: "Product", legal: "Juridisch", pricing: "Prijzen", api: "API", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Voorwaarden", rights: "Alle rechten voorbehouden." },
+  footer: { tagline: "Gratis online conversietools — bestanden, afbeeldingen, code, tekst en meer. Eén eenvoudige tool per taak.", gdprBadge: "AVG-conform · Bestanden nooit opgeslagen", topTools: "Top-tools", product: "Product", legal: "Juridisch", pricing: "Prijzen", dashboard: "Dashboard", vsVeed: "vs VEED.io", privacy: "Privacy", terms: "Voorwaarden", rights: "Alle rechten voorbehouden." },
   card: { open: "Openen", pro: "Pro" },
   account: { billing: "Facturering", logout: "Uitloggen" },
   upload: { instant: "Directe conversie — in je browser, geen upload nodig", dropOrClick: "Sleep je bestand of klik om te uploaden", dropHere: "Bestand hier neerzetten", formats: "Geaccepteerde formaten", maxFree: "Max. {mb} MB op het gratis abonnement.", selectFile: "Bestand kiezen", fileTooLarge: "Dit bestand is {size}. Gratis limiet: {mb} MB — upgrade naar Pro tot 500 MB." },
@@ -338,7 +337,7 @@ const nl: ChromeStrings = {
 };
 
 const ja: ChromeStrings = {
-  nav: { tools: "ツール", workflow: "ワークフロー", batch: "一括処理", pricing: "料金", api: "API", login: "ログイン", start: "始める" },
+  nav: { tools: "ツール", workflow: "ワークフロー", batch: "一括処理", pricing: "料金", login: "ログイン", start: "始める" },
   toolsMenu: {
     featured: "おすすめ", categories: "カテゴリー", all: "すべて", new: "新着",
     featuredItems: {
@@ -354,7 +353,7 @@ const ja: ChromeStrings = {
       utmBuilder: "UTM ビルダー", qrGenerator: "QR コード生成", pdfToJpg: "PDF を JPG に",
     },
   },
-  footer: { tagline: "無料のオンライン変換ツール — ファイル、画像、コード、テキストなど。作業ごとにシンプルなツール 1 つ。", gdprBadge: "GDPR 準拠 · ファイルは保存されません", topTools: "主要ツール", product: "プロダクト", legal: "法的事項", pricing: "料金", api: "API", dashboard: "ダッシュボード", vsVeed: "VEED.io との比較", privacy: "プライバシー", terms: "利用規約", rights: "All rights reserved." },
+  footer: { tagline: "無料のオンライン変換ツール — ファイル、画像、コード、テキストなど。作業ごとにシンプルなツール 1 つ。", gdprBadge: "GDPR 準拠 · ファイルは保存されません", topTools: "主要ツール", product: "プロダクト", legal: "法的事項", pricing: "料金", dashboard: "ダッシュボード", vsVeed: "VEED.io との比較", privacy: "プライバシー", terms: "利用規約", rights: "All rights reserved." },
   card: { open: "開く", pro: "Pro" },
   account: { billing: "請求", logout: "ログアウト" },
   upload: { instant: "即時変換 — ブラウザ内で実行、アップロード不要", dropOrClick: "ファイルをドロップまたはクリックしてアップロード", dropHere: "ここにファイルをドロップ", formats: "対応形式", maxFree: "無料プランは最大 {mb} MB。", selectFile: "ファイルを選択", fileTooLarge: "このファイルは {size} です。無料の上限は {mb} MB — Pro なら 500 MB まで。" },
@@ -371,7 +370,7 @@ const ja: ChromeStrings = {
 };
 
 const zh: ChromeStrings = {
-  nav: { tools: "工具", workflow: "工作流", batch: "批量", pricing: "价格", api: "API", login: "登录", start: "开始使用" },
+  nav: { tools: "工具", workflow: "工作流", batch: "批量", pricing: "价格", login: "登录", start: "开始使用" },
   toolsMenu: {
     featured: "精选", categories: "分类", all: "全部", new: "新增",
     featuredItems: {
@@ -387,7 +386,7 @@ const zh: ChromeStrings = {
       utmBuilder: "UTM 构建器", qrGenerator: "二维码生成器", pdfToJpg: "PDF 转 JPG",
     },
   },
-  footer: { tagline: "免费在线转换工具 — 文件、图像、代码、文本等。每项任务一个简单工具。", gdprBadge: "符合 GDPR · 文件从不存储", topTools: "热门工具", product: "产品", legal: "法律", pricing: "价格", api: "API", dashboard: "面板", vsVeed: "对比 VEED.io", privacy: "隐私", terms: "条款", rights: "保留所有权利。" },
+  footer: { tagline: "免费在线转换工具 — 文件、图像、代码、文本等。每项任务一个简单工具。", gdprBadge: "符合 GDPR · 文件从不存储", topTools: "热门工具", product: "产品", legal: "法律", pricing: "价格", dashboard: "面板", vsVeed: "对比 VEED.io", privacy: "隐私", terms: "条款", rights: "保留所有权利。" },
   card: { open: "打开", pro: "Pro" },
   account: { billing: "账单", logout: "退出登录" },
   upload: { instant: "即时转换 — 在浏览器中运行,无需上传", dropOrClick: "拖入文件或点击上传", dropHere: "将文件拖到这里", formats: "支持的格式", maxFree: "免费版最大 {mb} MB。", selectFile: "选择文件", fileTooLarge: "此文件 {size}。免费上限 {mb} MB — 升级 Pro 最大 500 MB。" },
@@ -404,7 +403,7 @@ const zh: ChromeStrings = {
 };
 
 const ko: ChromeStrings = {
-  nav: { tools: "도구", workflow: "워크플로", batch: "일괄", pricing: "요금", api: "API", login: "로그인", start: "시작하기" },
+  nav: { tools: "도구", workflow: "워크플로", batch: "일괄", pricing: "요금", login: "로그인", start: "시작하기" },
   toolsMenu: {
     featured: "추천", categories: "카테고리", all: "전체", new: "신규",
     featuredItems: {
@@ -420,7 +419,7 @@ const ko: ChromeStrings = {
       utmBuilder: "UTM 빌더", qrGenerator: "QR 코드 생성기", pdfToJpg: "PDF를 JPG로",
     },
   },
-  footer: { tagline: "무료 온라인 변환 도구 — 파일, 이미지, 코드, 텍스트 등. 작업마다 간단한 도구 하나.", gdprBadge: "GDPR 준수 · 파일은 저장되지 않습니다", topTools: "주요 도구", product: "프로덕트", legal: "법적 사항", pricing: "요금", api: "API", dashboard: "대시보드", vsVeed: "VEED.io 비교", privacy: "개인정보", terms: "이용약관", rights: "All rights reserved." },
+  footer: { tagline: "무료 온라인 변환 도구 — 파일, 이미지, 코드, 텍스트 등. 작업마다 간단한 도구 하나.", gdprBadge: "GDPR 준수 · 파일은 저장되지 않습니다", topTools: "주요 도구", product: "프로덕트", legal: "법적 사항", pricing: "요금", dashboard: "대시보드", vsVeed: "VEED.io 비교", privacy: "개인정보", terms: "이용약관", rights: "All rights reserved." },
   card: { open: "열기", pro: "Pro" },
   account: { billing: "결제", logout: "로그아웃" },
   upload: { instant: "즉시 변환 — 브라우저에서 실행, 업로드 불필요", dropOrClick: "파일을 끌어다 놓거나 클릭하여 업로드", dropHere: "여기에 파일을 놓으세요", formats: "지원 형식", maxFree: "무료 플랜은 최대 {mb} MB.", selectFile: "파일 선택", fileTooLarge: "이 파일은 {size} 입니다. 무료 한도 {mb} MB — Pro 는 최대 500 MB." },
@@ -437,7 +436,7 @@ const ko: ChromeStrings = {
 };
 
 const ar: ChromeStrings = {
-  nav: { tools: "الأدوات", workflow: "سير العمل", batch: "دفعة", pricing: "الأسعار", api: "API", login: "تسجيل الدخول", start: "ابدأ" },
+  nav: { tools: "الأدوات", workflow: "سير العمل", batch: "دفعة", pricing: "الأسعار", login: "تسجيل الدخول", start: "ابدأ" },
   toolsMenu: {
     featured: "مميّزة", categories: "الفئات", all: "الكل", new: "جديد",
     featuredItems: {
@@ -453,7 +452,7 @@ const ar: ChromeStrings = {
       utmBuilder: "منشئ UTM", qrGenerator: "منشئ رمز QR", pdfToJpg: "PDF إلى JPG",
     },
   },
-  footer: { tagline: "أدوات تحويل مجانية عبر الإنترنت — ملفات وصور وأكواد ونصوص والمزيد. أداة بسيطة لكل مهمة.", gdprBadge: "متوافق مع GDPR · لا يتم تخزين الملفات أبدًا", topTools: "الأدوات الأساسية", product: "المنتج", legal: "قانوني", pricing: "الأسعار", api: "API", dashboard: "لوحة التحكم", vsVeed: "مقارنة بـ VEED.io", privacy: "الخصوصية", terms: "الشروط", rights: "جميع الحقوق محفوظة." },
+  footer: { tagline: "أدوات تحويل مجانية عبر الإنترنت — ملفات وصور وأكواد ونصوص والمزيد. أداة بسيطة لكل مهمة.", gdprBadge: "متوافق مع GDPR · لا يتم تخزين الملفات أبدًا", topTools: "الأدوات الأساسية", product: "المنتج", legal: "قانوني", pricing: "الأسعار", dashboard: "لوحة التحكم", vsVeed: "مقارنة بـ VEED.io", privacy: "الخصوصية", terms: "الشروط", rights: "جميع الحقوق محفوظة." },
   card: { open: "افتح", pro: "Pro" },
   account: { billing: "الفوترة", logout: "تسجيل الخروج" },
   upload: { instant: "تحويل فوري — داخل متصفحك، بلا رفع", dropOrClick: "أفلت ملفك أو انقر للرفع", dropHere: "أفلت الملف هنا", formats: "الصيغ المقبولة", maxFree: "أقصى {mb} ميجا في الخطة المجانية.", selectFile: "اختر ملفًا", fileTooLarge: "هذا الملف {size}. الحد المجاني {mb} ميجا — Pro حتى 500 ميجا." },
@@ -470,7 +469,7 @@ const ar: ChromeStrings = {
 };
 
 const ru: ChromeStrings = {
-  nav: { tools: "Инструменты", workflow: "Процессы", batch: "Пакетно", pricing: "Тарифы", api: "API", login: "Войти", start: "Начать" },
+  nav: { tools: "Инструменты", workflow: "Процессы", batch: "Пакетно", pricing: "Тарифы", login: "Войти", start: "Начать" },
   toolsMenu: {
     featured: "Рекомендуемые", categories: "Категории", all: "Все", new: "Новое",
     featuredItems: {
@@ -486,7 +485,7 @@ const ru: ChromeStrings = {
       utmBuilder: "Конструктор UTM", qrGenerator: "Генератор QR-кодов", pdfToJpg: "PDF в JPG",
     },
   },
-  footer: { tagline: "Бесплатные онлайн-инструменты конвертации — файлы, изображения, код, текст и другое. Один простой инструмент на задачу.", gdprBadge: "Соответствует GDPR · Файлы никогда не хранятся", topTools: "Основные инструменты", product: "Продукт", legal: "Правовое", pricing: "Тарифы", api: "API", dashboard: "Панель", vsVeed: "Сравнение с VEED.io", privacy: "Конфиденциальность", terms: "Условия", rights: "Все права защищены." },
+  footer: { tagline: "Бесплатные онлайн-инструменты конвертации — файлы, изображения, код, текст и другое. Один простой инструмент на задачу.", gdprBadge: "Соответствует GDPR · Файлы никогда не хранятся", topTools: "Основные инструменты", product: "Продукт", legal: "Правовое", pricing: "Тарифы", dashboard: "Панель", vsVeed: "Сравнение с VEED.io", privacy: "Конфиденциальность", terms: "Условия", rights: "Все права защищены." },
   card: { open: "Открыть", pro: "Pro" },
   account: { billing: "Оплата", logout: "Выйти" },
   upload: { instant: "Мгновенная конвертация — в браузере, без загрузки", dropOrClick: "Перетащите файл или нажмите для загрузки", dropHere: "Бросьте файл сюда", formats: "Допустимые форматы", maxFree: "Макс. {mb} МБ на бесплатном тарифе.", selectFile: "Выбрать файл", fileTooLarge: "Файл размером {size}. Бесплатный лимит {mb} МБ — Pro до 500 МБ." },
@@ -503,7 +502,7 @@ const ru: ChromeStrings = {
 };
 
 const hi: ChromeStrings = {
-  nav: { tools: "टूल", workflow: "वर्कफ़्लो", batch: "बैच", pricing: "मूल्य", api: "API", login: "लॉग इन", start: "शुरू करें" },
+  nav: { tools: "टूल", workflow: "वर्कफ़्लो", batch: "बैच", pricing: "मूल्य", login: "लॉग इन", start: "शुरू करें" },
   toolsMenu: {
     featured: "विशेष", categories: "श्रेणियाँ", all: "सभी", new: "नया",
     featuredItems: {
@@ -519,7 +518,7 @@ const hi: ChromeStrings = {
       utmBuilder: "UTM बिल्डर", qrGenerator: "QR कोड जनरेटर", pdfToJpg: "PDF से JPG",
     },
   },
-  footer: { tagline: "मुफ़्त ऑनलाइन रूपांतरण टूल — फ़ाइलें, इमेज, कोड, टेक्स्ट और बहुत कुछ। हर काम के लिए एक सरल टूल।", gdprBadge: "GDPR अनुपालन · फ़ाइलें कभी संग्रहीत नहीं", topTools: "मुख्य टूल", product: "उत्पाद", legal: "क़ानूनी", pricing: "मूल्य", api: "API", dashboard: "डैशबोर्ड", vsVeed: "VEED.io से तुलना", privacy: "गोपनीयता", terms: "शर्तें", rights: "सर्वाधिकार सुरक्षित।" },
+  footer: { tagline: "मुफ़्त ऑनलाइन रूपांतरण टूल — फ़ाइलें, इमेज, कोड, टेक्स्ट और बहुत कुछ। हर काम के लिए एक सरल टूल।", gdprBadge: "GDPR अनुपालन · फ़ाइलें कभी संग्रहीत नहीं", topTools: "मुख्य टूल", product: "उत्पाद", legal: "क़ानूनी", pricing: "मूल्य", dashboard: "डैशबोर्ड", vsVeed: "VEED.io से तुलना", privacy: "गोपनीयता", terms: "शर्तें", rights: "सर्वाधिकार सुरक्षित।" },
   card: { open: "खोलें", pro: "Pro" },
   account: { billing: "बिलिंग", logout: "लॉग आउट" },
   upload: { instant: "तुरंत रूपांतरण — आपके ब्राउज़र में, अपलोड की ज़रूरत नहीं", dropOrClick: "फ़ाइल छोड़ें या अपलोड करने के लिए क्लिक करें", dropHere: "फ़ाइल यहाँ छोड़ें", formats: "स्वीकृत प्रारूप", maxFree: "मुफ़्त प्लान में अधिकतम {mb} MB।", selectFile: "फ़ाइल चुनें", fileTooLarge: "यह फ़ाइल {size} है. मुफ़्त सीमा {mb} MB — Pro में 500 MB तक।" },
@@ -536,7 +535,7 @@ const hi: ChromeStrings = {
 };
 
 const tr: ChromeStrings = {
-  nav: { tools: "Araçlar", workflow: "İş akışı", batch: "Toplu", pricing: "Fiyatlar", api: "API", login: "Giriş yap", start: "Başla" },
+  nav: { tools: "Araçlar", workflow: "İş akışı", batch: "Toplu", pricing: "Fiyatlar", login: "Giriş yap", start: "Başla" },
   toolsMenu: {
     featured: "Öne çıkanlar", categories: "Kategoriler", all: "Tümü", new: "Yeni",
     featuredItems: {
@@ -552,7 +551,7 @@ const tr: ChromeStrings = {
       utmBuilder: "UTM oluşturucu", qrGenerator: "QR kod oluşturucu", pdfToJpg: "PDF'den JPG'ye",
     },
   },
-  footer: { tagline: "Ücretsiz çevrimiçi dönüştürme araçları — dosyalar, görüntüler, kod, metin ve daha fazlası. Her iş için tek bir basit araç.", gdprBadge: "GDPR uyumlu · Dosyalar asla saklanmaz", topTools: "En iyi araçlar", product: "Ürün", legal: "Yasal", pricing: "Fiyatlar", api: "API", dashboard: "Panel", vsVeed: "VEED.io karşılaştırması", privacy: "Gizlilik", terms: "Şartlar", rights: "Tüm hakları saklıdır." },
+  footer: { tagline: "Ücretsiz çevrimiçi dönüştürme araçları — dosyalar, görüntüler, kod, metin ve daha fazlası. Her iş için tek bir basit araç.", gdprBadge: "GDPR uyumlu · Dosyalar asla saklanmaz", topTools: "En iyi araçlar", product: "Ürün", legal: "Yasal", pricing: "Fiyatlar", dashboard: "Panel", vsVeed: "VEED.io karşılaştırması", privacy: "Gizlilik", terms: "Şartlar", rights: "Tüm hakları saklıdır." },
   card: { open: "Aç", pro: "Pro" },
   account: { billing: "Faturalandırma", logout: "Çıkış yap" },
   upload: { instant: "Anında dönüştürme — tarayıcınızda çalışır, yükleme gerekmez", dropOrClick: "Dosyanızı bırakın veya yüklemek için tıklayın", dropHere: "Dosyayı buraya bırakın", formats: "Kabul edilen biçimler", maxFree: "Ücretsiz planda en fazla {mb} MB.", selectFile: "Dosya seç", fileTooLarge: "Bu dosya {size}. Ücretsiz sınır {mb} MB — 500 MB'a kadar için Pro'ya geçin." },
@@ -569,7 +568,7 @@ const tr: ChromeStrings = {
 };
 
 const id: ChromeStrings = {
-  nav: { tools: "Alat", workflow: "Alur kerja", batch: "Massal", pricing: "Harga", api: "API", login: "Masuk", start: "Mulai" },
+  nav: { tools: "Alat", workflow: "Alur kerja", batch: "Massal", pricing: "Harga", login: "Masuk", start: "Mulai" },
   toolsMenu: {
     featured: "Unggulan", categories: "Kategori", all: "Semua", new: "Baru",
     featuredItems: {
@@ -585,7 +584,7 @@ const id: ChromeStrings = {
       utmBuilder: "Pembuat UTM", qrGenerator: "Pembuat kode QR", pdfToJpg: "PDF ke JPG",
     },
   },
-  footer: { tagline: "Alat konversi online gratis — file, gambar, kode, teks, dan lainnya. Satu alat sederhana per tugas.", gdprBadge: "Patuh GDPR · File tidak pernah disimpan", topTools: "Alat unggulan", product: "Produk", legal: "Hukum", pricing: "Harga", api: "API", dashboard: "Dasbor", vsVeed: "vs VEED.io", privacy: "Privasi", terms: "Ketentuan", rights: "Semua hak dilindungi." },
+  footer: { tagline: "Alat konversi online gratis — file, gambar, kode, teks, dan lainnya. Satu alat sederhana per tugas.", gdprBadge: "Patuh GDPR · File tidak pernah disimpan", topTools: "Alat unggulan", product: "Produk", legal: "Hukum", pricing: "Harga", dashboard: "Dasbor", vsVeed: "vs VEED.io", privacy: "Privasi", terms: "Ketentuan", rights: "Semua hak dilindungi." },
   card: { open: "Buka", pro: "Pro" },
   account: { billing: "Penagihan", logout: "Keluar" },
   upload: { instant: "Konversi instan — berjalan di browser Anda, tanpa unggah", dropOrClick: "Letakkan file Anda atau klik untuk mengunggah", dropHere: "Letakkan file di sini", formats: "Format yang diterima", maxFree: "Maks {mb} MB pada paket gratis.", selectFile: "Pilih file", fileTooLarge: "File ini {size}. Batas gratis {mb} MB — tingkatkan ke Pro hingga 500 MB." },
@@ -602,7 +601,7 @@ const id: ChromeStrings = {
 };
 
 const vi: ChromeStrings = {
-  nav: { tools: "Công cụ", workflow: "Quy trình", batch: "Hàng loạt", pricing: "Giá", api: "API", login: "Đăng nhập", start: "Bắt đầu" },
+  nav: { tools: "Công cụ", workflow: "Quy trình", batch: "Hàng loạt", pricing: "Giá", login: "Đăng nhập", start: "Bắt đầu" },
   toolsMenu: {
     featured: "Nổi bật", categories: "Danh mục", all: "Tất cả", new: "Mới",
     featuredItems: {
@@ -618,7 +617,7 @@ const vi: ChromeStrings = {
       utmBuilder: "Trình tạo UTM", qrGenerator: "Trình tạo mã QR", pdfToJpg: "PDF sang JPG",
     },
   },
-  footer: { tagline: "Công cụ chuyển đổi trực tuyến miễn phí — tệp, hình ảnh, mã, văn bản và hơn thế. Một công cụ đơn giản cho mỗi tác vụ.", gdprBadge: "Tuân thủ GDPR · Tệp không bao giờ được lưu trữ", topTools: "Công cụ hàng đầu", product: "Sản phẩm", legal: "Pháp lý", pricing: "Giá", api: "API", dashboard: "Bảng điều khiển", vsVeed: "So với VEED.io", privacy: "Quyền riêng tư", terms: "Điều khoản", rights: "Bảo lưu mọi quyền." },
+  footer: { tagline: "Công cụ chuyển đổi trực tuyến miễn phí — tệp, hình ảnh, mã, văn bản và hơn thế. Một công cụ đơn giản cho mỗi tác vụ.", gdprBadge: "Tuân thủ GDPR · Tệp không bao giờ được lưu trữ", topTools: "Công cụ hàng đầu", product: "Sản phẩm", legal: "Pháp lý", pricing: "Giá", dashboard: "Bảng điều khiển", vsVeed: "So với VEED.io", privacy: "Quyền riêng tư", terms: "Điều khoản", rights: "Bảo lưu mọi quyền." },
   card: { open: "Mở", pro: "Pro" },
   account: { billing: "Thanh toán", logout: "Đăng xuất" },
   upload: { instant: "Chuyển đổi tức thì — chạy trong trình duyệt, không cần tải lên", dropOrClick: "Thả tệp của bạn hoặc nhấp để tải lên", dropHere: "Thả tệp vào đây", formats: "Định dạng được chấp nhận", maxFree: "Tối đa {mb} MB ở gói miễn phí.", selectFile: "Chọn tệp", fileTooLarge: "Tệp này {size}. Giới hạn miễn phí {mb} MB — nâng cấp Pro lên đến 500 MB." },
@@ -635,7 +634,7 @@ const vi: ChromeStrings = {
 };
 
 const sv: ChromeStrings = {
-  nav: { tools: "Verktyg", workflow: "Arbetsflöde", batch: "Batch", pricing: "Priser", api: "API", login: "Logga in", start: "Kom igång" },
+  nav: { tools: "Verktyg", workflow: "Arbetsflöde", batch: "Batch", pricing: "Priser", login: "Logga in", start: "Kom igång" },
   toolsMenu: {
     featured: "Utvalda", categories: "Kategorier", all: "Alla", new: "Nytt",
     featuredItems: {
@@ -651,7 +650,7 @@ const sv: ChromeStrings = {
       utmBuilder: "UTM-byggare", qrGenerator: "QR-kodgenerator", pdfToJpg: "PDF till JPG",
     },
   },
-  footer: { tagline: "Gratis onlineverktyg för konvertering — filer, bilder, kod, text och mer. Ett enkelt verktyg per uppgift.", gdprBadge: "GDPR-kompatibel · Filer lagras aldrig", topTools: "Toppverktyg", product: "Produkt", legal: "Juridik", pricing: "Priser", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Integritet", terms: "Villkor", rights: "Alla rättigheter förbehållna." },
+  footer: { tagline: "Gratis onlineverktyg för konvertering — filer, bilder, kod, text och mer. Ett enkelt verktyg per uppgift.", gdprBadge: "GDPR-kompatibel · Filer lagras aldrig", topTools: "Toppverktyg", product: "Produkt", legal: "Juridik", pricing: "Priser", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Integritet", terms: "Villkor", rights: "Alla rättigheter förbehållna." },
   card: { open: "Öppna", pro: "Pro" },
   account: { billing: "Fakturering", logout: "Logga ut" },
   upload: { instant: "Direkt konvertering — körs i din webbläsare, ingen uppladdning behövs", dropOrClick: "Släpp din fil eller klicka för att ladda upp", dropHere: "Släpp filen här", formats: "Accepterade format", maxFree: "Max {mb} MB på gratisplanen.", selectFile: "Välj en fil", fileTooLarge: "Den här filen är {size}. Gratisgränsen är {mb} MB — uppgradera till Pro för upp till 500 MB." },
@@ -668,7 +667,7 @@ const sv: ChromeStrings = {
 };
 
 const pl: ChromeStrings = {
-  nav: { tools: "Narzędzia", workflow: "Przepływ", batch: "Wsadowo", pricing: "Cennik", api: "API", login: "Zaloguj się", start: "Zacznij" },
+  nav: { tools: "Narzędzia", workflow: "Przepływ", batch: "Wsadowo", pricing: "Cennik", login: "Zaloguj się", start: "Zacznij" },
   toolsMenu: {
     featured: "Polecane", categories: "Kategorie", all: "Wszystkie", new: "Nowość",
     featuredItems: {
@@ -684,7 +683,7 @@ const pl: ChromeStrings = {
       utmBuilder: "Kreator UTM", qrGenerator: "Generator kodów QR", pdfToJpg: "PDF na JPG",
     },
   },
-  footer: { tagline: "Darmowe narzędzia konwersji online — pliki, obrazy, kod, tekst i więcej. Jedno proste narzędzie do każdego zadania.", gdprBadge: "Zgodny z RODO · Pliki nigdy nie są przechowywane", topTools: "Najlepsze narzędzia", product: "Produkt", legal: "Informacje prawne", pricing: "Cennik", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Prywatność", terms: "Warunki", rights: "Wszelkie prawa zastrzeżone." },
+  footer: { tagline: "Darmowe narzędzia konwersji online — pliki, obrazy, kod, tekst i więcej. Jedno proste narzędzie do każdego zadania.", gdprBadge: "Zgodny z RODO · Pliki nigdy nie są przechowywane", topTools: "Najlepsze narzędzia", product: "Produkt", legal: "Informacje prawne", pricing: "Cennik", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Prywatność", terms: "Warunki", rights: "Wszelkie prawa zastrzeżone." },
   card: { open: "Otwórz", pro: "Pro" },
   account: { billing: "Rozliczenia", logout: "Wyloguj się" },
   upload: { instant: "Natychmiastowa konwersja — działa w przeglądarce, bez przesyłania", dropOrClick: "Upuść plik lub kliknij, aby przesłać", dropHere: "Upuść plik tutaj", formats: "Akceptowane formaty", maxFree: "Maks. {mb} MB w planie darmowym.", selectFile: "Wybierz plik", fileTooLarge: "Ten plik ma {size}. Limit darmowy to {mb} MB — przejdź na Pro do 500 MB." },
@@ -701,7 +700,7 @@ const pl: ChromeStrings = {
 };
 
 const uk: ChromeStrings = {
-  nav: { tools: "Інструменти", workflow: "Процеси", batch: "Пакетно", pricing: "Ціни", api: "API", login: "Увійти", start: "Почати" },
+  nav: { tools: "Інструменти", workflow: "Процеси", batch: "Пакетно", pricing: "Ціни", login: "Увійти", start: "Почати" },
   toolsMenu: {
     featured: "Рекомендовані", categories: "Категорії", all: "Усі", new: "Нове",
     featuredItems: {
@@ -717,7 +716,7 @@ const uk: ChromeStrings = {
       utmBuilder: "Конструктор UTM", qrGenerator: "Генератор QR-кодів", pdfToJpg: "PDF у JPG",
     },
   },
-  footer: { tagline: "Безкоштовні онлайн-інструменти конвертації — файли, зображення, код, текст тощо. Один простий інструмент на завдання.", gdprBadge: "Відповідає GDPR · Файли ніколи не зберігаються", topTools: "Найкращі інструменти", product: "Продукт", legal: "Юридична інформація", pricing: "Ціни", api: "API", dashboard: "Панель", vsVeed: "проти VEED.io", privacy: "Конфіденційність", terms: "Умови", rights: "Усі права захищено." },
+  footer: { tagline: "Безкоштовні онлайн-інструменти конвертації — файли, зображення, код, текст тощо. Один простий інструмент на завдання.", gdprBadge: "Відповідає GDPR · Файли ніколи не зберігаються", topTools: "Найкращі інструменти", product: "Продукт", legal: "Юридична інформація", pricing: "Ціни", dashboard: "Панель", vsVeed: "проти VEED.io", privacy: "Конфіденційність", terms: "Умови", rights: "Усі права захищено." },
   card: { open: "Відкрити", pro: "Pro" },
   account: { billing: "Оплата", logout: "Вийти" },
   upload: { instant: "Миттєва конвертація — у вашому браузері, без завантаження", dropOrClick: "Перетягніть файл або натисніть, щоб завантажити", dropHere: "Перетягніть файл сюди", formats: "Прийнятні формати", maxFree: "Макс. {mb} МБ у безкоштовному плані.", selectFile: "Вибрати файл", fileTooLarge: "Цей файл {size}. Безкоштовний ліміт {mb} МБ — перейдіть на Pro до 500 МБ." },
@@ -734,7 +733,7 @@ const uk: ChromeStrings = {
 };
 
 const cs: ChromeStrings = {
-  nav: { tools: "Nástroje", workflow: "Workflow", batch: "Dávkově", pricing: "Ceny", api: "API", login: "Přihlásit se", start: "Začít" },
+  nav: { tools: "Nástroje", workflow: "Workflow", batch: "Dávkově", pricing: "Ceny", login: "Přihlásit se", start: "Začít" },
   toolsMenu: {
     featured: "Doporučené", categories: "Kategorie", all: "Vše", new: "Nové",
     featuredItems: {
@@ -750,7 +749,7 @@ const cs: ChromeStrings = {
       utmBuilder: "Tvůrce UTM", qrGenerator: "Generátor QR kódů", pdfToJpg: "PDF do JPG",
     },
   },
-  footer: { tagline: "Bezplatné online nástroje pro konverzi — soubory, obrázky, kód, text a další. Jeden jednoduchý nástroj na úkol.", gdprBadge: "V souladu s GDPR · Soubory se nikdy neukládají", topTools: "Hlavní nástroje", product: "Produkt", legal: "Právní informace", pricing: "Ceny", api: "API", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Soukromí", terms: "Podmínky", rights: "Všechna práva vyhrazena." },
+  footer: { tagline: "Bezplatné online nástroje pro konverzi — soubory, obrázky, kód, text a další. Jeden jednoduchý nástroj na úkol.", gdprBadge: "V souladu s GDPR · Soubory se nikdy neukládají", topTools: "Hlavní nástroje", product: "Produkt", legal: "Právní informace", pricing: "Ceny", dashboard: "Panel", vsVeed: "vs VEED.io", privacy: "Soukromí", terms: "Podmínky", rights: "Všechna práva vyhrazena." },
   card: { open: "Otevřít", pro: "Pro" },
   account: { billing: "Fakturace", logout: "Odhlásit se" },
   upload: { instant: "Okamžitá konverze — běží ve vašem prohlížeči, bez nahrávání", dropOrClick: "Přetáhněte soubor nebo klikněte pro nahrání", dropHere: "Sem přetáhněte soubor", formats: "Přijímané formáty", maxFree: "Max. {mb} MB v bezplatném plánu.", selectFile: "Vybrat soubor", fileTooLarge: "Tento soubor má {size}. Bezplatný limit je {mb} MB — přejděte na Pro až 500 MB." },

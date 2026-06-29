@@ -6,12 +6,12 @@
 // tools-config.ts and ignore this table — they're only limited by available
 // browser memory. The UI surfaces the soft hint below for those too.
 //
-// The Konvertools API gateway enforces the per-plan cap server-side
-// (supabase/functions/api-gateway/index.ts) — these UI values mirror it.
+// The server-assisted edge functions enforce the per-plan cap server-side;
+// these UI values mirror what they accept.
 
 import type { Plan } from "@/lib/ai-quotas";
 
-/** Hard per-plan upload cap (MB) used by the API gateway across every tool.
+/** Hard per-plan upload cap (MB) across every server-assisted tool.
  *  KONVER pricing: Free 20 MB · Pro 1 GB · Business 5 GB. */
 export const PLAN_FILE_MB: Record<Plan, number> = {
   free: 20,

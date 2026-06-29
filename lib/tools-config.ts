@@ -569,30 +569,6 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: baseFaqs("Auto-Sync", "video and audio files paired with SRT or VTT"),
   },
-  {
-    slug: "api",
-    phase: 3,
-    kind: "edge",
-    category: "subtitles",
-    icon: Terminal,
-    tone: "slate",
-    name: "Public API",
-    short: "REST endpoints to automate everything above.",
-    h1: "Konvertools API — Convert Anything Programmatically",
-    metaTitle: "Konvertools API — Convert Anything Programmatically | REST API",
-    metaDescription:
-      "The same engine that powers all Konvertools tools, available via REST API. Transcribe, translate, rephrase, remove backgrounds and more. Pay only for what you use.",
-    primaryKeyword: "file conversion api",
-    accept: [],
-    freeMaxMb: 0,
-    outputType: "JSON",
-    steps: [
-      { title: "Get an API key", body: "Available on the Business plan or pay-as-you-go." },
-      { title: "POST your job", body: "REST endpoints for every tool. Webhooks for long-running jobs." },
-      { title: "Receive your file", body: "JSON response with a signed download URL." },
-    ],
-    faqs: baseFaqs("the API", "the same formats as the web tools"),
-  },
 ];
 
 // ── Konvertools — Developer & Text (pure client-side, free & unlimited) ──────────
@@ -2795,7 +2771,6 @@ export const RELATED_TOOLS: Record<string, string[]> = {
   "batch-translate": ["translate-subtitles", "subtitle-generator", "add-subtitles-to-video"],
   "style-subtitles": ["add-subtitles-to-video", "tiktok-subtitles", "subtitle-editor"],
   "auto-sync": ["sync-subtitles", "subtitle-editor", "subtitle-generator"],
-  "api": ["subtitle-generator", "translate-subtitles", "add-subtitles-to-video"],
 };
 
 export type ComparisonRow = { feature: string; us: string; them: string };
@@ -2892,7 +2867,7 @@ export const ALTERNATIVES: AlternativeDef[] = [
     faqs: [
       { q: "Is Konvertools accurate enough vs HappyScribe?", a: "We use AI for transcription — modern accuracy across 30+ languages, with Pro at €25/month." },
       { q: "Do I need to talk to sales?", a: "No. Konvertools is fully self-serve — sign up and start in seconds." },
-      { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats, API access and priority support." },
+      { q: "Is it suitable for teams?", a: "Yes — the Business plan adds seats and priority support." },
       { q: "What does it cost?", a: "Free tier, Pro at €25/month, Business at €79/month. No hidden per-minute fees on the subscription plans." },
     ],
   },

@@ -5,12 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SubscriptionActions } from "@/components/billing/SubscriptionActions";
-import { BuyCreditsCard } from "@/components/billing/BuyCreditsCard";
 import { AiUsageCard } from "@/components/billing/AiUsageCard";
-import { CreditHistoryCard } from "@/components/billing/CreditHistoryCard";
 import { ReceiptText, ShieldCheck, ArrowLeft, CheckCircle2, CreditCard } from "lucide-react";
 import { PLANS, type PlanKey } from "@/lib/plans";
-import { BUSINESS_MONTHLY_CREDITS } from "@/lib/credits";
 import { getBilling } from "@/lib/i18n/account";
 import { getPlanFeatures } from "@/lib/i18n/plan-features";
 import { localePath, type Locale } from "@/lib/i18n/locales";
@@ -28,9 +25,6 @@ export async function BillingView({ locale }: { locale: Locale }) {
 
   let email: string | null = null;
   let plan: AccountPlan = "free";
-  let credits = 0;
-  let purchasedCredits = 0;
-  let monthlyGrant = 0;
   let subStatus: string | null = null;
   let renewsAt: string | null = null;
   let lsSubscriptionId: string | null = null;
@@ -46,7 +40,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
       email = userData.user.email ?? null;
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, credits, monthly_credits, monthly_credits_month, ls_subscription_status, ls_renews_at, ls_subscription_id, ls_customer_id")
+        .select("plan, ls_subscription_status, ls_renews_at, ls_subscription_id, ls_customer_id")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as AccountPlan | undefined) ?? "free");
@@ -54,10 +48,6 @@ export async function BillingView({ locale }: { locale: Locale }) {
       renewsAt = (profile?.ls_renews_at as string | null) ?? null;
       lsSubscriptionId = (profile?.ls_subscription_id as string | null) ?? null;
       lsCustomerId = (profile?.ls_customer_id as string | null) ?? null;
-      const thisMonth = new Date().toISOString().slice(0, 7);
-      monthlyGrant = profile?.monthly_credits_month === thisMonth ? (profile?.monthly_credits ?? 0) : 0;
-      purchasedCredits = profile?.credits ?? 0;
-      credits = purchasedCredits + monthlyGrant;
     }
   } catch {
     needsLogin = true;
@@ -176,9 +166,6 @@ export async function BillingView({ locale }: { locale: Locale }) {
                     </li>
                   ))}
                 </ul>
-                {plan === "business" && (
-                  <p className="mt-3 text-xs text-ink-400">{s.businessCreditsNote(BUSINESS_MONTHLY_CREDITS.toLocaleString(locale))}</p>
-                )}
               </CardContent>
             </Card>
           )}
@@ -187,33 +174,7 @@ export async function BillingView({ locale }: { locale: Locale }) {
         {/* ── Right: usage & history ─────────────────────────────── */}
         <div className="space-y-6">
           <AiUsageCard locale={locale} />
-          <CreditHistoryCard locale={locale} />
         </div>
-      </div>
-
-      {/* ── Credits (embedded purchase, full width) ──────────────── */}
-      <div className="mt-6">
-        <div className="mb-2 flex items-baseline justify-between">
-          <h2 className="text-lg font-semibold text-ink-900">{s.apiCredits}</h2>
-          <span className="text-sm text-ink-500">
-            {s.balance} <span className="font-semibold text-ink-900">{credits.toLocaleString(locale)}</span>
-          </span>
-        </div>
-        {credits > 0 && (
-          <div className="mb-3 grid gap-2 rounded-lg border border-ink-100 bg-white p-3 text-sm sm:grid-cols-2">
-            {plan === "business" && (
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-ink-600">{s.monthlyBusiness}</span>
-                <span className="text-ink-900"><span className="font-medium">{monthlyGrant.toLocaleString(locale)}</span> / {BUSINESS_MONTHLY_CREDITS.toLocaleString(locale)} · {s.resets1st}</span>
-              </div>
-            )}
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-ink-600">{s.purchasedPacks}</span>
-              <span className="text-ink-900"><span className="font-medium">{purchasedCredits.toLocaleString(locale)}</span> · {s.neverExpire}</span>
-            </div>
-          </div>
-        )}
-        <BuyCreditsCard locale={locale} />
       </div>
 
       {/* ── Invoices ─────────────────────────────────────────────── */}

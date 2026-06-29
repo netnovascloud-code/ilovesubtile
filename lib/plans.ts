@@ -34,7 +34,6 @@ export const PLANS = {
     features: [
       "3,000 AI conversions / month",
       "Everything in Pro",
-      "Full REST API + 300 API credits / month",
       "Text up to 100,000 characters",
       "Unlimited batch",
       "Unlimited templates",

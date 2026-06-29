@@ -144,9 +144,9 @@ export const VS: Record<string, Vs> = {
     hero: "Konvertools vs CloudConvert — Free Alternative, No Credits",
     metaTitle: "Konvertools vs CloudConvert — Free, No Credits | Konvertools",
     metaDescription: "Konvertools vs CloudConvert compared: no per-conversion credit system on free browser tools, instant local processing, plus AI text and subtitle tools.",
-    intro: "CloudConvert meters everything with a credit/minute system. Konvertools's browser tools are free and uncounted — the credits only exist for the optional REST API.",
+    intro: "CloudConvert meters everything with a credit/minute system. Konvertools's browser tools are free and uncounted — no credits, no per-conversion metering.",
     rows: [
-      { feature: "Pricing model", konver: "Free browser tools; API credits optional", them: "Credits/minutes for everything", win: true },
+      { feature: "Pricing model", konver: "Free browser tools, no credits", them: "Credits/minutes for everything", win: true },
       { feature: "Free tier", konver: "Unlimited browser tools", them: "25 conversions/day", win: true },
       { feature: "Upload required", konver: "No for most tools", them: "Yes, always", win: true },
       { feature: "Speed", konver: "Instant (local)", them: "Upload + queue", win: true },

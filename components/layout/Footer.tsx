@@ -66,11 +66,6 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href={localePath(locale, "api")} className="hover:text-ink-900">
-                {t.api}
-              </Link>
-            </li>
-            <li>
               <Link href="/dashboard" prefetch={false} className="hover:text-ink-900">
                 {t.dashboard}
               </Link>

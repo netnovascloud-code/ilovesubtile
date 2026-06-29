@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Coins, Sparkles, Activity, BadgeCheck } from "lucide-react";
+import { Sparkles, Activity, BadgeCheck } from "lucide-react";
 import { getDashboard } from "@/lib/i18n/account";
 import { type Locale } from "@/lib/i18n/locales";
 
@@ -32,9 +32,8 @@ function useCountUp(target: number, run: boolean, ms = 1000): number {
  * Numbers render at their final value on the server, then count up when the
  * row scrolls into view.
  */
-export function DashboardKpis({ locale, credits, aiUsed, aiLimit, aiKind, recentJobs, plan, planSubtitle }: {
+export function DashboardKpis({ locale, aiUsed, aiLimit, aiKind, recentJobs, plan, planSubtitle }: {
   locale: Locale;
-  credits: number;
   aiUsed: number;
   aiLimit: number;
   aiKind: "daily" | "monthly";
@@ -57,7 +56,6 @@ export function DashboardKpis({ locale, credits, aiUsed, aiLimit, aiKind, recent
   }, []);
 
   const fmt = (n: number) => n.toLocaleString(locale);
-  const credN = useCountUp(credits, shown);
   const usedN = useCountUp(aiUsed, shown);
   const jobsN = useCountUp(recentJobs, shown);
   const atLimit = aiUsed >= aiLimit;
@@ -65,14 +63,13 @@ export function DashboardKpis({ locale, credits, aiUsed, aiLimit, aiKind, recent
 
   type Card = { icon: ReactNode; tone: string; label: string; value: string; sub: string; cap?: boolean; subClass?: string };
   const cards: Card[] = [
-    { icon: <Coins className="h-5 w-5" />, tone: "bg-amber-50 text-amber-600", label: s.kpiCredits, value: fmt(credN), sub: "" },
     { icon: <Sparkles className="h-5 w-5" />, tone: "bg-brand-50 text-brand-600", label: s.aiUsage, value: `${fmt(usedN)} / ${fmt(aiLimit)}`, sub: usagePeriod, subClass: atLimit ? "text-amber-700" : undefined },
     { icon: <Activity className="h-5 w-5" />, tone: "bg-emerald-50 text-emerald-600", label: s.recentJobsCard, value: `${fmt(jobsN)}${recentJobs >= 20 ? "+" : ""}`, sub: s.upTo20 },
     { icon: <BadgeCheck className="h-5 w-5" />, tone: "bg-indigo-50 text-indigo-600", label: s.plan, value: plan, cap: true, sub: planSubtitle ?? (plan === "free" ? s.noActiveSub : "") },
   ];
 
   return (
-    <div ref={ref} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div ref={ref} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((c, i) => (
         <div key={i} className="rounded-xl border border-ink-100 bg-white p-5 shadow-card transition-shadow hover:shadow-cardHover">
           <div className={`grid h-10 w-10 place-items-center rounded-lg ${c.tone}`}>{c.icon}</div>

@@ -123,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   // Other top-level pages — English only.
-  for (const p of ["/api", "/translator", "/rephraser", "/ai-humanizer", "/batch", "/workflow", "/privacy", "/terms", "/refund"]) {
+  for (const p of ["/translator", "/rephraser", "/ai-humanizer", "/batch", "/workflow", "/privacy", "/terms", "/refund"]) {
     entries.push({
       url: `${SITE_URL}${p}`,
       lastModified: now,

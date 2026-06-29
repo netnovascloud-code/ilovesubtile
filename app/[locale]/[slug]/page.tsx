@@ -672,11 +672,6 @@ export default function LocalisedToolPage({
     case "link-builder":
       body = <LinkBuilderClient />;
       break;
-    case "api":
-      // The /api page has its own bespoke layout; redirect logic isn't worth it
-      // for the localised version — just show the standard server-job placeholder.
-      body = <ServerJobClient tool={spec} crossLinks={crossLinks} />;
-      break;
     default:
       body = <ServerJobClient tool={spec} crossLinks={crossLinks} />;
   }

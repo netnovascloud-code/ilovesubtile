@@ -18,6 +18,9 @@ const FN_MAP: Record<string, string> = {
   // The three former process-ffmpeg slugs (add-subtitles-to-video,
   // extract-subtitles, style-subtitles) now run entirely in the browser
   // (FFmpeg.wasm / pure-JS) and no longer call any backend.
+  // The live text translator (/translator) uses Google Cloud Translation via
+  // the dedicated `translate` function — a real MT engine, not the LLM.
+  "translator": "translate",
   // Text & AI tools — all handled by the ai-process function via `task`.
   "translate-text": "ai-process",
   "rephrase-text": "ai-process",

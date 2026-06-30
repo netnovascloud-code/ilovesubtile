@@ -34,6 +34,12 @@ verify_jwt = false
 [functions.lemonsqueezy-setup]
 verify_jwt = true
 
+# Translator: authenticated by the user's session (the function returns 401 to
+# anonymous callers) and calls Google Cloud Translation server-side, so the
+# platform JWT gate is off and the function does its own auth.
+[functions.translate]
+verify_jwt = false
+
 # Security tools accept anonymous (client-gated) traffic and do their own
 # per-user bucket enforcement, so the platform JWT gate is off here too.
 # (The public anon key would satisfy verify_jwt anyway; keeping it off matches

@@ -31,9 +31,14 @@ function corsFor(req: Request): Record<string, string> {
   };
 }
 
-// Per-plan monthly character caps. Conservative on purpose — Google's free tier
-// is 500,000 chars/month for the WHOLE project, so also cap it Google-side.
-const MONTHLY_CHARS: Record<string, number> = { free: 30_000, pro: 300_000, business: 1_000_000 };
+// Per-user monthly caps (a sub-allocation of the global budget below), so one
+// user can't drain the shared free pool.
+const MONTHLY_CHARS: Record<string, number> = { free: 5_000, pro: 50_000, business: 150_000 };
+// App-wide monthly budget — 4% under Google's free 500k chars/month. Enforced
+// atomically (translate_consume RPC) so total usage across ALL users can never
+// exceed the free tier → 0 € guaranteed, with the Google-side quota cap as the
+// ultimate backstop.
+const GLOBAL_MONTHLY_CHARS = 480_000;
 const MAX_CHARS_PER_REQ = 5000;
 
 function utcMonth(): string {
@@ -87,20 +92,30 @@ Deno.serve(async (req) => {
   if (!key) return json({ error: "not_configured", message: "The translator isn't configured yet." }, { status: 503 });
 
   // Per-user monthly character metering (fail-open on counter errors).
+  const month = utcMonth();
+  // Per-user monthly cap (prevents one user draining the shared pool).
   try {
     const { data: prof } = await svc.from("profiles").select("plan, usage_buckets").eq("id", userId).maybeSingle();
     const plan = (prof?.plan as string) ?? "free";
     const cap = MONTHLY_CHARS[plan] ?? MONTHLY_CHARS.free;
     const buckets = ((prof?.usage_buckets as Record<string, { c: number; m: string }>) ?? {});
-    const month = utcMonth();
     const cur = buckets["translate_chars"];
     const used = cur && cur.m === month ? (cur.c ?? 0) : 0;
     if (used + text.length > cap) {
-      return json({ error: "monthly_limit", plan, limit: cap, used, message: "Monthly translation limit reached." }, { status: 429 });
+      return json({ error: "monthly_limit", scope: "user", plan, limit: cap, used, message: "You've reached your monthly translation limit." }, { status: 429 });
     }
     buckets["translate_chars"] = { c: used + text.length, m: month };
     await svc.from("profiles").update({ usage_buckets: buckets }).eq("id", userId);
-  } catch { /* never block a real translation on a metering glitch */ }
+  } catch { /* never block a real translation on a per-user metering glitch */ }
+
+  // App-wide monthly budget — guarantees the whole project never exceeds
+  // Google's free tier. Atomic in Postgres so concurrent calls can't overshoot.
+  try {
+    const { data: ok } = await svc.rpc("translate_consume", { p_chars: text.length, p_cap: GLOBAL_MONTHLY_CHARS, p_month: month });
+    if (ok === false) {
+      return json({ error: "monthly_limit", scope: "global", message: "The free monthly translation quota has been reached. It resets next month." }, { status: 429 });
+    }
+  } catch { /* counter unavailable — the Google-side quota cap is the hard backstop */ }
 
   try {
     const res = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${key}`, {

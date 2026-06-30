@@ -1,5 +1,13 @@
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { SUPABASE_URL } from "@/lib/utils";
+import { AI_ENABLED } from "@/lib/flags";
+
+// Mistral-backed functions paused while AI is off (lib/flags). The Google
+// translator (`translate`), security tools and link tools are NOT in this set,
+// so they keep working.
+const AI_PAUSED_FUNCTIONS = new Set<string>([
+  "ai-process", "ai-vision", "ai-assistant", "process-subtitles", "translate-subtitles",
+]);
 
 /** tool slug → Supabase Edge Function that handles it. */
 const FN_MAP: Record<string, string> = {
@@ -76,6 +84,16 @@ export async function callTool(slug: string, body: FormData | object): Promise<R
   const fn = FN_MAP[slug];
   if (!fn) throw new Error(`No backend function mapped for "${slug}"`);
   if (!SUPABASE_URL) throw new Error("Supabase URL not configured");
+
+  // AI modules are paused (lib/flags). Short-circuit with a clear 503 so no
+  // request hits the AI backends. The translator / security / link tools are
+  // not in AI_PAUSED_FUNCTIONS, so they're unaffected.
+  if (!AI_ENABLED && AI_PAUSED_FUNCTIONS.has(fn)) {
+    return new Response(
+      JSON.stringify({ error: "ai_paused", message: "AI tools are temporarily unavailable — they're coming back soon." }),
+      { status: 503, headers: { "Content-Type": "application/json" } },
+    );
+  }
 
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
   let bearer = anon;

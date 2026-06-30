@@ -21,6 +21,7 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { edgeFnUrl } from "@/lib/utils";
+import { BILLING_ENABLED } from "@/lib/flags";
 
 function CheckoutLauncher() {
   const router = useRouter();
@@ -31,6 +32,12 @@ function CheckoutLauncher() {
   useEffect(() => {
     if (started.current) return;
     started.current = true;
+
+    // Subscriptions are paused until Paddle is live (lib/flags).
+    if (!BILLING_ENABLED) {
+      setError("Subscriptions are temporarily unavailable — they'll be back soon.");
+      return;
+    }
 
     const plan = params.get("plan");
     const interval = params.get("interval") === "annual" ? "annual" : "monthly";

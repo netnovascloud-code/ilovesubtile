@@ -473,22 +473,38 @@ Deno.serve(async (req) => {
     let host = raw;
     try { host = new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`).hostname; } catch { return json({ error: "bad_request", message: "Invalid URL." }, { status: 400 }); }
     if (!host || isPrivateHost(host)) return json({ error: "bad_request", message: "Only public hostnames can be checked." }, { status: 400 });
+
+    // 1) Validity via a real TLS handshake — works for TLS 1.2 AND 1.3 and
+    //    validates the chain against the system trust store. Success means the
+    //    certificate is present, current and trusted. (The old code only did a
+    //    hand-rolled TLS 1.2 ClientHello, which TLS 1.3-only servers reject →
+    //    every modern site 502'd.)
+    let tlsValid = false;
     try {
-      const der = await fetchLeafCert(host);
-      const c = parseLeaf(der);
+      const c = await Deno.connectTls({ hostname: host, port: 443 });
+      tlsValid = true;
+      try { c.close(); } catch { /* */ }
+    } catch { /* invalid / expired / untrusted / unreachable */ }
+
+    // 2) Certificate details via a best-effort plaintext TLS 1.2 handshake.
+    //    A TLS 1.3-only server won't expose the cert this way, so details can
+    //    be unavailable even when the certificate is valid.
+    let details: ReturnType<typeof parseLeaf> | null = null;
+    try { details = parseLeaf(await fetchLeafCert(host)); } catch { /* no plaintext cert */ }
+
+    if (details) {
       const now = Date.now();
-      const naMs = new Date(c.notAfter).getTime();
-      const nbMs = new Date(c.notBefore).getTime();
+      const naMs = new Date(details.notAfter).getTime();
+      const nbMs = new Date(details.notBefore).getTime();
       const daysRemaining = Math.floor((naMs - now) / 86_400_000);
-      const valid = now >= nbMs && now <= naMs;
-      return json({ host, valid, notBefore: c.notBefore, notAfter: c.notAfter, daysRemaining, issuer: c.issuer, subject: c.subject, domains: c.domains, keyStrength: c.keyStrength });
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      const friendly = msg === "tls_alert" || msg === "no_certificate"
-        ? "Couldn't read this site's certificate (it may be TLS 1.3-only or refuse direct connections)."
-        : "Could not connect to that host on port 443.";
-      return json({ error: "ssl_failed", message: friendly }, { status: 502 });
+      const valid = tlsValid || (now >= nbMs && now <= naMs);
+      return json({ host, valid, notBefore: details.notBefore, notAfter: details.notAfter, daysRemaining, issuer: details.issuer, subject: details.subject, domains: details.domains, keyStrength: details.keyStrength });
     }
+    if (tlsValid) {
+      // Trusted handshake, but the server didn't expose the cert in plaintext.
+      return json({ host, valid: true, limited: true, notBefore: "", notAfter: "", daysRemaining: -1, issuer: "", subject: host, domains: [host], keyStrength: "" });
+    }
+    return json({ error: "ssl_failed", message: "Could not establish a trusted TLS connection (the host may be unreachable, or its certificate is invalid or expired)." }, { status: 502 });
   }
 
   // ───────────────────────────── analyze_phishing ────────────────────────

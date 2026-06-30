@@ -3,16 +3,35 @@
 import { useMemo, useState } from "react";
 import { AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/hooks/useLocale";
 
-const FLAGS = [
-  { id: "g", label: "global" },
-  { id: "i", label: "ignore case" },
-  { id: "m", label: "multiline" },
-  { id: "s", label: "dotall" },
-  { id: "u", label: "unicode" },
-];
+const FLAG_IDS = [
+  { id: "g", key: "flagGlobal" },
+  { id: "i", key: "flagIgnoreCase" },
+  { id: "m", key: "flagMultiline" },
+  { id: "s", key: "flagDotall" },
+  { id: "u", key: "flagUnicode" },
+] as const;
+
+const T: Record<string, Record<string, string>> = {
+  en: {
+    flagGlobal: "global", flagIgnoreCase: "ignore case", flagMultiline: "multiline", flagDotall: "dotall", flagUnicode: "unicode",
+    patternPh: "pattern", testText: "Test text", matches: "Matches",
+    fixPattern: "Fix the pattern to see matches.", noMatches: "No matches.",
+    colMatch: "Match", colGroups: "Groups",
+    footer: "100% in your browser — nothing is uploaded. Free and unlimited, no account needed.",
+  },
+  fr: {
+    flagGlobal: "global", flagIgnoreCase: "ignorer la casse", flagMultiline: "multiligne", flagDotall: "point = tout", flagUnicode: "unicode",
+    patternPh: "motif", testText: "Texte de test", matches: "Correspondances",
+    fixPattern: "Corrigez le motif pour voir les correspondances.", noMatches: "Aucune correspondance.",
+    colMatch: "Correspondance", colGroups: "Groupes",
+    footer: "100 % dans votre navigateur — rien n'est envoyé. Gratuit et illimité, sans compte.",
+  },
+};
 
 export function RegexClient() {
+  const s = T[useLocale()] ?? T.en;
   const [pattern, setPattern] = useState("\\b\\w+@\\w+\\.\\w+\\b");
   const [flags, setFlags] = useState<Record<string, boolean>>({ g: true, i: false, m: false, s: false, u: false });
   const [text, setText] = useState("Contact ada@konvertools.com or sales@konvertools.com for details.");
@@ -66,15 +85,15 @@ export function RegexClient() {
             onChange={(e) => setPattern(e.target.value)}
             spellCheck={false}
             className="min-w-0 flex-1 bg-transparent px-1 py-2.5 text-ink-900 focus:outline-none"
-            placeholder="pattern"
+            placeholder={s.patternPh}
           />
           <span className="pr-3 text-ink-400">/{flagStr}</span>
         </div>
         <div className="flex flex-wrap gap-1">
-          {FLAGS.map((f) => (
+          {FLAG_IDS.map((f) => (
             <button
               key={f.id}
-              title={f.label}
+              title={s[f.key]}
               onClick={() => setFlags((s) => ({ ...s, [f.id]: !s[f.id] }))}
               className={cn(
                 "rounded-md border px-2.5 py-1.5 font-mono text-sm transition-colors",
@@ -95,7 +114,7 @@ export function RegexClient() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-ink-700">Test text</label>
+          <label className="mb-1.5 block text-sm font-medium text-ink-700">{s.testText}</label>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -105,7 +124,7 @@ export function RegexClient() {
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-ink-700">
-            Matches <span className="text-ink-400">({matches.length})</span>
+            {s.matches} <span className="text-ink-400">({matches.length})</span>
           </label>
           <div className="h-56 overflow-auto rounded-lg border border-ink-200 bg-ink-50/50 p-3 font-mono text-[13px]">
             {highlighted ? (
@@ -115,7 +134,7 @@ export function RegexClient() {
                   : <span key={i}>{s.t}</span>)}
               </p>
             ) : (
-              <p className="text-ink-400">{error ? "Fix the pattern to see matches." : "No matches."}</p>
+              <p className="text-ink-400">{error ? s.fixPattern : s.noMatches}</p>
             )}
           </div>
         </div>
@@ -125,7 +144,7 @@ export function RegexClient() {
         <div className="rounded-lg border border-ink-100 bg-white p-4">
           <table className="w-full text-left text-sm">
             <thead className="text-ink-400">
-              <tr><th className="pb-2 pr-4 font-medium">#</th><th className="pb-2 pr-4 font-medium">Match</th><th className="pb-2 font-medium">Groups</th></tr>
+              <tr><th className="pb-2 pr-4 font-medium">#</th><th className="pb-2 pr-4 font-medium">{s.colMatch}</th><th className="pb-2 font-medium">{s.colGroups}</th></tr>
             </thead>
             <tbody className="font-mono text-[13px] text-ink-800">
               {matches.slice(0, 100).map((m, i) => (
@@ -140,7 +159,7 @@ export function RegexClient() {
         </div>
       )}
 
-      <p className="text-xs text-ink-400">100% in your browser — nothing is uploaded. Free and unlimited, no account needed.</p>
+      <p className="text-xs text-ink-400">{s.footer}</p>
     </div>
   );
 }

@@ -3,11 +3,15 @@ import { SUPABASE_URL } from "@/lib/utils";
 import { AI_ENABLED } from "@/lib/flags";
 
 // Mistral-backed functions paused while AI is off (lib/flags). The Google
-// translator (`translate`), security tools and link tools are NOT in this set,
-// so they keep working.
+// translator (`translate`), the pure-code security tools (SSL/email/URL) and
+// the link tools are NOT in this set, so they keep working.
 const AI_PAUSED_FUNCTIONS = new Set<string>([
   "ai-process", "ai-vision", "ai-assistant", "process-subtitles", "translate-subtitles",
 ]);
+// Tools that live inside a NON-AI function but still call Mistral, so they must
+// be paused by slug. The phishing detector runs inside `security-tools` (which
+// otherwise stays live for SSL/email/URL) but uses Mistral to read intent.
+const AI_PAUSED_SLUGS = new Set<string>(["phishing-detector"]);
 
 /** tool slug → Supabase Edge Function that handles it. */
 const FN_MAP: Record<string, string> = {
@@ -86,9 +90,9 @@ export async function callTool(slug: string, body: FormData | object): Promise<R
   if (!SUPABASE_URL) throw new Error("Supabase URL not configured");
 
   // AI modules are paused (lib/flags). Short-circuit with a clear 503 so no
-  // request hits the AI backends. The translator / security / link tools are
-  // not in AI_PAUSED_FUNCTIONS, so they're unaffected.
-  if (!AI_ENABLED && AI_PAUSED_FUNCTIONS.has(fn)) {
+  // request hits the AI backends. The translator / non-AI security / link tools
+  // are not in either paused set, so they're unaffected.
+  if (!AI_ENABLED && (AI_PAUSED_FUNCTIONS.has(fn) || AI_PAUSED_SLUGS.has(slug))) {
     return new Response(
       JSON.stringify({ error: "ai_paused", message: "AI tools are temporarily unavailable — they're coming back soon." }),
       { status: 503, headers: { "Content-Type": "application/json" } },

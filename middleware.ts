@@ -65,8 +65,8 @@ function buildCsp(nonce: string): string {
     // cdn.jsdelivr.net + tessdata.projectnaptha.com: Tesseract.js (PDF OCR /
     // image-to-text) fetches its WASM core + worker from jsDelivr and the
     // language model (eng.traineddata.gz) from projectnaptha by default.
-    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
-    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.ezoic.net https://vercel.live",
+    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.paddle.com https://cdn.paddle.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
+    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.paddle.com https://*.ezoic.net https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self' https://*.lemonsqueezy.com",

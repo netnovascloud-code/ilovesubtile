@@ -40,6 +40,16 @@ verify_jwt = true
 [functions.translate]
 verify_jwt = false
 
+# Paddle Billing webhook: Paddle posts without a Supabase JWT and the function
+# verifies the Paddle-Signature HMAC itself, so the platform JWT gate is off.
+[functions.paddle-webhook]
+verify_jwt = false
+
+# Paddle customer portal: authenticated by the user's session (the function
+# returns 401 to anonymous callers) and calls the Paddle API server-side.
+[functions.paddle-portal]
+verify_jwt = false
+
 # Security tools accept anonymous (client-gated) traffic and do their own
 # per-user bucket enforcement, so the platform JWT gate is off here too.
 # (The public anon key would satisfy verify_jwt anyway; keeping it off matches

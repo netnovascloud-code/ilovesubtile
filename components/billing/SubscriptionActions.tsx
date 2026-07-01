@@ -11,11 +11,11 @@ import { type Locale } from "@/lib/i18n/locales";
 type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: string; scope?: string; status?: number };
 
 /**
- * Subscription self-service: open the Lemon Squeezy customer portal, or jump
- * straight to the "change payment method" page. Both URLs come from the
- * `lemonsqueezy-portal` Edge Function (LS key never leaves the server). When the
- * caller has no active subscription, that's a calm, expected state — shown as a
- * neutral note ("No active subscription"), not a red error.
+ * Subscription self-service: opens the Paddle customer portal, where the user
+ * manages/cancels their subscription and updates their payment method. The URL
+ * comes from the `paddle-portal` Edge Function (Paddle API key never leaves the
+ * server). When the caller has no billing account yet, that's a calm, expected
+ * state — shown as a neutral note, not a red error.
  */
 export function SubscriptionActions({ locale, customerOnly = false }: { locale: Locale; customerOnly?: boolean }) {
   const s = getBilling(locale);
@@ -32,16 +32,18 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
       const supabase = getSupabaseBrowser();
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { setError(s.signInFirstError); return; }
-      const res = await fetch(edgeFnUrl("lemonsqueezy-portal"), {
+      const res = await fetch(edgeFnUrl("paddle-portal"), {
         method: "POST",
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
       const body = (await res.json()) as PortalResponse;
-      const target = kind === "portal" ? body.url : (body.updatePaymentMethodUrl ?? body.url);
+      // Paddle's portal covers both management and payment-method updates, so
+      // both buttons use the same URL.
+      const target = body.url;
       if (!res.ok || !target) {
-        // "No subscription" is a calm, expected state (comped plan / one-time
-        // buyer with no recurring payment) → neutral note. Real failures → error.
-        const calm = body.error === "no_subscription" || body.error === "no_billing_account" || body.error === "no_subscription_portal";
+        // No billing account yet is a calm, expected state (e.g. comped plan)
+        // → neutral note. Real failures → error.
+        const calm = body.error === "no_customer" || body.error === "no_subscription" || body.error === "no_billing_account";
         if (calm) { setInfo(s.noSubscriptionError); return; }
         const diag = body.error ? ` (${body.error}${body.scope ? "/" + body.scope : ""}${body.status ? " " + body.status : ""})` : "";
         setError(s.portalError + diag);

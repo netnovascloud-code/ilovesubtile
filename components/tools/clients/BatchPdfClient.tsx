@@ -27,8 +27,6 @@ const PRESETS = [
   { id: "high", labelKey: "presetHigh", scale: 2.0, quality: 0.88 },
 ] as const;
 
-const MAX_FILES = 50;
-
 async function compressOne(file: File, scale: number, quality: number, pdfjs: PdfJs): Promise<Blob> {
   const { PDFDocument } = await import("pdf-lib");
   const src = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
@@ -52,7 +50,8 @@ async function compressOne(file: File, scale: number, quality: number, pdfjs: Pd
   return new Blob([await out.save() as BlobPart], { type: "application/pdf" });
 }
 
-export function BatchPdfClient({ locale }: { locale: Locale }) {
+export function BatchPdfClient({ locale, maxFiles = 50 }: { locale: Locale; maxFiles?: number }) {
+  const MAX_FILES = maxFiles;
   const t = getBatch(locale).pdf;
   const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);

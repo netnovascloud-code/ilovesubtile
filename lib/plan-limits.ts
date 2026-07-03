@@ -47,6 +47,18 @@ export function planFileMb(plan: Plan): number {
   return PLAN_FILE_MB[plan];
 }
 
+/** Batch multi-file caps. Batch runs 100% in the browser (no server cost), so
+ *  these are tiering limits, not resource limits: anonymous visitors get a
+ *  taste, signed-in free more, paid plans much more.
+ *  anon 2 · free 5 · Pro 20 · Business 100. */
+export const BATCH_MAX_FILES: { anon: number } & Record<Plan, number> = {
+  anon: 2, free: 5, pro: 20, business: 100,
+};
+export function batchLimit(plan: Plan | null | undefined, signedIn: boolean): number {
+  if (!signedIn) return BATCH_MAX_FILES.anon;
+  return BATCH_MAX_FILES[(plan ?? "free") as Plan] ?? BATCH_MAX_FILES.free;
+}
+
 /** Per-plan VIDEO caps — two dimensions, both enforced (the stricter one wins).
  *  Weight in MB, duration in seconds. KONVER: Free 200 MB / 3 min · Pro 1 GB /
  *  30 min · Business 5 GB / 3 h. These are the canonical defaults the UI gates

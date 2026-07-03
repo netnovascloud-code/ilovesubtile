@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { BatchTabs } from "@/components/tools/clients/BatchTabs";
-import { ProGate } from "@/components/billing/ProGate";
 import { getBatch } from "@/lib/i18n/page-batch";
 import { SITE_URL } from "@/lib/utils";
 import { LOCALES, HREFLANG_PREFIX } from "@/lib/seo";
@@ -26,11 +25,9 @@ export default function Page() {
           <p className="mt-3 text-ink-500">{t.hero.lead}</p>
         </div>
         <div className="mx-auto mt-8 max-w-5xl">
-          <ProGate>
-            <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
-              <BatchTabs locale="en" />
-            </div>
-          </ProGate>
+          <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
+            <BatchTabs locale="en" />
+          </div>
         </div>
       </div>
     </section>

@@ -14,14 +14,14 @@ type Job = { id: string; file: File; status: "queued" | "running" | "done" | "er
 // (self-hosted worker + CDN fallback + load timeout). See its header for why a
 // local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
-const MAX_FILES = 20;
 const CRF_PRESETS = [
   { id: "32", labelKey: "presetStrong" },
   { id: "28", labelKey: "presetBalanced" },
   { id: "23", labelKey: "presetHigh" },
 ] as const;
 
-export function BatchVideoClient({ locale }: { locale: Locale }) {
+export function BatchVideoClient({ locale, maxFiles = 20 }: { locale: Locale; maxFiles?: number }) {
+  const MAX_FILES = maxFiles;
   const t = getBatch(locale).video;
   const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);

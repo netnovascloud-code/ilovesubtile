@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
@@ -33,7 +32,6 @@ export function EmailAuthForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
-  const router = useRouter();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -82,16 +80,20 @@ export function EmailAuthForm({
             .from("profiles")
             .update({ tos_accepted_at: new Date().toISOString(), marketing_opt_in: marketing })
             .eq("id", data.session.user.id);
-          router.push(redirect);
-          router.refresh();
+          // Full-page navigation (not router.push) so the server re-reads the
+          // freshly-set auth cookie on the next request — otherwise the first
+          // load races the cookie write and looks logged-out (had to sign in
+          // twice).
+          window.location.assign(redirect);
         } else {
           setInfo(labels.checkInbox);
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        router.push(redirect);
-        router.refresh();
+        // Full-page navigation so the session cookie is committed before the
+        // destination renders server-side (fixes the "log in twice" bug).
+        window.location.assign(redirect);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

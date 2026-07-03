@@ -14,7 +14,6 @@ type Job = { id: string; file: File; status: "queued" | "running" | "done" | "er
 // (self-hosted worker + CDN fallback + load timeout). See its header for why a
 // local FFmpeg.load() without classWorkerURL hangs under Next/Webpack.
 
-const MAX_FILES = 50;
 const BITRATES = [
   { id: "128k", labelKey: "bitrate128" },
   { id: "192k", labelKey: "bitrate192" },
@@ -22,7 +21,8 @@ const BITRATES = [
   { id: "320k", labelKey: "bitrate320" },
 ] as const;
 
-export function BatchAudioClient({ locale }: { locale: Locale }) {
+export function BatchAudioClient({ locale, maxFiles = 50 }: { locale: Locale; maxFiles?: number }) {
+  const MAX_FILES = maxFiles;
   const t = getBatch(locale).audio;
   const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);

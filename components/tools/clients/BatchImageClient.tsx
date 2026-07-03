@@ -22,8 +22,6 @@ const FORMATS = [
   { id: "image/png", labelKey: "formatPng", ext: "png" },
 ] as const;
 
-const MAX_FILES = 50;
-
 async function convertOne(file: File, mime: string, quality: number, maxSide: number | null, t: BatchStrings["image"]): Promise<Blob> {
   const url = URL.createObjectURL(file);
   try {
@@ -50,8 +48,9 @@ async function convertOne(file: File, mime: string, quality: number, maxSide: nu
   } finally { URL.revokeObjectURL(url); }
 }
 
-export function BatchImageClient({ locale }: { locale: Locale }) {
+export function BatchImageClient({ locale, maxFiles = 50 }: { locale: Locale; maxFiles?: number }) {
   const t = getBatch(locale).image;
+  const MAX_FILES = maxFiles;
   const common = getBatch(locale).common;
   const [jobs, setJobs] = useState<Job[]>([]);
   const [format, setFormat] = useState<string>("image/webp");

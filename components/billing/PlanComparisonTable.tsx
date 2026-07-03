@@ -1,7 +1,7 @@
 import { Check, Minus } from "lucide-react";
 import { PLANS, FREE_PLAN } from "@/lib/plans";
 import { DAILY_LIMIT, MONTHLY_LIMIT } from "@/lib/ai-quotas";
-import { PLAN_FILE_MB, PLAN_TIME_SEC, PLAN_VIDEO_MAX_MB, PLAN_VIDEO_MAX_SEC } from "@/lib/plan-limits";
+import { PLAN_FILE_MB, PLAN_TIME_SEC, PLAN_VIDEO_MAX_MB, PLAN_VIDEO_MAX_SEC, BATCH_MAX_FILES } from "@/lib/plan-limits";
 import { getCompare } from "@/lib/i18n/plan-compare";
 import { type Locale } from "@/lib/i18n/locales";
 
@@ -62,7 +62,7 @@ export function PlanComparisonTable({ locale }: { locale: Locale }) {
       pro: secs(PLAN_TIME_SEC.pro, locale),
       business: secs(PLAN_TIME_SEC.business, locale),
     },
-    { label: s.rows.batch, free: s.oneFile, pro: s.files((20).toLocaleString(locale)), business: s.unlimited },
+    { label: s.rows.batch, free: s.files(BATCH_MAX_FILES.free.toLocaleString(locale)), pro: s.files(BATCH_MAX_FILES.pro.toLocaleString(locale)), business: s.files(BATCH_MAX_FILES.business.toLocaleString(locale)) },
     { label: s.rows.templates, free: false, pro: (10).toLocaleString(locale), business: s.unlimited },
     // Ads / watermark: "Yes" on free is the limitation, so the check sits on the paid columns.
     { label: s.rows.ads, free: true, pro: false, business: false },

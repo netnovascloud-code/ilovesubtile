@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BatchTabs } from "@/components/tools/clients/BatchTabs";
-import { ProGate } from "@/components/billing/ProGate";
 import { getBatch } from "@/lib/i18n/page-batch";
 import { NON_DEFAULT_LOCALES, isLocale, isRtl } from "@/lib/i18n/locales";
 import { SITE_URL } from "@/lib/utils";
@@ -40,11 +39,9 @@ export default function LocalisedBatch({ params }: { params: { locale: string } 
           <p className="mt-3 text-ink-500">{t.hero.lead}</p>
         </div>
         <div className="mx-auto mt-8 max-w-5xl">
-          <ProGate>
-            <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
-              <BatchTabs locale={locale} />
-            </div>
-          </ProGate>
+          <div className="rounded-2xl border border-ink-100 bg-white p-5 shadow-card md:p-7">
+            <BatchTabs locale={locale} />
+          </div>
         </div>
       </div>
     </section>

@@ -1,21 +1,26 @@
-"use client";
-
-import { ToolIcon } from "@/components/tools/ToolIcon";
-import { categoryAccent } from "@/lib/category-theme";
+import { toolEmoji } from "@/lib/tool-emoji";
 import type { ToolCategory } from "@/lib/tools-config";
 
 /**
- * Flat, iLovePDF-style tool icon: the tool's Lucide symbol drawn in the
- * category's accent colour, directly on the white card — no coloured tile.
+ * A tool's "logo" — rendered as an emoji (keyed off its icon name) instead of a
+ * line icon. `category` is accepted for call-site compatibility but unused now
+ * that the glyph is a coloured emoji rather than an accent-tinted symbol.
  */
 export function ToolGlyph({
-  category,
   iconName,
   px = 52,
 }: {
-  category: ToolCategory;
+  category?: ToolCategory;
   iconName: string;
   px?: number;
 }) {
-  return <ToolIcon name={iconName} size={px} color={categoryAccent(category)} strokeWidth={1.6} />;
+  return (
+    <span
+      aria-hidden
+      className="inline-block select-none leading-none"
+      style={{ fontSize: Math.round(px * 0.82), lineHeight: 1 }}
+    >
+      {toolEmoji(iconName)}
+    </span>
+  );
 }

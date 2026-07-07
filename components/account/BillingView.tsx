@@ -27,8 +27,8 @@ export async function BillingView({ locale }: { locale: Locale }) {
   let plan: AccountPlan = "free";
   let subStatus: string | null = null;
   let renewsAt: string | null = null;
-  let lsSubscriptionId: string | null = null;
-  let lsCustomerId: string | null = null;
+  let subscriptionId: string | null = null;
+  let customerId: string | null = null;
   let needsLogin = false;
 
   try {
@@ -40,14 +40,14 @@ export async function BillingView({ locale }: { locale: Locale }) {
       email = userData.user.email ?? null;
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, ls_subscription_status, ls_renews_at, ls_subscription_id, ls_customer_id")
+        .select("plan, stripe_subscription_status, stripe_renews_at, stripe_subscription_id, stripe_customer_id")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as AccountPlan | undefined) ?? "free");
-      subStatus = (profile?.ls_subscription_status as string | null) ?? null;
-      renewsAt = (profile?.ls_renews_at as string | null) ?? null;
-      lsSubscriptionId = (profile?.ls_subscription_id as string | null) ?? null;
-      lsCustomerId = (profile?.ls_customer_id as string | null) ?? null;
+      subStatus = (profile?.stripe_subscription_status as string | null) ?? null;
+      renewsAt = (profile?.stripe_renews_at as string | null) ?? null;
+      subscriptionId = (profile?.stripe_subscription_id as string | null) ?? null;
+      customerId = (profile?.stripe_customer_id as string | null) ?? null;
     }
   } catch {
     needsLogin = true;
@@ -60,12 +60,12 @@ export async function BillingView({ locale }: { locale: Locale }) {
     ? new Date(renewsAt).toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" })
     : null;
 
-  const isSubscriber = !!lsSubscriptionId;
-  const isComped = plan !== "free" && !lsSubscriptionId;
+  const isSubscriber = !!subscriptionId;
+  const isComped = plan !== "free" && !subscriptionId;
   // A LS customer without a recorded subscription. The portal Edge Function will
   // still check LS for a real subscription (covering a missed webhook) when this
   // button is clicked; if none exists it returns a calm "no subscription" note.
-  const hasCustomer = !isSubscriber && !!lsCustomerId;
+  const hasCustomer = !isSubscriber && !!customerId;
 
   let statusLine: string | null = null;
   if (isSubscriber && renewLabel) {

@@ -11,11 +11,12 @@ import { type Locale } from "@/lib/i18n/locales";
 type PortalResponse = { url?: string; updatePaymentMethodUrl?: string; error?: string; scope?: string; status?: number };
 
 /**
- * Subscription self-service: opens the Paddle customer portal, where the user
- * manages/cancels their subscription and updates their payment method. The URL
- * comes from the `paddle-portal` Edge Function (Paddle API key never leaves the
- * server). When the caller has no billing account yet, that's a calm, expected
- * state — shown as a neutral note, not a red error.
+ * Subscription self-service: opens the Stripe Billing customer portal, where
+ * the user manages/cancels their subscription, updates their payment method
+ * and downloads invoices. The URL comes from the `stripe-portal` Edge Function
+ * (the Stripe key never leaves the server). When the caller has no billing
+ * account yet, that's a calm, expected state — shown as a neutral note, not a
+ * red error.
  */
 export function SubscriptionActions({ locale, customerOnly = false }: { locale: Locale; customerOnly?: boolean }) {
   const s = getBilling(locale);
@@ -32,12 +33,12 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
       const supabase = getSupabaseBrowser();
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { setError(s.signInFirstError); return; }
-      const res = await fetch(edgeFnUrl("paddle-portal"), {
+      const res = await fetch(edgeFnUrl("stripe-portal"), {
         method: "POST",
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
       const body = (await res.json()) as PortalResponse;
-      // Paddle's portal covers both management and payment-method updates, so
+      // Stripe's portal covers both management and payment-method updates, so
       // both buttons use the same URL.
       const target = body.url;
       if (!res.ok || !target) {
@@ -64,9 +65,9 @@ export function SubscriptionActions({ locale, customerOnly = false }: { locale: 
     </>
   );
 
-  // Customer-only (no recorded subscription, but a Lemon Squeezy customer): one
-  // button → the portal. The Edge Function still checks LS for a real
-  // subscription first; if none, it shows the neutral "no subscription" note.
+  // Customer-only (no recorded subscription, but an existing Stripe customer):
+  // one button → the portal, where past invoices and the saved payment method
+  // live even without an active subscription.
   if (customerOnly) {
     return (
       <div>

@@ -39,8 +39,8 @@ const LOCALISED_ROOT_EN_SUBPATHS = new Set(["billing"]);
 /** Build the per-request Content-Security-Policy with a fresh nonce. The
  *  nonce + 'strict-dynamic' replace 'unsafe-inline' on script-src; any
  *  scripts loaded by a nonced script are then trusted by propagation, so
- *  esm.sh / unpkg / Ezoic / Lemon Squeezy loaders still work without explicit
- *  origin allowlists on script-src (CSP3 ignores URL allowlists when
+ *  esm.sh / unpkg / Ezoic loaders still work without explicit origin
+ *  allowlists on script-src (CSP3 ignores URL allowlists when
  *  'strict-dynamic' is set).
  *
  *  'unsafe-eval' is retained because FFmpeg.wasm, pdf-lib, mammoth and the
@@ -65,11 +65,13 @@ function buildCsp(nonce: string): string {
     // cdn.jsdelivr.net + tessdata.projectnaptha.com: Tesseract.js (PDF OCR /
     // image-to-text) fetches its WASM core + worker from jsDelivr and the
     // language model (eng.traineddata.gz) from projectnaptha by default.
-    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://api.lemonsqueezy.com https://*.lemonsqueezy.com https://*.paddle.com https://cdn.paddle.com https://*.ezoic.net https://*.ezojs.com https://vercel.live",
-    "frame-src 'self' https://app.lemonsqueezy.com https://*.lemonsqueezy.com https://*.paddle.com https://*.ezoic.net https://vercel.live",
+    // Stripe Checkout is a full-page redirect to checkout.stripe.com, so no
+    // Stripe origins are needed here (nothing Stripe-hosted runs on our pages).
+    "connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://esm.sh https://unpkg.com https://cdn.jsdelivr.net https://tessdata.projectnaptha.com https://staticimgly.com https://api.frankfurter.dev https://api.pwnedpasswords.com https://api.mistral.ai https://*.ezoic.net https://*.ezojs.com https://vercel.live",
+    "frame-src 'self' https://*.ezoic.net https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",
-    "form-action 'self' https://*.lemonsqueezy.com",
+    "form-action 'self'",
     "object-src 'none'",
     "upgrade-insecure-requests",
   ].join("; ");

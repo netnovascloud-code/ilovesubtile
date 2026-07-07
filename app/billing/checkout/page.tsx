@@ -1,13 +1,12 @@
 "use client";
 
 /**
- * /billing/checkout — checkout launcher (no iframe). Generates a Lemon Squeezy
- * hosted checkout URL and full-page redirects to it (Stripe-style). This is a
- * pure transition page ("Redirecting to secure payment…"), the buyer only sees
- * a spinner for a moment.
+ * /billing/checkout — checkout launcher (no iframe). Asks the stripe-checkout
+ * Edge Function for a hosted Stripe Checkout Session and full-page redirects to
+ * it. This is a pure transition page ("Redirecting to secure payment…"); the
+ * buyer only sees a spinner for a moment.
  *
- * Routing:
- *   /billing/checkout?plan=pro|business&interval=monthly|annual
+ * Routing: /billing/checkout?plan=pro|business&interval=monthly|annual
  *
  * Auth: if there's no session we bounce to /login?redirect=<this url>, so after
  * sign-in the user lands back here and the checkout fires automatically. That's
@@ -33,17 +32,14 @@ function CheckoutLauncher() {
     if (started.current) return;
     started.current = true;
 
-    // Subscriptions are paused until Paddle is live (lib/flags).
+    // Subscriptions are paused (lib/flags).
     if (!BILLING_ENABLED) {
       setError("Subscriptions are temporarily unavailable — they'll be back soon.");
       return;
     }
 
-    const plan = params.get("plan");
+    const plan = params.get("plan") === "business" ? "business" : "pro";
     const interval = params.get("interval") === "annual" ? "annual" : "monthly";
-
-    // Build the query for the edge function.
-    const query: Record<string, string> = { plan: plan ?? "pro", interval };
 
     (async () => {
       try {
@@ -54,7 +50,7 @@ function CheckoutLauncher() {
           router.replace(`/login?redirect=${encodeURIComponent(self)}`);
           return;
         }
-        const res = await fetch(edgeFnUrl("lemonsqueezy-checkout", query), {
+        const res = await fetch(edgeFnUrl("stripe-checkout", { plan, interval }), {
           method: "POST",
           headers: { Authorization: `Bearer ${session.access_token}` },
         });
@@ -63,17 +59,15 @@ function CheckoutLauncher() {
           // Map known error codes to short human messages. Unknown codes fall
           // back to a generic line — never leak raw status codes into the UI.
           const known: Record<string, string> = {
-            no_variant_configured: "This plan isn't on sale yet — please try again shortly.",
-            invalid_plan: "That plan doesn't exist anymore. Pick one from Pricing.",
+            no_price_configured: "This plan isn't on sale yet — please try again shortly.",
             unauthorized: "Your session expired. Please sign in again.",
-            no_store: "Checkout isn't configured yet — please contact support.",
-            missing_lemonsqueezy_key: "Checkout is temporarily unavailable. Please try again in a few minutes.",
-            lemonsqueezy_failed: "Our payment provider is having trouble. Please try again in a moment.",
+            not_configured: "Checkout is temporarily unavailable. Please try again in a few minutes.",
+            checkout_failed: "Our payment provider is having trouble. Please try again in a moment.",
           };
           setError(known[body.error ?? ""] ?? "We couldn't start the checkout. Please try again.");
           return;
         }
-        // Full-page redirect to the LS-hosted checkout (Stripe-style).
+        // Full-page redirect to the Stripe-hosted checkout.
         window.location.href = body.url;
       } catch (err) {
         setError(err instanceof Error ? err.message : "Network error.");

@@ -10,7 +10,7 @@ langAlts["x-default"] = `${SITE_URL}/refund`;
 
 export const metadata: Metadata = {
   title: "Refund Policy",
-  description: "When and how you can get a refund on Konvertools. Payments and refunds are handled by Paddle (Merchant of Record).",
+  description: "When and how you can get a refund on Konvertools. Payments and refunds are processed securely by Stripe.",
   alternates: { canonical: "/refund", languages: langAlts },
 };
 

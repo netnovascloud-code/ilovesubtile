@@ -1,7 +1,12 @@
 # Konvertools — Go-Live Runbook
 
-Step-by-step actions to switch the production stack from test mode to live.
-Each step says **WHO**, **WHERE**, **WHAT**, and a verification command.
+Step-by-step actions to take the production stack from Stripe TEST mode to
+LIVE. Each step says **WHO**, **WHERE**, **WHAT**, and how to verify.
+
+The Stripe integration is mode-agnostic by design: prices are resolved by
+**lookup_key** (`pro_monthly`, `pro_annual`, `business_monthly`,
+`business_annual`), so test → live is only (a) re-running `stripe-setup` with
+the live key and (b) swapping two Supabase secrets.
 
 ---
 
@@ -10,131 +15,97 @@ Each step says **WHO**, **WHERE**, **WHAT**, and a verification command.
 - [ ] Supabase project `flimyasklnzcsenogsup` (CaptionFlow) health: green.
 - [ ] Custom domain `konvertools.com` (and `konver.app`) points to Vercel.
 - [ ] DNS for emails (Resend SPF/DKIM) verified.
+- [ ] Migration `028_stripe_billing_columns.sql` applied.
+- [ ] Edge functions deployed: `stripe-checkout`, `stripe-webhook`,
+      `stripe-portal`, `stripe-setup` (all `--no-verify-jwt`).
 
 ## 0.1 · Auth emails via Resend (REQUIRED — confirmation / magic-link / reset)
 WHO: you · WHERE: Supabase Dashboard → **Authentication → Emails → SMTP Settings**
 
 IMPORTANT: Supabase sends **authentication** emails (signup confirmation,
 magic link, password reset, email-change) itself, through whatever SMTP is
-configured here — NOT through the `send-email` edge function. That edge
-function only sends *app* emails (welcome, job-done…). So even with Resend's
-domain verified, auth mails go out from the built-in
-`noreply@mail.app.supabase.io` (and are rate-limited to a few per hour) until
-you enable custom SMTP below.
+configured here — NOT through the `send-email` edge function. So even with
+Resend's domain verified, auth mails go out from the built-in
+`noreply@mail.app.supabase.io` (rate-limited) until you enable custom SMTP.
 
 1. Toggle **Enable Custom SMTP** ON and enter:
-   - Host: `smtp.resend.com`
-   - Port: `465` (SSL) — or `587` (STARTTLS)
-   - Username: `resend`
-   - Password: your Resend API key (`re_…`) — the same one in `RESEND_API_KEY`
-   - Sender email: `no-reply@konvertools.com` (must be a **verified** domain in Resend)
-   - Sender name: `Konvertools`
-2. (Recommended) **Authentication → Emails → Templates** → rebrand the
-   Confirm-signup / Magic-link / Reset-password templates (logo, FR/EN copy).
-3. **Authentication → URL Configuration** → Site URL = `https://konvertools.com`;
-   add `https://konvertools.com/auth/callback` (and the Vercel preview URL) to
-   Redirect URLs so confirmation links land on `/auth/callback`.
+   - Host: `smtp.resend.com` · Port: `465` · Username: `resend`
+   - Password: your Resend API key (`re_…`)
+   - Sender: `Konvertools <no-reply@konvertools.com>` (verified in Resend)
+2. **Authentication → URL Configuration** → Site URL = `https://konvertools.com`;
+   add `https://konvertools.com/auth/callback` to Redirect URLs.
 
-VERIFY: trigger a signup with a throwaway address, then check
-Supabase → Logs → Auth: the `mail.send` line must show
-`"mail_from":"no-reply@konvertools.com"` (not `…@mail.app.supabase.io`).
+VERIFY: sign up with a throwaway address; the `mail.send` line in Auth logs
+must show `no-reply@konvertools.com`.
 
-## 1 · Test the full payment flow (TEST MODE first)
-WHO: you · WHERE: konvertools.com (incognito)
-1. Sign up with a throwaway email.
-2. Click **Upgrade Pro** → redirected to `konvertools.lemonsqueezy.com/checkout/...`
-3. Pay with `4242 4242 4242 4242`, any future date, any CVC, any billing address.
-4. You should be redirected to `/dashboard?upgraded=1`.
+## 1 · Configure Stripe TEST mode (once)
+WHO: you (signed in with an email listed in `SETUP_ADMIN_EMAILS`)
 
-VERIFY (SQL, via the project's SQL editor):
+1. Supabase secrets: `STRIPE_SECRET_KEY` = your **test** key (`sk_test_…`),
+   `SETUP_ADMIN_EMAILS` = your email.
+2. Run the configurator (creates products, the 4 prices, and the webhook
+   endpoint; idempotent — safe to re-run):
+   ```bash
+   curl -X POST "https://flimyasklnzcsenogsup.supabase.co/functions/v1/stripe-setup?webhook=1" \
+     -H "Authorization: Bearer <your session JWT>" -H "apikey: <anon key>"
+   ```
+3. The response contains the webhook **signing secret** (`whsec_…`) — copy it
+   into the `STRIPE_WEBHOOK_SECRET` Supabase secret IMMEDIATELY (shown once).
+
+VERIFY: Stripe Dashboard (test mode) → Products shows "Konvertools Pro"
+(€25/mo, €210/yr) and "Konvertools Business" (€79/mo, €664/yr);
+Developers → Webhooks shows the `…/functions/v1/stripe-webhook` endpoint.
+
+## 2 · Test the full payment flow (TEST mode)
+WHO: you · WHERE: the deployed site (incognito)
+1. Sign up with a throwaway email → Pricing → **Upgrade to Pro**.
+2. On the Stripe Checkout page pay with card `4242 4242 4242 4242`,
+   any future date, any CVC.
+3. You should land on `/dashboard?upgraded=1`.
+
+VERIFY (SQL):
 ```sql
-select email, plan, ls_subscription_id, ls_subscription_status, ls_renews_at
-  from public.profiles
- where email = '<your test email>';
+select email, plan, stripe_customer_id, stripe_subscription_id,
+       stripe_subscription_status, stripe_renews_at
+  from public.profiles where email = '<your test email>';
 ```
-Expected: `plan='pro'`, `ls_subscription_id` non-null, `ls_subscription_status='active'`.
+Expected: `plan='pro'`, customer + subscription ids set, status `active`.
+Then open `/billing` → **Manage billing** → the Stripe portal opens; cancel
+from there and check the webhook flips the status (access kept until period
+end, then `plan='free'` on `customer.subscription.deleted`).
 
-If the row didn't update, check edge function logs for `lemonsqueezy-webhook`.
+## 3 · Branding the payment page
+WHO: you · WHERE: Stripe Dashboard → **Settings → Branding**
+Upload the Konvertools logo + icon, set brand colour — this styles the hosted
+Checkout page and the customer portal. Also **Settings → Customer emails**:
+enable receipts for successful payments and refunds.
 
-## 2 · Lemon Squeezy dashboard — switch to LIVE
-WHO: you · WHERE: app.lemonsqueezy.com
-1. **Settings → Stores → KonverTools** → toggle Test mode **OFF**.
-2. **Settings → API** → rotate the API key (live now). Copy it.
-3. **Settings → Webhooks** → create a new webhook (live):
-   - URL: `https://flimyasklnzcsenogsup.supabase.co/functions/v1/lemonsqueezy-webhook`
-   - Generate signing secret. Copy it.
-   - Tick at least: `subscription_created`, `subscription_updated`,
-     `subscription_cancelled`, `subscription_expired`,
-     `subscription_payment_success`, `subscription_payment_refunded`,
-     `order_created`, `order_refunded`.
-4. **Settings → Customer portal** → enable: Cancel subscriptions, Update plan,
-   Update payment method.
-5. **Settings → Emails** → enable Order confirmation + Subscription receipts,
-   set logo + brand colour.
-6. **Store → Design** → upload logo, set brand colour, white background.
-7. **Store → Products → each of the 6** → upload a product image (Media).
-   This fills the empty left column on the checkout page.
-
-## 3 · Update Supabase Edge Function secrets to LIVE
-WHO: you · WHERE: Supabase Dashboard → Project Settings → Edge Functions → Secrets
-- `LEMONSQUEEZY_API_KEY` → paste the LIVE API key from step 2.2
-- `LEMONSQUEEZY_WEBHOOK_SECRET` → paste the LIVE signing secret from step 2.3
-
-## 4 · Re-discover LIVE variant IDs
-WHO: Claude (or you, via the deployed function) · WHERE: Supabase
-The variant IDs in `public.billing_config` were captured in TEST mode and
-will likely differ in LIVE. Run the discovery once:
-```sql
--- as service_role (SQL editor):
-select net.http_get(
-  'https://flimyasklnzcsenogsup.supabase.co/functions/v1/lemonsqueezy-setup',
-  headers := jsonb_build_object('Authorization', 'Bearer ' || current_setting('supabase.admin_key', true))
-) as req_id;
-```
-(Or sign in to konvertools and `GET /functions/v1/lemonsqueezy-setup` with
-the session JWT — same effect.)
-
-VERIFY:
-```sql
-select key, value, updated_at from public.billing_config order by key;
-```
-9 rows expected: store_id + 8 variant_*. updated_at should be recent.
+## 4 · Switch to LIVE
+WHO: you
+1. Activate your Stripe account (business details, bank account for payouts).
+2. Re-run step 1 with the **live** key: set `STRIPE_SECRET_KEY` = `sk_live_…`,
+   call `stripe-setup?webhook=1` again, put the returned live `whsec_…` into
+   `STRIPE_WEBHOOK_SECRET`.
+3. That's it — same lookup_keys, so no code or env change anywhere else.
 
 ## 5 · End-to-end LIVE smoke test (REAL CARD, small amount)
-WHO: you
-1. Sign up with a real email.
-2. Buy the **Starter Pack** (€12, smallest live transaction).
-3. Verify the row in `profiles` updates and you receive the LS receipt email.
-4. Open `/billing` → click **Manage billing** → portal opens, cancel/refund
-   yourself from there.
+1. Subscribe to Pro monthly (€25) with a real card.
+2. Verify the `profiles` row updates and the Stripe receipt email arrives.
+3. Open `/billing` → portal → **cancel** the subscription, and (optionally)
+   refund yourself from Dashboard → Payments.
 
-## 6 · Cleanup
-WHO: Claude or you
-- Delete the obsolete edge functions from the Supabase dashboard (MCP can't):
-  - `stripe-checkout`, `stripe-portal`, `stripe-webhook`, `ls-diagnostic`
-- Purge test profiles created during smoke tests (SQL):
-  ```sql
-  delete from auth.users where email in ('<test1>', '<test2>');
-  -- cascade deletes from public.profiles via FK.
-  ```
-
-## 7 · DNS + Vercel — flip to production
-WHO: you · WHERE: Vercel + DNS provider
-- Merge `claude/vibrant-noether-4ISSI` into `main` (Vercel auto-deploys).
-- Verify `konvertools.com` serves the new build.
-- Hit a few pages: `/`, `/pricing`, `/dashboard`, `/billing`.
-
-## 8 · Post-launch watch (first 24 h)
-- Tail `lemonsqueezy-webhook` logs — every payment should be 200.
-- Tail `lemonsqueezy-checkout` logs — every Subscribe click should be 200.
+## 6 · Post-launch watch (first 24 h)
+- Stripe Dashboard → Developers → Webhooks → the endpoint's delivery log:
+  every event should be 200 (failures are retried by Stripe for 3 days).
+- Supabase → Edge Functions logs for `stripe-webhook` / `stripe-checkout`.
 - Watch Vercel Analytics for any 5xx.
 
 ---
 
 ## Rollback
-If a critical bug surfaces post-launch:
 - Vercel: instant rollback to the previous deployment (one click).
-- DB: migrations are forward-only. If a schema change broke prod, write a
-  reverse migration (don't `drop` data — `add column nullable` instead).
-- Edge functions: the MCP `deploy_edge_function` always creates a new
-  version; previous versions can be re-deployed from the dashboard.
+- Billing kill-switch: set `BILLING_ENABLED = false` in `lib/flags.ts` and
+  redeploy — checkout buttons go inert; existing subscriptions keep renewing
+  in Stripe until cancelled there.
+- DB: migrations are forward-only; write a reverse migration if needed
+  (never drop data).

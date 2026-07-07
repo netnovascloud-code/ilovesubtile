@@ -1,10 +1,11 @@
 import type { LegalDoc } from "@/lib/legal/types";
 
 // Canonical English source for the Refund Policy. Payments are processed by
-// Paddle.com as Merchant of Record, so Paddle is the seller on the receipt and
-// issues approved refunds. Mirrors the structure of the other legal docs and
-// cross-links Terms / Privacy. NOTE for the owner: have this reviewed against
-// your final pricing and local consumer law before relying on it.
+// Stripe; Konvertools (the Publisher) is the seller of record and approves
+// refunds, which Stripe returns to the original payment method. Mirrors the
+// structure of the other legal docs and cross-links Terms / Privacy. NOTE for
+// the owner: have this reviewed against your final pricing and local consumer
+// law before relying on it.
 
 export const REFUND_EN: LegalDoc = {
   h1: "Refund Policy",
@@ -16,7 +17,7 @@ export const REFUND_EN: LegalDoc = {
       title: "1. Overview",
       blocks: [
         { kind: "p", text: "This Refund Policy explains when and how you can obtain a refund for a purchase made on Konvertools. It forms part of, and should be read together with, our [Terms of Service](/terms) and [Privacy Policy](/privacy)." },
-        { kind: "p", text: "Payments and refunds are processed by our payment provider **Paddle** (Paddle.com Market Ltd), which acts as the **Merchant of Record** (the authorised reseller) for our products. This means Paddle is the seller shown on your receipt, collects any applicable VAT/sales tax, and issues approved refunds to your original payment method." },
+        { kind: "p", text: "Payments and refunds are processed securely by **Stripe** (Stripe Payments Europe, Ltd.), our payment processor. Konvertools is the seller shown on your receipt; approved refunds are returned by Stripe to your original payment method. We never see or store your card details." },
       ],
     },
     {
@@ -67,8 +68,7 @@ export const REFUND_EN: LegalDoc = {
       id: "how",
       title: "6. How to request a refund",
       blocks: [
-        { kind: "p", text: "Email us at [contact@konvertools.com](mailto:contact@konvertools.com) with the email address used at purchase and your **order or receipt number** (shown on the receipt Paddle sent you). Tell us briefly what you would like refunded and why." },
-        { kind: "p", text: "You can also contact Paddle's buyer support directly at [paddle.net](https://paddle.net) to look up your purchase, download your invoice, or request help with a payment." },
+        { kind: "p", text: "Email us at [contact@konvertools.com](mailto:contact@konvertools.com) with the email address used at purchase and your **invoice or receipt number** (shown on the receipt Stripe emailed you, and downloadable any time from your [billing page](/billing)). Tell us briefly what you would like refunded and why. We reply within a few business days." },
       ],
     },
     {
@@ -76,7 +76,7 @@ export const REFUND_EN: LegalDoc = {
       title: "7. How refunds are processed",
       blocks: [
         { kind: "ul", items: [
-          "Approved refunds are issued by **Paddle to your original payment method**.",
+          "Approved refunds are issued **via Stripe to your original payment method**.",
           "They typically appear within **5–10 business days**, depending on your bank or card issuer.",
           "Any **VAT/sales tax** collected on the original purchase is included in the refund where applicable.",
         ] },
@@ -86,7 +86,7 @@ export const REFUND_EN: LegalDoc = {
       id: "chargebacks",
       title: "8. Chargebacks",
       blocks: [
-        { kind: "p", text: "If you don't recognise a charge or have a billing problem, **please contact us first** — we can almost always resolve it faster than a bank dispute. Opening a chargeback without contacting us may lead to suspension of the related account while the dispute is investigated by Paddle." },
+        { kind: "p", text: "If you don't recognise a charge or have a billing problem, **please contact us first** — we can almost always resolve it faster than a bank dispute. Opening a chargeback without contacting us may lead to suspension of the related account while the dispute is investigated with the card networks." },
       ],
     },
     {

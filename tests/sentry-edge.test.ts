@@ -29,7 +29,7 @@ describe("captureEdgeException", () => {
     const fetchImpl = vi.fn().mockResolvedValue({ ok: true } as Response);
     const sent = await captureEdgeException(
       new Error("kaboom"),
-      { fn: "lemonsqueezy-webhook", userId: "user-1", request: { method: "POST", route: "/webhook" } },
+      { fn: "stripe-webhook", userId: "user-1", request: { method: "POST", route: "/webhook" } },
       { dsn: DSN, fetchImpl },
     );
     expect(sent).toBe(true);
@@ -38,7 +38,7 @@ describe("captureEdgeException", () => {
     expect(url).toBe("https://o42.ingest.sentry.io/api/1234567/store/");
     expect((init.headers as Record<string, string>)["X-Sentry-Auth"]).toContain("sentry_key=abc123publickey");
     const body = JSON.parse(init.body as string);
-    expect(body.tags.function).toBe("lemonsqueezy-webhook");
+    expect(body.tags.function).toBe("stripe-webhook");
     expect(body.user.id).toBe("user-1");
     expect(body.exception.values[0].value).toBe("kaboom");
   });

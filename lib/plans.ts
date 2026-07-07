@@ -1,14 +1,12 @@
 /**
  * Plan definitions — pure data, no payment SDK.
  *
- * All payment API calls live in Supabase Edge Functions (`lemonsqueezy-checkout`,
- * `lemonsqueezy-portal`, `lemonsqueezy-webhook`). The Lemon Squeezy store and
- * variant IDs live in those functions' secrets, not in the frontend.
- *
- * Paddle is our Merchant of Record — it collects and remits VAT/sales tax
- * worldwide, so we never handle tax ourselves. (The checkout/portal/webhook
- * edge functions are still named `lemonsqueezy-*` pending the backend
- * migration to Paddle — only the customer-facing copy says Paddle for now.)
+ * All payment API calls live in Supabase Edge Functions (`stripe-checkout`,
+ * `stripe-portal`, `stripe-webhook`; `stripe-setup` provisions the account).
+ * The Stripe key never reaches the frontend, and prices are resolved by
+ * lookup_key (pro_monthly …) so the SAME code serves test and live mode —
+ * switching modes is only swapping the STRIPE_* secrets. Keep the amounts
+ * below in sync with the amounts in supabase/functions/stripe-setup.
  */
 
 export const PLANS = {

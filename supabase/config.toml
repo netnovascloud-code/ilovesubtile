@@ -25,29 +25,27 @@ file_size_limit = "500MiB"
 
 # Functions configured per-folder; deploy with `supabase functions deploy <name>`.
 
-# Lemon Squeezy posts webhooks without a Supabase JWT; the function verifies
-# the X-Signature HMAC itself, so JWT verification is disabled here.
-[functions.lemonsqueezy-webhook]
+# Stripe posts webhooks without a Supabase JWT; the function verifies the
+# Stripe-Signature HMAC itself, so JWT verification is disabled here.
+[functions.stripe-webhook]
 verify_jwt = false
 
-# Setup helper auto-discovers the store + variant IDs (read-only).
-[functions.lemonsqueezy-setup]
-verify_jwt = true
+# Checkout / portal: authenticated by the user's session (401 to anonymous
+# callers); the Stripe key never leaves the server.
+[functions.stripe-checkout]
+verify_jwt = false
+[functions.stripe-portal]
+verify_jwt = false
+
+# One-time idempotent Stripe configurator (products/prices/webhook). Gated by
+# SETUP_ADMIN_EMAILS inside the function.
+[functions.stripe-setup]
+verify_jwt = false
 
 # Translator: authenticated by the user's session (the function returns 401 to
 # anonymous callers) and calls Google Cloud Translation server-side, so the
 # platform JWT gate is off and the function does its own auth.
 [functions.translate]
-verify_jwt = false
-
-# Paddle Billing webhook: Paddle posts without a Supabase JWT and the function
-# verifies the Paddle-Signature HMAC itself, so the platform JWT gate is off.
-[functions.paddle-webhook]
-verify_jwt = false
-
-# Paddle customer portal: authenticated by the user's session (the function
-# returns 401 to anonymous callers) and calls the Paddle API server-side.
-[functions.paddle-portal]
 verify_jwt = false
 
 # Security tools accept anonymous (client-gated) traffic and do their own

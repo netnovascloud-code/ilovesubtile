@@ -63,7 +63,7 @@ export async function DashboardView({ locale }: { locale: Locale }) {
     } else {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month, ls_subscription_status, ls_renews_at")
+        .select("plan, daily_usage, usage_reset_at, monthly_ai_usage, monthly_ai_month, stripe_subscription_status, stripe_renews_at")
         .eq("id", userData.user.id)
         .maybeSingle();
       plan = ((profile?.plan as PlanKey | undefined) ?? "free") as PlanKey;
@@ -71,8 +71,8 @@ export async function DashboardView({ locale }: { locale: Locale }) {
       usageResetAt = profile?.usage_reset_at ?? null;
       monthlyAiUsage = profile?.monthly_ai_usage ?? 0;
       monthlyAiMonth = profile?.monthly_ai_month ?? null;
-      subStatus = (profile?.ls_subscription_status as string | null) ?? null;
-      renewsAt = (profile?.ls_renews_at as string | null) ?? null;
+      subStatus = (profile?.stripe_subscription_status as string | null) ?? null;
+      renewsAt = (profile?.stripe_renews_at as string | null) ?? null;
 
       const { data: jobsData } = await supabase
         .from("jobs")

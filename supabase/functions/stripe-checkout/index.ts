@@ -93,8 +93,19 @@ Deno.serve(async (req) => {
   // Reuse the Stripe customer when we have one (keeps one customer per user
   // across upgrades/cancellations); otherwise Checkout creates it and the
   // webhook stores it.
-  const { data: prof } = await svc.from("profiles").select("stripe_customer_id").eq("id", userId).maybeSingle();
+  const { data: prof } = await svc.from("profiles")
+    .select("stripe_customer_id, stripe_subscription_id, stripe_subscription_status")
+    .eq("id", userId).maybeSingle();
   const customerId = (prof?.stripe_customer_id as string) ?? null;
+
+  // Guard: one subscription per account. Without this, an existing subscriber
+  // clicking another plan on /pricing would create a SECOND subscription billed
+  // in parallel — plan changes must go through the Billing portal instead.
+  const subId = (prof?.stripe_subscription_id as string) ?? null;
+  const subStatus = (prof?.stripe_subscription_status as string) ?? null;
+  if (subId && ["active", "trialing", "past_due", "cancelled"].includes(subStatus ?? "")) {
+    return json({ error: "already_subscribed", message: "You already have a subscription — manage it from your billing page." }, { status: 409 });
+  }
 
   const origin = STATIC_ORIGINS.has(req.headers.get("origin") ?? "") || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(req.headers.get("origin") ?? "")
     ? (req.headers.get("origin") as string)

@@ -63,6 +63,7 @@ function CheckoutLauncher() {
             unauthorized: "Your session expired. Please sign in again.",
             not_configured: "Checkout is temporarily unavailable. Please try again in a few minutes.",
             checkout_failed: "Our payment provider is having trouble. Please try again in a moment.",
+            already_subscribed: "You already have an active subscription — change or cancel your plan from your billing page.",
           };
           setError(known[body.error ?? ""] ?? "We couldn't start the checkout. Please try again.");
           return;
@@ -80,9 +81,10 @@ function CheckoutLauncher() {
       <div className="container flex min-h-[60vh] flex-col items-center justify-center text-center">
         <h1 className="text-xl font-semibold text-ink-900">Couldn&apos;t start checkout</h1>
         <p className="mt-2 max-w-md text-sm text-ink-500">{error}</p>
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Button onClick={() => window.location.reload()}>Try again</Button>
           <Link href="/pricing"><Button variant="outline">Back to pricing</Button></Link>
+          <Link href="/billing" prefetch={false}><Button variant="outline">Billing page</Button></Link>
         </div>
       </div>
     );

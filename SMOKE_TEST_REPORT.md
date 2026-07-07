@@ -1,10 +1,16 @@
-# Konvertools smoke test — 212/213 passed
+# Konvertools smoke test — 206/213 passed
 
-❌ 1 failures — see below.
+❌ 7 failures — see below.
 
 ## Failures
 
-- **currency-converter** — console: Access to fetch at 'https://api.frankfurter.dev/v1/latest?base=EUR' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on 
+- **AI ai-process:synonyms** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI ai-process:conjugate** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI ai-process:rephrase (no markdown)** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI ai-process:translate (target lang)** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI ai-process:ai-detect (JSON shape)** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI ai-process:citation (APA)** — HTTP 401 {"error":"auth_required","message":"Sign in to use the AI tools."}
+- **AI security:analyze_phishing (scam → flagged)** — HTTP 401 {"error":"auth_required","message":"Sign in to use the phishing detector."}
 
 ## Passes
 - subtitle-generator
@@ -22,7 +28,6 @@
 - batch-translate
 - style-subtitles
 - auto-sync
-- api
 - format-json
 - json-to-csv
 - csv-to-json
@@ -76,6 +81,7 @@
 - uuid-generator
 - unix-timestamp
 - text-diff
+- currency-converter
 - cron-builder
 - invoice-generator
 - vat-calculator
@@ -93,16 +99,11 @@
 - file-encryptor
 - merge-pdf
 - split-pdf
+- compress-pdf
 - rotate-pdf
 - images-to-pdf
-- compress-pdf
 - pdf-to-jpg
 - pdf-to-text
-- pdf-to-word
-- word-to-pdf
-- excel-to-pdf
-- html-to-pdf
-- pdf-to-excel
 - watermark-pdf
 - pdf-page-numbers
 - compare-pdf
@@ -157,6 +158,7 @@
 - blur-face
 - extract-colors
 - remove-video-background
+- font-converter
 - qr-generator
 - qr-code-reader
 - barcode-generator
@@ -166,6 +168,11 @@
 - roman-numeral-converter
 - color-palette-generator
 - email-signature-generator
+- url-shortener
+- deep-link
+- magic-link
+- utm-builder
+- link-builder
 - social-media-crop
 - exif-viewer
 - markdown-to-word
@@ -207,15 +214,8 @@
 - apple-icon /apple-icon
 - manifest /manifest.webmanifest
 - brand logo /Logo.png
-- AI ai-process:synonyms
-- AI ai-process:conjugate
-- AI ai-process:rephrase (no markdown)
-- AI ai-process:translate (target lang)
-- AI ai-process:ai-detect (JSON shape)
-- AI ai-process:citation (APA)
 - AI security:validate_email (gmail valid)
 - AI security:validate_email (no domain)
 - AI security:scan_url (safe)
 - AI security:ssl_check (valid cert)
 - AI security:password_check (known-pwned)
-- AI security:analyze_phishing (scam → flagged)

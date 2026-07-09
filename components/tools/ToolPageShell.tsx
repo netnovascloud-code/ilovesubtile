@@ -103,7 +103,7 @@ export function ToolPageShell({
 
           <div className="flex flex-wrap items-start gap-4">
             <div className="shrink-0">
-              <ToolGlyph category={tool.category} iconName={(tool.icon as { displayName?: string }).displayName ?? "Wrench"} px={56} />
+              <ToolGlyph slug={tool.slug} category={tool.category} px={56} />
             </div>
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2">
@@ -146,7 +146,7 @@ export function ToolPageShell({
                     className={cn("group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5", rth.hoverBorder)}
                   >
                     <div className="shrink-0">
-                      <ToolGlyph category={rt.category} iconName={(rt.icon as { displayName?: string }).displayName ?? "Wrench"} px={40} />
+                      <ToolGlyph slug={rt.slug} category={rt.category} px={40} />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1 font-medium text-ink-900">

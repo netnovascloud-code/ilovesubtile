@@ -74,7 +74,7 @@ export function VsPage({ vs }: { vs: Vs }) {
             {ctas.map((t) => (
               <li key={t.slug}>
                 <Link href={`/${t.slug}`} className="group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-brand-300">
-                  <ToolGlyph category={t.category} iconName={(t.icon as { displayName?: string }).displayName ?? "Wrench"} px={40} />
+                  <ToolGlyph slug={t.slug} category={t.category} px={40} />
                   <div className="min-w-0">
                     <div className="flex items-center gap-1 font-medium text-ink-900">{t.name}<ArrowRight className="h-3.5 w-3.5 text-brand-500 opacity-0 transition-opacity group-hover:opacity-100" /></div>
                     <div className="mt-0.5 line-clamp-2 text-sm text-ink-500">{t.short}</div>

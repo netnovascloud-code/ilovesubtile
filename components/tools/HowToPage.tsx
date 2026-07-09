@@ -61,7 +61,7 @@ export function HowToPage({ howto }: { howto: HowTo }) {
               <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-5">
                 <p className="text-xs uppercase tracking-wide text-brand-700">The tool for this</p>
                 <Link href={`/${tool.slug}`} className="mt-3 flex items-start gap-3">
-                  <ToolGlyph category={tool.category} iconName={(tool.icon as { displayName?: string }).displayName ?? "Wrench"} px={40} />
+                  <ToolGlyph slug={tool.slug} category={tool.category} px={40} />
                   <div className="min-w-0">
                     <div className="flex items-center gap-1 font-medium text-ink-900">{tool.name}<ArrowRight className="h-3.5 w-3.5 text-brand-500" /></div>
                     <div className="mt-0.5 text-sm text-ink-500">{tool.short}</div>

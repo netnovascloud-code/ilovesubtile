@@ -104,7 +104,7 @@ export function HomeExplorer({
           </span>
         )}
         <div className="w-fit">
-          <ToolGlyph category={t.category} iconName={t.iconName} px={52} />
+          <ToolGlyph slug={t.slug} category={t.category} px={52} />
         </div>
         <h3 className="mt-4 font-semibold text-ink-900">{t.name}</h3>
         <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-500">{t.short}</p>

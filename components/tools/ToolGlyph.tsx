@@ -2,33 +2,68 @@ import { FORMATS, iconSpecFor, type FormatDef, type OpKey } from "@/lib/tool-ico
 import type { ToolCategory } from "@/lib/tools-config";
 
 /**
- * A tool's "logo" — an iLovePDF-style file-type badge icon rendered as inline
- * SVG. Conversion tools show source → target format badges with an arrow
- * (e.g. PDF → W); other tools show one format badge plus a small action glyph
- * (merge, compress, lock…). Specs live in lib/tool-icons.ts, keyed by slug.
+ * A tool's "logo" — an iLovePDF-style file/document icon rendered as inline
+ * SVG. Each format is a sheet of paper: rounded page with a folded top-right
+ * corner, a subtle paper gradient, a drop shadow, and a coloured footer band
+ * carrying the format label (PDF, W, JPG…). Conversion tools show a source
+ * sheet + target sheet with a direction arrow; other tools show one sheet plus
+ * a small action-glyph bubble. Specs live in lib/tool-icons.ts, keyed by slug.
  */
 
-const FONT = "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 
-/** Label font size as a fraction of badge size, by label length. */
-function labelSize(label: string, s: number): number {
-  const n = label.length;
-  return s * (n <= 1 ? 0.52 : n === 2 ? 0.42 : n === 3 ? 0.33 : 0.26);
+// Shared, format-independent defs (paper gradient + soft shadow). Rendered
+// inside every glyph SVG with fixed ids: the definitions are identical across
+// instances, so duplicate ids on a page resolve to the same visual — no clash.
+function SheetDefs() {
+  return (
+    <defs>
+      <linearGradient id="tgPaper" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#ffffff" />
+        <stop offset="1" stopColor="#eef2f7" />
+      </linearGradient>
+      <filter id="tgShadow" x="-40%" y="-25%" width="180%" height="160%">
+        <feDropShadow dx="0" dy="1.4" stdDeviation="1.3" floodColor="#0f172a" floodOpacity="0.18" />
+      </filter>
+    </defs>
+  );
 }
 
-function Badge({ x, y, s, f, outlined }: { x: number; y: number; s: number; f: FormatDef; outlined?: boolean }) {
+/** Footer-band label font size, by label length, relative to sheet size. */
+function labelSize(label: string, s: number): number {
+  const n = label.length;
+  return s * (n <= 1 ? 0.3 : n === 2 ? 0.25 : n === 3 ? 0.2 : 0.15);
+}
+
+/** A single sheet-of-paper badge: page + folded corner + coloured label band. */
+function Sheet({ x, y, s, f }: { x: number; y: number; s: number; f: FormatDef }) {
+  const fold = s * 0.3;
+  const page = [
+    `M${x + 2} ${y}`,
+    `h${s - fold - 2}`,
+    `l${fold} ${fold}`,
+    `v${s - fold - 2}`,
+    `a2 2 0 0 1 -2 2`,
+    `H${x + 2}`,
+    `a2 2 0 0 1 -2 -2`,
+    `V${y + 2}`,
+    `a2 2 0 0 1 2 -2`,
+    "z",
+  ].join(" ");
+  const foldTri = `M${x + s - fold} ${y} L${x + s} ${y + fold} L${x + s - fold} ${y + fold} Z`;
+  const bandH = s * 0.34;
+  const bandY = y + s - bandH - s * 0.07;
+  const bandX = x + s * 0.05;
+  const bandW = s - s * 0.1;
   return (
-    <g>
-      <rect
-        x={x} y={y} width={s} height={s} rx={s * 0.22}
-        fill={f.bg}
-        stroke={outlined ? "#fff" : undefined}
-        strokeWidth={outlined ? 2 : undefined}
-      />
+    <g filter="url(#tgShadow)">
+      <path d={page} fill="url(#tgPaper)" stroke="#e2e8f0" strokeWidth={0.8} />
+      <path d={foldTri} fill={f.bg} fillOpacity={0.32} />
+      <rect x={bandX} y={bandY} width={bandW} height={bandH} rx={bandH * 0.28} fill={f.bg} />
       <text
-        x={x + s / 2} y={y + s / 2} dy="0.36em" textAnchor="middle"
-        fontSize={labelSize(f.label, s)} fontWeight={700} fill="#fff"
-        fontFamily={FONT} letterSpacing={f.label.length <= 2 ? 0.5 : 0}
+        x={x + s / 2} y={bandY + bandH / 2} dy="0.34em" textAnchor="middle"
+        fontSize={labelSize(f.label, s)} fontWeight={800} fill="#fff"
+        fontFamily={FONT} letterSpacing={f.label.length <= 2 ? 0.3 : 0}
       >
         {f.label}
       </text>
@@ -129,13 +164,15 @@ export function ToolGlyph({
     const to = FORMATS[spec.to];
     return (
       <svg viewBox="0 0 48 48" width={px} height={px} aria-hidden className="inline-block select-none">
-        <Badge x={2} y={2} s={25} f={from} />
-        <Badge x={21} y={21} s={25} f={to} outlined />
+        <SheetDefs />
+        {/* source sheet behind, target sheet in front, offset down-right */}
+        <Sheet x={0.5} y={1.5} s={27} f={from} />
+        <Sheet x={18} y={17.5} s={28.5} f={to} />
         {/* direction bubble in the free top-right corner */}
-        <circle cx={38.5} cy={9.5} r={7} fill="#fff" stroke="#E2E8F0" strokeWidth={1} />
-        <g stroke="#334155" strokeWidth={1.8} fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M35.7 6.7l5.2 5.2" />
-          <path d="M40.9 8.2v3.7h-3.7" />
+        <circle cx={40} cy={8.5} r={7.5} fill="#fff" stroke="#e2e8f0" strokeWidth={1} />
+        <g stroke="#334155" strokeWidth={1.9} fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M37 5.5l5.2 5.2" />
+          <path d="M42.5 6.8v4.2h-4.2" />
         </g>
       </svg>
     );
@@ -144,9 +181,11 @@ export function ToolGlyph({
   const f = FORMATS[spec.badge];
   return (
     <svg viewBox="0 0 48 48" width={px} height={px} aria-hidden className="inline-block select-none">
-      <Badge x={4} y={4} s={34} f={f} />
-      <circle cx={36} cy={36} r={10} fill="#fff" stroke="#E2E8F0" strokeWidth={1} />
-      <g transform="translate(36 36) scale(0.55) translate(-12 -12)">
+      <SheetDefs />
+      <Sheet x={3.5} y={3} s={32} f={f} />
+      {/* action-glyph bubble in the bottom-right corner */}
+      <circle cx={37} cy={37} r={11} fill="#fff" stroke="#e2e8f0" strokeWidth={1} />
+      <g transform="translate(37 37) scale(0.6) translate(-12 -12)">
         <OpGlyph op={spec.op} color={f.bg} />
       </g>
     </svg>

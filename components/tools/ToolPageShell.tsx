@@ -3,6 +3,8 @@ import { RELATED_TOOLS, TOOLS_BY_SLUG, TOOLS } from "@/lib/tools-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { categoryTheme } from "@/lib/category-theme";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
+import { AiAuthGate } from "@/components/tools/AiAuthGate";
+import { toolRequiresAuth } from "@/lib/tool-functions";
 import { cn } from "@/lib/utils";
 import { softwareApplicationSchema, breadcrumbSchema, type Locale } from "@/lib/seo";
 import { alsoSearchedAs } from "@/lib/keywords";
@@ -125,7 +127,7 @@ export function ToolPageShell({
       </section>
 
       <main className="container py-10">
-        {children}
+        {toolRequiresAuth(tool.slug) ? <AiAuthGate>{children}</AiAuthGate> : children}
         <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-ink-400">
           {common.privacyFiles}
         </p>

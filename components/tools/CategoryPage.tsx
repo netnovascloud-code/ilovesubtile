@@ -103,7 +103,7 @@ export function CategoryPage({ category, locale = DEFAULT_LOCALE }: { category: 
                   className={cn("group flex items-start gap-3 rounded-lg border border-ink-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5", theme.hoverBorder)}
                 >
                   <div className="shrink-0">
-                    <ToolGlyph category={t.category} iconName={(t.icon as { displayName?: string }).displayName ?? "Wrench"} px={40} />
+                    <ToolGlyph slug={t.slug} category={t.category} px={40} />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-1 font-medium text-ink-900">

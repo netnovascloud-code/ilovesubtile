@@ -277,7 +277,7 @@ Enable Google in Supabase → Authentication → Providers and add `http://local
 ## Design principles encoded in the codebase
 
 - Plus Jakarta Sans, single brand colour `#2D6BE4`, 8px radius, `shadow-card` only.
-- Tool logos are emoji (`lib/tool-emoji.ts` via `ToolGlyph`); Lucide line icons for UI chrome.
+- Tool logos are SVG file-type badges (`lib/tool-icons.ts` via `ToolGlyph`): conversions show source → target format badges with an arrow (PDF → W), other tools show one badge + an action glyph; Lucide line icons for UI chrome.
 - `AdSlot` has fixed dimensions to prevent CLS jumps when networks finally load.
 - AdBlock notice is **polite + dismissible + post-render** — never blocks the service.
 - All SEO data flows from `lib/tools-config.ts`. To change a tool's title you change one file.

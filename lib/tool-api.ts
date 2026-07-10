@@ -1,78 +1,17 @@
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { SUPABASE_URL } from "@/lib/utils";
 import { AI_ENABLED } from "@/lib/flags";
+import { FN_MAP, AI_AUTH_FUNCTIONS, AI_AUTH_SLUGS } from "@/lib/tool-functions";
 
-// Mistral-backed functions paused while AI is off (lib/flags). The Google
-// translator (`translate`), the pure-code security tools (SSL/email/URL) and
-// the link tools are NOT in this set, so they keep working.
-const AI_PAUSED_FUNCTIONS = new Set<string>([
-  "ai-process", "ai-vision", "ai-assistant", "process-subtitles", "translate-subtitles",
-]);
-// Tools that live inside a NON-AI function but still call Mistral, so they must
-// be paused by slug. The phishing detector runs inside `security-tools` (which
-// otherwise stays live for SSL/email/URL) but uses Mistral to read intent.
-const AI_PAUSED_SLUGS = new Set<string>(["phishing-detector"]);
+// Re-export the server-safe helpers so existing/import sites can keep using
+// "@/lib/tool-api" for both the browser call path and the mapping helpers.
+export { toolFunction, toolRequiresAuth, FN_MAP } from "@/lib/tool-functions";
 
-/** tool slug → Supabase Edge Function that handles it. */
-const FN_MAP: Record<string, string> = {
-  "subtitle-generator": "process-subtitles",
-  "tiktok-subtitles": "process-subtitles",
-  "voice-to-text": "process-subtitles",
-  "citation-generator": "ai-process",
-  "ai-detector": "ai-process",
-  "context-examples": "ai-process",
-  "translate-document-with-layout": "ai-process",
-  "translate-subtitles": "translate-subtitles",
-  "batch-translate": "translate-subtitles",
-  "youtube-chapters": "ai-process",
-  "auto-sync": "ai-process",
-  "ai-humanizer": "ai-process",
-  // The three former process-ffmpeg slugs (add-subtitles-to-video,
-  // extract-subtitles, style-subtitles) now run entirely in the browser
-  // (FFmpeg.wasm / pure-JS) and no longer call any backend.
-  // The live text translator (/translator) uses Google Cloud Translation via
-  // the dedicated `translate` function — a real MT engine, not the LLM.
-  "translator": "translate",
-  // Text & AI tools — all handled by the ai-process function via `task`.
-  "translate-text": "ai-process",
-  "rephrase-text": "ai-process",
-  "summarize-text": "ai-process",
-  "fix-grammar": "ai-process",
-  "simplify-text": "ai-process",
-  "professional-email": "ai-process",
-  "product-description": "ai-process",
-  "hashtag-generator": "ai-process",
-  "sentiment-analysis": "ai-process",
-  "keyword-extractor": "ai-process",
-  "detect-language": "ai-process",
-  "smart-drop": "ai-process",
-  "smart-assistant": "ai-assistant",
-  "cover-letter": "ai-process",
-  "contract-analyzer": "ai-process",
-  // Vision tools — all handled by the ai-vision function via `task` (sends
-  // a data-URL image instead of a text body; same response envelope).
-  "handwriting-to-text": "ai-vision",
-  "business-card-scanner": "ai-vision",
-  "receipt-scanner": "ai-vision",
-  "screenshot-to-code": "ai-vision",
-  "image-to-table": "ai-vision",
-  // Security tools — all handled by the security-tools function via `action`.
-  // (password-checker is pure client-side via HaveIBeenPwned — no backend.)
-  "email-checker": "security-tools",
-  "phishing-detector": "security-tools",
-  "url-scanner": "security-tools",
-  "ssl-checker": "security-tools",
-  // Link tools — all create rows via the create-link function (login required,
-  // anti-phishing screened). The light builders (UTM, mailto/wifi) are pure
-  // client-side and don't map here.
-  "url-shortener": "create-link",
-  "deep-link": "create-link",
-  "magic-link": "create-link",
-};
-
-export function toolFunction(slug: string): string | null {
-  return FN_MAP[slug] ?? null;
-}
+// Mistral-backed functions are paused while AI is off (lib/flags). Same sets as
+// the auth gate — a paused/AI function requires a signed-in user, and while
+// paused we short-circuit before any request leaves the browser.
+const AI_PAUSED_FUNCTIONS = AI_AUTH_FUNCTIONS;
+const AI_PAUSED_SLUGS = AI_AUTH_SLUGS;
 
 /**
  * Call a tool's Edge Function DIRECTLY from the browser.

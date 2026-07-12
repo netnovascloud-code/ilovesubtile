@@ -7,6 +7,7 @@ import { cn, formatBytes } from "@/lib/utils";
 import { TemplatesBar } from "@/components/tools/TemplatesBar";
 import { getFfmpeg } from "@/lib/ffmpeg-client";
 import { useLocale } from "@/hooks/useLocale";
+import { translateOption } from "@/lib/i18n/ffmpeg-options.generated";
 
 // Overlay-filter coordinates (W,H = main video; w,h = the watermark overlay).
 const POSITIONS = [
@@ -428,7 +429,8 @@ function renderWatermarkPng(text: string, size: number, color: string, alpha: nu
 }
 
 export function WatermarkVideoClient() {
-  const s = T[useLocale()] ?? T.en;
+  const locale = useLocale();
+  const s = T[locale] ?? T.en;
   const [file, setFile] = useState<File | null>(null);
   const [text, setText] = useState("Konvertools.io");
   const [pos, setPos] = useState<string>("BR");
@@ -521,7 +523,7 @@ export function WatermarkVideoClient() {
           <label className="mb-1 block text-xs font-medium text-ink-500">{s.position}</label>
           <div className="flex flex-wrap gap-1">
             {POSITIONS.map((p) => (
-              <button key={p.id} onClick={() => setPos(p.id)} className={cn("rounded-md border px-2.5 py-1 text-xs font-medium transition-colors", pos === p.id ? "border-brand-300 bg-brand-50 text-brand-700" : "border-ink-200 bg-white text-ink-600 hover:border-ink-300")}>{p.label}</button>
+              <button key={p.id} onClick={() => setPos(p.id)} className={cn("rounded-md border px-2.5 py-1 text-xs font-medium transition-colors", pos === p.id ? "border-brand-300 bg-brand-50 text-brand-700" : "border-ink-200 bg-white text-ink-600 hover:border-ink-300")}>{translateOption(locale, p.label)}</button>
             ))}
           </div>
         </div>
@@ -532,7 +534,7 @@ export function WatermarkVideoClient() {
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs font-medium text-ink-500">{s.colour}
             <select value={color} onChange={(e) => setColor(e.target.value)} className="rounded-md border border-ink-200 bg-white px-2 py-1 text-sm">
-              {["white", "black", "yellow", "red", "blue", "green"].map((c) => <option key={c} value={c}>{c}</option>)}
+              {["white", "black", "yellow", "red", "blue", "green"].map((c) => <option key={c} value={c}>{translateOption(locale, c)}</option>)}
             </select>
           </label>
           <label className="flex flex-1 items-center gap-2 text-xs font-medium text-ink-500">{s.opacity} · {opacity}%

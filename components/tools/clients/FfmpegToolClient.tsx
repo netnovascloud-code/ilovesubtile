@@ -10,6 +10,7 @@ import { getFfmpeg } from "@/lib/ffmpeg-client";
 import type { ToolCategory } from "@/lib/tools-config";
 import { useLocale } from "@/hooks/useLocale";
 import { getCommonUi } from "@/lib/i18n/tool-ui";
+import { translateOption } from "@/lib/i18n/ffmpeg-options.generated";
 import Link from "next/link";
 import { useUser } from "@/hooks/useUser";
 import { localePath } from "@/lib/i18n/locales";
@@ -119,7 +120,7 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
           <span className={cn("grid h-12 w-12 place-items-center rounded-xl", th.iconBg, th.iconText)}>
             <Upload className="h-6 w-6" />
           </span>
-          <span className="mt-3 font-semibold text-ink-900">{t.clickToUpload} {tool.label}</span>
+          <span className="mt-3 font-semibold text-ink-900">{t.clickToUpload} {translateOption(locale, tool.label)}</span>
           <span className="mt-0.5 text-xs text-ink-400">{t.accepted}: {tool.accept}</span>
           <input type="file" accept={tool.accept} className="hidden" onChange={(e) => pickFile(e.target.files?.[0] ?? null)} />
         </label>
@@ -141,7 +142,7 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
               const num = o as Extract<typeof o, { type: "number" | "range" }>;
               return (
                 <label key={o.id} className="flex items-center gap-2 text-sm text-ink-700">
-                  <span className="font-medium">{o.label}</span>
+                  <span className="font-medium">{translateOption(locale, o.label)}</span>
                   <input
                     type={type === "range" ? "range" : "number"}
                     min={num.min}
@@ -160,9 +161,9 @@ export function FfmpegToolClient({ slug, category }: { slug: string; category: T
             const sel = o as Extract<typeof o, { type?: "select"; values: { id: string; label: string }[] }>;
             return (
               <label key={o.id} className="flex items-center gap-2 text-sm text-ink-700">
-                <span className="font-medium">{o.label}</span>
+                <span className="font-medium">{translateOption(locale, o.label)}</span>
                 <select value={opt[o.id] ?? sel.default} onChange={(e) => setOpt((s) => ({ ...s, [o.id]: e.target.value }))} className="rounded-md border border-ink-200 bg-white px-2 py-1 text-sm">
-                  {sel.values.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
+                  {sel.values.map((v) => <option key={v.id} value={v.id}>{translateOption(locale, v.label)}</option>)}
                 </select>
               </label>
             );
